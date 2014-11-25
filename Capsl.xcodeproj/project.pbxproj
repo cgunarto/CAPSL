@@ -37,6 +37,8 @@
 		4F69EC171A253A35009625AA /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F69EC161A253A35009625AA /* libz.dylib */; };
 		4F69EC191A253A3C009625AA /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F69EC181A253A3C009625AA /* CoreLocation.framework */; };
 		4F69EC1B1A253A43009625AA /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F69EC1A1A253A43009625AA /* QuartzCore.framework */; };
+		4F69EC1F1A253BE5009625AA /* Capslr.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F69EC1E1A253BE5009625AA /* Capslr.m */; };
+		4F69EC221A253D2B009625AA /* Capsl.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F69EC211A253D2B009625AA /* Capsl.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -92,6 +94,10 @@
 		4F69EC161A253A35009625AA /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		4F69EC181A253A3C009625AA /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		4F69EC1A1A253A43009625AA /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		4F69EC1D1A253BE5009625AA /* Capslr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Capslr.h; sourceTree = "<group>"; };
+		4F69EC1E1A253BE5009625AA /* Capslr.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Capslr.m; sourceTree = "<group>"; };
+		4F69EC201A253D2B009625AA /* Capsl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Capsl.h; sourceTree = "<group>"; };
+		4F69EC211A253D2B009625AA /* Capsl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Capsl.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -167,6 +173,7 @@
 				4F69EBF41A25328F009625AA /* ComposeViewController.m */,
 				4F69EBF61A2532C8009625AA /* ProfileViewController.h */,
 				4F69EBF71A2532C8009625AA /* ProfileViewController.m */,
+				4F69EC1C1A253B8E009625AA /* Model */,
 				4F69EBCB1A252331009625AA /* Main.storyboard */,
 				4F69EBCE1A252331009625AA /* Images.xcassets */,
 				4F69EBD01A252331009625AA /* LaunchScreen.xib */,
@@ -223,6 +230,17 @@
 				4F69EBFC1A253957009625AA /* ParseUI.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		4F69EC1C1A253B8E009625AA /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				4F69EC1D1A253BE5009625AA /* Capslr.h */,
+				4F69EC1E1A253BE5009625AA /* Capslr.m */,
+				4F69EC201A253D2B009625AA /* Capsl.h */,
+				4F69EC211A253D2B009625AA /* Capsl.m */,
+			);
+			name = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -331,6 +349,8 @@
 				4F69EBE91A2531D9009625AA /* CapsuleListViewController.m in Sources */,
 				4F69EBEF1A253269009625AA /* ChooseTypeViewController.m in Sources */,
 				4F69EBEC1A25320C009625AA /* MessageDetailViewController.m in Sources */,
+				4F69EC221A253D2B009625AA /* Capsl.m in Sources */,
+				4F69EC1F1A253BE5009625AA /* Capslr.m in Sources */,
 				4F69EBC41A252331009625AA /* main.m in Sources */,
 				4F69EBF21A25327A009625AA /* CaptureViewController.m in Sources */,
 				4F69EBF51A25328F009625AA /* ComposeViewController.m in Sources */,
