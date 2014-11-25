@@ -14,6 +14,12 @@
 		4F69EBCF1A252331009625AA /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4F69EBCE1A252331009625AA /* Images.xcassets */; };
 		4F69EBD21A252331009625AA /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4F69EBD01A252331009625AA /* LaunchScreen.xib */; };
 		4F69EBDE1A252331009625AA /* CapslTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F69EBDD1A252331009625AA /* CapslTests.m */; };
+		4F69EBE91A2531D9009625AA /* CapsuleListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F69EBE81A2531D9009625AA /* CapsuleListViewController.m */; };
+		4F69EBEC1A25320C009625AA /* MessageDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F69EBEB1A25320C009625AA /* MessageDetailViewController.m */; };
+		4F69EBEF1A253269009625AA /* ChooseTypeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F69EBEE1A253269009625AA /* ChooseTypeViewController.m */; };
+		4F69EBF21A25327A009625AA /* CaptureViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F69EBF11A25327A009625AA /* CaptureViewController.m */; };
+		4F69EBF51A25328F009625AA /* ComposeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F69EBF41A25328F009625AA /* ComposeViewController.m */; };
+		4F69EBF81A2532C8009625AA /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F69EBF71A2532C8009625AA /* ProfileViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +46,18 @@
 		4F69EBD71A252331009625AA /* CapslTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CapslTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4F69EBDC1A252331009625AA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4F69EBDD1A252331009625AA /* CapslTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CapslTests.m; sourceTree = "<group>"; };
+		4F69EBE71A2531D9009625AA /* CapsuleListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CapsuleListViewController.h; sourceTree = "<group>"; };
+		4F69EBE81A2531D9009625AA /* CapsuleListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CapsuleListViewController.m; sourceTree = "<group>"; };
+		4F69EBEA1A25320C009625AA /* MessageDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageDetailViewController.h; sourceTree = "<group>"; };
+		4F69EBEB1A25320C009625AA /* MessageDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageDetailViewController.m; sourceTree = "<group>"; };
+		4F69EBED1A253269009625AA /* ChooseTypeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChooseTypeViewController.h; sourceTree = "<group>"; };
+		4F69EBEE1A253269009625AA /* ChooseTypeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChooseTypeViewController.m; sourceTree = "<group>"; };
+		4F69EBF01A25327A009625AA /* CaptureViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CaptureViewController.h; path = ../CaptureViewController.h; sourceTree = "<group>"; };
+		4F69EBF11A25327A009625AA /* CaptureViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CaptureViewController.m; path = ../CaptureViewController.m; sourceTree = "<group>"; };
+		4F69EBF31A25328F009625AA /* ComposeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ComposeViewController.h; sourceTree = "<group>"; };
+		4F69EBF41A25328F009625AA /* ComposeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ComposeViewController.m; sourceTree = "<group>"; };
+		4F69EBF61A2532C8009625AA /* ProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileViewController.h; sourceTree = "<group>"; };
+		4F69EBF71A2532C8009625AA /* ProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,6 +103,18 @@
 				4F69EBC61A252331009625AA /* AppDelegate.m */,
 				4F69EBC81A252331009625AA /* RootViewController.h */,
 				4F69EBC91A252331009625AA /* RootViewController.m */,
+				4F69EBE71A2531D9009625AA /* CapsuleListViewController.h */,
+				4F69EBE81A2531D9009625AA /* CapsuleListViewController.m */,
+				4F69EBEA1A25320C009625AA /* MessageDetailViewController.h */,
+				4F69EBEB1A25320C009625AA /* MessageDetailViewController.m */,
+				4F69EBED1A253269009625AA /* ChooseTypeViewController.h */,
+				4F69EBEE1A253269009625AA /* ChooseTypeViewController.m */,
+				4F69EBF01A25327A009625AA /* CaptureViewController.h */,
+				4F69EBF11A25327A009625AA /* CaptureViewController.m */,
+				4F69EBF31A25328F009625AA /* ComposeViewController.h */,
+				4F69EBF41A25328F009625AA /* ComposeViewController.m */,
+				4F69EBF61A2532C8009625AA /* ProfileViewController.h */,
+				4F69EBF71A2532C8009625AA /* ProfileViewController.m */,
 				4F69EBCB1A252331009625AA /* Main.storyboard */,
 				4F69EBCE1A252331009625AA /* Images.xcassets */,
 				4F69EBD01A252331009625AA /* LaunchScreen.xib */,
@@ -220,8 +250,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				4F69EBCA1A252331009625AA /* RootViewController.m in Sources */,
+				4F69EBF81A2532C8009625AA /* ProfileViewController.m in Sources */,
 				4F69EBC71A252331009625AA /* AppDelegate.m in Sources */,
+				4F69EBE91A2531D9009625AA /* CapsuleListViewController.m in Sources */,
+				4F69EBEF1A253269009625AA /* ChooseTypeViewController.m in Sources */,
+				4F69EBEC1A25320C009625AA /* MessageDetailViewController.m in Sources */,
 				4F69EBC41A252331009625AA /* main.m in Sources */,
+				4F69EBF21A25327A009625AA /* CaptureViewController.m in Sources */,
+				4F69EBF51A25328F009625AA /* ComposeViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -412,6 +448,7 @@
 				4F69EBE31A252331009625AA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		4F69EBE41A252331009625AA /* Build configuration list for PBXNativeTarget "CapslTests" */ = {
 			isa = XCConfigurationList;
@@ -420,6 +457,7 @@
 				4F69EBE61A252331009625AA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
