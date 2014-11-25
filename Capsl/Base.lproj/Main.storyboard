@@ -17,10 +17,6 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <connections>
-                        <segue destination="w0O-LT-xFB" kind="push" id="XD8-5D-ze6"/>
-                        <segue destination="Ou8-8b-QYj" kind="push" id="EEv-5r-MnB"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
@@ -96,9 +92,6 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="i2C-sG-3fU"/>
-                    <connections>
-                        <segue destination="ILH-s3-dTC" kind="push" id="gFy-Xn-7D4"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RAY-tq-4BN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -122,6 +115,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="22T-8U-pdV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="867" y="1099"/>
+        </scene>
+        <!--Compose View Controller-->
+        <scene sceneID="6LB-hC-jTg">
+            <objects>
+                <viewController id="Cv4-wc-CeT" customClass="ComposeViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="qMb-TA-4rU"/>
+                        <viewControllerLayoutGuide type="bottom" id="wdj-eW-ciZ"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="jor-SC-0ZF">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="oq7-HL-oRl" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1254" y="1099"/>
         </scene>
     </scenes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
