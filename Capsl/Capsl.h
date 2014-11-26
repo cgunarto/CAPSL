@@ -7,6 +7,8 @@
 //
 
 #import <Parse/Parse.h>
+#import <Parse/PFObject+Subclass.h>
+
 @class Capslr;
 
 @interface Capsl : PFObject

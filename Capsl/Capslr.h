@@ -7,6 +7,7 @@
 //
 
 #import <Parse/Parse.h>
+#import <Parse/PFObject+Subclass.h>
 
 @interface Capslr : PFObject <PFSubclassing>
 
@@ -17,6 +18,8 @@
 @property (nonatomic, strong) NSString *phone;
 @property (nonatomic, strong) PFFile *profilePhoto;
 @property (nonatomic, strong) PFRelation *friends;
+
++ (void)returnCapslrWithContactsArray:(NSArray *)Contacts withCompletion:(void(^)(NSArray *capslrObjectsArray, NSError *error))complete;
 
 
 @end
