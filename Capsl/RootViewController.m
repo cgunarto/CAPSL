@@ -12,6 +12,8 @@
 #import <ParseUI/ParseUI.h>
 #import <ParseFacebookUtils/PFFacebookUtils.h>
 #import <FacebookSDK/FacebookSDK.h>
+#import "LoginViewController.h"
+#import "SignUpViewController.h"
 
 @interface RootViewController () <PFLogInViewControllerDelegate, PFSignUpViewControllerDelegate>
 
@@ -38,7 +40,7 @@
     if (![PFUser currentUser]) {
 
         //Create the log in view controller
-        PFLogInViewController *logInViewController = [[PFLogInViewController alloc] init];
+        LoginViewController *logInViewController = [[LoginViewController alloc] init];
         [logInViewController setDelegate:self];
         [logInViewController setFields:PFLogInFieldsDefault |PFLogInFieldsDismissButton | PFLogInFieldsFacebook];
 
@@ -47,7 +49,7 @@
         [logInViewController setFacebookPermissions:[NSArray arrayWithObjects:@"user_about_me", @"user_birthday", @"user_relationships", @"user_relationship_details", nil]];
 
         //Create the sign up view controller
-        PFSignUpViewController *signUpViewController = [[PFSignUpViewController alloc] init];
+        SignUpViewController *signUpViewController = [[SignUpViewController alloc] init];
         [signUpViewController setDelegate:self];
         [signUpViewController setFields:PFSignUpFieldsDefault | PFSignUpFieldsAdditional];
 

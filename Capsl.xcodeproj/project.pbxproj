@@ -40,6 +40,8 @@
 		4F69EC1F1A253BE5009625AA /* Capslr.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F69EC1E1A253BE5009625AA /* Capslr.m */; };
 		4F69EC221A253D2B009625AA /* Capsl.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F69EC211A253D2B009625AA /* Capsl.m */; };
 		90D82F9E1A257754001EBC46 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 90D82F9D1A257754001EBC46 /* FacebookSDK.framework */; };
+		90D82FA41A258943001EBC46 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 90D82FA31A258943001EBC46 /* LoginViewController.m */; };
+		90D82FA71A258B7E001EBC46 /* SignUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 90D82FA61A258B7E001EBC46 /* SignUpViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -100,6 +102,10 @@
 		4F69EC201A253D2B009625AA /* Capsl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Capsl.h; sourceTree = "<group>"; };
 		4F69EC211A253D2B009625AA /* Capsl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Capsl.m; sourceTree = "<group>"; };
 		90D82F9D1A257754001EBC46 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FacebookSDK.framework; sourceTree = "<group>"; };
+		90D82FA21A258943001EBC46 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
+		90D82FA31A258943001EBC46 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
+		90D82FA51A258B7E001EBC46 /* SignUpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignUpViewController.h; sourceTree = "<group>"; };
+		90D82FA61A258B7E001EBC46 /* SignUpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignUpViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -162,6 +168,10 @@
 			children = (
 				4F69EBC51A252331009625AA /* AppDelegate.h */,
 				4F69EBC61A252331009625AA /* AppDelegate.m */,
+				90D82FA21A258943001EBC46 /* LoginViewController.h */,
+				90D82FA31A258943001EBC46 /* LoginViewController.m */,
+				90D82FA51A258B7E001EBC46 /* SignUpViewController.h */,
+				90D82FA61A258B7E001EBC46 /* SignUpViewController.m */,
 				4F69EBC81A252331009625AA /* RootViewController.h */,
 				4F69EBC91A252331009625AA /* RootViewController.m */,
 				4F69EBE71A2531D9009625AA /* CapsuleListViewController.h */,
@@ -356,8 +366,10 @@
 				4F69EBEC1A25320C009625AA /* MessageDetailViewController.m in Sources */,
 				4F69EC221A253D2B009625AA /* Capsl.m in Sources */,
 				4F69EC1F1A253BE5009625AA /* Capslr.m in Sources */,
+				90D82FA41A258943001EBC46 /* LoginViewController.m in Sources */,
 				4F69EBC41A252331009625AA /* main.m in Sources */,
 				4F69EBF21A25327A009625AA /* CaptureViewController.m in Sources */,
+				90D82FA71A258B7E001EBC46 /* SignUpViewController.m in Sources */,
 				4F69EBF51A25328F009625AA /* ComposeViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
