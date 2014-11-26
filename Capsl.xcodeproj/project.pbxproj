@@ -39,6 +39,7 @@
 		4F69EC1B1A253A43009625AA /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F69EC1A1A253A43009625AA /* QuartzCore.framework */; };
 		4F69EC1F1A253BE5009625AA /* Capslr.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F69EC1E1A253BE5009625AA /* Capslr.m */; };
 		4F69EC221A253D2B009625AA /* Capsl.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F69EC211A253D2B009625AA /* Capsl.m */; };
+		90D82F9E1A257754001EBC46 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 90D82F9D1A257754001EBC46 /* FacebookSDK.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -98,6 +99,7 @@
 		4F69EC1E1A253BE5009625AA /* Capslr.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Capslr.m; sourceTree = "<group>"; };
 		4F69EC201A253D2B009625AA /* Capsl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Capsl.h; sourceTree = "<group>"; };
 		4F69EC211A253D2B009625AA /* Capsl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Capsl.m; sourceTree = "<group>"; };
+		90D82F9D1A257754001EBC46 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FacebookSDK.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,6 +112,7 @@
 				4F69EC171A253A35009625AA /* libz.dylib in Frameworks */,
 				4F69EC151A253A2D009625AA /* CFNetwork.framework in Frameworks */,
 				4F69EC131A253A26009625AA /* MobileCoreServices.framework in Frameworks */,
+				90D82F9E1A257754001EBC46 /* FacebookSDK.framework in Frameworks */,
 				4F69EC111A253A1E009625AA /* AdSupport.framework in Frameworks */,
 				4F69EC0F1A253A16009625AA /* Security.framework in Frameworks */,
 				4F69EC0D1A253A0F009625AA /* CoreGraphics.framework in Frameworks */,
@@ -211,6 +214,7 @@
 		4F69EC011A25395F009625AA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				90D82F9D1A257754001EBC46 /* FacebookSDK.framework */,
 				4F69EC1A1A253A43009625AA /* QuartzCore.framework */,
 				4F69EC181A253A3C009625AA /* CoreLocation.framework */,
 				4F69EC161A253A35009625AA /* libz.dylib */,

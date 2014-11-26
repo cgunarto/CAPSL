@@ -10,6 +10,8 @@
 #import "Capslr.h"
 #import <Parse/Parse.h>
 #import <ParseUI/ParseUI.h>
+#import <ParseFacebookUtils/PFFacebookUtils.h>
+#import <FacebookSDK/FacebookSDK.h>
 
 @interface RootViewController () <PFLogInViewControllerDelegate, PFSignUpViewControllerDelegate>
 
@@ -39,6 +41,8 @@
         PFLogInViewController *logInViewController = [[PFLogInViewController alloc] init];
         [logInViewController setDelegate:self];
         [logInViewController setFields:PFLogInFieldsDefault |PFLogInFieldsDismissButton | PFLogInFieldsFacebook];
+
+        [logInViewController setFacebookPermissions:[NSArray arrayWithObjects:@"friends_about_me", nil]];
 
 
         //Create the sign up view controller
@@ -79,6 +83,8 @@
     return NO;
 }
 
+
+
 //Sent to the delegate when a PFUser is logged in
 - (void) logInViewController:(PFLogInViewController *)logInController didLogInUser:(PFUser *)user
 {
@@ -95,7 +101,7 @@
 //Sent to delegate when the log in screen is dismissed
 - (void)logInViewControllerDidCancelLogIn:(PFLogInViewController *)logInController
 {
-    [self.navigationController popViewControllerAnimated:YES];
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 #pragma mark - PfSignupViewController Delegate Methods
