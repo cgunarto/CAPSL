@@ -42,28 +42,9 @@
         [logInViewController setDelegate:self];
         [logInViewController setFields:PFLogInFieldsDefault |PFLogInFieldsDismissButton | PFLogInFieldsFacebook];
 
+#warning ASK DAVE!!!!!!
+
         [logInViewController setFacebookPermissions:[NSArray arrayWithObjects:@"user_about_me", @"user_birthday", @"user_relationships", @"user_relationship_details", nil]];
-
-//        NSArray *permissionArray = @[@"user_about_me", @"user_birthday", @"user_relationships", @"user_relationship_details"];
-
-//        [PFFacebookUtils logInWithPermissions:permissionArray block:^(PFUser *user, NSError *error) {
-//            if (!user)
-//            {
-//                if (!error)
-//                {
-//                    //TODO: Error Alert
-//                }
-//                else
-//                {
-//                    //TODO: Another Alert - "Login Error"
-//                }
-//            }
-//            else
-//            {
-//                [self dismissViewControllerAnimated:YES completion:nil];
-//            }
-//        }];
-
 
         //Create the sign up view controller
         PFSignUpViewController *signUpViewController = [[PFSignUpViewController alloc] init];
