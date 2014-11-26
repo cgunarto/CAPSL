@@ -112,6 +112,12 @@
  */
 @property (nonatomic, strong) NSString *email;
 
+//#warning manually added below property
+///*!
+// @abstract The phone for the `PFUser`.
+// */
+//@property (nonatomic, strong) NSString *phone;
+
 /*!
  @abstract Signs up the user *synchronously*.
 
