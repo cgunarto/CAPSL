@@ -20,6 +20,7 @@
 {
     //Correct applicationID and client key for Parse - Capsl
     [Parse setApplicationId:@"5JY7Z39SraGkmGmWprsSCyUBRKVk9T58IPDygfl1" clientKey:@"NHIYSRSFP5tFE8VGltjdFnzeLHX5jYPVIYlZH6Fc"];
+
     return YES;
 }
 
