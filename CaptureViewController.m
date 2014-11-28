@@ -7,9 +7,11 @@
 //
 
 #import "CaptureViewController.h"
+#import "ComposeViewController.h"
 
 @interface CaptureViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
+@property (strong, nonatomic) UIImage *chosenImage;
 
 
 @end
@@ -57,8 +59,8 @@
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
 
-    UIImage *chosenImage = info[UIImagePickerControllerEditedImage];
-    self.imageView.image = chosenImage;
+    self.chosenImage = info[UIImagePickerControllerEditedImage];
+    self.imageView.image = self.chosenImage;
 
     [picker dismissViewControllerAnimated:YES completion:NULL];
 }
@@ -70,7 +72,8 @@
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    
+    ComposeViewController *composeVC = segue.destinationViewController;
+    composeVC.chosenImage = self.chosenImage;
 }
 
 

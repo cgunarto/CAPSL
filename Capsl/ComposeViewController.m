@@ -9,6 +9,7 @@
 #import "ComposeViewController.h"
 
 @interface ComposeViewController ()
+@property (weak, nonatomic) IBOutlet UIImageView *imageView;
 
 @end
 
@@ -17,11 +18,15 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.imageView.image = self.chosenImage;
 }
 
 //set Time Date
-//set recipient
-//
+//set recipient - Capslr
+
+
+//create Capsl object with file, time delivered, sender Capslr (PFUser CurrentUser)
+//upload it to Parse
 
 
 

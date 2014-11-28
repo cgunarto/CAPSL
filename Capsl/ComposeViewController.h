@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface ComposeViewController : UIViewController
-@property NSData *imageData;
+@property (strong, nonatomic) UIImage *chosenImage;
 
 
 @end

@@ -136,18 +136,6 @@
                                     <segue destination="Cv4-wc-CeT" kind="modal" id="R80-fy-YcZ"/>
                                 </connections>
                             </button>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OKM-bx-Qp5">
-                                <rect key="frame" x="0.0" y="502" width="320" height="66"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2v9-Tl-qPi">
-                                        <rect key="frame" x="142" y="18" width="36" height="30"/>
-                                        <state key="normal" title="Snap">
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                    </button>
-                                </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -178,13 +166,22 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="V9p-Jq-op7">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="V9p-Jq-op7">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="312"/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="wdj-eW-ciZ" firstAttribute="top" secondItem="V9p-Jq-op7" secondAttribute="bottom" constant="256" id="Cg6-0a-K8V"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="V9p-Jq-op7" secondAttribute="trailing" constant="-16" id="OOi-hH-Lil"/>
+                            <constraint firstItem="V9p-Jq-op7" firstAttribute="top" secondItem="qMb-TA-4rU" secondAttribute="bottom" id="TaQ-ez-1VV"/>
+                            <constraint firstItem="V9p-Jq-op7" firstAttribute="leading" secondItem="jor-SC-0ZF" secondAttribute="leadingMargin" constant="-16" id="XAX-YW-u16"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="sVj-d2-xbA"/>
+                    <connections>
+                        <outlet property="imageView" destination="V9p-Jq-op7" id="cAX-iX-kD8"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oq7-HL-oRl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
