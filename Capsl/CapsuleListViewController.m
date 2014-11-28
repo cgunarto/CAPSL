@@ -27,17 +27,34 @@
 {
     [super viewDidLoad];
 
+    NSLog(@"%@", [PFUser currentUser]);
+
     // Dummy Data
+//    self.capsl = [Capsl object];
+//    self.capsl.reciever = @"jonno";
+//    PFQuery *query = [Capsl query];
+//    [query whereKey:@"reciever" equalTo:self.capsl.reciever];
+//    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+//        if (!error)
+//        {
+//            self.capslsArray = objects;
+//        }
+//    }];
+
     self.capsl = [Capsl object];
-    self.capsl.reciever = @"jonno";
+
+    self.capslr.user = [PFUser currentUser];
+    NSString *objectID = self.capslr.user.objectId;
+
     PFQuery *query = [Capsl query];
-    [query whereKey:@"reciever" equalTo:self.capsl.reciever];
+    [query whereKey:@"recipient" equalTo:objectID];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (!error)
         {
             self.capslsArray = objects;
         }
     }];
+
 }
 
 // Automatically reloads the tableview whenever capslsArray is updated..
@@ -93,7 +110,6 @@
 #pragma mark - Alert when timer expires
 -(void)presentCanOpenMeAlert
 {
-
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"You can now open your capsl!" message:nil preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction *okButton = [UIAlertAction actionWithTitle:@"Open capsl" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
         // UNLOCK CAPSL!!
