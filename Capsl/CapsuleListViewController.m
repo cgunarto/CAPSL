@@ -65,8 +65,8 @@
     [dateFormatter setDateFormat:@"MM-dd-yyyy"];
     NSDate *deliveryDate = capsl.deliveryTime;
 
-    cell.deliveryDateLabel.text = [dateFormatter stringFromDate:deliveryDate];
-    cell.fromLabel.text = capsl.from;
+    cell.deliveryDateLabel.text = [NSString stringWithFormat:@"D-Day: %@", [dateFormatter stringFromDate:deliveryDate]];
+    cell.fromLabel.text = [NSString stringWithFormat:@"From: %@", capsl.from];
 
     JKCountDownTimer *timer = [[JKCountDownTimer alloc] initWithDeliveryDate:deliveryDate withDelegate:self];
     [timer updateLabel];
