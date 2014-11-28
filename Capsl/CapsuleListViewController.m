@@ -9,13 +9,14 @@
 #import "CapsuleListViewController.h"
 #import "CapslTableViewCell.h"
 #import "Capsl.h"
-#import "Capslr.h"
+#import "JKCountDownTimer.h"
 
-@interface CapsuleListViewController () <UITableViewDataSource, UITableViewDelegate>
+@interface CapsuleListViewController () <UITableViewDataSource, UITableViewDelegate, JKCountdownTimerDelegate>
 
 @property (nonatomic)  NSArray *capslsArray;
+@property NSArray *timerArray;
+
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
-@property Capslr *capslr;
 @property Capsl *capsl;
 
 @end
@@ -27,20 +28,16 @@
     [super viewDidLoad];
 
     // Dummy Data
-    self.capslr = [Capslr object];
-
     self.capsl = [Capsl object];
-
-    self.capslr.objectId = @"SszsqhyTMB";
-
-
+    self.capsl.reciever = @"jonno";
     PFQuery *query = [Capsl query];
-
-    [query whereKey:@"recipient" equalTo:self.capslr.objectId];
+    [query whereKey:@"reciever" equalTo:self.capsl.reciever];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (!error)
         {
             self.capslsArray = objects;
+
+            self.timerArray = [self.capslsArray valueForKey:@"deliveryTime"];
         }
     }];
 }
@@ -49,7 +46,27 @@
 //JKTimer Delegate Method
 -(void)counterUpdated:(NSString *)dateString
 {
+    if (dateString == nil)
+    {
+        [self presentCanOpenMeAlert];
+    }
+    else
+    {
+        [self.capslsArray valueForKey:@"deliveryTime"];
+    }
+}
 
+#pragma mark - Alert when timer expires
+-(void)presentCanOpenMeAlert
+{
+
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"You can now open your capsl!" message:nil preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *okButton = [UIAlertAction actionWithTitle:@"Open capsl" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        // UNLOCK CAPSL!!
+    }];
+
+    [alert addAction:okButton];
+    [self presentViewController:alert animated:YES completion:nil];
 }
 
 
@@ -78,7 +95,9 @@
     NSDate *deliveryDate = capsl.deliveryTime;
 
     cell.deliveryDateLabel.text = [dateFormatter stringFromDate:deliveryDate];
-    
+    cell.fromLabel.text = capsl.from;
+
+
     return cell;
 }
 

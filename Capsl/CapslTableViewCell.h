@@ -11,7 +11,6 @@
 @interface CapslTableViewCell : UITableViewCell
 @property (strong, nonatomic) IBOutlet UIImageView *profileImage;
 @property (strong, nonatomic) IBOutlet UILabel *fromLabel;
-@property (strong, nonatomic) IBOutlet UILabel *sentDateLabel;
 @property (strong, nonatomic) IBOutlet UILabel *deliveryDateLabel;
 @property (strong, nonatomic) IBOutlet UILabel *timerLabel;
 

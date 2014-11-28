@@ -12,6 +12,7 @@
 #import <ParseUI/ParseUI.h>
 #import "LoginViewController.h"
 #import "SignUpViewController.h"
+#import "CapsuleListViewController.h"
 
 @interface RootViewController () <PFLogInViewControllerDelegate, PFSignUpViewControllerDelegate>
 
@@ -63,7 +64,9 @@
     }
     else
     {
-        // Show first VC
+# warning how to perform segue from containerview??
+        [self.parentViewController performSegueWithIdentifier:@"toCapslVCSegue" sender:self];
+
     }
 }
 
@@ -178,4 +181,6 @@
     [alert addAction:action];
     [self presentViewController:alert animated:YES completion:nil];
 }
+
+
 @end
