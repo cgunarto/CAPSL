@@ -495,10 +495,10 @@
                                 <exclude reference="eb9-mU-BdA"/>
                             </mask>
                             <mask key="constraints">
+                                <exclude reference="0wY-2G-btg"/>
                                 <exclude reference="7UU-hg-sFK"/>
                                 <exclude reference="IuO-Mk-SsE"/>
                                 <exclude reference="uft-z5-1P8"/>
-                                <exclude reference="0wY-2G-btg"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=compact">
@@ -506,10 +506,10 @@
                                 <include reference="eb9-mU-BdA"/>
                             </mask>
                             <mask key="constraints">
+                                <include reference="0wY-2G-btg"/>
                                 <include reference="7UU-hg-sFK"/>
                                 <include reference="IuO-Mk-SsE"/>
                                 <include reference="uft-z5-1P8"/>
-                                <include reference="0wY-2G-btg"/>
                             </mask>
                         </variation>
                     </view>
@@ -584,10 +584,10 @@
                                 <exclude reference="a8g-1W-Cn7"/>
                             </mask>
                             <mask key="constraints">
+                                <exclude reference="nGJ-Pa-rCg"/>
                                 <exclude reference="BPg-84-fn3"/>
                                 <exclude reference="NIb-7I-URx"/>
                                 <exclude reference="OSb-Fr-r7T"/>
-                                <exclude reference="nGJ-Pa-rCg"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=compact">
@@ -595,10 +595,10 @@
                                 <include reference="a8g-1W-Cn7"/>
                             </mask>
                             <mask key="constraints">
+                                <include reference="nGJ-Pa-rCg"/>
                                 <include reference="BPg-84-fn3"/>
                                 <include reference="NIb-7I-URx"/>
                                 <include reference="OSb-Fr-r7T"/>
-                                <include reference="nGJ-Pa-rCg"/>
                             </mask>
                         </variation>
                     </view>
