@@ -9,5 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface ComposeViewController : UIViewController
+@property NSData *imageData;
+
 
 @end
