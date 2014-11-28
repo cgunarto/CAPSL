@@ -37,24 +37,12 @@
         {
             self.capslsArray = objects;
 
+
             self.timerArray = [self.capslsArray valueForKey:@"deliveryTime"];
         }
     }];
 }
 
-
-//JKTimer Delegate Method
--(void)counterUpdated:(NSString *)dateString
-{
-    if (dateString == nil)
-    {
-        [self presentCanOpenMeAlert];
-    }
-    else
-    {
-        [self.capslsArray valueForKey:@"deliveryTime"];
-    }
-}
 
 #pragma mark - Alert when timer expires
 -(void)presentCanOpenMeAlert
@@ -97,8 +85,25 @@
     cell.deliveryDateLabel.text = [dateFormatter stringFromDate:deliveryDate];
     cell.fromLabel.text = capsl.from;
 
+    JKCountDownTimer *timer = [[JKCountDownTimer alloc] initWithDeliveryDate:deliveryDate withDelegate:self];
+    [timer updateLabel];
+
 
     return cell;
+}
+
+//JKTimer Delegate Method
+-(void)counterUpdated:(NSString *)dateString
+{
+    if (dateString == nil)
+    {
+        [self presentCanOpenMeAlert];
+    }
+    else
+    {
+        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+        [dateFormatter setDateFormat:@"MM-dd-yyyy"];
+    }
 }
 
 @end
