@@ -59,6 +59,7 @@
                                                      //Grab whatever values we desire. (CMD + Click kABPersonFirstNameProperty for the full list)
                                                      NSString *firstName = (__bridge NSString *)(ABRecordCopyValue(person, kABPersonFirstNameProperty));
                                                      NSString *lastName = (__bridge NSString *)(ABRecordCopyValue(person, kABPersonLastNameProperty));
+                                                     NSString *nickName = (__bridge NSString *)(ABRecordCopyValue(person, kABPersonNicknameProperty));
 
                                                      //Since a person can have multiple phone numbers, we loop through the phone numbers
                                                      ABMultiValueRef phoneNumbers = ABRecordCopyValue(person, kABPersonPhoneProperty);
@@ -81,6 +82,7 @@
                                                      //Assign the first name and last name
                                                      contact.firstName = firstName;
                                                      contact.lastName = lastName;
+                                                     contact.nickName = nickName;
                                                      
                                                      //Add the contact object to our array
                                                      if (contact.number != nil)

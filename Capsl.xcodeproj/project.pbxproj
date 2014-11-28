@@ -40,6 +40,8 @@
 		4F69EC1F1A253BE5009625AA /* Capslr.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F69EC1E1A253BE5009625AA /* Capslr.m */; };
 		4F69EC221A253D2B009625AA /* Capsl.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F69EC211A253D2B009625AA /* Capsl.m */; };
 		4F69EC311A291504009625AA /* Contact.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F69EC301A291504009625AA /* Contact.m */; };
+		4F69EC341A291C92009625AA /* AddressContactViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F69EC331A291C92009625AA /* AddressContactViewController.m */; };
+		4F69EC371A291CAA009625AA /* CapslrContactViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F69EC361A291CAA009625AA /* CapslrContactViewController.m */; };
 		90C0DD171A27CCE500A50BCF /* JKCountDownTimer.m in Sources */ = {isa = PBXBuildFile; fileRef = 90C0DD161A27CCE500A50BCF /* JKCountDownTimer.m */; };
 		90CE52CF1A27C3350033087E /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 90CE52CE1A27C3350033087E /* LoginViewController.m */; };
 		90CE52D21A27C36A0033087E /* SignUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 90CE52D11A27C36A0033087E /* SignUpViewController.m */; };
@@ -105,6 +107,10 @@
 		4F69EC211A253D2B009625AA /* Capsl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Capsl.m; sourceTree = "<group>"; };
 		4F69EC2F1A291504009625AA /* Contact.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Contact.h; sourceTree = "<group>"; };
 		4F69EC301A291504009625AA /* Contact.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Contact.m; sourceTree = "<group>"; };
+		4F69EC321A291C92009625AA /* AddressContactViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddressContactViewController.h; sourceTree = "<group>"; };
+		4F69EC331A291C92009625AA /* AddressContactViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddressContactViewController.m; sourceTree = "<group>"; };
+		4F69EC351A291CAA009625AA /* CapslrContactViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CapslrContactViewController.h; sourceTree = "<group>"; };
+		4F69EC361A291CAA009625AA /* CapslrContactViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CapslrContactViewController.m; sourceTree = "<group>"; };
 		90C0DD151A27CCE500A50BCF /* JKCountDownTimer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JKCountDownTimer.h; sourceTree = "<group>"; };
 		90C0DD161A27CCE500A50BCF /* JKCountDownTimer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JKCountDownTimer.m; sourceTree = "<group>"; };
 		90CE52CD1A27C3350033087E /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LoginViewController.h; path = ../LoginViewController.h; sourceTree = "<group>"; };
@@ -191,6 +197,10 @@
 				4F69EBF41A25328F009625AA /* ComposeViewController.m */,
 				4F69EBF61A2532C8009625AA /* ProfileViewController.h */,
 				4F69EBF71A2532C8009625AA /* ProfileViewController.m */,
+				4F69EC321A291C92009625AA /* AddressContactViewController.h */,
+				4F69EC331A291C92009625AA /* AddressContactViewController.m */,
+				4F69EC351A291CAA009625AA /* CapslrContactViewController.h */,
+				4F69EC361A291CAA009625AA /* CapslrContactViewController.m */,
 				4F69EC1C1A253B8E009625AA /* Model */,
 				4F69EBCB1A252331009625AA /* Main.storyboard */,
 				4F69EBCE1A252331009625AA /* Images.xcassets */,
@@ -382,9 +392,11 @@
 				4F69EBC71A252331009625AA /* AppDelegate.m in Sources */,
 				90CE52D51A27C5170033087E /* CapslTableViewCell.m in Sources */,
 				4F69EBE91A2531D9009625AA /* CapsuleListViewController.m in Sources */,
+				4F69EC371A291CAA009625AA /* CapslrContactViewController.m in Sources */,
 				4F69EBEF1A253269009625AA /* ChooseTypeViewController.m in Sources */,
 				4F69EBEC1A25320C009625AA /* MessageDetailViewController.m in Sources */,
 				4F69EC221A253D2B009625AA /* Capsl.m in Sources */,
+				4F69EC341A291C92009625AA /* AddressContactViewController.m in Sources */,
 				4F69EC1F1A253BE5009625AA /* Capslr.m in Sources */,
 				90C0DD171A27CCE500A50BCF /* JKCountDownTimer.m in Sources */,
 				90CE52CF1A27C3350033087E /* LoginViewController.m in Sources */,
