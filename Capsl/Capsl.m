@@ -27,6 +27,10 @@
 //Time at when receipient Capslr views the Capsl
 @dynamic viewedAt;
 
+// DUMMY DATA
+@dynamic reciever;
+@dynamic from;
+
 + (void)load
 {
     [self registerSubclass];

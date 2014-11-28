@@ -18,5 +18,9 @@
 @property (nonatomic, strong) PFFile *profilePhoto;
 @property (nonatomic, strong) PFRelation *friends;
 
+@property (nonatomic, strong) NSString *objectId;
+
++ (void)returnCapslrWithContactsArray:(NSArray *)Contacts withCompletion:(void(^)(NSArray *capslrObjectsArray, NSError *error))complete;
+
 
 @end

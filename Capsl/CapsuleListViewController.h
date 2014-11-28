@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Capslr.h"
 
 @interface CapsuleListViewController : UIViewController
+
+@property Capslr *capslr;
 
 @end

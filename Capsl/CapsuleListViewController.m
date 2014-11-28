@@ -7,31 +7,101 @@
 //
 
 #import "CapsuleListViewController.h"
+#import "CapslTableViewCell.h"
+#import "Capsl.h"
+#import "JKCountDownTimer.h"
 
-@interface CapsuleListViewController ()
+@interface CapsuleListViewController () <UITableViewDataSource, UITableViewDelegate, JKCountdownTimerDelegate>
+
+@property (nonatomic)  NSArray *capslsArray;
+
+@property (strong, nonatomic) IBOutlet UITableView *tableView;
+@property Capsl *capsl;
+@property (nonatomic)  NSString *timerString;
 
 @end
 
 @implementation CapsuleListViewController
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+
+    // Dummy Data
+    self.capsl = [Capsl object];
+    self.capsl.reciever = @"jonno";
+    PFQuery *query = [Capsl query];
+    [query whereKey:@"reciever" equalTo:self.capsl.reciever];
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        if (!error)
+        {
+            self.capslsArray = objects;
+        }
+    }];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+// Automatically reloads the tableview whenever capslsArray is updated..
+-(void)setCapslsArray:(NSArray *)capslsArray
+{
+    _capslsArray = capslsArray;
+    [self.tableView reloadData];
 }
 
-/*
-#pragma mark - Navigation
+#pragma mark - Tableview Delegate Methods
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return self.capslsArray.count;
 }
-*/
+
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    CapslTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
+
+    Capsl *capsl = self.capslsArray[indexPath.row];
+
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"MM-dd-yyyy"];
+    NSDate *deliveryDate = capsl.deliveryTime;
+
+    cell.deliveryDateLabel.text = [NSString stringWithFormat:@"D-Day: %@", [dateFormatter stringFromDate:deliveryDate]];
+    cell.fromLabel.text = [NSString stringWithFormat:@"From: %@", capsl.from];
+
+    JKCountDownTimer *timer = [[JKCountDownTimer alloc] initWithDeliveryDate:deliveryDate withDelegate:self];
+    [timer updateLabel];
+
+    cell.timerLabel.text = self.timerString;
+
+    return cell;
+}
+
+#pragma mark - JKTimer Delegate Method
+
+-(void)counterUpdated:(NSString *)dateString
+{
+    if (dateString == nil)
+    {
+        [self presentCanOpenMeAlert];
+    }
+    else
+    {
+        self.timerString = dateString;
+    }
+}
+
+#pragma mark - Alert when timer expires
+-(void)presentCanOpenMeAlert
+{
+
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"You can now open your capsl!" message:nil preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *okButton = [UIAlertAction actionWithTitle:@"Open capsl" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        // UNLOCK CAPSL!!
+    }];
+
+    [alert addAction:okButton];
+    [self presentViewController:alert animated:YES completion:nil];
+}
+
 
 @end
