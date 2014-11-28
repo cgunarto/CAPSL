@@ -64,9 +64,7 @@
     }
     else
     {
-# warning how to perform segue from containerview??
         [self.parentViewController performSegueWithIdentifier:@"toCapslVCSegue" sender:self];
-
     }
 }
 
