@@ -71,6 +71,12 @@
     NSDate *deliveryDate = capsl.deliveryTime;
 
     cell.deliveryDateLabel.text = [NSString stringWithFormat:@"D-Day: %@", [dateFormatter stringFromDate:deliveryDate]];
+
+    Capslr *capslr = [Capslr object];
+
+    PFQuery *query = [Capslr query];
+    [query whereKey:@"sender" equalTo:<#(id)#>]
+
     cell.fromLabel.text = [NSString stringWithFormat:@"From: %@", capsl.sender];
 
     JKCountDownTimer *timer = [[JKCountDownTimer alloc] initWithDeliveryDate:deliveryDate withDelegate:self];
