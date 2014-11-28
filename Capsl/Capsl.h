@@ -29,8 +29,5 @@
 @property (nonatomic, strong) NSDate *viewedAt;
 
 
-// DUMMY DATA
-@property (nonatomic, strong) NSString *reciever;
-@property (nonatomic, strong) NSString *from;
 
 @end
