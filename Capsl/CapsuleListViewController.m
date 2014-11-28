@@ -9,11 +9,14 @@
 #import "CapsuleListViewController.h"
 #import "CapslTableViewCell.h"
 #import "Capsl.h"
+#import "Capslr.h"
 
 @interface CapsuleListViewController () <UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic)  NSArray *capslsArray;
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
+@property Capslr *capslr;
+@property Capsl *capsl;
 
 @end
 
@@ -23,8 +26,17 @@
 {
     [super viewDidLoad];
 
+    // Dummy Data
+    self.capslr = [Capslr object];
+
+    self.capsl = [Capsl object];
+
+    self.capslr.objectId = @"SszsqhyTMB";
+
+
     PFQuery *query = [Capsl query];
 
+    [query whereKey:@"recipient" equalTo:self.capslr.objectId];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (!error)
         {

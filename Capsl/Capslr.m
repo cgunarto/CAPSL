@@ -18,6 +18,8 @@
 @dynamic profilePhoto;
 @dynamic friends;
 
+@dynamic objectId;
+
 + (void)load
 {
     [self registerSubclass]; // need to have this

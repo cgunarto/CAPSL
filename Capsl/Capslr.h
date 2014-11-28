@@ -18,5 +18,7 @@
 @property (nonatomic, strong) PFFile *profilePhoto;
 @property (nonatomic, strong) PFRelation *friends;
 
+@property (nonatomic, strong) NSString *objectId;
+
 
 @end
