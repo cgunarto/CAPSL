@@ -135,7 +135,7 @@
     capslr.username = user.username;
     capslr.email = user.email;
     capslr.phone = signUpController.signUpView.additionalField.text;
-    capslr.user = [PFUser currentUser];
+    capslr.user = user;
 
     [capslr saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         if (error)
