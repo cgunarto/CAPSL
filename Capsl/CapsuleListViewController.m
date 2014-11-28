@@ -12,7 +12,7 @@
 
 @interface CapsuleListViewController () <UITableViewDataSource, UITableViewDelegate>
 
-@property NSArray *capslsArray;
+@property (nonatomic)  NSArray *capslsArray;
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 
 @end
@@ -23,6 +23,28 @@
 {
     [super viewDidLoad];
 
+    PFQuery *query = [Capsl query];
+
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        if (!error)
+        {
+            self.capslsArray = objects;
+        }
+    }];
+}
+
+
+//JKTimer Delegate Method
+-(void)counterUpdated:(NSString *)dateString
+{
+
+}
+
+
+-(void)setCapslsArray:(NSArray *)capslsArray
+{
+    _capslsArray = capslsArray;
+    [self.tableView reloadData];
 }
 
 
@@ -37,8 +59,15 @@
 {
     CapslTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
 
+    Capsl *capsl = self.capslsArray[indexPath.row];
+
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"MM-dd-yyyy"];
+    NSDate *deliveryDate = capsl.deliveryTime;
+
+    cell.deliveryDateLabel.text = [dateFormatter stringFromDate:deliveryDate];
+    
     return cell;
 }
-
 
 @end
