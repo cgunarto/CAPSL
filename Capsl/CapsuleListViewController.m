@@ -27,32 +27,20 @@
 {
     [super viewDidLoad];
 
-    NSLog(@"%@", [PFUser currentUser]);
+    PFQuery *query = [Capslr query];
+    [query whereKey:@"user" equalTo:[PFUser currentUser]];
+    [query getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error) {
+        NSLog(@"%@", object);
 
-    // Dummy Data
-//    self.capsl = [Capsl object];
-//    self.capsl.reciever = @"jonno";
-//    PFQuery *query = [Capsl query];
-//    [query whereKey:@"reciever" equalTo:self.capsl.reciever];
-//    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-//        if (!error)
-//        {
-//            self.capslsArray = objects;
-//        }
-//    }];
+        Capslr *capslr = [Capslr object];
+        capslr.objectId = object.objectId;
 
-    self.capsl = [Capsl object];
-
-    self.capslr.user = [PFUser currentUser];
-    NSString *objectID = self.capslr.user.objectId;
-
-    PFQuery *query = [Capsl query];
-    [query whereKey:@"recipient" equalTo:objectID];
-    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-        if (!error)
-        {
+        PFQuery *queryForCapsls = [Capsl query];
+        [queryForCapsls whereKey:@"recipient" equalTo:capslr];
+        [queryForCapsls findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
             self.capslsArray = objects;
-        }
+
+        }];
     }];
 
 }
