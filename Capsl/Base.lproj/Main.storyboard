@@ -105,9 +105,50 @@
                     <view key="view" contentMode="scaleToFill" id="5n6-ct-hLT">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Hg3-VI-LXE">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="359-WG-P4Z">
+                                <rect key="frame" x="30" y="344" width="88" height="30"/>
+                                <state key="normal" title="Select Photo">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="selectPhotoButtonPressed:" destination="ILH-s3-dTC" eventType="touchUpInside" id="BpW-Bs-TRD"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g4v-3r-uh0">
+                                <rect key="frame" x="200" y="344" width="77" height="30"/>
+                                <state key="normal" title="Take Photo">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="takePhotoButtonPressed:" destination="ILH-s3-dTC" eventType="touchUpInside" id="7wj-9U-VaJ"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YYz-wi-pHa">
+                                <rect key="frame" x="124" y="433" width="72" height="30"/>
+                                <state key="normal" title="Use Photo">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="Cv4-wc-CeT" kind="modal" id="R80-fy-YcZ"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Hg3-VI-LXE" firstAttribute="top" secondItem="jZE-SC-Npr" secondAttribute="bottom" id="6Ue-Rz-fwq"/>
+                            <constraint firstItem="Hg3-VI-LXE" firstAttribute="leading" secondItem="5n6-ct-hLT" secondAttribute="leadingMargin" constant="-16" id="VgD-ZO-h0C"/>
+                            <constraint firstItem="adF-cQ-9qF" firstAttribute="top" secondItem="Hg3-VI-LXE" secondAttribute="bottom" id="cFv-ot-lHW"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Hg3-VI-LXE" secondAttribute="trailing" constant="-16" id="g3O-3t-lry"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="DGT-FQ-rL0"/>
+                    <connections>
+                        <outlet property="imageView" destination="Hg3-VI-LXE" id="4LV-VO-ege"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="22T-8U-pdV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -124,8 +165,23 @@
                     <view key="view" contentMode="scaleToFill" id="jor-SC-0ZF">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="V9p-Jq-op7">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="312"/>
+                            </imageView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="wdj-eW-ciZ" firstAttribute="top" secondItem="V9p-Jq-op7" secondAttribute="bottom" constant="256" id="Cg6-0a-K8V"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="V9p-Jq-op7" secondAttribute="trailing" constant="-16" id="OOi-hH-Lil"/>
+                            <constraint firstItem="V9p-Jq-op7" firstAttribute="top" secondItem="qMb-TA-4rU" secondAttribute="bottom" id="TaQ-ez-1VV"/>
+                            <constraint firstItem="V9p-Jq-op7" firstAttribute="leading" secondItem="jor-SC-0ZF" secondAttribute="leadingMargin" constant="-16" id="XAX-YW-u16"/>
+                        </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="sVj-d2-xbA"/>
+                    <connections>
+                        <outlet property="imageView" destination="V9p-Jq-op7" id="cAX-iX-kD8"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oq7-HL-oRl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -161,6 +217,17 @@
                     <view key="view" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="5GR-eB-ox7">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ofx-hr-FOf">
+                                <rect key="frame" x="137" y="269" width="54" height="30"/>
+                                <state key="normal" title="Camera">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="ILH-s3-dTC" kind="modal" id="Hrx-ny-OHU"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <toolbarItems/>
