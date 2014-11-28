@@ -13,6 +13,7 @@
 @interface CapsuleListViewController () <UITableViewDataSource, UITableViewDelegate>
 
 @property NSArray *capslsArray;
+@property (strong, nonatomic) IBOutlet UITableView *tableView;
 
 @end
 
