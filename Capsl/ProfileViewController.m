@@ -24,6 +24,7 @@
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *addressLeftConstraint;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *addressRightConstraint;
+@property (strong, nonatomic) IBOutlet UIBarButtonItem *dismissButton;
 
 @end
 
@@ -64,6 +65,16 @@
         [self showAddressViewCenter];
     }
 }
+
+#pragma mark Actions
+
+- (IBAction)onDismissButtonPressed:(UIBarButtonItem *)sender
+{
+
+    [self dismissViewControllerAnimated:YES completion:nil];
+
+}
+
 
 #pragma mark Helper Method
 //User sees that CPSLR friend list by default
