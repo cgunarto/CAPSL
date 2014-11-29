@@ -71,7 +71,7 @@
     PFQuery *query = [Capslr query];
     [query whereKey:@"objectId" equalTo: capsl.sender.objectId];
     [query getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error) {
-        cell.fromLabel.text = object[@"username"];
+        cell.fromLabel.text = [NSString stringWithFormat:@"From: %@", object[@"username"]];
     }];
 
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
