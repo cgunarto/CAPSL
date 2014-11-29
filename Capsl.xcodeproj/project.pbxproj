@@ -42,6 +42,13 @@
 		4F69EC311A291504009625AA /* Contact.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F69EC301A291504009625AA /* Contact.m */; };
 		4F69EC341A291C92009625AA /* AddressContactViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F69EC331A291C92009625AA /* AddressContactViewController.m */; };
 		4F69EC371A291CAA009625AA /* CapslrContactViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F69EC361A291CAA009625AA /* CapslrContactViewController.m */; };
+		8D5A3DD81A2A4AFD00A6485A /* JCATimelineRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D5A3DCD1A2A4AFD00A6485A /* JCATimelineRootViewController.m */; };
+		8D5A3DD91A2A4AFD00A6485A /* JCACapslViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D5A3DCF1A2A4AFD00A6485A /* JCACapslViewController.m */; };
+		8D5A3DDA1A2A4AFD00A6485A /* JCATimelineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D5A3DD11A2A4AFD00A6485A /* JCATimelineViewController.m */; };
+		8D5A3DDB1A2A4AFD00A6485A /* JCACapslCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D5A3DD31A2A4AFD00A6485A /* JCACapslCollectionViewCell.m */; };
+		8D5A3DDC1A2A4AFD00A6485A /* JCATimelineMonthCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D5A3DD51A2A4AFD00A6485A /* JCATimelineMonthCollectionViewCell.m */; };
+		8D5A3DDD1A2A4AFD00A6485A /* JCATimeline.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D5A3DD71A2A4AFD00A6485A /* JCATimeline.m */; };
+		8D5A3DE11A2A4B4700A6485A /* UIImage+ImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D5A3DE01A2A4B4700A6485A /* UIImage+ImageEffects.m */; };
 		90C0DD171A27CCE500A50BCF /* JKCountDownTimer.m in Sources */ = {isa = PBXBuildFile; fileRef = 90C0DD161A27CCE500A50BCF /* JKCountDownTimer.m */; };
 		90CE52CF1A27C3350033087E /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 90CE52CE1A27C3350033087E /* LoginViewController.m */; };
 		90CE52D21A27C36A0033087E /* SignUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 90CE52D11A27C36A0033087E /* SignUpViewController.m */; };
@@ -111,6 +118,20 @@
 		4F69EC331A291C92009625AA /* AddressContactViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddressContactViewController.m; sourceTree = "<group>"; };
 		4F69EC351A291CAA009625AA /* CapslrContactViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CapslrContactViewController.h; sourceTree = "<group>"; };
 		4F69EC361A291CAA009625AA /* CapslrContactViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CapslrContactViewController.m; sourceTree = "<group>"; };
+		8D5A3DCC1A2A4AFD00A6485A /* JCATimelineRootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JCATimelineRootViewController.h; sourceTree = "<group>"; };
+		8D5A3DCD1A2A4AFD00A6485A /* JCATimelineRootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JCATimelineRootViewController.m; sourceTree = "<group>"; };
+		8D5A3DCE1A2A4AFD00A6485A /* JCACapslViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JCACapslViewController.h; sourceTree = "<group>"; };
+		8D5A3DCF1A2A4AFD00A6485A /* JCACapslViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JCACapslViewController.m; sourceTree = "<group>"; };
+		8D5A3DD01A2A4AFD00A6485A /* JCATimelineViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JCATimelineViewController.h; sourceTree = "<group>"; };
+		8D5A3DD11A2A4AFD00A6485A /* JCATimelineViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JCATimelineViewController.m; sourceTree = "<group>"; };
+		8D5A3DD21A2A4AFD00A6485A /* JCACapslCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JCACapslCollectionViewCell.h; sourceTree = "<group>"; };
+		8D5A3DD31A2A4AFD00A6485A /* JCACapslCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JCACapslCollectionViewCell.m; sourceTree = "<group>"; };
+		8D5A3DD41A2A4AFD00A6485A /* JCATimelineMonthCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JCATimelineMonthCollectionViewCell.h; sourceTree = "<group>"; };
+		8D5A3DD51A2A4AFD00A6485A /* JCATimelineMonthCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JCATimelineMonthCollectionViewCell.m; sourceTree = "<group>"; };
+		8D5A3DD61A2A4AFD00A6485A /* JCATimeline.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JCATimeline.h; sourceTree = "<group>"; };
+		8D5A3DD71A2A4AFD00A6485A /* JCATimeline.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JCATimeline.m; sourceTree = "<group>"; };
+		8D5A3DDF1A2A4B4700A6485A /* UIImage+ImageEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ImageEffects.h"; sourceTree = "<group>"; };
+		8D5A3DE01A2A4B4700A6485A /* UIImage+ImageEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ImageEffects.m"; sourceTree = "<group>"; };
 		90C0DD151A27CCE500A50BCF /* JKCountDownTimer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JKCountDownTimer.h; sourceTree = "<group>"; };
 		90C0DD161A27CCE500A50BCF /* JKCountDownTimer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JKCountDownTimer.m; sourceTree = "<group>"; };
 		90CE52CD1A27C3350033087E /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LoginViewController.h; path = ../LoginViewController.h; sourceTree = "<group>"; };
@@ -202,7 +223,9 @@
 				4F69EC331A291C92009625AA /* AddressContactViewController.m */,
 				4F69EC351A291CAA009625AA /* CapslrContactViewController.h */,
 				4F69EC361A291CAA009625AA /* CapslrContactViewController.m */,
+				8D5A3DDE1A2A4B0700A6485A /* Timeline VCs */,
 				4F69EC1C1A253B8E009625AA /* Model */,
+				8D5A3DE21A2A4B4D00A6485A /* Categories */,
 				4F69EBCE1A252331009625AA /* Images.xcassets */,
 				4F69EBD01A252331009625AA /* LaunchScreen.xib */,
 				4F69EBC11A252331009625AA /* Supporting Files */,
@@ -271,6 +294,34 @@
 				4F69EC301A291504009625AA /* Contact.m */,
 			);
 			name = Model;
+			sourceTree = "<group>";
+		};
+		8D5A3DDE1A2A4B0700A6485A /* Timeline VCs */ = {
+			isa = PBXGroup;
+			children = (
+				8D5A3DCC1A2A4AFD00A6485A /* JCATimelineRootViewController.h */,
+				8D5A3DCD1A2A4AFD00A6485A /* JCATimelineRootViewController.m */,
+				8D5A3DCE1A2A4AFD00A6485A /* JCACapslViewController.h */,
+				8D5A3DCF1A2A4AFD00A6485A /* JCACapslViewController.m */,
+				8D5A3DD01A2A4AFD00A6485A /* JCATimelineViewController.h */,
+				8D5A3DD11A2A4AFD00A6485A /* JCATimelineViewController.m */,
+				8D5A3DD21A2A4AFD00A6485A /* JCACapslCollectionViewCell.h */,
+				8D5A3DD31A2A4AFD00A6485A /* JCACapslCollectionViewCell.m */,
+				8D5A3DD41A2A4AFD00A6485A /* JCATimelineMonthCollectionViewCell.h */,
+				8D5A3DD51A2A4AFD00A6485A /* JCATimelineMonthCollectionViewCell.m */,
+				8D5A3DD61A2A4AFD00A6485A /* JCATimeline.h */,
+				8D5A3DD71A2A4AFD00A6485A /* JCATimeline.m */,
+			);
+			name = "Timeline VCs";
+			sourceTree = "<group>";
+		};
+		8D5A3DE21A2A4B4D00A6485A /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				8D5A3DDF1A2A4B4700A6485A /* UIImage+ImageEffects.h */,
+				8D5A3DE01A2A4B4700A6485A /* UIImage+ImageEffects.m */,
+			);
+			name = Categories;
 			sourceTree = "<group>";
 		};
 		90CE52D61A27C5200033087E /* Capsl List View */ = {
@@ -390,9 +441,15 @@
 				4F69EBCA1A252331009625AA /* RootViewController.m in Sources */,
 				4F69EBF81A2532C8009625AA /* ProfileViewController.m in Sources */,
 				4F69EBC71A252331009625AA /* AppDelegate.m in Sources */,
+				8D5A3DDC1A2A4AFD00A6485A /* JCATimelineMonthCollectionViewCell.m in Sources */,
+				8D5A3DDD1A2A4AFD00A6485A /* JCATimeline.m in Sources */,
+				8D5A3DE11A2A4B4700A6485A /* UIImage+ImageEffects.m in Sources */,
 				90CE52D51A27C5170033087E /* CapslTableViewCell.m in Sources */,
 				4F69EBE91A2531D9009625AA /* CapsuleListViewController.m in Sources */,
 				4F69EC371A291CAA009625AA /* CapslrContactViewController.m in Sources */,
+				8D5A3DDA1A2A4AFD00A6485A /* JCATimelineViewController.m in Sources */,
+				8D5A3DD91A2A4AFD00A6485A /* JCACapslViewController.m in Sources */,
+				8D5A3DDB1A2A4AFD00A6485A /* JCACapslCollectionViewCell.m in Sources */,
 				4F69EBEF1A253269009625AA /* ChooseTypeViewController.m in Sources */,
 				4F69EBEC1A25320C009625AA /* MessageDetailViewController.m in Sources */,
 				4F69EC221A253D2B009625AA /* Capsl.m in Sources */,
@@ -400,6 +457,7 @@
 				4F69EC1F1A253BE5009625AA /* Capslr.m in Sources */,
 				90C0DD171A27CCE500A50BCF /* JKCountDownTimer.m in Sources */,
 				90CE52CF1A27C3350033087E /* LoginViewController.m in Sources */,
+				8D5A3DD81A2A4AFD00A6485A /* JCATimelineRootViewController.m in Sources */,
 				4F69EBC41A252331009625AA /* main.m in Sources */,
 				4F69EBF21A25327A009625AA /* CaptureViewController.m in Sources */,
 				90CE52D21A27C36A0033087E /* SignUpViewController.m in Sources */,
