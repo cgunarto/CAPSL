@@ -36,6 +36,7 @@
 
         PFQuery *queryForCapsls = [Capsl query];
         [queryForCapsls whereKey:@"recipient" equalTo:capslr];
+        [queryForCapsls orderByAscending:@"deliveryTime"];
         [queryForCapsls findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
 
             self.capslsArray = objects;
