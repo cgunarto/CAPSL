@@ -28,16 +28,25 @@
 {
     [super viewDidLoad];
 
-    // Dummy Data
-    self.capsl = [Capsl object];
-    self.capsl.reciever = @"jonno";
-    PFQuery *query = [Capsl query];
-    [query whereKey:@"reciever" equalTo:self.capsl.reciever];
-    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-        if (!error)
-        {
-            self.capslsArray = objects;
-        }
+    // need to refactor this code later
+    PFQuery *query = [Capslr query];
+    [query whereKey:@"user" equalTo:[PFUser currentUser]];
+    [query getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error) {
+
+        Capslr *capslr = [Capslr object];
+        capslr.objectId = object.objectId;
+
+        //calling class method to get capsls for current user only
+        [Capsl searchCapslByKey:@"recipient" orderByAscending:@"deliveryTime" equalTo:capslr completion:^(NSArray *objects, NSError *error) {
+            if (!error)
+            {
+                self.capslsArray = objects;
+            }
+            else
+            {
+                NSLog(@"%@", error.localizedDescription);
+            }
+        }];
     }];
 
 }
@@ -82,19 +91,27 @@
     return self.capslsArray.count;
 }
 
-
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     CapslTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
-
     Capsl *capsl = self.capslsArray[indexPath.row];
 
+    // querying for sender data (need to refactor later)
+    PFQuery *query = [Capslr query];
+    [query whereKey:@"objectId" equalTo: capsl.sender.objectId];
+    [query getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error) {
+
+        cell.fromLabel.text = [NSString stringWithFormat:@"From: %@", object[@"username"]];
+    }];
+
+    // Setting the delivery date
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"MM-dd-yyyy"];
     NSDate *deliveryDate = capsl.deliveryTime;
 
     cell.deliveryDateLabel.text = [NSString stringWithFormat:@"D-Day: %@", [dateFormatter stringFromDate:deliveryDate]];
-    cell.fromLabel.text = [NSString stringWithFormat:@"From: %@", capsl.from];
+
+    //TODO: make the timer tick in the cell... via setting the custom cell as the delegate for the timer(?)
 
     JKCountDownTimer *timer = [[JKCountDownTimer alloc] initWithDeliveryDate:deliveryDate withDelegate:self];
     [timer updateLabel];
@@ -105,7 +122,6 @@
 }
 
 #pragma mark - JKTimer Delegate Method
-
 -(void)counterUpdated:(NSString *)dateString
 {
     if (dateString == nil)
@@ -115,16 +131,17 @@
     else
     {
         self.timerString = dateString;
+        NSLog(@"%@", self.timerString);
     }
 }
 
 #pragma mark - Alert when timer expires
 -(void)presentCanOpenMeAlert
 {
-
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"You can now open your capsl!" message:nil preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction *okButton = [UIAlertAction actionWithTitle:@"Open capsl" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
         // UNLOCK CAPSL!!
+
     }];
 
     [alert addAction:okButton];

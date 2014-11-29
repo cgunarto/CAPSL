@@ -27,9 +27,6 @@
 //Time at when receipient Capslr views the Capsl
 @dynamic viewedAt;
 
-// DUMMY DATA
-@dynamic reciever;
-@dynamic from;
 
 + (void)load
 {
@@ -41,5 +38,23 @@
     return @"Capsl";
 }
 
+//Class Method searching for capsl by its recipient
++ (void)searchCapslByKey:(NSString *)key orderByAscending:(NSString *)date equalTo:(id)object completion:(searchCapslByRecipientBlock)complete
+{
+    PFQuery *query = [self query];
+    [query whereKey:key equalTo:object];
+    [query orderByAscending:date];
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error)
+     {
+         if (!error)
+         {
+             complete(objects,nil);
+         }
+         else
+         {
+             complete(nil,error);
+         }
+     }];
+}
 
 @end
