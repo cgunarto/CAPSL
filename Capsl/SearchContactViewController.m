@@ -17,11 +17,15 @@
 
 @property (nonatomic, strong) NSArray *capslrArray;
 @property (nonatomic, strong) NSArray *contactsArray;
+@property (nonatomic, strong) NSArray *searchResults;
 
 
 @end
 
 @implementation SearchContactViewController
+
+
+//TODO:add segmented control to toggle between search CAPSLR and CONTACT
 
 - (void)viewDidLoad
 {
@@ -41,6 +45,28 @@
      }];
 }
 
+
+//Filtering for search results
+- (void)filterContentForSearchText:(NSString*)searchText scope:(NSString*)scope
+{
+    NSPredicate *resultPredicate = [NSPredicate predicateWithFormat:@"name contains[c] %@", searchText];
+    self.searchResults = [self.capslrArray filteredArrayUsingPredicate:resultPredicate];
+}
+
+-(BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchString:(NSString *)searchString
+{
+    [self filterContentForSearchText:searchString
+                               scope:[[self.searchDisplayController.searchBar scopeButtonTitles]
+                                      objectAtIndex:[self.searchDisplayController.searchBar
+                                                     selectedScopeButtonIndex]]];
+    
+    return YES;
+}
+
+
+
+#pragma mark Table View Methods
+
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     AllContactTableViewCell *allContactCell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
@@ -57,5 +83,44 @@
 {
     return self.capslrArray.count;
 }
+
+
+if (tableView == self.searchDisplayController.searchResultsTableView) {
+    return [searchResults count];
+
+} else {
+    return [recipes count];
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 @end
