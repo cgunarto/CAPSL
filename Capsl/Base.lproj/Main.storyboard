@@ -372,6 +372,10 @@
                                         <include reference="K6H-y0-qfR"/>
                                     </mask>
                                 </variation>
+                                <connections>
+                                    <action selector="onRecipientTextFieldClicked:" destination="Cv4-wc-CeT" eventType="touchUpInside" id="uIN-jb-xXV"/>
+                                    <action selector="onTextFieldEdited:" destination="Cv4-wc-CeT" eventType="touchUpInside" id="cEN-4C-mKW"/>
+                                </connections>
                             </textField>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>

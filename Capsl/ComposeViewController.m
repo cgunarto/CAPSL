@@ -7,6 +7,7 @@
 //
 
 #import "ComposeViewController.h"
+#import "ProfileViewController.h"
 
 @interface ComposeViewController () <UITextFieldDelegate, UIActionSheetDelegate>
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
@@ -92,6 +93,13 @@
     NSLog(@"%@", dateString);
 
     self.deliveryTimeTextField.text = [NSString stringWithFormat:@"%@",dateString];
+}
+
+- (IBAction)onRecipientTextFieldClicked:(UITextField *)sender
+{
+
+
+
 }
 
 
