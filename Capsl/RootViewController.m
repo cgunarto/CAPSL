@@ -44,8 +44,6 @@
         [logInViewController setFields:PFLogInFieldsDefault |PFLogInFieldsDismissButton];
 
 
-        //        [logInViewController setFacebookPermissions:[NSArray arrayWithObjects:@"user_about_me", @"user_birthday", @"user_relationships", @"user_relationship_details", nil]];
-
         //Create the sign up view controller
         SignUpViewController *signUpViewController = [[SignUpViewController alloc] init];
         [signUpViewController setDelegate:self];
