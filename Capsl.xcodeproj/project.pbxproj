@@ -159,6 +159,7 @@
 		4F69EBB51A252331009625AA = {
 			isa = PBXGroup;
 			children = (
+				4F69EBCB1A252331009625AA /* Main.storyboard */,
 				4F69EBC01A252331009625AA /* Capsl */,
 				4F69EBDA1A252331009625AA /* CapslTests */,
 				4F69EBBF1A252331009625AA /* Products */,
@@ -202,7 +203,6 @@
 				4F69EC351A291CAA009625AA /* CapslrContactViewController.h */,
 				4F69EC361A291CAA009625AA /* CapslrContactViewController.m */,
 				4F69EC1C1A253B8E009625AA /* Model */,
-				4F69EBCB1A252331009625AA /* Main.storyboard */,
 				4F69EBCE1A252331009625AA /* Images.xcassets */,
 				4F69EBD01A252331009625AA /* LaunchScreen.xib */,
 				4F69EBC11A252331009625AA /* Supporting Files */,
@@ -432,6 +432,7 @@
 				4F69EBCC1A252331009625AA /* Base */,
 			);
 			name = Main.storyboard;
+			path = Capsl;
 			sourceTree = "<group>";
 		};
 		4F69EBD01A252331009625AA /* LaunchScreen.xib */ = {
