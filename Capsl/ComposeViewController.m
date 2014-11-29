@@ -96,11 +96,7 @@
     self.deliveryTimeTextField.text = [NSString stringWithFormat:@"%@",dateString];
 }
 
-- (IBAction)onRecipientTextEdited:(UITextField *)sender
-{
-    ProfileViewController *profileVC = [self.storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([ProfileViewController class])];
-    [self presentViewController:profileVC animated:YES completion:nil];
-}
+
 
 
 

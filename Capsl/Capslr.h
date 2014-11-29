@@ -21,6 +21,7 @@
 @property (nonatomic, strong) NSString *objectId;
 
 + (void)returnCapslrWithContactsArray:(NSArray *)Contacts withCompletion:(void(^)(NSArray *capslrObjectsArray, NSError *error))complete;
++ (void)returnCapslrFromPFUser:(PFUser *)user withCompletion:(void(^)(Capslr *currentCapslr, NSError *error))complete;
 
 
 @end

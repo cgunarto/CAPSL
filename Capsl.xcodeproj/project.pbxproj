@@ -42,6 +42,7 @@
 		4F69EC311A291504009625AA /* Contact.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F69EC301A291504009625AA /* Contact.m */; };
 		4F69EC341A291C92009625AA /* AddressContactViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F69EC331A291C92009625AA /* AddressContactViewController.m */; };
 		4F69EC371A291CAA009625AA /* CapslrContactViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F69EC361A291CAA009625AA /* CapslrContactViewController.m */; };
+		4F69EC3A1A2A72D9009625AA /* SearchContactViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F69EC391A2A72D9009625AA /* SearchContactViewController.m */; };
 		8D5A3DD81A2A4AFD00A6485A /* JCATimelineRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D5A3DCD1A2A4AFD00A6485A /* JCATimelineRootViewController.m */; };
 		8D5A3DD91A2A4AFD00A6485A /* JCACapslViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D5A3DCF1A2A4AFD00A6485A /* JCACapslViewController.m */; };
 		8D5A3DDA1A2A4AFD00A6485A /* JCATimelineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D5A3DD11A2A4AFD00A6485A /* JCATimelineViewController.m */; };
@@ -118,6 +119,8 @@
 		4F69EC331A291C92009625AA /* AddressContactViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddressContactViewController.m; sourceTree = "<group>"; };
 		4F69EC351A291CAA009625AA /* CapslrContactViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CapslrContactViewController.h; sourceTree = "<group>"; };
 		4F69EC361A291CAA009625AA /* CapslrContactViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CapslrContactViewController.m; sourceTree = "<group>"; };
+		4F69EC381A2A72D9009625AA /* SearchContactViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchContactViewController.h; sourceTree = "<group>"; };
+		4F69EC391A2A72D9009625AA /* SearchContactViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchContactViewController.m; sourceTree = "<group>"; };
 		8D5A3DCC1A2A4AFD00A6485A /* JCATimelineRootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JCATimelineRootViewController.h; sourceTree = "<group>"; };
 		8D5A3DCD1A2A4AFD00A6485A /* JCATimelineRootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JCATimelineRootViewController.m; sourceTree = "<group>"; };
 		8D5A3DCE1A2A4AFD00A6485A /* JCACapslViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JCACapslViewController.h; sourceTree = "<group>"; };
@@ -223,6 +226,8 @@
 				4F69EC331A291C92009625AA /* AddressContactViewController.m */,
 				4F69EC351A291CAA009625AA /* CapslrContactViewController.h */,
 				4F69EC361A291CAA009625AA /* CapslrContactViewController.m */,
+				4F69EC381A2A72D9009625AA /* SearchContactViewController.h */,
+				4F69EC391A2A72D9009625AA /* SearchContactViewController.m */,
 				8D5A3DDE1A2A4B0700A6485A /* Timeline VCs */,
 				4F69EC1C1A253B8E009625AA /* Model */,
 				8D5A3DE21A2A4B4D00A6485A /* Categories */,
@@ -460,6 +465,7 @@
 				8D5A3DD81A2A4AFD00A6485A /* JCATimelineRootViewController.m in Sources */,
 				4F69EBC41A252331009625AA /* main.m in Sources */,
 				4F69EBF21A25327A009625AA /* CaptureViewController.m in Sources */,
+				4F69EC3A1A2A72D9009625AA /* SearchContactViewController.m in Sources */,
 				90CE52D21A27C36A0033087E /* SignUpViewController.m in Sources */,
 				4F69EBF51A25328F009625AA /* ComposeViewController.m in Sources */,
 			);

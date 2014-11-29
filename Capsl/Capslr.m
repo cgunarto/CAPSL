@@ -64,5 +64,49 @@
 }
 
 
+//Takes a PFUser current user info and then returns a Capslr
++ (void)returnCapslrFromPFUser:(PFUser *)user withCompletion:(void(^)(Capslr *currentCapslr, NSError *error))complete
+{
+    PFQuery *query = [Capslr query];
+    [query whereKey:@"user" equalTo:user];
+    [query getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error)
+    {
+        if(!error)
+        {
+            Capslr *capslr = (Capslr *)object;
+            complete (capslr, nil);
+        }
+        else
+        {
+            complete (nil, error);
+        }
+    }];
+}
 
 @end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
