@@ -40,7 +40,7 @@
         [queryForCapsls findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
 
             self.capslsArray = objects;
-            NSLog(@"%@", objects);
+//            NSLog(@"%@", objects);
         }];
     }];
 
@@ -66,14 +66,19 @@
     CapslTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
 
     Capsl *capsl = self.capslsArray[indexPath.row];
+    NSLog(@"%@", capsl.sender);
+
+    PFQuery *query = [Capslr query];
+    [query whereKey:@"objectId" equalTo: capsl.sender.objectId];
+    [query getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error) {
+        cell.fromLabel.text = object[@"username"];
+    }];
 
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"MM-dd-yyyy"];
     NSDate *deliveryDate = capsl.deliveryTime;
 
     cell.deliveryDateLabel.text = [NSString stringWithFormat:@"D-Day: %@", [dateFormatter stringFromDate:deliveryDate]];
-
-    cell.fromLabel.text = [NSString stringWithFormat:@"From: %@", capsl.sender];
 
     JKCountDownTimer *timer = [[JKCountDownTimer alloc] initWithDeliveryDate:deliveryDate withDelegate:self];
     [timer updateLabel];
