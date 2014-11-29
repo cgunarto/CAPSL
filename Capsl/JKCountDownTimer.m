@@ -47,7 +47,7 @@
     NSString *result;
 
     long elapsedSeconds = [self.deliveryDate timeIntervalSinceDate:[NSDate date]];
-    NSLog(@"Elaped seconds:%ld seconds",elapsedSeconds);
+//    NSLog(@"Elaped seconds:%ld seconds",elapsedSeconds);
 
     if (elapsedSeconds >= kOneHoursBeforeShowingTimer)
     {

@@ -101,6 +101,7 @@
     else
     {
         self.timerString = dateString;
+        NSLog(@"%@", self.timerString);
     }
 }
 
