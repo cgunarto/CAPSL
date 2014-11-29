@@ -34,12 +34,16 @@
         Capslr *capslr = [Capslr object];
         capslr.objectId = object.objectId;
 
-        PFQuery *queryForCapsls = [Capsl query];
-        [queryForCapsls whereKey:@"recipient" equalTo:capslr];
-        [queryForCapsls orderByAscending:@"deliveryTime"];
-        [queryForCapsls findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-
-            self.capslsArray = objects;
+        //calling class method
+        [Capsl searchCapslByKey:@"recipient" orderByAscending:@"deliveryTime" equalTo:capslr completion:^(NSArray *objects, NSError *error) {
+            if (!error)
+            {
+                self.capslsArray = objects;
+            }
+            else
+            {
+                NSLog(@"%@", error.localizedDescription);
+            }
         }];
     }];
 

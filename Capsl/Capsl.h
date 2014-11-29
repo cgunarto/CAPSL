@@ -9,6 +9,8 @@
 #import <Parse/Parse.h>
 @class Capslr;
 
+typedef void(^searchCapslByRecipientBlock)(NSArray *objects, NSError *error);
+
 @interface Capsl : PFObject
 
 @property Capslr *sender;
@@ -28,6 +30,6 @@
 //Time at when receipient Capslr views the Capsl
 @property (nonatomic, strong) NSDate *viewedAt;
 
-
++ (void)searchCapslByKey:(NSString *)key orderByAscending:(NSString *)key equalTo:(id)object completion:(searchCapslByRecipientBlock)complete;
 
 @end
