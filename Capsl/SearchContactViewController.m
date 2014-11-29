@@ -11,7 +11,7 @@
 #import "Capslr.h"
 #import "AllContactTableViewCell.h"
 
-@interface SearchContactViewController () <UITableViewDataSource, UITableViewDelegate, UISearchDisplayDelegate>
+@interface SearchContactViewController () <UITableViewDataSource, UITableViewDelegate, UISearchControllerDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 
@@ -81,16 +81,19 @@
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return self.capslrArray.count;
+    if (tableView == self.searchDisplayController.searchResultsTableView)
+    {
+        return [self.searchResults count];
+
+    }
+    else
+    {
+        return [self.capslrArray count];
+    }
 }
 
 
-if (tableView == self.searchDisplayController.searchResultsTableView) {
-    return [searchResults count];
 
-} else {
-    return [recipes count];
-}
 
 
 
