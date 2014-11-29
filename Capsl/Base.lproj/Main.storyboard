@@ -1206,7 +1206,7 @@
                         <subviews>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lZV-Ya-xrU">
                                 <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
-                                <color key="backgroundColor" red="0.42878434059999998" green="0.80185294149999997" blue="0.78471052649999995" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <connections>
                                     <segue destination="rFA-hQ-1ss" kind="embed" identifier="capslCollectionSegue" id="ywC-d6-52M"/>
                                 </connections>
