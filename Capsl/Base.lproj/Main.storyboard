@@ -438,8 +438,7 @@
                                     </mask>
                                 </variation>
                                 <connections>
-                                    <action selector="onRecipientTextFieldClicked:" destination="Cv4-wc-CeT" eventType="touchUpInside" id="uIN-jb-xXV"/>
-                                    <action selector="onTextFieldEdited:" destination="Cv4-wc-CeT" eventType="touchUpInside" id="cEN-4C-mKW"/>
+                                    <action selector="onRecipientTextEdited:" destination="Cv4-wc-CeT" eventType="editingDidBegin" id="5bi-D6-vHd"/>
                                 </connections>
                             </textField>
                         </subviews>

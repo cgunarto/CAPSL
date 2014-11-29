@@ -29,6 +29,7 @@
     self.imageView.image = self.chosenImage;
     self.deliveryDateTextField.delegate = self;
     self.deliveryTimeTextField.delegate = self;
+    self.recipientTextfield.delegate = self;
 
     //Setting the date picker for Delivery Date Textfield
     self.datePicker = [[UIDatePicker alloc]init];
@@ -95,13 +96,11 @@
     self.deliveryTimeTextField.text = [NSString stringWithFormat:@"%@",dateString];
 }
 
-- (IBAction)onRecipientTextFieldClicked:(UITextField *)sender
+- (IBAction)onRecipientTextEdited:(UITextField *)sender
 {
-
-
-
+    ProfileViewController *profileVC = [self.storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([ProfileViewController class])];
+    [self presentViewController:profileVC animated:YES completion:nil];
 }
-
 
 
 
