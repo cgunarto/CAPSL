@@ -27,6 +27,7 @@
 {
     [super viewDidLoad];
 
+    // need to refactor this code later
     PFQuery *query = [Capslr query];
     [query whereKey:@"user" equalTo:[PFUser currentUser]];
     [query getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error) {
@@ -34,7 +35,7 @@
         Capslr *capslr = [Capslr object];
         capslr.objectId = object.objectId;
 
-        //calling class method
+        //calling class method to get capsls for current user only
         [Capsl searchCapslByKey:@"recipient" orderByAscending:@"deliveryTime" equalTo:capslr completion:^(NSArray *objects, NSError *error) {
             if (!error)
             {
@@ -63,28 +64,27 @@
     return self.capslsArray.count;
 }
 
-
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     CapslTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
     Capsl *capsl = self.capslsArray[indexPath.row];
 
-    // querying for sender data
-
+    // querying for sender data (need to refactor later)
     PFQuery *query = [Capslr query];
     [query whereKey:@"objectId" equalTo: capsl.sender.objectId];
     [query getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error) {
+
         cell.fromLabel.text = [NSString stringWithFormat:@"From: %@", object[@"username"]];
     }];
 
     // Setting the delivery date
-
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"MM-dd-yyyy"];
     NSDate *deliveryDate = capsl.deliveryTime;
+
     cell.deliveryDateLabel.text = [NSString stringWithFormat:@"D-Day: %@", [dateFormatter stringFromDate:deliveryDate]];
 
-    // Countdown timer for each cell..
+    //TODO: make the timer tick in the cell... via setting the custom cell as the delegate for the timer(?)
 
     JKCountDownTimer *timer = [[JKCountDownTimer alloc] initWithDeliveryDate:deliveryDate withDelegate:self];
     [timer updateLabel];
@@ -95,7 +95,6 @@
 }
 
 #pragma mark - JKTimer Delegate Method
-
 -(void)counterUpdated:(NSString *)dateString
 {
     if (dateString == nil)
