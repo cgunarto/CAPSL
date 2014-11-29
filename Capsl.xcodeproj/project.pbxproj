@@ -43,6 +43,7 @@
 		4F69EC341A291C92009625AA /* AddressContactViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F69EC331A291C92009625AA /* AddressContactViewController.m */; };
 		4F69EC371A291CAA009625AA /* CapslrContactViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F69EC361A291CAA009625AA /* CapslrContactViewController.m */; };
 		4F69EC3A1A2A72D9009625AA /* SearchContactViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F69EC391A2A72D9009625AA /* SearchContactViewController.m */; };
+		4F69EC3D1A2A83E3009625AA /* AllContactTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F69EC3C1A2A83E3009625AA /* AllContactTableViewCell.m */; };
 		8D5A3DD81A2A4AFD00A6485A /* JCATimelineRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D5A3DCD1A2A4AFD00A6485A /* JCATimelineRootViewController.m */; };
 		8D5A3DD91A2A4AFD00A6485A /* JCACapslViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D5A3DCF1A2A4AFD00A6485A /* JCACapslViewController.m */; };
 		8D5A3DDA1A2A4AFD00A6485A /* JCATimelineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D5A3DD11A2A4AFD00A6485A /* JCATimelineViewController.m */; };
@@ -121,6 +122,8 @@
 		4F69EC361A291CAA009625AA /* CapslrContactViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CapslrContactViewController.m; sourceTree = "<group>"; };
 		4F69EC381A2A72D9009625AA /* SearchContactViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchContactViewController.h; sourceTree = "<group>"; };
 		4F69EC391A2A72D9009625AA /* SearchContactViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchContactViewController.m; sourceTree = "<group>"; };
+		4F69EC3B1A2A83E3009625AA /* AllContactTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AllContactTableViewCell.h; sourceTree = "<group>"; };
+		4F69EC3C1A2A83E3009625AA /* AllContactTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AllContactTableViewCell.m; sourceTree = "<group>"; };
 		8D5A3DCC1A2A4AFD00A6485A /* JCATimelineRootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JCATimelineRootViewController.h; sourceTree = "<group>"; };
 		8D5A3DCD1A2A4AFD00A6485A /* JCATimelineRootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JCATimelineRootViewController.m; sourceTree = "<group>"; };
 		8D5A3DCE1A2A4AFD00A6485A /* JCACapslViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JCACapslViewController.h; sourceTree = "<group>"; };
@@ -297,6 +300,8 @@
 				4F69EC211A253D2B009625AA /* Capsl.m */,
 				4F69EC2F1A291504009625AA /* Contact.h */,
 				4F69EC301A291504009625AA /* Contact.m */,
+				4F69EC3B1A2A83E3009625AA /* AllContactTableViewCell.h */,
+				4F69EC3C1A2A83E3009625AA /* AllContactTableViewCell.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -460,6 +465,7 @@
 				4F69EC221A253D2B009625AA /* Capsl.m in Sources */,
 				4F69EC341A291C92009625AA /* AddressContactViewController.m in Sources */,
 				4F69EC1F1A253BE5009625AA /* Capslr.m in Sources */,
+				4F69EC3D1A2A83E3009625AA /* AllContactTableViewCell.m in Sources */,
 				90C0DD171A27CCE500A50BCF /* JKCountDownTimer.m in Sources */,
 				90CE52CF1A27C3350033087E /* LoginViewController.m in Sources */,
 				8D5A3DD81A2A4AFD00A6485A /* JCATimelineRootViewController.m in Sources */,

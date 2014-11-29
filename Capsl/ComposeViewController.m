@@ -10,11 +10,9 @@
 #import "ProfileViewController.h"
 
 @interface ComposeViewController () <UITextFieldDelegate, UIActionSheetDelegate>
-@property (weak, nonatomic) IBOutlet UIImageView *imageView;
 @property (weak, nonatomic) IBOutlet UITextField *deliveryDateTextField;
 @property UIActionSheet *pickerViewPopup;
 @property (weak, nonatomic) IBOutlet UITextField *deliveryTimeTextField;
-@property (weak, nonatomic) IBOutlet UITextField *recipientTextfield;
 
 @property UIDatePicker *datePicker;
 @property UIDatePicker *timePicker;
@@ -26,10 +24,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.imageView.image = self.chosenImage;
     self.deliveryDateTextField.delegate = self;
     self.deliveryTimeTextField.delegate = self;
-    self.recipientTextfield.delegate = self;
 
     //Setting the date picker for Delivery Date Textfield
     self.datePicker = [[UIDatePicker alloc]init];
