@@ -310,7 +310,7 @@
                                     </mask>
                                 </variation>
                             </imageView>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Receiver" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dcF-dd-DdR">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Delivery Time" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dcF-dd-DdR">
                                 <rect key="frame" x="0.0" y="-30" width="97" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="TDI-o2-4pC"/>
@@ -331,25 +331,6 @@
                                     </mask>
                                 </variation>
                             </textField>
-                            <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="9se-cb-E21">
-                                <rect key="frame" x="-160" y="-81" width="320" height="162"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="162" id="Y8t-s3-GJC"/>
-                                </constraints>
-                                <date key="date" timeIntervalSinceReferenceDate="438911602.255068">
-                                    <!--2014-11-28 23:53:22 +0000-->
-                                </date>
-                                <variation key="default">
-                                    <mask key="constraints">
-                                        <exclude reference="Y8t-s3-GJC"/>
-                                    </mask>
-                                </variation>
-                                <variation key="widthClass=compact">
-                                    <mask key="constraints">
-                                        <include reference="Y8t-s3-GJC"/>
-                                    </mask>
-                                </variation>
-                            </datePicker>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Delivery date" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="9yN-NY-E88">
                                 <rect key="frame" x="0.0" y="-30" width="97" height="30"/>
                                 <constraints>
@@ -371,6 +352,27 @@
                                     </mask>
                                 </variation>
                             </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Recipient" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="mP4-8S-VKC">
+                                <rect key="frame" x="0.0" y="-30" width="97" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="326" id="Fkw-IO-NUI"/>
+                                    <constraint firstAttribute="height" constant="30" id="K6H-y0-qfR"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="Fkw-IO-NUI"/>
+                                        <exclude reference="K6H-y0-qfR"/>
+                                    </mask>
+                                </variation>
+                                <variation key="widthClass=compact">
+                                    <mask key="constraints">
+                                        <include reference="Fkw-IO-NUI"/>
+                                        <include reference="K6H-y0-qfR"/>
+                                    </mask>
+                                </variation>
+                            </textField>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -384,56 +386,54 @@
                             <constraint firstAttribute="centerX" secondItem="V9p-Jq-op7" secondAttribute="centerX" id="Vsa-Ei-g3f"/>
                             <constraint firstItem="V9p-Jq-op7" firstAttribute="leading" secondItem="jor-SC-0ZF" secondAttribute="leadingMargin" constant="-16" id="XAX-YW-u16"/>
                             <constraint firstItem="dcF-dd-DdR" firstAttribute="top" secondItem="9yN-NY-E88" secondAttribute="bottom" constant="28" id="ZGa-9K-Sv8"/>
-                            <constraint firstItem="wdj-eW-ciZ" firstAttribute="top" secondItem="9se-cb-E21" secondAttribute="bottom" id="bgZ-7j-aVZ"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="9se-cb-E21" secondAttribute="trailing" constant="-16" id="cks-g0-sIl"/>
-                            <constraint firstItem="9se-cb-E21" firstAttribute="leading" secondItem="jor-SC-0ZF" secondAttribute="leadingMargin" constant="-16" id="pPj-rV-LFU"/>
+                            <constraint firstItem="mP4-8S-VKC" firstAttribute="top" secondItem="dcF-dd-DdR" secondAttribute="bottom" constant="30" id="hjL-AD-Pac"/>
+                            <constraint firstAttribute="centerX" secondItem="mP4-8S-VKC" secondAttribute="centerX" id="tAL-h3-aVo"/>
                         </constraints>
                         <variation key="default">
                             <mask key="subviews">
                                 <exclude reference="dcF-dd-DdR"/>
-                                <exclude reference="9se-cb-E21"/>
                                 <exclude reference="9yN-NY-E88"/>
+                                <exclude reference="mP4-8S-VKC"/>
                             </mask>
                             <mask key="constraints">
                                 <exclude reference="39M-Ft-YOJ"/>
                                 <exclude reference="Gi5-ZE-EU3"/>
                                 <exclude reference="Ck8-Zs-Jjm"/>
                                 <exclude reference="ZGa-9K-Sv8"/>
+                                <exclude reference="hjL-AD-Pac"/>
+                                <exclude reference="tAL-h3-aVo"/>
                                 <exclude reference="1MW-CY-TH7"/>
                                 <exclude reference="Vsa-Ei-g3f"/>
-                                <exclude reference="bgZ-7j-aVZ"/>
-                                <exclude reference="cks-g0-sIl"/>
-                                <exclude reference="pPj-rV-LFU"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=compact">
                             <mask key="subviews">
                                 <include reference="dcF-dd-DdR"/>
-                                <include reference="9se-cb-E21"/>
                                 <include reference="9yN-NY-E88"/>
+                                <include reference="mP4-8S-VKC"/>
                             </mask>
                             <mask key="constraints">
                                 <include reference="39M-Ft-YOJ"/>
                                 <include reference="Gi5-ZE-EU3"/>
                                 <include reference="Ck8-Zs-Jjm"/>
                                 <include reference="ZGa-9K-Sv8"/>
+                                <include reference="hjL-AD-Pac"/>
+                                <include reference="tAL-h3-aVo"/>
                                 <include reference="1MW-CY-TH7"/>
                                 <exclude reference="OOi-hH-Lil"/>
                                 <exclude reference="TaQ-ez-1VV"/>
                                 <include reference="Vsa-Ei-g3f"/>
                                 <exclude reference="XAX-YW-u16"/>
                                 <exclude reference="Cg6-0a-K8V"/>
-                                <include reference="bgZ-7j-aVZ"/>
-                                <include reference="cks-g0-sIl"/>
-                                <include reference="pPj-rV-LFU"/>
                             </mask>
                         </variation>
                     </view>
                     <navigationItem key="navigationItem" id="sVj-d2-xbA"/>
                     <connections>
-                        <outlet property="datePickerView" destination="9se-cb-E21" id="cbw-JV-mFJ"/>
-                        <outlet property="deliveryTimeTextField" destination="9yN-NY-E88" id="pOY-af-mqX"/>
+                        <outlet property="deliveryDateTextField" destination="9yN-NY-E88" id="b5s-5S-Isf"/>
+                        <outlet property="deliveryTimeTextField" destination="dcF-dd-DdR" id="NwP-X4-AGo"/>
                         <outlet property="imageView" destination="V9p-Jq-op7" id="cAX-iX-kD8"/>
+                        <outlet property="recipientTextfield" destination="mP4-8S-VKC" id="s9V-nA-Ao9"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oq7-HL-oRl" userLabel="First Responder" sceneMemberID="firstResponder"/>
