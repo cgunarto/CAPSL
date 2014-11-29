@@ -15,6 +15,12 @@
 #import "CapsuleListViewController.h"
 
 @interface RootViewController () <PFLogInViewControllerDelegate, PFSignUpViewControllerDelegate>
+@property (strong, nonatomic) IBOutlet UIView *capsuleListContainerView;
+@property (strong, nonatomic) IBOutlet UIView *chooseTypeContainerView;
+@property (strong, nonatomic) IBOutlet UIToolbar *toolBar;
+@property NSMutableArray *toolbarButtons;
+@property (strong, nonatomic) IBOutlet UIBarButtonItem *sendCapsuleButton;
+@property (strong, nonatomic) IBOutlet UIBarButtonItem *viewCapsulesButton;
 
 @end
 
@@ -26,6 +32,12 @@
     [super viewDidAppear:animated];
 
     [self manageLogin];
+
+    self.toolbarButtons = [self.toolBar.items mutableCopy];
+
+    [self.capsuleListContainerView setHidden:YES];
+    [self.chooseTypeContainerView setHidden:NO];
+
 }
 
 - (void)viewDidLoad
@@ -178,5 +190,56 @@
     [self presentViewController:alert animated:YES completion:nil];
 }
 
+#pragma mark - Actions
+
+- (IBAction)onSendCapsuleButtonTapped:(UIBarButtonItem *)sender
+{
+
+    [self.capsuleListContainerView setHidden:YES];
+    [self.chooseTypeContainerView setHidden:NO];
+    [self.toolbarButtons removeObject:self.sendCapsuleButton];
+    [self.toolbarButtons insertObject:self.viewCapsulesButton atIndex:2];
+
+    self.toolBar.items = self.toolbarButtons;
+
+}
+
+- (IBAction)onViewCapsulesButtonTapped:(UIBarButtonItem *)sender
+{
+
+    [self.capsuleListContainerView setHidden:NO];
+    [self.chooseTypeContainerView setHidden:YES];
+    [self.toolbarButtons removeObject:self.viewCapsulesButton];
+    [self.toolbarButtons insertObject:self.sendCapsuleButton atIndex:2];
+
+    self.toolBar.items = self.toolbarButtons;
+
+}
+
+#pragma mark - segue life cycle
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+
+    if ([segue.identifier isEqualToString:@"viewCapsulesSegue"])
+    {
+    }
+    else if ([segue.identifier isEqualToString:@"chooseTypeSegue"])
+    {
+        [self.capsuleListContainerView setHidden:YES];
+        [self.chooseTypeContainerView setHidden:NO];
+
+    }
+    else
+    {
+
+    }
+
+}
 
 @end
+
+
+
+
+
