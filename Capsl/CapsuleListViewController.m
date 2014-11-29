@@ -13,6 +13,7 @@
 
 @interface CapsuleListViewController () <UITableViewDataSource, UITableViewDelegate, JKCountdownTimerDelegate>
 
+@property (strong, nonatomic) IBOutlet UIView *timelineViewControllerContainer;
 @property (nonatomic)  NSArray *capslsArray;
 
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
@@ -49,6 +50,32 @@
     }];
 
 }
+
+
+- (void)viewDidLayoutSubviews
+{
+
+    if (UIInterfaceOrientationIsLandscape([UIDevice currentDevice].orientation))
+    {
+
+        [self.view bringSubviewToFront:self.timelineViewControllerContainer];
+//        [self.timelineViewControllerContainer setHidden:NO];
+//        [self.view addSubview:self.timelineViewControllerContainer];
+        [self.timelineViewControllerContainer setNeedsDisplay];
+
+    }
+    else
+    {
+
+//        [self.timelineViewControllerContainer setHidden:YES];
+        [self.view sendSubviewToBack:self.timelineViewControllerContainer];
+//        [self.timelineViewControllerContainer removeFromSuperview];
+
+
+    }
+
+}
+
 
 // Automatically reloads the tableview whenever capslsArray is updated..
 -(void)setCapslsArray:(NSArray *)capslsArray
