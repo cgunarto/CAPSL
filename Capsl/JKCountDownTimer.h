@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "CapslTableViewCell.h"
 
 @protocol JKCountdownTimerDelegate <NSObject>
 
