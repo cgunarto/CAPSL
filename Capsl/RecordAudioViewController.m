@@ -28,13 +28,14 @@
 
 @implementation RecordAudioViewController
 
-//code from Appcoda http://www.appcoda.com/ios-avfoundation-framework-tutorial/
+//code referenced from Appcoda http://www.appcoda.com/ios-avfoundation-framework-tutorial/
 //TODO:need to create CPSL and perform segueToCompose
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 
+    // TODO: CLEAN and put in its own method?
     // Disable Stop/Play button when application launches
     [self.stopButton setEnabled:NO];
     [self.playButton setEnabled:NO];
@@ -59,9 +60,6 @@
 
     // Initiate and prepare the recorder
     self.recorder = [[AVAudioRecorder alloc] initWithURL:outputFileURL settings:recordSetting error:NULL];
-
-    self.audioData = [[NSData alloc] initWithContentsOfURL:outputFileURL];
-
     self.recorder.delegate = self;
     self.recorder.meteringEnabled = YES;
     [self.recorder prepareToRecord];
@@ -113,8 +111,8 @@
     [audioSession setActive:NO error:nil];
 
     //TODO: Set Capsl NSData with recorded audio file
+    self.audioData = [[NSData alloc] initWithContentsOfURL:self.recorder.url];
     self.createdCapsl.audio = [PFFile fileWithName:@"audio.m4a" data:self.audioData];
-
 
 }
 
@@ -129,7 +127,8 @@
 
 #pragma mark AVAudioRecorderDelegate
 //Delegate method for handling interruption during recording
-- (void) audioRecorderDidFinishRecording:(AVAudioRecorder *)avrecorder successfully:(BOOL)flag{
+- (void) audioRecorderDidFinishRecording:(AVAudioRecorder *)avrecorder successfully:(BOOL)flag
+{
     [self.recordPauseButton setTitle:@"Record" forState:UIControlStateNormal];
 
     [self.stopButton setEnabled:NO];
@@ -147,16 +146,20 @@
     [alert show];
 }
 
-#pragma mark Passing Info to next VC
+#pragma mark Next Button and Segue
 
 - (IBAction)onNextButtonPressed:(UIButton *)sender
 {
+
+
     if (self.createdCapsl.audio != nil)
     {
         //Fire off segueToContactSearch segue
         //Pass data to Search Contact VC
         [self performSegueWithIdentifier:@"segueToContactSearch" sender:self];
     }
+
+    //If audio is empty, don't move forward yet
     else
     {
         UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"RECORDER EMPTY"
