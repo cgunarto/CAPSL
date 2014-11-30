@@ -45,6 +45,7 @@
 		4F69EC3A1A2A72D9009625AA /* SearchContactViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F69EC391A2A72D9009625AA /* SearchContactViewController.m */; };
 		4F69EC3D1A2A83E3009625AA /* AllContactTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F69EC3C1A2A83E3009625AA /* AllContactTableViewCell.m */; };
 		4FC4EA181A2B021D00D3D09D /* RecordAudioViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FC4EA171A2B021D00D3D09D /* RecordAudioViewController.m */; };
+		4FC4EA1D1A2BDA9B00D3D09D /* WriteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FC4EA1C1A2BDA9B00D3D09D /* WriteViewController.m */; };
 		8D5A3DD81A2A4AFD00A6485A /* JCATimelineRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D5A3DCD1A2A4AFD00A6485A /* JCATimelineRootViewController.m */; };
 		8D5A3DD91A2A4AFD00A6485A /* JCACapslViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D5A3DCF1A2A4AFD00A6485A /* JCACapslViewController.m */; };
 		8D5A3DDA1A2A4AFD00A6485A /* JCATimelineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D5A3DD11A2A4AFD00A6485A /* JCATimelineViewController.m */; };
@@ -128,6 +129,8 @@
 		4F69EC3C1A2A83E3009625AA /* AllContactTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AllContactTableViewCell.m; sourceTree = "<group>"; };
 		4FC4EA161A2B021D00D3D09D /* RecordAudioViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecordAudioViewController.h; sourceTree = "<group>"; };
 		4FC4EA171A2B021D00D3D09D /* RecordAudioViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecordAudioViewController.m; sourceTree = "<group>"; };
+		4FC4EA1B1A2BDA9B00D3D09D /* WriteViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WriteViewController.h; sourceTree = "<group>"; };
+		4FC4EA1C1A2BDA9B00D3D09D /* WriteViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WriteViewController.m; sourceTree = "<group>"; };
 		8D5A3DCC1A2A4AFD00A6485A /* JCATimelineRootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JCATimelineRootViewController.h; sourceTree = "<group>"; };
 		8D5A3DCD1A2A4AFD00A6485A /* JCATimelineRootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JCATimelineRootViewController.m; sourceTree = "<group>"; };
 		8D5A3DCE1A2A4AFD00A6485A /* JCACapslViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JCACapslViewController.h; sourceTree = "<group>"; };
@@ -310,6 +313,8 @@
 				4F69EBF11A25327A009625AA /* CaptureViewController.m */,
 				4FC4EA161A2B021D00D3D09D /* RecordAudioViewController.h */,
 				4FC4EA171A2B021D00D3D09D /* RecordAudioViewController.m */,
+				4FC4EA1B1A2BDA9B00D3D09D /* WriteViewController.h */,
+				4FC4EA1C1A2BDA9B00D3D09D /* WriteViewController.m */,
 				4F69EC381A2A72D9009625AA /* SearchContactViewController.h */,
 				4F69EC391A2A72D9009625AA /* SearchContactViewController.m */,
 				4F69EBF31A25328F009625AA /* ComposeViewController.h */,
@@ -485,6 +490,7 @@
 				4F69EC311A291504009625AA /* Contact.m in Sources */,
 				4F69EBCA1A252331009625AA /* RootViewController.m in Sources */,
 				4F69EBF81A2532C8009625AA /* ProfileViewController.m in Sources */,
+				4FC4EA1D1A2BDA9B00D3D09D /* WriteViewController.m in Sources */,
 				4F69EBC71A252331009625AA /* AppDelegate.m in Sources */,
 				8D5A3DDC1A2A4AFD00A6485A /* JCATimelineMonthCollectionViewCell.m in Sources */,
 				8D5A3DDD1A2A4AFD00A6485A /* JCATimeline.m in Sources */,
