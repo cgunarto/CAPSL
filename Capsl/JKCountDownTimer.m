@@ -91,7 +91,7 @@
     NSInteger ti = (NSInteger)interval;
     NSInteger seconds = ti % 60;
 
-    return [NSString stringWithFormat:@"Seconds Left: %02li", (long)seconds];
+    return [NSString stringWithFormat:@"%02li", (long)seconds];
 }
 
 

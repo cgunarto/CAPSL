@@ -114,10 +114,10 @@
 
     //TODO: make the timer tick in the cell... via setting the custom cell as the delegate for the timer(?)
 
-    JKCountDownTimer *timer = [[JKCountDownTimer alloc] initWithDeliveryDate:deliveryDate withDelegate:self];
-    [timer updateLabel];
-
-    cell.timerLabel.text = self.timerString;
+    [cell startTimerWithDate:deliveryDate withCompletion:^(NSDate *date) {
+        JKCountDownTimer *timer = [[JKCountDownTimer alloc] initWithDeliveryDate:date withDelegate:self];
+        [timer updateLabel];
+    }];
 
     return cell;
 }

@@ -15,7 +15,7 @@
 @end
 
 
-@interface JKCountDownTimer : NSObject
+@interface JKCountDownTimer : NSTimer
 
 @property NSTimer *timer;
 @property NSDate *deliveryDate;
