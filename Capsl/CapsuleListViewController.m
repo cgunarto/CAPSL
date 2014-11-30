@@ -35,12 +35,10 @@
     [super viewDidLoad];
 
     //need to refactor this code later
-    PFQuery *query = [Capslr query];
-    [query whereKey:@"user" equalTo:[PFUser currentUser]];
-    [query getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error) {
 
+    [Capslr returnCapslrFromPFUser:[PFUser currentUser] withCompletion:^(Capslr *currentCapslr, NSError *error) {
         Capslr *capslr = [Capslr object];
-        capslr.objectId = object.objectId;
+        capslr.objectId = currentCapslr.objectId;
 
         //calling class method to get capsls for current user only
         [Capsl searchCapslByKey:@"recipient" orderByAscending:@"deliveryTime" equalTo:capslr completion:^(NSArray *objects, NSError *error) {
@@ -132,7 +130,7 @@
 {
     if ([dateString isEqual: @"OPEN!"])
     {
-        [self presentCanOpenMeAlert];
+//        [self presentCanOpenMeAlert];
     }
     else
     {
