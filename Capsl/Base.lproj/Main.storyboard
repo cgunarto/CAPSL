@@ -485,10 +485,22 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <variation key="widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="169" y="398" width="42" height="30"/>
+                                    <rect key="frame" x="77" y="423" width="42" height="30"/>
                                 </variation>
                                 <connections>
                                     <segue destination="wyg-As-9oh" kind="unwind" unwindAction="unWindSegue:" id="tgj-Q7-KgC"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FEo-bK-2hA">
+                                <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                <state key="normal" title="NEXT">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <variation key="widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="283" y="423" width="39" height="30"/>
+                                </variation>
+                                <connections>
+                                    <action selector="onNextButtonPressed:" destination="Vgx-hR-DGD" eventType="touchUpInside" id="JVD-4T-3lh"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -499,6 +511,7 @@
                                 <exclude reference="9ZE-4q-zUy"/>
                                 <exclude reference="SeJ-cV-lRw"/>
                                 <exclude reference="H89-oX-ZpA"/>
+                                <exclude reference="FEo-bK-2hA"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=compact">
@@ -507,6 +520,7 @@
                                 <include reference="9ZE-4q-zUy"/>
                                 <include reference="SeJ-cV-lRw"/>
                                 <include reference="H89-oX-ZpA"/>
+                                <include reference="FEo-bK-2hA"/>
                             </mask>
                         </variation>
                     </view>
@@ -514,12 +528,13 @@
                         <outlet property="playButton" destination="SeJ-cV-lRw" id="9hx-aK-Uz5"/>
                         <outlet property="recordPauseButton" destination="fSy-W1-wUz" id="h4W-4a-fRs"/>
                         <outlet property="stopButton" destination="9ZE-4q-zUy" id="7my-z8-Idi"/>
+                        <segue destination="g6O-c0-HJb" kind="presentation" identifier="segueToContactSearch" id="l5z-DG-cjd"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2vm-oA-mNu" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="wyg-As-9oh" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="1786.5" y="423"/>
+            <point key="canvasLocation" x="1786.5" y="409"/>
         </scene>
         <!--Capture View Controller-->
         <scene sceneID="zZZ-wh-yVa">
@@ -2045,4 +2060,7 @@
     <resources>
         <image name="group-50" width="26" height="26"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="l5z-DG-cjd"/>
+    </inferredMetricsTieBreakers>
 </document>

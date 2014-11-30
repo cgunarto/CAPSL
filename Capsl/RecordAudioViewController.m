@@ -7,6 +7,9 @@
 //
 
 #import "RecordAudioViewController.h"
+#import "SearchContactViewController.h"
+#import "Capsl.h"
+#import "Capslr.h"
 @import AVFoundation;
 
 @interface RecordAudioViewController () <AVAudioRecorderDelegate, AVAudioPlayerDelegate>
@@ -16,6 +19,10 @@
 
 @property AVAudioRecorder *recorder;
 @property AVAudioPlayer *player;
+
+@property NSData *audioData;
+
+@property Capsl *createdCapsl;
 
 @end
 
@@ -35,7 +42,7 @@
     // Set the audio file
     NSArray *pathComponents = [NSArray arrayWithObjects:
                                [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject],
-                               @"MyAudioMemo.m4a",
+                               @"MyAudio.m4a",
                                nil];
     NSURL *outputFileURL = [NSURL fileURLWithPathComponents:pathComponents];
 
@@ -52,9 +59,22 @@
 
     // Initiate and prepare the recorder
     self.recorder = [[AVAudioRecorder alloc] initWithURL:outputFileURL settings:recordSetting error:NULL];
+
+    self.audioData = [[NSData alloc] initWithContentsOfURL:outputFileURL];
+
     self.recorder.delegate = self;
     self.recorder.meteringEnabled = YES;
     [self.recorder prepareToRecord];
+
+    //Setting CPSL sender
+    [Capslr returnCapslrFromPFUser:[PFUser currentUser] withCompletion:^(Capslr *currentCapslr, NSError *error)
+     {
+         self.createdCapsl.sender = currentCapslr;
+     }];
+
+    //Initializing Capsl object and its type
+    self.createdCapsl = [Capsl object];
+    self.createdCapsl.type = @"audio";
 }
 
 - (IBAction)onRecordButtonTapped:(UIButton *)sender
@@ -72,8 +92,10 @@
         [self.recorder record];
         [self.recordPauseButton setTitle:@"Pause" forState:UIControlStateNormal];
 
-    } else {
+    }
 
+    else
+    {
         // Pause recording
         [self.recorder pause];
         [self.recordPauseButton setTitle:@"Record" forState:UIControlStateNormal];
@@ -89,6 +111,11 @@
 
     AVAudioSession *audioSession = [AVAudioSession sharedInstance];
     [audioSession setActive:NO error:nil];
+
+    //TODO: Set Capsl NSData with recorded audio file
+    self.createdCapsl.audio = [PFFile fileWithName:@"audio.m4a" data:self.audioData];
+
+
 }
 
 - (IBAction)onPlayTapped:(UIButton *)sender
@@ -119,6 +146,73 @@
                                           otherButtonTitles:nil];
     [alert show];
 }
+
+#pragma mark Passing Info to next VC
+
+- (IBAction)onNextButtonPressed:(UIButton *)sender
+{
+    if (self.createdCapsl.audio != nil)
+    {
+        //Fire off segueToContactSearch segue
+        //Pass data to Search Contact VC
+        [self performSegueWithIdentifier:@"segueToContactSearch" sender:self];
+    }
+    else
+    {
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"RECORDER EMPTY"
+                                                                       message:@"Please record an audio message"
+                                                                preferredStyle:UIAlertControllerStyleAlert];
+
+        UIAlertAction *okButton = [UIAlertAction actionWithTitle:@"OK"
+                                                           style:UIAlertActionStyleDefault
+                                                         handler:nil];
+        [alert addAction:okButton];
+        [self presentViewController:alert
+                           animated:YES
+                         completion:nil];
+
+    }
+
+}
+
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    SearchContactViewController *searchContactVC = segue.destinationViewController;
+    searchContactVC.createdCapsl = self.createdCapsl;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
