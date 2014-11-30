@@ -44,7 +44,9 @@
          self.createdCapsl.sender = currentCapslr;
      }];
 
+    //Initializing Capsl object and its type
     self.createdCapsl = [Capsl object];
+    self.createdCapsl.type = @"photo";
 }
 
 
@@ -79,7 +81,6 @@
     //Settign CPSL image to be sent
     NSData *imageData = UIImageJPEGRepresentation(self.chosenImage, 0.05f);
     self.createdCapsl.photo = [PFFile fileWithName:@"image.jpg" data:imageData];
-    self.createdCapsl.type = @"photo";
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
