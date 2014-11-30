@@ -21,6 +21,7 @@
 @property (nonatomic, strong) NSArray *contactsArray;
 @property (nonatomic, strong) NSArray *searchResults;
 
+@property (weak, nonatomic) IBOutlet UISegmentedControl *segmentedControl;
 
 @end
 
@@ -133,6 +134,8 @@
 }
 
 
+- (IBAction)onContactTypeChosen:(UISegmentedControl *)sender {
+}
 
 
 @end

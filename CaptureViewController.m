@@ -94,5 +94,28 @@
     searchContactVC.createdCapsl = self.createdCapsl;
 }
 
+- (IBAction)onUsePhotoPressed:(UIButton *)sender
+{
+    if (self.imageView.image != nil)
+    {
+        [self performSegueWithIdentifier:@"segueToContactSearch" sender:self];
+    }
+    else
+    {
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"NO PHOTOS CHOSEN"
+                                                                       message:@"take a photo or select image"
+                                                                preferredStyle:UIAlertControllerStyleAlert];
+
+        UIAlertAction *okButton = [UIAlertAction actionWithTitle:@"OK"
+                                                           style:UIAlertActionStyleDefault
+                                                         handler:nil];
+        [alert addAction:okButton];
+        [self presentViewController:alert
+                           animated:YES
+                         completion:nil];
+
+    }
+
+}
 
 @end
