@@ -28,7 +28,7 @@
 {
     [super viewDidLoad];
 
-    // need to refactor this code later
+//     need to refactor this code later
     PFQuery *query = [Capslr query];
     [query whereKey:@"user" equalTo:[PFUser currentUser]];
     [query getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error) {
