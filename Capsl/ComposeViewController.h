@@ -7,9 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+@class Capsl;
 
 @interface ComposeViewController : UIViewController
-@property (strong, nonatomic) UIImage *chosenImage;
+@property (strong, nonatomic) Capsl *createdCapsl;
 
 
 @end

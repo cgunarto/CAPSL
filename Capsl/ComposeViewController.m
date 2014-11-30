@@ -8,6 +8,7 @@
 
 #import "ComposeViewController.h"
 #import "ProfileViewController.h"
+#import "Capsl.h"
 
 @interface ComposeViewController () <UITextFieldDelegate, UIActionSheetDelegate>
 @property (weak, nonatomic) IBOutlet UITextField *deliveryDateTextField;
@@ -51,7 +52,7 @@
 
     [self.deliveryTimeTextField setInputView:self.timePicker];
 
-
+    NSLog(@"%@", self.createdCapsl.recipient);
 }
 
 -(void)updateDateTextField:(id)sender
@@ -92,6 +93,10 @@
     self.deliveryTimeTextField.text = [NSString stringWithFormat:@"%@",dateString];
 }
 
+- (IBAction)onSendButtonPressed:(UIButton *)sender
+{
+
+}
 
 
 
