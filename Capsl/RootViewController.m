@@ -26,7 +26,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [PFUser logOut];
+//    [PFUser logOut];
 
     self.sendCapsuleButton.alpha = 0;
     self.viewCapsulesButton.alpha = 0;
