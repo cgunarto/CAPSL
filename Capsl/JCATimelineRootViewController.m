@@ -102,8 +102,8 @@
 
 - (void)processCapsls:(NSArray *)capsls
 {
-    NSMutableArray *arrayOfYears;
-    NSMutableArray *arrayOfMonths;
+    NSMutableArray *arrayOfYears = [@[] mutableCopy];
+    NSMutableArray *aYearOfMonths;
     NSMutableArray *aMonthOfCapsls;
 
     NSDateFormatter *yearFormatter = [[NSDateFormatter alloc] init];
@@ -120,11 +120,21 @@
         NSString *year = [NSString stringWithFormat:@"%@", [yearFormatter stringFromDate:capsl.deliveryTime]];
         NSString *month = [NSString stringWithFormat:@"%@", [monthFormatter stringFromDate:capsl.deliveryTime]];
 
+        // if capsls skip years, generate empty years in the array
         if (compareYear != [year intValue])
         {
+            int emptyYears = [year intValue] - compareYear;
 
+            for (int x = 1; x <= emptyYears; x++)
+            {
+                aYearOfMonths = [@[] mutableCopy];
+                aMonthOfCapsls = [@[] mutableCopy];
 
-            compareYear = compareYear + 1;
+                [aYearOfMonths addObject: aMonthOfCapsls];
+                [arrayOfYears addObject:aYearOfMonths];
+            }
+
+            compareYear = [year intValue];
 
         }
 
