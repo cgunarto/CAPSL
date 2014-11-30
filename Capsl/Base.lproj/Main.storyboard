@@ -319,11 +319,6 @@
                                         </connections>
                                     </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="2l5-SH-g4G"/>
-                                    <barButtonItem title="VIEW CAPSULES" id="Cr9-Bm-dSW">
-                                        <connections>
-                                            <action selector="onViewCapsulesButtonTapped:" destination="b02-oj-3a1" id="OxV-KI-3ZW"/>
-                                        </connections>
-                                    </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="l7J-Dw-Pxy"/>
                                 </items>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -423,6 +418,11 @@
                 <barButtonItem title="SEND CAPSULE" id="WTc-xi-ULI">
                     <connections>
                         <action selector="onSendCapsuleButtonTapped:" destination="b02-oj-3a1" id="6SQ-Zf-IzH"/>
+                    </connections>
+                </barButtonItem>
+                <barButtonItem title="VIEW CAPSULES" id="Cr9-Bm-dSW">
+                    <connections>
+                        <action selector="onViewCapsulesButtonTapped:" destination="b02-oj-3a1" id="OxV-KI-3ZW"/>
                     </connections>
                 </barButtonItem>
             </objects>

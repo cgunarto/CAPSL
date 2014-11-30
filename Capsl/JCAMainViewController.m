@@ -27,6 +27,8 @@
 
     self.toolbarButtons = [self.toolBar.items mutableCopy];
 
+    
+
     [self.view addSubview:self.capsuleListContainerView];
     [self.view addSubview:self.chooseTypeContainerView];
     [self.capsuleListContainerView setHidden:YES];
