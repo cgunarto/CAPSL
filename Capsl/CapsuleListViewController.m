@@ -15,8 +15,7 @@
 
 @property (strong, nonatomic) IBOutlet UIView *timelineViewControllerContainer;
 @property (nonatomic)  NSArray *capslsArray;
-@property NSMutableArray *timerArray;
-@property NSMutableArray *dynamicTimerArray;
+
 
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 @property Capsl *capsl;
@@ -43,8 +42,6 @@
             if (!error)
             {
                 self.capslsArray = objects;
-
-                self.timerArray = [[objects valueForKey:@"deliveryTime"] mutableCopy];
             }
             else
             {
@@ -120,9 +117,7 @@
     JKCountDownTimer *timer = [[JKCountDownTimer alloc] initWithDeliveryDate:deliveryDate withDelegate:self];
     [timer updateLabel];
 
-//    NSString *timeString = self.timerArray[indexPath.row];
-
-//    cell.timerLabel.text = timeString;
+    cell.timerLabel.text = self.timerString;
 
     return cell;
 }
@@ -136,18 +131,8 @@
     }
     else
     {
-//        self.timerString = dateString;
+        self.timerString = dateString;
 //        NSLog(@"%@", self.timerString);
-
-        self.dynamicTimerArray = [@[] mutableCopy];
-
-        for (NSDate *date in self.timerArray)
-        {
-            [self.dynamicTimerArray addObject:dateString];
-
-        }
-
-
     }
 }
 
