@@ -10,6 +10,7 @@
 #import "Contact.h"
 #import "Capslr.h"
 #import "AllContactTableViewCell.h"
+#import "ComposeViewController.h"
 
 @interface SearchContactViewController () <UITableViewDataSource, UITableViewDelegate, UISearchDisplayDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -48,7 +49,8 @@
 //Filtering for search results
 - (void)filterContentForSearchText:(NSString*)searchText scope:(NSString*)scope
 {
-    NSPredicate *resultPredicate = [NSPredicate predicateWithFormat:@"name contains[c] %@", searchText];
+    NSPredicate *resultPredicate = [NSPredicate predicateWithFormat:@"username contains[c] %@", searchText];
+
     self.searchResults = [self.capslrArray filteredArrayUsingPredicate:resultPredicate];
 }
 
@@ -100,9 +102,31 @@
     }
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 94;
+}
 
 
-
+//-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+//{
+//    if ([segue.identifier isEqualToString:@"showRecipeDetail"])
+//    {
+//        NSIndexPath *indexPath = nil;
+//        Capslr *capslr = nil;
+//
+//        if (self.searchDisplayController.active) {
+//            indexPath = [self.searchDisplayController.searchResultsTableView indexPathForSelectedRow];
+//            recipe = [searchResults objectAtIndex:indexPath.row];
+//        } else {
+//            indexPath = [self.tableView indexPathForSelectedRow];
+//            recipe = [recipes objectAtIndex:indexPath.row];
+//        }
+//
+//        RecipeDetailViewController *destViewController = segue.destinationViewController;
+//        destViewController.recipe = recipe;
+//
+//}
 
 
 
