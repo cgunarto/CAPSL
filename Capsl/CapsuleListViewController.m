@@ -17,11 +17,16 @@
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 
 @property (nonatomic)  NSArray *capslsArray;
-@property CapslTableViewCell *capslTableViewCell;
 
 @end
 
 @implementation CapsuleListViewController
+
+//-(void)viewWillAppear:(BOOL)animated
+//{
+//    [super viewWillAppear:animated];
+//    [self.tableView reloadData];
+//}
 
 - (void)viewDidLoad
 {
@@ -92,7 +97,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    self.capslTableViewCell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
+    CapslTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
     Capsl *capsl = self.capslsArray[indexPath.row];
 
     // querying for sender data (need to refactor later)
@@ -100,7 +105,7 @@
     [query whereKey:@"objectId" equalTo: capsl.sender.objectId];
     [query getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error) {
 
-        self.capslTableViewCell.fromLabel.text = [NSString stringWithFormat:@"From: %@", object[@"username"]];
+        cell.fromLabel.text = [NSString stringWithFormat:@"From: %@", object[@"username"]];
     }];
 
     // Setting the delivery date
@@ -108,16 +113,15 @@
     [dateFormatter setDateFormat:@"MM-dd-yyyy"];
     NSDate *deliveryDate = capsl.deliveryTime;
 
-    self.capslTableViewCell.deliveryDateLabel.text = [NSString stringWithFormat:@"D-Day: %@", [dateFormatter stringFromDate:deliveryDate]];
+    cell.deliveryDateLabel.text = [NSString stringWithFormat:@"D-Day: %@", [dateFormatter stringFromDate:deliveryDate]];
 
-    //TODO: make the timer tick in the cell... via setting the custom cell as the delegate for the timer(?)
-
-    [self.capslTableViewCell startTimerWithDate:deliveryDate withCompletion:^(NSDate *date) {
+    //Timer finally working...
+    [cell startTimerWithDate:deliveryDate withCompletion:^(NSDate *date) {
         JKCountDownTimer *timer = [[JKCountDownTimer alloc] initWithDeliveryDate:date withDelegate:self];
         [timer updateLabel];
     }];
 
-    return self.capslTableViewCell;
+    return cell;
 }
 
 #pragma mark - JKTimer Delegate Method
@@ -148,10 +152,7 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-//    if ([self.capslTableViewCell.timerLabel.text isEqual:@"OPEN!"])
-//    {
-//        NSLog(@"test");
-//    }
+
 }
 
 
