@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="vXZ-lx-hvc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="vXZ-lx-hvc">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
@@ -525,6 +525,7 @@
                         </variation>
                     </view>
                     <connections>
+                        <outlet property="nextButton" destination="FEo-bK-2hA" id="njG-zM-PBe"/>
                         <outlet property="playButton" destination="SeJ-cV-lRw" id="9hx-aK-Uz5"/>
                         <outlet property="recordPauseButton" destination="fSy-W1-wUz" id="h4W-4a-fRs"/>
                         <outlet property="stopButton" destination="9ZE-4q-zUy" id="7my-z8-Idi"/>
@@ -534,7 +535,105 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2vm-oA-mNu" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="wyg-As-9oh" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="1786.5" y="409"/>
+            <point key="canvasLocation" x="1759.5" y="411"/>
+        </scene>
+        <!--Write View Controller-->
+        <scene sceneID="xhz-Sv-hS5">
+            <objects>
+                <viewController id="7sN-oj-M7L" customClass="WriteViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="kqT-cR-la9"/>
+                        <viewControllerLayoutGuide type="bottom" id="rbi-qz-iF6"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="TtC-Js-N0C">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mti-ml-R4i">
+                                <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                <state key="normal" title="BACK">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <variation key="widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="174" y="422" width="42" height="30"/>
+                                </variation>
+                                <connections>
+                                    <segue destination="yCJ-Y8-yMs" kind="unwind" unwindAction="unWindSegue:" id="uH2-pk-6JM"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="drO-Un-iSK">
+                                <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                <state key="normal" title="NEXT">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <variation key="widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="177" y="353" width="39" height="30"/>
+                                </variation>
+                                <connections>
+                                    <action selector="onNextButtonPressed:" destination="7sN-oj-M7L" eventType="touchUpInside" id="8lV-eV-xap"/>
+                                </connections>
+                            </button>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Enter Text Here" translatesAutoresizingMaskIntoConstraints="NO" id="Hxf-4Z-KfM">
+                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                <color key="backgroundColor" red="0.73049389189633973" green="0.94033490429724376" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="300" id="DNx-YH-fPb"/>
+                                    <constraint firstAttribute="width" constant="300" id="JM2-Vw-63Y"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="DNx-YH-fPb"/>
+                                        <exclude reference="JM2-Vw-63Y"/>
+                                    </mask>
+                                </variation>
+                                <variation key="widthClass=compact">
+                                    <mask key="constraints">
+                                        <include reference="DNx-YH-fPb"/>
+                                        <include reference="JM2-Vw-63Y"/>
+                                    </mask>
+                                </variation>
+                            </textView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Hxf-4Z-KfM" firstAttribute="top" secondItem="kqT-cR-la9" secondAttribute="bottom" constant="20" id="XX7-jo-Ulz"/>
+                            <constraint firstAttribute="centerX" secondItem="Hxf-4Z-KfM" secondAttribute="centerX" id="rcx-aq-Dov"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="Mti-ml-R4i"/>
+                                <exclude reference="drO-Un-iSK"/>
+                                <exclude reference="Hxf-4Z-KfM"/>
+                            </mask>
+                            <mask key="constraints">
+                                <exclude reference="XX7-jo-Ulz"/>
+                                <exclude reference="rcx-aq-Dov"/>
+                            </mask>
+                        </variation>
+                        <variation key="widthClass=compact">
+                            <mask key="subviews">
+                                <include reference="Mti-ml-R4i"/>
+                                <include reference="drO-Un-iSK"/>
+                                <include reference="Hxf-4Z-KfM"/>
+                            </mask>
+                            <mask key="constraints">
+                                <include reference="XX7-jo-Ulz"/>
+                                <include reference="rcx-aq-Dov"/>
+                            </mask>
+                        </variation>
+                    </view>
+                    <connections>
+                        <outlet property="nextButton" destination="drO-Un-iSK" id="xa6-0g-Abj"/>
+                        <outlet property="textView" destination="Hxf-4Z-KfM" id="OWF-D6-TtO"/>
+                        <segue destination="g6O-c0-HJb" kind="presentation" identifier="segueToContactSearch" id="4XE-kI-X4t"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="K2t-An-Ljz" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="yCJ-Y8-yMs" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="1771.5" y="-357"/>
         </scene>
         <!--Capture View Controller-->
         <scene sceneID="zZZ-wh-yVa">
@@ -569,15 +668,6 @@
                                     <action selector="takePhotoButtonPressed:" destination="ILH-s3-dTC" eventType="touchUpInside" id="7wj-9U-VaJ"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YYz-wi-pHa">
-                                <rect key="frame" x="124" y="433" width="72" height="30"/>
-                                <state key="normal" title="Use Photo">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="onUsePhotoPressed:" destination="ILH-s3-dTC" eventType="touchUpInside" id="gJu-ui-Alv"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rmd-g5-42K">
                                 <rect key="frame" x="-23" y="-15" width="46" height="30"/>
                                 <state key="normal" title="Back">
@@ -588,6 +678,18 @@
                                 </variation>
                                 <connections>
                                     <segue destination="WDk-x7-13s" kind="unwind" unwindAction="unWindSegue:" id="2zH-mm-eOw"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YYz-wi-pHa">
+                                <rect key="frame" x="124" y="433" width="72" height="30"/>
+                                <state key="normal" title="Next">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <variation key="widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="137" y="433" width="32" height="30"/>
+                                </variation>
+                                <connections>
+                                    <action selector="onNextButtonPressed:" destination="ILH-s3-dTC" eventType="touchUpInside" id="0Pd-XV-giJ"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -612,7 +714,7 @@
                     <navigationItem key="navigationItem" id="DGT-FQ-rL0"/>
                     <connections>
                         <outlet property="imageView" destination="Hg3-VI-LXE" id="4LV-VO-ege"/>
-                        <outlet property="usePhotoButton" destination="YYz-wi-pHa" id="sxd-r1-eur"/>
+                        <outlet property="nextButton" destination="YYz-wi-pHa" id="dRN-qM-H91"/>
                         <segue destination="g6O-c0-HJb" kind="presentation" identifier="segueToContactSearch" id="Eln-db-Pjz"/>
                     </connections>
                 </viewController>
@@ -1319,16 +1421,30 @@
                                     <segue destination="Vgx-hR-DGD" kind="presentation" identifier="segueToRecord" id="K6l-2m-OHE"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aoM-Wr-yEl">
+                                <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                <state key="normal" title="Write">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <variation key="widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="145" y="328" width="36" height="30"/>
+                                </variation>
+                                <connections>
+                                    <segue destination="7sN-oj-M7L" kind="presentation" id="uB2-Mk-Wob"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <variation key="default">
                             <mask key="subviews">
                                 <exclude reference="yTD-nv-7D2"/>
+                                <exclude reference="aoM-Wr-yEl"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=compact">
                             <mask key="subviews">
                                 <include reference="yTD-nv-7D2"/>
+                                <include reference="aoM-Wr-yEl"/>
                             </mask>
                         </variation>
                     </view>
@@ -2061,6 +2177,6 @@
         <image name="group-50" width="26" height="26"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Eln-db-Pjz"/>
+        <segue reference="4XE-kI-X4t"/>
     </inferredMetricsTieBreakers>
 </document>

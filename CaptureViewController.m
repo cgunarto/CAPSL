@@ -15,14 +15,15 @@
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
 @property (strong, nonatomic) UIImage *chosenImage;
 @property Capsl *createdCapsl;
-@property (weak, nonatomic) IBOutlet UIButton *usePhotoButton;
 
-//TODO:pass CAPSL object
-
+@property (weak, nonatomic) IBOutlet UIButton *nextButton;
 
 @end
 
+
 @implementation CaptureViewController
+
+#pragma mark View Controller Life Cycle
 
 - (void)viewDidLoad
 {
@@ -49,6 +50,7 @@
     self.createdCapsl.type = @"photo";
 }
 
+#pragma mark Image Picker Related Methods
 
 - (IBAction)takePhotoButtonPressed:(UIButton *)sender
 {
@@ -88,10 +90,13 @@
     [picker dismissViewControllerAnimated:YES completion:NULL];
 }
 
+
+#pragma mark Segue and Next Button
+
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     //If sender is Use Photo Button, pass info to next VC
-    if ([sender isEqual:self.usePhotoButton])
+    if ([sender isEqual:self.nextButton])
     {
         SearchContactViewController *searchContactVC = segue.destinationViewController;
 
@@ -102,7 +107,7 @@
 
 }
 
-- (IBAction)onUsePhotoPressed:(UIButton *)sender
+- (IBAction)onNextButtonPressed:(UIButton *)sender
 {
     if (self.imageView.image != nil)
     {
