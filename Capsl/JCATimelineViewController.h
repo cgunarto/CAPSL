@@ -18,6 +18,8 @@
 
 @interface JCATimelineViewController : UIViewController
 
+@property NSArray *capslGrandArray;
+
 - (void)centerCorrespondingMonthCell:(NSIndexPath *)indexPath;
 
 @property (nonatomic, weak) id <TimelineDelegate> delegate;

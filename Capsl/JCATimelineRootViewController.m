@@ -156,14 +156,14 @@
             }
 
             compareYear = [capslYear intValue];
-
         }
-        else
-        {
 
-        }
+        [[arrayOfYears lastObject][[capslMonth intValue]] addObject:capsl];
 
     }
+
+    self.capslVC.capslGrandArray = arrayOfYears;
+    self.timelineVC.capslGrandArray = arrayOfYears;
 
 }
 
