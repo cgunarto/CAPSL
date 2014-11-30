@@ -32,25 +32,24 @@
 {
     [super viewDidLoad];
 
-    //need to refactor this code later
-    PFQuery *query = [Capslr query];
-    [query whereKey:@"user" equalTo:[PFUser currentUser]];
-    [query getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error) {
+    [Capslr returnCapslrFromPFUser:[PFUser currentUser] withCompletion:^(Capslr *currentCapslr, NSError *error) {
+        if (!error)
+        {
+            Capslr *capslr = [Capslr object];
+            capslr.objectId = currentCapslr.objectId;
 
-        Capslr *capslr = [Capslr object];
-        capslr.objectId = object.objectId;
-
-        //calling class method to get capsls for current user only
-        [Capsl searchCapslByKey:@"recipient" orderByAscending:@"deliveryTime" equalTo:capslr completion:^(NSArray *objects, NSError *error) {
-            if (!error)
-            {
-                self.capslsArray = objects;
-            }
-            else
-            {
-                NSLog(@"%@", error.localizedDescription);
-            }
-        }];
+            //calling class method to get capsls for current user only
+            [Capsl searchCapslByKey:@"recipient" orderByAscending:@"deliveryTime" equalTo:capslr completion:^(NSArray *objects, NSError *error) {
+                if (!error)
+                {
+                    self.capslsArray = objects;
+                }
+                else
+                {
+                    NSLog(@"%@", error.localizedDescription);
+                }
+            }];
+        }
     }];
 
 }
@@ -112,7 +111,6 @@
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"MM-dd-yyyy"];
     NSDate *deliveryDate = capsl.deliveryTime;
-
     cell.deliveryDateLabel.text = [NSString stringWithFormat:@"D-Day: %@", [dateFormatter stringFromDate:deliveryDate]];
 
     //Timer finally working...
@@ -148,6 +146,21 @@
 
     [alert addAction:okButton];
     [self presentViewController:alert animated:YES completion:nil];
+}
+
+#pragma mark - Delegate method when user selects one of the cells
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    Capsl *selectedCapsl = self.capslsArray[indexPath.row];
+    [self]
+}
+
+- (void)showPhotoDetailViewControllerForPhoto: (Photo *)photo
+{
+    PhotoDetailViewController *photoDetailVC = [self.storyboard instantiateViewControllerWithIdentifier: NSStringFromClass([PhotoDetailViewController class])];
+    photoDetailVC.selectedPhoto = photo;
+
+    [self.navigationController pushViewController:photoDetailVC animated:YES];
 }
 
 
