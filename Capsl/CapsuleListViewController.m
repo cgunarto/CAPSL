@@ -129,7 +129,7 @@
 {
     if ([dateString isEqual: @"OPEN!"])
     {
-        [self presentCanOpenMeAlert];
+//        [self presentCanOpenMeAlert];
     }
     else
     {
