@@ -428,15 +428,16 @@
             </objects>
             <point key="canvasLocation" x="423" y="147"/>
         </scene>
-        <!--View Controller-->
+        <!--Record Audio View Controller-->
         <scene sceneID="dxg-4x-l5b">
             <objects>
-                <viewController id="Vgx-hR-DGD" sceneMemberID="viewController">
+                <viewController id="Vgx-hR-DGD" customClass="RecordAudioViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="viq-Eu-Lp1"/>
                         <viewControllerLayoutGuide type="bottom" id="l9U-ga-g9I"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="jQj-Ud-E42">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fSy-W1-wUz">
@@ -448,6 +449,9 @@
                                 <variation key="widthClass=compact" fixedFrame="YES">
                                     <rect key="frame" x="111" y="247" width="64" height="30"/>
                                 </variation>
+                                <connections>
+                                    <action selector="onRecordButtonTapped:" destination="Vgx-hR-DGD" eventType="touchUpInside" id="wDL-1K-7xi"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9ZE-4q-zUy">
                                 <rect key="frame" x="-23" y="-15" width="46" height="30"/>
@@ -458,6 +462,9 @@
                                 <variation key="widthClass=compact" fixedFrame="YES">
                                     <rect key="frame" x="218" y="247" width="41" height="30"/>
                                 </variation>
+                                <connections>
+                                    <action selector="onStopTapped:" destination="Vgx-hR-DGD" eventType="touchUpInside" id="6vs-aq-8Ot"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SeJ-cV-lRw">
                                 <rect key="frame" x="-23" y="-15" width="46" height="30"/>
@@ -468,6 +475,18 @@
                                 <variation key="widthClass=compact" fixedFrame="YES">
                                     <rect key="frame" x="169" y="312" width="37" height="30"/>
                                 </variation>
+                                <connections>
+                                    <action selector="onPlayTapped:" destination="Vgx-hR-DGD" eventType="touchUpInside" id="BNt-f7-NCt"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="H89-oX-ZpA">
+                                <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                <state key="normal" title="BACK">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <variation key="widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="169" y="398" width="42" height="30"/>
+                                </variation>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -476,6 +495,7 @@
                                 <exclude reference="fSy-W1-wUz"/>
                                 <exclude reference="9ZE-4q-zUy"/>
                                 <exclude reference="SeJ-cV-lRw"/>
+                                <exclude reference="H89-oX-ZpA"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=compact">
@@ -483,13 +503,19 @@
                                 <include reference="fSy-W1-wUz"/>
                                 <include reference="9ZE-4q-zUy"/>
                                 <include reference="SeJ-cV-lRw"/>
+                                <include reference="H89-oX-ZpA"/>
                             </mask>
                         </variation>
                     </view>
+                    <connections>
+                        <outlet property="playButton" destination="SeJ-cV-lRw" id="9hx-aK-Uz5"/>
+                        <outlet property="recordPauseButton" destination="fSy-W1-wUz" id="h4W-4a-fRs"/>
+                        <outlet property="stopButton" destination="9ZE-4q-zUy" id="7my-z8-Idi"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2vm-oA-mNu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1624.5" y="465"/>
+            <point key="canvasLocation" x="1786.5" y="423"/>
         </scene>
         <!--Capture View Controller-->
         <scene sceneID="zZZ-wh-yVa">
@@ -550,7 +576,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="22T-8U-pdV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1625.625" y="1160.9154929577464"/>
+            <point key="canvasLocation" x="1786.5" y="1159"/>
         </scene>
         <!--Compose View Controller-->
         <scene sceneID="6LB-hC-jTg">
@@ -705,7 +731,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oq7-HL-oRl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3093" y="1160"/>
+            <point key="canvasLocation" x="3429" y="1160"/>
         </scene>
         <!--Search Contact View Controller-->
         <scene sceneID="2VP-Sn-w8a">
@@ -1085,7 +1111,7 @@
                     </connections>
                 </searchDisplayController>
             </objects>
-            <point key="canvasLocation" x="2344.5" y="1155"/>
+            <point key="canvasLocation" x="2608.5" y="1159"/>
         </scene>
         <!--Capsule List View Controller-->
         <scene sceneID="NZY-3G-5QX">
@@ -1246,6 +1272,9 @@
                                 <variation key="widthClass=compact" fixedFrame="YES">
                                     <rect key="frame" x="144" y="205" width="40" height="30"/>
                                 </variation>
+                                <connections>
+                                    <segue destination="Vgx-hR-DGD" kind="presentation" id="K6l-2m-OHE"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
