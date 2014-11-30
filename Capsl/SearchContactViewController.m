@@ -11,7 +11,7 @@
 #import "Capslr.h"
 #import "AllContactTableViewCell.h"
 
-@interface SearchContactViewController () <UITableViewDataSource, UITableViewDelegate, UISearchControllerDelegate>
+@interface SearchContactViewController () <UITableViewDataSource, UITableViewDelegate, UISearchDisplayDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 
@@ -39,7 +39,6 @@
           {
               self.capslrArray = capslrObjectsArray;
               [self.tableView reloadData];
-
           }];
          
      }];
@@ -69,9 +68,19 @@
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    AllContactTableViewCell *allContactCell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
+    AllContactTableViewCell *allContactCell = (AllContactTableViewCell *)[self.tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
 
-    Capslr *capslr = self.capslrArray[indexPath.row];
+    Capslr *capslr = nil;
+
+    if (tableView == self.searchDisplayController.searchResultsTableView)
+    {
+        capslr = [self.searchResults objectAtIndex:indexPath.row];
+    }
+    else
+    {
+        capslr = [self.capslrArray objectAtIndex:indexPath.row];
+    }
+
     allContactCell.nameLabel.text = capslr.name;
     allContactCell.usernameLabel.text = capslr.username;
     allContactCell.phoneLabel.text = capslr.phone;
@@ -84,7 +93,6 @@
     if (tableView == self.searchDisplayController.searchResultsTableView)
     {
         return [self.searchResults count];
-
     }
     else
     {
