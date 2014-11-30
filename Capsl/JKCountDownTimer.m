@@ -7,7 +7,7 @@
 //
 
 #import "JKCountDownTimer.h"
-#define kTwoHoursBeforeOpeningCapsl 7200
+#define kSixHoursInSeconds 21600
 #define kDayInSeconds 86400
 #define kWeekInSeconds 604800
 
@@ -59,7 +59,7 @@
     {
         result = @"THIS WEEK";
     }
-    else if (elapsedSeconds < kDayInSeconds && elapsedSeconds >= kTwoHoursBeforeOpeningCapsl)
+    else if (elapsedSeconds < kDayInSeconds && elapsedSeconds >= kSixHoursInSeconds)
     {
         result = @"TODAY";
     }
@@ -71,7 +71,7 @@
 //        result = [dateFormatter stringFromDate:self.deliveryDate];
 //
 //    }
-    else if (elapsedSeconds < kTwoHoursBeforeOpeningCapsl && elapsedSeconds >= 60)
+    else if (elapsedSeconds < kSixHoursInSeconds && elapsedSeconds >= 60)
     {
         result = [self stringFromTimeInterval:elapsedSeconds];
     }
