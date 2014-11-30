@@ -9,6 +9,7 @@
 #import "ComposeViewController.h"
 #import "ProfileViewController.h"
 #import "Capsl.h"
+#import "Capslr.h"
 
 @interface ComposeViewController () <UITextFieldDelegate, UIActionSheetDelegate>
 @property (weak, nonatomic) IBOutlet UITextField *deliveryDateTextField;
@@ -82,7 +83,7 @@
 -(void)updateTimeTextField:(id)sender
 {
     UIDatePicker *picker = (UIDatePicker*)self.deliveryTimeTextField.inputView;
-//    self.deliveryTimeTextField.text = [NSString stringWithFormat:@"%@",picker.date];
+    //self.deliveryTimeTextField.text = [NSString stringWithFormat:@"%@",picker.date];
 
     NSDate *pickerDate = picker.date;
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
@@ -92,16 +93,56 @@
 
     self.deliveryTimeTextField.text = [NSString stringWithFormat:@"%@",dateString];
 
+    //Setting createdCapsl's delivery Time
     self.createdCapsl.deliveryTime = picker.date;
 }
 
 - (IBAction)onSendButtonPressed:(UIButton *)sender
 {
-    //Check if date is empty or not
+    //If date is not chosen, present an alert
+    if ([self.deliveryDateTextField.text isEqual: @""] || [self.deliveryTimeTextField  isEqual: @""] )
+    {
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"NO DELIVERY DATE CHOSEN"
+                                                                       message:@"Please choose a delivery date"
+                                                                preferredStyle:UIAlertControllerStyleAlert];
+
+        UIAlertAction *okButton = [UIAlertAction actionWithTitle:@"OK"
+                                                           style:UIAlertActionStyleDefault
+                                                         handler:nil];
+        [alert addAction:okButton];
+        [self presentViewController:alert
+                           animated:YES
+                         completion:nil];
+
+    }
+    else
+    {
+        //Save it to Capsl
+        [self.createdCapsl saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error)
+        {
+            if (!error)
+            {
+                Capslr *recipient= self.createdCapsl.recipient;
+                NSString *message = [NSString stringWithFormat:@"Capsl sent to %@", recipient.username];
+
+                UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Message Sent!"
+                                                                               message:message
+                                                                        preferredStyle:UIAlertControllerStyleAlert];
+
+                UIAlertAction *okButton = [UIAlertAction actionWithTitle:@"OK"
+                                                                   style:UIAlertActionStyleDefault
+                                                                 handler:nil];
+                [alert addAction:okButton];
+                [self presentViewController:alert
+                                   animated:YES
+                                 completion:nil];
+
+            }
+        }];
+    }
+
+
 }
-
-
-
 
 
 //set Time Date
