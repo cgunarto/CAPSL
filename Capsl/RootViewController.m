@@ -26,7 +26,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-//    [PFUser logOut];
+    [PFUser logOut];
+
+    self.sendCapsuleButton.alpha = 0;
+    self.viewCapsulesButton.alpha = 0;
 
 }
 
@@ -68,7 +71,12 @@
     }
     else
     {
-//        [self performSegueWithIdentifier:@"toMainViewControllerSegue" sender:self];
+        [UIView animateWithDuration:0.5 animations:^{
+
+            self.sendCapsuleButton.alpha = 1;
+            self.viewCapsulesButton.alpha = 1;
+
+        }];
     }
 }
 
