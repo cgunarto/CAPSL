@@ -9,7 +9,9 @@
 #import "SearchContactViewController.h"
 #import "Contact.h"
 #import "Capslr.h"
+#import "Capsl.h"
 #import "AllContactTableViewCell.h"
+#import "ComposeViewController.h"
 
 @interface SearchContactViewController () <UITableViewDataSource, UITableViewDelegate, UISearchDisplayDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -17,11 +19,15 @@
 
 @property (nonatomic, strong) NSArray *capslrArray;
 @property (nonatomic, strong) NSArray *contactsArray;
+@property (nonatomic, strong) NSArray *searchResults;
 
 
 @end
 
 @implementation SearchContactViewController
+
+
+//TODO:add segmented control to toggle between search CAPSLR and CONTACT
 
 - (void)viewDidLoad
 {
@@ -35,17 +41,48 @@
           {
               self.capslrArray = capslrObjectsArray;
               [self.tableView reloadData];
-
           }];
          
      }];
 }
 
+//Filtering for search results
+- (void)filterContentForSearchText:(NSString*)searchText scope:(NSString*)scope
+{
+    NSPredicate *resultPredicate = [NSPredicate predicateWithFormat:@"username contains[c] %@", searchText];
+
+    self.searchResults = [self.capslrArray filteredArrayUsingPredicate:resultPredicate];
+}
+
+-(BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchString:(NSString *)searchString
+{
+    [self filterContentForSearchText:searchString
+                               scope:[[self.searchDisplayController.searchBar scopeButtonTitles]
+                                      objectAtIndex:[self.searchDisplayController.searchBar
+                                                     selectedScopeButtonIndex]]];
+    
+    return YES;
+}
+
+
+
+#pragma mark Table View Methods
+
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    AllContactTableViewCell *allContactCell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
+    AllContactTableViewCell *allContactCell = (AllContactTableViewCell *)[self.tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
 
-    Capslr *capslr = self.capslrArray[indexPath.row];
+    Capslr *capslr = nil;
+
+    if (tableView == self.searchDisplayController.searchResultsTableView)
+    {
+        capslr = [self.searchResults objectAtIndex:indexPath.row];
+    }
+    else
+    {
+        capslr = [self.capslrArray objectAtIndex:indexPath.row];
+    }
+
     allContactCell.nameLabel.text = capslr.name;
     allContactCell.usernameLabel.text = capslr.username;
     allContactCell.phoneLabel.text = capslr.phone;
@@ -55,7 +92,47 @@
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return self.capslrArray.count;
+    if (tableView == self.searchDisplayController.searchResultsTableView)
+    {
+        return [self.searchResults count];
+    }
+    else
+    {
+        return [self.capslrArray count];
+    }
 }
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 94;
+}
+
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.identifier isEqualToString:@"segueToCompose"])
+    {
+        NSIndexPath *indexPath = nil;
+        Capslr *capslr = nil;
+
+        if (self.searchDisplayController.active)
+        {
+            indexPath = [self.searchDisplayController.searchResultsTableView indexPathForSelectedRow];
+            capslr = [self.searchResults objectAtIndex:indexPath.row];
+        }
+        else
+        {
+            indexPath = [self.tableView indexPathForSelectedRow];
+            capslr = [self.capslrArray objectAtIndex:indexPath.row];
+        }
+
+        self.createdCapsl.recipient = capslr;
+
+        ComposeViewController *composeVC = segue.destinationViewController;
+        composeVC.createdCapsl = self.createdCapsl;
+    }
+}
+
+
+
 
 @end
