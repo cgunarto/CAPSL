@@ -7,7 +7,7 @@
 //
 
 #import "JKCountDownTimer.h"
-#define kOneHoursBeforeShowingTimer 3600
+#define kTwoHoursBeforeOpeningCapsl 7200
 
 @interface JKCountDownTimer ()
 
@@ -47,9 +47,9 @@
     NSString *result;
 
     long elapsedSeconds = [self.deliveryDate timeIntervalSinceDate:[NSDate date]];
-    NSLog(@"Elaped seconds:%ld seconds",elapsedSeconds);
+//    NSLog(@"Elaped seconds:%ld seconds",elapsedSeconds);
 
-    if (elapsedSeconds >= kOneHoursBeforeShowingTimer)
+    if (elapsedSeconds >= kTwoHoursBeforeOpeningCapsl)
     {
         NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
         [dateFormatter setDateFormat:@"MM/dd/yyyy"];
@@ -57,7 +57,7 @@
         result = [dateFormatter stringFromDate:self.deliveryDate];
 
     }
-    else if (elapsedSeconds < kOneHoursBeforeShowingTimer && elapsedSeconds >= 60)
+    else if (elapsedSeconds < kTwoHoursBeforeOpeningCapsl && elapsedSeconds >= 60)
     {
         result = [self stringFromTimeInterval:elapsedSeconds];
     }

@@ -131,8 +131,8 @@
     }
     else
     {
-        self.timerString = dateString;
-//        NSLog(@"%@", self.timerString);
+//        self.timerString = dateString;
+////        NSLog(@"%@", self.timerString);
     }
 }
 
