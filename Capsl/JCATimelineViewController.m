@@ -44,6 +44,12 @@
 
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [self.timelineView reloadData];
+}
+
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

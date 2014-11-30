@@ -30,51 +30,30 @@
     [super viewDidLoad];
     self.device = [UIDevice currentDevice];
 
-//    self.wallpaperView = [[UIImageView alloc] initWithImage:[self processWallpaper:[UIImage imageNamed:@"wallpaper"]]];
-//    self.wallpaperView.contentMode = UIViewContentModeCenter;
-//    [self.view addSubview:self.wallpaperView];
+    self.wallpaperView = [[UIImageView alloc] initWithImage:[self processWallpaper:[UIImage imageNamed:@"wallpaper"]]];
+    self.wallpaperView.contentMode = UIViewContentModeCenter;
+    [self.view addSubview:self.wallpaperView];
+
+
+
+
+}
+
+- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator
+{
+
+    [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
 
     [self.view addSubview:self.capslContainerView];
     [self.view addSubview:self.timelineContainerView];
 
-
-
 }
 
-- (void)viewDidLayoutSubviews
-{
-    
-}
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
-}
-
-#pragma mark Device Orientation
-
-- (BOOL)shouldAutorotate
-{
-    return YES;
-}
-
-- (NSUInteger)supportedInterfaceOrientations
-{
-    if (UIInterfaceOrientationIsLandscape([UIDevice currentDevice].orientation))
-    {
-
-//        [self.view setHidden:NO];
-
-    }
-    else
-    {
-
-//        [self.view setHidden:YES];
-
-    }
-
-    return UIInterfaceOrientationMaskAllButUpsideDown;
 }
 
 

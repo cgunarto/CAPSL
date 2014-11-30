@@ -29,7 +29,7 @@
 {
     [super viewDidLoad];
 
-    // need to refactor this code later
+//     need to refactor this code later
     PFQuery *query = [Capslr query];
     [query whereKey:@"user" equalTo:[PFUser currentUser]];
     [query getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error) {
@@ -59,18 +59,18 @@
     if (UIInterfaceOrientationIsLandscape([UIDevice currentDevice].orientation))
     {
 
+        [self.view addSubview:self.timelineViewControllerContainer];
         [self.view bringSubviewToFront:self.timelineViewControllerContainer];
-//        [self.timelineViewControllerContainer setHidden:NO];
-//        [self.view addSubview:self.timelineViewControllerContainer];
+        [self.timelineViewControllerContainer setHidden:NO];
         [self.timelineViewControllerContainer setNeedsDisplay];
 
     }
     else
     {
 
-//        [self.timelineViewControllerContainer setHidden:YES];
+        [self.timelineViewControllerContainer setHidden:YES];
         [self.view sendSubviewToBack:self.timelineViewControllerContainer];
-//        [self.timelineViewControllerContainer removeFromSuperview];
+        [self.timelineViewControllerContainer removeFromSuperview];
 
 
     }
