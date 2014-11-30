@@ -42,6 +42,8 @@
      {
          self.createdCapsl.sender = currentCapslr;
      }];
+
+    self.createdCapsl = [Capsl object];
 }
 
 

@@ -9,6 +9,7 @@
 #import "SearchContactViewController.h"
 #import "Contact.h"
 #import "Capslr.h"
+#import "Capsl.h"
 #import "AllContactTableViewCell.h"
 #import "ComposeViewController.h"
 
@@ -44,7 +45,6 @@
          
      }];
 }
-
 
 //Filtering for search results
 - (void)filterContentForSearchText:(NSString*)searchText scope:(NSString*)scope
@@ -107,56 +107,30 @@
     return 94;
 }
 
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.identifier isEqualToString:@"segueToCompose"])
+    {
+        NSIndexPath *indexPath = nil;
+        Capslr *capslr = nil;
 
-//-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-//{
-//    if ([segue.identifier isEqualToString:@"showRecipeDetail"])
-//    {
-//        NSIndexPath *indexPath = nil;
-//        Capslr *capslr = nil;
-//
-//        if (self.searchDisplayController.active)
-//        {
-//            indexPath = [self.searchDisplayController.searchResultsTableView indexPathForSelectedRow];
-//            capslr = [self.searchResults objectAtIndex:indexPath.row];
-//        }
-//        else
-//        {
-//            indexPath = [self.tableView indexPathForSelectedRow];
-//            capslr = [self.capslrArray objectAtIndex:indexPath.row];
-//        }
-//
-//        C *destViewController = segue.destinationViewController;
-//        destViewController.recipe = recipe;
-//
-//}
+        if (self.searchDisplayController.active)
+        {
+            indexPath = [self.searchDisplayController.searchResultsTableView indexPathForSelectedRow];
+            capslr = [self.searchResults objectAtIndex:indexPath.row];
+        }
+        else
+        {
+            indexPath = [self.tableView indexPathForSelectedRow];
+            capslr = [self.capslrArray objectAtIndex:indexPath.row];
+        }
 
+        self.createdCapsl.recipient = capslr;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        ComposeViewController *composeVC = segue.destinationViewController;
+        composeVC.createdCapsl = self.createdCapsl;
+    }
+}
 
 
 
