@@ -10,9 +10,11 @@
 #import "CapslTableViewCell.h"
 #import "Capsl.h"
 #import "JKCountDownTimer.h"
+#import "JCATimelineRootViewController.h"
 
 @interface CapsuleListViewController () <UITableViewDataSource, UITableViewDelegate, JKCountdownTimerDelegate>
 
+@property JCATimelineRootViewController *timelineRootVC;
 @property (strong, nonatomic) IBOutlet UIView *timelineViewControllerContainer;
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 
@@ -45,6 +47,7 @@
             if (!error)
             {
                 self.capslsArray = objects;
+                self.timelineRootVC.capslsArray = objects;
             }
             else
             {
@@ -148,6 +151,15 @@
 
     [alert addAction:okButton];
     [self presentViewController:alert animated:YES completion:nil];
+}
+
+#pragma mark - segue life cycle
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+
+    self.timelineRootVC = segue.destinationViewController;
+
 }
 
 

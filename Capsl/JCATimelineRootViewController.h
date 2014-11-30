@@ -10,6 +10,7 @@
 
 @interface JCATimelineRootViewController : UIViewController
 
+@property NSArray *capslsArray;
 
 @end
 

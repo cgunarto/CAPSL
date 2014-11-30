@@ -11,6 +11,7 @@
 #import "JCACapslViewController.h"
 #import "JCATimelineViewController.h"
 #import "UIImage+ImageEffects.h"
+#import "Capsl.h"
 
 @interface JCATimelineRootViewController () <TimelineDelegate, CapslViewDelegate>
 
@@ -44,6 +45,8 @@
 
     [self.view addSubview:self.capslContainerView];
     [self.view addSubview:self.timelineContainerView];
+
+    [self processCapsls:self.capslsArray];
 
 }
 
@@ -94,6 +97,38 @@
     wallpaper = [wallpaper applyBlurWithRadius:3 tintColor:tintColor saturationDeltaFactor:0.8 maskImage:nil];
 
     return wallpaper;
+
+}
+
+- (void)processCapsls:(NSArray *)capsls
+{
+    NSMutableArray *arrayOfYears;
+    NSMutableArray *arrayOfMonths;
+    NSMutableArray *aMonthOfCapsls;
+
+    NSDateFormatter *yearFormatter = [[NSDateFormatter alloc] init];
+    NSDateFormatter *monthFormatter = [[NSDateFormatter alloc] init];
+    yearFormatter.dateFormat = @"yyyy";
+    monthFormatter.dateFormat = @"MM";
+
+    int compareYear = 2013;
+    int compareMonth = 1;
+
+    for (Capsl *capsl in capsls)
+    {
+        // get month and year for current capsl
+        NSString *year = [NSString stringWithFormat:@"%@", [yearFormatter stringFromDate:capsl.deliveryTime]];
+        NSString *month = [NSString stringWithFormat:@"%@", [monthFormatter stringFromDate:capsl.deliveryTime]];
+
+        if (compareYear != [year intValue])
+        {
+
+
+            compareYear = compareYear + 1;
+
+        }
+
+    }
 
 }
 

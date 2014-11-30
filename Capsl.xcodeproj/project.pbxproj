@@ -223,11 +223,10 @@
 				8DAC42421A2A9BD400A8859A /* JCAMainViewController.h */,
 				8DAC42431A2A9BD400A8859A /* JCAMainViewController.m */,
 				90CE52D61A27C5200033087E /* Capsl List View */,
-				4F69EBEA1A25320C009625AA /* MessageDetailViewController.h */,
-				4F69EBEB1A25320C009625AA /* MessageDetailViewController.m */,
+				8D5A3DDE1A2A4B0700A6485A /* Timeline VCs */,
+				8DC55F3A1A2B8B4500AF1AB8 /* Capsule View */,
 				4FC4EA191A2B027500D3D09D /* Capture & Compose VCs */,
 				4FC4EA1A1A2B030000D3D09D /* Profile & Contact VCs */,
-				8D5A3DDE1A2A4B0700A6485A /* Timeline VCs */,
 				4F69EC1C1A253B8E009625AA /* Model */,
 				8D5A3DE21A2A4B4D00A6485A /* Categories */,
 				4F69EBCE1A252331009625AA /* Images.xcassets */,
@@ -358,6 +357,15 @@
 				8D5A3DE01A2A4B4700A6485A /* UIImage+ImageEffects.m */,
 			);
 			name = Categories;
+			sourceTree = "<group>";
+		};
+		8DC55F3A1A2B8B4500AF1AB8 /* Capsule View */ = {
+			isa = PBXGroup;
+			children = (
+				4F69EBEA1A25320C009625AA /* MessageDetailViewController.h */,
+				4F69EBEB1A25320C009625AA /* MessageDetailViewController.m */,
+			);
+			name = "Capsule View";
 			sourceTree = "<group>";
 		};
 		90CE52D61A27C5200033087E /* Capsl List View */ = {
