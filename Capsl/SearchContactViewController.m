@@ -115,15 +115,18 @@
 //        NSIndexPath *indexPath = nil;
 //        Capslr *capslr = nil;
 //
-//        if (self.searchDisplayController.active) {
+//        if (self.searchDisplayController.active)
+//        {
 //            indexPath = [self.searchDisplayController.searchResultsTableView indexPathForSelectedRow];
-//            recipe = [searchResults objectAtIndex:indexPath.row];
-//        } else {
+//            capslr = [self.searchResults objectAtIndex:indexPath.row];
+//        }
+//        else
+//        {
 //            indexPath = [self.tableView indexPathForSelectedRow];
-//            recipe = [recipes objectAtIndex:indexPath.row];
+//            capslr = [self.capslrArray objectAtIndex:indexPath.row];
 //        }
 //
-//        RecipeDetailViewController *destViewController = segue.destinationViewController;
+//        C *destViewController = segue.destinationViewController;
 //        destViewController.recipe = recipe;
 //
 //}
