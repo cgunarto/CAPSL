@@ -28,6 +28,9 @@
     [super viewDidLoad];
 //    [PFUser logOut];
 
+    self.sendCapsuleButton.alpha = 0;
+    self.viewCapsulesButton.alpha = 0;
+
 }
 
 //View did appear - for login/signup modal view
@@ -68,7 +71,12 @@
     }
     else
     {
-//        [self performSegueWithIdentifier:@"toMainViewControllerSegue" sender:self];
+        [UIView animateWithDuration:0.5 animations:^{
+
+            self.sendCapsuleButton.alpha = 1;
+            self.viewCapsulesButton.alpha = 1;
+
+        }];
     }
 }
 
