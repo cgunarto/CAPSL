@@ -12,19 +12,23 @@
 #import <ParseUI/ParseUI.h>
 #import "LoginViewController.h"
 #import "SignUpViewController.h"
-#import "CapsuleListViewController.h"
+#import "JCAMainViewController.h"
 
 @interface RootViewController () <PFLogInViewControllerDelegate, PFSignUpViewControllerDelegate>
-@property (strong, nonatomic) IBOutlet UIView *capsuleListContainerView;
-@property (strong, nonatomic) IBOutlet UIView *chooseTypeContainerView;
-@property (strong, nonatomic) IBOutlet UIToolbar *toolBar;
-@property NSMutableArray *toolbarButtons;
-@property (strong, nonatomic) IBOutlet UIBarButtonItem *sendCapsuleButton;
-@property (strong, nonatomic) IBOutlet UIBarButtonItem *viewCapsulesButton;
+@property (strong, nonatomic) IBOutlet UIButton *sendCapsuleButton;
+@property (strong, nonatomic) IBOutlet UIButton *viewCapsulesButton;
 
 @end
 
 @implementation RootViewController
+
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+//    [PFUser logOut];
+
+}
 
 //View did appear - for login/signup modal view
 -(void)viewDidAppear:(BOOL)animated
@@ -33,18 +37,8 @@
 
     [self manageLogin];
 
-    self.toolbarButtons = [self.toolBar.items mutableCopy];
-
-    [self.capsuleListContainerView setHidden:YES];
-    [self.chooseTypeContainerView setHidden:NO];
-
 }
 
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-
-}
 
 -(void)manageLogin
 {
@@ -74,7 +68,7 @@
     }
     else
     {
-        [self.parentViewController performSegueWithIdentifier:@"toCapslVCSegue" sender:self];
+//        [self performSegueWithIdentifier:@"toMainViewControllerSegue" sender:self];
     }
 }
 
@@ -190,51 +184,29 @@
     [self presentViewController:alert animated:YES completion:nil];
 }
 
-#pragma mark - Actions
+#pragma mark Actions
 
-- (IBAction)onSendCapsuleButtonTapped:(UIBarButtonItem *)sender
+- (IBAction)onDecisionButtonPressed:(UIButton *)sender
 {
 
-    [self.capsuleListContainerView setHidden:YES];
-    [self.chooseTypeContainerView setHidden:NO];
-    [self.toolbarButtons removeObject:self.sendCapsuleButton];
-    [self.toolbarButtons insertObject:self.viewCapsulesButton atIndex:2];
-
-    self.toolBar.items = self.toolbarButtons;
+    [self performSegueWithIdentifier:@"toMainViewControllerSegue" sender:sender];
 
 }
 
-- (IBAction)onViewCapsulesButtonTapped:(UIBarButtonItem *)sender
-{
-
-    [self.capsuleListContainerView setHidden:NO];
-    [self.chooseTypeContainerView setHidden:YES];
-    [self.toolbarButtons removeObject:self.viewCapsulesButton];
-    [self.toolbarButtons insertObject:self.sendCapsuleButton atIndex:2];
-
-    self.toolBar.items = self.toolbarButtons;
-
-}
-
-#pragma mark - segue life cycle
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
 
-    if ([segue.identifier isEqualToString:@"viewCapsulesSegue"])
-    {
-    }
-    else if ([segue.identifier isEqualToString:@"chooseTypeSegue"])
-    {
-        [self.capsuleListContainerView setHidden:YES];
-        [self.chooseTypeContainerView setHidden:NO];
+    JCAMainViewController *vc = segue.destinationViewController;
 
+    if ([sender isEqual:self.sendCapsuleButton])
+    {
+        vc.showChooseVC = YES;
     }
     else
     {
-
+        vc.showChooseVC = NO;
     }
-
 }
 
 @end
