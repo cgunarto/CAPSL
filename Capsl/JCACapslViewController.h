@@ -16,6 +16,8 @@
 
 @interface JCACapslViewController : UIViewController
 
+@property NSArray *capslGrandArray;
+
 - (void)showCapsls:(NSInteger)monthIndex withAnimation:(BOOL)animated;
 
 @property (nonatomic, weak) id <CapslViewDelegate> delegate;

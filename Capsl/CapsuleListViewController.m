@@ -10,9 +10,11 @@
 #import "CapslTableViewCell.h"
 #import "Capsl.h"
 #import "JKCountDownTimer.h"
+#import "JCATimelineRootViewController.h"
 
 @interface CapsuleListViewController () <UITableViewDataSource, UITableViewDelegate, JKCountdownTimerDelegate>
 
+@property JCATimelineRootViewController *timelineRootVC;
 @property (strong, nonatomic) IBOutlet UIView *timelineViewControllerContainer;
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 
@@ -32,6 +34,7 @@
 {
     [super viewDidLoad];
 
+<<<<<<< HEAD
     [Capslr returnCapslrFromPFUser:[PFUser currentUser] withCompletion:^(Capslr *currentCapslr, NSError *error) {
         if (!error)
         {
@@ -50,6 +53,28 @@
                 }
             }];
         }
+=======
+    //need to refactor this code later
+    PFQuery *query = [Capslr query];
+    [query whereKey:@"user" equalTo:[PFUser currentUser]];
+    [query getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error) {
+
+        Capslr *capslr = [Capslr object];
+        capslr.objectId = object.objectId;
+
+        //calling class method to get capsls for current user only
+        [Capsl searchCapslByKey:@"recipient" orderByAscending:@"deliveryTime" equalTo:capslr completion:^(NSArray *objects, NSError *error) {
+            if (!error)
+            {
+                self.capslsArray = objects;
+                self.timelineRootVC.capslsArray = objects;
+            }
+            else
+            {
+                NSLog(@"%@", error.localizedDescription);
+            }
+        }];
+>>>>>>> Development
     }];
 
 }
@@ -148,6 +173,7 @@
     [self presentViewController:alert animated:YES completion:nil];
 }
 
+<<<<<<< HEAD
 #pragma mark - Delegate method when user selects one of the cells
 //-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 //{
@@ -162,6 +188,16 @@
 //
 //    [self.navigationController pushViewController:photoDetailVC animated:YES];
 //}
+=======
+#pragma mark - segue life cycle
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+
+    self.timelineRootVC = segue.destinationViewController;
+
+}
+>>>>>>> Development
 
 
 @end
