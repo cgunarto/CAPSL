@@ -15,6 +15,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
 @property (strong, nonatomic) UIImage *chosenImage;
 @property Capsl *createdCapsl;
+@property (weak, nonatomic) IBOutlet UIButton *usePhotoButton;
 
 //TODO:pass CAPSL object
 
@@ -88,11 +89,16 @@
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    SearchContactViewController *searchContactVC = segue.destinationViewController;
+    //If sender is Use Photo Button, pass info to next VC
+    if ([sender isEqual:self.usePhotoButton])
+    {
+        SearchContactViewController *searchContactVC = segue.destinationViewController;
 
-    //TODO:delete chosenImage later
-    searchContactVC.chosenImage = self.chosenImage;
-    searchContactVC.createdCapsl = self.createdCapsl;
+        //TODO:delete chosenImage later
+        searchContactVC.chosenImage = self.chosenImage;
+        searchContactVC.createdCapsl = self.createdCapsl;
+    }
+
 }
 
 - (IBAction)onUsePhotoPressed:(UIButton *)sender
