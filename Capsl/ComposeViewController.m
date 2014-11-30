@@ -91,11 +91,13 @@
     NSLog(@"%@", dateString);
 
     self.deliveryTimeTextField.text = [NSString stringWithFormat:@"%@",dateString];
+
+    self.createdCapsl.deliveryTime = picker.date;
 }
 
 - (IBAction)onSendButtonPressed:(UIButton *)sender
 {
-
+    //Check if date is empty or not
 }
 
 
