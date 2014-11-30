@@ -8,6 +8,8 @@
 
 #import "JKCountDownTimer.h"
 #define kTwoHoursBeforeOpeningCapsl 7200
+#define kDayInSeconds 86400
+#define kWeekInSeconds 604800
 
 @interface JKCountDownTimer ()
 
@@ -49,14 +51,26 @@
     long elapsedSeconds = [self.deliveryDate timeIntervalSinceDate:[NSDate date]];
 //    NSLog(@"Elaped seconds:%ld seconds",elapsedSeconds);
 
-    if (elapsedSeconds >= kTwoHoursBeforeOpeningCapsl)
+    if (elapsedSeconds >= kWeekInSeconds)
     {
-        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-        [dateFormatter setDateFormat:@"MM/dd/yyyy"];
-
-        result = [dateFormatter stringFromDate:self.deliveryDate];
-
+        result = @"SOON";
     }
+    else if (elapsedSeconds < kWeekInSeconds && elapsedSeconds >= kDayInSeconds)
+    {
+        result = @"THIS WEEK";
+    }
+    else if (elapsedSeconds < kDayInSeconds && elapsedSeconds >= kTwoHoursBeforeOpeningCapsl)
+    {
+        result = @"TODAY";
+    }
+//    else if (elapsedSeconds < kTwoHoursBeforeOpeningCapsl)
+//    {
+//        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+//        [dateFormatter setDateFormat:@"MM/dd/yyyy"];
+//
+//        result = [dateFormatter stringFromDate:self.deliveryDate];
+//
+//    }
     else if (elapsedSeconds < kTwoHoursBeforeOpeningCapsl && elapsedSeconds >= 60)
     {
         result = [self stringFromTimeInterval:elapsedSeconds];
@@ -68,8 +82,7 @@
     else if (elapsedSeconds < 0)
     {
         [self.timer invalidate];
-        
-        // result = nil  // calling function will need to check to see if valid response
+        result = @"OPEN!";
     }
 
     [self.delegate counterUpdated:result];

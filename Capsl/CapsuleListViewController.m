@@ -125,7 +125,7 @@
 #pragma mark - JKTimer Delegate Method
 -(void)counterUpdated:(NSString *)dateString
 {
-    if (dateString == nil)
+    if ([dateString isEqual: @"OPEN!"])
     {
         [self presentCanOpenMeAlert];
     }
