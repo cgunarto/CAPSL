@@ -149,19 +149,19 @@
 }
 
 #pragma mark - Delegate method when user selects one of the cells
--(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    Capsl *selectedCapsl = self.capslsArray[indexPath.row];
-    [self]
-}
-
-- (void)showPhotoDetailViewControllerForPhoto: (Photo *)photo
-{
-    PhotoDetailViewController *photoDetailVC = [self.storyboard instantiateViewControllerWithIdentifier: NSStringFromClass([PhotoDetailViewController class])];
-    photoDetailVC.selectedPhoto = photo;
-
-    [self.navigationController pushViewController:photoDetailVC animated:YES];
-}
+//-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+//{
+//    Capsl *selectedCapsl = self.capslsArray[indexPath.row];
+//    [self]
+//}
+//
+//- (void)showPhotoDetailViewControllerForPhoto: (Photo *)photo
+//{
+//    PhotoDetailViewController *photoDetailVC = [self.storyboard instantiateViewControllerWithIdentifier: NSStringFromClass([PhotoDetailViewController class])];
+//    photoDetailVC.selectedPhoto = photo;
+//
+//    [self.navigationController pushViewController:photoDetailVC animated:YES];
+//}
 
 
 @end
