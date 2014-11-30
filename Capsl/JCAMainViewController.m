@@ -29,8 +29,20 @@
 
     [self.view addSubview:self.capsuleListContainerView];
     [self.view addSubview:self.chooseTypeContainerView];
-    [self.capsuleListContainerView setHidden:YES];
-    [self.chooseTypeContainerView setHidden:NO];
+
+    if (self.showChooseVC == YES)
+    {
+
+        [self showChooseVCContainer];
+
+    }
+    else
+    {
+
+        [self showCapsulesVCContainer];
+
+    }
+
 
 }
 
@@ -45,25 +57,37 @@
 - (IBAction)onSendCapsuleButtonTapped:(UIBarButtonItem *)sender
 {
 
-    [self.capsuleListContainerView setHidden:YES];
-    [self.chooseTypeContainerView setHidden:NO];
-    [self.toolbarButtons removeObject:self.sendCapsuleButton];
-    [self.toolbarButtons insertObject:self.viewCapsulesButton atIndex:2];
-
-    self.toolBar.items = self.toolbarButtons;
+    [self showChooseVCContainer];
 
 }
 
 - (IBAction)onViewCapsulesButtonTapped:(UIBarButtonItem *)sender
 {
 
+    [self showCapsulesVCContainer];
+    
+}
+
+#pragma mark Helper methods
+
+- (void)showChooseVCContainer
+{
+    [self.capsuleListContainerView setHidden:YES];
+    [self.chooseTypeContainerView setHidden:NO];
+    [self.toolbarButtons removeObject:self.sendCapsuleButton];
+    [self.toolbarButtons insertObject:self.viewCapsulesButton atIndex:2];
+
+    self.toolBar.items = self.toolbarButtons;
+}
+
+- (void)showCapsulesVCContainer
+{
     [self.capsuleListContainerView setHidden:NO];
     [self.chooseTypeContainerView setHidden:YES];
     [self.toolbarButtons removeObject:self.viewCapsulesButton];
     [self.toolbarButtons insertObject:self.sendCapsuleButton atIndex:2];
 
     self.toolBar.items = self.toolbarButtons;
-    
 }
 
 #pragma mark - segue life cycle
