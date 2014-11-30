@@ -31,11 +31,9 @@
     self.device = [UIDevice currentDevice];
 
     self.wallpaperView = [[UIImageView alloc] initWithImage:[self processWallpaper:[UIImage imageNamed:@"wallpaper"]]];
-    self.wallpaperView.contentMode = UIViewContentModeCenter;
+//    self.wallpaperView.frame = self.view.bounds;
+    self.wallpaperView.contentMode = UIViewContentModeScaleAspectFill;
     [self.view addSubview:self.wallpaperView];
-
-
-
 
 }
 
