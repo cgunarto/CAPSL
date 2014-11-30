@@ -7,11 +7,17 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "JKCountDownTimer.h"
 
-@interface CapslTableViewCell : UITableViewCell
+@interface CapslTableViewCell : UITableViewCell <JKCountdownTimerDelegate>
+
 @property (strong, nonatomic) IBOutlet UIImageView *profileImage;
 @property (strong, nonatomic) IBOutlet UILabel *fromLabel;
 @property (strong, nonatomic) IBOutlet UILabel *deliveryDateLabel;
 @property (strong, nonatomic) IBOutlet UILabel *timerLabel;
+
+@property JKCountDownTimer *timer;
+
+- (void)startTimerWithDate:(NSDate *)date withCompletion:(void(^)(NSDate *date))complete;
 
 @end

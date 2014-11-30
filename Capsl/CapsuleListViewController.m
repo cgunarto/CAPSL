@@ -14,21 +14,25 @@
 @interface CapsuleListViewController () <UITableViewDataSource, UITableViewDelegate, JKCountdownTimerDelegate>
 
 @property (strong, nonatomic) IBOutlet UIView *timelineViewControllerContainer;
-@property (nonatomic)  NSArray *capslsArray;
-
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
-@property Capsl *capsl;
-@property (nonatomic)  NSString *timerString;
+
+@property (nonatomic)  NSArray *capslsArray;
 
 @end
 
 @implementation CapsuleListViewController
 
+//-(void)viewWillAppear:(BOOL)animated
+//{
+//    [super viewWillAppear:animated];
+//    [self.tableView reloadData];
+//}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 
-//     need to refactor this code later
+    //need to refactor this code later
     PFQuery *query = [Capslr query];
     [query whereKey:@"user" equalTo:[PFUser currentUser]];
     [query getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error) {
@@ -111,12 +115,11 @@
 
     cell.deliveryDateLabel.text = [NSString stringWithFormat:@"D-Day: %@", [dateFormatter stringFromDate:deliveryDate]];
 
-    //TODO: make the timer tick in the cell... via setting the custom cell as the delegate for the timer(?)
-
-    JKCountDownTimer *timer = [[JKCountDownTimer alloc] initWithDeliveryDate:deliveryDate withDelegate:self];
-    [timer updateLabel];
-
-    cell.timerLabel.text = self.timerString;
+    //Timer finally working...
+    [cell startTimerWithDate:deliveryDate withCompletion:^(NSDate *date) {
+        JKCountDownTimer *timer = [[JKCountDownTimer alloc] initWithDeliveryDate:date withDelegate:self];
+        [timer updateLabel];
+    }];
 
     return cell;
 }
@@ -124,22 +127,21 @@
 #pragma mark - JKTimer Delegate Method
 -(void)counterUpdated:(NSString *)dateString
 {
-    if (dateString == nil)
+    if ([dateString isEqual: @"OPEN!"])
     {
         [self presentCanOpenMeAlert];
     }
     else
     {
-        self.timerString = dateString;
-        NSLog(@"%@", self.timerString);
+
     }
 }
 
 #pragma mark - Alert when timer expires
 -(void)presentCanOpenMeAlert
 {
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"You can now open your capsl!" message:nil preferredStyle:UIAlertControllerStyleAlert];
-    UIAlertAction *okButton = [UIAlertAction actionWithTitle:@"Open capsl" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"CAPSL UNLOCKED!" message:nil preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *okButton = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
         // UNLOCK CAPSL!!
 
     }];
