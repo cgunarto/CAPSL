@@ -33,7 +33,8 @@
     self.timerLabel.text = dateString;
     if ([self.timerLabel.text isEqual:@"OPEN!"])
     {
-        self.timerLabel.textColor = [UIColor blueColor];
+        self.timerLabel.textColor = [UIColor whiteColor];
+        self.timerLabel.backgroundColor = [UIColor blueColor];
     }
 }
 
