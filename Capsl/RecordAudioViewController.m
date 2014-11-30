@@ -23,6 +23,7 @@
 @property NSData *audioData;
 
 @property Capsl *createdCapsl;
+@property (weak, nonatomic) IBOutlet UIButton *nextButton;
 
 @end
 
@@ -180,8 +181,12 @@
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    SearchContactViewController *searchContactVC = segue.destinationViewController;
-    searchContactVC.createdCapsl = self.createdCapsl;
+    //If sender is Next Button, pass info to next VC
+    if ([sender isEqual:self.nextButton])
+    {
+        SearchContactViewController *searchContactVC = segue.destinationViewController;
+        searchContactVC.createdCapsl = self.createdCapsl;
+    }
 }
 
 
