@@ -573,7 +573,7 @@
                                     <action selector="onNextButtonPressed:" destination="7sN-oj-M7L" eventType="touchUpInside" id="8lV-eV-xap"/>
                                 </connections>
                             </button>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Enter Text Here" translatesAutoresizingMaskIntoConstraints="NO" id="Hxf-4Z-KfM">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Hxf-4Z-KfM">
                                 <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                                 <color key="backgroundColor" red="0.73049389189633973" green="0.94033490429724376" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -581,7 +581,7 @@
                                     <constraint firstAttribute="width" constant="300" id="JM2-Vw-63Y"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences" returnKeyType="done"/>
                                 <variation key="default">
                                     <mask key="constraints">
                                         <exclude reference="DNx-YH-fPb"/>

@@ -12,9 +12,10 @@
 #import "Capsl.h"
 
 
-@interface WriteViewController ()
+@interface WriteViewController () <UITextViewDelegate>
 @property (weak, nonatomic) IBOutlet UITextView *textView;
 @property (weak, nonatomic) IBOutlet UIButton *nextButton;
+@property NSString *messageToSend;
 
 @property Capsl *createdCapsl;
 
@@ -25,6 +26,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+
+    self.textView.delegate = self;
 }
 
 - (IBAction)onNextButtonPressed:(UIButton *)sender
@@ -40,5 +43,7 @@
         searchContactVC.createdCapsl = self.createdCapsl;
     }
 }
+
+
 
 @end
