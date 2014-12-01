@@ -158,13 +158,23 @@
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Nnz-B4-4T3">
-                                <rect key="frame" x="71" y="340" width="240" height="200"/>
+                                <rect key="frame" x="71" y="380" width="240" height="200"/>
                             </imageView>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bD1-5I-6kz">
+                                <rect key="frame" x="108" y="321" width="166" height="30"/>
+                                <state key="normal" title="PLAY AUDIO MESSAGE">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="onPlayAudioButtonPressed:" destination="N8i-uc-Ane" eventType="touchUpInside" id="5eU-dU-xiV"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="asZ-fY-vEd"/>
                     <connections>
+                        <outlet property="audioPlayerButton" destination="bD1-5I-6kz" id="5x1-AW-MQM"/>
                         <outlet property="deliveryDateLabel" destination="xBc-J8-KPE" id="D8s-YD-oZC"/>
                         <outlet property="photoMessage" destination="Nnz-B4-4T3" id="wtr-ZO-d49"/>
                         <outlet property="senderLabel" destination="vmf-Ub-hzM" id="viW-VE-XKh"/>

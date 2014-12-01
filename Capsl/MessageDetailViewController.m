@@ -9,8 +9,9 @@
 #import "MessageDetailViewController.h"
 #import "Capslr.h"
 #import "JKCountDownTimer.h"
+@import AVFoundation;
 
-@interface MessageDetailViewController () <JKCountdownTimerDelegate>
+@interface MessageDetailViewController () <JKCountdownTimerDelegate, AVAudioPlayerDelegate>
 
 @property (strong, nonatomic) IBOutlet UILabel *senderLabel;
 @property (strong, nonatomic) IBOutlet UILabel *deliveryDateLabel;
@@ -26,6 +27,10 @@
 
 //Photo Message
 @property (strong, nonatomic) IBOutlet UIImageView *photoMessage;
+
+//Audio Message
+@property AVAudioPlayer *player;
+@property (strong, nonatomic) IBOutlet UIButton *audioPlayerButton;
 
 
 @end
@@ -59,6 +64,13 @@
 
     //Photo Message
     [self displayPhotoMessage];
+
+    //Audio Message
+    if ([self.timerLabel.text isEqual:@"AVAILABLE"] && self.chosenCapsl.audio != nil)
+    {
+        // unhide the audio button
+        self.audioPlayerButton.hidden = NO;
+    }
 }
 
 #pragma mark - Displaying Text Message Capsl
@@ -92,6 +104,22 @@
         //
     }
 }
+
+#pragma mark - Display Audio Message
+- (IBAction)onPlayAudioButtonPressed:(UIButton *)sender
+{
+    AVAudioSession *session = [AVAudioSession sharedInstance];
+    [session setCategory:AVAudioSessionCategoryPlayback error:nil];
+
+    PFFile *audioFile = self.chosenCapsl.audio;
+    NSString *filePath = [audioFile url];
+    NSURL *audioURL = [NSURL URLWithString:filePath];
+
+    self.player = [[AVAudioPlayer alloc] initWithContentsOfURL:audioURL error:nil];
+    [self.player setDelegate:self];
+    [self.player play];
+}
+
 
 #pragma mark - JKTimer Delegate Method
 -(void)counterUpdated:(NSString *)dateString
