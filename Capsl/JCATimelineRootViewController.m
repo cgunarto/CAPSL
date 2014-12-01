@@ -65,11 +65,12 @@
 - (void)indexPathForTimelineCellAtCenter:(NSIndexPath *)indexPath fromTap:(BOOL)didTap
 {
 
+    NSInteger yearMultiplier = indexPath.section;
     NSInteger monthIndex = indexPath.item;
 
 //    self.capslVC.delegate = nil;
 
-    [self.capslVC showCapsls:monthIndex withAnimation:didTap];
+    [self.capslVC showCapslAtYear:yearMultiplier andMonth:monthIndex withAnimation:didTap];
 
 }
 

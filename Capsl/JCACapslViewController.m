@@ -8,6 +8,8 @@
 
 #import "JCACapslViewController.h"
 #import "JCACapslCollectionViewCell.h"
+#import "Capsl.h"
+#import "Capslr.h"
 #import <QuartzCore/QuartzCore.h>
 
 @interface JCACapslViewController () <UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout>
@@ -58,15 +60,16 @@ static NSString * const reuseIdentifier = @"CapslCell";
     // Dispose of any resources that can be recreated.
 }
 
-- (void)showCapsls:(NSInteger)monthIndex withAnimation:(BOOL)animated
+- (void)showCapslAtYear:(NSInteger)yearMultiplier andMonth:(NSInteger)monthIndex withAnimation:(BOOL)animated
 {
 
-    NSIndexPath *monthIndexPath = [NSIndexPath indexPathForItem:0 inSection:monthIndex];
+    NSIndexPath *monthIndexPath = [NSIndexPath indexPathForItem:0 inSection:(yearMultiplier * 13) + monthIndex + 1];
 
     UICollectionViewLayoutAttributes *attributes = [self.capslView layoutAttributesForItemAtIndexPath:monthIndexPath];
     CGRect capslRect = attributes.frame;
     CGPoint capslViewOffset = CGPointMake(capslRect.origin.x - self.flowLayout.headerReferenceSize.width, 0);
     [self.capslView setContentOffset:capslViewOffset animated:animated];
+
     //    [self.capslView scrollToItemAtIndexPath:monthIndexPath atScrollPosition:UICollectionViewScrollPositionLeft animated:animated];
 
 }
@@ -77,7 +80,7 @@ static NSString * const reuseIdentifier = @"CapslCell";
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
 
-    return self.monthsOfTheYear.count;
+    return self.capslGrandArray.count * 13;
 
 }
 
@@ -85,17 +88,40 @@ static NSString * const reuseIdentifier = @"CapslCell";
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
 
-    return 4;
+    NSArray *year = self.capslGrandArray[section/13];
+    NSArray *month = year[section % 13];
 
+    if (section % 13 == 0)
+    {
+        return 0;
+    }
+    else if (month.count == 0)
+    {
+        return 0;
+    }
+    else
+    {
+        return month.count;
+    }
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     JCACapslCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
-    cell.nameLabel.text = self.monthsOfTheYear[indexPath.section];
-    [self drawCell:cell];
 
-    cell.profilePicView.image = [UIImage imageNamed:@"profilepic1"];
+    NSArray *year = self.capslGrandArray[indexPath.section / 13];
+    NSArray *month = year[indexPath.section % 13];
+
+    if (indexPath.section % 13 != 0)
+    {
+        Capsl *capsl = month[indexPath.item];
+
+        cell.nameLabel.text = capsl.sender.objectId;
+
+        [self drawCell:cell];
+
+        cell.profilePicView.image = [UIImage imageNamed:@"profilepic1"];
+    }
 
     return cell;
 }
