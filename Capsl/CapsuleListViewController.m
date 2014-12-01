@@ -123,6 +123,10 @@
         [timer updateLabel];
     }];
 
+
+//    NSIndexPath *newIndexPath = [NSIndexPath indexPathForRow:3 inSection:0];
+//    [tableView scrollToRowAtIndexPath:newIndexPath atScrollPosition:UITableViewScrollPositionTop animated:YES];
+
     return cell;
 }
 
@@ -137,19 +141,6 @@
     {
 
     }
-}
-
-#pragma mark - Alert when timer expires
--(void)presentCanOpenMeAlert
-{
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"CAPSL UNLOCKED!" message:nil preferredStyle:UIAlertControllerStyleAlert];
-    UIAlertAction *okButton = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-        // UNLOCK CAPSL!!
-
-    }];
-
-    [alert addAction:okButton];
-    [self presentViewController:alert animated:YES completion:nil];
 }
 
 //-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -178,6 +169,19 @@
 
     }
 
+}
+
+#pragma mark - Alert when timer expires
+-(void)presentCanOpenMeAlert
+{
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"CAPSL UNLOCKED!" message:nil preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *okButton = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        // UNLOCK CAPSL!!
+
+    }];
+
+    [alert addAction:okButton];
+    [self presentViewController:alert animated:YES completion:nil];
 }
 
 
