@@ -9,12 +9,14 @@
 #import "MessageDetailViewController.h"
 #import "Capslr.h"
 #import "JKCountDownTimer.h"
+@import AVFoundation;
 
-@interface MessageDetailViewController () <JKCountdownTimerDelegate>
+@interface MessageDetailViewController () <JKCountdownTimerDelegate, AVAudioPlayerDelegate>
 
 @property (strong, nonatomic) IBOutlet UILabel *senderLabel;
 @property (strong, nonatomic) IBOutlet UILabel *deliveryDateLabel;
-@property (strong, nonatomic) IBOutlet UILabel *timerLabel;
+@property (strong, nonatomic) IBOutlet UILabel *statusLabel;
+@property (strong, nonatomic) IBOutlet UITextView *unavailableMessage;
 
 //String for TIMER
 @property NSString *timerString;
@@ -27,14 +29,31 @@
 //Photo Message
 @property (strong, nonatomic) IBOutlet UIImageView *photoMessage;
 
+//Audio Message
+@property AVAudioPlayer *player;
+@property (strong, nonatomic) IBOutlet UIButton *audioPlayerButton;
+
 
 @end
 
 @implementation MessageDetailViewController
 
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+}
+
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+
+    // Customizing back button in Navbar
+    UIBarButtonItem *backButton = [[UIBarButtonItem alloc]
+                                initWithTitle:@"Back"
+                                style:UIBarButtonItemStylePlain
+                                target:self
+                                action:nil];
+    self.navigationController.navigationBar.topItem.backBarButtonItem = backButton;
 
     // Passing Delivery Date
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
@@ -59,20 +78,32 @@
 
     //Photo Message
     [self displayPhotoMessage];
+
+    //Audio Message
+    if ([self.statusLabel.text containsString:@"Viewed"] && self.chosenCapsl.audio != nil)
+    {
+        // unhide the audio button
+        self.audioPlayerButton.hidden = NO;
+    }
 }
 
 #pragma mark - Displaying Text Message Capsl
 - (void)displayTextMessage
 {
     //Text Message
-    if ([self.timerLabel.text isEqual:@"OPEN!"])
+    if ([self.statusLabel.text isEqual:@"OPEN!"])
     {
         self.textMessage.text = self.chosenCapsl.text;
-        self.timerLabel.text = @"AVAILABLE";
+
+        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+        [dateFormatter setDateFormat:@"MM-dd-yyyy HH:mm"];
+        NSDate *viewedAt = self.chosenCapsl.viewedAt;
+        self.statusLabel.text = [NSString stringWithFormat:@"Viewed At: %@", [dateFormatter stringFromDate:viewedAt]];
     }
     else
     {
-        self.textMessage.text = @"NOT AVAILABLE YET";
+        self.textMessage.hidden = YES;
+        self.unavailableMessage.hidden = NO;
     }
 }
 
@@ -80,7 +111,7 @@
 - (void)displayPhotoMessage
 {
     //Photo Message
-    if ([self.timerLabel.text isEqual:@"OPEN!"] || [self.timerLabel.text isEqual:@"AVAILABLE"])
+    if ([self.statusLabel.text isEqual:@"OPEN!"] || [self.statusLabel.text containsString:@"Viewed"])
     {
         [self.chosenCapsl.photo getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
             self.photoMessage.image = [UIImage imageWithData:data];
@@ -89,25 +120,41 @@
     }
     else
     {
-        //
+        self.unavailableMessage.hidden = NO;
     }
 }
+
+#pragma mark - Display Audio Message
+- (IBAction)onPlayAudioButtonPressed:(UIButton *)sender
+{
+    AVAudioSession *session = [AVAudioSession sharedInstance];
+    [session setCategory:AVAudioSessionCategoryPlayback error:nil];
+
+    PFFile *audioFile = self.chosenCapsl.audio;
+    NSString *filePath = [audioFile url];
+    NSURL *audioURL = [NSURL URLWithString:filePath];
+
+    self.player = [[AVAudioPlayer alloc] initWithContentsOfURL:audioURL error:nil];
+    [self.player setDelegate:self];
+    [self.player play];
+}
+
 
 #pragma mark - JKTimer Delegate Method
 -(void)counterUpdated:(NSString *)dateString
 {
-    self.timerLabel.text = dateString;
+    self.statusLabel.text = dateString;
 }
 
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-}
 
-//BACK BUTTON to dismiss VC
-- (IBAction)onBackButtonPressed:(UIButton *)sender
+#pragma mark - Alert
+-(void)notAvailableAlert
 {
-    [self dismissViewControllerAnimated:YES completion:nil];
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"CAPSL is not yet available" message:@"Please check again later" preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *okButton = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil];
+
+    [alert addAction:okButton];
+    [self presentViewController:alert animated:YES completion:nil];
 }
 
 

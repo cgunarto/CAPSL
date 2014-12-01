@@ -12,6 +12,7 @@
 #import "JKCountDownTimer.h"
 #import "JCATimelineRootViewController.h"
 #import "MessageDetailViewController.h"
+#import "UIImage+RoundedCorner.h"
 
 @interface CapsuleListViewController () <UITableViewDataSource, UITableViewDelegate, JKCountdownTimerDelegate>
 
@@ -25,17 +26,9 @@
 
 @implementation CapsuleListViewController
 
-//-(void)viewWillAppear:(BOOL)animated
-//{
-//    [super viewWillAppear:animated];
-//    [self.tableView reloadData];
-//}
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
-    //need to refactor this code later
 
     [Capslr returnCapslrFromPFUser:[PFUser currentUser] withCompletion:^(Capslr *currentCapslr, NSError *error) {
         Capslr *capslr = [Capslr object];
@@ -47,6 +40,9 @@
             {
                 self.capslsArray = objects;
                 self.timelineRootVC.capslsArray = objects;
+
+                // Navigation Title
+                self.navigationItem.title = [NSString stringWithFormat:@"Capsl Count: %lu", (unsigned long)self.capslsArray.count];
             }
             else
             {
@@ -55,6 +51,7 @@
         }];
     }];
 
+    self.navigationController.navigationBar.backgroundColor = [UIColor greenColor];
 }
 
 
@@ -108,6 +105,12 @@
     [query getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error) {
 
         cell.fromLabel.text = [NSString stringWithFormat:@"From: %@", object[@"username"]];
+
+        //Sender Profile Image (using categories)
+        PFFile *profilePhoto = object[@"profilePhoto"];
+        [profilePhoto getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
+            cell.profileImage.image = [[UIImage imageWithData:data] roundedCornerImage:150 borderSize:10];
+        }];
     }];
 
     // Setting the delivery date
@@ -139,24 +142,19 @@
     }
 }
 
-#pragma mark - Alert when timer expires
--(void)presentCanOpenMeAlert
+#pragma mark - Saving Data for Viewed At
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"CAPSL UNLOCKED!" message:nil preferredStyle:UIAlertControllerStyleAlert];
-    UIAlertAction *okButton = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-        // UNLOCK CAPSL!!
 
-    }];
+    Capsl *capsl = self.capslsArray[indexPath.row];
+    long elapsedSeconds = [capsl.deliveryTime timeIntervalSinceDate:[NSDate date]];
 
-    [alert addAction:okButton];
-    [self presentViewController:alert animated:YES completion:nil];
+    if ((!capsl.viewedAt) && elapsedSeconds <= 0)
+    {
+        capsl.viewedAt = [NSDate date];
+        [capsl saveInBackground];
+    }
 }
-
-//-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-//{
-//    Capsl *capsl = self.capslsArray[indexPath.row];
-//    [self performSegueWithIdentifier:@"segueToMessageVC" sender:capsl];
-//}
 
 #pragma mark - segue life cycle
 
@@ -173,11 +171,22 @@
     }
     else
     {
-
         self.timelineRootVC = segue.destinationViewController;
-
     }
 
+}
+
+#pragma mark - Alert when timer expires
+-(void)presentCanOpenMeAlert
+{
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"CAPSL UNLOCKED!" message:nil preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *okButton = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        // UNLOCK CAPSL!!
+
+    }];
+
+    [alert addAction:okButton];
+    [self presentViewController:alert animated:YES completion:nil];
 }
 
 

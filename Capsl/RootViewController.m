@@ -60,6 +60,7 @@
 
         UIColor *color = [UIColor lightGrayColor];
         signUpViewController.signUpView.additionalField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"Phone Number" attributes:@{NSForegroundColorAttributeName: color}];
+        signUpViewController.signUpView.additionalField.keyboardType = UIKeyboardTypePhonePad;
 
 
         //Assign our sign up controller to be displayed from the login controller

@@ -55,6 +55,9 @@
 		8D5A3DE11A2A4B4700A6485A /* UIImage+ImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D5A3DE01A2A4B4700A6485A /* UIImage+ImageEffects.m */; };
 		8DAC42441A2A9BD400A8859A /* JCAMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DAC42431A2A9BD400A8859A /* JCAMainViewController.m */; };
 		90C0DD171A27CCE500A50BCF /* JKCountDownTimer.m in Sources */ = {isa = PBXBuildFile; fileRef = 90C0DD161A27CCE500A50BCF /* JKCountDownTimer.m */; };
+		90C61E621A2C4D3A003EFEF9 /* UIImage+RoundedCorner.m in Sources */ = {isa = PBXBuildFile; fileRef = 90C61E611A2C4D3A003EFEF9 /* UIImage+RoundedCorner.m */; };
+		90C61E671A2C4EA3003EFEF9 /* UIImage+Alpha.m in Sources */ = {isa = PBXBuildFile; fileRef = 90C61E641A2C4EA3003EFEF9 /* UIImage+Alpha.m */; };
+		90C61E681A2C4EA3003EFEF9 /* UIImage+Resize.m in Sources */ = {isa = PBXBuildFile; fileRef = 90C61E661A2C4EA3003EFEF9 /* UIImage+Resize.m */; };
 		90CE52CF1A27C3350033087E /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 90CE52CE1A27C3350033087E /* LoginViewController.m */; };
 		90CE52D21A27C36A0033087E /* SignUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 90CE52D11A27C36A0033087E /* SignUpViewController.m */; };
 		90CE52D51A27C5170033087E /* CapslTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 90CE52D41A27C5170033087E /* CapslTableViewCell.m */; };
@@ -149,6 +152,12 @@
 		8DAC42431A2A9BD400A8859A /* JCAMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JCAMainViewController.m; sourceTree = "<group>"; };
 		90C0DD151A27CCE500A50BCF /* JKCountDownTimer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JKCountDownTimer.h; sourceTree = "<group>"; };
 		90C0DD161A27CCE500A50BCF /* JKCountDownTimer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JKCountDownTimer.m; sourceTree = "<group>"; };
+		90C61E601A2C4D3A003EFEF9 /* UIImage+RoundedCorner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+RoundedCorner.h"; sourceTree = "<group>"; };
+		90C61E611A2C4D3A003EFEF9 /* UIImage+RoundedCorner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+RoundedCorner.m"; sourceTree = "<group>"; };
+		90C61E631A2C4EA3003EFEF9 /* UIImage+Alpha.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Alpha.h"; sourceTree = "<group>"; };
+		90C61E641A2C4EA3003EFEF9 /* UIImage+Alpha.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Alpha.m"; sourceTree = "<group>"; };
+		90C61E651A2C4EA3003EFEF9 /* UIImage+Resize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Resize.h"; sourceTree = "<group>"; };
+		90C61E661A2C4EA3003EFEF9 /* UIImage+Resize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Resize.m"; sourceTree = "<group>"; };
 		90CE52CD1A27C3350033087E /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LoginViewController.h; path = ../LoginViewController.h; sourceTree = "<group>"; };
 		90CE52CE1A27C3350033087E /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LoginViewController.m; path = ../LoginViewController.m; sourceTree = "<group>"; };
 		90CE52D01A27C36A0033087E /* SignUpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignUpViewController.h; sourceTree = "<group>"; };
@@ -358,6 +367,12 @@
 		8D5A3DE21A2A4B4D00A6485A /* Categories */ = {
 			isa = PBXGroup;
 			children = (
+				90C61E601A2C4D3A003EFEF9 /* UIImage+RoundedCorner.h */,
+				90C61E611A2C4D3A003EFEF9 /* UIImage+RoundedCorner.m */,
+				90C61E631A2C4EA3003EFEF9 /* UIImage+Alpha.h */,
+				90C61E641A2C4EA3003EFEF9 /* UIImage+Alpha.m */,
+				90C61E651A2C4EA3003EFEF9 /* UIImage+Resize.h */,
+				90C61E661A2C4EA3003EFEF9 /* UIImage+Resize.m */,
 				8D5A3DDF1A2A4B4700A6485A /* UIImage+ImageEffects.h */,
 				8D5A3DE01A2A4B4700A6485A /* UIImage+ImageEffects.m */,
 			);
@@ -494,6 +509,7 @@
 				4F69EBC71A252331009625AA /* AppDelegate.m in Sources */,
 				8D5A3DDC1A2A4AFD00A6485A /* JCATimelineMonthCollectionViewCell.m in Sources */,
 				8D5A3DDD1A2A4AFD00A6485A /* JCATimeline.m in Sources */,
+				90C61E681A2C4EA3003EFEF9 /* UIImage+Resize.m in Sources */,
 				8D5A3DE11A2A4B4700A6485A /* UIImage+ImageEffects.m in Sources */,
 				90CE52D51A27C5170033087E /* CapslTableViewCell.m in Sources */,
 				4F69EBE91A2531D9009625AA /* CapsuleListViewController.m in Sources */,
@@ -514,6 +530,8 @@
 				4F69EBC41A252331009625AA /* main.m in Sources */,
 				4F69EBF21A25327A009625AA /* CaptureViewController.m in Sources */,
 				4F69EC3A1A2A72D9009625AA /* SearchContactViewController.m in Sources */,
+				90C61E671A2C4EA3003EFEF9 /* UIImage+Alpha.m in Sources */,
+				90C61E621A2C4D3A003EFEF9 /* UIImage+RoundedCorner.m in Sources */,
 				90CE52D21A27C36A0033087E /* SignUpViewController.m in Sources */,
 				4F69EBF51A25328F009625AA /* ComposeViewController.m in Sources */,
 			);
