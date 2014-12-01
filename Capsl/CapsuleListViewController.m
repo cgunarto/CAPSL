@@ -170,7 +170,6 @@
     }
     else
     {
-
         self.timelineRootVC = segue.destinationViewController;
     }
 
