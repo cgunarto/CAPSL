@@ -12,6 +12,7 @@
 #import "JKCountDownTimer.h"
 #import "JCATimelineRootViewController.h"
 #import "MessageDetailViewController.h"
+#import "UIImage+RoundedCorner.h"
 
 @interface CapsuleListViewController () <UITableViewDataSource, UITableViewDelegate, JKCountdownTimerDelegate>
 
@@ -111,10 +112,10 @@
 
         cell.fromLabel.text = [NSString stringWithFormat:@"From: %@", object[@"username"]];
 
-        //Sender Profile Image
+        //Sender Profile Image (using categories)
         PFFile *profilePhoto = object[@"profilePhoto"];
         [profilePhoto getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
-            cell.profileImage.image = [UIImage imageWithData:data];
+            cell.profileImage.image = [[UIImage imageWithData:data] roundedCornerImage:150 borderSize:10];
         }];
     }];
 
