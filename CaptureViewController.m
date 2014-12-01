@@ -103,6 +103,7 @@
         //TODO:delete chosenImage later
         searchContactVC.chosenImage = self.chosenImage;
         searchContactVC.createdCapsl = self.createdCapsl;
+
     }
 
 }
@@ -111,7 +112,7 @@
 {
     if (self.imageView.image != nil)
     {
-        [self performSegueWithIdentifier:@"segueToContactSearch" sender:self];
+        [self performSegueWithIdentifier:@"segueToContactSearch" sender:self.nextButton];
     }
     else
     {
