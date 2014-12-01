@@ -606,7 +606,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2vm-oA-mNu" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="wyg-As-9oh" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="2167.5" y="139"/>
+            <point key="canvasLocation" x="2146.5" y="465"/>
         </scene>
         <!--Write View Controller-->
         <scene sceneID="xhz-Sv-hS5">
@@ -704,7 +704,83 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="K2t-An-Ljz" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="yCJ-Y8-yMs" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="2191.5" y="-671"/>
+            <point key="canvasLocation" x="2146.5" y="-287"/>
+        </scene>
+        <!--Record Video View Controller-->
+        <scene sceneID="hZI-Fm-ack">
+            <objects>
+                <viewController id="GuB-P9-wPV" customClass="RecordVideoViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="LWB-t7-iRu"/>
+                        <viewControllerLayoutGuide type="bottom" id="bhv-DH-tID"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="AOX-Q5-c43">
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="T22-XM-DVT">
+                                <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                <state key="normal" title="BACK">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <variation key="widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="81" y="507" width="42" height="30"/>
+                                </variation>
+                                <connections>
+                                    <segue destination="EsB-iG-aF3" kind="unwind" unwindAction="unWindSegue:" id="mjk-Ts-F38"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jrq-Hr-dbd">
+                                <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                <state key="normal" title="RECORD">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <variation key="widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="168" y="459" width="64" height="30"/>
+                                </variation>
+                                <connections>
+                                    <action selector="onRecordButtonPressed:" destination="GuB-P9-wPV" eventType="touchUpInside" id="diL-CI-uA0"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sND-sZ-gNi">
+                                <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                <state key="normal" title="NEXT">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <variation key="widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="269" y="507" width="39" height="30"/>
+                                </variation>
+                                <connections>
+                                    <action selector="onNextButtonPressed:" destination="GuB-P9-wPV" eventType="touchUpInside" id="jRY-5R-tvN"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="T22-XM-DVT"/>
+                                <exclude reference="Jrq-Hr-dbd"/>
+                                <exclude reference="sND-sZ-gNi"/>
+                            </mask>
+                        </variation>
+                        <variation key="widthClass=compact">
+                            <mask key="subviews">
+                                <include reference="T22-XM-DVT"/>
+                                <include reference="Jrq-Hr-dbd"/>
+                                <include reference="sND-sZ-gNi"/>
+                            </mask>
+                        </variation>
+                    </view>
+                    <connections>
+                        <outlet property="backButton" destination="T22-XM-DVT" id="FjM-lE-onf"/>
+                        <outlet property="nextButton" destination="sND-sZ-gNi" id="f1N-dI-2FE"/>
+                        <outlet property="recordVideo" destination="Jrq-Hr-dbd" id="DzR-OB-Ej2"/>
+                        <segue destination="g6O-c0-HJb" kind="presentation" identifier="segueToSearchContact" id="THB-3X-bqr"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="wzw-xm-tIz" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="EsB-iG-aF3" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="2146.5" y="-1072"/>
         </scene>
         <!--Capture View Controller-->
         <scene sceneID="zZZ-wh-yVa">
@@ -792,7 +868,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="22T-8U-pdV" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="WDk-x7-13s" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="2167.5" y="897"/>
+            <point key="canvasLocation" x="2146.5" y="1273"/>
         </scene>
         <!--Compose View Controller-->
         <scene sceneID="6LB-hC-jTg">
@@ -947,7 +1023,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oq7-HL-oRl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3841.5" y="897"/>
+            <point key="canvasLocation" x="3784.5" y="159"/>
         </scene>
         <!--Search Contact View Controller-->
         <scene sceneID="2VP-Sn-w8a">
@@ -1327,7 +1403,7 @@
                     </connections>
                 </searchDisplayController>
             </objects>
-            <point key="canvasLocation" x="2973" y="897"/>
+            <point key="canvasLocation" x="3003" y="159"/>
         </scene>
         <!--Capsule List View Controller-->
         <scene sceneID="NZY-3G-5QX">
@@ -1474,9 +1550,12 @@
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ofx-hr-FOf">
                                 <rect key="frame" x="137" y="269" width="54" height="30"/>
-                                <state key="normal" title="Camera">
+                                <state key="normal" title="Photo">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <variation key="widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="245" y="142" width="41" height="30"/>
+                                </variation>
                                 <connections>
                                     <segue destination="ILH-s3-dTC" kind="presentation" identifier="segueToCapture" id="51b-QJ-FRk"/>
                                 </connections>
@@ -1487,7 +1566,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <variation key="widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="144" y="205" width="40" height="30"/>
+                                    <rect key="frame" x="108" y="142" width="40" height="30"/>
                                 </variation>
                                 <connections>
                                     <segue destination="Vgx-hR-DGD" kind="presentation" identifier="segueToRecord" id="K6l-2m-OHE"/>
@@ -1499,10 +1578,22 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <variation key="widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="145" y="328" width="36" height="30"/>
+                                    <rect key="frame" x="110" y="215" width="36" height="30"/>
                                 </variation>
                                 <connections>
                                     <segue destination="7sN-oj-M7L" kind="presentation" id="uB2-Mk-Wob"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mkO-I1-IRX">
+                                <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                <state key="normal" title="Video">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <variation key="widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="247" y="215" width="39" height="30"/>
+                                </variation>
+                                <connections>
+                                    <segue destination="GuB-P9-wPV" kind="presentation" id="LT8-Z2-SIB"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -1511,12 +1602,14 @@
                             <mask key="subviews">
                                 <exclude reference="yTD-nv-7D2"/>
                                 <exclude reference="aoM-Wr-yEl"/>
+                                <exclude reference="mkO-I1-IRX"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=compact">
                             <mask key="subviews">
                                 <include reference="yTD-nv-7D2"/>
                                 <include reference="aoM-Wr-yEl"/>
+                                <include reference="mkO-I1-IRX"/>
                             </mask>
                         </variation>
                     </view>
@@ -2267,6 +2360,6 @@
         <image name="group-50" width="26" height="26"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="4XE-kI-X4t"/>
+        <segue reference="THB-3X-bqr"/>
     </inferredMetricsTieBreakers>
 </document>
