@@ -16,6 +16,7 @@
 @property (strong, nonatomic) IBOutlet UILabel *senderLabel;
 @property (strong, nonatomic) IBOutlet UILabel *deliveryDateLabel;
 @property (strong, nonatomic) IBOutlet UILabel *timerLabel;
+@property (strong, nonatomic) IBOutlet UITextView *unavailableMessage;
 
 //String for TIMER
 @property NSString *timerString;
@@ -84,7 +85,8 @@
     }
     else
     {
-        self.textMessage.text = @"NOT AVAILABLE YET";
+        self.textMessage.hidden = YES;
+        self.unavailableMessage.hidden = NO;
     }
 }
 
@@ -101,7 +103,7 @@
     }
     else
     {
-        //
+        self.unavailableMessage.hidden = NO;
     }
 }
 
@@ -130,6 +132,16 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+}
+
+#pragma mark - Alert
+-(void)notAvailableAlert
+{
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"CAPSL is not yet available" message:@"Please check again later" preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *okButton = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil];
+
+    [alert addAction:okButton];
+    [self presentViewController:alert animated:YES completion:nil];
 }
 
 //BACK BUTTON to dismiss VC

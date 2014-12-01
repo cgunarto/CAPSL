@@ -143,11 +143,19 @@
     }
 }
 
-//-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-//{
-//    Capsl *capsl = self.capslsArray[indexPath.row];
-//    [self performSegueWithIdentifier:@"segueToMessageVC" sender:capsl];
-//}
+#pragma mark - Saving Data for viewed at
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+
+    Capsl *capsl = self.capslsArray[indexPath.row];
+    long elapsedSeconds = [capsl.deliveryTime timeIntervalSinceDate:[NSDate date]];
+
+    if ((!capsl.viewedAt) && elapsedSeconds <= 0)
+    {
+        capsl.viewedAt = [NSDate date];
+        [capsl saveInBackground];
+    }
+}
 
 #pragma mark - segue life cycle
 
@@ -166,7 +174,6 @@
     {
 
         self.timelineRootVC = segue.destinationViewController;
-
     }
 
 }

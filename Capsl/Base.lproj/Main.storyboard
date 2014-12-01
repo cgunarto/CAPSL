@@ -169,6 +169,12 @@
                                     <action selector="onPlayAudioButtonPressed:" destination="N8i-uc-Ane" eventType="touchUpInside" id="5eU-dU-xiV"/>
                                 </connections>
                             </button>
+                            <textView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" text="Please check back later..." textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="UNA-PA-EKn">
+                                <rect key="frame" x="71" y="287" width="240" height="128"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -180,6 +186,7 @@
                         <outlet property="senderLabel" destination="vmf-Ub-hzM" id="viW-VE-XKh"/>
                         <outlet property="textMessage" destination="nEm-xI-Xvh" id="d6i-eg-3YR"/>
                         <outlet property="timerLabel" destination="cpa-Ff-17n" id="3az-fD-Cj7"/>
+                        <outlet property="unavailableMessage" destination="UNA-PA-EKn" id="NmX-Q5-5fF"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LLQ-dC-Us2" userLabel="First Responder" sceneMemberID="firstResponder"/>
