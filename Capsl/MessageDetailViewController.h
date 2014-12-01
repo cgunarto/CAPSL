@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Capsl.h"
 
 @interface MessageDetailViewController : UIViewController
+
+@property Capsl *chosenCapsl;
 
 @end

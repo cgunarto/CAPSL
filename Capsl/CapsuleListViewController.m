@@ -11,6 +11,7 @@
 #import "Capsl.h"
 #import "JKCountDownTimer.h"
 #import "JCATimelineRootViewController.h"
+#import "MessageDetailViewController.h"
 
 @interface CapsuleListViewController () <UITableViewDataSource, UITableViewDelegate, JKCountdownTimerDelegate>
 
@@ -151,12 +152,31 @@
     [self presentViewController:alert animated:YES completion:nil];
 }
 
+//-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+//{
+//    Capsl *capsl = self.capslsArray[indexPath.row];
+//    [self performSegueWithIdentifier:@"segueToMessageVC" sender:capsl];
+//}
+
 #pragma mark - segue life cycle
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
+    if ([segue.identifier isEqualToString:@"segueToMessageVC"])
+    {
+        NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
+        Capsl *capsl = self.capslsArray[indexPath.row];
 
-    self.timelineRootVC = segue.destinationViewController;
+        MessageDetailViewController *messageDetailVC = segue.destinationViewController;
+        messageDetailVC.chosenCapsl = capsl;
+
+    }
+    else
+    {
+
+        self.timelineRootVC = segue.destinationViewController;
+
+    }
 
 }
 
