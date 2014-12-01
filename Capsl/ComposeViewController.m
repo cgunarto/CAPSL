@@ -115,6 +115,7 @@
                          completion:nil];
 
     }
+    
     else
     {
         //Save it to Capsl
@@ -137,6 +138,11 @@
                                    animated:YES
                                  completion:nil];
 
+            }
+
+            else
+            {
+                NSLog(@"there is an error %@", error.localizedDescription);
             }
         }];
     }

@@ -157,7 +157,7 @@
     {
         //Fire off segueToContactSearch segue
         //Pass data to Search Contact VC
-        [self performSegueWithIdentifier:@"segueToContactSearch" sender:self];
+        [self performSegueWithIdentifier:@"segueToContactSearch" sender:self.nextButton];
     }
 
     //If audio is empty, don't move forward yet
