@@ -16,8 +16,13 @@
 @property (strong, nonatomic) IBOutlet UILabel *deliveryDateLabel;
 @property (strong, nonatomic) IBOutlet UILabel *timerLabel;
 
-//string for TIMER
+//String for TIMER
 @property NSString *timerString;
+
+// ----TYPES OF MESSAGE---- //
+
+//Text Message
+@property (strong, nonatomic) IBOutlet UITextView *textView;
 
 @end
 
@@ -44,8 +49,20 @@
     //Timer
     JKCountDownTimer *timer = [[JKCountDownTimer alloc] initWithDeliveryDate:self.chosenCapsl.deliveryTime withDelegate:self];
     [timer updateLabel];
+
+    //Text Message
+    if ([self.timerLabel.text isEqual:@"OPEN!"])
+    {
+        self.textView.text = self.chosenCapsl.text;
+    }
+    else
+    {
+        self.textView.text = @"NOT AVAILABLE YET";
+    }
+
 }
 
+#pragma mark - JKTimer Delegate Method
 -(void)counterUpdated:(NSString *)dateString
 {
     self.timerLabel.text = dateString;
