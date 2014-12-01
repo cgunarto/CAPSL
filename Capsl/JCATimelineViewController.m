@@ -16,7 +16,7 @@
 @property NSArray *monthStrings;
 @property NSMutableArray *arrayOfMonths;
 @property CGFloat screenWidth;
-@property UIView *timelineHighlight;
+//@property UIView *timelineHighlight;
 
 @end
 

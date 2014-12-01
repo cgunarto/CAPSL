@@ -11,6 +11,9 @@
 #import "JCACapslViewController.h"
 #import "JCATimelineViewController.h"
 #import "UIImage+ImageEffects.h"
+#import "Capsl.h"
+
+#define kNumOfTimelinePrefixYears 1
 
 @interface JCATimelineRootViewController () <TimelineDelegate, CapslViewDelegate>
 
@@ -44,6 +47,8 @@
 
     [self.view addSubview:self.capslContainerView];
     [self.view addSubview:self.timelineContainerView];
+
+    [self processCapsls:self.capslsArray];
 
 }
 
@@ -94,6 +99,71 @@
     wallpaper = [wallpaper applyBlurWithRadius:3 tintColor:tintColor saturationDeltaFactor:0.8 maskImage:nil];
 
     return wallpaper;
+
+}
+
+- (void)processCapsls:(NSArray *)capsls
+{
+    NSMutableArray *arrayOfYears = [@[] mutableCopy];
+
+    NSDateFormatter *yearFormatter = [[NSDateFormatter alloc] init];
+    NSDateFormatter *monthFormatter = [[NSDateFormatter alloc] init];
+    yearFormatter.dateFormat = @"yyyy";
+    monthFormatter.dateFormat = @"MM";
+
+    int yearToday = [[NSString stringWithFormat:@"%@", [yearFormatter stringFromDate:[NSDate date]]] intValue];
+    int firstCapslYear = [[NSString stringWithFormat:@"%@", [yearFormatter stringFromDate:[capsls.firstObject deliveryTime]]] intValue];
+    int compareYear;
+
+    // set start of timeline based on today or first capsl, whichever is earlier
+    if (firstCapslYear > yearToday)
+    {
+        compareYear = (yearToday - 1) - kNumOfTimelinePrefixYears;
+    }
+    else
+    {
+        compareYear = (firstCapslYear - 1) - kNumOfTimelinePrefixYears;
+    }
+
+    // create embedded array of capsls
+    for (Capsl *capsl in capsls)
+    {
+        // get month and year for current capsl
+        NSString *capslYear = [NSString stringWithFormat:@"%@", [yearFormatter stringFromDate:capsl.deliveryTime]];
+        NSString *capslMonth = [NSString stringWithFormat:@"%@", [monthFormatter stringFromDate:capsl.deliveryTime]];
+
+        // if capsls skip years, generate empty years in the array
+        if (compareYear != [capslYear intValue])
+        {
+            int newYearPlusAnyEmptyInBetween = [capslYear intValue] - compareYear;
+
+            for (int x = 1; x <= newYearPlusAnyEmptyInBetween; x++)
+            {
+                NSMutableArray *aYearOfMonths = [@[] mutableCopy];
+
+                // add Year marker at index 0
+                [aYearOfMonths addObject:[NSString stringWithFormat:@"%i",compareYear + x]];
+
+                // add 12 months to empty year
+                for (int y = 1; y <= 12; y++)
+                {
+                    NSMutableArray *aMonthOfCapsls = [@[] mutableCopy];
+                    [aYearOfMonths addObject:aMonthOfCapsls];
+                }
+
+                [arrayOfYears addObject:aYearOfMonths];
+
+            }
+
+            compareYear = [capslYear intValue];
+        }
+
+        [[arrayOfYears lastObject][[capslMonth intValue]] addObject:capsl];
+
+    }
+
+    self.capslVC.capslGrandArray = arrayOfYears;
+    self.timelineVC.capslGrandArray = arrayOfYears;
 
 }
 

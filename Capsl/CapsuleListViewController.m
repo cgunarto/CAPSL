@@ -10,9 +10,12 @@
 #import "CapslTableViewCell.h"
 #import "Capsl.h"
 #import "JKCountDownTimer.h"
+#import "JCATimelineRootViewController.h"
+#import "MessageDetailViewController.h"
 
 @interface CapsuleListViewController () <UITableViewDataSource, UITableViewDelegate, JKCountdownTimerDelegate>
 
+@property JCATimelineRootViewController *timelineRootVC;
 @property (strong, nonatomic) IBOutlet UIView *timelineViewControllerContainer;
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 
@@ -33,18 +36,17 @@
     [super viewDidLoad];
 
     //need to refactor this code later
-    PFQuery *query = [Capslr query];
-    [query whereKey:@"user" equalTo:[PFUser currentUser]];
-    [query getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error) {
 
+    [Capslr returnCapslrFromPFUser:[PFUser currentUser] withCompletion:^(Capslr *currentCapslr, NSError *error) {
         Capslr *capslr = [Capslr object];
-        capslr.objectId = object.objectId;
+        capslr.objectId = currentCapslr.objectId;
 
         //calling class method to get capsls for current user only
         [Capsl searchCapslByKey:@"recipient" orderByAscending:@"deliveryTime" equalTo:capslr completion:^(NSArray *objects, NSError *error) {
             if (!error)
             {
                 self.capslsArray = objects;
+                self.timelineRootVC.capslsArray = objects;
             }
             else
             {
@@ -129,7 +131,7 @@
 {
     if ([dateString isEqual: @"OPEN!"])
     {
-        [self presentCanOpenMeAlert];
+//        [self presentCanOpenMeAlert];
     }
     else
     {
@@ -148,6 +150,34 @@
 
     [alert addAction:okButton];
     [self presentViewController:alert animated:YES completion:nil];
+}
+
+//-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+//{
+//    Capsl *capsl = self.capslsArray[indexPath.row];
+//    [self performSegueWithIdentifier:@"segueToMessageVC" sender:capsl];
+//}
+
+#pragma mark - segue life cycle
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.identifier isEqualToString:@"segueToMessageVC"])
+    {
+        NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
+        Capsl *capsl = self.capslsArray[indexPath.row];
+
+        MessageDetailViewController *messageDetailVC = segue.destinationViewController;
+        messageDetailVC.chosenCapsl = capsl;
+
+    }
+    else
+    {
+
+        self.timelineRootVC = segue.destinationViewController;
+
+    }
+
 }
 
 
