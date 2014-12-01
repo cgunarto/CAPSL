@@ -13,6 +13,8 @@
 #import "AllContactTableViewCell.h"
 #import "ComposeViewController.h"
 
+#define kTableViewHeight 94;
+
 @interface SearchContactViewController () <UITableViewDataSource, UITableViewDelegate, UISearchDisplayDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
@@ -105,7 +107,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 94;
+    return kTableViewHeight;
 }
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
