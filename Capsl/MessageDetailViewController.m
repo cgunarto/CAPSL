@@ -38,6 +38,11 @@
 
 @implementation MessageDetailViewController
 
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+}
+
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
@@ -129,10 +134,6 @@
     self.timerLabel.text = dateString;
 }
 
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-}
 
 #pragma mark - Alert
 -(void)notAvailableAlert

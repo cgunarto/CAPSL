@@ -35,8 +35,6 @@
 {
     [super viewDidLoad];
 
-    //need to refactor this code later
-
     [Capslr returnCapslrFromPFUser:[PFUser currentUser] withCompletion:^(Capslr *currentCapslr, NSError *error) {
         Capslr *capslr = [Capslr object];
         capslr.objectId = currentCapslr.objectId;
@@ -143,7 +141,7 @@
     }
 }
 
-#pragma mark - Saving Data for viewed at
+#pragma mark - Saving Data for Viewed At
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
 
