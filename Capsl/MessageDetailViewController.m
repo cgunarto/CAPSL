@@ -91,8 +91,6 @@
         [dateFormatter setDateFormat:@"MM-dd-yyyy HH:mm"];
         NSDate *viewedAt = self.chosenCapsl.viewedAt;
         self.statusLabel.text = [NSString stringWithFormat:@"Viewed At: %@", [dateFormatter stringFromDate:viewedAt]];
-
-//        self.statusLabel.text = @"AVAILABLE";
     }
     else
     {
@@ -149,12 +147,6 @@
 
     [alert addAction:okButton];
     [self presentViewController:alert animated:YES completion:nil];
-}
-
-//BACK BUTTON to dismiss VC
-- (IBAction)onBackButtonPressed:(UIButton *)sender
-{
-    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 

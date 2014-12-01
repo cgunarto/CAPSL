@@ -45,6 +45,9 @@
             {
                 self.capslsArray = objects;
                 self.timelineRootVC.capslsArray = objects;
+
+                // Navigation Title
+                self.navigationItem.title = [NSString stringWithFormat:@"Total CAPSLS: %lu", (unsigned long)self.capslsArray.count];
             }
             else
             {
@@ -53,6 +56,7 @@
         }];
     }];
 
+    self.navigationController.navigationBar.backgroundColor = [UIColor greenColor];
 }
 
 
