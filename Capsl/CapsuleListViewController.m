@@ -25,11 +25,11 @@
 
 @implementation CapsuleListViewController
 
-//-(void)viewWillAppear:(BOOL)animated
-//{
-//    [super viewWillAppear:animated];
-//    [self.tableView reloadData];
-//}
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self.tableView reloadData];
+}
 
 - (void)viewDidLoad
 {
@@ -110,6 +110,12 @@
     [query getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error) {
 
         cell.fromLabel.text = [NSString stringWithFormat:@"From: %@", object[@"username"]];
+
+        //Sender Profile Image
+        PFFile *profilePhoto = object[@"profilePhoto"];
+        [profilePhoto getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
+            cell.profileImage.image = [UIImage imageWithData:data];
+        }];
     }];
 
     // Setting the delivery date
@@ -124,10 +130,6 @@
         JKCountDownTimer *timer = [[JKCountDownTimer alloc] initWithDeliveryDate:date withDelegate:self];
         [timer updateLabel];
     }];
-
-
-//    NSIndexPath *newIndexPath = [NSIndexPath indexPathForRow:3 inSection:0];
-//    [tableView scrollToRowAtIndexPath:newIndexPath atScrollPosition:UITableViewScrollPositionTop animated:YES];
 
     return cell;
 }
