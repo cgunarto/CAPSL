@@ -22,7 +22,11 @@
 // ----TYPES OF MESSAGE---- //
 
 //Text Message
-@property (strong, nonatomic) IBOutlet UITextView *textView;
+@property (strong, nonatomic) IBOutlet UITextView *textMessage;
+
+//Photo Message
+@property (strong, nonatomic) IBOutlet UIImageView *photoMessage;
+
 
 @end
 
@@ -51,15 +55,42 @@
     [timer updateLabel];
 
     //Text Message
+    [self displayTextMessage];
+
+    //Photo Message
+    [self displayPhotoMessage];
+}
+
+#pragma mark - Displaying Text Message Capsl
+- (void)displayTextMessage
+{
+    //Text Message
     if ([self.timerLabel.text isEqual:@"OPEN!"])
     {
-        self.textView.text = self.chosenCapsl.text;
+        self.textMessage.text = self.chosenCapsl.text;
+        self.timerLabel.text = @"AVAILABLE";
     }
     else
     {
-        self.textView.text = @"NOT AVAILABLE YET";
+        self.textMessage.text = @"NOT AVAILABLE YET";
     }
+}
 
+#pragma mark - Displaying Photo Message Capsl
+- (void)displayPhotoMessage
+{
+    //Photo Message
+    if ([self.timerLabel.text isEqual:@"OPEN!"] || [self.timerLabel.text isEqual:@"AVAILABLE"])
+    {
+        [self.chosenCapsl.photo getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
+            self.photoMessage.image = [UIImage imageWithData:data];
+
+        }];
+    }
+    else
+    {
+        //
+    }
 }
 
 #pragma mark - JKTimer Delegate Method
@@ -73,8 +104,7 @@
     [super viewDidLoad];
 }
 
-
-
+//BACK BUTTON to dismiss VC
 - (IBAction)onBackButtonPressed:(UIButton *)sender
 {
     [self dismissViewControllerAnimated:YES completion:nil];
