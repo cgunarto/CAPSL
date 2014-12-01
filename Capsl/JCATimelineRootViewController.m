@@ -32,7 +32,6 @@
 {
     [super viewDidLoad];
     self.device = [UIDevice currentDevice];
-
     self.wallpaperView = [[UIImageView alloc] initWithImage:[self processWallpaper:[UIImage imageNamed:@"wallpaper"]]];
 //    self.wallpaperView.frame = self.view.bounds;
     self.wallpaperView.contentMode = UIViewContentModeScaleAspectFill;
@@ -65,11 +64,12 @@
 - (void)indexPathForTimelineCellAtCenter:(NSIndexPath *)indexPath fromTap:(BOOL)didTap
 {
 
+    NSInteger yearMultiplier = indexPath.section;
     NSInteger monthIndex = indexPath.item;
 
 //    self.capslVC.delegate = nil;
 
-    [self.capslVC showCapsls:monthIndex withAnimation:didTap];
+    [self.capslVC showCapslAtYear:yearMultiplier andMonth:monthIndex withAnimation:didTap];
 
 }
 
@@ -148,6 +148,10 @@
                 for (int y = 1; y <= 12; y++)
                 {
                     NSMutableArray *aMonthOfCapsls = [@[] mutableCopy];
+
+                    Capsl *emptyCapsl = [Capsl object];
+
+                    [aMonthOfCapsls addObject:emptyCapsl];
                     [aYearOfMonths addObject:aMonthOfCapsls];
                 }
 
@@ -158,7 +162,16 @@
             compareYear = [capslYear intValue];
         }
 
-        [[arrayOfYears lastObject][[capslMonth intValue]] addObject:capsl];
+        NSMutableArray *lastYear = [arrayOfYears lastObject][[capslMonth intValue]];
+        Capsl *checkCapsl = lastYear.firstObject;
+        if (!checkCapsl.objectId)
+        {
+            [lastYear replaceObjectAtIndex:0 withObject:capsl];
+        }
+        else
+        {
+            [lastYear addObject:capsl];
+        }
 
     }
 

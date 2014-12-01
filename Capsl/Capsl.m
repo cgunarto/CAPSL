@@ -42,6 +42,7 @@
 + (void)searchCapslByKey:(NSString *)key orderByAscending:(NSString *)date equalTo:(id)object completion:(searchCapslByRecipientBlock)complete
 {
     PFQuery *query = [self query];
+    [query includeKey:@"sender"];
     [query whereKey:key equalTo:object];
     [query orderByAscending:date];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error)
