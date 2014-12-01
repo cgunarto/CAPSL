@@ -8,11 +8,16 @@
 
 #import "MessageDetailViewController.h"
 #import "Capslr.h"
+#import "JKCountDownTimer.h"
 
-@interface MessageDetailViewController ()
+@interface MessageDetailViewController () <JKCountdownTimerDelegate>
+
 @property (strong, nonatomic) IBOutlet UILabel *senderLabel;
 @property (strong, nonatomic) IBOutlet UILabel *deliveryDateLabel;
 @property (strong, nonatomic) IBOutlet UILabel *timerLabel;
+
+//string for TIMER
+@property NSString *timerString;
 
 @end
 
@@ -21,8 +26,6 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-
-    NSLog(@"%@", self.chosenCapsl);
 
     // Passing Delivery Date
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
@@ -38,6 +41,14 @@
         self.senderLabel.text = [NSString stringWithFormat:@"From: %@", object[@"username"]];
     }];
 
+    //Timer
+    JKCountDownTimer *timer = [[JKCountDownTimer alloc] initWithDeliveryDate:self.chosenCapsl.deliveryTime withDelegate:self];
+    [timer updateLabel];
+}
+
+-(void)counterUpdated:(NSString *)dateString
+{
+    self.timerLabel.text = dateString;
 }
 
 - (void)viewDidLoad
