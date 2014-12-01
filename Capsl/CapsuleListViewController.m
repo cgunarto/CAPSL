@@ -47,7 +47,7 @@
                 self.timelineRootVC.capslsArray = objects;
 
                 // Navigation Title
-                self.navigationItem.title = [NSString stringWithFormat:@"Total CAPSLS: %lu", (unsigned long)self.capslsArray.count];
+                self.navigationItem.title = [NSString stringWithFormat:@"Capsl Count: %lu", (unsigned long)self.capslsArray.count];
             }
             else
             {

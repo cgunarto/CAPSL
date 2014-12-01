@@ -47,6 +47,14 @@
 {
     [super viewWillAppear:animated];
 
+    // Customizing back button in Navbar
+    UIBarButtonItem *backButton = [[UIBarButtonItem alloc]
+                                initWithTitle:@"Back"
+                                style:UIBarButtonItemStylePlain
+                                target:self
+                                action:nil];
+    self.navigationController.navigationBar.topItem.backBarButtonItem = backButton;
+
     // Passing Delivery Date
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"MM-dd-yyyy"];
