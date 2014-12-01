@@ -70,7 +70,7 @@ static NSString * const reuseIdentifier = @"CapslCell";
     CGPoint capslViewOffset = CGPointMake(capslRect.origin.x - self.flowLayout.headerReferenceSize.width, 0);
     [self.capslView setContentOffset:capslViewOffset animated:animated];
 
-    //    [self.capslView scrollToItemAtIndexPath:monthIndexPath atScrollPosition:UICollectionViewScrollPositionLeft animated:animated];
+//        [self.capslView scrollToItemAtIndexPath:monthIndexPath atScrollPosition:UICollectionViewScrollPositionLeft animated:animated];
 
 }
 
@@ -88,21 +88,25 @@ static NSString * const reuseIdentifier = @"CapslCell";
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
 
-    NSArray *year = self.capslGrandArray[section/13];
-    NSArray *month = year[section % 13];
+    NSArray *arrayOfMonths = self.capslGrandArray[section/13];
+    NSArray *arrayOfCapsules = arrayOfMonths[section % 13];
 
     if (section % 13 == 0)
     {
         return 0;
     }
-    else if (month.count == 0)
-    {
-        return 0;
-    }
     else
     {
-        return month.count;
+        return arrayOfCapsules.count;
     }
+//    else if (month.count == 0)
+//    {
+//        return 0;
+//    }
+//    else
+//    {
+//        return month.count;
+//    }
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
@@ -116,7 +120,7 @@ static NSString * const reuseIdentifier = @"CapslCell";
     {
         Capsl *capsl = month[indexPath.item];
 
-        cell.nameLabel.text = capsl.sender.objectId;
+        cell.nameLabel.text = capsl.sender.username;
 
         [self drawCell:cell];
 

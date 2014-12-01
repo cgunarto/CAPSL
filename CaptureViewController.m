@@ -111,7 +111,7 @@
 {
     if (self.imageView.image != nil)
     {
-        [self performSegueWithIdentifier:@"segueToContactSearch" sender:self];
+        [self performSegueWithIdentifier:@"segueToContactSearch" sender:self.nextButton];
     }
     else
     {
