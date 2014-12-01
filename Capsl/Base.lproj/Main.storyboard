@@ -133,12 +133,6 @@
                                     <action selector="onBackButtonPressed:" destination="N8i-uc-Ane" eventType="touchUpInside" id="mZ7-NM-1S6"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Timer Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cpa-Ff-17n">
-                                <rect key="frame" x="101" y="151" width="180" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Sender Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vmf-Ub-hzM">
                                 <rect key="frame" x="56" y="75" width="270" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -175,6 +169,12 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Timer Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cpa-Ff-17n">
+                                <rect key="frame" x="71" y="151" width="240" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -184,8 +184,8 @@
                         <outlet property="deliveryDateLabel" destination="xBc-J8-KPE" id="D8s-YD-oZC"/>
                         <outlet property="photoMessage" destination="Nnz-B4-4T3" id="wtr-ZO-d49"/>
                         <outlet property="senderLabel" destination="vmf-Ub-hzM" id="viW-VE-XKh"/>
+                        <outlet property="statusLabel" destination="cpa-Ff-17n" id="G9c-kA-49e"/>
                         <outlet property="textMessage" destination="nEm-xI-Xvh" id="d6i-eg-3YR"/>
-                        <outlet property="timerLabel" destination="cpa-Ff-17n" id="3az-fD-Cj7"/>
                         <outlet property="unavailableMessage" destination="UNA-PA-EKn" id="NmX-Q5-5fF"/>
                     </connections>
                 </viewController>

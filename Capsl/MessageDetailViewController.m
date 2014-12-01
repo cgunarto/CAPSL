@@ -15,7 +15,7 @@
 
 @property (strong, nonatomic) IBOutlet UILabel *senderLabel;
 @property (strong, nonatomic) IBOutlet UILabel *deliveryDateLabel;
-@property (strong, nonatomic) IBOutlet UILabel *timerLabel;
+@property (strong, nonatomic) IBOutlet UILabel *statusLabel;
 @property (strong, nonatomic) IBOutlet UITextView *unavailableMessage;
 
 //String for TIMER
@@ -72,7 +72,7 @@
     [self displayPhotoMessage];
 
     //Audio Message
-    if ([self.timerLabel.text isEqual:@"AVAILABLE"] && self.chosenCapsl.audio != nil)
+    if ([self.statusLabel.text containsString:@"Viewed"] && self.chosenCapsl.audio != nil)
     {
         // unhide the audio button
         self.audioPlayerButton.hidden = NO;
@@ -83,10 +83,16 @@
 - (void)displayTextMessage
 {
     //Text Message
-    if ([self.timerLabel.text isEqual:@"OPEN!"])
+    if ([self.statusLabel.text isEqual:@"OPEN!"])
     {
         self.textMessage.text = self.chosenCapsl.text;
-        self.timerLabel.text = @"AVAILABLE";
+
+        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+        [dateFormatter setDateFormat:@"MM-dd-yyyy HH:mm"];
+        NSDate *viewedAt = self.chosenCapsl.viewedAt;
+        self.statusLabel.text = [NSString stringWithFormat:@"Viewed At: %@", [dateFormatter stringFromDate:viewedAt]];
+
+//        self.statusLabel.text = @"AVAILABLE";
     }
     else
     {
@@ -99,7 +105,7 @@
 - (void)displayPhotoMessage
 {
     //Photo Message
-    if ([self.timerLabel.text isEqual:@"OPEN!"] || [self.timerLabel.text isEqual:@"AVAILABLE"])
+    if ([self.statusLabel.text isEqual:@"OPEN!"] || [self.statusLabel.text containsString:@"Viewed"])
     {
         [self.chosenCapsl.photo getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
             self.photoMessage.image = [UIImage imageWithData:data];
@@ -131,7 +137,7 @@
 #pragma mark - JKTimer Delegate Method
 -(void)counterUpdated:(NSString *)dateString
 {
-    self.timerLabel.text = dateString;
+    self.statusLabel.text = dateString;
 }
 
 
