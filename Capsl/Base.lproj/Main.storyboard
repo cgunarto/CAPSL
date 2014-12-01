@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="vXZ-lx-hvc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="vXZ-lx-hvc">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
@@ -129,12 +129,12 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                 <variation key="widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="89" y="182" width="240" height="150"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="0.0" height="0.0"/>
                                 </variation>
                             </textView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Nnz-B4-4T3">
                                 <variation key="widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="84" y="380" width="250" height="200"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="0.0" height="0.0"/>
                                 </variation>
                             </imageView>
                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bD1-5I-6kz">
@@ -181,7 +181,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                 <variation key="widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="109" y="252" width="200" height="200"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="0.0" height="0.0"/>
                                 </variation>
                             </textView>
                         </subviews>
@@ -200,7 +200,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LLQ-dC-Us2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1800" y="1160"/>
+            <point key="canvasLocation" x="-1500" y="2794"/>
         </scene>
         <!--Profile View Controller-->
         <scene sceneID="cNy-iX-CZU">
@@ -606,7 +606,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2vm-oA-mNu" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="wyg-As-9oh" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="1759.5" y="411"/>
+            <point key="canvasLocation" x="2167.5" y="139"/>
         </scene>
         <!--Write View Controller-->
         <scene sceneID="xhz-Sv-hS5">
@@ -704,7 +704,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="K2t-An-Ljz" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="yCJ-Y8-yMs" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="1771.5" y="-357"/>
+            <point key="canvasLocation" x="2191.5" y="-671"/>
         </scene>
         <!--Capture View Controller-->
         <scene sceneID="zZZ-wh-yVa">
@@ -792,7 +792,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="22T-8U-pdV" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="WDk-x7-13s" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="2238" y="1159"/>
+            <point key="canvasLocation" x="2167.5" y="897"/>
         </scene>
         <!--Compose View Controller-->
         <scene sceneID="6LB-hC-jTg">
@@ -947,7 +947,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oq7-HL-oRl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3881" y="1160"/>
+            <point key="canvasLocation" x="3841.5" y="897"/>
         </scene>
         <!--Search Contact View Controller-->
         <scene sceneID="2VP-Sn-w8a">
@@ -1327,7 +1327,7 @@
                     </connections>
                 </searchDisplayController>
             </objects>
-            <point key="canvasLocation" x="3060" y="1159"/>
+            <point key="canvasLocation" x="2973" y="897"/>
         </scene>
         <!--Capsule List View Controller-->
         <scene sceneID="NZY-3G-5QX">
@@ -1458,7 +1458,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RDH-cC-bCK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-265" y="1160"/>
+            <point key="canvasLocation" x="-745.5" y="1644"/>
         </scene>
         <!--Choose Type View Controller-->
         <scene sceneID="dkb-PF-VJ8">
@@ -1524,7 +1524,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="H71-hM-pXh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1428" y="1160"/>
+            <point key="canvasLocation" x="1374" y="897"/>
         </scene>
         <!--Capslr Contact View Controller-->
         <scene sceneID="XXl-33-DZn">
@@ -1613,7 +1613,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="n2I-vu-zSl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2244" y="1834.125"/>
+            <point key="canvasLocation" x="2298" y="1895.5"/>
         </scene>
         <!--Address Contact View Controller-->
         <scene sceneID="lpI-v5-1AS">
@@ -1702,7 +1702,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5h5-XE-Hxm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2244" y="2408.625"/>
+            <point key="canvasLocation" x="2268" y="2540.5"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="4ch-3M-IRb">
@@ -1814,7 +1814,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MU7-2W-SGl" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-792" y="1160.25"/>
+            <point key="canvasLocation" x="-745.5" y="2374"/>
         </scene>
         <!--Capsl View Controller-->
         <scene sceneID="t6v-ty-2GA">
@@ -2114,7 +2114,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="shg-QP-90E" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1159" y="2008.5"/>
+            <point key="canvasLocation" x="-745.5" y="2730"/>
         </scene>
         <!--Timeline View Controller-->
         <scene sceneID="YIi-TE-PEU">
@@ -2242,7 +2242,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="-425" y="1828.5"/>
+            <point key="canvasLocation" x="-90" y="2648"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="XtB-NJ-AaT">
@@ -2260,7 +2260,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5Dt-mj-JtB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="15" y="1159"/>
+            <point key="canvasLocation" x="-90" y="897"/>
         </scene>
     </scenes>
     <resources>
