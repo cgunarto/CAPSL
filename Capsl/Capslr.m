@@ -83,6 +83,26 @@
     }];
 }
 
+//Returns a Cpslr with phone number
++ (void)returnCapslrFromPhone:(NSString *)phone withCompletion:(void(^)(Capslr *capslr, NSError *error))complete
+{
+    PFQuery *query = [Capslr query];
+    [query whereKey:@"phone" equalTo:phone];
+    [query getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error)
+     {
+         if(!error)
+         {
+             Capslr *capslr = (Capslr *)object;
+             complete (capslr, nil);
+         }
+         else
+         {
+             complete (nil, error);
+         }
+     }];
+}
+
+
 @end
 
 
