@@ -59,11 +59,11 @@
     {
         result = @"THIS WEEK";
     }
-    else if (elapsedSeconds < kDayInSeconds && elapsedSeconds >= kSixHoursInSeconds)
-    {
-        result = @"TODAY";
-    }
-    else if (elapsedSeconds < kSixHoursInSeconds && elapsedSeconds >= 60)
+//    else if (elapsedSeconds < kDayInSeconds && elapsedSeconds >= kSixHoursInSeconds)
+//    {
+//        result = @"TODAY";
+//    }
+    else if (elapsedSeconds < 86400 && elapsedSeconds >= 60)
     {
         result = [self stringFromTimeInterval:elapsedSeconds];
     }

@@ -1457,14 +1457,14 @@
                                 <exclude reference="176-jE-9B6"/>
                             </mask>
                             <mask key="constraints">
-                                <exclude reference="TjT-rx-2gc"/>
-                                <exclude reference="YNN-2g-eG6"/>
-                                <exclude reference="nBE-Wl-7x4"/>
+                                <exclude reference="oM6-dP-Cw4"/>
+                                <exclude reference="rKx-Xy-FHv"/>
                                 <exclude reference="74a-oh-OEh"/>
                                 <exclude reference="O7L-81-EL0"/>
                                 <exclude reference="mKy-kV-NJt"/>
-                                <exclude reference="oM6-dP-Cw4"/>
-                                <exclude reference="rKx-Xy-FHv"/>
+                                <exclude reference="TjT-rx-2gc"/>
+                                <exclude reference="YNN-2g-eG6"/>
+                                <exclude reference="nBE-Wl-7x4"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=compact">
@@ -1472,10 +1472,10 @@
                                 <include reference="lkG-ai-fz1"/>
                             </mask>
                             <mask key="constraints">
+                                <include reference="rKx-Xy-FHv"/>
                                 <include reference="TjT-rx-2gc"/>
                                 <include reference="YNN-2g-eG6"/>
                                 <include reference="nBE-Wl-7x4"/>
-                                <include reference="rKx-Xy-FHv"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=compact">
@@ -1483,10 +1483,10 @@
                                 <include reference="176-jE-9B6"/>
                             </mask>
                             <mask key="constraints">
+                                <include reference="oM6-dP-Cw4"/>
                                 <include reference="74a-oh-OEh"/>
                                 <include reference="O7L-81-EL0"/>
                                 <include reference="mKy-kV-NJt"/>
-                                <include reference="oM6-dP-Cw4"/>
                             </mask>
                         </variation>
                     </view>

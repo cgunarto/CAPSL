@@ -11,6 +11,7 @@
 #import "Capsl.h"
 #import "JKCountDownTimer.h"
 #import "JCATimelineRootViewController.h"
+#import "JCAMainViewController.h"
 #import "MessageDetailViewController.h"
 
 @interface CapsuleListViewController () <UITableViewDataSource, UITableViewDelegate>
@@ -48,32 +49,10 @@
 
     self.navigationItem.title = [NSString stringWithFormat:@"%li", (long)self.capslCount];
     self.navigationController.navigationBar.backgroundColor = [UIColor greenColor];
+
+    self.tableView.contentInset = UIEdgeInsetsMake(self.navigationController.navigationBar.frame.size.height, 0, 44, 0);
+
 }
-
-
-//- (void)viewDidLayoutSubviews
-//{
-//
-//    if (UIInterfaceOrientationIsLandscape([UIDevice currentDevice].orientation))
-//    {
-//
-//        [self.view addSubview:self.timelineViewControllerContainer];
-//        [self.view bringSubviewToFront:self.timelineViewControllerContainer];
-//        [self.timelineViewControllerContainer setHidden:NO];
-//        [self.timelineViewControllerContainer setNeedsDisplay];
-//
-//    }
-//    else
-//    {
-//
-////        [self.timelineViewControllerContainer setHidden:YES];
-////        [self.view sendSubviewToBack:self.timelineViewControllerContainer];
-//        [self.timelineViewControllerContainer removeFromSuperview];
-//
-//
-//    }
-//
-//}
 
 
 // Automatically reloads the tableview whenever capslsArray is updated..

@@ -52,6 +52,7 @@ static NSString * const reuseIdentifier = @"CapslCell";
 
 - (void)viewWillAppear:(BOOL)animated
 {
+    [super viewWillAppear:animated];
     [self.capslView reloadData];
 }
 

@@ -10,6 +10,7 @@
 
 @interface JCAMainViewController : UIViewController
 
+@property (strong, nonatomic) IBOutlet UIToolbar *toolBar;
 @property BOOL showChooseVC;
 
 @end
