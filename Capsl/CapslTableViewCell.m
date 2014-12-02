@@ -20,12 +20,11 @@
     // Configure the view for the selected state
 }
 
-- (void)startTimerWithDate:(NSDate *)date withCompletion:(void(^)(NSDate *date))complete
+- (void)startTimerWithDate:(NSDate *)date
 {
     JKCountDownTimer *timer = [[JKCountDownTimer alloc] initWithDeliveryDate:date withDelegate:self];
-    [timer updateLabel];
 
-    complete(date);
+    [timer updateLabel];
 }
 
 -(void)counterUpdated:(NSString *)dateString
