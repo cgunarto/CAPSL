@@ -12,5 +12,7 @@
 
 @property NSArray *capslsArray;
 
+- (void)updateClocks;
+
 @end
 

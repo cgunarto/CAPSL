@@ -19,6 +19,7 @@
 @property (strong, nonatomic) IBOutlet UIView *capslListContainer;
 @property JCATimelineRootViewController *timelineRootVC;
 @property CapsuleListViewController *capslListVC;
+@property NSTimer *timer;
 
 
 @property Capslr *capslr;
@@ -64,6 +65,19 @@
 
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    // put timer here
+
+    self.timer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(updateUIInSubviews) userInfo:nil repeats:YES];
+
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    // invalidate timer here
+}
+
 - (BOOL)prefersStatusBarHidden {
     return YES;
 }
@@ -98,6 +112,16 @@
         
     }
     
+}
+
+#pragma mark - helper methods
+
+- (void)updateUIInSubviews
+{
+
+    [self.capslListVC updateClocks];
+//    [self.timelineRootVC updateClocks];
+
 }
 
 
