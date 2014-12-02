@@ -106,10 +106,21 @@
             capslr = [self.capslrArray objectAtIndex:indexPath.row];
         }
 
-        //TODO: Set profile photo
         allContactCell.nameLabel.text = capslr.name;
         allContactCell.usernameLabel.text = capslr.username;
         allContactCell.phoneLabel.text = capslr.phone;
+        //TODO: Set profile photo
+
+        //Make the profile rounded
+        allContactCell.photoImageView.layer.cornerRadius = allContactCell.photoImageView.frame.size.width/2;
+        allContactCell.photoImageView.clipsToBounds = YES;
+//
+//        [capslr.profilePhoto getDataInBackgroundWithBlock:^(NSData *data, NSError *error)
+//        {
+//            UIImage *image = [UIImage imageWithData:data];
+//            allContactCell.photoImageView.image = image;
+//        }];
+
     }
 
     //If selectedSegement is 1, Address Book contact - extract Contact object

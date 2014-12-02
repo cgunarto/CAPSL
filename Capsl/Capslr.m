@@ -39,6 +39,9 @@
     NSMutableArray *capslrArray =[@[]mutableCopy];
 
     PFQuery *query = [Capslr query];
+
+    //inclue PFFile ProfilePhoto in the Cpslr object creation
+    [query includeKey:@"profilePhoto"];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error)
      {
          if (!error)
@@ -107,6 +110,7 @@
          }
      }];
 }
+
 
 
 @end
