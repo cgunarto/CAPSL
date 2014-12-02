@@ -12,9 +12,8 @@
 #import "JKCountDownTimer.h"
 #import "JCATimelineRootViewController.h"
 #import "MessageDetailViewController.h"
-#import "UIImage+RoundedCorner.h"
 
-@interface CapsuleListViewController () <UITableViewDataSource, UITableViewDelegate, JKCountdownTimerDelegate>
+@interface CapsuleListViewController () <UITableViewDataSource, UITableViewDelegate>
 
 @property JCATimelineRootViewController *timelineRootVC;
 @property (strong, nonatomic) IBOutlet UIView *timelineViewControllerContainer;
@@ -112,6 +111,7 @@
 
         //Sender Profile Image (using categories)
         PFFile *profilePhoto = object[@"profilePhoto"];
+        cell.profileImage.image = nil;
         [profilePhoto getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
             cell.profileImage.image = [UIImage imageWithData:data] ;
         }];
@@ -124,26 +124,9 @@
 
     cell.deliveryDateLabel.text = [NSString stringWithFormat:@"D-Day: %@", [dateFormatter stringFromDate:deliveryDate]];
 
-    //Timer finally working...
-    [cell startTimerWithDate:deliveryDate withCompletion:^(NSDate *date) {
-        JKCountDownTimer *timer = [[JKCountDownTimer alloc] initWithDeliveryDate:date withDelegate:self];
-        [timer updateLabel];
-    }];
+    [cell startTimerWithDate:deliveryDate];
 
     return cell;
-}
-
-#pragma mark - JKTimer Delegate Method
--(void)counterUpdated:(NSString *)dateString
-{
-    if ([dateString isEqual: @"OPEN!"])
-    {
-//        [self presentCanOpenMeAlert];
-    }
-    else
-    {
-
-    }
 }
 
 #pragma mark - Saving Data for Viewed At

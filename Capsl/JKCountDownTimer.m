@@ -63,14 +63,6 @@
     {
         result = @"TODAY";
     }
-//    else if (elapsedSeconds < kTwoHoursBeforeOpeningCapsl)
-//    {
-//        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-//        [dateFormatter setDateFormat:@"MM/dd/yyyy"];
-//
-//        result = [dateFormatter stringFromDate:self.deliveryDate];
-//
-//    }
     else if (elapsedSeconds < kSixHoursInSeconds && elapsedSeconds >= 60)
     {
         result = [self stringFromTimeInterval:elapsedSeconds];
@@ -81,10 +73,9 @@
     }
     else if (elapsedSeconds < 0)
     {
-        [self.timer invalidate];
         result = @"OPEN!";
+        [self.timer invalidate];
     }
-
     [self.delegate counterUpdated:result];
 
 }

@@ -18,6 +18,6 @@
 
 @property JKCountDownTimer *timer;
 
-- (void)startTimerWithDate:(NSDate *)date withCompletion:(void(^)(NSDate *date))complete;
+- (void)startTimerWithDate:(NSDate *)date;
 
 @end
