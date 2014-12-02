@@ -10,7 +10,7 @@
 #import "JKCountDownTimer.h"
 #import "Capsl.h"
 
-@interface CapslTableViewCell : UITableViewCell <JKCountdownTimerDelegate>
+@interface CapslTableViewCell : UITableViewCell
 
 @property (strong, nonatomic) IBOutlet UIImageView *profileImage;
 @property (strong, nonatomic) IBOutlet UILabel *fromLabel;
@@ -19,10 +19,6 @@
 
 @property NSString *timerString;
 
-@property JKCountDownTimer *timer;
-
 - (void)updateTimeLabelForCapsl:(Capsl *)capsl;
-
-//- (JKCountDownTimer *)startTimerWithDate:(NSDate *)date;
 
 @end

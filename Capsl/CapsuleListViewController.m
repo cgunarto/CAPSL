@@ -26,28 +26,6 @@
 {
     [super viewDidLoad];
 
-    self.timersArray = [@[] mutableCopy];
-
-//    [Capslr returnCapslrFromPFUser:[PFUser currentUser] withCompletion:^(Capslr *currentCapslr, NSError *error) {
-//        Capslr *capslr = [Capslr object];
-//        capslr.objectId = currentCapslr.objectId;
-//
-//        //calling class method to get capsls for current user only
-//        [Capsl searchCapslByKey:@"recipient" orderByAscending:@"deliveryTime" equalTo:capslr completion:^(NSArray *objects, NSError *error) {
-//            if (!error)
-//            {
-//                self.capslsArray = objects;
-//                self.timelineRootVC.capslsArray = objects;
-//
-//                // Navigation Title
-//            }
-//            else
-//            {
-//                NSLog(@"%@", error.localizedDescription);
-//            }
-//        }];
-//    }];
-
     self.navigationItem.title = [NSString stringWithFormat:@"%li", (long)self.capslCount];
     self.navigationController.navigationBar.backgroundColor = [UIColor greenColor];
 
@@ -83,14 +61,8 @@
 
     cell.deliveryDateLabel.text = [NSString stringWithFormat:@"D-Day: %@", [dateFormatter stringFromDate:deliveryDate]];
 
-//    NSTimeInterval *timeInterval = [capsl getTimeIntervalUntilDelivery];
-
+    // updating timer string...
     [cell updateTimeLabelForCapsl:capsl];
-
-//    JKCountDownTimer *timer = self.timersArray[indexPath.row];
-//    timer.delegate = cell;
-
-//    cell.timerLabel.text = [timer updateLabel];
 
     cell.profileImage.layer.cornerRadius = cell.profileImage.frame.size.width/2;
     cell.profileImage.clipsToBounds = YES;
