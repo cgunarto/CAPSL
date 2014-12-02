@@ -15,11 +15,8 @@
 
 @interface CapsuleListViewController () <UITableViewDataSource, UITableViewDelegate>
 
-@property JCATimelineRootViewController *timelineRootVC;
-@property (strong, nonatomic) IBOutlet UIView *timelineViewControllerContainer;
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 
-@property (nonatomic)  NSArray *capslsArray;
 
 @end
 
@@ -29,56 +26,54 @@
 {
     [super viewDidLoad];
 
-    [Capslr returnCapslrFromPFUser:[PFUser currentUser] withCompletion:^(Capslr *currentCapslr, NSError *error) {
-        Capslr *capslr = [Capslr object];
-        capslr.objectId = currentCapslr.objectId;
+//    [Capslr returnCapslrFromPFUser:[PFUser currentUser] withCompletion:^(Capslr *currentCapslr, NSError *error) {
+//        Capslr *capslr = [Capslr object];
+//        capslr.objectId = currentCapslr.objectId;
+//
+//        //calling class method to get capsls for current user only
+//        [Capsl searchCapslByKey:@"recipient" orderByAscending:@"deliveryTime" equalTo:capslr completion:^(NSArray *objects, NSError *error) {
+//            if (!error)
+//            {
+//                self.capslsArray = objects;
+//                self.timelineRootVC.capslsArray = objects;
+//
+//                // Navigation Title
+//            }
+//            else
+//            {
+//                NSLog(@"%@", error.localizedDescription);
+//            }
+//        }];
+//    }];
 
-        //calling class method to get capsls for current user only
-        [Capsl searchCapslByKey:@"recipient" orderByAscending:@"deliveryTime" equalTo:capslr completion:^(NSArray *objects, NSError *error) {
-            if (!error)
-            {
-                self.capslsArray = objects;
-                self.timelineRootVC.capslsArray = objects;
-
-                // Navigation Title
-                self.navigationItem.title = [NSString stringWithFormat:@"Capsl Count: %lu", (unsigned long)self.capslsArray.count];
-            }
-            else
-            {
-                NSLog(@"%@", error.localizedDescription);
-            }
-        }];
-    }];
-
+    self.navigationItem.title = [NSString stringWithFormat:@"%li", (long)self.capslCount];
     self.navigationController.navigationBar.backgroundColor = [UIColor greenColor];
 }
 
 
-- (void)viewDidLayoutSubviews
-{
-
-    if (UIInterfaceOrientationIsLandscape([UIDevice currentDevice].orientation))
-    {
-
-        [self.view addSubview:self.timelineViewControllerContainer];
-        [self.view bringSubviewToFront:self.timelineViewControllerContainer];
-        [self.timelineViewControllerContainer setHidden:NO];
-        [self.timelineViewControllerContainer setNeedsDisplay];
-        [self.navigationController setNavigationBarHidden:YES];
-
-    }
-    else
-    {
-
-//        [self.timelineViewControllerContainer setHidden:YES];
-//        [self.view sendSubviewToBack:self.timelineViewControllerContainer];
-        [self.timelineViewControllerContainer removeFromSuperview];
-        [self.navigationController setNavigationBarHidden:NO];
-
-
-    }
-
-}
+//- (void)viewDidLayoutSubviews
+//{
+//
+//    if (UIInterfaceOrientationIsLandscape([UIDevice currentDevice].orientation))
+//    {
+//
+//        [self.view addSubview:self.timelineViewControllerContainer];
+//        [self.view bringSubviewToFront:self.timelineViewControllerContainer];
+//        [self.timelineViewControllerContainer setHidden:NO];
+//        [self.timelineViewControllerContainer setNeedsDisplay];
+//
+//    }
+//    else
+//    {
+//
+////        [self.timelineViewControllerContainer setHidden:YES];
+////        [self.view sendSubviewToBack:self.timelineViewControllerContainer];
+//        [self.timelineViewControllerContainer removeFromSuperview];
+//
+//
+//    }
+//
+//}
 
 
 // Automatically reloads the tableview whenever capslsArray is updated..
@@ -149,19 +144,12 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    if ([segue.identifier isEqualToString:@"segueToMessageVC"])
-    {
-        NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
-        Capsl *capsl = self.capslsArray[indexPath.row];
 
-        MessageDetailViewController *messageDetailVC = segue.destinationViewController;
-        messageDetailVC.chosenCapsl = capsl;
+    NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
+    Capsl *capsl = self.capslsArray[indexPath.row];
 
-    }
-    else
-    {
-        self.timelineRootVC = segue.destinationViewController;
-    }
+    MessageDetailViewController *messageDetailVC = segue.destinationViewController;
+    messageDetailVC.chosenCapsl = capsl;
 
 }
 

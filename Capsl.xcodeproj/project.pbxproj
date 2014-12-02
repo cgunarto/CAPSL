@@ -55,6 +55,7 @@
 		8D5A3DDD1A2A4AFD00A6485A /* JCATimeline.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D5A3DD71A2A4AFD00A6485A /* JCATimeline.m */; };
 		8D5A3DE11A2A4B4700A6485A /* UIImage+ImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D5A3DE01A2A4B4700A6485A /* UIImage+ImageEffects.m */; };
 		8DAC42441A2A9BD400A8859A /* JCAMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DAC42431A2A9BD400A8859A /* JCAMainViewController.m */; };
+		8DE360601A2D6E5800DAE08C /* ViewCapsulesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DE3605F1A2D6E5800DAE08C /* ViewCapsulesViewController.m */; };
 		90C0DD171A27CCE500A50BCF /* JKCountDownTimer.m in Sources */ = {isa = PBXBuildFile; fileRef = 90C0DD161A27CCE500A50BCF /* JKCountDownTimer.m */; };
 		90C61E621A2C4D3A003EFEF9 /* UIImage+RoundedCorner.m in Sources */ = {isa = PBXBuildFile; fileRef = 90C61E611A2C4D3A003EFEF9 /* UIImage+RoundedCorner.m */; };
 		90C61E671A2C4EA3003EFEF9 /* UIImage+Alpha.m in Sources */ = {isa = PBXBuildFile; fileRef = 90C61E641A2C4EA3003EFEF9 /* UIImage+Alpha.m */; };
@@ -153,6 +154,8 @@
 		8D5A3DE01A2A4B4700A6485A /* UIImage+ImageEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ImageEffects.m"; sourceTree = "<group>"; };
 		8DAC42421A2A9BD400A8859A /* JCAMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JCAMainViewController.h; sourceTree = "<group>"; };
 		8DAC42431A2A9BD400A8859A /* JCAMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JCAMainViewController.m; sourceTree = "<group>"; };
+		8DE3605E1A2D6E5800DAE08C /* ViewCapsulesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ViewCapsulesViewController.h; path = ../ViewCapsulesViewController.h; sourceTree = "<group>"; };
+		8DE3605F1A2D6E5800DAE08C /* ViewCapsulesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ViewCapsulesViewController.m; path = ../ViewCapsulesViewController.m; sourceTree = "<group>"; };
 		90C0DD151A27CCE500A50BCF /* JKCountDownTimer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JKCountDownTimer.h; sourceTree = "<group>"; };
 		90C0DD161A27CCE500A50BCF /* JKCountDownTimer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JKCountDownTimer.m; sourceTree = "<group>"; };
 		90C61E601A2C4D3A003EFEF9 /* UIImage+RoundedCorner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+RoundedCorner.h"; sourceTree = "<group>"; };
@@ -237,8 +240,7 @@
 				4F69EBC91A252331009625AA /* RootViewController.m */,
 				8DAC42421A2A9BD400A8859A /* JCAMainViewController.h */,
 				8DAC42431A2A9BD400A8859A /* JCAMainViewController.m */,
-				90CE52D61A27C5200033087E /* Capsl List View */,
-				8D5A3DDE1A2A4B0700A6485A /* Timeline VCs */,
+				8DE360611A2D6E6500DAE08C /* View Capsules */,
 				8DC55F3A1A2B8B4500AF1AB8 /* Capsule View */,
 				4FC4EA191A2B027500D3D09D /* Capture & Compose VCs */,
 				4FC4EA1A1A2B030000D3D09D /* Profile & Contact VCs */,
@@ -393,6 +395,17 @@
 			name = "Capsule View";
 			sourceTree = "<group>";
 		};
+		8DE360611A2D6E6500DAE08C /* View Capsules */ = {
+			isa = PBXGroup;
+			children = (
+				8DE3605E1A2D6E5800DAE08C /* ViewCapsulesViewController.h */,
+				8DE3605F1A2D6E5800DAE08C /* ViewCapsulesViewController.m */,
+				90CE52D61A27C5200033087E /* Capsl List View */,
+				8D5A3DDE1A2A4B0700A6485A /* Timeline VCs */,
+			);
+			name = "View Capsules";
+			sourceTree = "<group>";
+		};
 		90CE52D61A27C5200033087E /* Capsl List View */ = {
 			isa = PBXGroup;
 			children = (
@@ -531,6 +544,7 @@
 				4F69EC3D1A2A83E3009625AA /* AllContactTableViewCell.m in Sources */,
 				90C0DD171A27CCE500A50BCF /* JKCountDownTimer.m in Sources */,
 				90CE52CF1A27C3350033087E /* LoginViewController.m in Sources */,
+				8DE360601A2D6E5800DAE08C /* ViewCapsulesViewController.m in Sources */,
 				8D5A3DD81A2A4AFD00A6485A /* JCATimelineRootViewController.m in Sources */,
 				4F69EBC41A252331009625AA /* main.m in Sources */,
 				4F69EBF21A25327A009625AA /* CaptureViewController.m in Sources */,

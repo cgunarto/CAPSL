@@ -13,4 +13,8 @@
 
 @property Capslr *capslr;
 
+@property (nonatomic)  NSArray *capslsArray;
+@property NSInteger capslCount;
+
+
 @end
