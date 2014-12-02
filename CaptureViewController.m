@@ -13,8 +13,8 @@
 
 @interface CaptureViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
-@property (strong, nonatomic) UIImage *chosenImage;
 @property Capsl *createdCapsl;
+@property UIImage *chosenImage;
 
 @property (weak, nonatomic) IBOutlet UIButton *nextButton;
 
@@ -100,8 +100,6 @@
     {
         SearchContactViewController *searchContactVC = segue.destinationViewController;
 
-        //TODO:delete chosenImage later
-        searchContactVC.chosenImage = self.chosenImage;
         searchContactVC.createdCapsl = self.createdCapsl;
 
     }
@@ -110,7 +108,7 @@
 
 - (IBAction)onNextButtonPressed:(UIButton *)sender
 {
-    if (self.imageView.image != nil)
+    if (self.createdCapsl.photo != nil)
     {
         [self performSegueWithIdentifier:@"segueToContactSearch" sender:self.nextButton];
     }

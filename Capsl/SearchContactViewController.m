@@ -32,7 +32,7 @@
 @implementation SearchContactViewController
 
 
-//TODO:add segmented control to toggle between search CAPSLR and CONTACT
+//TODO:check for phone number corner cases
 
 - (void)viewDidLoad
 {
@@ -181,6 +181,7 @@
             ComposeViewController *composeVC = segue.destinationViewController;
             composeVC.createdCapsl = self.createdCapsl;
         }
+
         else
         {
             Contact *contact = nil;
