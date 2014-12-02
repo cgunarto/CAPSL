@@ -20,6 +20,6 @@
 
 @property JKCountDownTimer *timer;
 
-- (JKCountDownTimer *)startTimerWithDate:(NSDate *)date;
+//- (JKCountDownTimer *)startTimerWithDate:(NSDate *)date;
 
 @end

@@ -83,8 +83,8 @@
 - (void)capslsScrolledToIndex:(NSIndexPath *)indexPath
 {
 
-    NSInteger yearIndex = indexPath.section / 13;
-    NSInteger monthIndex = (indexPath.section % 13) - 1;
+    NSInteger yearIndex = indexPath.section / 12;
+    NSInteger monthIndex = indexPath.section % 12;
     NSIndexPath *timelineMonthIndexPath = [NSIndexPath indexPathForItem:monthIndex inSection:yearIndex];
 
 //    if (indexPath)
