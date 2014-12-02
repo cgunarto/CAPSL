@@ -116,10 +116,6 @@
         allContactCell.usernameLabel.text = capslr.username;
         allContactCell.phoneLabel.text = capslr.phone;
 
-        //Make the profile rounded
-        allContactCell.photoImageView.layer.cornerRadius = allContactCell.photoImageView.frame.size.width/2;
-        allContactCell.photoImageView.clipsToBounds = YES;
-
         [capslr.profilePhoto getDataInBackgroundWithBlock:^(NSData *data, NSError *error)
          {
              NSLog(@"PROFILE PHOTO QUERIED");
@@ -150,8 +146,12 @@
         allContactCell.nameLabel.text = [contact fullName];
         allContactCell.usernameLabel.text = contact.nickName;
         allContactCell.phoneLabel.text = contact.number;
-        allContactCell.photoImageView.image = nil;
+        allContactCell.photoImageView.image = [UIImage imageWithData:contact.photo];
     }
+
+    //Make the profile rounded
+    allContactCell.photoImageView.layer.cornerRadius = allContactCell.photoImageView.frame.size.width/2;
+    allContactCell.photoImageView.clipsToBounds = YES;
 
     return allContactCell;
 }
@@ -272,7 +272,6 @@
         NSLog(@"Address book contact chosen");
     }
     [self.tableView reloadData];
-
 
 }
 
