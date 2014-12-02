@@ -32,6 +32,7 @@
 }
 
 //Comparing the retrieved Capslrs to see if any contacts are Capslrs (based on phone number)
+//Return only Capslrs that have been claimed by a sign up and have the corresponding phone number
 + (void)returnCapslrWithContactsArray:(NSArray *)Contacts withCompletion:(void(^)(NSArray *capslrObjectsArray, NSError *error))complete
 {
     NSMutableArray *capslrContact = [@[]mutableCopy];
@@ -44,7 +45,12 @@
          {
              for (Capslr *capslr in objects)
              {
-                 [capslrArray addObject:capslr];
+                 //Only add CAPSLRs that have a user pointer (they have been claimed by a signup), otherwise empty CAPSLR with phone numbers only will show up
+                 //Empty CAPSLRs are created when a sender sends message to a phone number (not a CAPSLR user)
+                 if (capslr.user)
+                 {
+                     [capslrArray addObject:capslr];
+                 }
              }
 
              for (Contact *contact in Contacts)

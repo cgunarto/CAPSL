@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="vXZ-lx-hvc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="vXZ-lx-hvc">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
@@ -1457,14 +1457,14 @@
                                 <exclude reference="176-jE-9B6"/>
                             </mask>
                             <mask key="constraints">
-                                <exclude reference="TjT-rx-2gc"/>
-                                <exclude reference="YNN-2g-eG6"/>
-                                <exclude reference="nBE-Wl-7x4"/>
+                                <exclude reference="oM6-dP-Cw4"/>
+                                <exclude reference="rKx-Xy-FHv"/>
                                 <exclude reference="74a-oh-OEh"/>
                                 <exclude reference="O7L-81-EL0"/>
                                 <exclude reference="mKy-kV-NJt"/>
-                                <exclude reference="oM6-dP-Cw4"/>
-                                <exclude reference="rKx-Xy-FHv"/>
+                                <exclude reference="TjT-rx-2gc"/>
+                                <exclude reference="YNN-2g-eG6"/>
+                                <exclude reference="nBE-Wl-7x4"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=compact">
@@ -1472,10 +1472,10 @@
                                 <include reference="lkG-ai-fz1"/>
                             </mask>
                             <mask key="constraints">
+                                <include reference="rKx-Xy-FHv"/>
                                 <include reference="TjT-rx-2gc"/>
                                 <include reference="YNN-2g-eG6"/>
                                 <include reference="nBE-Wl-7x4"/>
-                                <include reference="rKx-Xy-FHv"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=compact">
@@ -1483,10 +1483,10 @@
                                 <include reference="176-jE-9B6"/>
                             </mask>
                             <mask key="constraints">
+                                <include reference="oM6-dP-Cw4"/>
                                 <include reference="74a-oh-OEh"/>
                                 <include reference="O7L-81-EL0"/>
                                 <include reference="mKy-kV-NJt"/>
-                                <include reference="oM6-dP-Cw4"/>
                             </mask>
                         </variation>
                     </view>
@@ -2480,6 +2480,6 @@
         <image name="group-50" width="26" height="26"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Eln-db-Pjz"/>
+        <segue reference="THB-3X-bqr"/>
     </inferredMetricsTieBreakers>
 </document>
