@@ -83,9 +83,14 @@
 - (void)capslsScrolledToIndex:(NSIndexPath *)indexPath
 {
 
-    NSInteger monthIndex = indexPath.section;
-    NSIndexPath *timelineMonthIndexPath = [NSIndexPath indexPathForItem:monthIndex inSection:1];
+    NSInteger yearIndex = indexPath.section / 13;
+    NSInteger monthIndex = (indexPath.section % 13) - 1;
+    NSIndexPath *timelineMonthIndexPath = [NSIndexPath indexPathForItem:monthIndex inSection:yearIndex];
 
+//    if (indexPath)
+//    {
+//        [self.timelineVC centerCorrespondingMonthCell:timelineMonthIndexPath];
+//    }
     [self.timelineVC centerCorrespondingMonthCell:timelineMonthIndexPath];
 
 }
@@ -142,7 +147,7 @@
                 NSMutableArray *aYearOfMonths = [@[] mutableCopy];
 
                 // add Year marker at index 0
-                [aYearOfMonths addObject:[NSString stringWithFormat:@"%i",compareYear + x]];
+//                [aYearOfMonths addObject:[NSString stringWithFormat:@"%i",compareYear + x]];
 
                 // add 12 months to empty year
                 for (int y = 1; y <= 12; y++)
@@ -162,7 +167,7 @@
             compareYear = [capslYear intValue];
         }
 
-        NSMutableArray *lastYear = [arrayOfYears lastObject][[capslMonth intValue]];
+        NSMutableArray *lastYear = [arrayOfYears lastObject][[capslMonth intValue] - 1];
         Capsl *checkCapsl = lastYear.firstObject;
         if (!checkCapsl.objectId)
         {
