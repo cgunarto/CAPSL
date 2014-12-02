@@ -11,7 +11,7 @@
 #import "JKCountDownTimer.h"
 @import AVFoundation;
 
-@interface MessageDetailViewController () <JKCountdownTimerDelegate, AVAudioPlayerDelegate>
+@interface MessageDetailViewController () <AVAudioPlayerDelegate>
 
 @property (strong, nonatomic) IBOutlet UILabel *senderLabel;
 @property (strong, nonatomic) IBOutlet UILabel *deliveryDateLabel;
@@ -70,8 +70,8 @@
     }];
 
     //Timer
-    JKCountDownTimer *timer = [[JKCountDownTimer alloc] initWithDeliveryDate:self.chosenCapsl.deliveryTime withDelegate:self];
-    [timer updateLabel];
+//    JKCountDownTimer *timer = [[JKCountDownTimer alloc] initWithDeliveryDate:self.chosenCapsl.deliveryTime withDelegate:self];
+//    [timer updateLabel];
 
     //Text Message
     [self displayTextMessage];
@@ -141,10 +141,10 @@
 
 
 #pragma mark - JKTimer Delegate Method
--(void)counterUpdated:(NSString *)dateString
-{
-    self.statusLabel.text = dateString;
-}
+//-(void)counterUpdated:(NSString *)dateString
+//{
+//    self.statusLabel.text = dateString;
+//}
 
 
 #pragma mark - Alert

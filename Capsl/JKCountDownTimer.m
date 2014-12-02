@@ -30,7 +30,7 @@
     return self;
 }
 
--(instancetype)initWithDeliveryDate:(NSDate *)date withDelegate:(id<JKCountdownTimerDelegate>)delegate
+- (instancetype)initWithDeliveryDate:(NSDate *)date withDelegate:(id<JKCountdownTimerDelegate>)delegate
 {
     self = [super init];
 
@@ -97,7 +97,6 @@
 
     return [NSString stringWithFormat:@"%02li", (long)seconds];
 }
-
 
 
 

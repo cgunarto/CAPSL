@@ -23,7 +23,7 @@
 @property id<JKCountdownTimerDelegate>delegate;
 
 
--(instancetype)initWithDeliveryDate:(NSDate *)date withDelegate:(id<JKCountdownTimerDelegate>)delegate;
+- (instancetype)initWithDeliveryDate:(NSDate *)date withDelegate:(id<JKCountdownTimerDelegate>)delegate;
 
 - (void)updateLabel;
 

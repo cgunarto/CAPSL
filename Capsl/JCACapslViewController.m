@@ -52,6 +52,7 @@ static NSString * const reuseIdentifier = @"CapslCell";
 
 - (void)viewWillAppear:(BOOL)animated
 {
+    [super viewWillAppear:animated];
     [self.capslView reloadData];
 }
 
@@ -121,7 +122,11 @@ static NSString * const reuseIdentifier = @"CapslCell";
 
     if (!capsl.objectId)
     {
-        cell.alpha = 0;
+        cell.hidden = YES;
+    }
+    else
+    {
+        cell.hidden = NO;
     }
 
     return cell;

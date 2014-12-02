@@ -12,7 +12,6 @@
 
 @property (strong, nonatomic) IBOutlet UIView *capsuleListContainerView;
 @property (strong, nonatomic) IBOutlet UIView *chooseTypeContainerView;
-@property (strong, nonatomic) IBOutlet UIToolbar *toolBar;
 @property NSMutableArray *toolbarButtons;
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *sendCapsuleButton;
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *viewCapsulesButton;

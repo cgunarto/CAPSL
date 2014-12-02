@@ -11,12 +11,12 @@
 #import "Capsl.h"
 #import "JKCountDownTimer.h"
 #import "JCATimelineRootViewController.h"
+#import "JCAMainViewController.h"
 #import "MessageDetailViewController.h"
 
 @interface CapsuleListViewController () <UITableViewDataSource, UITableViewDelegate>
 
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
-
 
 @end
 
@@ -25,6 +25,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+
+    self.timersArray = [@[] mutableCopy];
 
 //    [Capslr returnCapslrFromPFUser:[PFUser currentUser] withCompletion:^(Capslr *currentCapslr, NSError *error) {
 //        Capslr *capslr = [Capslr object];
@@ -48,32 +50,10 @@
 
     self.navigationItem.title = [NSString stringWithFormat:@"%li", (long)self.capslCount];
     self.navigationController.navigationBar.backgroundColor = [UIColor greenColor];
+
+    self.tableView.contentInset = UIEdgeInsetsMake(self.navigationController.navigationBar.frame.size.height, 0, 44, 0);
+
 }
-
-
-//- (void)viewDidLayoutSubviews
-//{
-//
-//    if (UIInterfaceOrientationIsLandscape([UIDevice currentDevice].orientation))
-//    {
-//
-//        [self.view addSubview:self.timelineViewControllerContainer];
-//        [self.view bringSubviewToFront:self.timelineViewControllerContainer];
-//        [self.timelineViewControllerContainer setHidden:NO];
-//        [self.timelineViewControllerContainer setNeedsDisplay];
-//
-//    }
-//    else
-//    {
-//
-////        [self.timelineViewControllerContainer setHidden:YES];
-////        [self.view sendSubviewToBack:self.timelineViewControllerContainer];
-//        [self.timelineViewControllerContainer removeFromSuperview];
-//
-//
-//    }
-//
-//}
 
 
 // Automatically reloads the tableview whenever capslsArray is updated..
@@ -96,6 +76,18 @@
     CapslTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
     Capsl *capsl = self.capslsArray[indexPath.row];
 
+    // Setting the delivery date
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"MM-dd-yyyy"];
+    NSDate *deliveryDate = capsl.deliveryTime;
+
+    cell.deliveryDateLabel.text = [NSString stringWithFormat:@"D-Day: %@", [dateFormatter stringFromDate:deliveryDate]];
+
+    JKCountDownTimer *timer = self.timersArray[indexPath.row];
+    timer.delegate = cell;
+
+//    cell.timerLabel.text = [timer updateLabel];
+
     cell.profileImage.layer.cornerRadius = cell.profileImage.frame.size.width/2;
     cell.profileImage.clipsToBounds = YES;
 
@@ -113,15 +105,6 @@
             cell.profileImage.image = [UIImage imageWithData:data] ;
         }];
     }];
-
-    // Setting the delivery date
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"MM-dd-yyyy"];
-    NSDate *deliveryDate = capsl.deliveryTime;
-
-    cell.deliveryDateLabel.text = [NSString stringWithFormat:@"D-Day: %@", [dateFormatter stringFromDate:deliveryDate]];
-
-    [cell startTimerWithDate:deliveryDate];
 
     return cell;
 }

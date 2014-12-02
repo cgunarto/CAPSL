@@ -12,6 +12,8 @@
 @interface CapsuleListViewController : UIViewController
 
 @property Capslr *capslr;
+@property NSMutableArray *timersArray;
+
 
 @property (nonatomic)  NSArray *capslsArray;
 @property NSInteger capslCount;
