@@ -100,6 +100,9 @@
     CapslTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
     Capsl *capsl = self.capslsArray[indexPath.row];
 
+    cell.profileImage.layer.cornerRadius = cell.profileImage.frame.size.width/2;
+    cell.profileImage.clipsToBounds = YES;
+
     // querying for sender data (need to refactor later)
     PFQuery *query = [Capslr query];
     [query whereKey:@"objectId" equalTo: capsl.sender.objectId];
@@ -110,7 +113,7 @@
         //Sender Profile Image (using categories)
         PFFile *profilePhoto = object[@"profilePhoto"];
         [profilePhoto getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
-            cell.profileImage.image = [[UIImage imageWithData:data] roundedCornerImage:150 borderSize:10];
+            cell.profileImage.image = [UIImage imageWithData:data] ;
         }];
     }];
 
