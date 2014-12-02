@@ -12,9 +12,8 @@
 #import "JKCountDownTimer.h"
 #import "JCATimelineRootViewController.h"
 #import "MessageDetailViewController.h"
-#import "UIImage+RoundedCorner.h"
 
-@interface CapsuleListViewController () <UITableViewDataSource, UITableViewDelegate, JKCountdownTimerDelegate>
+@interface CapsuleListViewController () <UITableViewDataSource, UITableViewDelegate>
 
 @property JCATimelineRootViewController *timelineRootVC;
 @property (strong, nonatomic) IBOutlet UIView *timelineViewControllerContainer;
@@ -96,10 +95,14 @@
     return self.capslsArray.count;
 }
 
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     CapslTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
     Capsl *capsl = self.capslsArray[indexPath.row];
+
+    cell.profileImage.layer.cornerRadius = cell.profileImage.frame.size.width/2;
+    cell.profileImage.clipsToBounds = YES;
 
     // querying for sender data (need to refactor later)
     PFQuery *query = [Capslr query];
@@ -110,8 +113,9 @@
 
         //Sender Profile Image (using categories)
         PFFile *profilePhoto = object[@"profilePhoto"];
+        cell.profileImage.image = nil;
         [profilePhoto getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
-            cell.profileImage.image = [[UIImage imageWithData:data] roundedCornerImage:150 borderSize:10];
+            cell.profileImage.image = [UIImage imageWithData:data] ;
         }];
     }];
 
@@ -122,26 +126,9 @@
 
     cell.deliveryDateLabel.text = [NSString stringWithFormat:@"D-Day: %@", [dateFormatter stringFromDate:deliveryDate]];
 
-    //Timer finally working...
-    [cell startTimerWithDate:deliveryDate withCompletion:^(NSDate *date) {
-        JKCountDownTimer *timer = [[JKCountDownTimer alloc] initWithDeliveryDate:date withDelegate:self];
-        [timer updateLabel];
-    }];
+    [cell startTimerWithDate:deliveryDate];
 
     return cell;
-}
-
-#pragma mark - JKTimer Delegate Method
--(void)counterUpdated:(NSString *)dateString
-{
-    if ([dateString isEqual: @"OPEN!"])
-    {
-//        [self presentCanOpenMeAlert];
-    }
-    else
-    {
-
-    }
 }
 
 #pragma mark - Saving Data for Viewed At
