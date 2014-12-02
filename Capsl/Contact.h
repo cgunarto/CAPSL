@@ -14,6 +14,7 @@
 @property NSString *lastName;
 @property NSString *nickName;
 @property NSString *number;
+@property NSData *photo;
 
 - (NSString *) fullName;
 + (NSArray *)sortContactArrayAlphabetically:(NSMutableArray*)arrayOfContacts;

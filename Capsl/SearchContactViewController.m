@@ -33,7 +33,6 @@
 
 
 //TODO:check for phone number corner cases
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -53,6 +52,12 @@
           }];
          
      }];
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    //Tableview needs to be reloaded otherwise profile pic will not show up the first time view loads
+    [self.tableView reloadData];
 }
 
 //Filtering for search results
@@ -104,12 +109,25 @@
         else
         {
             capslr = [self.capslrArray objectAtIndex:indexPath.row];
+
         }
 
-        //TODO: Set profile photo
         allContactCell.nameLabel.text = capslr.name;
         allContactCell.usernameLabel.text = capslr.username;
         allContactCell.phoneLabel.text = capslr.phone;
+
+        [capslr.profilePhoto getDataInBackgroundWithBlock:^(NSData *data, NSError *error)
+         {
+             NSLog(@"PROFILE PHOTO QUERIED");
+             if (!error)
+             {
+                  allContactCell.photoImageView.image = [UIImage imageWithData:data];
+             }
+             else
+             {
+                 NSLog(@"%@", error.localizedDescription);
+             }
+         }];
     }
 
     //If selectedSegement is 1, Address Book contact - extract Contact object
@@ -128,7 +146,12 @@
         allContactCell.nameLabel.text = [contact fullName];
         allContactCell.usernameLabel.text = contact.nickName;
         allContactCell.phoneLabel.text = contact.number;
+        allContactCell.photoImageView.image = [UIImage imageWithData:contact.photo];
     }
+
+    //Make the profile rounded
+    allContactCell.photoImageView.layer.cornerRadius = allContactCell.photoImageView.frame.size.width/2;
+    allContactCell.photoImageView.clipsToBounds = YES;
 
     return allContactCell;
 }
@@ -249,7 +272,6 @@
         NSLog(@"Address book contact chosen");
     }
     [self.tableView reloadData];
-
 
 }
 

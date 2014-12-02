@@ -61,6 +61,9 @@
                                                      NSString *lastName = (__bridge NSString *)(ABRecordCopyValue(person, kABPersonLastNameProperty));
                                                      NSString *nickName = (__bridge NSString *)(ABRecordCopyValue(person, kABPersonNicknameProperty));
 
+                                                     //Grabbing the profile photo
+                                                     NSData *photo = CFBridgingRelease(ABPersonCopyImageDataWithFormat(person, kABPersonImageFormatOriginalSize));
+
                                                      //Since a person can have multiple phone numbers, we loop through the phone numbers
                                                      ABMultiValueRef phoneNumbers = ABRecordCopyValue(person, kABPersonPhoneProperty);
                                                      for (CFIndex i = 0; i < ABMultiValueGetCount(phoneNumbers); i++)
@@ -83,6 +86,7 @@
                                                      contact.firstName = firstName;
                                                      contact.lastName = lastName;
                                                      contact.nickName = nickName;
+                                                     contact.photo = photo;
                                                      
                                                      //Add the contact object to our array
                                                      if (contact.number != nil)
