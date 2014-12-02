@@ -58,7 +58,6 @@
              {
                  for (Capslr *capslr in capslrArray)
                  {
-                     NSLog(@"%@   %@",contact.number, capslr.phone);
                      if ([contact.number isEqualToString:capslr.phone])
                      {
                          [capslrContact addObject:capslr];
