@@ -20,21 +20,23 @@
     // Configure the view for the selected state
 }
 
-- (void)startTimerWithDate:(NSDate *)date
-{
-    JKCountDownTimer *timer = [[JKCountDownTimer alloc] initWithDeliveryDate:date withDelegate:self];
-
-    [timer updateLabel];
-}
+//- (JKCountDownTimer *)startTimerWithDate:(NSDate *)date
+//{
+//    JKCountDownTimer *timer = [[JKCountDownTimer alloc] initWithDeliveryDate:date withDelegate:self];
+//
+//    [timer updateLabel];
+//
+//    return timer;
+//}
 
 -(void)counterUpdated:(NSString *)dateString
 {
     self.timerLabel.text = dateString;
-    if ([self.timerLabel.text isEqual:@"OPEN!"])
-    {
-        self.timerLabel.textColor = [UIColor whiteColor];
-        self.timerLabel.backgroundColor = [UIColor blueColor];
-    }
+//    if ([self.timerLabel.text isEqual:@"OPEN!"])
+//    {
+//        self.timerLabel.textColor = [UIColor whiteColor];
+//        self.timerLabel.backgroundColor = [UIColor blueColor];
+//    }
 }
 
 @end

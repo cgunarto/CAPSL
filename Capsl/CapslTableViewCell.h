@@ -16,8 +16,10 @@
 @property (strong, nonatomic) IBOutlet UILabel *deliveryDateLabel;
 @property (strong, nonatomic) IBOutlet UILabel *timerLabel;
 
+@property NSString *timerString;
+
 @property JKCountDownTimer *timer;
 
-- (void)startTimerWithDate:(NSDate *)date;
+- (JKCountDownTimer *)startTimerWithDate:(NSDate *)date;
 
 @end

@@ -18,7 +18,6 @@
 
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 
-
 @end
 
 @implementation CapsuleListViewController
@@ -26,6 +25,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+
+    self.timersArray = [@[] mutableCopy];
 
 //    [Capslr returnCapslrFromPFUser:[PFUser currentUser] withCompletion:^(Capslr *currentCapslr, NSError *error) {
 //        Capslr *capslr = [Capslr object];
@@ -75,6 +76,18 @@
     CapslTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
     Capsl *capsl = self.capslsArray[indexPath.row];
 
+    // Setting the delivery date
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"MM-dd-yyyy"];
+    NSDate *deliveryDate = capsl.deliveryTime;
+
+    cell.deliveryDateLabel.text = [NSString stringWithFormat:@"D-Day: %@", [dateFormatter stringFromDate:deliveryDate]];
+
+    JKCountDownTimer *timer = self.timersArray[indexPath.row];
+    timer.delegate = cell;
+
+//    cell.timerLabel.text = [timer updateLabel];
+
     cell.profileImage.layer.cornerRadius = cell.profileImage.frame.size.width/2;
     cell.profileImage.clipsToBounds = YES;
 
@@ -92,15 +105,6 @@
             cell.profileImage.image = [UIImage imageWithData:data] ;
         }];
     }];
-
-    // Setting the delivery date
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"MM-dd-yyyy"];
-    NSDate *deliveryDate = capsl.deliveryTime;
-
-    cell.deliveryDateLabel.text = [NSString stringWithFormat:@"D-Day: %@", [dateFormatter stringFromDate:deliveryDate]];
-
-    [cell startTimerWithDate:deliveryDate];
 
     return cell;
 }
