@@ -32,7 +32,7 @@
 @implementation SearchContactViewController
 
 
-//TODO:add segmented control to toggle between search CAPSLR and CONTACT
+//TODO:check for phone number corner cases
 
 - (void)viewDidLoad
 {
@@ -48,6 +48,7 @@
          [Capslr returnCapslrWithContactsArray:self.contactsArray withCompletion:^(NSArray *capslrObjectsArray, NSError *error)
           {
               self.capslrArray = capslrObjectsArray;
+              self.tableViewDataArray = [self.capslrArray mutableCopy];
               [self.tableView reloadData];
           }];
          
@@ -65,6 +66,7 @@
     }
 
     //If selecteSegment is 1 (Address contact), predicate for username
+    else
     {
         //TODO:add last name
         NSPredicate *resultPredicate = [NSPredicate predicateWithFormat:@"firstName contains[c] %@", searchText];
@@ -160,9 +162,13 @@
 {
     Capslr *capslr = nil;
 
+    NSLog(@"prepareForSegue is called");
+
     if ([segue.identifier isEqualToString:@"segueToCompose"])
     {
         NSIndexPath *indexPath = nil;
+
+        NSLog(@"segueToCompose is identified");
 
         if (self.segmentedControl.selectedSegmentIndex == 0)
         {
@@ -181,6 +187,7 @@
             ComposeViewController *composeVC = segue.destinationViewController;
             composeVC.createdCapsl = self.createdCapsl;
         }
+
         else
         {
             Contact *contact = nil;
