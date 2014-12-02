@@ -63,7 +63,7 @@ static NSString * const reuseIdentifier = @"CapslCell";
 - (void)showCapslAtYear:(NSInteger)yearMultiplier andMonth:(NSInteger)monthIndex withAnimation:(BOOL)animated
 {
 
-    NSIndexPath *monthIndexPath = [NSIndexPath indexPathForItem:0 inSection:(yearMultiplier * 13) + monthIndex + 1];
+    NSIndexPath *monthIndexPath = [NSIndexPath indexPathForItem:0 inSection:(yearMultiplier * 12) + monthIndex];
 
     UICollectionViewLayoutAttributes *attributes = [self.capslView layoutAttributesForItemAtIndexPath:monthIndexPath];
     CGRect capslRect = attributes.frame;
@@ -80,7 +80,7 @@ static NSString * const reuseIdentifier = @"CapslCell";
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
 
-    return self.capslGrandArray.count * 13;
+    return self.capslGrandArray.count * 12;
 
 }
 
@@ -88,43 +88,40 @@ static NSString * const reuseIdentifier = @"CapslCell";
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
 
-    NSArray *arrayOfMonths = self.capslGrandArray[section/13];
-    NSArray *arrayOfCapsules = arrayOfMonths[section % 13];
+    NSArray *arrayOfMonths = self.capslGrandArray[section/12];
+    NSArray *arrayOfCapsules = arrayOfMonths[section % 12];
 
-    if (section % 13 == 0)
-    {
-        return 0;
-    }
-    else
-    {
-        return arrayOfCapsules.count;
-    }
-//    else if (month.count == 0)
+//    if (section % 12 == 0)
 //    {
 //        return 0;
 //    }
 //    else
 //    {
-//        return month.count;
+        return arrayOfCapsules.count;
 //    }
+
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     JCACapslCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
 
-    NSArray *year = self.capslGrandArray[indexPath.section / 13];
-    NSArray *month = year[indexPath.section % 13];
+    NSArray *year = self.capslGrandArray[indexPath.section / 12];
+    NSArray *month = year[indexPath.section % 12];
 
-    if (indexPath.section % 13 != 0)
+
+    Capsl *capsl = month[indexPath.item];
+
+    cell.nameLabel.text = capsl.sender.username;
+//    cell.nameLabel.text = self.monthsOfTheYear[indexPath.section % 12];
+
+    [self drawCell:cell];
+
+    cell.profilePicView.image = [UIImage imageNamed:@"profilepic1"];
+
+    if (!capsl.objectId)
     {
-        Capsl *capsl = month[indexPath.item];
-
-        cell.nameLabel.text = capsl.sender.username;
-
-        [self drawCell:cell];
-
-        cell.profilePicView.image = [UIImage imageNamed:@"profilepic1"];
+        cell.alpha = 0;
     }
 
     return cell;
