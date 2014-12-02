@@ -104,11 +104,6 @@
 
     cell.deliveryDateLabel.text = [NSString stringWithFormat:@"D-Day: %@", [dateFormatter stringFromDate:deliveryDate]];
 
-    JKCountDownTimer *timer = self.timersArray[indexPath.row];
-    timer.delegate = cell;
-
-//    cell.timerLabel.text = [timer updateLabel];
-
     cell.profileImage.layer.cornerRadius = cell.profileImage.frame.size.width/2;
     cell.profileImage.clipsToBounds = YES;
 
@@ -126,6 +121,10 @@
             cell.profileImage.image = [UIImage imageWithData:data] ;
         }];
     }];
+
+    JKCountDownTimer *timer = self.timersArray[indexPath.row];
+
+    timer.delegate = cell;
 
     return cell;
 }
