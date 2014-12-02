@@ -58,4 +58,12 @@
      }];
 }
 
+- (NSTimeInterval)getTimeIntervalUntilDelivery
+{
+    NSDate *deliveryDate = self.deliveryTime;
+    NSTimeInterval timeInterval = [deliveryDate timeIntervalSinceNow];
+
+    return timeInterval;
+}
+
 @end

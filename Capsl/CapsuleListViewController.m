@@ -83,8 +83,12 @@
 
     cell.deliveryDateLabel.text = [NSString stringWithFormat:@"D-Day: %@", [dateFormatter stringFromDate:deliveryDate]];
 
-    JKCountDownTimer *timer = self.timersArray[indexPath.row];
-    timer.delegate = cell;
+//    NSTimeInterval *timeInterval = [capsl getTimeIntervalUntilDelivery];
+
+    [cell updateTimeLabelForCapsl:capsl];
+
+//    JKCountDownTimer *timer = self.timersArray[indexPath.row];
+//    timer.delegate = cell;
 
 //    cell.timerLabel.text = [timer updateLabel];
 
@@ -136,7 +140,20 @@
 
 }
 
-#pragma mark - Alert when timer expires
+#pragma mark - helper methods
+
+- (void)updateClocks
+{
+    for (CapslTableViewCell *cell in self.tableView.visibleCells)
+    {
+        NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
+        Capsl *capsl = self.capslsArray[indexPath.row];
+        
+        [cell updateTimeLabelForCapsl:capsl];
+    }
+}
+
+// Alert when timer expires
 -(void)presentCanOpenMeAlert
 {
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"CAPSL UNLOCKED!" message:nil preferredStyle:UIAlertControllerStyleAlert];

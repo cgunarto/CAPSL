@@ -30,6 +30,8 @@ typedef void(^searchCapslByRecipientBlock)(NSArray *objects, NSError *error);
 //Time at when receipient Capslr views the Capsl
 @property (nonatomic, strong) NSDate *viewedAt;
 
+- (NSTimeInterval)getTimeIntervalUntilDelivery;
+
 + (void)searchCapslByKey:(NSString *)key orderByAscending:(NSString *)key equalTo:(id)object completion:(searchCapslByRecipientBlock)complete;
 
 @end

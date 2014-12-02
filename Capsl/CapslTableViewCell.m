@@ -7,6 +7,7 @@
 //
 
 #import "CapslTableViewCell.h"
+#define kDayInSeconds 86400
 
 @implementation CapslTableViewCell
 
@@ -38,5 +39,28 @@
 //        self.timerLabel.backgroundColor = [UIColor blueColor];
 //    }
 }
+
+- (void)updateTimeLabelForCapsl:(Capsl *)capsl
+{
+
+    NSDate *deliveryDate = capsl.deliveryTime;
+    NSTimeInterval timeInterval = [deliveryDate timeIntervalSinceNow];
+    NSString *dateString = [self stringFromTimeInterval:timeInterval];
+
+    self.timerLabel.text = dateString;
+
+}
+
+- (NSString *)stringFromTimeInterval:(NSTimeInterval)interval
+{
+    NSInteger ti = (NSInteger)interval;
+    NSInteger seconds = ti % 60;
+    NSInteger minutes = (ti / 60) % 60;
+    NSInteger hours = (ti / 3600);
+
+    return [NSString stringWithFormat:@"%02li:%02li:%02li", (long)hours, (long)minutes, (long)seconds];
+}
+
+
 
 @end
