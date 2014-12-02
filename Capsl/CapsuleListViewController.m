@@ -65,14 +65,16 @@
         [self.view bringSubviewToFront:self.timelineViewControllerContainer];
         [self.timelineViewControllerContainer setHidden:NO];
         [self.timelineViewControllerContainer setNeedsDisplay];
+        [self.navigationController setNavigationBarHidden:YES];
 
     }
     else
     {
 
-        [self.timelineViewControllerContainer setHidden:YES];
-        [self.view sendSubviewToBack:self.timelineViewControllerContainer];
+//        [self.timelineViewControllerContainer setHidden:YES];
+//        [self.view sendSubviewToBack:self.timelineViewControllerContainer];
         [self.timelineViewControllerContainer removeFromSuperview];
+        [self.navigationController setNavigationBarHidden:NO];
 
 
     }
