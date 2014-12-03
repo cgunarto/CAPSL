@@ -161,8 +161,8 @@
 #pragma mark - Helper Method
 - (void)scrollToSoonestCapslWithCount:(NSInteger)openCapslsCount
 {
-    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:(openCapslsCount - 1) inSection:0];
-    [self.tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionBottom animated:NO];
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:(openCapslsCount) inSection:0];
+    [self.tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionTop animated:NO];
 }
 
 
