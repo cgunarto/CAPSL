@@ -31,6 +31,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
+    self.capslListVC.availableCapslsArray = [@[] mutableCopy];
 
     [Capslr returnCapslrFromPFUser:[PFUser currentUser] withCompletion:^(Capslr *currentCapslr, NSError *error) {
         Capslr *capslr = [Capslr object];
@@ -42,7 +43,20 @@
             {
                 self.timelineRootVC.capslsArray = objects;
                 self.capslListVC.capslsArray = objects;
-                self.capslListVC.title = [NSString stringWithFormat:@"%lu", (unsigned long)objects.count];
+                self.capslListVC.title = [NSString stringWithFormat:@"Count: %lu", (unsigned long)objects.count];
+
+                NSInteger availableCapslsCount = 0;
+
+                for (NSDate *date in [objects valueForKey:@"deliveryTime"])
+                {
+                    if ([date timeIntervalSinceNow] < 0)
+                    {
+                        availableCapslsCount++;
+                    }
+                }
+
+                [self.capslListVC scrollToSoonestCapslWithCount:availableCapslsCount];
+
             }
             else
             {
@@ -60,8 +74,23 @@
                 NSLog(@"%@", error.localizedDescription);
             }
         }];
+
     }];
 
+}
+
+-(void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    if ([self.capslListVC.navigationItem.rightBarButtonItem.title isEqual:@"Sent Capsules"])
+    {
+        self.capslListVC.title = [NSString stringWithFormat:@"%lu", (unsigned long)self.capslListVC.capslsArray.count];
+
+    }
+    else if ([self.capslListVC.navigationItem.rightBarButtonItem.title isEqual:@"Recieved Capsules"])
+    {
+        self.capslListVC.title = [NSString stringWithFormat:@"%lu", (unsigned long)self.capslListVC.sentCapslsArray.count];
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated

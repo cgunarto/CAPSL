@@ -14,14 +14,16 @@
 #import "JCAMainViewController.h"
 #import "MessageDetailViewController.h"
 
-@interface CapsuleListViewController () <UITableViewDataSource, UITableViewDelegate>
+@interface CapsuleListViewController () <UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate>
 
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *capslsBarButtonItem;
+@property NSInteger availableCapslsCount;
 
 @end
 
 @implementation CapsuleListViewController
+
 
 - (void)viewDidLoad
 {
@@ -30,8 +32,18 @@
     //TODO: fix capslCount!!
     
     self.navigationController.navigationBar.backgroundColor = [UIColor greenColor];
-
     self.tableView.contentInset = UIEdgeInsetsMake(self.navigationController.navigationBar.frame.size.height, 0, 44, 0);
+
+    self.availableCapslsCount = 0;
+
+//    for (NSDate *date in [self.capslsArray valueForKey:@"deliveryTime"])
+//    {
+//        if ([date timeIntervalSinceNow] < 0)
+//        {
+//            availableCapslsCount++;
+//        }
+//    }
+
 
 }
 
@@ -41,7 +53,10 @@
 {
     _capslsArray = capslsArray;
     [self.tableView reloadData];
+
 }
+
+
 
 #pragma mark - Tableview Delegate Methods
 
@@ -64,18 +79,17 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-
     CapslTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
 
     if ([self.capslsBarButtonItem.title isEqual:@"Sent Capsules"])
     {
+
         Capsl *capsl = self.capslsArray[indexPath.row];
 
         // Setting the delivery date
         NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
 
         //TODO: change date format with no LEADING ZERO
-
         [dateFormatter setDateFormat:@"MMM dd, yyyy hh:mm a"];
         NSDate *deliveryDate = capsl.deliveryTime;
 
@@ -102,6 +116,7 @@
                 cell.profileImage.image = [UIImage imageWithData:data];
             }];
         }];
+
     }
     else if ([self.capslsBarButtonItem.title isEqual:@"Recieved Capsules"])
     {
@@ -132,17 +147,24 @@
         NSDate *viewedAtDate = capsl.viewedAt;
         if (viewedAtDate)
         {
-            cell.timerLabel.text = @"OPENED";
+            cell.timerLabel.text = @"Opened";
         }
         else
         {
             cell.timerLabel.text = @"Not Opened";
         }
-
     }
-
     return cell;
 }
+
+
+#pragma mark - Helper Method
+- (void)scrollToSoonestCapslWithCount:(NSInteger)openCapslsCount
+{
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:(openCapslsCount - 1) inSection:0];
+    [self.tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionBottom animated:NO];
+}
+
 
 #pragma mark - Saving Data for Viewed At
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -190,6 +212,7 @@
         }
     }
 }
+
 
 - (IBAction)onSentCapsulesButtonPressed:(UIBarButtonItem *)sender
 {
