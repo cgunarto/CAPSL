@@ -17,9 +17,9 @@
 @property UIImage *chosenImage;
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *cancelButton;
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *doneButton;
+@property (weak, nonatomic) IBOutlet UITextView *textView;
 
 @end
-
 
 @implementation CaptureViewController
 
@@ -28,16 +28,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    if (![UIImagePickerController isSourceTypeAvailable: UIImagePickerControllerSourceTypeCamera])
-    {
-        UIAlertView *myAlertView = [[UIAlertView alloc] initWithTitle:@"Error"
-                                                              message:@"Device has no camera"
-                                                             delegate:nil
-                                                    cancelButtonTitle:@"OK"
-                                                    otherButtonTitles: nil];
-        [myAlertView show];
+    [self.view addSubview:self.textView];
 
-    }
+    self.textView.translatesAutoresizingMaskIntoConstraints = NO;
+    [self setTextViewToCenter];
 
     //Setting CPSL sender
     [Capslr returnCapslrFromPFUser:[PFUser currentUser] withCompletion:^(Capslr *currentCapslr, NSError *error)
@@ -51,18 +45,91 @@
     self.navigationItem.leftBarButtonItem = self.cancelButton;
 }
 
-#pragma mark Image Picker Related Methods
-
-- (IBAction)takePhotoButtonPressed:(UIButton *)sender
+-(void)setImageView:(UIImageView *)imageView
 {
-    UIImagePickerController *picker = [[UIImagePickerController alloc] init];
-    picker.delegate = self;
-    picker.allowsEditing = YES;
-    picker.sourceType = UIImagePickerControllerSourceTypeCamera;
-
-    [self presentViewController:picker animated:YES completion:NULL];
+    //if image view is set, move textview to bottom of screen
+    
 }
 
+
+//Setting textView to the center of the screen
+- (void)setTextViewToCenter;
+{
+    NSLayoutConstraint *constraint = [NSLayoutConstraint
+                                      constraintWithItem:self.textView
+                                      attribute:NSLayoutAttributeCenterX
+                                      relatedBy:NSLayoutRelationEqual
+                                      toItem:self.view
+                                      attribute:NSLayoutAttributeCenterX
+                                      multiplier:1.0f
+                                      constant:0.0f];
+
+    [self.view addConstraint:constraint];
+
+    constraint = [NSLayoutConstraint
+                  constraintWithItem:self.textView
+                  attribute:NSLayoutAttributeCenterY
+                  relatedBy:NSLayoutRelationEqual
+                  toItem:self.view
+                  attribute:NSLayoutAttributeCenterY
+                  multiplier:1.0f
+                  constant:0.0f];
+
+    [self.view addConstraint:constraint];
+
+    constraint = [NSLayoutConstraint constraintWithItem:self.textView
+                                              attribute:NSLayoutAttributeWidth
+                                              relatedBy:NSLayoutRelationEqual
+                                                 toItem:self.view
+                                              attribute:NSLayoutAttributeWidth
+                                             multiplier:1
+                                               constant:0];
+
+    [self.view addConstraint:constraint];
+
+    constraint = [NSLayoutConstraint constraintWithItem:self.textView
+                                              attribute:NSLayoutAttributeHeight
+                                              relatedBy:NSLayoutRelationEqual
+                                                 toItem:self.view
+                                              attribute:NSLayoutAttributeHeight
+                                             multiplier:0.3
+                                               constant:0];
+
+    [self.view addConstraint:constraint];
+
+
+
+}
+
+
+#pragma mark Image Picker Related Methods
+
+- (IBAction)onImageTapped:(UITapGestureRecognizer *)sender
+{
+
+    if (![UIImagePickerController isSourceTypeAvailable: UIImagePickerControllerSourceTypeCamera])
+    {
+        UIAlertView *myAlertView = [[UIAlertView alloc] initWithTitle:@"Error"
+                                                              message:@"Device has no camera"
+                                                             delegate:nil
+                                                    cancelButtonTitle:@"OK"
+                                                    otherButtonTitles: nil];
+        [myAlertView show];
+
+    }
+
+    else
+    {
+        UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+        picker.delegate = self;
+        picker.allowsEditing = YES;
+        picker.sourceType = UIImagePickerControllerSourceTypeCamera;
+
+        [self presentViewController:picker animated:YES completion:NULL];
+    }
+}
+
+//TODO:CUSTOMIZE CAMERA OVERLAY
 - (IBAction)selectPhotoButtonPressed:(UIButton *)sender
 {
     UIImagePickerController *picker = [[UIImagePickerController alloc] init];
@@ -93,15 +160,6 @@
     [picker dismissViewControllerAnimated:YES completion:NULL];
 }
 
-- (IBAction)onImageTapped:(UITapGestureRecognizer *)sender
-{
-    UIImagePickerController *picker = [[UIImagePickerController alloc] init];
-    picker.delegate = self;
-    picker.allowsEditing = YES;
-    picker.sourceType = UIImagePickerControllerSourceTypeCamera;
-
-    [self presentViewController:picker animated:YES completion:NULL];
-}
 
 
 #pragma mark Segue and Next Button
