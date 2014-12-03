@@ -30,38 +30,64 @@
 
     NSDate *deliveryDate = capsl.deliveryTime;
     NSTimeInterval timeInterval = [deliveryDate timeIntervalSinceNow];
+    NSString *dateString = [NSString string];
 
-    long elapsedSeconds = timeInterval;
-    //    NSLog(@"Elaped seconds:%ld seconds",elapsedSeconds);
+    if (timeInterval <= 0)
+    {
+        dateString = @"Open";
+    }
+    if (timeInterval > 0 && timeInterval <= kDayInSeconds)
+    {
+        dateString = [self countdownStringFromTimeInterval:timeInterval];
+    }
+    if (timeInterval > kDayInSeconds)
+    {
+        dateString = [self englishStringFromTimeInterval:timeInterval];
+    }
 
-    if (elapsedSeconds >= kWeekInSeconds)
+    self.timerLabel.text = dateString;
+
+}
+
+- (NSString *)englishStringFromTimeInterval:(NSTimeInterval)timeInterval
+{
+    NSString *timeString = [NSString string];
+
+    NSCalendarUnit dayOfWeek = NSCalendarUnitWeekday;
+    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+    NSInteger todaysDay = [calendar component:dayOfWeek fromDate:[NSDate date]];
+
+    NSInteger daysUntilSunday = 8 - todaysDay;
+    NSTimeInterval timeFromStartOfTodayThroughSaturday = kDayInSeconds * daysUntilSunday;
+    NSTimeInterval timeFromStartOfTodayThroughTomorrow = kDayInSeconds * 2;
+
+    NSDate *startOfToday = [calendar startOfDayForDate:[NSDate date]];
+
+    NSTimeInterval timeSinceMidnightToday = [startOfToday timeIntervalSinceNow];
+
+    NSTimeInterval timeFromNowUntilSunday = timeSinceMidnightToday + timeFromStartOfTodayThroughSaturday;
+    NSTimeInterval timeFromNowUntilDayAfterTomorrow = timeSinceMidnightToday + timeFromStartOfTodayThroughTomorrow;
+
+//    NSDate *startOfSunday = [NSDate dateWithTimeInterval:timeFromNowUntilSunday sinceDate:[NSDate date]];
+
+    if (timeInterval <= timeFromNowUntilDayAfterTomorrow)
     {
-        self.timerLabel.text = @"SOON";
+        timeString = @"Tomorrow";
     }
-    else if (elapsedSeconds < kWeekInSeconds && elapsedSeconds >= kDayInSeconds)
+    else if (timeInterval <= timeFromNowUntilSunday)
     {
-        self.timerLabel.text = @"THIS WEEK";
+        timeString = @"This Week";
     }
-    else if (elapsedSeconds < kDayInSeconds && elapsedSeconds >= kSixHoursInSeconds)
+    else if (timeInterval > timeFromNowUntilSunday)
     {
-        self.timerLabel.text = @"TODAY";
+        timeString = @"Later";
     }
-    else if (elapsedSeconds < kSixHoursInSeconds && elapsedSeconds >= 60)
-    {
-        self.timerLabel.text = [self stringFromTimeInterval:elapsedSeconds];
-    }
-    else if (elapsedSeconds < 60 && elapsedSeconds >= 0)
-    {
-        self.timerLabel.text = [self stringForLastSixtySeconds:elapsedSeconds];
-    }
-    else if (elapsedSeconds < 0)
-    {
-        self.timerLabel.text = @"OPEN!";
-    }
+
+    return timeString;
 }
 
 
-- (NSString *)stringFromTimeInterval:(NSTimeInterval)interval
+- (NSString *)countdownStringFromTimeInterval:(NSTimeInterval)interval
 {
     NSInteger ti = (NSInteger)interval;
     NSInteger seconds = ti % 60;
