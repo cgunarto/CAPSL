@@ -11,7 +11,7 @@
 #import "Capsl.h"
 #import "Capslr.h"
 
-@interface CaptureViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
+@interface CaptureViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextViewDelegate>
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
 @property Capsl *createdCapsl;
 @property UIImage *chosenImage;
@@ -28,6 +28,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+
+    self.textView.delegate = self;
     [self.view addSubview:self.textView];
 
     self.textView.translatesAutoresizingMaskIntoConstraints = NO;
@@ -45,10 +47,64 @@
     self.navigationItem.leftBarButtonItem = self.cancelButton;
 }
 
--(void)setImageView:(UIImageView *)imageView
+- (void)viewDidAppear:(BOOL)animated
 {
-    //if image view is set, move textview to bottom of screen
-    
+    [super viewDidAppear:animated];
+    if (self.imageView.image)
+    {
+        [self setTextViewToBottom];
+    }
+    else
+    {
+        [self setTextViewToCenter];
+    }
+}
+
+
+- (void)setTextViewToBottom
+{
+    NSLayoutConstraint *constraint = [NSLayoutConstraint
+                                      constraintWithItem:self.textView
+                                      attribute:NSLayoutAttributeBottom
+                                      relatedBy:NSLayoutRelationEqual
+                                      toItem:self.view
+                                      attribute:NSLayoutAttributeBottom
+                                      multiplier:1.0f
+                                      constant:0.0f];
+
+    [self.view addConstraint:constraint];
+
+    constraint = [NSLayoutConstraint
+                  constraintWithItem:self.textView
+                  attribute:NSLayoutAttributeCenterY
+                  relatedBy:NSLayoutRelationEqual
+                  toItem:self.view
+                  attribute:NSLayoutAttributeCenterY
+                  multiplier:1.0f
+                  constant:0.0f];
+
+    [self.view addConstraint:constraint];
+
+    constraint = [NSLayoutConstraint constraintWithItem:self.textView
+                                              attribute:NSLayoutAttributeWidth
+                                              relatedBy:NSLayoutRelationEqual
+                                                 toItem:self.view
+                                              attribute:NSLayoutAttributeWidth
+                                             multiplier:1
+                                               constant:0];
+
+    [self.view addConstraint:constraint];
+
+    constraint = [NSLayoutConstraint constraintWithItem:self.textView
+                                              attribute:NSLayoutAttributeHeight
+                                              relatedBy:NSLayoutRelationEqual
+                                                 toItem:self.view
+                                              attribute:NSLayoutAttributeHeight
+                                             multiplier:0.3
+                                               constant:0];
+
+    [self.view addConstraint:constraint];
+
 }
 
 
@@ -96,8 +152,6 @@
                                                constant:0];
 
     [self.view addConstraint:constraint];
-
-
 
 }
 
@@ -199,6 +253,22 @@
                          completion:nil];
         
     }
+}
+
+#pragma mark Text View Delegate
+
+- (void)textViewDidBeginEditing:(UITextView *)textView
+{
+    if ([textView.text isEqualToString:@"Enter Text Here"])
+    {
+        textView.text = @"";
+    }
+}
+
+- (void)textViewDidEndEditing:(UITextView *)textView
+{
+    self.createdCapsl.text = self.textView.text;
+    [self resignFirstResponder];
 }
 
 
