@@ -1,30 +1,30 @@
+////
+////  JKCountDownTimer.h
+////  Capsl
+////
+////  Created by Jonathan Kim on 11/27/14.
+////  Copyright (c) 2014 Christina Gunarto. All rights reserved.
+////
 //
-//  JKCountDownTimer.h
-//  Capsl
+//#import <Foundation/Foundation.h>
 //
-//  Created by Jonathan Kim on 11/27/14.
-//  Copyright (c) 2014 Christina Gunarto. All rights reserved.
+//@protocol JKCountdownTimerDelegate <NSObject>
 //
-
-#import <Foundation/Foundation.h>
-
-@protocol JKCountdownTimerDelegate <NSObject>
-
--(void)counterUpdated:(NSString *)dateString;
-
-@end
-
-
-@interface JKCountDownTimer : NSTimer
-
-@property NSTimer *timer;
-@property NSDate *deliveryDate;
-
-@property id<JKCountdownTimerDelegate>delegate;
-
-
-- (instancetype)initWithDeliveryDate:(NSDate *)date withDelegate:(id<JKCountdownTimerDelegate>)delegate;
-
-- (void)updateLabel;
-
-@end
+//-(void)counterUpdated:(NSString *)dateString;
+//
+//@end
+//
+//
+//@interface JKCountDownTimer : NSTimer
+//
+//@property NSTimer *timer;
+//@property NSDate *deliveryDate;
+//
+//@property id<JKCountdownTimerDelegate>delegate;
+//
+//
+//- (instancetype)initWithDeliveryDate:(NSDate *)date withDelegate:(id<JKCountdownTimerDelegate>)delegate;
+//
+//- (void)updateLabel;
+//
+//@end
