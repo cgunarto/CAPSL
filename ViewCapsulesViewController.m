@@ -44,17 +44,6 @@
                 self.timelineRootVC.capslsArray = objects;
                 self.capslListVC.capslsArray = objects;
                 self.capslListVC.capslCount = objects.count;
-
-                NSMutableArray *timers = [@[] mutableCopy];
-
-                for (Capsl *capsl in objects)
-                {
-                    JKCountDownTimer *timer = [[JKCountDownTimer alloc] initWithDeliveryDate:capsl.deliveryTime withDelegate:nil];
-                    [timers addObject:timer];
-                }
-
-                self.capslListVC.timersArray = timers;
-
             }
             else
             {
