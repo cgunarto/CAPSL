@@ -1,21 +1,26 @@
-////
-////  JKCountDownTimer.h
-////  Capsl
-////
-////  Created by Jonathan Kim on 11/27/14.
-////  Copyright (c) 2014 Christina Gunarto. All rights reserved.
-////
 //
-//#import <Foundation/Foundation.h>
+//  JKCountDownTimer.h
+//  Capsl
 //
-//@protocol JKCountdownTimerDelegate <NSObject>
+//  Created by Jonathan Kim on 11/27/14.
+//  Copyright (c) 2014 Christina Gunarto. All rights reserved.
 //
+
+#import <Foundation/Foundation.h>
+
+@class Capsl;
+
+@protocol JKCountdownTimerDelegate <NSObject>
+
 //-(void)counterUpdated:(NSString *)dateString;
-//
-//@end
-//
-//
-//@interface JKCountDownTimer : NSTimer
+
+@end
+
+
+@interface JKCountDownTimer : NSTimer
+
++ (NSString *)getStringWithTimeInterval:(NSTimeInterval)timeInterval;
+
 //
 //@property NSTimer *timer;
 //@property NSDate *deliveryDate;
@@ -27,4 +32,4 @@
 //
 //- (void)updateLabel;
 //
-//@end
+@end
