@@ -33,7 +33,6 @@
     [super viewDidLoad];
 
     self.textView.delegate = self;
-//    [self.view addSubview:self.textView];
 
     //Setting CPSL sender
     [Capslr returnCapslrFromPFUser:[PFUser currentUser] withCompletion:^(Capslr *currentCapslr, NSError *error)
@@ -53,33 +52,6 @@
     {
         [self setTextViewToBottom];
     }
-}
-
-//- (void)setTextViewToBottom
-//{
-//    NSLog(@"Self setTextViewToBottom called");
-//    CGFloat thirdScreenHeight = [UIScreen mainScreen].bounds.size.height/3;
-//    self.topTextViewConstraint.constant = self.topTextViewConstraint.constant + thirdScreenHeight;
-//}
-
-//Setting textView to the center of the screen
-- (void)setTextViewToBottom
-{
-    NSLog(@"Setting text to bottom!");
-
-    [self.view removeConstraint:self.bottomTextViewConstraint];
-
-    self.textView.translatesAutoresizingMaskIntoConstraints = NO;
-
-    self.bottomTextViewConstraint = [NSLayoutConstraint constraintWithItem:self.textView
-                                              attribute:NSLayoutAttributeBottom
-                                              relatedBy:NSLayoutRelationEqual
-                                                 toItem:self.view
-                                              attribute:NSLayoutAttributeBottom
-                                             multiplier:1.0f
-                                               constant:0.0f];
-    [self.view addConstraint:self.bottomTextViewConstraint];
-
 }
 
 
@@ -183,8 +155,7 @@
 
 - (void)textViewDidBeginEditing:(UITextView *)textView
 {
-//    //TODO: not setting text view center
-//    [self setTextViewToCenter];
+    [self setTextViewToTop];
 
     [self.navigationController setNavigationBarHidden:YES];
 
@@ -206,9 +177,45 @@
     if ([text isEqualToString:@"\n"])
     {
         [textView resignFirstResponder];
+        [self setTextViewToBottom];
 
     }
     return YES;
+}
+
+#pragma mark Text View Placement
+- (void)setTextViewToBottom
+{
+    [self.view removeConstraint:self.bottomTextViewConstraint];
+
+    self.textView.translatesAutoresizingMaskIntoConstraints = NO;
+
+    self.bottomTextViewConstraint = [NSLayoutConstraint constraintWithItem:self.textView
+                                                                 attribute:NSLayoutAttributeBottom
+                                                                 relatedBy:NSLayoutRelationEqual
+                                                                    toItem:self.view
+                                                                 attribute:NSLayoutAttributeBottom
+                                                                multiplier:1.0f
+                                                                  constant:0.0f];
+    [self.view addConstraint:self.bottomTextViewConstraint];
+
+}
+
+- (void)setTextViewToTop
+{
+    [self.view removeConstraint:self.bottomTextViewConstraint];
+
+    self.textView.translatesAutoresizingMaskIntoConstraints = NO;
+
+    self.bottomTextViewConstraint = [NSLayoutConstraint constraintWithItem:self.textView
+                                                                 attribute:NSLayoutAttributeTop
+                                                                 relatedBy:NSLayoutRelationEqual
+                                                                    toItem:self.view
+                                                                 attribute:NSLayoutAttributeTop
+                                                                multiplier:1.0f
+                                                                  constant:0.0f];
+    [self.view addConstraint:self.bottomTextViewConstraint];
+    
 }
 
 
