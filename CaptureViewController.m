@@ -160,28 +160,56 @@
 
 - (IBAction)onImageTapped:(UITapGestureRecognizer *)sender
 {
+    //Trigger an action sheet, 1 goes to camera, 2 goes to photo folder
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Select photo option" message:@"Select camera option" preferredStyle:UIAlertControllerStyleActionSheet];
 
-    if (![UIImagePickerController isSourceTypeAvailable: UIImagePickerControllerSourceTypeCamera])
-    {
-        UIAlertView *myAlertView = [[UIAlertView alloc] initWithTitle:@"Error"
-                                                              message:@"Device has no camera"
-                                                             delegate:nil
-                                                    cancelButtonTitle:@"OK"
-                                                    otherButtonTitles: nil];
-        [myAlertView show];
+    UIAlertAction *cameraButton = [UIAlertAction actionWithTitle:@"Camera"
+                                                           style:UIAlertActionStyleDefault
+                                                         handler:^(UIAlertAction *action)
+                                   {
 
-    }
+                                       [alert dismissViewControllerAnimated:YES completion:nil];
 
-    else
-    {
-        UIImagePickerController *picker = [[UIImagePickerController alloc] init];
-        picker.delegate = self;
-        picker.allowsEditing = YES;
-        picker.sourceType = UIImagePickerControllerSourceTypeCamera;
+                                       if (![UIImagePickerController isSourceTypeAvailable: UIImagePickerControllerSourceTypeCamera])
+                                       {
+                                           UIAlertView *myAlertView = [[UIAlertView alloc] initWithTitle:@"Error"
+                                                                                                 message:@"Device has no camera"
+                                                                                                delegate:nil
+                                                                                       cancelButtonTitle:@"OK"
+                                                                                       otherButtonTitles: nil];
+                                           [myAlertView show];
+
+                                       }
+                                       
+                                       else
+                                       {
+                                           UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+                                           picker.delegate = self;
+                                           picker.allowsEditing = YES;
+                                           picker.sourceType = UIImagePickerControllerSourceTypeCamera;
+                                           
+                                           
+                                           [self presentViewController:picker animated:YES completion:NULL];
+                                       }
+                                   }];
+
+    UIAlertAction* cancelButton = [UIAlertAction actionWithTitle:@"Cancel"
+                                                           style:UIAlertActionStyleDefault
+                                                         handler:^(UIAlertAction * action)
+                                   {
+                                       [alert dismissViewControllerAnimated:YES completion:nil];
+
+                                   }];
+
+    [alert addAction:cameraButton];
+    [alert addAction:cancelButton];
+
+    [self presentViewController:alert
+                       animated:YES
+                     completion:nil];
 
 
-        [self presentViewController:picker animated:YES completion:NULL];
-    }
+
 }
 
 //TODO:CUSTOMIZE CAMERA OVERLAY
@@ -322,39 +350,10 @@
 //TODO:NOT SURE WHY THIS ISN'T WORKING
 - (void)setAddAudioToBottom
 {
-//    [self.view removeConstraint:self.bottomAddAudioConstraint];
-//
-//    self.addAudioButton.translatesAutoresizingMaskIntoConstraints = NO;
-//
-//    self.bottomAddAudioConstraint = [NSLayoutConstraint constraintWithItem:self.addAudioButton
-//                                                                 attribute:NSLayoutAttributeBottom
-//                                                                 relatedBy:NSLayoutRelationEqual
-//                                                                    toItem:self.view
-//                                                                 attribute:NSLayoutAttributeBottom
-//                                                                multiplier:1.0f
-//                                                                  constant:0.0f];
-//    [self.view addConstraint:self.bottomAddAudioConstraint];
-
     self.bottomAddAudioConstraint.constant = 0;
 }
 
 
-- (void)setTextViewToTop
-{
-    [self.view removeConstraint:self.bottomTextViewConstraint];
-
-    self.textView.translatesAutoresizingMaskIntoConstraints = NO;
-
-    self.bottomTextViewConstraint = [NSLayoutConstraint constraintWithItem:self.textView
-                                                                 attribute:NSLayoutAttributeTop
-                                                                 relatedBy:NSLayoutRelationEqual
-                                                                    toItem:self.view
-                                                                 attribute:NSLayoutAttributeTop
-                                                                multiplier:1.0f
-                                                                  constant:0.0f];
-    [self.view addConstraint:self.bottomTextViewConstraint];
-    
-}
 
 - (IBAction)unWindToCaptureSegue:(UIStoryboardSegue *)segue
 {
