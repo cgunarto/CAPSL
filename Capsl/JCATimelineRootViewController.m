@@ -24,6 +24,9 @@
 @property (strong, nonatomic) IBOutlet UIView *timelineContainerView;
 @property UIDevice *device;
 
+@property BOOL shouldShowSent;
+
+
 @end
 
 @implementation JCATimelineRootViewController
@@ -32,10 +35,13 @@
 {
     [super viewDidLoad];
     self.device = [UIDevice currentDevice];
-    self.wallpaperView = [[UIImageView alloc] initWithImage:[self processWallpaper:[UIImage imageNamed:@"wallpaper"]]];
-//    self.wallpaperView.frame = self.view.bounds;
-    self.wallpaperView.contentMode = UIViewContentModeScaleAspectFill;
-    [self.view addSubview:self.wallpaperView];
+
+    self.shouldShowSent = NO;
+    self.timelineVC.showSent = self.shouldShowSent;
+    self.capslVC.showSent = self.shouldShowSent;
+
+
+    [self setWallpaper];
 
 }
 
@@ -47,7 +53,10 @@
     [self.view addSubview:self.capslContainerView];
     [self.view addSubview:self.timelineContainerView];
 
-    [self processCapsls:self.capslsArray];
+    self.capslVC.capslGrandArray = [self processCapsls:self.capslsArray];
+    self.capslVC.sentCapslsGrandArray = [self processCapsls:self.sentCapslsArray];
+    self.timelineVC.capslGrandArray = [self processCapsls:self.capslsArray];
+    self.timelineVC.sentCapslsGrandArray = [self processCapsls:self.sentCapslsArray];
 
 }
 
@@ -97,6 +106,27 @@
 
 #pragma mark - helper methods
 
+- (void)setWallpaper
+{
+
+    UIImage *wallpaper = [[UIImage alloc] init];
+
+    if (self.shouldShowSent)
+    {
+        wallpaper = [self processWallpaper:[UIImage imageNamed:@"wallpaperSent"]];
+    }
+    else
+    {
+        wallpaper = [self processWallpaper:[UIImage imageNamed:@"wallpaperReceived"]];
+    }
+
+    self.wallpaperView = [[UIImageView alloc] initWithImage:wallpaper];
+    //    self.wallpaperView.frame = self.view.bounds;
+    self.wallpaperView.contentMode = UIViewContentModeScaleAspectFill;
+    [self.view addSubview:self.wallpaperView];
+
+}
+
 - (UIImage *)processWallpaper:(UIImage *)wallpaper
 {
 
@@ -115,7 +145,27 @@
 }
 
 
-- (void)processCapsls:(NSArray *)capsls
+- (NSMutableArray *)generateEmptyYear
+{
+    NSMutableArray *aYearOfMonths = [@[] mutableCopy];
+    
+    // add Year marker at index 0
+    //                [aYearOfMonths addObject:[NSString stringWithFormat:@"%i",compareYear + x]];
+    
+    // add 12 months to empty year
+    for (int y = 1; y <= 12; y++)
+    {
+        NSMutableArray *aMonthOfCapsls = [@[] mutableCopy];
+        
+        Capsl *emptyCapsl = [Capsl object];
+        
+        [aMonthOfCapsls addObject:emptyCapsl];
+        [aYearOfMonths addObject:aMonthOfCapsls];
+    }
+    return aYearOfMonths;
+}
+
+- (NSArray *)processCapsls:(NSArray *)capsls
 {
     NSMutableArray *arrayOfYears = [@[] mutableCopy];
 
@@ -152,21 +202,9 @@
 
             for (int x = 1; x <= newYearPlusAnyEmptyInBetween; x++)
             {
-                NSMutableArray *aYearOfMonths = [@[] mutableCopy];
+                NSMutableArray *aYearOfMonths;
 
-                // add Year marker at index 0
-//                [aYearOfMonths addObject:[NSString stringWithFormat:@"%i",compareYear + x]];
-
-                // add 12 months to empty year
-                for (int y = 1; y <= 12; y++)
-                {
-                    NSMutableArray *aMonthOfCapsls = [@[] mutableCopy];
-
-                    Capsl *emptyCapsl = [Capsl object];
-
-                    [aMonthOfCapsls addObject:emptyCapsl];
-                    [aYearOfMonths addObject:aMonthOfCapsls];
-                }
+                aYearOfMonths = [self generateEmptyYear];
 
                 [arrayOfYears addObject:aYearOfMonths];
 
@@ -188,8 +226,11 @@
 
     }
 
-    self.capslVC.capslGrandArray = arrayOfYears;
-    self.timelineVC.capslGrandArray = arrayOfYears;
+    // add suffix empty year
+
+    [arrayOfYears addObject:[self generateEmptyYear]];
+
+    return arrayOfYears;
 
 }
 
@@ -208,6 +249,10 @@
         self.timelineVC = segue.destinationViewController;
         self.timelineVC.delegate = self;
     }
+
+    // temporary manual override to show sent vs received capsls
+
+
     
 }
 

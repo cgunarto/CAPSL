@@ -43,6 +43,7 @@
 {
     PFQuery *query = [self query];
     [query includeKey:@"sender"];
+    [query includeKey:@"recipient"];
     [query whereKey:key equalTo:object];
     [query orderByAscending:date];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error)

@@ -13,13 +13,14 @@
 @implementation JCACapslCollectionViewCell
 
 
-- (void)updateTimeLabelForCapsl:(Capsl *)capsl
+- (void)updateLabelsForCapsl:(Capsl *)capsl
 {
 
     NSDate *deliveryDate = capsl.deliveryTime;
     NSTimeInterval timeInterval = [deliveryDate timeIntervalSinceNow];
 
-    self.countdownButton.text = [JKCountDownTimer getStringWithTimeInterval:timeInterval];
+    self.countdownLabel.text = [JKCountDownTimer getStringWithTimeInterval:timeInterval];
+    self.deliveryDateLabel.text = [JKCountDownTimer getDateStringWithDate:deliveryDate];
 
 //    [UIView setAnimationsEnabled:NO];
 //    [self.countdownButton setTitle:[JKCountDownTimer getStringWithTimeInterval:timeInterval] forState:UIControlStateNormal];

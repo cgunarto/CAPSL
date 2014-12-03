@@ -8,9 +8,10 @@
 
 #import "CaptureViewController.h"
 #import "SearchContactViewController.h"
+#import "RecordAudioViewController.h"
 #import "Capsl.h"
 #import "Capslr.h"
-#define kOFFSET_FOR_KEYBOARD 500;
+#define kOFFSET_FOR_KEYBOARD 200;
 
 @interface CaptureViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextViewDelegate>
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
@@ -18,9 +19,10 @@
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *cancelButton;
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *doneButton;
 @property (weak, nonatomic) IBOutlet UITextView *textView;
+@property (weak, nonatomic) IBOutlet UIButton *addAudioButton;
 
-//+ to go to bottom - to go to top
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *bottomTextViewConstraint;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *bottomAddAudioConstraint;
 
 @end
 
@@ -44,6 +46,7 @@
     self.createdCapsl = [Capsl object];
     self.createdCapsl.type = @"multimedia";
     self.navigationItem.leftBarButtonItem = self.cancelButton;
+    self.navigationItem.rightBarButtonItem = self.doneButton;
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -59,6 +62,11 @@
                                              selector:@selector(keyboardWillHide)
                                                  name:UIKeyboardWillHideNotification
                                                object:nil];
+    if (self.createdCapsl.audio)
+    {
+        [self.addAudioButton setTitle:@"Audio added - tap to edit" forState:UIControlStateNormal];
+    }
+
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -134,13 +142,13 @@
         // 1. move the view's origin up so that the text field that will be hidden come above the keyboard
         // 2. increase the size of the view so that the area behind the keyboard is covered up.
         rect.origin.y -= kOFFSET_FOR_KEYBOARD;
-//        rect.size.height += kOFFSET_FOR_KEYBOARD;
+        rect.size.height = [UIScreen mainScreen].bounds.size.height;
     }
     else
     {
         // revert back to the normal state.
         rect.origin.y += kOFFSET_FOR_KEYBOARD;
-//        rect.size.height -= kOFFSET_FOR_KEYBOARD;
+        rect.size.height = [UIScreen mainScreen].bounds.size.height;
     }
     [[UIApplication sharedApplication] keyWindow].frame = rect;
 
@@ -171,6 +179,7 @@
         picker.allowsEditing = YES;
         picker.sourceType = UIImagePickerControllerSourceTypeCamera;
 
+
         [self presentViewController:picker animated:YES completion:NULL];
     }
 }
@@ -188,8 +197,6 @@
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
-    self.navigationItem.rightBarButtonItem = self.doneButton;
-
     //Accessing uncropped image from info dictionary
     self.chosenImage = info[UIImagePickerControllerOriginalImage];
     self.imageView.image = self.chosenImage;
@@ -201,6 +208,8 @@
     self.createdCapsl.photo = [PFFile fileWithName:@"image.jpg" data:imageData];
 
     [self setTextViewToBottom];
+    [self setAddAudioToBottom];
+
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
@@ -221,18 +230,28 @@
 
         searchContactVC.createdCapsl = self.createdCapsl;
     }
+
+    //Passig whatever created to RecordAudioVC so audioVC can add audio files
+    //Accessing it through the NavVC
+    if ([segue.identifier isEqualToString:@"segueToAudio"])
+    {
+        UINavigationController *navVC = segue.destinationViewController;
+        RecordAudioViewController *recordVC = navVC.childViewControllers[0];
+        recordVC.createdCapsl = self.createdCapsl;
+    }
 }
 
 - (IBAction)onDoneButtonPressed:(UIBarButtonItem *)sender
 {
-    if (self.createdCapsl.photo != nil)
+    if (self.createdCapsl.photo || self.createdCapsl.audio || self.createdCapsl.text)
     {
         [self performSegueWithIdentifier:@"segueToContactSearch" sender:self.doneButton];
     }
+
     else
     {
-        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"NO PHOTOS CHOSEN"
-                                                                       message:@"take a photo or select image"
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"NO CAPSL CREATED"
+                                                                       message:@"Choose a photo, record audio, or write text"
                                                                 preferredStyle:UIAlertControllerStyleAlert];
 
         UIAlertAction *okButton = [UIAlertAction actionWithTitle:@"OK"
@@ -298,8 +317,27 @@
                                                                 multiplier:1.0f
                                                                   constant:0.0f];
     [self.view addConstraint:self.bottomTextViewConstraint];
-
 }
+
+//TODO:NOT SURE WHY THIS ISN'T WORKING
+- (void)setAddAudioToBottom
+{
+//    [self.view removeConstraint:self.bottomAddAudioConstraint];
+//
+//    self.addAudioButton.translatesAutoresizingMaskIntoConstraints = NO;
+//
+//    self.bottomAddAudioConstraint = [NSLayoutConstraint constraintWithItem:self.addAudioButton
+//                                                                 attribute:NSLayoutAttributeBottom
+//                                                                 relatedBy:NSLayoutRelationEqual
+//                                                                    toItem:self.view
+//                                                                 attribute:NSLayoutAttributeBottom
+//                                                                multiplier:1.0f
+//                                                                  constant:0.0f];
+//    [self.view addConstraint:self.bottomAddAudioConstraint];
+
+    self.bottomAddAudioConstraint.constant = 0;
+}
+
 
 - (void)setTextViewToTop
 {
