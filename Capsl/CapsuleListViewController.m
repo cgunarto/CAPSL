@@ -27,6 +27,7 @@
 {
     [super viewDidLoad];
 
+    //TODO: fix capslCount!!
     self.navigationItem.title = [NSString stringWithFormat:@"%li", (long)self.capslCount];
     self.navigationController.navigationBar.backgroundColor = [UIColor greenColor];
 
@@ -57,10 +58,10 @@
 
     // Setting the delivery date
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"MM-dd-yyyy"];
+    [dateFormatter setDateFormat:@"MMM dd, yyyy | "];
     NSDate *deliveryDate = capsl.deliveryTime;
 
-    cell.deliveryDateLabel.text = [NSString stringWithFormat:@"D-Day: %@", [dateFormatter stringFromDate:deliveryDate]];
+    cell.deliveryDateLabel.text = [NSString stringWithFormat:@"%@", [dateFormatter stringFromDate:deliveryDate]];
 
     // updating timer string...
     [cell updateTimeLabelForCapsl:capsl];
@@ -129,7 +130,7 @@
 
 - (IBAction)onSentCapsulesButtonPressed:(UIBarButtonItem *)sender
 {
-    
+    self.navigationController.navigationItem.rightBarButtonItem.title = @"Received Messages";
 }
 
 // Alert when timer expires

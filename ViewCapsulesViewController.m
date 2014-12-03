@@ -23,7 +23,6 @@
 
 
 @property Capslr *capslr;
-@property (nonatomic)  NSArray *capslsArray;
 
 @end
 
@@ -44,6 +43,17 @@
                 self.timelineRootVC.capslsArray = objects;
                 self.capslListVC.capslsArray = objects;
                 self.capslListVC.capslCount = objects.count;
+            }
+            else
+            {
+                NSLog(@"%@", error.localizedDescription);
+            }
+        }];
+        // get data for capsls sent
+        [Capsl searchCapslByKey:@"sender" orderByAscending:@"deliveryTime" equalTo:capslr completion:^(NSArray *objects, NSError *error) {
+            if (!error)
+            {
+                self.capslListVC.sentCapslsArray = objects;
             }
             else
             {
