@@ -786,33 +786,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="359-WG-P4Z">
-                                <rect key="frame" x="30" y="344" width="88" height="30"/>
-                                <state key="normal" title="Select Photo">
-                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <variation key="widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="30" y="503" width="88" height="30"/>
-                                </variation>
-                                <connections>
-                                    <action selector="selectPhotoButtonPressed:" destination="ILH-s3-dTC" eventType="touchUpInside" id="BpW-Bs-TRD"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g4v-3r-uh0">
-                                <rect key="frame" x="200" y="344" width="77" height="30"/>
-                                <state key="normal" title="Take Photo">
-                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <variation key="widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="30" y="452" width="77" height="30"/>
-                                </variation>
-                                <connections>
-                                    <action selector="takePhotoButtonPressed:" destination="ILH-s3-dTC" eventType="touchUpInside" id="7wj-9U-VaJ"/>
-                                </connections>
-                            </button>
-                            <imageView contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Hg3-VI-LXE">
+                            <imageView contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Hg3-VI-LXE">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <color key="backgroundColor" red="0.0054950260858286663" green="0.010627522276604502" blue="0.014748086734693855" alpha="1" colorSpace="calibratedRGB"/>
                                 <gestureRecognizers/>
@@ -820,11 +794,48 @@
                                     <outletCollection property="gestureRecognizers" destination="c4q-uJ-KCm" appends="YES" id="iwv-Fh-SUF"/>
                                 </connections>
                             </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tap to change image" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VHH-hP-3OW">
+                                <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="39" id="Qtk-hc-hIN"/>
+                                    <constraint firstAttribute="width" constant="264" id="wWw-At-Ng9"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="17"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="Qtk-hc-hIN"/>
+                                        <exclude reference="wWw-At-Ng9"/>
+                                    </mask>
+                                </variation>
+                                <variation key="widthClass=compact">
+                                    <mask key="constraints">
+                                        <include reference="Qtk-hc-hIN"/>
+                                        <include reference="wWw-At-Ng9"/>
+                                    </mask>
+                                </variation>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="359-WG-P4Z">
+                                <rect key="frame" x="30" y="344" width="88" height="30"/>
+                                <state key="normal" title="Select Photo">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <variation key="widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="156" y="156" width="88" height="30"/>
+                                </variation>
+                                <connections>
+                                    <action selector="selectPhotoButtonPressed:" destination="ILH-s3-dTC" eventType="touchUpInside" id="BpW-Bs-TRD"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="Hg3-VI-LXE" firstAttribute="top" secondItem="jZE-SC-Npr" secondAttribute="bottom" id="6Ue-Rz-fwq"/>
+                            <constraint firstItem="VHH-hP-3OW" firstAttribute="top" secondItem="jZE-SC-Npr" secondAttribute="bottom" constant="76" id="EmF-l3-b4J"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Hg3-VI-LXE" secondAttribute="trailing" constant="-16" id="Nsy-yW-XZL"/>
+                            <constraint firstAttribute="centerX" secondItem="VHH-hP-3OW" secondAttribute="centerX" id="O7L-5Y-ag2"/>
                             <constraint firstItem="Hg3-VI-LXE" firstAttribute="leading" secondItem="5n6-ct-hLT" secondAttribute="leadingMargin" constant="-16" id="VgD-ZO-h0C"/>
                             <constraint firstItem="adF-cQ-9qF" firstAttribute="top" secondItem="Hg3-VI-LXE" secondAttribute="bottom" id="cFv-ot-lHW"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Hg3-VI-LXE" secondAttribute="trailing" constant="-16" id="g3O-3t-lry"/>
@@ -833,14 +844,22 @@
                             <constraint firstItem="Hg3-VI-LXE" firstAttribute="leading" secondItem="5n6-ct-hLT" secondAttribute="leadingMargin" constant="-16" id="uuY-GI-8hE"/>
                         </constraints>
                         <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="VHH-hP-3OW"/>
+                            </mask>
                             <mask key="constraints">
                                 <exclude reference="Nsy-yW-XZL"/>
                                 <exclude reference="tdb-jM-Nsv"/>
                                 <exclude reference="uuY-GI-8hE"/>
+                                <exclude reference="EmF-l3-b4J"/>
+                                <exclude reference="O7L-5Y-ag2"/>
                                 <exclude reference="iPi-Ux-goy"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=compact">
+                            <mask key="subviews">
+                                <include reference="VHH-hP-3OW"/>
+                            </mask>
                             <mask key="constraints">
                                 <exclude reference="6Ue-Rz-fwq"/>
                                 <include reference="Nsy-yW-XZL"/>
@@ -848,6 +867,8 @@
                                 <exclude reference="g3O-3t-lry"/>
                                 <include reference="tdb-jM-Nsv"/>
                                 <include reference="uuY-GI-8hE"/>
+                                <include reference="EmF-l3-b4J"/>
+                                <include reference="O7L-5Y-ag2"/>
                                 <exclude reference="cFv-ot-lHW"/>
                                 <include reference="iPi-Ux-goy"/>
                             </mask>
