@@ -54,45 +54,49 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
 
+    CapslTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
+
     if ([self.capslsBarButtonItem.title isEqual:@"Sent Capsules"])
     {
-        <#statements#>
-    }
 
-    CapslTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
-    Capsl *capsl = self.capslsArray[indexPath.row];
+        Capsl *capsl = self.capslsArray[indexPath.row];
 
-    // Setting the delivery date
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+        // Setting the delivery date
+        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
 
-    //TODO: change date format with no LEADING ZERO
+        //TODO: change date format with no LEADING ZERO
 
-    [dateFormatter setDateFormat:@"MMM dd, yyyy hh:mm a"];
-    NSDate *deliveryDate = capsl.deliveryTime;
+        [dateFormatter setDateFormat:@"MMM dd, yyyy hh:mm a"];
+        NSDate *deliveryDate = capsl.deliveryTime;
 
-    cell.deliveryDateLabel.text = [NSString stringWithFormat:@"%@", [dateFormatter stringFromDate:deliveryDate]];
+        cell.deliveryDateLabel.text = [NSString stringWithFormat:@"%@", [dateFormatter stringFromDate:deliveryDate]];
 
-    // updating timer string...
-    [cell updateTimeLabelForCapsl:capsl];
+        // updating timer string...
+        [cell updateTimeLabelForCapsl:capsl];
 
-    cell.profileImage.layer.cornerRadius = cell.profileImage.frame.size.width/2;
-    cell.profileImage.clipsToBounds = YES;
+        cell.profileImage.layer.cornerRadius = cell.profileImage.frame.size.width/2;
+        cell.profileImage.clipsToBounds = YES;
 
-    // querying for sender data (need to refactor later)
-    PFQuery *query = [Capslr query];
-    [query whereKey:@"objectId" equalTo: capsl.sender.objectId];
-    [query getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error) {
+        // querying for sender data (need to refactor later)
+        PFQuery *query = [Capslr query];
+        [query whereKey:@"objectId" equalTo: capsl.sender.objectId];
+        [query getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error) {
 
-        cell.fromLabel.text = [NSString stringWithFormat:@"From: %@", object[@"username"]];
+            cell.fromLabel.text = [NSString stringWithFormat:@"From: %@", object[@"username"]];
 
-        //Sender Profile Image (using categories)
-        PFFile *profilePhoto = object[@"profilePhoto"];
-        cell.profileImage.image = nil;
+            //Sender Profile Image (using categories)
+            PFFile *profilePhoto = object[@"profilePhoto"];
+            cell.profileImage.image = nil;
 
-        [profilePhoto getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
-            cell.profileImage.image = [UIImage imageWithData:data];
+            [profilePhoto getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
+                cell.profileImage.image = [UIImage imageWithData:data];
+            }];
         }];
-    }];
+    }
+    else if ([self.capslsBarButtonItem.title isEqual:@"Recieved Capsules"])
+    {
+        Capsl *capsl = self.sentCapslsArray[indexPath.row];
+    }
 
     return cell;
 }
@@ -147,6 +151,8 @@
     {
         self.capslsBarButtonItem.title = @"Sent Capsules";
     }
+
+    [self.tableView reloadData];
 }
 
 // Alert when timer expires
