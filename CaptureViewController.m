@@ -28,16 +28,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    if (![UIImagePickerController isSourceTypeAvailable: UIImagePickerControllerSourceTypeCamera])
-    {
-        UIAlertView *myAlertView = [[UIAlertView alloc] initWithTitle:@"Error"
-                                                              message:@"Device has no camera"
-                                                             delegate:nil
-                                                    cancelButtonTitle:@"OK"
-                                                    otherButtonTitles: nil];
-        [myAlertView show];
+    [self.view addSubview:self.textView];
 
-    }
+    self.textView.translatesAutoresizingMaskIntoConstraints = NO;
+    [self setTextViewToCenter];
 
     //Setting CPSL sender
     [Capslr returnCapslrFromPFUser:[PFUser currentUser] withCompletion:^(Capslr *currentCapslr, NSError *error)
@@ -57,16 +51,82 @@
     
 }
 
+
+//Setting textView to the center of the screen
+- (void)setTextViewToCenter;
+{
+    NSLayoutConstraint *constraint = [NSLayoutConstraint
+                                      constraintWithItem:self.textView
+                                      attribute:NSLayoutAttributeCenterX
+                                      relatedBy:NSLayoutRelationEqual
+                                      toItem:self.view
+                                      attribute:NSLayoutAttributeCenterX
+                                      multiplier:1.0f
+                                      constant:0.0f];
+
+    [self.view addConstraint:constraint];
+
+    constraint = [NSLayoutConstraint
+                  constraintWithItem:self.textView
+                  attribute:NSLayoutAttributeCenterY
+                  relatedBy:NSLayoutRelationEqual
+                  toItem:self.view
+                  attribute:NSLayoutAttributeCenterY
+                  multiplier:1.0f
+                  constant:0.0f];
+
+    [self.view addConstraint:constraint];
+
+    constraint = [NSLayoutConstraint constraintWithItem:self.textView
+                                              attribute:NSLayoutAttributeWidth
+                                              relatedBy:NSLayoutRelationEqual
+                                                 toItem:self.view
+                                              attribute:NSLayoutAttributeWidth
+                                             multiplier:1
+                                               constant:0];
+
+    [self.view addConstraint:constraint];
+
+    constraint = [NSLayoutConstraint constraintWithItem:self.textView
+                                              attribute:NSLayoutAttributeHeight
+                                              relatedBy:NSLayoutRelationEqual
+                                                 toItem:self.view
+                                              attribute:NSLayoutAttributeHeight
+                                             multiplier:0.3
+                                               constant:0];
+
+    [self.view addConstraint:constraint];
+
+
+
+}
+
+
 #pragma mark Image Picker Related Methods
 
 - (IBAction)onImageTapped:(UITapGestureRecognizer *)sender
 {
-    UIImagePickerController *picker = [[UIImagePickerController alloc] init];
-    picker.delegate = self;
-    picker.allowsEditing = YES;
-    picker.sourceType = UIImagePickerControllerSourceTypeCamera;
 
-    [self presentViewController:picker animated:YES completion:NULL];
+    if (![UIImagePickerController isSourceTypeAvailable: UIImagePickerControllerSourceTypeCamera])
+    {
+        UIAlertView *myAlertView = [[UIAlertView alloc] initWithTitle:@"Error"
+                                                              message:@"Device has no camera"
+                                                             delegate:nil
+                                                    cancelButtonTitle:@"OK"
+                                                    otherButtonTitles: nil];
+        [myAlertView show];
+
+    }
+
+    else
+    {
+        UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+        picker.delegate = self;
+        picker.allowsEditing = YES;
+        picker.sourceType = UIImagePickerControllerSourceTypeCamera;
+
+        [self presentViewController:picker animated:YES completion:NULL];
+    }
 }
 
 //TODO:CUSTOMIZE CAMERA OVERLAY
