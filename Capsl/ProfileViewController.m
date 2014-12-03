@@ -57,7 +57,7 @@
 
     [Capslr returnCapslrFromPFUser:[PFUser currentUser] withCompletion:^(Capslr *currentCapslr, NSError *error) {
 
-        self.currentCapslrInfo = @[currentCapslr];
+        self.currentCapslrInfo = @[currentCapslr.name, currentCapslr.username, currentCapslr.email];
 
         [currentCapslr.profilePhoto getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
 

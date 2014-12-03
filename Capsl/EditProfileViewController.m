@@ -25,7 +25,8 @@
 {
     [super viewWillAppear:animated];
 
-    self.editableInfoForCurrentCapslr = @[[self.currenCapslrInfo valueForKey:@"name"], [self.currenCapslrInfo valueForKey:@"username"], [self.currenCapslrInfo valueForKey:@"email"], [self.currenCapslrInfo valueForKey:@"profilePhoto"]];
+//    self.editableInfoForCurrentCapslr = @[[self.currenCapslrInfo valueForKey:@"name"], [self.currenCapslrInfo valueForKey:@"username"], [self.currenCapslrInfo valueForKey:@"email"]];
+//    self.editableInfoForCurrentCapslr = self.currenCapslrInfo;
 
 }
 
@@ -38,12 +39,17 @@
 
 }
 
--(void)setEditableInfoForCurrentCapslr:(NSArray *)editableInfoForCurrentCapslr
+//-(void)setEditableInfoForCurrentCapslr:(NSArray *)editableInfoForCurrentCapslr
+//{
+//    _editableInfoForCurrentCapslr = editableInfoForCurrentCapslr;
+//    [self.tableView reloadData];
+//}
+
+-(void)setCurrenCapslrInfo:(NSArray *)currenCapslrInfo
 {
-    _editableInfoForCurrentCapslr = editableInfoForCurrentCapslr;
+    _currenCapslrInfo = currenCapslrInfo;
     [self.tableView reloadData];
 }
-
 
 #pragma mark - Tableview delegate methods
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -52,7 +58,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if (section == 1)
-        return self.editableInfoForCurrentCapslr.count - 1;
+        return self.currenCapslrInfo.count;
     return 1;
 }
 
@@ -76,7 +82,7 @@
 
     }else if (indexPath.section == 1) {
         cell = [tableView dequeueReusableCellWithIdentifier:@"dataCell" forIndexPath:indexPath];
-        cell.textLabel.text = self.theData[indexPath.row];
+        cell.textLabel.text = self.currenCapslrInfo[indexPath.row];
 
     }else if (indexPath.section == 2) {
         cell = [tableView dequeueReusableCellWithIdentifier:@"buttonCell" forIndexPath:indexPath];
