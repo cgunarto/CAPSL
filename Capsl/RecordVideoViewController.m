@@ -16,9 +16,9 @@
 
 @interface RecordVideoViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
-@property (weak, nonatomic) IBOutlet UIButton *backButton;
-@property (weak, nonatomic) IBOutlet UIButton *nextButton;
 @property (weak, nonatomic) IBOutlet UIButton *recordVideo;
+@property (strong, nonatomic) IBOutlet UIBarButtonItem *cancelButton;
+@property (strong, nonatomic) IBOutlet UIBarButtonItem *doneButton;
 
 @property (strong, nonatomic) NSURL *videoURL;
 @property (strong, nonatomic) MPMoviePlayerController *videoController;
@@ -30,6 +30,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.navigationItem.leftBarButtonItem = self.cancelButton;
+    self.navigationItem.rightBarButtonItem = self.doneButton;
 }
 
 #pragma mark Record button and methods
@@ -81,7 +83,6 @@
     self.createdCapsl.type = @"video";
 
 
-
     //set created capsule video
     NSData *videoData = [[NSData alloc] initWithContentsOfURL:self.videoURL];
     //TODO:convert to mp4?
@@ -123,7 +124,7 @@
     // Stop the video player and remove it from view
     [self.videoController stop];
     [self.videoController.view removeFromSuperview];
-//    self.videoController = nil;
+    self.videoController = nil;
 
     // Display a message
     UIAlertView *alert = [[UIAlertView alloc]
@@ -135,19 +136,39 @@
 
 #pragma mark Next and Segue
 
-- (IBAction)onNextButtonPressed:(UIButton *)sender
+- (IBAction)onDoneButtonPressed:(UIBarButtonItem *)sender
 {
-    [self performSegueWithIdentifier:@"segueToSearchContact" sender:self.nextButton];
+    if (self.createdCapsl.video)
+    {
+        [self performSegueWithIdentifier:@"segueToSearchContact" sender:self.doneButton];
+    }
+    else
+    {
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"NOTHING RECORDED"
+                                                                       message:@"Please record a video"
+                                                                preferredStyle:UIAlertControllerStyleAlert];
+
+        UIAlertAction *okButton = [UIAlertAction actionWithTitle:@"OK"
+                                                           style:UIAlertActionStyleDefault
+                                                         handler:nil];
+        [alert addAction:okButton];
+        [self presentViewController:alert
+                           animated:YES
+                         completion:nil];
+
+    }
 }
 
+- (IBAction)onCancelButtonPressed:(UIBarButtonItem *)sender
+{
+}
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    if ([sender isEqual:self.nextButton])
+    if ([sender isEqual:self.doneButton])
     {
         SearchContactViewController *searchContactVC = segue.destinationViewController;
         searchContactVC.createdCapsl = self.createdCapsl;
-
     }
 }
 

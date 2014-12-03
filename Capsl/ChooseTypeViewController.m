@@ -10,6 +10,7 @@
 #import "RecordAudioViewController.h"
 
 @interface ChooseTypeViewController ()
+@property (weak, nonatomic) IBOutlet UIImageView *imageView;
 
 @end
 
@@ -18,6 +19,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.imageView.image = [UIImage imageNamed:@"mountain"];
 }
 
 #pragma mark Segue
