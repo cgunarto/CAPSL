@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+@class Capsl;
 
 @interface CaptureViewController : UIViewController
+@property Capsl *createdCapsl;
+
 
 @end

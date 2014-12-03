@@ -63,11 +63,13 @@
                 NSLog(@"%@", error.localizedDescription);
             }
         }];
+
         // get data for capsls sent
         [Capsl searchCapslByKey:@"sender" orderByAscending:@"deliveryTime" equalTo:capslr completion:^(NSArray *objects, NSError *error) {
             if (!error)
             {
                 self.capslListVC.sentCapslsArray = objects;
+                self.timelineRootVC.sentCapslsArray = objects;
             }
             else
             {

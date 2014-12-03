@@ -86,10 +86,8 @@
 
         Capsl *capsl = self.capslsArray[indexPath.row];
 
-        cell.deliveryDateLabel.text = [JKCountDownTimer formatDateWithDate:capsl.deliveryTime];
-
         // updating timer string...
-        [cell updateTimeLabelForCapsl:capsl];
+        [cell updateLabelsForCapsl:capsl];
 
         cell.profileImage.layer.cornerRadius = cell.profileImage.frame.size.width/2;
         cell.profileImage.clipsToBounds = YES;
@@ -131,7 +129,7 @@
             }];
         }];
 
-        cell.deliveryDateLabel.text = [JKCountDownTimer formatDateWithDate:capsl.deliveryTime];
+        [cell updateLabelsForCapsl:capsl];
 
         NSDate *viewedAtDate = capsl.viewedAt;
         if (viewedAtDate)
@@ -193,7 +191,7 @@
         if ([self.capslsBarButtonItem.title isEqual: @"Sent Capsules"])
         {
             Capsl *capsl = self.capslsArray[indexPath.row];
-            [cell updateTimeLabelForCapsl:capsl];
+            [cell updateLabelsForCapsl:capsl];
         }
         else
         {

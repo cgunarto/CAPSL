@@ -26,12 +26,13 @@
 
 
 
-- (void)updateTimeLabelForCapsl:(Capsl *)capsl
+- (void)updateLabelsForCapsl:(Capsl *)capsl
 {
 
     NSDate *deliveryDate = capsl.deliveryTime;
     NSTimeInterval timeInterval = [deliveryDate timeIntervalSinceNow];
     self.timerLabel.text = [JKCountDownTimer getStringWithTimeInterval:timeInterval];
+    self.deliveryDateLabel.text = [JKCountDownTimer getDateStringWithDate:deliveryDate];
 
 }
 

@@ -17,6 +17,7 @@
 @interface JCACapslViewController : UIViewController
 
 @property NSArray *capslGrandArray;
+@property NSArray *sentCapslsGrandArray;
 
 - (void)showCapslAtYear:(NSInteger)yearMultiplier andMonth:(NSInteger)monthIndex withAnimation:(BOOL)animated;
 - (void)updateClocks;

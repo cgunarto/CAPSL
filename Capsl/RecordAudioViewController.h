@@ -7,7 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+@class Capsl;
 
 @interface RecordAudioViewController : UIViewController
+@property Capsl *createdCapsl;
 
 @end

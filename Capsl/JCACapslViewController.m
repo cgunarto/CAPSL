@@ -114,11 +114,9 @@ static NSString * const reuseIdentifier = @"CapslCell";
     cell.nameLabel.text = capsl.sender.username;
 //    cell.nameLabel.text = self.monthsOfTheYear[indexPath.section % 12];
 
-    cell.deliveryDateLabel.text = [JKCountDownTimer formatDateWithDate:capsl.deliveryTime];
-
     [self drawCell:cell];
 
-    [cell updateTimeLabelForCapsl:capsl];
+    [cell updateLabelsForCapsl:capsl];
 
     cell.profilePicView.image = [UIImage imageNamed:@"profilepic1"];
 
@@ -202,9 +200,9 @@ static NSString * const reuseIdentifier = @"CapslCell";
 //    cell.profilePicView.layer.borderColor = [UIColor blackColor].CGColor;
 //    cell.profilePicView.layer.borderWidth = 1.0;
 
-    cell.countdownButton.layer.cornerRadius = cell.countdownButton.frame.size.height/2;
-    cell.countdownButton.clipsToBounds = YES;
-    cell.countdownButton.backgroundColor = [UIColor colorWithHue:0.496 saturation:0.791 brightness:0.554 alpha:1.000];
+    cell.countdownLabel.layer.cornerRadius = cell.countdownLabel.frame.size.height/2;
+    cell.countdownLabel.clipsToBounds = YES;
+    cell.countdownLabel.backgroundColor = [UIColor colorWithHue:0.496 saturation:0.791 brightness:0.554 alpha:1.000];
 
 
     return cell;
@@ -219,7 +217,7 @@ static NSString * const reuseIdentifier = @"CapslCell";
 
         Capsl *capsl = [self getCapslWithIndexPath:indexPath];
 
-        [cell updateTimeLabelForCapsl:capsl];
+        [cell updateLabelsForCapsl:capsl];
 
     }
 }
