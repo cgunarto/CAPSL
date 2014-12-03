@@ -10,6 +10,7 @@
 #import "SearchContactViewController.h"
 #import "Capsl.h"
 #import "Capslr.h"
+#define kOFFSET_FOR_KEYBOARD 500;
 
 @interface CaptureViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextViewDelegate>
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
@@ -46,12 +47,105 @@
     self.navigationItem.leftBarButtonItem = self.cancelButton;
 }
 
--(void)viewDidAppear:(BOOL)animated
+- (void)viewWillAppear:(BOOL)animated
 {
+    [super viewWillAppear:animated];
+    // register for keyboard notifications
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWillShow)
+                                                 name:UIKeyboardWillShowNotification
+                                               object:nil];
+
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWillHide)
+                                                 name:UIKeyboardWillHideNotification
+                                               object:nil];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    // unregister for keyboard notifications while not visible.
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:UIKeyboardWillShowNotification
+                                                  object:nil];
+
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:UIKeyboardWillHideNotification
+                                                  object:nil];
+}
+
+- (void)keyboardWillShow
+{
+    //If image is not nil, move the keyboard up by Keyboard height
+    //If image is nil, don't do anything
     if (self.imageView.image)
     {
-        [self setTextViewToBottom];
+//        [self setTextViewToTop];
+
+//
+//        //WHY DOESN'T THIS WORK?
+        CGRect rect = [[UIApplication sharedApplication] keyWindow].frame;
+        rect.origin.y -= kOFFSET_FOR_KEYBOARD;
+        rect.size.height += kOFFSET_FOR_KEYBOARD;
+        [[UIApplication sharedApplication] keyWindow].frame = rect;
+
+                // Animate the current view out of the way
+        if ([[UIApplication sharedApplication] keyWindow].frame.origin.y >= 0)
+        {
+            [self setViewMovedUp:YES];
+        }
+        else if ([[UIApplication sharedApplication] keyWindow].frame.origin.y < 0)
+        {
+            [self setViewMovedUp:NO];
+        }
     }
+
+}
+
+- (void)keyboardWillHide
+{
+    //If image is not nil, move the keyboard down by Keyboard height
+    //If image is nil, don't do anything
+    if (self.imageView.image)
+    {
+        // Animate the current view out of the way
+        if ([[UIApplication sharedApplication] keyWindow].frame.origin.y >= 0)
+        {
+            [self setViewMovedUp:YES];
+        }
+        else if ([[UIApplication sharedApplication] keyWindow].frame.origin.y < 0)
+        {
+            [self setViewMovedUp:NO];
+        }
+//        [self setTextViewToBottom];
+    }
+}
+
+//method to move the view up/down whenever the keyboard is shown/dismissed
+-(void)setViewMovedUp:(BOOL)movedUp
+{
+    [UIView beginAnimations:nil context:NULL];
+    [UIView setAnimationDuration:0.3]; // if you want to slide up the view
+
+    //Move the whole application's frame instead of the view
+    CGRect rect = [[UIApplication sharedApplication] keyWindow].frame;
+    if (movedUp)
+    {
+        // 1. move the view's origin up so that the text field that will be hidden come above the keyboard
+        // 2. increase the size of the view so that the area behind the keyboard is covered up.
+        rect.origin.y -= kOFFSET_FOR_KEYBOARD;
+//        rect.size.height += kOFFSET_FOR_KEYBOARD;
+    }
+    else
+    {
+        // revert back to the normal state.
+        rect.origin.y += kOFFSET_FOR_KEYBOARD;
+//        rect.size.height -= kOFFSET_FOR_KEYBOARD;
+    }
+    [[UIApplication sharedApplication] keyWindow].frame = rect;
+
+    [UIView commitAnimations];
 }
 
 
@@ -106,6 +200,8 @@
     //Settign CPSL image to be sent
     NSData *imageData = UIImageJPEGRepresentation(self.chosenImage, 1.0f);
     self.createdCapsl.photo = [PFFile fileWithName:@"image.jpg" data:imageData];
+
+    [self setTextViewToBottom];
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
@@ -155,13 +251,20 @@
 
 - (void)textViewDidBeginEditing:(UITextView *)textView
 {
-    [self setTextViewToTop];
-
-    [self.navigationController setNavigationBarHidden:YES];
+//    [self.navigationController setNavigationBarHidden:YES];
 
     if ([textView.text isEqualToString:@"Enter Text Here"])
     {
         textView.text = @"";
+    }
+
+    if (self.imageView.image)
+    {
+        //move the main view, so that the keyboard does not hide it.
+        if  (self.textView.frame.origin.y >= 0)
+        {
+            [self setViewMovedUp:YES];
+        }
     }
 }
 
@@ -177,8 +280,6 @@
     if ([text isEqualToString:@"\n"])
     {
         [textView resignFirstResponder];
-        [self setTextViewToBottom];
-
     }
     return YES;
 }

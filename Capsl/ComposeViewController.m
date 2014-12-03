@@ -145,17 +145,4 @@
 
 }
 
-
-//set Time Date
-//set recipient - Capslr
-
-
-//create Capsl object with file, time delivered, sender Capslr (PFUser CurrentUser)
-//upload it to Parse
-
-
-
-
-
-
 @end

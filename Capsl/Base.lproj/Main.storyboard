@@ -838,38 +838,54 @@
                         <constraints>
                             <constraint firstItem="Tjw-18-0nC" firstAttribute="width" secondItem="5n6-ct-hLT" secondAttribute="width" id="3OH-EE-Zto"/>
                             <constraint firstItem="Hg3-VI-LXE" firstAttribute="top" secondItem="jZE-SC-Npr" secondAttribute="bottom" id="6Ue-Rz-fwq"/>
+                            <constraint firstItem="Hg3-VI-LXE" firstAttribute="top" secondItem="jZE-SC-Npr" secondAttribute="bottom" id="DUq-iH-V4S"/>
+                            <constraint firstItem="adF-cQ-9qF" firstAttribute="top" secondItem="Hg3-VI-LXE" secondAttribute="bottom" id="LgZ-A5-0eP"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Hg3-VI-LXE" secondAttribute="trailing" constant="-16" id="Nsy-yW-XZL"/>
                             <constraint firstAttribute="centerX" secondItem="Tjw-18-0nC" secondAttribute="centerX" id="Yw2-JK-WoR"/>
                             <constraint firstItem="adF-cQ-9qF" firstAttribute="top" secondItem="Hg3-VI-LXE" secondAttribute="bottom" id="iPi-Ux-goy"/>
                             <constraint firstAttribute="centerX" secondItem="VHH-hP-3OW" secondAttribute="centerX" id="jgQ-pG-w6r"/>
+                            <constraint firstItem="Hg3-VI-LXE" firstAttribute="bottom" secondItem="5n6-ct-hLT" secondAttribute="bottomMargin" id="lBf-SF-IzZ"/>
                             <constraint firstItem="VHH-hP-3OW" firstAttribute="top" secondItem="jZE-SC-Npr" secondAttribute="bottom" constant="56" id="r19-jv-XC2"/>
                             <constraint firstItem="Tjw-18-0nC" firstAttribute="height" secondItem="5n6-ct-hLT" secondAttribute="height" multiplier="0.3" constant="20" id="rgl-Gv-Uwu"/>
+                            <constraint firstItem="VHH-hP-3OW" firstAttribute="top" secondItem="jZE-SC-Npr" secondAttribute="bottom" constant="56" id="tYR-IC-SLP"/>
                             <constraint firstItem="Hg3-VI-LXE" firstAttribute="leading" secondItem="5n6-ct-hLT" secondAttribute="leadingMargin" constant="-16" id="uuY-GI-8hE"/>
+                            <constraint firstItem="Hg3-VI-LXE" firstAttribute="top" secondItem="5n6-ct-hLT" secondAttribute="topMargin" constant="44" id="vop-WL-uQm"/>
                             <constraint firstItem="adF-cQ-9qF" firstAttribute="top" secondItem="Tjw-18-0nC" secondAttribute="bottom" constant="175" id="xVn-9w-Fbt"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
+                                <exclude reference="DUq-iH-V4S"/>
                                 <exclude reference="Nsy-yW-XZL"/>
+                                <exclude reference="lBf-SF-IzZ"/>
                                 <exclude reference="uuY-GI-8hE"/>
+                                <exclude reference="vop-WL-uQm"/>
                                 <exclude reference="jgQ-pG-w6r"/>
                                 <exclude reference="r19-jv-XC2"/>
+                                <exclude reference="tYR-IC-SLP"/>
                                 <exclude reference="3OH-EE-Zto"/>
                                 <exclude reference="Yw2-JK-WoR"/>
                                 <exclude reference="rgl-Gv-Uwu"/>
+                                <exclude reference="LgZ-A5-0eP"/>
                                 <exclude reference="iPi-Ux-goy"/>
                                 <exclude reference="xVn-9w-Fbt"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=compact">
                             <mask key="constraints">
+                                <exclude reference="6Ue-Rz-fwq"/>
+                                <include reference="DUq-iH-V4S"/>
                                 <include reference="Nsy-yW-XZL"/>
+                                <exclude reference="lBf-SF-IzZ"/>
                                 <include reference="uuY-GI-8hE"/>
+                                <exclude reference="vop-WL-uQm"/>
                                 <include reference="jgQ-pG-w6r"/>
-                                <include reference="r19-jv-XC2"/>
+                                <exclude reference="r19-jv-XC2"/>
+                                <include reference="tYR-IC-SLP"/>
                                 <include reference="3OH-EE-Zto"/>
                                 <include reference="Yw2-JK-WoR"/>
                                 <include reference="rgl-Gv-Uwu"/>
-                                <include reference="iPi-Ux-goy"/>
+                                <include reference="LgZ-A5-0eP"/>
+                                <exclude reference="iPi-Ux-goy"/>
                                 <include reference="xVn-9w-Fbt"/>
                             </mask>
                         </variation>
