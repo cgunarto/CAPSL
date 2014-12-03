@@ -12,10 +12,9 @@
 @interface CapsuleListViewController : UIViewController
 
 @property Capslr *capslr;
-@property NSMutableArray *timersArray;
-
 
 @property (nonatomic)  NSArray *capslsArray;
+@property (nonatomic) NSArray *sentCapslsArray;
 @property NSInteger capslCount;
 
 - (void)updateClocks;

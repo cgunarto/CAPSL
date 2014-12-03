@@ -23,7 +23,6 @@
 
 
 @property Capslr *capslr;
-@property (nonatomic)  NSArray *capslsArray;
 
 @end
 
@@ -44,17 +43,17 @@
                 self.timelineRootVC.capslsArray = objects;
                 self.capslListVC.capslsArray = objects;
                 self.capslListVC.capslCount = objects.count;
-
-                NSMutableArray *timers = [@[] mutableCopy];
-
-                for (Capsl *capsl in objects)
-                {
-                    JKCountDownTimer *timer = [[JKCountDownTimer alloc] initWithDeliveryDate:capsl.deliveryTime withDelegate:nil];
-                    [timers addObject:timer];
-                }
-
-                self.capslListVC.timersArray = timers;
-
+            }
+            else
+            {
+                NSLog(@"%@", error.localizedDescription);
+            }
+        }];
+        // get data for capsls sent
+        [Capsl searchCapslByKey:@"sender" orderByAscending:@"deliveryTime" equalTo:capslr completion:^(NSArray *objects, NSError *error) {
+            if (!error)
+            {
+                self.capslListVC.sentCapslsArray = objects;
             }
             else
             {
