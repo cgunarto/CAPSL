@@ -17,6 +17,7 @@
 @interface CapsuleListViewController () <UITableViewDataSource, UITableViewDelegate>
 
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
+@property (strong, nonatomic) IBOutlet UIBarButtonItem *sentCapslsBarButtonItem;
 
 @end
 
@@ -124,6 +125,11 @@
         
         [cell updateTimeLabelForCapsl:capsl];
     }
+}
+
+- (IBAction)onSentCapsulesButtonPressed:(UIBarButtonItem *)sender
+{
+    
 }
 
 // Alert when timer expires

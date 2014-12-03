@@ -1647,8 +1647,15 @@
                         </variation>
                     </view>
                     <toolbarItems/>
-                    <navigationItem key="navigationItem" id="gJq-YD-dtv"/>
+                    <navigationItem key="navigationItem" id="gJq-YD-dtv">
+                        <barButtonItem key="rightBarButtonItem" title="Sent Capsules" id="rZ7-9n-v3w">
+                            <connections>
+                                <action selector="onSentCapsulesButtonPressed:" destination="yHn-iw-5rP" id="dWd-ZX-oZf"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
+                        <outlet property="sentCapslsBarButtonItem" destination="rZ7-9n-v3w" id="1Wk-o4-eUe"/>
                         <outlet property="tableView" destination="6sN-U3-hhX" id="6g1-rY-Oot"/>
                     </connections>
                 </viewController>
