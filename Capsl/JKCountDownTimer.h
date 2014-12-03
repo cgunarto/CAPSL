@@ -21,7 +21,7 @@
 
 + (NSString *)getStringWithTimeInterval:(NSTimeInterval)timeInterval;
 
-+ (NSString *)formatDateWithDate:(NSDate *)date;
++ (NSString *)getDateStringWithDate:(NSDate *)date;
 
 //
 //@property NSTimer *timer;

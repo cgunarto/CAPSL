@@ -15,6 +15,8 @@
 @property (strong, nonatomic) IBOutlet UICollectionView *timelineView;
 @property NSArray *monthStrings;
 @property NSMutableArray *arrayOfMonths;
+@property NSArray *collectionViewData;
+
 @property CGFloat screenWidth;
 //@property UIView *timelineHighlight;
 
@@ -46,7 +48,7 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    [self.timelineView reloadData];
+    [self updateData];
 }
 
 
@@ -59,7 +61,7 @@
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
-    return self.capslGrandArray.count;
+    return self.collectionViewData.count;
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
@@ -193,6 +195,21 @@
     NSIndexPath *indexPath = [self.timelineView indexPathForItemAtPoint:CGPointMake(xUnderCenterOfContainer, yUnderCenterOfContainer)];
     return indexPath;
 }
+
+- (void)updateData
+{
+    if (self.showSent == NO)
+    {
+        self.collectionViewData = self.capslGrandArray;
+    }
+    else
+    {
+        self.collectionViewData = self.sentCapslsGrandArray;
+    }
+
+    [self.timelineView reloadData];
+}
+
 
 #pragma mark - actions
 

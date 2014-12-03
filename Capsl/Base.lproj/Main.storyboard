@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="vXZ-lx-hvc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="vXZ-lx-hvc">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
@@ -576,22 +576,29 @@
                             </mask>
                         </variation>
                     </view>
+                    <navigationItem key="navigationItem" id="gaZ-zy-Ftb"/>
                     <connections>
-                        <outlet property="doneButton" destination="4bY-XC-FNH" id="eF8-RR-ANY"/>
+                        <outlet property="cancelButton" destination="4bY-XC-FNH" id="eiF-27-5Ia"/>
                         <outlet property="playButton" destination="SeJ-cV-lRw" id="9hx-aK-Uz5"/>
                         <outlet property="recordPauseButton" destination="fSy-W1-wUz" id="h4W-4a-fRs"/>
-                        <outlet property="stopButton" destination="9ZE-4q-zUy" id="7my-z8-Idi"/>
+                        <outlet property="saveButton" destination="Bp7-Fh-YNq" id="Jhf-EA-Jy2"/>
+                        <outlet property="stopButton" destination="9ZE-4q-zUy" id="owU-GL-ZfG"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2vm-oA-mNu" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="wyg-As-9oh" userLabel="Exit" sceneMemberID="exit"/>
-                <barButtonItem systemItem="done" id="4bY-XC-FNH">
+                <barButtonItem systemItem="stop" id="4bY-XC-FNH">
                     <connections>
-                        <segue destination="wyg-As-9oh" kind="unwind" unwindAction="unWindToCaptureSegue:" id="kVE-zp-PP0"/>
+                        <segue destination="wyg-As-9oh" kind="unwind" unwindAction="unWindToCaptureSegue:" id="j6I-iV-OT9"/>
+                    </connections>
+                </barButtonItem>
+                <barButtonItem systemItem="save" id="Bp7-Fh-YNq">
+                    <connections>
+                        <segue destination="wyg-As-9oh" kind="unwind" unwindAction="unWindToCaptureSegue:" id="mjp-fb-8pI"/>
                     </connections>
                 </barButtonItem>
             </objects>
-            <point key="canvasLocation" x="3000" y="-282"/>
+            <point key="canvasLocation" x="3918" y="-282"/>
         </scene>
         <!--Record Video View Controller-->
         <scene sceneID="hZI-Fm-ack">
@@ -711,52 +718,48 @@
                                 <gestureRecognizers/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-CondensedBold" family="Helvetica Neue" pointSize="20"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences" returnKeyType="done"/>
                             </textView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="col-p1-YKd">
                                 <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                <color key="backgroundColor" red="1" green="0.40000000596046448" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="Irx-y8-6XE"/>
-                                    <constraint firstAttribute="width" constant="72" id="Qrq-dM-7Ub"/>
+                                    <constraint firstAttribute="height" constant="56" id="j0q-6w-Ogo"/>
                                 </constraints>
+                                <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="17"/>
                                 <state key="normal" title="Add Audio">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <variation key="default">
                                     <mask key="constraints">
-                                        <exclude reference="Irx-y8-6XE"/>
-                                        <exclude reference="Qrq-dM-7Ub"/>
+                                        <exclude reference="j0q-6w-Ogo"/>
                                     </mask>
                                 </variation>
                                 <variation key="widthClass=compact">
+                                    <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="17"/>
                                     <mask key="constraints">
-                                        <include reference="Irx-y8-6XE"/>
-                                        <include reference="Qrq-dM-7Ub"/>
+                                        <include reference="j0q-6w-Ogo"/>
                                     </mask>
                                 </variation>
                                 <connections>
-                                    <segue destination="Vgx-hR-DGD" kind="show" identifier="segueToAudio" id="2s3-Cm-t1P"/>
+                                    <segue destination="sly-Qd-pFA" kind="presentation" identifier="segueToAudio" id="2s3-Cm-t1P"/>
                                 </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="Tjw-18-0nC" firstAttribute="width" secondItem="5n6-ct-hLT" secondAttribute="width" id="3OH-EE-Zto"/>
-                            <constraint firstItem="Hg3-VI-LXE" firstAttribute="top" secondItem="jZE-SC-Npr" secondAttribute="bottom" id="6Ue-Rz-fwq"/>
+                            <constraint firstAttribute="width" secondItem="col-p1-YKd" secondAttribute="width" id="9fO-TK-m5V"/>
                             <constraint firstItem="Hg3-VI-LXE" firstAttribute="top" secondItem="jZE-SC-Npr" secondAttribute="bottom" id="DUq-iH-V4S"/>
-                            <constraint firstAttribute="centerX" secondItem="col-p1-YKd" secondAttribute="centerX" id="K1j-tc-zb5"/>
+                            <constraint firstAttribute="bottomMargin" secondItem="col-p1-YKd" secondAttribute="bottom" constant="175" id="DdI-RR-lsR"/>
+                            <constraint firstAttribute="centerX" secondItem="col-p1-YKd" secondAttribute="centerX" id="HtA-sR-qmY"/>
                             <constraint firstItem="adF-cQ-9qF" firstAttribute="top" secondItem="Hg3-VI-LXE" secondAttribute="bottom" id="LgZ-A5-0eP"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Hg3-VI-LXE" secondAttribute="trailing" constant="-16" id="Nsy-yW-XZL"/>
                             <constraint firstAttribute="centerX" secondItem="Tjw-18-0nC" secondAttribute="centerX" id="Yw2-JK-WoR"/>
-                            <constraint firstItem="col-p1-YKd" firstAttribute="top" secondItem="Tjw-18-0nC" secondAttribute="bottom" constant="45" id="ZWW-tl-wSk"/>
-                            <constraint firstItem="adF-cQ-9qF" firstAttribute="top" secondItem="Hg3-VI-LXE" secondAttribute="bottom" id="iPi-Ux-goy"/>
                             <constraint firstAttribute="centerX" secondItem="VHH-hP-3OW" secondAttribute="centerX" id="jgQ-pG-w6r"/>
-                            <constraint firstItem="Hg3-VI-LXE" firstAttribute="bottom" secondItem="5n6-ct-hLT" secondAttribute="bottomMargin" id="lBf-SF-IzZ"/>
-                            <constraint firstItem="VHH-hP-3OW" firstAttribute="top" secondItem="jZE-SC-Npr" secondAttribute="bottom" constant="56" id="r19-jv-XC2"/>
                             <constraint firstItem="Tjw-18-0nC" firstAttribute="height" secondItem="5n6-ct-hLT" secondAttribute="height" multiplier="0.3" constant="20" id="rgl-Gv-Uwu"/>
                             <constraint firstItem="VHH-hP-3OW" firstAttribute="top" secondItem="jZE-SC-Npr" secondAttribute="bottom" constant="56" id="tYR-IC-SLP"/>
                             <constraint firstItem="Hg3-VI-LXE" firstAttribute="leading" secondItem="5n6-ct-hLT" secondAttribute="leadingMargin" constant="-16" id="uuY-GI-8hE"/>
-                            <constraint firstItem="Hg3-VI-LXE" firstAttribute="top" secondItem="5n6-ct-hLT" secondAttribute="topMargin" constant="44" id="vop-WL-uQm"/>
                             <constraint firstItem="adF-cQ-9qF" firstAttribute="top" secondItem="Tjw-18-0nC" secondAttribute="bottom" constant="175" id="xVn-9w-Fbt"/>
                         </constraints>
                         <variation key="default">
@@ -766,20 +769,17 @@
                             <mask key="constraints">
                                 <exclude reference="DUq-iH-V4S"/>
                                 <exclude reference="Nsy-yW-XZL"/>
-                                <exclude reference="lBf-SF-IzZ"/>
                                 <exclude reference="uuY-GI-8hE"/>
-                                <exclude reference="vop-WL-uQm"/>
+                                <exclude reference="jgQ-pG-w6r"/>
+                                <exclude reference="tYR-IC-SLP"/>
                                 <exclude reference="3OH-EE-Zto"/>
                                 <exclude reference="Yw2-JK-WoR"/>
                                 <exclude reference="rgl-Gv-Uwu"/>
-                                <exclude reference="jgQ-pG-w6r"/>
-                                <exclude reference="r19-jv-XC2"/>
-                                <exclude reference="tYR-IC-SLP"/>
+                                <exclude reference="9fO-TK-m5V"/>
+                                <exclude reference="DdI-RR-lsR"/>
+                                <exclude reference="HtA-sR-qmY"/>
                                 <exclude reference="LgZ-A5-0eP"/>
-                                <exclude reference="iPi-Ux-goy"/>
                                 <exclude reference="xVn-9w-Fbt"/>
-                                <exclude reference="K1j-tc-zb5"/>
-                                <exclude reference="ZWW-tl-wSk"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=compact">
@@ -787,28 +787,26 @@
                                 <include reference="col-p1-YKd"/>
                             </mask>
                             <mask key="constraints">
-                                <exclude reference="6Ue-Rz-fwq"/>
                                 <include reference="DUq-iH-V4S"/>
                                 <include reference="Nsy-yW-XZL"/>
-                                <exclude reference="lBf-SF-IzZ"/>
                                 <include reference="uuY-GI-8hE"/>
-                                <exclude reference="vop-WL-uQm"/>
+                                <include reference="jgQ-pG-w6r"/>
+                                <include reference="tYR-IC-SLP"/>
                                 <include reference="3OH-EE-Zto"/>
                                 <include reference="Yw2-JK-WoR"/>
                                 <include reference="rgl-Gv-Uwu"/>
-                                <include reference="jgQ-pG-w6r"/>
-                                <exclude reference="r19-jv-XC2"/>
-                                <include reference="tYR-IC-SLP"/>
+                                <include reference="9fO-TK-m5V"/>
+                                <include reference="DdI-RR-lsR"/>
+                                <include reference="HtA-sR-qmY"/>
                                 <include reference="LgZ-A5-0eP"/>
-                                <exclude reference="iPi-Ux-goy"/>
                                 <include reference="xVn-9w-Fbt"/>
-                                <include reference="K1j-tc-zb5"/>
-                                <include reference="ZWW-tl-wSk"/>
                             </mask>
                         </variation>
                     </view>
                     <navigationItem key="navigationItem" id="DGT-FQ-rL0"/>
                     <connections>
+                        <outlet property="addAudioButton" destination="col-p1-YKd" id="why-vR-Ksu"/>
+                        <outlet property="bottomAddAudioConstraint" destination="DdI-RR-lsR" id="Q4w-PE-qEz"/>
                         <outlet property="bottomTextViewConstraint" destination="xVn-9w-Fbt" id="qgn-v0-TaI"/>
                         <outlet property="cancelButton" destination="z6Q-Dn-DDG" id="cpp-iG-eE7"/>
                         <outlet property="doneButton" destination="n73-cQ-FAH" id="MSi-Ll-YNC"/>
@@ -819,7 +817,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="22T-8U-pdV" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="WDk-x7-13s" userLabel="Exit" sceneMemberID="exit"/>
-                <barButtonItem systemItem="cancel" id="z6Q-Dn-DDG">
+                <barButtonItem systemItem="stop" id="z6Q-Dn-DDG">
                     <connections>
                         <segue destination="WDk-x7-13s" kind="unwind" unwindAction="unWindSegue:" id="L1N-KJ-aGl"/>
                     </connections>
@@ -2059,7 +2057,7 @@
                                                         </mask>
                                                     </variation>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EMb-f9-Dj3" userLabel="Delivery time Label">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EMb-f9-Dj3" userLabel="Delivery time Label">
                                                     <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -2244,7 +2242,7 @@
                                             </mask>
                                         </variation>
                                         <connections>
-                                            <outlet property="countdownButton" destination="4bF-8D-J0f" id="Pet-2R-qza"/>
+                                            <outlet property="countdownLabel" destination="4bF-8D-J0f" id="046-X8-che"/>
                                             <outlet property="deliveryDateLabel" destination="EMb-f9-Dj3" id="hU3-e6-Wur"/>
                                             <outlet property="nameLabel" destination="3X9-61-e5E" id="pZO-3d-fEg"/>
                                             <outlet property="profilePicView" destination="EoB-oR-KE7" id="cvG-oa-fEg"/>
@@ -2328,7 +2326,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="50" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kzl-qi-aul">
@@ -2486,6 +2484,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fDb-9k-pt4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2146.5" y="1162"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="Ope-89-EtW">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="sly-Qd-pFA" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="8FD-Yh-MQ4">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="Vgx-hR-DGD" kind="relationship" relationship="rootViewController" id="DGO-1h-PyJ"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="H3J-uO-wwh" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3000" y="-282"/>
         </scene>
     </scenes>
     <resources>
