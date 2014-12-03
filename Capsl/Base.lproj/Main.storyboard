@@ -578,17 +578,23 @@
                     </view>
                     <navigationItem key="navigationItem" id="gaZ-zy-Ftb"/>
                     <connections>
-                        <outlet property="doneButton" destination="4bY-XC-FNH" id="eF8-RR-ANY"/>
+                        <outlet property="cancelButton" destination="4bY-XC-FNH" id="eiF-27-5Ia"/>
                         <outlet property="playButton" destination="SeJ-cV-lRw" id="9hx-aK-Uz5"/>
                         <outlet property="recordPauseButton" destination="fSy-W1-wUz" id="h4W-4a-fRs"/>
-                        <outlet property="stopButton" destination="9ZE-4q-zUy" id="7my-z8-Idi"/>
+                        <outlet property="saveButton" destination="Bp7-Fh-YNq" id="Jhf-EA-Jy2"/>
+                        <outlet property="stopButton" destination="9ZE-4q-zUy" id="owU-GL-ZfG"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2vm-oA-mNu" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="wyg-As-9oh" userLabel="Exit" sceneMemberID="exit"/>
-                <barButtonItem systemItem="done" id="4bY-XC-FNH">
+                <barButtonItem systemItem="stop" id="4bY-XC-FNH">
                     <connections>
-                        <segue destination="wyg-As-9oh" kind="unwind" unwindAction="unWindToCaptureSegue:" id="kVE-zp-PP0"/>
+                        <segue destination="wyg-As-9oh" kind="unwind" unwindAction="unWindToCaptureSegue:" id="j6I-iV-OT9"/>
+                    </connections>
+                </barButtonItem>
+                <barButtonItem systemItem="save" id="Bp7-Fh-YNq">
+                    <connections>
+                        <segue destination="wyg-As-9oh" kind="unwind" unwindAction="unWindToCaptureSegue:" id="mjp-fb-8pI"/>
                     </connections>
                 </barButtonItem>
             </objects>
@@ -784,18 +790,23 @@
                                 <exclude reference="col-p1-YKd"/>
                             </mask>
                             <mask key="constraints">
+                                <exclude reference="5Aj-HE-qkF"/>
                                 <exclude reference="DUq-iH-V4S"/>
                                 <exclude reference="Nsy-yW-XZL"/>
                                 <exclude reference="lBf-SF-IzZ"/>
                                 <exclude reference="uuY-GI-8hE"/>
                                 <exclude reference="vop-WL-uQm"/>
-                                <exclude reference="jgQ-pG-w6r"/>
-                                <exclude reference="r19-jv-XC2"/>
-                                <exclude reference="tYR-IC-SLP"/>
                                 <exclude reference="3OH-EE-Zto"/>
                                 <exclude reference="Yw2-JK-WoR"/>
                                 <exclude reference="rgl-Gv-Uwu"/>
-                                <exclude reference="5Aj-HE-qkF"/>
+                                <exclude reference="jgQ-pG-w6r"/>
+                                <exclude reference="r19-jv-XC2"/>
+                                <exclude reference="tYR-IC-SLP"/>
+                                <exclude reference="LgZ-A5-0eP"/>
+                                <exclude reference="TVd-Wm-pxA"/>
+                                <exclude reference="cMs-bu-UZ7"/>
+                                <exclude reference="iPi-Ux-goy"/>
+                                <exclude reference="xVn-9w-Fbt"/>
                                 <exclude reference="7tZ-nv-VkH"/>
                                 <exclude reference="Fu9-oT-RQX"/>
                                 <exclude reference="I4b-U2-RUg"/>
@@ -805,11 +816,6 @@
                                 <exclude reference="Xzb-ip-Cf2"/>
                                 <exclude reference="ZWW-tl-wSk"/>
                                 <exclude reference="jkz-9t-OC2"/>
-                                <exclude reference="LgZ-A5-0eP"/>
-                                <exclude reference="TVd-Wm-pxA"/>
-                                <exclude reference="cMs-bu-UZ7"/>
-                                <exclude reference="iPi-Ux-goy"/>
-                                <exclude reference="xVn-9w-Fbt"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=compact">
@@ -817,19 +823,24 @@
                                 <include reference="col-p1-YKd"/>
                             </mask>
                             <mask key="constraints">
+                                <exclude reference="5Aj-HE-qkF"/>
                                 <exclude reference="6Ue-Rz-fwq"/>
                                 <include reference="DUq-iH-V4S"/>
                                 <include reference="Nsy-yW-XZL"/>
                                 <exclude reference="lBf-SF-IzZ"/>
                                 <include reference="uuY-GI-8hE"/>
                                 <exclude reference="vop-WL-uQm"/>
-                                <include reference="jgQ-pG-w6r"/>
-                                <exclude reference="r19-jv-XC2"/>
-                                <include reference="tYR-IC-SLP"/>
                                 <include reference="3OH-EE-Zto"/>
                                 <include reference="Yw2-JK-WoR"/>
                                 <include reference="rgl-Gv-Uwu"/>
-                                <exclude reference="5Aj-HE-qkF"/>
+                                <include reference="jgQ-pG-w6r"/>
+                                <exclude reference="r19-jv-XC2"/>
+                                <include reference="tYR-IC-SLP"/>
+                                <include reference="LgZ-A5-0eP"/>
+                                <exclude reference="TVd-Wm-pxA"/>
+                                <include reference="cMs-bu-UZ7"/>
+                                <exclude reference="iPi-Ux-goy"/>
+                                <include reference="xVn-9w-Fbt"/>
                                 <exclude reference="7tZ-nv-VkH"/>
                                 <exclude reference="Fu9-oT-RQX"/>
                                 <exclude reference="I4b-U2-RUg"/>
@@ -839,11 +850,6 @@
                                 <exclude reference="Xzb-ip-Cf2"/>
                                 <exclude reference="ZWW-tl-wSk"/>
                                 <include reference="jkz-9t-OC2"/>
-                                <include reference="LgZ-A5-0eP"/>
-                                <exclude reference="TVd-Wm-pxA"/>
-                                <include reference="cMs-bu-UZ7"/>
-                                <exclude reference="iPi-Ux-goy"/>
-                                <include reference="xVn-9w-Fbt"/>
                             </mask>
                         </variation>
                     </view>

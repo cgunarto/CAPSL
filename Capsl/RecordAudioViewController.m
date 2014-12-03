@@ -16,7 +16,9 @@
 @property (weak, nonatomic) IBOutlet UIButton *recordPauseButton;
 @property (weak, nonatomic) IBOutlet UIButton *stopButton;
 @property (weak, nonatomic) IBOutlet UIButton *playButton;
-@property (strong, nonatomic) IBOutlet UIBarButtonItem *doneButton;
+
+@property (strong, nonatomic) IBOutlet UIBarButtonItem *saveButton;
+@property (strong, nonatomic) IBOutlet UIBarButtonItem *cancelButton;
 
 @property AVAudioRecorder *recorder;
 @property AVAudioPlayer *player;
@@ -39,6 +41,9 @@
     // Disable Stop/Play button when application launches
     [self.stopButton setEnabled:NO];
     [self.playButton setEnabled:NO];
+
+    self.navigationItem.leftBarButtonItem = self.cancelButton;
+    self.navigationItem.rightBarButtonItem = self.saveButton;
 
     // Set the audio file
     NSArray *pathComponents = [NSArray arrayWithObjects:
@@ -79,7 +84,6 @@
         // Start recording
         [self.recorder record];
         [self.recordPauseButton setTitle:@"Pause" forState:UIControlStateNormal];
-
     }
 
     else
@@ -140,13 +144,11 @@
 
 - (IBAction)onNextButtonPressed:(UIButton *)sender
 {
-
-
     if (self.createdCapsl.audio != nil)
     {
         //Fire off segueToContactSearch segue
         //Pass data to Search Contact VC
-        [self performSegueWithIdentifier:@"segueToContactSearch" sender:self.doneButton];
+        [self performSegueWithIdentifier:@"segueToContactSearch" sender:self.stopButton];
     }
 
     //If audio is empty, don't move forward yet
@@ -170,8 +172,9 @@
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    //If sender is Next Button, pass info to next VC
-    if ([sender isEqual:self.doneButton])
+    //If sender is SAVE button, pass the createdCpsl Info
+    //TODO: DO A CHECK IF IT'S EMPTY
+    if ([sender isEqual:self.saveButton])
     {
         CaptureViewController *captureVC = segue.destinationViewController;
         captureVC.createdCapsl = self.createdCapsl;
