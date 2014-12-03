@@ -17,9 +17,9 @@
 @property UIImage *chosenImage;
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *cancelButton;
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *doneButton;
+@property (weak, nonatomic) IBOutlet UITextView *textView;
 
 @end
-
 
 @implementation CaptureViewController
 
@@ -51,9 +51,15 @@
     self.navigationItem.leftBarButtonItem = self.cancelButton;
 }
 
+-(void)setImageView:(UIImageView *)imageView
+{
+    //if image view is set, move textview to bottom of screen
+    
+}
+
 #pragma mark Image Picker Related Methods
 
-- (IBAction)takePhotoButtonPressed:(UIButton *)sender
+- (IBAction)onImageTapped:(UITapGestureRecognizer *)sender
 {
     UIImagePickerController *picker = [[UIImagePickerController alloc] init];
     picker.delegate = self;
@@ -63,6 +69,7 @@
     [self presentViewController:picker animated:YES completion:NULL];
 }
 
+//TODO:CUSTOMIZE CAMERA OVERLAY
 - (IBAction)selectPhotoButtonPressed:(UIButton *)sender
 {
     UIImagePickerController *picker = [[UIImagePickerController alloc] init];
@@ -93,15 +100,6 @@
     [picker dismissViewControllerAnimated:YES completion:NULL];
 }
 
-- (IBAction)onImageTapped:(UITapGestureRecognizer *)sender
-{
-    UIImagePickerController *picker = [[UIImagePickerController alloc] init];
-    picker.delegate = self;
-    picker.allowsEditing = YES;
-    picker.sourceType = UIImagePickerControllerSourceTypeCamera;
-
-    [self presentViewController:picker animated:YES completion:NULL];
-}
 
 
 #pragma mark Segue and Next Button
