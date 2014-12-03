@@ -711,42 +711,53 @@
                                 <gestureRecognizers/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-CondensedBold" family="Helvetica Neue" pointSize="20"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences" returnKeyType="done"/>
                             </textView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="col-p1-YKd">
                                 <rect key="frame" x="-23" y="-15" width="46" height="30"/>
                                 <constraints>
+                                    <constraint firstAttribute="height" constant="56" id="6gC-QF-EsY"/>
                                     <constraint firstAttribute="height" constant="30" id="Irx-y8-6XE"/>
                                     <constraint firstAttribute="width" constant="72" id="Qrq-dM-7Ub"/>
                                 </constraints>
+                                <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="17"/>
                                 <state key="normal" title="Add Audio">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <variation key="default">
                                     <mask key="constraints">
+                                        <exclude reference="6gC-QF-EsY"/>
                                         <exclude reference="Irx-y8-6XE"/>
                                         <exclude reference="Qrq-dM-7Ub"/>
                                     </mask>
                                 </variation>
                                 <variation key="widthClass=compact">
+                                    <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="17"/>
                                     <mask key="constraints">
-                                        <include reference="Irx-y8-6XE"/>
-                                        <include reference="Qrq-dM-7Ub"/>
+                                        <include reference="6gC-QF-EsY"/>
+                                        <exclude reference="Irx-y8-6XE"/>
+                                        <exclude reference="Qrq-dM-7Ub"/>
                                     </mask>
                                 </variation>
                                 <connections>
-                                    <segue destination="Vgx-hR-DGD" kind="show" identifier="segueToAudio" id="2s3-Cm-t1P"/>
+                                    <segue destination="Vgx-hR-DGD" kind="presentation" identifier="segueToAudio" id="2s3-Cm-t1P"/>
                                 </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="Tjw-18-0nC" firstAttribute="width" secondItem="5n6-ct-hLT" secondAttribute="width" id="3OH-EE-Zto"/>
+                            <constraint firstItem="col-p1-YKd" firstAttribute="top" secondItem="Tjw-18-0nC" secondAttribute="bottom" id="5Aj-HE-qkF"/>
                             <constraint firstItem="Hg3-VI-LXE" firstAttribute="top" secondItem="jZE-SC-Npr" secondAttribute="bottom" id="6Ue-Rz-fwq"/>
+                            <constraint firstItem="col-p1-YKd" firstAttribute="leading" secondItem="5n6-ct-hLT" secondAttribute="leadingMargin" constant="-16" id="7tZ-nv-VkH"/>
                             <constraint firstItem="Hg3-VI-LXE" firstAttribute="top" secondItem="jZE-SC-Npr" secondAttribute="bottom" id="DUq-iH-V4S"/>
+                            <constraint firstItem="col-p1-YKd" firstAttribute="leading" secondItem="5n6-ct-hLT" secondAttribute="leadingMargin" constant="-16" id="Fu9-oT-RQX"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="col-p1-YKd" secondAttribute="trailing" constant="-16" id="I4b-U2-RUg"/>
                             <constraint firstAttribute="centerX" secondItem="col-p1-YKd" secondAttribute="centerX" id="K1j-tc-zb5"/>
                             <constraint firstItem="adF-cQ-9qF" firstAttribute="top" secondItem="Hg3-VI-LXE" secondAttribute="bottom" id="LgZ-A5-0eP"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Hg3-VI-LXE" secondAttribute="trailing" constant="-16" id="Nsy-yW-XZL"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="col-p1-YKd" secondAttribute="trailing" constant="-16" id="PXK-6X-tfe"/>
+                            <constraint firstItem="col-p1-YKd" firstAttribute="top" secondItem="Tjw-18-0nC" secondAttribute="bottom" id="Xzb-ip-Cf2"/>
                             <constraint firstAttribute="centerX" secondItem="Tjw-18-0nC" secondAttribute="centerX" id="Yw2-JK-WoR"/>
                             <constraint firstItem="col-p1-YKd" firstAttribute="top" secondItem="Tjw-18-0nC" secondAttribute="bottom" constant="45" id="ZWW-tl-wSk"/>
                             <constraint firstItem="adF-cQ-9qF" firstAttribute="top" secondItem="Hg3-VI-LXE" secondAttribute="bottom" id="iPi-Ux-goy"/>
@@ -775,7 +786,13 @@
                                 <exclude reference="3OH-EE-Zto"/>
                                 <exclude reference="Yw2-JK-WoR"/>
                                 <exclude reference="rgl-Gv-Uwu"/>
+                                <exclude reference="5Aj-HE-qkF"/>
+                                <exclude reference="7tZ-nv-VkH"/>
+                                <exclude reference="Fu9-oT-RQX"/>
+                                <exclude reference="I4b-U2-RUg"/>
                                 <exclude reference="K1j-tc-zb5"/>
+                                <exclude reference="PXK-6X-tfe"/>
+                                <exclude reference="Xzb-ip-Cf2"/>
                                 <exclude reference="ZWW-tl-wSk"/>
                                 <exclude reference="LgZ-A5-0eP"/>
                                 <exclude reference="iPi-Ux-goy"/>
@@ -799,8 +816,14 @@
                                 <include reference="3OH-EE-Zto"/>
                                 <include reference="Yw2-JK-WoR"/>
                                 <include reference="rgl-Gv-Uwu"/>
-                                <include reference="K1j-tc-zb5"/>
-                                <include reference="ZWW-tl-wSk"/>
+                                <exclude reference="5Aj-HE-qkF"/>
+                                <include reference="7tZ-nv-VkH"/>
+                                <exclude reference="Fu9-oT-RQX"/>
+                                <include reference="I4b-U2-RUg"/>
+                                <exclude reference="K1j-tc-zb5"/>
+                                <exclude reference="PXK-6X-tfe"/>
+                                <include reference="Xzb-ip-Cf2"/>
+                                <exclude reference="ZWW-tl-wSk"/>
                                 <include reference="LgZ-A5-0eP"/>
                                 <exclude reference="iPi-Ux-goy"/>
                                 <include reference="xVn-9w-Fbt"/>

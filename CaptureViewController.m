@@ -8,9 +8,10 @@
 
 #import "CaptureViewController.h"
 #import "SearchContactViewController.h"
+#import "RecordAudioViewController.h"
 #import "Capsl.h"
 #import "Capslr.h"
-#define kOFFSET_FOR_KEYBOARD 500;
+#define kOFFSET_FOR_KEYBOARD 200;
 
 @interface CaptureViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextViewDelegate>
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
@@ -134,13 +135,14 @@
         // 1. move the view's origin up so that the text field that will be hidden come above the keyboard
         // 2. increase the size of the view so that the area behind the keyboard is covered up.
         rect.origin.y -= kOFFSET_FOR_KEYBOARD;
-//        rect.size.height += kOFFSET_FOR_KEYBOARD;
+        rect.size.height = 667;
     }
     else
     {
         // revert back to the normal state.
         rect.origin.y += kOFFSET_FOR_KEYBOARD;
-//        rect.size.height -= kOFFSET_FOR_KEYBOARD;
+        rect.size.height = 667;
+
     }
     [[UIApplication sharedApplication] keyWindow].frame = rect;
 
@@ -220,6 +222,11 @@
         SearchContactViewController *searchContactVC = segue.destinationViewController;
 
         searchContactVC.createdCapsl = self.createdCapsl;
+    }
+
+    if ([segue.identifier isEqualToString:@"segueToAudio"])
+    {
+        
     }
 }
 
