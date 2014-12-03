@@ -21,6 +21,5 @@
 @property NSString *timerString;
 
 - (void)updateTimeLabelForCapsl:(Capsl *)capsl;
-- (void)updateProfilePhotoForCapsl:(Capslr *)capslr withCapsl:(Capsl *)capsl;
 
 @end
