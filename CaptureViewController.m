@@ -161,14 +161,13 @@
 - (IBAction)onImageTapped:(UITapGestureRecognizer *)sender
 {
     //Trigger an action sheet, 1 goes to camera, 2 goes to photo folder
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Select photo option" message:@"Select camera option" preferredStyle:UIAlertControllerStyleActionSheet];
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"SELECT IMAGE SOURCE" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
 
     UIAlertAction *cameraButton = [UIAlertAction actionWithTitle:@"Camera"
                                                            style:UIAlertActionStyleDefault
                                                          handler:^(UIAlertAction *action)
                                    {
 
-                                       [alert dismissViewControllerAnimated:YES completion:nil];
 
                                        if (![UIImagePickerController isSourceTypeAvailable: UIImagePickerControllerSourceTypeCamera])
                                        {
@@ -191,7 +190,28 @@
                                            
                                            [self presentViewController:picker animated:YES completion:NULL];
                                        }
+
+                                       [alert dismissViewControllerAnimated:YES completion:nil];
+
                                    }];
+
+
+    UIAlertAction *libraryButton = [UIAlertAction actionWithTitle:@"Photo Library"
+                                                           style:UIAlertActionStyleDefault
+                                                         handler:^(UIAlertAction *action)
+                                   {
+                                       UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+                                       picker.delegate = self;
+                                       picker.allowsEditing = YES;
+                                       picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+
+                                       [self presentViewController:picker animated:YES completion:NULL];
+
+                                       [alert dismissViewControllerAnimated:YES completion:nil];
+                                       
+                                   }];
+
+
 
     UIAlertAction* cancelButton = [UIAlertAction actionWithTitle:@"Cancel"
                                                            style:UIAlertActionStyleDefault
@@ -202,6 +222,7 @@
                                    }];
 
     [alert addAction:cameraButton];
+    [alert addAction:libraryButton];
     [alert addAction:cancelButton];
 
     [self presentViewController:alert
@@ -212,16 +233,6 @@
 
 }
 
-//TODO:CUSTOMIZE CAMERA OVERLAY
-- (IBAction)selectPhotoButtonPressed:(UIButton *)sender
-{
-    UIImagePickerController *picker = [[UIImagePickerController alloc] init];
-    picker.delegate = self;
-    picker.allowsEditing = YES;
-    picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-
-    [self presentViewController:picker animated:YES completion:NULL];
-}
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
