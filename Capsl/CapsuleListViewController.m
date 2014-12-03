@@ -86,14 +86,9 @@
 
         Capsl *capsl = self.capslsArray[indexPath.row];
 
-        // Setting the delivery date
-        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-
-        //TODO: change date format with no LEADING ZERO
-        [dateFormatter setDateFormat:@"MMM dd, yyyy hh:mm a"];
         NSDate *deliveryDate = capsl.deliveryTime;
 
-        cell.deliveryDateLabel.text = [NSString stringWithFormat:@"%@", [dateFormatter stringFromDate:deliveryDate]];
+        cell.deliveryDateLabel.text = [JKCountDownTimer formatDateWithDate:deliveryDate];
 
         // updating timer string...
         [cell updateTimeLabelForCapsl:capsl];
