@@ -119,7 +119,7 @@
 {
 
     [self.capslListVC updateClocks];
-//    [self.timelineRootVC updateClocks];
+    [self.timelineRootVC updateClocks];
 
 }
 

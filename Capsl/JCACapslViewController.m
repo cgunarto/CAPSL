@@ -107,11 +107,8 @@ static NSString * const reuseIdentifier = @"CapslCell";
 {
     JCACapslCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
 
-    NSArray *year = self.capslGrandArray[indexPath.section / 12];
-    NSArray *month = year[indexPath.section % 12];
 
-
-    Capsl *capsl = month[indexPath.item];
+    Capsl *capsl = [self getCapslWithIndexPath:indexPath];
 
     cell.nameLabel.text = capsl.sender.username;
 //    cell.nameLabel.text = self.monthsOfTheYear[indexPath.section % 12];
@@ -202,6 +199,32 @@ static NSString * const reuseIdentifier = @"CapslCell";
     cell.countdownButton.layer.cornerRadius = cell.countdownButton.frame.size.height/2;
 
     return cell;
+}
+
+- (void)updateClocks
+{
+    for (JCACapslCollectionViewCell *cell in self.capslView.visibleCells)
+    {
+
+        NSIndexPath *indexPath = [self.capslView indexPathForCell:cell];
+
+        Capsl *capsl = [self getCapslWithIndexPath:indexPath];
+
+        [cell updateTimeLabelForCapsl:capsl];
+
+    }
+}
+
+- (Capsl *)getCapslWithIndexPath:(NSIndexPath *)indexPath
+{
+
+    NSArray *year = self.capslGrandArray[indexPath.section / 12];
+    NSArray *month = year[indexPath.section % 12];
+
+    Capsl *capsl = month[indexPath.item];
+
+    return capsl;
+
 }
 
 @end

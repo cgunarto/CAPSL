@@ -7,7 +7,19 @@
 //
 
 #import "JCACapslCollectionViewCell.h"
+#import "Capsl.h"
+#import "JKCountDownTimer.h"
 
 @implementation JCACapslCollectionViewCell
+
+
+- (void)updateTimeLabelForCapsl:(Capsl *)capsl
+{
+
+    NSDate *deliveryDate = capsl.deliveryTime;
+    NSTimeInterval timeInterval = [deliveryDate timeIntervalSinceNow];
+    self.countdownButton.titleLabel.text = [JKCountDownTimer getStringWithTimeInterval:timeInterval];
+    
+}
 
 @end

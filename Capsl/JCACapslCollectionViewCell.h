@@ -8,11 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
+@class Capsl;
 @interface JCACapslCollectionViewCell : UICollectionViewCell
 
 @property (strong, nonatomic) IBOutlet UILabel *nameLabel;
 @property (strong, nonatomic) IBOutlet UIImageView *profilePicView;
 @property (strong, nonatomic) IBOutlet UIButton *countdownButton;
 @property (strong, nonatomic) IBOutlet UILabel *deliveryDateLabel;
+
+- (void)updateTimeLabelForCapsl:(Capsl *)capsl;
 
 @end

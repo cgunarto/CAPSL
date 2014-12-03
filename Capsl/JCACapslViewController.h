@@ -19,6 +19,7 @@
 @property NSArray *capslGrandArray;
 
 - (void)showCapslAtYear:(NSInteger)yearMultiplier andMonth:(NSInteger)monthIndex withAnimation:(BOOL)animated;
+- (void)updateClocks;
 
 @property (nonatomic, weak) id <CapslViewDelegate> delegate;
 

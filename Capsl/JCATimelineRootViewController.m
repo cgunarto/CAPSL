@@ -107,6 +107,14 @@
 
 }
 
+- (void)updateClocks
+{
+
+    [self.capslVC updateClocks];
+
+}
+
+
 - (void)processCapsls:(NSArray *)capsls
 {
     NSMutableArray *arrayOfYears = [@[] mutableCopy];
