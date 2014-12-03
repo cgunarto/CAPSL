@@ -76,10 +76,12 @@
 
         //Sender Profile Image (using categories)
         PFFile *profilePhoto = object[@"profilePhoto"];
-        cell.profileImage.image = nil;
-        [profilePhoto getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
-            cell.profileImage.image = [UIImage imageWithData:data] ;
-        }];
+        if (!cell.profileImage.image)
+        {
+            [profilePhoto getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
+                cell.profileImage.image = [UIImage imageWithData:data];
+            }];
+        }
     }];
 
     return cell;
@@ -90,7 +92,7 @@
 {
 
     Capsl *capsl = self.capslsArray[indexPath.row];
-    long elapsedSeconds = [capsl.deliveryTime timeIntervalSinceDate:[NSDate date]];
+    long elapsedSeconds = [capsl.deliveryTime timeIntervalSinceNow];
 
     if ((!capsl.viewedAt) && elapsedSeconds <= 0)
     {
