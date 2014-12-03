@@ -47,7 +47,18 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return self.capslsArray.count;
+    NSInteger arrayCount;
+
+    if ([self.capslsBarButtonItem.title isEqual:@"Sent Capsules"])
+    {
+        arrayCount =  self.capslsArray.count;
+    }
+    else if ([self.capslsBarButtonItem.title isEqual:@"Recieved Capsules"])
+    {
+        arrayCount = self.sentCapslsArray.count;
+    }
+
+    return arrayCount;
 }
 
 
@@ -82,9 +93,9 @@
         [query whereKey:@"objectId" equalTo: capsl.sender.objectId];
         [query getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error) {
 
-            cell.fromLabel.text = [NSString stringWithFormat:@"From: %@", object[@"username"]];
+            cell.capslrLabel.text = [NSString stringWithFormat:@"From: %@", object[@"username"]];
 
-            //Sender Profile Image (using categories)
+            //Sender Profile Image
             PFFile *profilePhoto = object[@"profilePhoto"];
             cell.profileImage.image = nil;
 
@@ -96,6 +107,39 @@
     else if ([self.capslsBarButtonItem.title isEqual:@"Recieved Capsules"])
     {
         Capsl *capsl = self.sentCapslsArray[indexPath.row];
+
+        //Capsl sent to...
+        PFQuery *query = [Capslr query];
+        [query whereKey:@"objectId" equalTo: capsl.recipient.objectId];
+        [query getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error) {
+
+            cell.capslrLabel.text = [NSString stringWithFormat:@"To: %@", object[@"username"]];
+
+            //Reciever Profile Image
+            PFFile *profilePhoto = object[@"profilePhoto"];
+            cell.profileImage.image = nil;
+
+            [profilePhoto getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
+                cell.profileImage.image = [UIImage imageWithData:data];
+            }];
+        }];
+
+        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+        [dateFormatter setDateFormat:@"MMM dd, yyyy hh:mm a"];
+        NSDate *deliveryDate = capsl.deliveryTime;
+
+        cell.deliveryDateLabel.text = [NSString stringWithFormat:@"%@", [dateFormatter stringFromDate:deliveryDate]];
+
+        NSDate *viewedAtDate = capsl.viewedAt;
+        if (viewedAtDate)
+        {
+            cell.timerLabel.text = @"OPENED";
+        }
+        else
+        {
+            cell.timerLabel.text = @"Not Opened";
+        }
+
     }
 
     return cell;
@@ -135,9 +179,16 @@
     for (CapslTableViewCell *cell in self.tableView.visibleCells)
     {
         NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
-        Capsl *capsl = self.capslsArray[indexPath.row];
-        
-        [cell updateTimeLabelForCapsl:capsl];
+
+        if ([self.capslsBarButtonItem.title isEqual: @"Sent Capsules"])
+        {
+            Capsl *capsl = self.capslsArray[indexPath.row];
+            [cell updateTimeLabelForCapsl:capsl];
+        }
+        else
+        {
+            nil;
+        }
     }
 }
 

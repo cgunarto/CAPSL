@@ -1573,8 +1573,8 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="capslrLabel" destination="Vw2-gs-VU7" id="Wxw-4M-av9"/>
                                             <outlet property="deliveryDateLabel" destination="8aB-UJ-cmv" id="wUW-Gj-55C"/>
-                                            <outlet property="fromLabel" destination="Vw2-gs-VU7" id="NWb-z1-ugn"/>
                                             <outlet property="profileImage" destination="HAI-ck-GMZ" id="0ej-Df-dMh"/>
                                             <outlet property="timerLabel" destination="Lji-1Y-YV1" id="Sbu-5o-cfO"/>
                                             <segue destination="N8i-uc-Ane" kind="show" identifier="segueToMessageVC" id="pQh-8B-df7"/>
