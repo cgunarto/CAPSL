@@ -7,7 +7,7 @@
 //
 
 #import "RecordAudioViewController.h"
-#import "SearchContactViewController.h"
+#import "CaptureViewController.h"
 #import "Capsl.h"
 #import "Capslr.h"
 @import AVFoundation;
@@ -16,14 +16,13 @@
 @property (weak, nonatomic) IBOutlet UIButton *recordPauseButton;
 @property (weak, nonatomic) IBOutlet UIButton *stopButton;
 @property (weak, nonatomic) IBOutlet UIButton *playButton;
+@property (strong, nonatomic) IBOutlet UIBarButtonItem *doneButton;
 
 @property AVAudioRecorder *recorder;
 @property AVAudioPlayer *player;
 
 @property NSData *audioData;
 
-@property Capsl *createdCapsl;
-@property (weak, nonatomic) IBOutlet UIButton *nextButton;
 
 @end
 
@@ -157,7 +156,7 @@
     {
         //Fire off segueToContactSearch segue
         //Pass data to Search Contact VC
-        [self performSegueWithIdentifier:@"segueToContactSearch" sender:self.nextButton];
+        [self performSegueWithIdentifier:@"segueToContactSearch" sender:self.doneButton];
     }
 
     //If audio is empty, don't move forward yet
@@ -182,10 +181,10 @@
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     //If sender is Next Button, pass info to next VC
-    if ([sender isEqual:self.nextButton])
+    if ([sender isEqual:self.doneButton])
     {
-        SearchContactViewController *searchContactVC = segue.destinationViewController;
-        searchContactVC.createdCapsl = self.createdCapsl;
+        CaptureViewController *captureVC = segue.destinationViewController;
+        captureVC.createdCapsl = self.createdCapsl;
     }
 }
 

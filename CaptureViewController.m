@@ -14,7 +14,6 @@
 
 @interface CaptureViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextViewDelegate>
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
-@property Capsl *createdCapsl;
 @property UIImage *chosenImage;
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *cancelButton;
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *doneButton;
@@ -317,6 +316,10 @@
                                                                   constant:0.0f];
     [self.view addConstraint:self.bottomTextViewConstraint];
     
+}
+
+- (IBAction)unWindToCaptureSegue:(UIStoryboardSegue *)segue
+{
 }
 
 
