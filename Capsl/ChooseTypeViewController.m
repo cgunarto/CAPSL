@@ -10,6 +10,7 @@
 #import "RecordAudioViewController.h"
 
 @interface ChooseTypeViewController ()
+@property (weak, nonatomic) IBOutlet UIImageView *imageView;
 
 @end
 
