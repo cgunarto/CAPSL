@@ -17,7 +17,7 @@
 @interface CapsuleListViewController () <UITableViewDataSource, UITableViewDelegate>
 
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
-@property (strong, nonatomic) IBOutlet UIBarButtonItem *sentCapslsBarButtonItem;
+@property (strong, nonatomic) IBOutlet UIBarButtonItem *capslsBarButtonItem;
 
 @end
 
@@ -130,10 +130,14 @@
 
 - (IBAction)onSentCapsulesButtonPressed:(UIBarButtonItem *)sender
 {
-//    if (<#condition#>) {
-//        <#statements#>
-//    }
-//    self.sentCapslsBarButtonItem.title = @"Received Messages";
+    if ([self.capslsBarButtonItem.title isEqual: @"Sent Capsules"])
+    {
+        self.capslsBarButtonItem.title = @"Recieved Capsules";
+    }
+    else if ([self.capslsBarButtonItem.title isEqual:@"Recieved Capsules"])
+    {
+        self.capslsBarButtonItem.title = @"Sent Capsules";
+    }
 }
 
 // Alert when timer expires
