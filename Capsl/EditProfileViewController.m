@@ -29,8 +29,6 @@
 {
     [super viewWillAppear:animated];
 
-    NSLog(@"%@", self.currentProfilePicture);
-
     self.infoArray = @[kNameLabel, kUsernameLabel, kEmailLabel];
 }
 
@@ -91,10 +89,43 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-//    if (indexPath.section == 1)
-//    {
-//        <#statements#>
-//    }
+    if (indexPath.section == 0)
+    {
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil
+                                                                       message:nil
+                                                                preferredStyle:UIAlertControllerStyleActionSheet];
+
+        UIAlertAction *chooseFromLibrary = [UIAlertAction actionWithTitle:@"Choose from Library"
+                                                                    style:UIAlertActionStyleDefault
+                                                                  handler:^(UIAlertAction *action) {
+            // add code here
+        }];
+
+        UIAlertAction *takePhoto = [UIAlertAction actionWithTitle:@"Take Photo"
+                                                            style:UIAlertActionStyleDefault
+                                                          handler:^(UIAlertAction *action) {
+            // add code here
+        }];
+
+        UIAlertAction *delete = [UIAlertAction actionWithTitle:@"Delete"
+                                                         style:UIAlertActionStyleDefault
+                                                       handler:^(UIAlertAction *action) {
+            // add code here
+        }];
+
+        UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"Cancel"
+                                                         style:UIAlertActionStyleCancel
+                                                       handler:nil];
+
+        [alert addAction:chooseFromLibrary];
+        [alert addAction:takePhoto];
+        [alert addAction:delete];
+        [alert addAction:cancel];
+
+        [self presentViewController:alert animated:YES completion:nil];
+
+
+    }
 }
 
 @end
