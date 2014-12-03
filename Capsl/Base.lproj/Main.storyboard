@@ -816,7 +816,7 @@
                                     </mask>
                                 </variation>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="359-WG-P4Z">
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="359-WG-P4Z">
                                 <rect key="frame" x="30" y="344" width="88" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="88" id="4nx-Np-Wgn"/>
@@ -856,9 +856,10 @@
                                         <exclude reference="mkW-52-JGH"/>
                                     </mask>
                                 </variation>
-                                <variation key="widthClass=compact">
+                                <variation key="widthClass=compact" ambiguous="YES">
+                                    <rect key="frame" x="0.0" y="236" width="400" height="120"/>
                                     <mask key="constraints">
-                                        <include reference="mkW-52-JGH"/>
+                                        <exclude reference="mkW-52-JGH"/>
                                     </mask>
                                 </variation>
                             </textView>
@@ -888,17 +889,17 @@
                                 <exclude reference="Tjw-18-0nC"/>
                             </mask>
                             <mask key="constraints">
-                                <exclude reference="Nsy-yW-XZL"/>
-                                <exclude reference="tdb-jM-Nsv"/>
-                                <exclude reference="uuY-GI-8hE"/>
                                 <exclude reference="EmF-l3-b4J"/>
                                 <exclude reference="O7L-5Y-ag2"/>
-                                <exclude reference="R8o-gO-vZb"/>
-                                <exclude reference="nuW-F2-28x"/>
                                 <exclude reference="S6m-eZ-rRC"/>
                                 <exclude reference="YBF-j5-hVT"/>
                                 <exclude reference="bxG-jH-1iM"/>
                                 <exclude reference="heY-Fr-8Xf"/>
+                                <exclude reference="Nsy-yW-XZL"/>
+                                <exclude reference="tdb-jM-Nsv"/>
+                                <exclude reference="uuY-GI-8hE"/>
+                                <exclude reference="R8o-gO-vZb"/>
+                                <exclude reference="nuW-F2-28x"/>
                                 <exclude reference="iPi-Ux-goy"/>
                             </mask>
                         </variation>
@@ -908,20 +909,20 @@
                                 <include reference="Tjw-18-0nC"/>
                             </mask>
                             <mask key="constraints">
+                                <include reference="EmF-l3-b4J"/>
+                                <include reference="O7L-5Y-ag2"/>
+                                <exclude reference="S6m-eZ-rRC"/>
+                                <exclude reference="YBF-j5-hVT"/>
+                                <exclude reference="bxG-jH-1iM"/>
+                                <exclude reference="heY-Fr-8Xf"/>
                                 <exclude reference="6Ue-Rz-fwq"/>
                                 <include reference="Nsy-yW-XZL"/>
                                 <exclude reference="VgD-ZO-h0C"/>
                                 <exclude reference="g3O-3t-lry"/>
                                 <include reference="tdb-jM-Nsv"/>
                                 <include reference="uuY-GI-8hE"/>
-                                <include reference="EmF-l3-b4J"/>
-                                <include reference="O7L-5Y-ag2"/>
                                 <include reference="R8o-gO-vZb"/>
                                 <include reference="nuW-F2-28x"/>
-                                <include reference="S6m-eZ-rRC"/>
-                                <include reference="YBF-j5-hVT"/>
-                                <include reference="bxG-jH-1iM"/>
-                                <include reference="heY-Fr-8Xf"/>
                                 <exclude reference="cFv-ot-lHW"/>
                                 <include reference="iPi-Ux-goy"/>
                             </mask>
@@ -938,11 +939,6 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="22T-8U-pdV" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="WDk-x7-13s" userLabel="Exit" sceneMemberID="exit"/>
-                <barButtonItem systemItem="cancel" id="z6Q-Dn-DDG">
-                    <connections>
-                        <segue destination="WDk-x7-13s" kind="unwind" unwindAction="unWindSegue:" id="L1N-KJ-aGl"/>
-                    </connections>
-                </barButtonItem>
                 <barButtonItem systemItem="done" id="n73-cQ-FAH">
                     <connections>
                         <action selector="onDoneButtonPressed:" destination="ILH-s3-dTC" id="ckK-pm-aqO"/>
@@ -954,6 +950,11 @@
                         <outlet property="delegate" destination="ILH-s3-dTC" id="db2-B6-hyP"/>
                     </connections>
                 </tapGestureRecognizer>
+                <barButtonItem systemItem="cancel" id="z6Q-Dn-DDG">
+                    <connections>
+                        <segue destination="WDk-x7-13s" kind="unwind" unwindAction="unWindSegue:" id="L1N-KJ-aGl"/>
+                    </connections>
+                </barButtonItem>
             </objects>
             <point key="canvasLocation" x="2992.5" y="438"/>
         </scene>
