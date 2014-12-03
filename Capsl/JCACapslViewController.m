@@ -115,6 +115,8 @@ static NSString * const reuseIdentifier = @"CapslCell";
 
     [self drawCell:cell];
 
+    [cell updateTimeLabelForCapsl:capsl];
+
     cell.profilePicView.image = [UIImage imageNamed:@"profilepic1"];
 
     if (!capsl.objectId)
@@ -185,6 +187,7 @@ static NSString * const reuseIdentifier = @"CapslCell";
     NSLayoutConstraint *heightConstraint = [NSLayoutConstraint constraintWithItem:cell.profilePicView attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:cell.profilePicView attribute:NSLayoutAttributeWidth multiplier:1.0 constant:0];
 
     [cell addSubview:cell.profilePicView];
+    [cell sendSubviewToBack:cell.profilePicView];
     [cell addConstraints:@[widthConstraint, heightConstraint]];
 
     cell.profilePicView.layer.cornerRadius = cell.frame.size.width/2;
@@ -197,6 +200,9 @@ static NSString * const reuseIdentifier = @"CapslCell";
 //    cell.profilePicView.layer.borderWidth = 1.0;
 
     cell.countdownButton.layer.cornerRadius = cell.countdownButton.frame.size.height/2;
+    cell.countdownButton.clipsToBounds = YES;
+    cell.countdownButton.backgroundColor = [UIColor colorWithHue:0.496 saturation:0.791 brightness:0.554 alpha:1.000];
+
 
     return cell;
 }

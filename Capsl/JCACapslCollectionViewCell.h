@@ -13,8 +13,8 @@
 
 @property (strong, nonatomic) IBOutlet UILabel *nameLabel;
 @property (strong, nonatomic) IBOutlet UIImageView *profilePicView;
-@property (strong, nonatomic) IBOutlet UIButton *countdownButton;
 @property (strong, nonatomic) IBOutlet UILabel *deliveryDateLabel;
+@property (strong, nonatomic) IBOutlet UILabel *countdownButton;
 
 - (void)updateTimeLabelForCapsl:(Capsl *)capsl;
 
