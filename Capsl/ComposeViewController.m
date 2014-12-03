@@ -52,13 +52,10 @@
          forControlEvents:UIControlEventValueChanged];
 
     [self.deliveryTimeTextField setInputView:self.timePicker];
-
-    NSLog(@"%@", self.createdCapsl.recipient);
 }
 
 -(void)updateDateTextField:(id)sender
 {
-    NSLog(@"textfield value changed");
     UIDatePicker *picker = (UIDatePicker*)self.deliveryDateTextField.inputView;
 
     //Setting a minimum and maximum date for TimeTextField that is 24 hours of the chosen date from DateTextField
@@ -74,7 +71,6 @@
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
     [dateFormat setDateFormat:@"dd-MM-yyyy"];
     NSString *dateString = [dateFormat stringFromDate:pickerDate];
-    NSLog(@"%@", dateString);
 
     //TODO: use NSDateFormatter
     self.deliveryDateTextField.text = [NSString stringWithFormat:@"%@",dateString];
@@ -89,7 +85,6 @@
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
     [dateFormat setDateFormat:@"dd-MM-yyyy HH:mm"];
     NSString *dateString = [dateFormat stringFromDate:pickerDate];
-    NSLog(@"%@", dateString);
 
     self.deliveryTimeTextField.text = [NSString stringWithFormat:@"%@",dateString];
 
@@ -149,18 +144,5 @@
 
 
 }
-
-
-//set Time Date
-//set recipient - Capslr
-
-
-//create Capsl object with file, time delivered, sender Capslr (PFUser CurrentUser)
-//upload it to Parse
-
-
-
-
-
 
 @end

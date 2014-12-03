@@ -10,14 +10,18 @@
 #import "SearchContactViewController.h"
 #import "Capsl.h"
 #import "Capslr.h"
+#define kOFFSET_FOR_KEYBOARD 500;
 
-@interface CaptureViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
+@interface CaptureViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextViewDelegate>
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
 @property Capsl *createdCapsl;
 @property UIImage *chosenImage;
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *cancelButton;
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *doneButton;
 @property (weak, nonatomic) IBOutlet UITextView *textView;
+
+//+ to go to bottom - to go to top
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *bottomTextViewConstraint;
 
 @end
 
@@ -28,10 +32,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self.view addSubview:self.textView];
 
-    self.textView.translatesAutoresizingMaskIntoConstraints = NO;
-    [self setTextViewToCenter];
+    self.textView.delegate = self;
 
     //Setting CPSL sender
     [Capslr returnCapslrFromPFUser:[PFUser currentUser] withCompletion:^(Capslr *currentCapslr, NSError *error)
@@ -45,60 +47,105 @@
     self.navigationItem.leftBarButtonItem = self.cancelButton;
 }
 
--(void)setImageView:(UIImageView *)imageView
+- (void)viewWillAppear:(BOOL)animated
 {
-    //if image view is set, move textview to bottom of screen
-    
+    [super viewWillAppear:animated];
+    // register for keyboard notifications
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWillShow)
+                                                 name:UIKeyboardWillShowNotification
+                                               object:nil];
+
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWillHide)
+                                                 name:UIKeyboardWillHideNotification
+                                               object:nil];
 }
 
-
-//Setting textView to the center of the screen
-- (void)setTextViewToCenter;
+- (void)viewWillDisappear:(BOOL)animated
 {
-    NSLayoutConstraint *constraint = [NSLayoutConstraint
-                                      constraintWithItem:self.textView
-                                      attribute:NSLayoutAttributeCenterX
-                                      relatedBy:NSLayoutRelationEqual
-                                      toItem:self.view
-                                      attribute:NSLayoutAttributeCenterX
-                                      multiplier:1.0f
-                                      constant:0.0f];
+    [super viewWillDisappear:animated];
+    // unregister for keyboard notifications while not visible.
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:UIKeyboardWillShowNotification
+                                                  object:nil];
 
-    [self.view addConstraint:constraint];
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:UIKeyboardWillHideNotification
+                                                  object:nil];
+}
 
-    constraint = [NSLayoutConstraint
-                  constraintWithItem:self.textView
-                  attribute:NSLayoutAttributeCenterY
-                  relatedBy:NSLayoutRelationEqual
-                  toItem:self.view
-                  attribute:NSLayoutAttributeCenterY
-                  multiplier:1.0f
-                  constant:0.0f];
+- (void)keyboardWillShow
+{
+    //If image is not nil, move the keyboard up by Keyboard height
+    //If image is nil, don't do anything
+    if (self.imageView.image)
+    {
+//        [self setTextViewToTop];
 
-    [self.view addConstraint:constraint];
+//
+//        //WHY DOESN'T THIS WORK?
+        CGRect rect = [[UIApplication sharedApplication] keyWindow].frame;
+        rect.origin.y -= kOFFSET_FOR_KEYBOARD;
+        rect.size.height += kOFFSET_FOR_KEYBOARD;
+        [[UIApplication sharedApplication] keyWindow].frame = rect;
 
-    constraint = [NSLayoutConstraint constraintWithItem:self.textView
-                                              attribute:NSLayoutAttributeWidth
-                                              relatedBy:NSLayoutRelationEqual
-                                                 toItem:self.view
-                                              attribute:NSLayoutAttributeWidth
-                                             multiplier:1
-                                               constant:0];
+                // Animate the current view out of the way
+        if ([[UIApplication sharedApplication] keyWindow].frame.origin.y >= 0)
+        {
+            [self setViewMovedUp:YES];
+        }
+        else if ([[UIApplication sharedApplication] keyWindow].frame.origin.y < 0)
+        {
+            [self setViewMovedUp:NO];
+        }
+    }
 
-    [self.view addConstraint:constraint];
+}
 
-    constraint = [NSLayoutConstraint constraintWithItem:self.textView
-                                              attribute:NSLayoutAttributeHeight
-                                              relatedBy:NSLayoutRelationEqual
-                                                 toItem:self.view
-                                              attribute:NSLayoutAttributeHeight
-                                             multiplier:0.3
-                                               constant:0];
+- (void)keyboardWillHide
+{
+    //If image is not nil, move the keyboard down by Keyboard height
+    //If image is nil, don't do anything
+    if (self.imageView.image)
+    {
+        // Animate the current view out of the way
+        if ([[UIApplication sharedApplication] keyWindow].frame.origin.y >= 0)
+        {
+            [self setViewMovedUp:YES];
+        }
+        else if ([[UIApplication sharedApplication] keyWindow].frame.origin.y < 0)
+        {
+            [self setViewMovedUp:NO];
+        }
+//        [self setTextViewToBottom];
+    }
+}
 
-    [self.view addConstraint:constraint];
+//method to move the view up/down whenever the keyboard is shown/dismissed
+-(void)setViewMovedUp:(BOOL)movedUp
+{
+    [UIView beginAnimations:nil context:NULL];
+    [UIView setAnimationDuration:0.3]; // if you want to slide up the view
 
+    //Move the whole application's frame instead of the view
+    CGRect rect = [[UIApplication sharedApplication] keyWindow].frame;
+    if (movedUp)
+    {
+        // 1. move the view's origin up so that the text field that will be hidden come above the keyboard
+        // 2. increase the size of the view so that the area behind the keyboard is covered up.
+        rect.origin.y -= kOFFSET_FOR_KEYBOARD;
+//        rect.size.height += kOFFSET_FOR_KEYBOARD;
+    }
+    else
+    {
+        // revert back to the normal state.
+        rect.origin.y += kOFFSET_FOR_KEYBOARD;
+//        rect.size.height -= kOFFSET_FOR_KEYBOARD;
+    }
+    [[UIApplication sharedApplication] keyWindow].frame = rect;
 
-
+    [UIView commitAnimations];
 }
 
 
@@ -151,8 +198,10 @@
     [picker dismissViewControllerAnimated:YES completion:NULL];
 
     //Settign CPSL image to be sent
-    NSData *imageData = UIImageJPEGRepresentation(self.chosenImage, 0.05f);
+    NSData *imageData = UIImageJPEGRepresentation(self.chosenImage, 1.0f);
     self.createdCapsl.photo = [PFFile fileWithName:@"image.jpg" data:imageData];
+
+    [self setTextViewToBottom];
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
@@ -172,11 +221,8 @@
         SearchContactViewController *searchContactVC = segue.destinationViewController;
 
         searchContactVC.createdCapsl = self.createdCapsl;
-
     }
-
 }
-
 
 - (IBAction)onDoneButtonPressed:(UIBarButtonItem *)sender
 {
@@ -199,6 +245,78 @@
                          completion:nil];
         
     }
+}
+
+#pragma mark Text View Delegate
+
+- (void)textViewDidBeginEditing:(UITextView *)textView
+{
+//    [self.navigationController setNavigationBarHidden:YES];
+
+    if ([textView.text isEqualToString:@"Enter Text Here"])
+    {
+        textView.text = @"";
+    }
+
+    if (self.imageView.image)
+    {
+        //move the main view, so that the keyboard does not hide it.
+        if  (self.textView.frame.origin.y >= 0)
+        {
+            [self setViewMovedUp:YES];
+        }
+    }
+}
+
+- (void)textViewDidEndEditing:(UITextView *)textView
+{
+    self.createdCapsl.text = self.textView.text;
+    [self resignFirstResponder];
+    [self.navigationController setNavigationBarHidden:NO];
+}
+
+- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
+{
+    if ([text isEqualToString:@"\n"])
+    {
+        [textView resignFirstResponder];
+    }
+    return YES;
+}
+
+#pragma mark Text View Placement
+- (void)setTextViewToBottom
+{
+    [self.view removeConstraint:self.bottomTextViewConstraint];
+
+    self.textView.translatesAutoresizingMaskIntoConstraints = NO;
+
+    self.bottomTextViewConstraint = [NSLayoutConstraint constraintWithItem:self.textView
+                                                                 attribute:NSLayoutAttributeBottom
+                                                                 relatedBy:NSLayoutRelationEqual
+                                                                    toItem:self.view
+                                                                 attribute:NSLayoutAttributeBottom
+                                                                multiplier:1.0f
+                                                                  constant:0.0f];
+    [self.view addConstraint:self.bottomTextViewConstraint];
+
+}
+
+- (void)setTextViewToTop
+{
+    [self.view removeConstraint:self.bottomTextViewConstraint];
+
+    self.textView.translatesAutoresizingMaskIntoConstraints = NO;
+
+    self.bottomTextViewConstraint = [NSLayoutConstraint constraintWithItem:self.textView
+                                                                 attribute:NSLayoutAttributeTop
+                                                                 relatedBy:NSLayoutRelationEqual
+                                                                    toItem:self.view
+                                                                 attribute:NSLayoutAttributeTop
+                                                                multiplier:1.0f
+                                                                  constant:0.0f];
+    [self.view addConstraint:self.bottomTextViewConstraint];
+    
 }
 
 
