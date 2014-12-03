@@ -819,35 +819,10 @@
                                     </mask>
                                 </variation>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="359-WG-P4Z">
-                                <rect key="frame" x="30" y="344" width="88" height="30"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="88" id="4nx-Np-Wgn"/>
-                                    <constraint firstAttribute="height" constant="30" id="aVM-XD-hnI"/>
-                                </constraints>
-                                <state key="normal" title="Select Photo">
-                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <variation key="default">
-                                    <mask key="constraints">
-                                        <exclude reference="4nx-Np-Wgn"/>
-                                        <exclude reference="aVM-XD-hnI"/>
-                                    </mask>
-                                </variation>
-                                <variation key="widthClass=compact">
-                                    <mask key="constraints">
-                                        <include reference="4nx-Np-Wgn"/>
-                                        <include reference="aVM-XD-hnI"/>
-                                    </mask>
-                                </variation>
-                                <connections>
-                                    <action selector="selectPhotoButtonPressed:" destination="ILH-s3-dTC" eventType="touchUpInside" id="BpW-Bs-TRD"/>
-                                </connections>
-                            </button>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Enter Text Here" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Tjw-18-0nC">
                                 <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                                 <color key="backgroundColor" white="1" alpha="0.39000000000000001" colorSpace="calibratedWhite"/>
+                                <gestureRecognizers/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="100" id="2fA-fa-Jfo"/>
                                     <constraint firstAttribute="width" constant="394" id="Ahu-Bu-rkX"/>
@@ -874,7 +849,7 @@
                                     </mask>
                                 </variation>
                                 <variation key="widthClass=compact" ambiguous="YES">
-                                    <rect key="frame" x="0.0" y="0.0" width="0.0" height="0.0"/>
+                                    <rect key="frame" x="45" y="353" width="300" height="100"/>
                                     <mask key="constraints">
                                         <exclude reference="2fA-fa-Jfo"/>
                                         <exclude reference="Ahu-Bu-rkX"/>
@@ -898,10 +873,8 @@
                             <constraint firstAttribute="trailingMargin" secondItem="Tjw-18-0nC" secondAttribute="trailing" constant="-16" id="JZM-re-7c0"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Hg3-VI-LXE" secondAttribute="trailing" constant="-16" id="Nsy-yW-XZL"/>
                             <constraint firstAttribute="centerX" secondItem="VHH-hP-3OW" secondAttribute="centerX" id="O7L-5Y-ag2"/>
-                            <constraint firstAttribute="centerX" secondItem="359-WG-P4Z" secondAttribute="centerX" id="R8o-gO-vZb"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Tjw-18-0nC" secondAttribute="trailing" constant="-16" id="TlA-0W-ZNJ"/>
                             <constraint firstItem="adF-cQ-9qF" firstAttribute="top" secondItem="Hg3-VI-LXE" secondAttribute="bottom" id="iPi-Ux-goy"/>
-                            <constraint firstItem="359-WG-P4Z" firstAttribute="top" secondItem="VHH-hP-3OW" secondAttribute="bottom" constant="8" id="nuW-F2-28x"/>
                             <constraint firstItem="Hg3-VI-LXE" firstAttribute="top" secondItem="5n6-ct-hLT" secondAttribute="topMargin" id="tdb-jM-Nsv"/>
                             <constraint firstItem="Hg3-VI-LXE" firstAttribute="leading" secondItem="5n6-ct-hLT" secondAttribute="leadingMargin" constant="-16" id="uuY-GI-8hE"/>
                             <constraint firstItem="Tjw-18-0nC" firstAttribute="leading" secondItem="5n6-ct-hLT" secondAttribute="leadingMargin" constant="-16" id="yYB-Fu-Zrm"/>
@@ -923,8 +896,6 @@
                                 <exclude reference="Nsy-yW-XZL"/>
                                 <exclude reference="tdb-jM-Nsv"/>
                                 <exclude reference="uuY-GI-8hE"/>
-                                <exclude reference="R8o-gO-vZb"/>
-                                <exclude reference="nuW-F2-28x"/>
                                 <exclude reference="52d-th-5q0"/>
                                 <exclude reference="iPi-Ux-goy"/>
                             </mask>
@@ -946,8 +917,6 @@
                                 <include reference="Nsy-yW-XZL"/>
                                 <include reference="tdb-jM-Nsv"/>
                                 <include reference="uuY-GI-8hE"/>
-                                <include reference="R8o-gO-vZb"/>
-                                <include reference="nuW-F2-28x"/>
                                 <exclude reference="52d-th-5q0"/>
                                 <include reference="iPi-Ux-goy"/>
                             </mask>

@@ -61,6 +61,7 @@
 }
 
 
+
 - (void)setTextViewToBottom
 {
     NSLayoutConstraint *constraint = [NSLayoutConstraint
@@ -205,7 +206,7 @@
     [picker dismissViewControllerAnimated:YES completion:NULL];
 
     //Settign CPSL image to be sent
-    NSData *imageData = UIImageJPEGRepresentation(self.chosenImage, 0.05f);
+    NSData *imageData = UIImageJPEGRepresentation(self.chosenImage, 1.0f);
     self.createdCapsl.photo = [PFFile fileWithName:@"image.jpg" data:imageData];
 }
 
@@ -259,6 +260,10 @@
 
 - (void)textViewDidBeginEditing:(UITextView *)textView
 {
+    [self setTextViewToCenter];
+    //TODO:hides NAV BAR controller
+    [self.navigationController setNavigationBarHidden:YES];
+
     if ([textView.text isEqualToString:@"Enter Text Here"])
     {
         textView.text = @"";
@@ -267,8 +272,14 @@
 
 - (void)textViewDidEndEditing:(UITextView *)textView
 {
+    if (self.imageView.image)
+    {
+        [self setTextViewToBottom];
+    }
     self.createdCapsl.text = self.textView.text;
     [self resignFirstResponder];
+    [self.navigationController setNavigationBarHidden:NO];
+
 }
 
 
