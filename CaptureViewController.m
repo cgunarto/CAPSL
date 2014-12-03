@@ -135,14 +135,13 @@
         // 1. move the view's origin up so that the text field that will be hidden come above the keyboard
         // 2. increase the size of the view so that the area behind the keyboard is covered up.
         rect.origin.y -= kOFFSET_FOR_KEYBOARD;
-        rect.size.height = 667;
+        rect.size.height = [UIScreen mainScreen].bounds.size.height;
     }
     else
     {
         // revert back to the normal state.
         rect.origin.y += kOFFSET_FOR_KEYBOARD;
-        rect.size.height = 667;
-
+        rect.size.height = [UIScreen mainScreen].bounds.size.height;
     }
     [[UIApplication sharedApplication] keyWindow].frame = rect;
 
@@ -224,9 +223,13 @@
         searchContactVC.createdCapsl = self.createdCapsl;
     }
 
+    //Passig whatever created to RecordAudioVC so audioVC can add audio files
+    //Accessing it through the NavVC
     if ([segue.identifier isEqualToString:@"segueToAudio"])
     {
-        
+        UINavigationController *navVC = segue.destinationViewController;
+        RecordAudioViewController *recordVC = navVC.childViewControllers[0];
+        recordVC.createdCapsl = self.createdCapsl;
     }
 }
 

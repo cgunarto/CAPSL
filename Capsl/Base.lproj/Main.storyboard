@@ -576,6 +576,7 @@
                             </mask>
                         </variation>
                     </view>
+                    <navigationItem key="navigationItem" id="gaZ-zy-Ftb"/>
                     <connections>
                         <outlet property="doneButton" destination="4bY-XC-FNH" id="eF8-RR-ANY"/>
                         <outlet property="playButton" destination="SeJ-cV-lRw" id="9hx-aK-Uz5"/>
@@ -591,7 +592,7 @@
                     </connections>
                 </barButtonItem>
             </objects>
-            <point key="canvasLocation" x="3000" y="-282"/>
+            <point key="canvasLocation" x="3918" y="-282"/>
         </scene>
         <!--Record Video View Controller-->
         <scene sceneID="hZI-Fm-ack">
@@ -715,10 +716,12 @@
                             </textView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="col-p1-YKd">
                                 <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                <color key="backgroundColor" red="1" green="0.40000000596046448" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="56" id="6gC-QF-EsY"/>
                                     <constraint firstAttribute="height" constant="30" id="Irx-y8-6XE"/>
                                     <constraint firstAttribute="width" constant="72" id="Qrq-dM-7Ub"/>
+                                    <constraint firstAttribute="height" constant="56" id="h0Q-1P-t5D"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="17"/>
                                 <state key="normal" title="Add Audio">
@@ -729,18 +732,20 @@
                                         <exclude reference="6gC-QF-EsY"/>
                                         <exclude reference="Irx-y8-6XE"/>
                                         <exclude reference="Qrq-dM-7Ub"/>
+                                        <exclude reference="h0Q-1P-t5D"/>
                                     </mask>
                                 </variation>
                                 <variation key="widthClass=compact">
                                     <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="17"/>
                                     <mask key="constraints">
-                                        <include reference="6gC-QF-EsY"/>
+                                        <exclude reference="6gC-QF-EsY"/>
                                         <exclude reference="Irx-y8-6XE"/>
                                         <exclude reference="Qrq-dM-7Ub"/>
+                                        <include reference="h0Q-1P-t5D"/>
                                     </mask>
                                 </variation>
                                 <connections>
-                                    <segue destination="Vgx-hR-DGD" kind="presentation" identifier="segueToAudio" id="2s3-Cm-t1P"/>
+                                    <segue destination="sly-Qd-pFA" kind="presentation" identifier="segueToAudio" id="2s3-Cm-t1P"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -757,11 +762,15 @@
                             <constraint firstItem="adF-cQ-9qF" firstAttribute="top" secondItem="Hg3-VI-LXE" secondAttribute="bottom" id="LgZ-A5-0eP"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Hg3-VI-LXE" secondAttribute="trailing" constant="-16" id="Nsy-yW-XZL"/>
                             <constraint firstAttribute="trailingMargin" secondItem="col-p1-YKd" secondAttribute="trailing" constant="-16" id="PXK-6X-tfe"/>
+                            <constraint firstItem="col-p1-YKd" firstAttribute="leading" secondItem="5n6-ct-hLT" secondAttribute="leadingMargin" constant="-16" id="RmD-bh-IpV"/>
+                            <constraint firstItem="adF-cQ-9qF" firstAttribute="top" secondItem="col-p1-YKd" secondAttribute="bottom" constant="175" id="TVd-Wm-pxA"/>
                             <constraint firstItem="col-p1-YKd" firstAttribute="top" secondItem="Tjw-18-0nC" secondAttribute="bottom" id="Xzb-ip-Cf2"/>
                             <constraint firstAttribute="centerX" secondItem="Tjw-18-0nC" secondAttribute="centerX" id="Yw2-JK-WoR"/>
                             <constraint firstItem="col-p1-YKd" firstAttribute="top" secondItem="Tjw-18-0nC" secondAttribute="bottom" constant="45" id="ZWW-tl-wSk"/>
+                            <constraint firstItem="adF-cQ-9qF" firstAttribute="top" secondItem="col-p1-YKd" secondAttribute="bottom" constant="175" id="cMs-bu-UZ7"/>
                             <constraint firstItem="adF-cQ-9qF" firstAttribute="top" secondItem="Hg3-VI-LXE" secondAttribute="bottom" id="iPi-Ux-goy"/>
                             <constraint firstAttribute="centerX" secondItem="VHH-hP-3OW" secondAttribute="centerX" id="jgQ-pG-w6r"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="col-p1-YKd" secondAttribute="trailing" constant="-16" id="jkz-9t-OC2"/>
                             <constraint firstItem="Hg3-VI-LXE" firstAttribute="bottom" secondItem="5n6-ct-hLT" secondAttribute="bottomMargin" id="lBf-SF-IzZ"/>
                             <constraint firstItem="VHH-hP-3OW" firstAttribute="top" secondItem="jZE-SC-Npr" secondAttribute="bottom" constant="56" id="r19-jv-XC2"/>
                             <constraint firstItem="Tjw-18-0nC" firstAttribute="height" secondItem="5n6-ct-hLT" secondAttribute="height" multiplier="0.3" constant="20" id="rgl-Gv-Uwu"/>
@@ -792,9 +801,13 @@
                                 <exclude reference="I4b-U2-RUg"/>
                                 <exclude reference="K1j-tc-zb5"/>
                                 <exclude reference="PXK-6X-tfe"/>
+                                <exclude reference="RmD-bh-IpV"/>
                                 <exclude reference="Xzb-ip-Cf2"/>
                                 <exclude reference="ZWW-tl-wSk"/>
+                                <exclude reference="jkz-9t-OC2"/>
                                 <exclude reference="LgZ-A5-0eP"/>
+                                <exclude reference="TVd-Wm-pxA"/>
+                                <exclude reference="cMs-bu-UZ7"/>
                                 <exclude reference="iPi-Ux-goy"/>
                                 <exclude reference="xVn-9w-Fbt"/>
                             </mask>
@@ -817,14 +830,18 @@
                                 <include reference="Yw2-JK-WoR"/>
                                 <include reference="rgl-Gv-Uwu"/>
                                 <exclude reference="5Aj-HE-qkF"/>
-                                <include reference="7tZ-nv-VkH"/>
+                                <exclude reference="7tZ-nv-VkH"/>
                                 <exclude reference="Fu9-oT-RQX"/>
-                                <include reference="I4b-U2-RUg"/>
+                                <exclude reference="I4b-U2-RUg"/>
                                 <exclude reference="K1j-tc-zb5"/>
                                 <exclude reference="PXK-6X-tfe"/>
-                                <include reference="Xzb-ip-Cf2"/>
+                                <include reference="RmD-bh-IpV"/>
+                                <exclude reference="Xzb-ip-Cf2"/>
                                 <exclude reference="ZWW-tl-wSk"/>
+                                <include reference="jkz-9t-OC2"/>
                                 <include reference="LgZ-A5-0eP"/>
+                                <exclude reference="TVd-Wm-pxA"/>
+                                <include reference="cMs-bu-UZ7"/>
                                 <exclude reference="iPi-Ux-goy"/>
                                 <include reference="xVn-9w-Fbt"/>
                             </mask>
@@ -2509,6 +2526,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fDb-9k-pt4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2146.5" y="1162"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="Ope-89-EtW">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="sly-Qd-pFA" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="8FD-Yh-MQ4">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="Vgx-hR-DGD" kind="relationship" relationship="rootViewController" id="DGO-1h-PyJ"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="H3J-uO-wwh" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3000" y="-282"/>
         </scene>
     </scenes>
     <resources>

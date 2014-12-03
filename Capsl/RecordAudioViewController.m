@@ -63,16 +63,6 @@
     self.recorder.delegate = self;
     self.recorder.meteringEnabled = YES;
     [self.recorder prepareToRecord];
-
-    //Setting CPSL sender
-    [Capslr returnCapslrFromPFUser:[PFUser currentUser] withCompletion:^(Capslr *currentCapslr, NSError *error)
-     {
-         self.createdCapsl.sender = currentCapslr;
-     }];
-
-    //Initializing Capsl object and its type
-    self.createdCapsl = [Capsl object];
-    self.createdCapsl.type = @"audio";
 }
 
 - (IBAction)onRecordButtonTapped:(UIButton *)sender
