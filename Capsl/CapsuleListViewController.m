@@ -58,7 +58,7 @@
 
     // Setting the delivery date
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"MMM dd, yyyy | "];
+    [dateFormatter setDateFormat:@"MMM dd, yyyy hh:mm a"];
     NSDate *deliveryDate = capsl.deliveryTime;
 
     cell.deliveryDateLabel.text = [NSString stringWithFormat:@"%@", [dateFormatter stringFromDate:deliveryDate]];
@@ -130,7 +130,10 @@
 
 - (IBAction)onSentCapsulesButtonPressed:(UIBarButtonItem *)sender
 {
-    self.navigationController.navigationItem.rightBarButtonItem.title = @"Received Messages";
+//    if (<#condition#>) {
+//        <#statements#>
+//    }
+//    self.sentCapslsBarButtonItem.title = @"Received Messages";
 }
 
 // Alert when timer expires
