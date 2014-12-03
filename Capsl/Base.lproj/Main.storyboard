@@ -1678,7 +1678,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <variation key="widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="62" y="115" width="277" height="50"/>
+                                    <rect key="frame" x="63" y="170" width="277" height="50"/>
                                 </variation>
                                 <connections>
                                     <segue destination="ILH-s3-dTC" kind="presentation" id="whG-5e-0rx"/>
@@ -1691,7 +1691,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <variation key="widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="62" y="181" width="123" height="52"/>
+                                    <rect key="frame" x="63" y="236" width="124" height="52"/>
                                 </variation>
                                 <connections>
                                     <segue destination="GuB-P9-wPV" kind="presentation" id="LT8-Z2-SIB"/>
@@ -1712,10 +1712,10 @@
                                 <exclude reference="mkO-I1-IRX"/>
                             </mask>
                             <mask key="constraints">
+                                <exclude reference="1lB-Ir-VTU"/>
                                 <exclude reference="FYd-iR-xHa"/>
                                 <exclude reference="IVP-xT-zZx"/>
                                 <exclude reference="mSn-Fs-BOM"/>
-                                <exclude reference="1lB-Ir-VTU"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=compact">
@@ -1725,10 +1725,10 @@
                                 <include reference="mkO-I1-IRX"/>
                             </mask>
                             <mask key="constraints">
+                                <include reference="1lB-Ir-VTU"/>
                                 <include reference="FYd-iR-xHa"/>
                                 <include reference="IVP-xT-zZx"/>
                                 <include reference="mSn-Fs-BOM"/>
-                                <include reference="1lB-Ir-VTU"/>
                             </mask>
                         </variation>
                     </view>
