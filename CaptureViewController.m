@@ -11,7 +11,7 @@
 #import "Capsl.h"
 #import "Capslr.h"
 
-@interface CaptureViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
+@interface CaptureViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextViewDelegate>
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
 @property Capsl *createdCapsl;
 @property UIImage *chosenImage;
@@ -28,10 +28,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self.view addSubview:self.textView];
 
-    self.textView.translatesAutoresizingMaskIntoConstraints = NO;
-    [self setTextViewToCenter];
+    self.textView.delegate = self;
+    [self.view addSubview:self.textView];
 
     //Setting CPSL sender
     [Capslr returnCapslrFromPFUser:[PFUser currentUser] withCompletion:^(Capslr *currentCapslr, NSError *error)
@@ -45,16 +44,127 @@
     self.navigationItem.leftBarButtonItem = self.cancelButton;
 }
 
--(void)setImageView:(UIImageView *)imageView
+- (void)viewWillAppear:(BOOL)animated
 {
-    //if image view is set, move textview to bottom of screen
-    
+    [super viewWillAppear:animated];
+
+    if (self.imageView.image == nil)
+    {
+        [self setTextViewToCenter];
+    }
+    else
+    {
+        [self setTextViewToBottom];
+    }
+}
+
+
+
+- (void)setTextViewToBottom
+{
+    NSLog(@"Setting Text to Bottom");
+    self.textView.translatesAutoresizingMaskIntoConstraints = NO;
+
+    NSLayoutConstraint *constraint = [NSLayoutConstraint
+                                      constraintWithItem:self.textView
+                                      attribute:NSLayoutAttributeBottom
+                                      relatedBy:NSLayoutRelationEqual
+                                      toItem:self.view
+                                      attribute:NSLayoutAttributeBottom
+                                      multiplier:1.0f
+                                      constant:0.0f];
+
+    [self.view addConstraint:constraint];
+
+    constraint = [NSLayoutConstraint
+                  constraintWithItem:self.textView
+                  attribute:NSLayoutAttributeCenterY
+                  relatedBy:NSLayoutRelationEqual
+                  toItem:self.view
+                  attribute:NSLayoutAttributeCenterY
+                  multiplier:1.0f
+                  constant:0.0f];
+
+    [self.view addConstraint:constraint];
+
+    constraint = [NSLayoutConstraint constraintWithItem:self.textView
+                                              attribute:NSLayoutAttributeWidth
+                                              relatedBy:NSLayoutRelationEqual
+                                                 toItem:self.view
+                                              attribute:NSLayoutAttributeWidth
+                                             multiplier:1.0f
+                                               constant:0.0f];
+
+    [self.view addConstraint:constraint];
+
+    constraint = [NSLayoutConstraint constraintWithItem:self.textView
+                                              attribute:NSLayoutAttributeHeight
+                                              relatedBy:NSLayoutRelationEqual
+                                                 toItem:self.view
+                                              attribute:NSLayoutAttributeHeight
+                                             multiplier:0.3f
+                                               constant:0.0f];
+
+    [self.view addConstraint:constraint];
+
+}
+
+- (void)setTextViewToTop
+{
+    NSLog(@"Setting Text to Top");
+    self.textView.translatesAutoresizingMaskIntoConstraints = NO;
+
+    NSLayoutConstraint *constraint = [NSLayoutConstraint
+                                      constraintWithItem:self.textView
+                                      attribute:NSLayoutAttributeTop
+                                      relatedBy:NSLayoutRelationEqual
+                                      toItem:self.view
+                                      attribute:NSLayoutAttributeTop
+                                      multiplier:1.0f
+                                      constant:0.0f];
+
+    [self.view addConstraint:constraint];
+
+    constraint = [NSLayoutConstraint
+                  constraintWithItem:self.textView
+                  attribute:NSLayoutAttributeCenterY
+                  relatedBy:NSLayoutRelationEqual
+                  toItem:self.view
+                  attribute:NSLayoutAttributeCenterY
+                  multiplier:1.0f
+                  constant:0.0f];
+
+    [self.view addConstraint:constraint];
+
+    constraint = [NSLayoutConstraint constraintWithItem:self.textView
+                                              attribute:NSLayoutAttributeWidth
+                                              relatedBy:NSLayoutRelationEqual
+                                                 toItem:self.view
+                                              attribute:NSLayoutAttributeWidth
+                                             multiplier:1.0f
+                                               constant:0.0f];
+
+    [self.view addConstraint:constraint];
+
+    constraint = [NSLayoutConstraint constraintWithItem:self.textView
+                                              attribute:NSLayoutAttributeHeight
+                                              relatedBy:NSLayoutRelationEqual
+                                                 toItem:self.view
+                                              attribute:NSLayoutAttributeHeight
+                                             multiplier:0.3f
+                                               constant:0.0f];
+
+    [self.view addConstraint:constraint];
 }
 
 
 //Setting textView to the center of the screen
 - (void)setTextViewToCenter;
 {
+    NSLog(@"Setting text to center!");
+
+    self.textView.translatesAutoresizingMaskIntoConstraints = NO;
+
     NSLayoutConstraint *constraint = [NSLayoutConstraint
                                       constraintWithItem:self.textView
                                       attribute:NSLayoutAttributeCenterX
@@ -82,8 +192,8 @@
                                               relatedBy:NSLayoutRelationEqual
                                                  toItem:self.view
                                               attribute:NSLayoutAttributeWidth
-                                             multiplier:1
-                                               constant:0];
+                                             multiplier:1.0f
+                                               constant:0.0f];
 
     [self.view addConstraint:constraint];
 
@@ -92,12 +202,10 @@
                                               relatedBy:NSLayoutRelationEqual
                                                  toItem:self.view
                                               attribute:NSLayoutAttributeHeight
-                                             multiplier:0.3
-                                               constant:0];
+                                             multiplier:0.3f
+                                               constant:0.0f];
 
     [self.view addConstraint:constraint];
-
-
 
 }
 
@@ -151,7 +259,7 @@
     [picker dismissViewControllerAnimated:YES completion:NULL];
 
     //Settign CPSL image to be sent
-    NSData *imageData = UIImageJPEGRepresentation(self.chosenImage, 0.05f);
+    NSData *imageData = UIImageJPEGRepresentation(self.chosenImage, 1.0f);
     self.createdCapsl.photo = [PFFile fileWithName:@"image.jpg" data:imageData];
 }
 
@@ -172,11 +280,8 @@
         SearchContactViewController *searchContactVC = segue.destinationViewController;
 
         searchContactVC.createdCapsl = self.createdCapsl;
-
     }
-
 }
-
 
 - (IBAction)onDoneButtonPressed:(UIBarButtonItem *)sender
 {
@@ -199,6 +304,46 @@
                          completion:nil];
         
     }
+}
+
+#pragma mark Text View Delegate
+
+- (void)textViewDidBeginEditing:(UITextView *)textView
+{
+//    //TODO: not setting text view center
+//    [self setTextViewToCenter];
+
+    [self setTextViewToTop];
+    [self.navigationController setNavigationBarHidden:YES];
+
+    if ([textView.text isEqualToString:@"Enter Text Here"])
+    {
+        textView.text = @"";
+    }
+}
+
+- (void)textViewDidEndEditing:(UITextView *)textView
+{
+    self.createdCapsl.text = self.textView.text;
+    [self resignFirstResponder];
+    [self.navigationController setNavigationBarHidden:NO];
+}
+
+- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
+{
+    if ([text isEqualToString:@"\n"])
+    {
+        [textView resignFirstResponder];
+        if (self.imageView.image)
+        {
+            [self setTextViewToBottom];
+        }
+        else
+        {
+            [self setTextViewToCenter];
+        }
+    }
+    return YES;
 }
 
 
