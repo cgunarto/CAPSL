@@ -24,6 +24,9 @@
 @property (strong, nonatomic) IBOutlet UIView *timelineContainerView;
 @property UIDevice *device;
 
+@property BOOL shouldShowSent;
+
+
 @end
 
 @implementation JCATimelineRootViewController
@@ -32,10 +35,13 @@
 {
     [super viewDidLoad];
     self.device = [UIDevice currentDevice];
-    self.wallpaperView = [[UIImageView alloc] initWithImage:[self processWallpaper:[UIImage imageNamed:@"wallpaper"]]];
-//    self.wallpaperView.frame = self.view.bounds;
-    self.wallpaperView.contentMode = UIViewContentModeScaleAspectFill;
-    [self.view addSubview:self.wallpaperView];
+
+    self.shouldShowSent = NO;
+    self.timelineVC.showSent = self.shouldShowSent;
+    self.capslVC.showSent = self.shouldShowSent;
+
+
+    [self setWallpaper];
 
 }
 
@@ -99,6 +105,27 @@
 }
 
 #pragma mark - helper methods
+
+- (void)setWallpaper
+{
+
+    UIImage *wallpaper = [[UIImage alloc] init];
+
+    if (self.shouldShowSent)
+    {
+        wallpaper = [self processWallpaper:[UIImage imageNamed:@"wallpaperSent"]];
+    }
+    else
+    {
+        wallpaper = [self processWallpaper:[UIImage imageNamed:@"wallpaperReceived"]];
+    }
+
+    self.wallpaperView = [[UIImageView alloc] initWithImage:wallpaper];
+    //    self.wallpaperView.frame = self.view.bounds;
+    self.wallpaperView.contentMode = UIViewContentModeScaleAspectFill;
+    [self.view addSubview:self.wallpaperView];
+
+}
 
 - (UIImage *)processWallpaper:(UIImage *)wallpaper
 {
@@ -222,6 +249,10 @@
         self.timelineVC = segue.destinationViewController;
         self.timelineVC.delegate = self;
     }
+
+    // temporary manual override to show sent vs received capsls
+
+
     
 }
 

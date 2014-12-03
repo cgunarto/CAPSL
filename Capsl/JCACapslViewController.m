@@ -22,6 +22,7 @@
 @property NSArray *yearsWithCapsls;
 @property NSArray *capslsInAYear;
 @property NSArray *monthsOfTheYear;
+@property NSArray *collectionViewData;
 
 @end
 
@@ -48,13 +49,25 @@ static NSString * const reuseIdentifier = @"CapslCell";
     // Register cell classes
 //    [self.timelineView registerClass:[JCACapslCollectionViewCell class] forCellWithReuseIdentifier:reuseIdentifier];
 
-    // Do any additional setup after loading the view.
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [self.capslView reloadData];
+    [self updateData];
+}
+
+- (void)setCapslGrandArray:(NSArray *)capslGrandArray
+{
+    _capslGrandArray = capslGrandArray;
+    [self updateData];
+
+}
+
+- (void)setSentCapslsGrandArray:(NSArray *)sentCapslsGrandArray
+{
+    _sentCapslsGrandArray = sentCapslsGrandArray;
+    [self updateData];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -82,7 +95,7 @@ static NSString * const reuseIdentifier = @"CapslCell";
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
 
-    return self.capslGrandArray.count * 12;
+    return self.collectionViewData.count * 12;
 
 }
 
@@ -90,7 +103,7 @@ static NSString * const reuseIdentifier = @"CapslCell";
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
 
-    NSArray *arrayOfMonths = self.capslGrandArray[section/12];
+    NSArray *arrayOfMonths = self.collectionViewData[section/12];
     NSArray *arrayOfCapsules = arrayOfMonths[section % 12];
 
 //    if (section % 12 == 0)
@@ -111,8 +124,15 @@ static NSString * const reuseIdentifier = @"CapslCell";
 
     Capsl *capsl = [self getCapslWithIndexPath:indexPath];
 
-    cell.nameLabel.text = capsl.sender.username;
-//    cell.nameLabel.text = self.monthsOfTheYear[indexPath.section % 12];
+    if (self.showSent)
+    {
+        cell.nameLabel.text = capsl.recipient.username;
+    }
+    else
+    {
+        cell.nameLabel.text = capsl.sender.username;
+    //    cell.nameLabel.text = self.monthsOfTheYear[indexPath.section % 12];
+    }
 
     [self drawCell:cell];
 
@@ -202,7 +222,15 @@ static NSString * const reuseIdentifier = @"CapslCell";
 
     cell.countdownLabel.layer.cornerRadius = cell.countdownLabel.frame.size.height/2;
     cell.countdownLabel.clipsToBounds = YES;
-    cell.countdownLabel.backgroundColor = [UIColor colorWithHue:0.496 saturation:0.791 brightness:0.554 alpha:1.000];
+
+    if (self.showSent)
+    {
+        cell.countdownLabel.backgroundColor = [UIColor colorWithHue:0.496 saturation:0.791 brightness:0.554 alpha:1.000];
+    }
+    else
+    {
+        cell.countdownLabel.backgroundColor = [UIColor colorWithHue:0.614 saturation:0.607 brightness:0.642 alpha:1.000];
+    }
 
 
     return cell;
@@ -225,13 +253,27 @@ static NSString * const reuseIdentifier = @"CapslCell";
 - (Capsl *)getCapslWithIndexPath:(NSIndexPath *)indexPath
 {
 
-    NSArray *year = self.capslGrandArray[indexPath.section / 12];
+    NSArray *year = self.collectionViewData[indexPath.section / 12];
     NSArray *month = year[indexPath.section % 12];
 
     Capsl *capsl = month[indexPath.item];
 
     return capsl;
 
+}
+
+- (void)updateData
+{
+    if (self.showSent == NO)
+    {
+        self.collectionViewData = self.capslGrandArray;
+    }
+    else
+    {
+        self.collectionViewData = self.sentCapslsGrandArray;
+    }
+
+    [self.capslView reloadData];
 }
 
 @end

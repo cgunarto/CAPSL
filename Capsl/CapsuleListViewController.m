@@ -18,6 +18,8 @@
 
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *capslsBarButtonItem;
+@property NSArray *tableViewData;
+
 @property NSInteger availableCapslsCount;
 
 @end
