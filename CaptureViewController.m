@@ -34,24 +34,37 @@
 {
     [super viewDidLoad];
 
-    self.textView.delegate = self;
+    //If VC isEditing, it is trying to create a Capsl message
+    if (self.isEditing)
+    {
+        self.textView.delegate = self;
 
-    //Setting CPSL sender
-    [Capslr returnCapslrFromPFUser:[PFUser currentUser] withCompletion:^(Capslr *currentCapslr, NSError *error)
-     {
-         self.createdCapsl.sender = currentCapslr;
-     }];
+        //Setting CPSL sender
+        [Capslr returnCapslrFromPFUser:[PFUser currentUser] withCompletion:^(Capslr *currentCapslr, NSError *error)
+         {
+             self.createdCapsl.sender = currentCapslr;
+         }];
 
-    //Initializing Capsl object and its type
-    self.createdCapsl = [Capsl object];
-    self.createdCapsl.type = @"multimedia";
-    self.navigationItem.leftBarButtonItem = self.cancelButton;
-    self.navigationItem.rightBarButtonItem = self.doneButton;
+        //Initializing Capsl object and its type
+        self.createdCapsl = [Capsl object];
+        self.createdCapsl.type = @"multimedia";
+        self.navigationItem.leftBarButtonItem = self.cancelButton;
+        self.navigationItem.rightBarButtonItem = self.doneButton;
+    }
+
+    //If VC isEditing is NO, it is trying to unwrap and display a CPSL message
+    else
+    {
+
+    }
+
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+
+    if
     // register for keyboard notifications
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(keyboardWillShow)
