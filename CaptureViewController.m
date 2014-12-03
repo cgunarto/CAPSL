@@ -19,9 +19,10 @@
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *cancelButton;
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *doneButton;
 @property (weak, nonatomic) IBOutlet UITextView *textView;
+@property (weak, nonatomic) IBOutlet UIButton *addAudioButton;
 
-//+ to go to bottom - to go to top
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *bottomTextViewConstraint;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *bottomAddAudioConstraint;
 
 @end
 
@@ -45,6 +46,7 @@
     self.createdCapsl = [Capsl object];
     self.createdCapsl.type = @"multimedia";
     self.navigationItem.leftBarButtonItem = self.cancelButton;
+    self.navigationItem.rightBarButtonItem = self.doneButton;
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -60,6 +62,11 @@
                                              selector:@selector(keyboardWillHide)
                                                  name:UIKeyboardWillHideNotification
                                                object:nil];
+    if (self.createdCapsl.audio)
+    {
+        [self.addAudioButton setTitle:@"Audio added - tap to edit" forState:UIControlStateNormal];
+    }
+
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -172,6 +179,7 @@
         picker.allowsEditing = YES;
         picker.sourceType = UIImagePickerControllerSourceTypeCamera;
 
+
         [self presentViewController:picker animated:YES completion:NULL];
     }
 }
@@ -189,8 +197,6 @@
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
-    self.navigationItem.rightBarButtonItem = self.doneButton;
-
     //Accessing uncropped image from info dictionary
     self.chosenImage = info[UIImagePickerControllerOriginalImage];
     self.imageView.image = self.chosenImage;
@@ -202,6 +208,8 @@
     self.createdCapsl.photo = [PFFile fileWithName:@"image.jpg" data:imageData];
 
     [self setTextViewToBottom];
+    [self setAddAudioToBottom];
+
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
@@ -235,14 +243,15 @@
 
 - (IBAction)onDoneButtonPressed:(UIBarButtonItem *)sender
 {
-    if (self.createdCapsl.photo != nil)
+    if (self.createdCapsl.photo || self.createdCapsl.audio || self.createdCapsl.text)
     {
         [self performSegueWithIdentifier:@"segueToContactSearch" sender:self.doneButton];
     }
+
     else
     {
-        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"NO PHOTOS CHOSEN"
-                                                                       message:@"take a photo or select image"
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"NO CAPSL CREATED"
+                                                                       message:@"Choose a photo, record audio, or write text"
                                                                 preferredStyle:UIAlertControllerStyleAlert];
 
         UIAlertAction *okButton = [UIAlertAction actionWithTitle:@"OK"
@@ -308,8 +317,27 @@
                                                                 multiplier:1.0f
                                                                   constant:0.0f];
     [self.view addConstraint:self.bottomTextViewConstraint];
-
 }
+
+//TODO:NOT SURE WHY THIS ISN'T WORKING
+- (void)setAddAudioToBottom
+{
+//    [self.view removeConstraint:self.bottomAddAudioConstraint];
+//
+//    self.addAudioButton.translatesAutoresizingMaskIntoConstraints = NO;
+//
+//    self.bottomAddAudioConstraint = [NSLayoutConstraint constraintWithItem:self.addAudioButton
+//                                                                 attribute:NSLayoutAttributeBottom
+//                                                                 relatedBy:NSLayoutRelationEqual
+//                                                                    toItem:self.view
+//                                                                 attribute:NSLayoutAttributeBottom
+//                                                                multiplier:1.0f
+//                                                                  constant:0.0f];
+//    [self.view addConstraint:self.bottomAddAudioConstraint];
+
+    self.bottomAddAudioConstraint.constant = 0;
+}
+
 
 - (void)setTextViewToTop
 {

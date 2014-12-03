@@ -118,7 +118,6 @@
 
         [capslr.profilePhoto getDataInBackgroundWithBlock:^(NSData *data, NSError *error)
          {
-             NSLog(@"PROFILE PHOTO QUERIED");
              if (!error)
              {
                   allContactCell.photoImageView.image = [UIImage imageWithData:data];

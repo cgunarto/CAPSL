@@ -170,14 +170,41 @@
 
 }
 
+- (BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender
+{
+    if ([sender isEqual:self.saveButton])
+    {
+        if (self.createdCapsl.audio == nil)
+        {
+            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"NO AUDIO TO SAVE"
+                                                                           message:@"Please record a message"
+                                                                    preferredStyle:UIAlertControllerStyleAlert];
+
+            UIAlertAction *okButton = [UIAlertAction actionWithTitle:@"OK"
+                                                               style:UIAlertActionStyleDefault
+                                                             handler:nil];
+            [alert addAction:okButton];
+            [self presentViewController:alert
+                               animated:YES
+                             completion:nil];
+
+            return NO;
+        }
+    }
+
+    return YES;
+}
+
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     //If sender is SAVE button, pass the createdCpsl Info
-    //TODO: DO A CHECK IF IT'S EMPTY
     if ([sender isEqual:self.saveButton])
     {
-        CaptureViewController *captureVC = segue.destinationViewController;
-        captureVC.createdCapsl = self.createdCapsl;
+        if (self.createdCapsl.audio)
+        {
+            CaptureViewController *captureVC = segue.destinationViewController;
+            captureVC.createdCapsl = self.createdCapsl;
+        }
     }
 }
 
