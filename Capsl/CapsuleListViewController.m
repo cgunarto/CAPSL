@@ -53,11 +53,20 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+
+    if ([self.capslsBarButtonItem.title isEqual:@"Sent Capsules"])
+    {
+        <#statements#>
+    }
+
     CapslTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
     Capsl *capsl = self.capslsArray[indexPath.row];
 
     // Setting the delivery date
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+
+    //TODO: change date format with no LEADING ZERO
+
     [dateFormatter setDateFormat:@"MMM dd, yyyy hh:mm a"];
     NSDate *deliveryDate = capsl.deliveryTime;
 
