@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="vXZ-lx-hvc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="vXZ-lx-hvc">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
@@ -786,7 +786,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Hg3-VI-LXE">
+                            <imageView contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Hg3-VI-LXE">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <color key="backgroundColor" red="0.0054950260859999997" green="0.010627522279999999" blue="0.01474808673" alpha="1" colorSpace="calibratedRGB"/>
                                 <gestureRecognizers/>
@@ -797,29 +797,7 @@
                                     <outletCollection property="gestureRecognizers" destination="c4q-uJ-KCm" appends="YES" id="iwv-Fh-SUF"/>
                                 </connections>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tap to change image" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VHH-hP-3OW">
-                                <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="39" id="Qtk-hc-hIN"/>
-                                    <constraint firstAttribute="width" constant="264" id="wWw-At-Ng9"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="17"/>
-                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                                <variation key="default">
-                                    <mask key="constraints">
-                                        <exclude reference="Qtk-hc-hIN"/>
-                                        <exclude reference="wWw-At-Ng9"/>
-                                    </mask>
-                                </variation>
-                                <variation key="widthClass=compact">
-                                    <mask key="constraints">
-                                        <include reference="Qtk-hc-hIN"/>
-                                        <include reference="wWw-At-Ng9"/>
-                                    </mask>
-                                </variation>
-                            </label>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Enter Text Here" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Tjw-18-0nC">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" text="Enter Text Here" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Tjw-18-0nC">
                                 <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                                 <color key="backgroundColor" white="1" alpha="0.39000000000000001" colorSpace="calibratedWhite"/>
                                 <gestureRecognizers/>
@@ -862,6 +840,34 @@
                                     </mask>
                                 </variation>
                             </textView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Tap to change image" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VHH-hP-3OW">
+                                <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="39" id="Qtk-hc-hIN"/>
+                                    <constraint firstAttribute="height" constant="50" id="SrK-xy-M5E"/>
+                                    <constraint firstAttribute="width" constant="295" id="nAA-69-Fii"/>
+                                    <constraint firstAttribute="width" constant="264" id="wWw-At-Ng9"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="17"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="Qtk-hc-hIN"/>
+                                        <exclude reference="SrK-xy-M5E"/>
+                                        <exclude reference="nAA-69-Fii"/>
+                                        <exclude reference="wWw-At-Ng9"/>
+                                    </mask>
+                                </variation>
+                                <variation key="widthClass=compact">
+                                    <mask key="constraints">
+                                        <exclude reference="Qtk-hc-hIN"/>
+                                        <include reference="SrK-xy-M5E"/>
+                                        <include reference="nAA-69-Fii"/>
+                                        <exclude reference="wWw-At-Ng9"/>
+                                    </mask>
+                                </variation>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -870,40 +876,32 @@
                             <constraint firstAttribute="centerX" secondItem="VHH-hP-3OW" secondAttribute="centerX" id="O7L-5Y-ag2"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Tjw-18-0nC" secondAttribute="trailing" constant="-16" id="TlA-0W-ZNJ"/>
                             <constraint firstItem="adF-cQ-9qF" firstAttribute="top" secondItem="Hg3-VI-LXE" secondAttribute="bottom" id="iPi-Ux-goy"/>
+                            <constraint firstAttribute="centerX" secondItem="VHH-hP-3OW" secondAttribute="centerX" id="jgQ-pG-w6r"/>
+                            <constraint firstItem="VHH-hP-3OW" firstAttribute="top" secondItem="jZE-SC-Npr" secondAttribute="bottom" constant="56" id="r19-jv-XC2"/>
                             <constraint firstItem="Hg3-VI-LXE" firstAttribute="top" secondItem="5n6-ct-hLT" secondAttribute="topMargin" id="tdb-jM-Nsv"/>
                             <constraint firstItem="Hg3-VI-LXE" firstAttribute="leading" secondItem="5n6-ct-hLT" secondAttribute="leadingMargin" constant="-16" id="uuY-GI-8hE"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
-                                <exclude reference="EmF-l3-b4J"/>
-                                <exclude reference="O7L-5Y-ag2"/>
-                                <exclude reference="0GD-O5-rHs"/>
-                                <exclude reference="7cy-iN-qST"/>
-                                <exclude reference="HMM-o7-Igd"/>
-                                <exclude reference="JZM-re-7c0"/>
                                 <exclude reference="TlA-0W-ZNJ"/>
-                                <exclude reference="yYB-Fu-Zrm"/>
                                 <exclude reference="Nsy-yW-XZL"/>
                                 <exclude reference="tdb-jM-Nsv"/>
                                 <exclude reference="uuY-GI-8hE"/>
-                                <exclude reference="52d-th-5q0"/>
+                                <exclude reference="O7L-5Y-ag2"/>
+                                <exclude reference="jgQ-pG-w6r"/>
+                                <exclude reference="r19-jv-XC2"/>
                                 <exclude reference="iPi-Ux-goy"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=compact">
                             <mask key="constraints">
-                                <include reference="EmF-l3-b4J"/>
-                                <include reference="O7L-5Y-ag2"/>
-                                <exclude reference="0GD-O5-rHs"/>
-                                <exclude reference="7cy-iN-qST"/>
-                                <exclude reference="HMM-o7-Igd"/>
-                                <exclude reference="JZM-re-7c0"/>
                                 <exclude reference="TlA-0W-ZNJ"/>
-                                <exclude reference="yYB-Fu-Zrm"/>
                                 <include reference="Nsy-yW-XZL"/>
                                 <include reference="tdb-jM-Nsv"/>
                                 <include reference="uuY-GI-8hE"/>
-                                <exclude reference="52d-th-5q0"/>
+                                <exclude reference="O7L-5Y-ag2"/>
+                                <include reference="jgQ-pG-w6r"/>
+                                <include reference="r19-jv-XC2"/>
                                 <include reference="iPi-Ux-goy"/>
                             </mask>
                         </variation>
@@ -913,6 +911,7 @@
                         <outlet property="cancelButton" destination="z6Q-Dn-DDG" id="cpp-iG-eE7"/>
                         <outlet property="doneButton" destination="n73-cQ-FAH" id="MSi-Ll-YNC"/>
                         <outlet property="imageView" destination="Hg3-VI-LXE" id="4LV-VO-ege"/>
+                        <outlet property="textView" destination="Tjw-18-0nC" id="T4L-oH-noI"/>
                         <segue destination="g6O-c0-HJb" kind="presentation" identifier="segueToContactSearch" id="Eln-db-Pjz"/>
                     </connections>
                 </viewController>
