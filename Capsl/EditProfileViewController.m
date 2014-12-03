@@ -10,12 +10,16 @@
 #import "EditProfilePicTableViewCell.h"
 #import "Capslr.h"
 
+#define kNameLabel @"Name"
+#define kUsernameLabel @"Username"
+#define kEmailLabel @"Email"
+
+
 @interface EditProfileViewController () <UITableViewDataSource, UITableViewDelegate>
 
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 
-@property NSArray *theData;
-@property (nonatomic)  NSArray *editableInfoForCurrentCapslr;
+@property NSArray *infoArray;
 
 @end
 
@@ -25,9 +29,7 @@
 {
     [super viewWillAppear:animated];
 
-//    self.editableInfoForCurrentCapslr = @[[self.currenCapslrInfo valueForKey:@"name"], [self.currenCapslrInfo valueForKey:@"username"], [self.currenCapslrInfo valueForKey:@"email"]];
-//    self.editableInfoForCurrentCapslr = self.currenCapslrInfo;
-
+    self.infoArray = @[kNameLabel, kUsernameLabel, kEmailLabel];
 }
 
 
@@ -38,12 +40,6 @@
     self.navigationItem.title = @"My Profile";
 
 }
-
-//-(void)setEditableInfoForCurrentCapslr:(NSArray *)editableInfoForCurrentCapslr
-//{
-//    _editableInfoForCurrentCapslr = editableInfoForCurrentCapslr;
-//    [self.tableView reloadData];
-//}
 
 -(void)setCurrenCapslrInfo:(NSArray *)currenCapslrInfo
 {
@@ -82,7 +78,10 @@
 
     }else if (indexPath.section == 1) {
         cell = [tableView dequeueReusableCellWithIdentifier:@"dataCell" forIndexPath:indexPath];
-        cell.textLabel.text = self.currenCapslrInfo[indexPath.row];
+
+        cell.textLabel.text = self.infoArray[indexPath.row];
+        cell.detailTextLabel.text = self.currenCapslrInfo[indexPath.row];
+        [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
 
     }else if (indexPath.section == 2) {
         cell = [tableView dequeueReusableCellWithIdentifier:@"buttonCell" forIndexPath:indexPath];
