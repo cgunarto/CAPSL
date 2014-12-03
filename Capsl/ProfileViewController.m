@@ -11,8 +11,9 @@
 #import "Contact.h"
 #define kLeftInitialConstant -16
 #define kRightInitialConstant -16
+#import "Capslr.h"
 
-@class Capslr;
+//@class Capslr;
 
 @interface ProfileViewController ()
 @property PFUser *currentCPSLR;
@@ -25,6 +26,9 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *addressLeftConstraint;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *addressRightConstraint;
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *dismissButton;
+
+//Added by jonno
+@property (strong, nonatomic) IBOutlet UIImageView *profilePictureImageView;
 
 @end
 
@@ -48,6 +52,16 @@
     self.segmentedControl.selectedSegmentIndex = 0;
 
     [self showCapslViewCenter];
+
+    [Capslr returnCapslrFromPFUser:[PFUser currentUser] withCompletion:^(Capslr *currentCapslr, NSError *error) {
+        [currentCapslr.profilePhoto getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
+
+            self.profilePictureImageView.layer.cornerRadius = self.profilePictureImageView.frame.size.width/2;
+            self.profilePictureImageView.clipsToBounds = YES;
+
+            self.profilePictureImageView.image = [UIImage imageWithData:data];
+        }];
+    }];
 }
 
 //Segmented control toggles between CAPSLR and ADDRESS BOOK contact

@@ -55,6 +55,8 @@
 		8D5A3DE11A2A4B4700A6485A /* UIImage+ImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D5A3DE01A2A4B4700A6485A /* UIImage+ImageEffects.m */; };
 		8DAC42441A2A9BD400A8859A /* JCAMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DAC42431A2A9BD400A8859A /* JCAMainViewController.m */; };
 		8DE360601A2D6E5800DAE08C /* ViewCapsulesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DE3605F1A2D6E5800DAE08C /* ViewCapsulesViewController.m */; };
+		905E900D1A2F9D9700BF32E3 /* EditProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 905E900C1A2F9D9700BF32E3 /* EditProfileViewController.m */; };
+		905E90101A2FA3FC00BF32E3 /* EditProfilePicTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 905E900F1A2FA3FC00BF32E3 /* EditProfilePicTableViewCell.m */; };
 		90C0DD171A27CCE500A50BCF /* JKCountDownTimer.m in Sources */ = {isa = PBXBuildFile; fileRef = 90C0DD161A27CCE500A50BCF /* JKCountDownTimer.m */; };
 		90C61E621A2C4D3A003EFEF9 /* UIImage+RoundedCorner.m in Sources */ = {isa = PBXBuildFile; fileRef = 90C61E611A2C4D3A003EFEF9 /* UIImage+RoundedCorner.m */; };
 		90C61E671A2C4EA3003EFEF9 /* UIImage+Alpha.m in Sources */ = {isa = PBXBuildFile; fileRef = 90C61E641A2C4EA3003EFEF9 /* UIImage+Alpha.m */; };
@@ -153,6 +155,10 @@
 		8DAC42431A2A9BD400A8859A /* JCAMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JCAMainViewController.m; sourceTree = "<group>"; };
 		8DE3605E1A2D6E5800DAE08C /* ViewCapsulesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ViewCapsulesViewController.h; path = ../ViewCapsulesViewController.h; sourceTree = "<group>"; };
 		8DE3605F1A2D6E5800DAE08C /* ViewCapsulesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ViewCapsulesViewController.m; path = ../ViewCapsulesViewController.m; sourceTree = "<group>"; };
+		905E900B1A2F9D9700BF32E3 /* EditProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditProfileViewController.h; sourceTree = "<group>"; };
+		905E900C1A2F9D9700BF32E3 /* EditProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditProfileViewController.m; sourceTree = "<group>"; };
+		905E900E1A2FA3FC00BF32E3 /* EditProfilePicTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditProfilePicTableViewCell.h; sourceTree = "<group>"; };
+		905E900F1A2FA3FC00BF32E3 /* EditProfilePicTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditProfilePicTableViewCell.m; sourceTree = "<group>"; };
 		90C0DD151A27CCE500A50BCF /* JKCountDownTimer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JKCountDownTimer.h; sourceTree = "<group>"; };
 		90C0DD161A27CCE500A50BCF /* JKCountDownTimer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JKCountDownTimer.m; sourceTree = "<group>"; };
 		90C61E601A2C4D3A003EFEF9 /* UIImage+RoundedCorner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+RoundedCorner.h"; sourceTree = "<group>"; };
@@ -339,6 +345,10 @@
 			children = (
 				4F69EBF61A2532C8009625AA /* ProfileViewController.h */,
 				4F69EBF71A2532C8009625AA /* ProfileViewController.m */,
+				905E900B1A2F9D9700BF32E3 /* EditProfileViewController.h */,
+				905E900C1A2F9D9700BF32E3 /* EditProfileViewController.m */,
+				905E900E1A2FA3FC00BF32E3 /* EditProfilePicTableViewCell.h */,
+				905E900F1A2FA3FC00BF32E3 /* EditProfilePicTableViewCell.m */,
 				4F69EC321A291C92009625AA /* AddressContactViewController.h */,
 				4F69EC331A291C92009625AA /* AddressContactViewController.m */,
 				4F69EC351A291CAA009625AA /* CapslrContactViewController.h */,
@@ -516,6 +526,7 @@
 			files = (
 				8DAC42441A2A9BD400A8859A /* JCAMainViewController.m in Sources */,
 				4F69EC311A291504009625AA /* Contact.m in Sources */,
+				905E900D1A2F9D9700BF32E3 /* EditProfileViewController.m in Sources */,
 				4F69EBCA1A252331009625AA /* RootViewController.m in Sources */,
 				4F69EBF81A2532C8009625AA /* ProfileViewController.m in Sources */,
 				4F69EBC71A252331009625AA /* AppDelegate.m in Sources */,
@@ -531,6 +542,7 @@
 				8D5A3DDB1A2A4AFD00A6485A /* JCACapslCollectionViewCell.m in Sources */,
 				4F69EBEF1A253269009625AA /* ChooseTypeViewController.m in Sources */,
 				4F69EBEC1A25320C009625AA /* MessageDetailViewController.m in Sources */,
+				905E90101A2FA3FC00BF32E3 /* EditProfilePicTableViewCell.m in Sources */,
 				4FC4EA181A2B021D00D3D09D /* RecordAudioViewController.m in Sources */,
 				4F69EC221A253D2B009625AA /* Capsl.m in Sources */,
 				4F69EC341A291C92009625AA /* AddressContactViewController.m in Sources */,
