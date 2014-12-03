@@ -19,6 +19,9 @@
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *doneButton;
 @property (weak, nonatomic) IBOutlet UITextView *textView;
 
+//+ to go to bottom - to go to top
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *bottomTextViewConstraint;
+
 @end
 
 @implementation CaptureViewController
@@ -44,55 +47,38 @@
     self.navigationItem.leftBarButtonItem = self.cancelButton;
 }
 
+-(void)viewDidAppear:(BOOL)animated
+{
+    if (self.imageView.image)
+    {
+        [self setTextViewToBottom];
+    }
+}
+
+//- (void)setTextViewToBottom
+//{
+//    NSLog(@"Self setTextViewToBottom called");
+//    CGFloat thirdScreenHeight = [UIScreen mainScreen].bounds.size.height/3;
+//    self.topTextViewConstraint.constant = self.topTextViewConstraint.constant + thirdScreenHeight;
+//}
 
 //Setting textView to the center of the screen
-- (void)setTextViewToCenter;
+- (void)setTextViewToBottom
 {
-//    NSLog(@"Setting text to center!");
-//
-//    self.textView.translatesAutoresizingMaskIntoConstraints = NO;
-//
-//    NSLayoutConstraint *constraint = [NSLayoutConstraint
-//                                      constraintWithItem:self.textView
-//                                      attribute:NSLayoutAttributeCenterX
-//                                      relatedBy:NSLayoutRelationEqual
-//                                      toItem:self.view
-//                                      attribute:NSLayoutAttributeCenterX
-//                                      multiplier:1.0f
-//                                      constant:0.0f];
-//
-//    [self.view addConstraint:constraint];
-//
-//    constraint = [NSLayoutConstraint
-//                  constraintWithItem:self.textView
-//                  attribute:NSLayoutAttributeCenterY
-//                  relatedBy:NSLayoutRelationEqual
-//                  toItem:self.view
-//                  attribute:NSLayoutAttributeCenterY
-//                  multiplier:1.0f
-//                  constant:0.0f];
-//
-//    [self.view addConstraint:constraint];
-//
-//    constraint = [NSLayoutConstraint constraintWithItem:self.textView
-//                                              attribute:NSLayoutAttributeWidth
-//                                              relatedBy:NSLayoutRelationEqual
-//                                                 toItem:self.view
-//                                              attribute:NSLayoutAttributeWidth
-//                                             multiplier:1.0f
-//                                               constant:0.0f];
-//
-//    [self.view addConstraint:constraint];
-//
-//    constraint = [NSLayoutConstraint constraintWithItem:self.textView
-//                                              attribute:NSLayoutAttributeHeight
-//                                              relatedBy:NSLayoutRelationEqual
-//                                                 toItem:self.view
-//                                              attribute:NSLayoutAttributeHeight
-//                                             multiplier:0.3f
-//                                               constant:0.0f];
-//
-//    [self.view addConstraint:constraint];
+    NSLog(@"Setting text to bottom!");
+
+    [self.view removeConstraint:self.bottomTextViewConstraint];
+
+    self.textView.translatesAutoresizingMaskIntoConstraints = NO;
+
+    self.bottomTextViewConstraint = [NSLayoutConstraint constraintWithItem:self.textView
+                                              attribute:NSLayoutAttributeBottom
+                                              relatedBy:NSLayoutRelationEqual
+                                                 toItem:self.view
+                                              attribute:NSLayoutAttributeBottom
+                                             multiplier:1.0f
+                                               constant:0.0f];
+    [self.view addConstraint:self.bottomTextViewConstraint];
 
 }
 

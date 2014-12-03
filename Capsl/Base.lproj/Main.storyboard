@@ -3,7 +3,6 @@
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
-        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
@@ -833,80 +832,51 @@
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-CondensedBold" family="Helvetica Neue" pointSize="20"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
-                                <variation key="widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="0.0" y="225" width="400" height="150"/>
-                                </variation>
                             </textView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="Tjw-18-0nC" firstAttribute="width" secondItem="5n6-ct-hLT" secondAttribute="width" id="3OH-EE-Zto"/>
                             <constraint firstItem="Hg3-VI-LXE" firstAttribute="top" secondItem="jZE-SC-Npr" secondAttribute="bottom" id="6Ue-Rz-fwq"/>
-                            <constraint firstItem="Tjw-18-0nC" firstAttribute="top" secondItem="jZE-SC-Npr" secondAttribute="bottom" constant="181" id="Emo-C6-wze"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Hg3-VI-LXE" secondAttribute="trailing" constant="-16" id="Nsy-yW-XZL"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="Tjw-18-0nC" secondAttribute="trailing" constant="-16" id="O3n-Xw-ggk"/>
-                            <constraint firstItem="Tjw-18-0nC" firstAttribute="leading" secondItem="5n6-ct-hLT" secondAttribute="leadingMargin" constant="-16" id="O5K-lg-bWQ"/>
-                            <constraint firstAttribute="centerX" secondItem="VHH-hP-3OW" secondAttribute="centerX" id="O7L-5Y-ag2"/>
-                            <constraint firstItem="Tjw-18-0nC" firstAttribute="width" secondItem="5n6-ct-hLT" secondAttribute="height" multiplier="2:3" id="Og9-fy-MGB"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="Tjw-18-0nC" secondAttribute="trailing" constant="-16" id="TlA-0W-ZNJ"/>
                             <constraint firstAttribute="centerX" secondItem="Tjw-18-0nC" secondAttribute="centerX" id="Yw2-JK-WoR"/>
-                            <constraint firstItem="Tjw-18-0nC" firstAttribute="leading" secondItem="5n6-ct-hLT" secondAttribute="leadingMargin" constant="-16" id="ZOJ-pT-OQd"/>
-                            <constraint firstItem="Tjw-18-0nC" firstAttribute="top" secondItem="VHH-hP-3OW" secondAttribute="bottom" constant="75" id="aOW-zg-moK"/>
                             <constraint firstItem="adF-cQ-9qF" firstAttribute="top" secondItem="Hg3-VI-LXE" secondAttribute="bottom" id="iPi-Ux-goy"/>
                             <constraint firstAttribute="centerX" secondItem="VHH-hP-3OW" secondAttribute="centerX" id="jgQ-pG-w6r"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="Tjw-18-0nC" secondAttribute="trailing" constant="-16" id="jst-XN-VuF"/>
                             <constraint firstItem="VHH-hP-3OW" firstAttribute="top" secondItem="jZE-SC-Npr" secondAttribute="bottom" constant="56" id="r19-jv-XC2"/>
                             <constraint firstItem="Tjw-18-0nC" firstAttribute="height" secondItem="5n6-ct-hLT" secondAttribute="height" multiplier="0.3" constant="20" id="rgl-Gv-Uwu"/>
-                            <constraint firstItem="Hg3-VI-LXE" firstAttribute="top" secondItem="5n6-ct-hLT" secondAttribute="topMargin" id="tdb-jM-Nsv"/>
                             <constraint firstItem="Hg3-VI-LXE" firstAttribute="leading" secondItem="5n6-ct-hLT" secondAttribute="leadingMargin" constant="-16" id="uuY-GI-8hE"/>
+                            <constraint firstItem="adF-cQ-9qF" firstAttribute="top" secondItem="Tjw-18-0nC" secondAttribute="bottom" constant="175" id="xVn-9w-Fbt"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
                                 <exclude reference="Nsy-yW-XZL"/>
-                                <exclude reference="tdb-jM-Nsv"/>
                                 <exclude reference="uuY-GI-8hE"/>
-                                <exclude reference="O7L-5Y-ag2"/>
                                 <exclude reference="jgQ-pG-w6r"/>
                                 <exclude reference="r19-jv-XC2"/>
                                 <exclude reference="3OH-EE-Zto"/>
-                                <exclude reference="Emo-C6-wze"/>
-                                <exclude reference="O3n-Xw-ggk"/>
-                                <exclude reference="O5K-lg-bWQ"/>
-                                <exclude reference="Og9-fy-MGB"/>
-                                <exclude reference="TlA-0W-ZNJ"/>
                                 <exclude reference="Yw2-JK-WoR"/>
-                                <exclude reference="ZOJ-pT-OQd"/>
-                                <exclude reference="aOW-zg-moK"/>
-                                <exclude reference="jst-XN-VuF"/>
                                 <exclude reference="rgl-Gv-Uwu"/>
                                 <exclude reference="iPi-Ux-goy"/>
+                                <exclude reference="xVn-9w-Fbt"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=compact">
                             <mask key="constraints">
                                 <include reference="Nsy-yW-XZL"/>
-                                <exclude reference="tdb-jM-Nsv"/>
                                 <include reference="uuY-GI-8hE"/>
-                                <exclude reference="O7L-5Y-ag2"/>
                                 <include reference="jgQ-pG-w6r"/>
                                 <include reference="r19-jv-XC2"/>
                                 <include reference="3OH-EE-Zto"/>
-                                <include reference="Emo-C6-wze"/>
-                                <exclude reference="O3n-Xw-ggk"/>
-                                <exclude reference="O5K-lg-bWQ"/>
-                                <exclude reference="Og9-fy-MGB"/>
-                                <exclude reference="TlA-0W-ZNJ"/>
                                 <include reference="Yw2-JK-WoR"/>
-                                <exclude reference="ZOJ-pT-OQd"/>
-                                <exclude reference="aOW-zg-moK"/>
-                                <exclude reference="jst-XN-VuF"/>
                                 <include reference="rgl-Gv-Uwu"/>
                                 <include reference="iPi-Ux-goy"/>
+                                <include reference="xVn-9w-Fbt"/>
                             </mask>
                         </variation>
                     </view>
                     <navigationItem key="navigationItem" id="DGT-FQ-rL0"/>
                     <connections>
+                        <outlet property="bottomTextViewConstraint" destination="xVn-9w-Fbt" id="qgn-v0-TaI"/>
                         <outlet property="cancelButton" destination="z6Q-Dn-DDG" id="cpp-iG-eE7"/>
                         <outlet property="doneButton" destination="n73-cQ-FAH" id="MSi-Ll-YNC"/>
                         <outlet property="imageView" destination="Hg3-VI-LXE" id="4LV-VO-ege"/>
