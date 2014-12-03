@@ -10,6 +10,7 @@
 #import "JCACapslCollectionViewCell.h"
 #import "Capsl.h"
 #import "Capslr.h"
+#import "JKCountDownTimer.h"
 #import <QuartzCore/QuartzCore.h>
 
 @interface JCACapslViewController () <UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout>
@@ -112,6 +113,8 @@ static NSString * const reuseIdentifier = @"CapslCell";
 
     cell.nameLabel.text = capsl.sender.username;
 //    cell.nameLabel.text = self.monthsOfTheYear[indexPath.section % 12];
+
+    cell.deliveryDateLabel.text = [JKCountDownTimer formatDateWithDate:capsl.deliveryTime];
 
     [self drawCell:cell];
 

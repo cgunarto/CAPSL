@@ -86,9 +86,7 @@
 
         Capsl *capsl = self.capslsArray[indexPath.row];
 
-        NSDate *deliveryDate = capsl.deliveryTime;
-
-        cell.deliveryDateLabel.text = [JKCountDownTimer formatDateWithDate:deliveryDate];
+        cell.deliveryDateLabel.text = [JKCountDownTimer formatDateWithDate:capsl.deliveryTime];
 
         // updating timer string...
         [cell updateTimeLabelForCapsl:capsl];
@@ -133,11 +131,7 @@
             }];
         }];
 
-        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-        [dateFormatter setDateFormat:@"MMM dd, yyyy hh:mm a"];
-        NSDate *deliveryDate = capsl.deliveryTime;
-
-        cell.deliveryDateLabel.text = [NSString stringWithFormat:@"%@", [dateFormatter stringFromDate:deliveryDate]];
+        cell.deliveryDateLabel.text = [JKCountDownTimer formatDateWithDate:capsl.deliveryTime];
 
         NSDate *viewedAtDate = capsl.viewedAt;
         if (viewedAtDate)
