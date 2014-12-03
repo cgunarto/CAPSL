@@ -10,4 +10,6 @@
 
 @interface EditProfileViewController : UIViewController
 
+@property NSArray *currenCapslrInfo;
+
 @end

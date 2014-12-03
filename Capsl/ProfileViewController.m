@@ -12,6 +12,7 @@
 #define kLeftInitialConstant -16
 #define kRightInitialConstant -16
 #import "Capslr.h"
+#import "EditProfileViewController.h"
 
 //@class Capslr;
 
@@ -29,6 +30,7 @@
 
 //Added by jonno
 @property (strong, nonatomic) IBOutlet UIImageView *profilePictureImageView;
+@property NSArray *currentCapslrInfo;
 
 @end
 
@@ -54,6 +56,9 @@
     [self showCapslViewCenter];
 
     [Capslr returnCapslrFromPFUser:[PFUser currentUser] withCompletion:^(Capslr *currentCapslr, NSError *error) {
+
+        self.currentCapslrInfo = @[currentCapslr];
+
         [currentCapslr.profilePhoto getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
 
             self.profilePictureImageView.layer.cornerRadius = self.profilePictureImageView.frame.size.width/2;
@@ -119,6 +124,14 @@
     [self.view layoutIfNeeded];
 }
 
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.identifier isEqual:@"editProfileSegue"])
+    {
+        EditProfileViewController *editProfileVC = segue.destinationViewController;
+        editProfileVC.currenCapslrInfo = self.currentCapslrInfo;
+    }
+}
 
 
 @end

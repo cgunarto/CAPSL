@@ -349,7 +349,7 @@
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="edit" id="Jxf-qR-mEl">
                             <connections>
-                                <segue destination="iX6-Dw-liI" kind="show" id="5I1-SD-8Oo"/>
+                                <segue destination="iX6-Dw-liI" kind="show" identifier="editProfileSegue" id="5I1-SD-8Oo"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>

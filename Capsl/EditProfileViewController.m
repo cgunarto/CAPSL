@@ -8,17 +8,27 @@
 
 #import "EditProfileViewController.h"
 #import "EditProfilePicTableViewCell.h"
+#import "Capslr.h"
 
 @interface EditProfileViewController () <UITableViewDataSource, UITableViewDelegate>
 
-@property (strong, nonatomic) IBOutlet UIImageView *profileImageView;
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 
 @property NSArray *theData;
+@property (nonatomic)  NSArray *editableInfoForCurrentCapslr;
 
 @end
 
 @implementation EditProfileViewController
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+
+    self.editableInfoForCurrentCapslr = @[[self.currenCapslrInfo valueForKey:@"name"], [self.currenCapslrInfo valueForKey:@"username"], [self.currenCapslrInfo valueForKey:@"email"], [self.currenCapslrInfo valueForKey:@"profilePhoto"]];
+
+}
+
 
 - (void)viewDidLoad
 {
@@ -26,7 +36,11 @@
 
     self.navigationItem.title = @"My Profile";
 
-    self.theData = @[@"One",@"Two",@"Three",@"Four",@"Five"];
+}
+
+-(void)setEditableInfoForCurrentCapslr:(NSArray *)editableInfoForCurrentCapslr
+{
+    _editableInfoForCurrentCapslr = editableInfoForCurrentCapslr;
     [self.tableView reloadData];
 }
 
@@ -38,7 +52,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if (section == 1)
-        return self.theData.count;
+        return self.editableInfoForCurrentCapslr.count - 1;
     return 1;
 }
 
@@ -53,8 +67,12 @@
 
     if (indexPath.section == 0) {
         cell = [tableView dequeueReusableCellWithIdentifier:@"profilePic" forIndexPath:indexPath];
+
         cell.imageView.image = [UIImage imageNamed:@"profilepic1"];
         cell.textLabel.text = @"Edit Photo";
+
+        cell.imageView.layer.cornerRadius = cell.imageView.frame.size.width/2;
+        cell.imageView.clipsToBounds = YES;
 
     }else if (indexPath.section == 1) {
         cell = [tableView dequeueReusableCellWithIdentifier:@"dataCell" forIndexPath:indexPath];
