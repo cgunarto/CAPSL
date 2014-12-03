@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "JKCountDownTimer.h"
 #import "Capsl.h"
+#import "Capslr.h"
 
 @interface CapslTableViewCell : UITableViewCell
 
@@ -20,5 +21,6 @@
 @property NSString *timerString;
 
 - (void)updateTimeLabelForCapsl:(Capsl *)capsl;
+- (void)updateProfilePhotoForCapsl:(Capslr *)capslr withCapsl:(Capsl *)capsl;
 
 @end

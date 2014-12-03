@@ -76,12 +76,11 @@
 
         //Sender Profile Image (using categories)
         PFFile *profilePhoto = object[@"profilePhoto"];
-        if (!cell.profileImage.image)
-        {
-            [profilePhoto getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
-                cell.profileImage.image = [UIImage imageWithData:data];
-            }];
-        }
+        cell.profileImage.image = nil;
+
+        [profilePhoto getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
+            cell.profileImage.image = [UIImage imageWithData:data];
+        }];
     }];
 
     return cell;
