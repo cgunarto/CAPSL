@@ -15,7 +15,7 @@
 #define kEmailLabel @"Email"
 
 
-@interface EditProfileViewController () <UITableViewDataSource, UITableViewDelegate>
+@interface EditProfileViewController () <UITableViewDataSource, UITableViewDelegate, UIImagePickerControllerDelegate>
 
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 
@@ -99,17 +99,44 @@
                                                                     style:UIAlertActionStyleDefault
                                                                   handler:^(UIAlertAction *action) {
             // add code here
+            UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+            picker.delegate = self;
+            picker.allowsEditing = YES;
+            picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+
+            [self presentViewController:picker animated:YES completion:NULL];
+
+            [alert dismissViewControllerAnimated:YES completion:nil];
         }];
 
-        UIAlertAction *takePhoto = [UIAlertAction actionWithTitle:@"Take Photo"
-                                                            style:UIAlertActionStyleDefault
-                                                          handler:^(UIAlertAction *action) {
+        UIAlertAction *takePhoto = [UIAlertAction actionWithTitle:@"Take Photo" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
             // add code here
+            if (![UIImagePickerController isSourceTypeAvailable: UIImagePickerControllerSourceTypeCamera])
+            {
+                UIAlertView *myAlertView = [[UIAlertView alloc] initWithTitle:@"Error"
+                                                                      message:@"Device has no camera"
+                                                                     delegate:nil
+                                                            cancelButtonTitle:@"OK"
+                                                            otherButtonTitles: nil];
+                [myAlertView show];
+
+            }
+
+            else
+            {
+                UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+                picker.delegate = self;
+                picker.allowsEditing = YES;
+                picker.sourceType = UIImagePickerControllerSourceTypeCamera;
+                
+                
+                [self presentViewController:picker animated:YES completion:NULL];
+            }
+            
+            [alert dismissViewControllerAnimated:YES completion:nil];
         }];
 
-        UIAlertAction *delete = [UIAlertAction actionWithTitle:@"Delete"
-                                                         style:UIAlertActionStyleDefault
-                                                       handler:^(UIAlertAction *action) {
+        UIAlertAction *delete = [UIAlertAction actionWithTitle:@"Delete" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
             // add code here
         }];
 
@@ -123,9 +150,33 @@
         [alert addAction:cancel];
 
         [self presentViewController:alert animated:YES completion:nil];
-
-
     }
 }
+
+
+
+
+//- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
+//{
+//    //Accessing uncropped image from info dictionary
+//    self.chosenImage = info[UIImagePickerControllerOriginalImage];
+//    self.imageView.image = self.chosenImage;
+//
+//    [picker dismissViewControllerAnimated:YES completion:NULL];
+//    
+//    //Settign CPSL image to be sent
+//    NSData *imageData = UIImageJPEGRepresentation(self.chosenImage, 1.0f);
+//    self.createdCapsl.photo = [PFFile fileWithName:@"image.jpg" data:imageData];
+//    
+//    [self setTextViewToBottom];
+//    [self setAddAudioToBottom];
+//    
+//}
+
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
+{
+    [picker dismissViewControllerAnimated:YES completion:NULL];
+}
+
 
 @end
