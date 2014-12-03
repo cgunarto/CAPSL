@@ -15,8 +15,8 @@
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
 @property Capsl *createdCapsl;
 @property UIImage *chosenImage;
-
-@property (weak, nonatomic) IBOutlet UIButton *nextButton;
+@property (strong, nonatomic) IBOutlet UIBarButtonItem *cancelButton;
+@property (strong, nonatomic) IBOutlet UIBarButtonItem *doneButton;
 
 @end
 
@@ -47,7 +47,8 @@
 
     //Initializing Capsl object and its type
     self.createdCapsl = [Capsl object];
-    self.createdCapsl.type = @"photo";
+    self.createdCapsl.type = @"multimedia";
+    self.navigationItem.leftBarButtonItem = self.cancelButton;
 }
 
 #pragma mark Image Picker Related Methods
@@ -74,6 +75,8 @@
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
+    self.navigationItem.rightBarButtonItem = self.doneButton;
+
     //Accessing uncropped image from info dictionary
     self.chosenImage = info[UIImagePickerControllerOriginalImage];
     self.imageView.image = self.chosenImage;
@@ -90,13 +93,23 @@
     [picker dismissViewControllerAnimated:YES completion:NULL];
 }
 
+- (IBAction)onImageTapped:(UITapGestureRecognizer *)sender
+{
+    UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+    picker.delegate = self;
+    picker.allowsEditing = YES;
+    picker.sourceType = UIImagePickerControllerSourceTypeCamera;
+
+    [self presentViewController:picker animated:YES completion:NULL];
+}
+
 
 #pragma mark Segue and Next Button
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     //If sender is Use Photo Button, pass info to next VC
-    if ([sender isEqual:self.nextButton])
+    if ([sender isEqual:self.doneButton])
     {
         SearchContactViewController *searchContactVC = segue.destinationViewController;
 
@@ -106,11 +119,12 @@
 
 }
 
-- (IBAction)onNextButtonPressed:(UIButton *)sender
+
+- (IBAction)onDoneButtonPressed:(UIBarButtonItem *)sender
 {
     if (self.createdCapsl.photo != nil)
     {
-        [self performSegueWithIdentifier:@"segueToContactSearch" sender:self.nextButton];
+        [self performSegueWithIdentifier:@"segueToContactSearch" sender:self.doneButton];
     }
     else
     {
@@ -125,9 +139,10 @@
         [self presentViewController:alert
                            animated:YES
                          completion:nil];
-
+        
     }
-
 }
+
+
 
 @end
