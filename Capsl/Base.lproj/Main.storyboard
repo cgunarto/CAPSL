@@ -856,8 +856,7 @@
                                         <exclude reference="mkW-52-JGH"/>
                                     </mask>
                                 </variation>
-                                <variation key="widthClass=compact" ambiguous="YES">
-                                    <rect key="frame" x="0.0" y="236" width="400" height="120"/>
+                                <variation key="widthClass=compact">
                                     <mask key="constraints">
                                         <exclude reference="mkW-52-JGH"/>
                                     </mask>
@@ -866,6 +865,8 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="adF-cQ-9qF" firstAttribute="top" secondItem="Tjw-18-0nC" secondAttribute="bottom" constant="245" id="2E3-a8-ZOp"/>
+                            <constraint firstItem="Tjw-18-0nC" firstAttribute="leading" secondItem="5n6-ct-hLT" secondAttribute="leadingMargin" constant="-13" id="2hZ-ZF-6qG"/>
                             <constraint firstItem="Hg3-VI-LXE" firstAttribute="top" secondItem="jZE-SC-Npr" secondAttribute="bottom" id="6Ue-Rz-fwq"/>
                             <constraint firstItem="VHH-hP-3OW" firstAttribute="top" secondItem="jZE-SC-Npr" secondAttribute="bottom" constant="76" id="EmF-l3-b4J"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Hg3-VI-LXE" secondAttribute="trailing" constant="-16" id="Nsy-yW-XZL"/>
@@ -877,11 +878,13 @@
                             <constraint firstItem="Tjw-18-0nC" firstAttribute="leading" secondItem="5n6-ct-hLT" secondAttribute="leadingMargin" constant="-16" id="bxG-jH-1iM"/>
                             <constraint firstItem="adF-cQ-9qF" firstAttribute="top" secondItem="Hg3-VI-LXE" secondAttribute="bottom" id="cFv-ot-lHW"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Hg3-VI-LXE" secondAttribute="trailing" constant="-16" id="g3O-3t-lry"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Tjw-18-0nC" secondAttribute="trailing" constant="-13" id="gLG-ue-AtM"/>
                             <constraint firstAttribute="centerX" secondItem="Tjw-18-0nC" secondAttribute="centerX" id="heY-Fr-8Xf"/>
                             <constraint firstItem="adF-cQ-9qF" firstAttribute="top" secondItem="Hg3-VI-LXE" secondAttribute="bottom" id="iPi-Ux-goy"/>
                             <constraint firstItem="359-WG-P4Z" firstAttribute="top" secondItem="VHH-hP-3OW" secondAttribute="bottom" constant="8" id="nuW-F2-28x"/>
                             <constraint firstItem="Hg3-VI-LXE" firstAttribute="top" secondItem="5n6-ct-hLT" secondAttribute="topMargin" id="tdb-jM-Nsv"/>
                             <constraint firstItem="Hg3-VI-LXE" firstAttribute="leading" secondItem="5n6-ct-hLT" secondAttribute="leadingMargin" constant="-16" id="uuY-GI-8hE"/>
+                            <constraint firstItem="Tjw-18-0nC" firstAttribute="top" secondItem="359-WG-P4Z" secondAttribute="bottom" constant="58" id="vsE-zM-hX0"/>
                         </constraints>
                         <variation key="default">
                             <mask key="subviews">
@@ -889,17 +892,21 @@
                                 <exclude reference="Tjw-18-0nC"/>
                             </mask>
                             <mask key="constraints">
-                                <exclude reference="EmF-l3-b4J"/>
-                                <exclude reference="O7L-5Y-ag2"/>
-                                <exclude reference="S6m-eZ-rRC"/>
-                                <exclude reference="YBF-j5-hVT"/>
-                                <exclude reference="bxG-jH-1iM"/>
-                                <exclude reference="heY-Fr-8Xf"/>
                                 <exclude reference="Nsy-yW-XZL"/>
                                 <exclude reference="tdb-jM-Nsv"/>
                                 <exclude reference="uuY-GI-8hE"/>
+                                <exclude reference="EmF-l3-b4J"/>
+                                <exclude reference="O7L-5Y-ag2"/>
                                 <exclude reference="R8o-gO-vZb"/>
                                 <exclude reference="nuW-F2-28x"/>
+                                <exclude reference="2hZ-ZF-6qG"/>
+                                <exclude reference="S6m-eZ-rRC"/>
+                                <exclude reference="YBF-j5-hVT"/>
+                                <exclude reference="bxG-jH-1iM"/>
+                                <exclude reference="gLG-ue-AtM"/>
+                                <exclude reference="heY-Fr-8Xf"/>
+                                <exclude reference="vsE-zM-hX0"/>
+                                <exclude reference="2E3-a8-ZOp"/>
                                 <exclude reference="iPi-Ux-goy"/>
                             </mask>
                         </variation>
@@ -909,20 +916,24 @@
                                 <include reference="Tjw-18-0nC"/>
                             </mask>
                             <mask key="constraints">
-                                <include reference="EmF-l3-b4J"/>
-                                <include reference="O7L-5Y-ag2"/>
-                                <exclude reference="S6m-eZ-rRC"/>
-                                <exclude reference="YBF-j5-hVT"/>
-                                <exclude reference="bxG-jH-1iM"/>
-                                <exclude reference="heY-Fr-8Xf"/>
                                 <exclude reference="6Ue-Rz-fwq"/>
                                 <include reference="Nsy-yW-XZL"/>
                                 <exclude reference="VgD-ZO-h0C"/>
                                 <exclude reference="g3O-3t-lry"/>
                                 <include reference="tdb-jM-Nsv"/>
                                 <include reference="uuY-GI-8hE"/>
+                                <include reference="EmF-l3-b4J"/>
+                                <include reference="O7L-5Y-ag2"/>
                                 <include reference="R8o-gO-vZb"/>
                                 <include reference="nuW-F2-28x"/>
+                                <include reference="2hZ-ZF-6qG"/>
+                                <exclude reference="S6m-eZ-rRC"/>
+                                <exclude reference="YBF-j5-hVT"/>
+                                <exclude reference="bxG-jH-1iM"/>
+                                <include reference="gLG-ue-AtM"/>
+                                <exclude reference="heY-Fr-8Xf"/>
+                                <include reference="vsE-zM-hX0"/>
+                                <include reference="2E3-a8-ZOp"/>
                                 <exclude reference="cFv-ot-lHW"/>
                                 <include reference="iPi-Ux-goy"/>
                             </mask>
