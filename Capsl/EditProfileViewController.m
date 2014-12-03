@@ -29,6 +29,8 @@
 {
     [super viewWillAppear:animated];
 
+    NSLog(@"%@", self.currentProfilePicture);
+
     self.infoArray = @[kNameLabel, kUsernameLabel, kEmailLabel];
 }
 
@@ -70,11 +72,8 @@
     if (indexPath.section == 0) {
         cell = [tableView dequeueReusableCellWithIdentifier:@"profilePic" forIndexPath:indexPath];
 
-        cell.imageView.image = [UIImage imageNamed:@"profilepic1"];
+        cell.imageView.image = self.currentProfilePicture;
         cell.textLabel.text = @"Edit Photo";
-
-        cell.imageView.layer.cornerRadius = cell.imageView.frame.size.width/2;
-        cell.imageView.clipsToBounds = YES;
 
     }else if (indexPath.section == 1) {
         cell = [tableView dequeueReusableCellWithIdentifier:@"dataCell" forIndexPath:indexPath];
@@ -88,6 +87,14 @@
     }
     
     return cell;
+}
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+//    if (indexPath.section == 1)
+//    {
+//        <#statements#>
+//    }
 }
 
 @end

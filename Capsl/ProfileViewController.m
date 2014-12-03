@@ -130,6 +130,7 @@
     {
         EditProfileViewController *editProfileVC = segue.destinationViewController;
         editProfileVC.currenCapslrInfo = self.currentCapslrInfo;
+        editProfileVC.currentProfilePicture = self.profilePictureImageView.image;
     }
 }
 
