@@ -15,7 +15,6 @@
 
 @property (nonatomic)  NSArray *capslsArray;
 @property (nonatomic) NSArray *sentCapslsArray;
-@property NSInteger capslCount;
 
 - (void)updateClocks;
 

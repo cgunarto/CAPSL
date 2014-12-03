@@ -42,7 +42,7 @@
             {
                 self.timelineRootVC.capslsArray = objects;
                 self.capslListVC.capslsArray = objects;
-                self.capslListVC.capslCount = objects.count;
+                self.capslListVC.title = [NSString stringWithFormat:@"%lu", (unsigned long)objects.count];
             }
             else
             {

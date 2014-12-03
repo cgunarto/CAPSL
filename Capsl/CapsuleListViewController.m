@@ -28,7 +28,7 @@
     [super viewDidLoad];
 
     //TODO: fix capslCount!!
-    self.navigationItem.title = [NSString stringWithFormat:@"%li", (long)self.capslCount];
+    
     self.navigationController.navigationBar.backgroundColor = [UIColor greenColor];
 
     self.tableView.contentInset = UIEdgeInsetsMake(self.navigationController.navigationBar.frame.size.height, 0, 44, 0);
@@ -69,7 +69,6 @@
 
     if ([self.capslsBarButtonItem.title isEqual:@"Sent Capsules"])
     {
-
         Capsl *capsl = self.capslsArray[indexPath.row];
 
         // Setting the delivery date
