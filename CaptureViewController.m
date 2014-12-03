@@ -30,7 +30,7 @@
     [super viewDidLoad];
 
     self.textView.delegate = self;
-    [self.view addSubview:self.textView];
+//    [self.view addSubview:self.textView];
 
     //Setting CPSL sender
     [Capslr returnCapslrFromPFUser:[PFUser currentUser] withCompletion:^(Capslr *currentCapslr, NSError *error)
@@ -44,168 +44,55 @@
     self.navigationItem.leftBarButtonItem = self.cancelButton;
 }
 
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-
-    if (self.imageView.image == nil)
-    {
-        [self setTextViewToCenter];
-    }
-    else
-    {
-        [self setTextViewToBottom];
-    }
-}
-
-
-
-- (void)setTextViewToBottom
-{
-    NSLog(@"Setting Text to Bottom");
-    self.textView.translatesAutoresizingMaskIntoConstraints = NO;
-
-    NSLayoutConstraint *constraint = [NSLayoutConstraint
-                                      constraintWithItem:self.textView
-                                      attribute:NSLayoutAttributeBottom
-                                      relatedBy:NSLayoutRelationEqual
-                                      toItem:self.view
-                                      attribute:NSLayoutAttributeBottom
-                                      multiplier:1.0f
-                                      constant:0.0f];
-
-    [self.view addConstraint:constraint];
-
-    constraint = [NSLayoutConstraint
-                  constraintWithItem:self.textView
-                  attribute:NSLayoutAttributeCenterY
-                  relatedBy:NSLayoutRelationEqual
-                  toItem:self.view
-                  attribute:NSLayoutAttributeCenterY
-                  multiplier:1.0f
-                  constant:0.0f];
-
-    [self.view addConstraint:constraint];
-
-    constraint = [NSLayoutConstraint constraintWithItem:self.textView
-                                              attribute:NSLayoutAttributeWidth
-                                              relatedBy:NSLayoutRelationEqual
-                                                 toItem:self.view
-                                              attribute:NSLayoutAttributeWidth
-                                             multiplier:1.0f
-                                               constant:0.0f];
-
-    [self.view addConstraint:constraint];
-
-    constraint = [NSLayoutConstraint constraintWithItem:self.textView
-                                              attribute:NSLayoutAttributeHeight
-                                              relatedBy:NSLayoutRelationEqual
-                                                 toItem:self.view
-                                              attribute:NSLayoutAttributeHeight
-                                             multiplier:0.3f
-                                               constant:0.0f];
-
-    [self.view addConstraint:constraint];
-
-}
-
-- (void)setTextViewToTop
-{
-    NSLog(@"Setting Text to Top");
-    self.textView.translatesAutoresizingMaskIntoConstraints = NO;
-
-    NSLayoutConstraint *constraint = [NSLayoutConstraint
-                                      constraintWithItem:self.textView
-                                      attribute:NSLayoutAttributeTop
-                                      relatedBy:NSLayoutRelationEqual
-                                      toItem:self.view
-                                      attribute:NSLayoutAttributeTop
-                                      multiplier:1.0f
-                                      constant:0.0f];
-
-    [self.view addConstraint:constraint];
-
-    constraint = [NSLayoutConstraint
-                  constraintWithItem:self.textView
-                  attribute:NSLayoutAttributeCenterY
-                  relatedBy:NSLayoutRelationEqual
-                  toItem:self.view
-                  attribute:NSLayoutAttributeCenterY
-                  multiplier:1.0f
-                  constant:0.0f];
-
-    [self.view addConstraint:constraint];
-
-    constraint = [NSLayoutConstraint constraintWithItem:self.textView
-                                              attribute:NSLayoutAttributeWidth
-                                              relatedBy:NSLayoutRelationEqual
-                                                 toItem:self.view
-                                              attribute:NSLayoutAttributeWidth
-                                             multiplier:1.0f
-                                               constant:0.0f];
-
-    [self.view addConstraint:constraint];
-
-    constraint = [NSLayoutConstraint constraintWithItem:self.textView
-                                              attribute:NSLayoutAttributeHeight
-                                              relatedBy:NSLayoutRelationEqual
-                                                 toItem:self.view
-                                              attribute:NSLayoutAttributeHeight
-                                             multiplier:0.3f
-                                               constant:0.0f];
-
-    [self.view addConstraint:constraint];
-}
-
 
 //Setting textView to the center of the screen
 - (void)setTextViewToCenter;
 {
-    NSLog(@"Setting text to center!");
-
-    self.textView.translatesAutoresizingMaskIntoConstraints = NO;
-
-    NSLayoutConstraint *constraint = [NSLayoutConstraint
-                                      constraintWithItem:self.textView
-                                      attribute:NSLayoutAttributeCenterX
-                                      relatedBy:NSLayoutRelationEqual
-                                      toItem:self.view
-                                      attribute:NSLayoutAttributeCenterX
-                                      multiplier:1.0f
-                                      constant:0.0f];
-
-    [self.view addConstraint:constraint];
-
-    constraint = [NSLayoutConstraint
-                  constraintWithItem:self.textView
-                  attribute:NSLayoutAttributeCenterY
-                  relatedBy:NSLayoutRelationEqual
-                  toItem:self.view
-                  attribute:NSLayoutAttributeCenterY
-                  multiplier:1.0f
-                  constant:0.0f];
-
-    [self.view addConstraint:constraint];
-
-    constraint = [NSLayoutConstraint constraintWithItem:self.textView
-                                              attribute:NSLayoutAttributeWidth
-                                              relatedBy:NSLayoutRelationEqual
-                                                 toItem:self.view
-                                              attribute:NSLayoutAttributeWidth
-                                             multiplier:1.0f
-                                               constant:0.0f];
-
-    [self.view addConstraint:constraint];
-
-    constraint = [NSLayoutConstraint constraintWithItem:self.textView
-                                              attribute:NSLayoutAttributeHeight
-                                              relatedBy:NSLayoutRelationEqual
-                                                 toItem:self.view
-                                              attribute:NSLayoutAttributeHeight
-                                             multiplier:0.3f
-                                               constant:0.0f];
-
-    [self.view addConstraint:constraint];
+//    NSLog(@"Setting text to center!");
+//
+//    self.textView.translatesAutoresizingMaskIntoConstraints = NO;
+//
+//    NSLayoutConstraint *constraint = [NSLayoutConstraint
+//                                      constraintWithItem:self.textView
+//                                      attribute:NSLayoutAttributeCenterX
+//                                      relatedBy:NSLayoutRelationEqual
+//                                      toItem:self.view
+//                                      attribute:NSLayoutAttributeCenterX
+//                                      multiplier:1.0f
+//                                      constant:0.0f];
+//
+//    [self.view addConstraint:constraint];
+//
+//    constraint = [NSLayoutConstraint
+//                  constraintWithItem:self.textView
+//                  attribute:NSLayoutAttributeCenterY
+//                  relatedBy:NSLayoutRelationEqual
+//                  toItem:self.view
+//                  attribute:NSLayoutAttributeCenterY
+//                  multiplier:1.0f
+//                  constant:0.0f];
+//
+//    [self.view addConstraint:constraint];
+//
+//    constraint = [NSLayoutConstraint constraintWithItem:self.textView
+//                                              attribute:NSLayoutAttributeWidth
+//                                              relatedBy:NSLayoutRelationEqual
+//                                                 toItem:self.view
+//                                              attribute:NSLayoutAttributeWidth
+//                                             multiplier:1.0f
+//                                               constant:0.0f];
+//
+//    [self.view addConstraint:constraint];
+//
+//    constraint = [NSLayoutConstraint constraintWithItem:self.textView
+//                                              attribute:NSLayoutAttributeHeight
+//                                              relatedBy:NSLayoutRelationEqual
+//                                                 toItem:self.view
+//                                              attribute:NSLayoutAttributeHeight
+//                                             multiplier:0.3f
+//                                               constant:0.0f];
+//
+//    [self.view addConstraint:constraint];
 
 }
 
@@ -313,7 +200,6 @@
 //    //TODO: not setting text view center
 //    [self setTextViewToCenter];
 
-    [self setTextViewToTop];
     [self.navigationController setNavigationBarHidden:YES];
 
     if ([textView.text isEqualToString:@"Enter Text Here"])
@@ -334,14 +220,7 @@
     if ([text isEqualToString:@"\n"])
     {
         [textView resignFirstResponder];
-        if (self.imageView.image)
-        {
-            [self setTextViewToBottom];
-        }
-        else
-        {
-            [self setTextViewToCenter];
-        }
+
     }
     return YES;
 }
