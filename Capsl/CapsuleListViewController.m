@@ -86,14 +86,9 @@
 
         Capsl *capsl = self.capslsArray[indexPath.row];
 
-        // Setting the delivery date
-        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-
-        //TODO: change date format with no LEADING ZERO
-        [dateFormatter setDateFormat:@"MMM dd, yyyy hh:mm a"];
         NSDate *deliveryDate = capsl.deliveryTime;
 
-        cell.deliveryDateLabel.text = [NSString stringWithFormat:@"%@", [dateFormatter stringFromDate:deliveryDate]];
+        cell.deliveryDateLabel.text = [JKCountDownTimer formatDateWithDate:deliveryDate];
 
         // updating timer string...
         [cell updateTimeLabelForCapsl:capsl];
@@ -161,8 +156,8 @@
 #pragma mark - Helper Method
 - (void)scrollToSoonestCapslWithCount:(NSInteger)openCapslsCount
 {
-    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:(openCapslsCount - 1) inSection:0];
-    [self.tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionBottom animated:NO];
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:(openCapslsCount) inSection:0];
+    [self.tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionTop animated:NO];
 }
 
 
