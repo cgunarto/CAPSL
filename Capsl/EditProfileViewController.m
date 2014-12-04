@@ -205,7 +205,7 @@
 //    [picker dismissViewControllerAnimated:YES completion:NULL];
 //    
 //    //Settign CPSL image to be sent
-//    NSData *imageData = UIImageJPEGRepresentation(self.chosenImage, 1.0f);
+//    NSData *imageData = UIImageJPEGRepresentation(self.chosenImage, 0.5f);
 //    self.createdCapsl.photo = [PFFile fileWithName:@"image.jpg" data:imageData];
 //    
 //    [self setTextViewToBottom];
