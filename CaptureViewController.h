@@ -11,6 +11,9 @@
 
 @interface CaptureViewController : UIViewController
 @property Capsl *createdCapsl;
+@property Capsl *capslToDisplay;
+
+@property BOOL isEditing;
 
 
 @end

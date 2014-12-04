@@ -24,9 +24,6 @@
 @property (strong, nonatomic) IBOutlet UIView *timelineContainerView;
 @property UIDevice *device;
 
-@property BOOL shouldShowSent;
-
-
 @end
 
 @implementation JCATimelineRootViewController
@@ -36,9 +33,8 @@
     [super viewDidLoad];
     self.device = [UIDevice currentDevice];
 
-    self.shouldShowSent = NO;
     self.timelineVC.showSent = self.shouldShowSent;
-    self.capslVC.showSent = self.shouldShowSent;
+//    self.capslVC.showSent = self.shouldShowSent;
 
 
     [self setWallpaper];

@@ -19,6 +19,7 @@
 @property (strong, nonatomic) IBOutlet UIView *capslListContainer;
 @property JCATimelineRootViewController *timelineRootVC;
 @property CapsuleListViewController *capslListVC;
+@property (strong, nonatomic) IBOutlet UISegmentedControl *sentReceivedSegmentedControl;
 @property NSTimer *timer;
 
 
@@ -28,7 +29,8 @@
 
 @implementation ViewCapsulesViewController
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
 
     self.capslListVC.availableCapslsArray = [@[] mutableCopy];
@@ -79,6 +81,16 @@
 
     }];
 
+    self.timelineRootVC.shouldShowSent = NO;
+//    [self.view addSubview:self.sentReceivedSegmentedControl];
+//    [self.view bringSubviewToFront:self.sentReceivedSegmentedControl];
+//
+//    self.sentReceivedSegmentedControl.translatesAutoresizingMaskIntoConstraints = NO;
+//
+//    NSLayoutConstraint *constraint = [NSLayoutConstraint constraintWithItem:self.sentReceivedSegmentedControl attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeCenterX multiplier:1.0 constant:0.0];
+//    [self.view addConstraint:constraint];
+//    self.sentReceivedSegmentedControl.frame = CGRectMake(50, 200, self.sentReceivedSegmentedControl.frame.size.width, self.sentReceivedSegmentedControl.frame.size.height);
+
 }
 
 -(void)viewDidAppear:(BOOL)animated
@@ -128,6 +140,7 @@
         [self.timelineContainer setHidden:NO];
         [self.capslListContainer removeFromSuperview];
         [self.timelineContainer setNeedsDisplay];
+        [self.view bringSubviewToFront:self.sentReceivedSegmentedControl];
 
     }
     else
@@ -139,7 +152,7 @@
         [self.view bringSubviewToFront:self.capslListContainer];
         [self.capslListContainer setHidden:NO];
         [self.timelineContainer removeFromSuperview];
-        
+        [self.view bringSubviewToFront:self.sentReceivedSegmentedControl];
     }
     
 }
@@ -154,6 +167,27 @@
 
 }
 
+#pragma mark - actions
+
+- (IBAction)onSegmentedControlValueChanged:(UISegmentedControl *)sender
+{
+    switch (sender.selectedSegmentIndex)
+    {
+        case 0:
+        {
+            self.timelineRootVC.shouldShowSent = NO;
+            break;
+        }
+        case 1:
+        {
+            self.timelineRootVC.shouldShowSent = YES;
+        }
+        default:
+            break;
+    }
+
+}
+
 
 #pragma mark - segue life cycle
 
@@ -163,6 +197,7 @@
     {
         UINavigationController *navVC = segue.destinationViewController;
         self.capslListVC = navVC.childViewControllers.firstObject;
+//        self.capslListVC = segue.destinationViewController;
     }
     else
     {

@@ -12,6 +12,7 @@
 
 @property NSArray *capslsArray;
 @property NSArray *sentCapslsArray;
+@property BOOL shouldShowSent;
 
 - (void)updateClocks;
 

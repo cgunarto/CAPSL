@@ -17,6 +17,8 @@
 @property (nonatomic) NSArray *sentCapslsArray;
 @property (nonatomic) NSMutableArray *availableCapslsArray;
 
+@property BOOL shouldShowSent;
+
 - (void)updateClocks;
 
 - (void)scrollToSoonestCapslWithCount:(NSInteger)openCapslsCount;

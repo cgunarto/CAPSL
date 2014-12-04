@@ -184,14 +184,10 @@
 {
     Capslr *capslr = nil;
 
-    NSLog(@"prepareForSegue is called");
-
     if ([segue.identifier isEqualToString:@"segueToCompose"])
     {
         NSIndexPath *indexPath = nil;
-
-        NSLog(@"segueToCompose is identified");
-
+        
         if (self.segmentedControl.selectedSegmentIndex == 0)
         {
             if (self.searchDisplayController.active)
@@ -261,14 +257,12 @@
     if (sender.selectedSegmentIndex == 0)
     {
         self.tableViewDataArray = [self.capslrArray mutableCopy];
-        NSLog(@"CPSLR contact chosen");
     }
 
     //If selected segment is 1, TBV data array is ContactsArray
     else
     {
         self.tableViewDataArray = [self.contactsArray mutableCopy];
-        NSLog(@"Address book contact chosen");
     }
     [self.tableView reloadData];
 
