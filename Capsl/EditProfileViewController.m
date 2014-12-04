@@ -11,6 +11,7 @@
 #import "Capslr.h"
 #import "UpdateProfileInfoViewController.h"
 #import "UpdateProfileInfoViewController.h"
+#import "RootViewController.h"
 
 #define kNameLabel @"Name"
 #define kUsernameLabel @"Username"
@@ -89,6 +90,7 @@
 
     }else if (indexPath.section == 2) {
         cell = [tableView dequeueReusableCellWithIdentifier:@"buttonCell" forIndexPath:indexPath];
+        cell.textLabel.text = @"LOGOUT";
     }
 
 #warning fix this later...
@@ -178,6 +180,13 @@
         {
             [self performSegueWithIdentifier:@"editEmailSegue" sender:self.currenCapslrInfo[2]];
         }
+    }
+    else if (indexPath.section == 2)
+    {
+        RootViewController *rootVC = [[RootViewController alloc] init];
+
+        [PFUser logOut];
+        [self.navigationController popToViewController:rootVC animated:YES];
     }
 }
 

@@ -68,7 +68,7 @@
 {
     [Capslr returnCapslrFromPFUser:[PFUser currentUser] withCompletion:^(Capslr *currentCapslr, NSError *error) {
 
-        if (self.nameString)
+        if (self.nameString && self.nameString)
         {
             currentCapslr.name = self.textField.text;
             [currentCapslr saveInBackground];
@@ -86,11 +86,8 @@
     }];
 
     //TODO: ADD REFRESHING ANIMATION FOR SAVING
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-
     [self.navigationController popToViewController:self.navigationController.childViewControllers[1] animated:YES];
 
-    });
 }
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
@@ -103,9 +100,15 @@
     {
         return NO;
     }
-
-    //enable Save Button when textfield is used
-    self.saveBarButtonItem.enabled = YES;
+    else if (textLength == 0)
+    {
+        self.saveBarButtonItem.enabled = NO;
+    }
+    else
+    {
+        //enable Save Button when textfield is used
+        self.saveBarButtonItem.enabled = YES;
+    }
 
     return YES;
 }
