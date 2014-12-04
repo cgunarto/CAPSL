@@ -1788,14 +1788,8 @@
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="gJq-YD-dtv">
                         <nil key="title"/>
-                        <barButtonItem key="rightBarButtonItem" title="Sent Capsules" id="rZ7-9n-v3w">
-                            <connections>
-                                <action selector="onSentCapsulesButtonPressed:" destination="yHn-iw-5rP" id="dWd-ZX-oZf"/>
-                            </connections>
-                        </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="capslsBarButtonItem" destination="rZ7-9n-v3w" id="d1E-WM-aLh"/>
                         <outlet property="tableView" destination="6sN-U3-hhX" id="6g1-rY-Oot"/>
                     </connections>
                 </viewController>
