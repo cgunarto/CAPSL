@@ -42,6 +42,8 @@ static NSString * const reuseIdentifier = @"CapslCell";
 
     self.monthsOfTheYear = @[@"Jan", @"Feb", @"Mar", @"Apr", @"May", @"Jun", @"Jul", @"Aug", @"Sep", @"Oct", @"Nov", @"Dec"];
 
+
+
     
     // Uncomment the following line to preserve selection between presentations
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -55,6 +57,7 @@ static NSString * const reuseIdentifier = @"CapslCell";
 {
     [super viewWillAppear:animated];
     [self updateData];
+    [self scrollToUnopened];
 }
 
 - (void)setCapslGrandArray:(NSArray *)capslGrandArray
@@ -274,6 +277,11 @@ static NSString * const reuseIdentifier = @"CapslCell";
     }
 
     [self.capslView reloadData];
+}
+
+- (void)scrollToUnopened
+{
+
 }
 
 @end
