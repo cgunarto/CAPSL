@@ -26,7 +26,7 @@
 
     if (timeInterval <= 0)
     {
-        dateString = @"Open";
+        dateString = @"Unlocked";
     }
     if (timeInterval > 0 && timeInterval <= kDayInSeconds)
     {

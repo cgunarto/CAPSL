@@ -17,7 +17,7 @@
 @property (nonatomic) NSArray *sentCapslsArray;
 @property (nonatomic) NSMutableArray *availableCapslsArray;
 
-@property BOOL shouldShowSent;
+@property (nonatomic) BOOL shouldShowSent;
 
 - (void)updateClocks;
 
