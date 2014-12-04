@@ -246,13 +246,21 @@
     UIAlertAction *noButton = [UIAlertAction actionWithTitle:@"No" style:UIAlertActionStyleDefault handler:nil];
     UIAlertAction *yesButton = [UIAlertAction actionWithTitle:@"Yes" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
         [PFUser logOut];
-        [self performSegueWithIdentifier:@"logoutSegue" sender:self];
+        [self showRootViewController];
     }];
 
     [alert addAction:noButton];
     [alert addAction:yesButton];
 
     [self presentViewController:alert animated:yesButton completion:nil];
+}
+
+- (void)showRootViewController
+{
+    RootViewController *rootVC = [self.storyboard instantiateViewControllerWithIdentifier: NSStringFromClass([RootViewController class])];
+
+//    [self.navigationController pushViewController:rootVC animated:YES];
+    [self presentViewController:rootVC animated:YES completion:nil];
 }
 
 
