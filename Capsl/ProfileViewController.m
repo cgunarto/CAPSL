@@ -31,6 +31,7 @@
 //Added by jonno
 @property (strong, nonatomic) IBOutlet UIImageView *profilePictureImageView;
 @property NSArray *currentCapslrInfo;
+@property UIImage *updatedPicture;
 
 @end
 
@@ -52,6 +53,16 @@
 {
     [super viewWillAppear:animated];
 
+    self.profilePictureImageView.image = self.updatedPicture;
+}
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    self.segmentedControl.selectedSegmentIndex = 0;
+
+    [self showCapslViewCenter];
+
     [Capslr returnCapslrFromPFUser:[PFUser currentUser] withCompletion:^(Capslr *currentCapslr, NSError *error) {
 
         self.currentCapslrInfo = @[currentCapslr.name, currentCapslr.username, currentCapslr.email];
@@ -64,15 +75,6 @@
             self.profilePictureImageView.image = [UIImage imageWithData:data];
         }];
     }];
-}
-
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-    self.segmentedControl.selectedSegmentIndex = 0;
-
-    [self showCapslViewCenter];
-
 }
 
 //Segmented control toggles between CAPSLR and ADDRESS BOOK contact
@@ -136,8 +138,15 @@
     {
         EditProfileViewController *editProfileVC = segue.destinationViewController;
         editProfileVC.currenCapslrInfo = self.currentCapslrInfo;
-        editProfileVC.currentProfilePicture = self.profilePictureImageView.image;
+        editProfileVC.updatedProfilePicture = self.profilePictureImageView.image;
     }
+}
+
+- (IBAction)unwindToProfileViewSegue:(UIStoryboardSegue *)segue
+{
+    EditProfileViewController *editVC = segue.sourceViewController;
+    self.profilePictureImageView.image = editVC.updatedProfilePicture;
+    self.updatedPicture = editVC.updatedProfilePicture;
 }
 
 

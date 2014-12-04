@@ -15,5 +15,6 @@
 @property (nonatomic) NSArray *currenCapslrInfo;
 @property (nonatomic) UIImage *currentProfilePicture;
 
+@property (nonatomic) UIImage *updatedProfilePicture;
 
 @end

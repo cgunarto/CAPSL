@@ -24,6 +24,7 @@
 
 @property NSArray *infoArray;
 @property (nonatomic)  UIImage *chosenImage;
+@property (strong, nonatomic) IBOutlet UIBarButtonItem *backBarButtonItem;
 
 @end
 
@@ -44,6 +45,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+
+    self.navigationItem.leftBarButtonItem = self.backBarButtonItem;
 
     self.infoArray = @[kNameLabel, kUsernameLabel, kEmailLabel];
 
@@ -86,7 +89,7 @@
     if (indexPath.section == 0) {
         cell = [tableView dequeueReusableCellWithIdentifier:@"profilePic" forIndexPath:indexPath];
 
-        cell.imageView.image = self.currentProfilePicture;
+        cell.imageView.image = self.updatedProfilePicture;
         cell.textLabel.text = @"Edit Photo";
 
     }else if (indexPath.section == 1) {
@@ -215,6 +218,9 @@
     [Capslr returnCapslrFromPFUser:[PFUser currentUser] withCompletion:^(Capslr *currentCapslr, NSError *error) {
         currentCapslr.profilePhoto = profilePhoto;
         self.currentProfilePicture = self.chosenImage;
+
+        self.updatedProfilePicture = self.chosenImage;
+
         [currentCapslr saveInBackground];
     }];
 
@@ -263,6 +269,10 @@
     [self presentViewController:rootVC animated:YES completion:nil];
 }
 
+- (IBAction)onBackBarButtonItemPressed:(UIBarButtonItem *)sender
+{
+    [self performSegueWithIdentifier:@"toProfileVC" sender:self.updatedProfilePicture];
+}
 
 
 
