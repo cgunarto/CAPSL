@@ -89,6 +89,7 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    // FOR SECTION ONE
     if (indexPath.section == 0)
     {
         UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil
@@ -98,7 +99,7 @@
         UIAlertAction *chooseFromLibrary = [UIAlertAction actionWithTitle:@"Choose from Library"
                                                                     style:UIAlertActionStyleDefault
                                                                   handler:^(UIAlertAction *action) {
-            // add code here
+            // CHOOSE FROM PHOTO LIBRARY
             UIImagePickerController *picker = [[UIImagePickerController alloc] init];
             picker.delegate = self;
             picker.allowsEditing = YES;
@@ -110,7 +111,7 @@
         }];
 
         UIAlertAction *takePhoto = [UIAlertAction actionWithTitle:@"Take Photo" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-            // add code here
+            // CAMERA
             if (![UIImagePickerController isSourceTypeAvailable: UIImagePickerControllerSourceTypeCamera])
             {
                 UIAlertView *myAlertView = [[UIAlertView alloc] initWithTitle:@"Error"
@@ -151,10 +152,21 @@
 
         [self presentViewController:alert animated:YES completion:nil];
     }
+
+    // FOR SECTION TWO
+    else if (indexPath.section == 1)
+    {
+        if (indexPath.row == 0)
+        {
+            NSLog(@"HELLO!");
+        }
+    }
 }
 
-
-
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
+{
+    [picker dismissViewControllerAnimated:YES completion:NULL];
+}
 
 //- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 //{
@@ -173,10 +185,6 @@
 //    
 //}
 
-- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
-{
-    [picker dismissViewControllerAnimated:YES completion:NULL];
-}
 
 
 @end
