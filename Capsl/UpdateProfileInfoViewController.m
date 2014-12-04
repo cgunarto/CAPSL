@@ -9,6 +9,9 @@
 #import "UpdateProfileInfoViewController.h"
 
 @interface UpdateProfileInfoViewController ()
+@property (strong, nonatomic) IBOutlet UILabel *descriptionLabel;
+@property (strong, nonatomic) IBOutlet UITextField *textField;
+@property (strong, nonatomic) IBOutlet UILabel *worldCountLabel;
 
 @end
 
