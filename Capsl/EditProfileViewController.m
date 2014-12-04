@@ -66,6 +66,12 @@
     [self.tableView reloadData];
 }
 
+- (void)setCurrenCapslrInfo:(NSArray *)currenCapslrInfo
+{
+    _currenCapslrInfo = currenCapslrInfo;
+    [self.tableView reloadData];
+}
+
 #pragma mark - Tableview delegate methods
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 3;

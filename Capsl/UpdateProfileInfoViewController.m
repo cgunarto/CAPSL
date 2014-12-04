@@ -71,23 +71,24 @@
         if (self.nameString && self.nameString)
         {
             currentCapslr.name = self.textField.text;
-            [currentCapslr saveInBackground];
+            [currentCapslr save];
+            [self.navigationController popToViewController:self.navigationController.childViewControllers[1] animated:YES];
         }
         else if (self.usernameString)
         {
             currentCapslr.username = self.textField.text;
-            [currentCapslr saveInBackground];
+            [currentCapslr save];
+            [self.navigationController popToViewController:self.navigationController.childViewControllers[1] animated:YES];
         }
         else if (self.emailString)
         {
             currentCapslr.email = self.textField.text;
-            [currentCapslr saveInBackground];
+            [currentCapslr save];
+            [self.navigationController popToViewController:self.navigationController.childViewControllers[1] animated:YES];
         }
     }];
 
     //TODO: ADD REFRESHING ANIMATION FOR SAVING
-    [self.navigationController popToViewController:self.navigationController.childViewControllers[1] animated:YES];
-
 }
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
