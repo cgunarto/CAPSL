@@ -23,6 +23,7 @@
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 
 @property NSArray *infoArray;
+@property UIImage *chosenImage;
 
 @end
 
@@ -36,6 +37,7 @@
 
         self.currenCapslrInfo = @[currentCapslr.name, currentCapslr.username, currentCapslr.email];
     }];
+
 }
 
 
@@ -195,23 +197,24 @@
 }
 
 //TODO: implement this later
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
+{
 
-//- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
-//{
-//    //Accessing uncropped image from info dictionary
-//    self.chosenImage = info[UIImagePickerControllerOriginalImage];
-//    self.imageView.image = self.chosenImage;
-//
-//    [picker dismissViewControllerAnimated:YES completion:NULL];
-//    
+    //Accessing uncropped image from info dictionary
+    self.chosenImage = info[UIImagePickerControllerOriginalImage];
+
 //    //Settign CPSL image to be sent
-//    NSData *imageData = UIImageJPEGRepresentation(self.chosenImage, 0.5f);
-//    self.createdCapsl.photo = [PFFile fileWithName:@"image.jpg" data:imageData];
-//    
-//    [self setTextViewToBottom];
-//    [self setAddAudioToBottom];
-//    
-//}
+    NSData *imageData = UIImageJPEGRepresentation(self.chosenImage, 0.5f);
+    PFFile *profilePhoto = [PFFile fileWithName:@"image.jpg" data:imageData];
+
+    [Capslr returnCapslrFromPFUser:[PFUser currentUser] withCompletion:^(Capslr *currentCapslr, NSError *error) {
+        currentCapslr.profilePhoto = profilePhoto;
+        [currentCapslr saveInBackground];
+
+    }];
+
+    [picker dismissViewControllerAnimated:YES completion:NULL];
+}
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
