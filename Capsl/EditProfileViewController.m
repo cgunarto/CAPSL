@@ -183,10 +183,7 @@
     }
     else if (indexPath.section == 2)
     {
-        RootViewController *rootVC = [[RootViewController alloc] init];
-
-        [PFUser logOut];
-        [self.navigationController popToViewController:rootVC animated:YES];
+        [self logOutAlert];
     }
 }
 
@@ -232,7 +229,22 @@
     {
         updateProfileInfoVC.emailString = self.currenCapslrInfo[2];
     }
+}
 
+- (void)logOutAlert
+{
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Are you sure you want to logout?" message:nil preferredStyle:UIAlertControllerStyleAlert];
+
+    UIAlertAction *noButton = [UIAlertAction actionWithTitle:@"No" style:UIAlertActionStyleDefault handler:nil];
+    UIAlertAction *yesButton = [UIAlertAction actionWithTitle:@"Yes" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        [PFUser logOut];
+        [self performSegueWithIdentifier:@"logoutSegue" sender:self];
+    }];
+
+    [alert addAction:noButton];
+    [alert addAction:yesButton];
+
+    [self presentViewController:alert animated:yesButton completion:nil];
 }
 
 

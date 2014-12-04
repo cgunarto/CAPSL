@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="vXZ-lx-hvc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="vXZ-lx-hvc">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
@@ -801,21 +801,21 @@
                                 <exclude reference="Aef-Rp-DP2"/>
                             </mask>
                             <mask key="constraints">
+                                <exclude reference="kXW-Jd-N2g"/>
                                 <exclude reference="DUq-iH-V4S"/>
                                 <exclude reference="Nsy-yW-XZL"/>
                                 <exclude reference="uuY-GI-8hE"/>
-                                <exclude reference="jgQ-pG-w6r"/>
-                                <exclude reference="tYR-IC-SLP"/>
                                 <exclude reference="3OH-EE-Zto"/>
                                 <exclude reference="7uR-9a-2SP"/>
                                 <exclude reference="Yw2-JK-WoR"/>
                                 <exclude reference="rgl-Gv-Uwu"/>
-                                <exclude reference="kXW-Jd-N2g"/>
+                                <exclude reference="LgZ-A5-0eP"/>
+                                <exclude reference="xVn-9w-Fbt"/>
                                 <exclude reference="9fO-TK-m5V"/>
                                 <exclude reference="DdI-RR-lsR"/>
                                 <exclude reference="HtA-sR-qmY"/>
-                                <exclude reference="LgZ-A5-0eP"/>
-                                <exclude reference="xVn-9w-Fbt"/>
+                                <exclude reference="jgQ-pG-w6r"/>
+                                <exclude reference="tYR-IC-SLP"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=compact">
@@ -824,21 +824,21 @@
                                 <include reference="Aef-Rp-DP2"/>
                             </mask>
                             <mask key="constraints">
+                                <include reference="kXW-Jd-N2g"/>
                                 <include reference="DUq-iH-V4S"/>
                                 <include reference="Nsy-yW-XZL"/>
                                 <include reference="uuY-GI-8hE"/>
-                                <include reference="jgQ-pG-w6r"/>
-                                <include reference="tYR-IC-SLP"/>
                                 <include reference="3OH-EE-Zto"/>
                                 <include reference="7uR-9a-2SP"/>
                                 <include reference="Yw2-JK-WoR"/>
                                 <include reference="rgl-Gv-Uwu"/>
-                                <include reference="kXW-Jd-N2g"/>
+                                <include reference="LgZ-A5-0eP"/>
+                                <include reference="xVn-9w-Fbt"/>
                                 <include reference="9fO-TK-m5V"/>
                                 <include reference="DdI-RR-lsR"/>
                                 <include reference="HtA-sR-qmY"/>
-                                <include reference="LgZ-A5-0eP"/>
-                                <include reference="xVn-9w-Fbt"/>
+                                <include reference="jgQ-pG-w6r"/>
+                                <include reference="tYR-IC-SLP"/>
                             </mask>
                         </variation>
                     </view>
@@ -2064,7 +2064,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5h5-XE-Hxm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3186" y="2540.5"/>
+            <point key="canvasLocation" x="3109.5" y="3066.5"/>
         </scene>
         <!--Edit Profile View Controller-->
         <scene sceneID="wMC-9p-R1S">
@@ -2115,6 +2115,9 @@
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="vXZ-lx-hvc" kind="show" identifier="logoutSegue" id="5R7-Zo-Kny"/>
+                                        </connections>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="buttonCell" id="Lre-No-kHJ">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -2157,6 +2160,11 @@
                                 <exclude reference="kFG-UX-p6j"/>
                             </mask>
                             <mask key="constraints">
+                                <exclude reference="OcB-Vx-d8C"/>
+                                <exclude reference="OkG-sb-AZe"/>
+                                <exclude reference="Vws-Zp-8ec"/>
+                                <exclude reference="lgK-AU-x0L"/>
+                                <exclude reference="pqu-XZ-nf7"/>
                                 <exclude reference="4K7-rR-ePE"/>
                                 <exclude reference="Ea9-hE-3v3"/>
                                 <exclude reference="Exm-ld-rB1"/>
@@ -2171,11 +2179,6 @@
                                 <exclude reference="ssv-tH-1YV"/>
                                 <exclude reference="t5F-FM-o80"/>
                                 <exclude reference="u3A-9D-11m"/>
-                                <exclude reference="OcB-Vx-d8C"/>
-                                <exclude reference="OkG-sb-AZe"/>
-                                <exclude reference="Vws-Zp-8ec"/>
-                                <exclude reference="lgK-AU-x0L"/>
-                                <exclude reference="pqu-XZ-nf7"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=compact">
@@ -2183,6 +2186,11 @@
                                 <include reference="kFG-UX-p6j"/>
                             </mask>
                             <mask key="constraints">
+                                <include reference="OcB-Vx-d8C"/>
+                                <exclude reference="OkG-sb-AZe"/>
+                                <exclude reference="Vws-Zp-8ec"/>
+                                <exclude reference="lgK-AU-x0L"/>
+                                <exclude reference="pqu-XZ-nf7"/>
                                 <exclude reference="4K7-rR-ePE"/>
                                 <exclude reference="Ea9-hE-3v3"/>
                                 <exclude reference="Exm-ld-rB1"/>
@@ -2197,11 +2205,6 @@
                                 <exclude reference="ssv-tH-1YV"/>
                                 <exclude reference="t5F-FM-o80"/>
                                 <exclude reference="u3A-9D-11m"/>
-                                <include reference="OcB-Vx-d8C"/>
-                                <exclude reference="OkG-sb-AZe"/>
-                                <exclude reference="Vws-Zp-8ec"/>
-                                <exclude reference="lgK-AU-x0L"/>
-                                <exclude reference="pqu-XZ-nf7"/>
                             </mask>
                         </variation>
                     </view>
@@ -2214,7 +2217,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6CZ-aX-Kan" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3109.5" y="2507"/>
+            <point key="canvasLocation" x="3109.5" y="2523"/>
         </scene>
         <!--Update Profile Info View Controller-->
         <scene sceneID="kfg-WE-kqz">
