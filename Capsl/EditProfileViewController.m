@@ -39,6 +39,7 @@
     [super viewDidLoad];
 
     self.navigationItem.title = @"My Profile";
+
 }
 
 -(void)setCurrenCapslrInfo:(NSArray *)currenCapslrInfo
