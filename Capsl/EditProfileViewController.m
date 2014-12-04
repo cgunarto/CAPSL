@@ -23,7 +23,7 @@
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 
 @property NSArray *infoArray;
-@property UIImage *chosenImage;
+@property (nonatomic)  UIImage *chosenImage;
 
 @end
 
@@ -51,9 +51,15 @@
 
 }
 
--(void)setCurrenCapslrInfo:(NSArray *)currenCapslrInfo
+-(void)setChosenImage:(UIImage *)chosenImage
 {
-    _currenCapslrInfo = currenCapslrInfo;
+    _chosenImage = chosenImage;
+    [self.tableView reloadData];
+}
+
+-(void)setCurrentProfilePicture:(UIImage *)currentProfilePicture
+{
+    _currentProfilePicture = currentProfilePicture;
     [self.tableView reloadData];
 }
 
@@ -203,14 +209,13 @@
     //Accessing uncropped image from info dictionary
     self.chosenImage = info[UIImagePickerControllerOriginalImage];
 
-//    //Settign CPSL image to be sent
     NSData *imageData = UIImageJPEGRepresentation(self.chosenImage, 0.5f);
     PFFile *profilePhoto = [PFFile fileWithName:@"image.jpg" data:imageData];
 
     [Capslr returnCapslrFromPFUser:[PFUser currentUser] withCompletion:^(Capslr *currentCapslr, NSError *error) {
         currentCapslr.profilePhoto = profilePhoto;
         [currentCapslr saveInBackground];
-
+        self.currentProfilePicture = self.chosenImage;
     }];
 
     [picker dismissViewControllerAnimated:YES completion:NULL];
