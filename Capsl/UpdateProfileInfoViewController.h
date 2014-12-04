@@ -10,4 +10,8 @@
 
 @interface UpdateProfileInfoViewController : UIViewController
 
+@property NSString *nameString;
+@property NSString *usernameString;
+@property NSString *emailString;
+
 @end

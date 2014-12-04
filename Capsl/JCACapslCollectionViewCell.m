@@ -19,7 +19,7 @@
     NSDate *deliveryDate = capsl.deliveryTime;
     NSTimeInterval timeInterval = [deliveryDate timeIntervalSinceNow];
 
-    self.countdownLabel.text = [JKCountDownTimer getStringWithTimeInterval:timeInterval];
+    self.countdownLabel.text = [[JKCountDownTimer getStringWithTimeInterval:timeInterval] uppercaseString];
     self.deliveryDateLabel.text = [JKCountDownTimer getDateStringWithDate:deliveryDate];
 
 //    [UIView setAnimationsEnabled:NO];

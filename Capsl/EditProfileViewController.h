@@ -8,9 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
+
+
 @interface EditProfileViewController : UIViewController
 
 @property (nonatomic) NSArray *currenCapslrInfo;
-@property UIImage *currentProfilePicture;
+@property (nonatomic) UIImage *currentProfilePicture;
+
 
 @end

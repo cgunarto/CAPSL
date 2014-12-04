@@ -235,6 +235,7 @@ static NSString * const reuseIdentifier = @"CapslCell";
         cell.countdownLabel.backgroundColor = [UIColor colorWithHue:0.614 saturation:0.607 brightness:0.642 alpha:1.000];
     }
 
+    [cell layoutIfNeeded];
 
     return cell;
 }

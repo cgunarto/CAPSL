@@ -34,7 +34,7 @@
     self.device = [UIDevice currentDevice];
 
     self.timelineVC.showSent = self.shouldShowSent;
-//    self.capslVC.showSent = self.shouldShowSent;
+    self.capslVC.showSent = self.shouldShowSent;
 
 
     [self setWallpaper];
@@ -49,10 +49,21 @@
     [self.view addSubview:self.capslContainerView];
     [self.view addSubview:self.timelineContainerView];
 
+}
+
+-(void)setShouldShowSent:(BOOL)shouldShowSent
+{
+    _shouldShowSent = shouldShowSent;
+
+    self.timelineVC.showSent = _shouldShowSent;
+    self.capslVC.showSent = _shouldShowSent;
+
     self.capslVC.capslGrandArray = [self processCapsls:self.capslsArray];
     self.capslVC.sentCapslsGrandArray = [self processCapsls:self.sentCapslsArray];
     self.timelineVC.capslGrandArray = [self processCapsls:self.capslsArray];
     self.timelineVC.sentCapslsGrandArray = [self processCapsls:self.sentCapslsArray];
+
+    [self setWallpaper];
 
 }
 
@@ -104,6 +115,7 @@
 
 - (void)setWallpaper
 {
+    [self.wallpaperView removeFromSuperview];
 
     UIImage *wallpaper = [[UIImage alloc] init];
 
@@ -120,6 +132,7 @@
     //    self.wallpaperView.frame = self.view.bounds;
     self.wallpaperView.contentMode = UIViewContentModeScaleAspectFill;
     [self.view addSubview:self.wallpaperView];
+    [self.view sendSubviewToBack:self.wallpaperView];
 
 }
 

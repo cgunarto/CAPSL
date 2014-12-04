@@ -9,17 +9,21 @@
 #import "EditProfileViewController.h"
 #import "EditProfilePicTableViewCell.h"
 #import "Capslr.h"
+#import "UpdateProfileInfoViewController.h"
+#import "UpdateProfileInfoViewController.h"
+#import "RootViewController.h"
 
 #define kNameLabel @"Name"
 #define kUsernameLabel @"Username"
 #define kEmailLabel @"Email"
 
 
-@interface EditProfileViewController () <UITableViewDataSource, UITableViewDelegate, UIImagePickerControllerDelegate>
+@interface EditProfileViewController () <UITableViewDataSource, UITableViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 
 @property NSArray *infoArray;
+@property (nonatomic)  UIImage *chosenImage;
 
 @end
 
@@ -29,7 +33,11 @@
 {
     [super viewWillAppear:animated];
 
-    self.infoArray = @[kNameLabel, kUsernameLabel, kEmailLabel];
+    [Capslr returnCapslrFromPFUser:[PFUser currentUser] withCompletion:^(Capslr *currentCapslr, NSError *error) {
+
+        self.currenCapslrInfo = @[currentCapslr.name, currentCapslr.username, currentCapslr.email];
+    }];
+
 }
 
 
@@ -37,13 +45,21 @@
 {
     [super viewDidLoad];
 
+    self.infoArray = @[kNameLabel, kUsernameLabel, kEmailLabel];
+
     self.navigationItem.title = @"My Profile";
 
 }
 
--(void)setCurrenCapslrInfo:(NSArray *)currenCapslrInfo
+-(void)setChosenImage:(UIImage *)chosenImage
 {
-    _currenCapslrInfo = currenCapslrInfo;
+    _chosenImage = chosenImage;
+    [self.tableView reloadData];
+}
+
+-(void)setCurrentProfilePicture:(UIImage *)currentProfilePicture
+{
+    _currentProfilePicture = currentProfilePicture;
     [self.tableView reloadData];
 }
 
@@ -82,8 +98,12 @@
 
     }else if (indexPath.section == 2) {
         cell = [tableView dequeueReusableCellWithIdentifier:@"buttonCell" forIndexPath:indexPath];
+        cell.textLabel.text = @"LOGOUT";
     }
-    
+
+#warning fix this later...
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+
     return cell;
 }
 
@@ -158,32 +178,91 @@
     {
         if (indexPath.row == 0)
         {
-            NSLog(@"HELLO!");
+            [self performSegueWithIdentifier:@"editNameSegue" sender:self.currenCapslrInfo[0]];
+        }
+        else if (indexPath.row == 1)
+        {
+            [self performSegueWithIdentifier:@"editUsernameSegue" sender:self.currenCapslrInfo[1]];
+        }
+        else if (indexPath.row == 2)
+        {
+            [self performSegueWithIdentifier:@"editEmailSegue" sender:self.currenCapslrInfo[2]];
         }
     }
+    else if (indexPath.section == 2)
+    {
+        [self logOutAlert];
+    }
 }
+
+
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
 {
     [picker dismissViewControllerAnimated:YES completion:NULL];
 }
 
-//- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
-//{
-//    //Accessing uncropped image from info dictionary
-//    self.chosenImage = info[UIImagePickerControllerOriginalImage];
-//    self.imageView.image = self.chosenImage;
-//
-//    [picker dismissViewControllerAnimated:YES completion:NULL];
-//    
-//    //Settign CPSL image to be sent
-//    NSData *imageData = UIImageJPEGRepresentation(self.chosenImage, 1.0f);
-//    self.createdCapsl.photo = [PFFile fileWithName:@"image.jpg" data:imageData];
-//    
-//    [self setTextViewToBottom];
-//    [self setAddAudioToBottom];
-//    
-//}
+//TODO: implement this later
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
+{
+
+    //Accessing uncropped image from info dictionary
+    self.chosenImage = info[UIImagePickerControllerOriginalImage];
+
+    NSData *imageData = UIImageJPEGRepresentation(self.chosenImage, 0.5f);
+    PFFile *profilePhoto = [PFFile fileWithName:@"image.jpg" data:imageData];
+
+    [Capslr returnCapslrFromPFUser:[PFUser currentUser] withCompletion:^(Capslr *currentCapslr, NSError *error) {
+        currentCapslr.profilePhoto = profilePhoto;
+        self.currentProfilePicture = self.chosenImage;
+        [currentCapslr saveInBackground];
+    }];
+
+    [picker dismissViewControllerAnimated:YES completion:NULL];
+}
+
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    UpdateProfileInfoViewController *updateProfileInfoVC = segue.destinationViewController;
+
+    if ([segue.identifier isEqual:@"editNameSegue"])
+    {
+        updateProfileInfoVC.nameString = self.currenCapslrInfo[0];
+    }
+    else if ([segue.identifier isEqual:@"editUsernameSegue"])
+    {
+        updateProfileInfoVC.usernameString = self.currenCapslrInfo[1];
+    }
+    else if ([segue.identifier isEqual:@"editEmailSegue"])
+    {
+        updateProfileInfoVC.emailString = self.currenCapslrInfo[2];
+    }
+}
+
+- (void)logOutAlert
+{
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Are you sure you want to logout?" message:nil preferredStyle:UIAlertControllerStyleAlert];
+
+    UIAlertAction *noButton = [UIAlertAction actionWithTitle:@"No" style:UIAlertActionStyleDefault handler:nil];
+    UIAlertAction *yesButton = [UIAlertAction actionWithTitle:@"Yes" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        [PFUser logOut];
+        [self showRootViewController];
+    }];
+
+    [alert addAction:noButton];
+    [alert addAction:yesButton];
+
+    [self presentViewController:alert animated:yesButton completion:nil];
+}
+
+- (void)showRootViewController
+{
+    RootViewController *rootVC = [self.storyboard instantiateViewControllerWithIdentifier: NSStringFromClass([RootViewController class])];
+
+//    [self.navigationController pushViewController:rootVC animated:YES];
+    [self presentViewController:rootVC animated:YES completion:nil];
+}
+
 
 
 

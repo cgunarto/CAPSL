@@ -45,7 +45,6 @@
             {
                 self.timelineRootVC.capslsArray = objects;
                 self.capslListVC.capslsArray = objects;
-                self.capslListVC.title = [NSString stringWithFormat:@"Count: %lu", (unsigned long)objects.count];
 
                 NSInteger availableCapslsCount = 0;
 
@@ -57,6 +56,9 @@
                     }
                 }
 
+                self.timelineRootVC.shouldShowSent = NO;
+                self.capslListVC.shouldShowSent = NO;
+                
                 [self.capslListVC scrollToSoonestCapslWithCount:availableCapslsCount];
 
             }
@@ -72,6 +74,7 @@
             {
                 self.capslListVC.sentCapslsArray = objects;
                 self.timelineRootVC.sentCapslsArray = objects;
+                
             }
             else
             {
@@ -81,7 +84,6 @@
 
     }];
 
-    self.timelineRootVC.shouldShowSent = NO;
 //    [self.view addSubview:self.sentReceivedSegmentedControl];
 //    [self.view bringSubviewToFront:self.sentReceivedSegmentedControl];
 //
@@ -93,19 +95,6 @@
 
 }
 
--(void)viewDidAppear:(BOOL)animated
-{
-    [super viewDidAppear:animated];
-    if ([self.capslListVC.navigationItem.rightBarButtonItem.title isEqual:@"Sent Capsules"])
-    {
-        self.capslListVC.title = [NSString stringWithFormat:@"%lu", (unsigned long)self.capslListVC.capslsArray.count];
-
-    }
-    else if ([self.capslListVC.navigationItem.rightBarButtonItem.title isEqual:@"Recieved Capsules"])
-    {
-        self.capslListVC.title = [NSString stringWithFormat:@"%lu", (unsigned long)self.capslListVC.sentCapslsArray.count];
-    }
-}
 
 - (void)viewWillAppear:(BOOL)animated
 {
@@ -118,10 +107,8 @@
 - (void)viewWillDisappear:(BOOL)animated
 {
     // invalidate timer here
-}
 
-- (BOOL)prefersStatusBarHidden {
-    return YES;
+    [self.timer invalidate];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -176,11 +163,13 @@
         case 0:
         {
             self.timelineRootVC.shouldShowSent = NO;
+            self.capslListVC.shouldShowSent = NO;
             break;
         }
         case 1:
         {
             self.timelineRootVC.shouldShowSent = YES;
+            self.capslListVC.shouldShowSent = YES;
         }
         default:
             break;

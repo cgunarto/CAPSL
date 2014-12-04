@@ -31,7 +31,7 @@
 
     NSDate *deliveryDate = capsl.deliveryTime;
     NSTimeInterval timeInterval = [deliveryDate timeIntervalSinceNow];
-    self.timerLabel.text = [JKCountDownTimer getStringWithTimeInterval:timeInterval];
+    self.timerLabel.text = [[JKCountDownTimer getStringWithTimeInterval:timeInterval] uppercaseString];
     self.deliveryDateLabel.text = [JKCountDownTimer getDateStringWithDate:deliveryDate];
 
 }

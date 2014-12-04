@@ -17,8 +17,9 @@
 @interface CapsuleListViewController () <UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate>
 
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
-@property (strong, nonatomic) IBOutlet UIBarButtonItem *capslsBarButtonItem;
 @property NSArray *tableViewData;
+@property NSMutableArray *senderPics;
+@property NSMutableArray *recipientPics;
 
 @property NSInteger availableCapslsCount;
 
@@ -33,10 +34,15 @@
 
     //TODO: fix capslCount!!
     
-    self.navigationController.navigationBar.backgroundColor = [UIColor greenColor];
     self.tableView.contentInset = UIEdgeInsetsMake(self.navigationController.navigationBar.frame.size.height, 0, 44, 0);
 
     self.availableCapslsCount = 0;
+
+    self.senderPics = [@[] mutableCopy];
+    self.recipientPics = [@[] mutableCopy];
+
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+
 
 //    for (NSDate *date in [self.capslsArray valueForKey:@"deliveryTime"])
 //    {
@@ -50,13 +56,31 @@
 }
 
 
-// Automatically reloads the tableview whenever capslsArray is updated..
--(void)setCapslsArray:(NSArray *)capslsArray
+-(void)setShouldShowSent:(BOOL)shouldShowSent
 {
-    _capslsArray = capslsArray;
-    [self.tableView reloadData];
+    _shouldShowSent = shouldShowSent;
 
+    if (_shouldShowSent)
+    {
+        self.tableViewData = self.sentCapslsArray;
+    }
+    else
+    {
+        self.tableViewData = self.capslsArray;
+    }
+
+    [self.tableView reloadData];
 }
+
+
+// Automatically reloads the tableview whenever capslsArray is updated..
+
+//-(void)setCapslsArray:(NSArray *)capslsArray
+//{
+//    _capslsArray = capslsArray;
+//    [self.tableView reloadData];
+//
+//}
 
 
 
@@ -64,18 +88,9 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    NSInteger arrayCount;
 
-    if ([self.capslsBarButtonItem.title isEqual:@"Sent Capsules"])
-    {
-        arrayCount =  self.capslsArray.count;
-    }
-    else if ([self.capslsBarButtonItem.title isEqual:@"Recieved Capsules"])
-    {
-        arrayCount = self.sentCapslsArray.count;
-    }
+    return self.tableViewData.count;
 
-    return arrayCount;
 }
 
 
@@ -83,66 +98,54 @@
 {
     CapslTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
 
-    if ([self.capslsBarButtonItem.title isEqual:@"Sent Capsules"])
+    Capsl *capslForCell = self.tableViewData[indexPath.row];
+
+    PFFile *profilePhoto = [[PFFile alloc] init];
+
+    NSMutableArray *profilePicArray = [@[] mutableCopy];
+
+    if (self.shouldShowSent)
     {
+        cell.capslrLabel.text = capslForCell.recipient.username;
+        profilePhoto = capslForCell.recipient.profilePhoto;
 
-        Capsl *capsl = self.capslsArray[indexPath.row];
+        profilePicArray = self.recipientPics;
+    }
+    else
+    {
+        cell.capslrLabel.text = capslForCell.sender.username;
+        profilePhoto = capslForCell.sender.profilePhoto;
+        profilePicArray = self.senderPics;
+    }
 
-        // updating timer string...
-        [cell updateLabelsForCapsl:capsl];
 
-        cell.profileImage.layer.cornerRadius = cell.profileImage.frame.size.width/2;
-        cell.profileImage.clipsToBounds = YES;
-
-        // querying for sender data (need to refactor later)
-        PFQuery *query = [Capslr query];
-        [query whereKey:@"objectId" equalTo: capsl.sender.objectId];
-        [query getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error) {
-
-            cell.capslrLabel.text = [NSString stringWithFormat:@"From: %@", object[@"username"]];
-
-            //Sender Profile Image
-            PFFile *profilePhoto = object[@"profilePhoto"];
-            cell.profileImage.image = nil;
-
-            [profilePhoto getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
-                cell.profileImage.image = [UIImage imageWithData:data];
-            }];
-        }];
+    //Sender Profile Image
+    if (profilePicArray.count != 0)
+    {
+        cell.profileImage.image = profilePicArray[indexPath.row];
 
     }
-    else if ([self.capslsBarButtonItem.title isEqual:@"Recieved Capsules"])
-    {
-        Capsl *capsl = self.sentCapslsArray[indexPath.row];
 
-        //Capsl sent to...
-        PFQuery *query = [Capslr query];
-        [query whereKey:@"objectId" equalTo: capsl.recipient.objectId];
-        [query getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error) {
+    cell.profileImage.layer.cornerRadius = cell.profileImage.frame.size.width/2;
+    cell.profileImage.clipsToBounds = YES;
 
-            cell.capslrLabel.text = [NSString stringWithFormat:@"To: %@", object[@"username"]];
-
-            //Reciever Profile Image
-            PFFile *profilePhoto = object[@"profilePhoto"];
-            cell.profileImage.image = nil;
-
-            [profilePhoto getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
-                cell.profileImage.image = [UIImage imageWithData:data];
-            }];
+//    if ([cell.profileImage.image isEqual:[UIImage imageNamed:@"default"]])
+//    {
+        [profilePhoto getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
+            cell.profileImage.image = [UIImage imageWithData:data];
+//            [profilePicArray replaceObjectAtIndex:indexPath.row withObject:[UIImage imageWithData:data]];
         }];
+//    }
+//    else
+//    {
+//        cell.profileImage.image = profilePicArray[indexPath.row];
+//    }
 
-        [cell updateLabelsForCapsl:capsl];
+    // updating timer string...
+    [cell updateLabelsForCapsl:capslForCell];
 
-        NSDate *viewedAtDate = capsl.viewedAt;
-        if (viewedAtDate)
-        {
-            cell.timerLabel.text = @"Opened";
-        }
-        else
-        {
-            cell.timerLabel.text = @"Not Opened";
-        }
-    }
+    //Capsl sent to...
+
     return cell;
 }
 
@@ -150,8 +153,8 @@
 #pragma mark - Helper Method
 - (void)scrollToSoonestCapslWithCount:(NSInteger)openCapslsCount
 {
-    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:(openCapslsCount) inSection:0];
-    [self.tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionTop animated:NO];
+//    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:(openCapslsCount) inSection:0];
+//    [self.tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionTop animated:NO];
 }
 
 
@@ -159,7 +162,7 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
 
-    Capsl *capsl = self.capslsArray[indexPath.row];
+    Capsl *capsl = self.tableViewData[indexPath.row];
     long elapsedSeconds = [capsl.deliveryTime timeIntervalSinceNow];
 
     if ((!capsl.viewedAt) && elapsedSeconds <= 0)
@@ -175,7 +178,7 @@
 {
 
     NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
-    Capsl *capsl = self.capslsArray[indexPath.row];
+    Capsl *capsl = self.tableViewData[indexPath.row];
 
     MessageDetailViewController *messageDetailVC = segue.destinationViewController;
     messageDetailVC.chosenCapsl = capsl;
@@ -188,33 +191,13 @@
 {
     for (CapslTableViewCell *cell in self.tableView.visibleCells)
     {
+        
         NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
 
-        if ([self.capslsBarButtonItem.title isEqual: @"Sent Capsules"])
-        {
-            Capsl *capsl = self.capslsArray[indexPath.row];
-            [cell updateLabelsForCapsl:capsl];
-        }
-        else
-        {
-            nil;
-        }
-    }
-}
+        Capsl *capsl = self.tableViewData[indexPath.row];
+        [cell updateLabelsForCapsl:capsl];
 
-
-- (IBAction)onSentCapsulesButtonPressed:(UIBarButtonItem *)sender
-{
-    if ([self.capslsBarButtonItem.title isEqual: @"Sent Capsules"])
-    {
-        self.capslsBarButtonItem.title = @"Recieved Capsules";
     }
-    else if ([self.capslsBarButtonItem.title isEqual:@"Recieved Capsules"])
-    {
-        self.capslsBarButtonItem.title = @"Sent Capsules";
-    }
-
-    [self.tableView reloadData];
 }
 
 // Alert when timer expires

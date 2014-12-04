@@ -51,6 +51,19 @@
     [self updateData];
 }
 
+- (void)setCapslGrandArray:(NSArray *)capslGrandArray
+{
+    _capslGrandArray = capslGrandArray;
+    [self updateData];
+
+}
+
+- (void)setSentCapslsGrandArray:(NSArray *)sentCapslsGrandArray
+{
+    _sentCapslsGrandArray = sentCapslsGrandArray;
+    [self updateData];
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
