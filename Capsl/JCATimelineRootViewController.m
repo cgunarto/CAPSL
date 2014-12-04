@@ -130,7 +130,7 @@
 
     self.wallpaperView = [[UIImageView alloc] initWithImage:wallpaper];
     //    self.wallpaperView.frame = self.view.bounds;
-    self.wallpaperView.contentMode = UIViewContentModeScaleAspectFill;
+    self.wallpaperView.contentMode = UIViewContentModeScaleAspectFit;
     [self.view addSubview:self.wallpaperView];
     [self.view sendSubviewToBack:self.wallpaperView];
 
@@ -140,7 +140,7 @@
 {
 
     UIColor *tintColor = [UIColor colorWithWhite:0.3 alpha:0.1];
-    wallpaper = [wallpaper applyBlurWithRadius:3 tintColor:tintColor saturationDeltaFactor:0.8 maskImage:nil];
+//    wallpaper = [wallpaper applyBlurWithRadius:3 tintColor:tintColor saturationDeltaFactor:0.8 maskImage:nil];
 
     return wallpaper;
 

@@ -33,6 +33,8 @@
 {
     [super viewDidLoad];
 
+    self.view.backgroundColor = [UIColor colorWithWhite:0.0 alpha:0.75];
+
     self.capslListVC.availableCapslsArray = [@[] mutableCopy];
 
     [Capslr returnCapslrFromPFUser:[PFUser currentUser] withCompletion:^(Capslr *currentCapslr, NSError *error) {
@@ -170,6 +172,7 @@
         {
             self.timelineRootVC.shouldShowSent = YES;
             self.capslListVC.shouldShowSent = YES;
+            break;
         }
         default:
             break;

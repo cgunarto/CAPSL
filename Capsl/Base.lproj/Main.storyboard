@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="vXZ-lx-hvc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="vXZ-lx-hvc">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
@@ -716,7 +716,7 @@
                                 <color key="backgroundColor" red="0.0054950260859999997" green="0.010627522279999999" blue="0.01474808673" alpha="1" colorSpace="calibratedRGB"/>
                                 <gestureRecognizers/>
                                 <variation key="heightClass=compact" ambiguous="YES">
-                                    <rect key="frame" x="-1" y="1" width="0.0" height="0.0"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="0.0" height="0.0"/>
                                 </variation>
                                 <connections>
                                     <outletCollection property="gestureRecognizers" destination="c4q-uJ-KCm" appends="YES" id="iwv-Fh-SUF"/>
@@ -758,7 +758,7 @@
                                 <fontDescription key="fontDescription" name="HelveticaNeue-CondensedBold" family="Helvetica Neue" pointSize="20"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences" returnKeyType="done"/>
                                 <variation key="heightClass=compact" ambiguous="YES">
-                                    <rect key="frame" x="-1" y="1" width="0.0" height="0.0"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="0.0" height="0.0"/>
                                 </variation>
                             </textView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="col-p1-YKd">
@@ -1504,7 +1504,6 @@
                                 </connections>
                             </segmentedControl>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailingMargin" secondItem="176-jE-9B6" secondAttribute="trailing" constant="-16" id="74a-oh-OEh"/>
                             <constraint firstItem="VVo-uI-EQc" firstAttribute="top" secondItem="loW-9Y-mC8" secondAttribute="bottom" constant="8" id="74l-Mh-A1a"/>
@@ -1763,7 +1762,7 @@
                                 </connections>
                             </tableView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="trailingMargin" secondItem="6sN-U3-hhX" secondAttribute="trailing" constant="-16" id="4IK-Uf-GHd"/>
                             <constraint firstAttribute="trailingMargin" secondItem="6sN-U3-hhX" secondAttribute="trailing" constant="-16" id="AH3-hC-fwb"/>
@@ -1963,6 +1962,7 @@
                         </variation>
                     </view>
                     <toolbarItems/>
+                    <nil key="simulatedStatusBarMetrics"/>
                     <connections>
                         <outlet property="imageView" destination="gSW-Fa-jHk" id="eUB-Oq-9cx"/>
                     </connections>
@@ -2486,7 +2486,7 @@
                                 </connections>
                             </containerView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.26243638990000001" green="0.81107264759999997" blue="0.8598896265" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="lZV-Ya-xrU" firstAttribute="leading" secondItem="J05-Fc-44N" secondAttribute="leadingMargin" constant="-16" id="V96-Ss-OSx"/>
                             <constraint firstItem="lZV-Ya-xrU" firstAttribute="top" secondItem="J05-Fc-44N" secondAttribute="topMargin" id="WXL-C6-whf"/>
