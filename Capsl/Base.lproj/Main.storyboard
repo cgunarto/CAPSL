@@ -754,7 +754,7 @@
                                     <segue destination="sly-Qd-pFA" kind="presentation" identifier="segueToAudio" id="2s3-Cm-t1P"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Aef-Rp-DP2">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Character count: 150" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Aef-Rp-DP2">
                                 <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="20" id="Zs8-3v-05Z"/>
@@ -801,21 +801,21 @@
                                 <exclude reference="Aef-Rp-DP2"/>
                             </mask>
                             <mask key="constraints">
+                                <exclude reference="kXW-Jd-N2g"/>
                                 <exclude reference="DUq-iH-V4S"/>
                                 <exclude reference="Nsy-yW-XZL"/>
                                 <exclude reference="uuY-GI-8hE"/>
-                                <exclude reference="jgQ-pG-w6r"/>
-                                <exclude reference="tYR-IC-SLP"/>
                                 <exclude reference="3OH-EE-Zto"/>
                                 <exclude reference="7uR-9a-2SP"/>
                                 <exclude reference="Yw2-JK-WoR"/>
                                 <exclude reference="rgl-Gv-Uwu"/>
-                                <exclude reference="kXW-Jd-N2g"/>
+                                <exclude reference="LgZ-A5-0eP"/>
+                                <exclude reference="xVn-9w-Fbt"/>
                                 <exclude reference="9fO-TK-m5V"/>
                                 <exclude reference="DdI-RR-lsR"/>
                                 <exclude reference="HtA-sR-qmY"/>
-                                <exclude reference="LgZ-A5-0eP"/>
-                                <exclude reference="xVn-9w-Fbt"/>
+                                <exclude reference="jgQ-pG-w6r"/>
+                                <exclude reference="tYR-IC-SLP"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=compact">
@@ -824,21 +824,21 @@
                                 <include reference="Aef-Rp-DP2"/>
                             </mask>
                             <mask key="constraints">
+                                <include reference="kXW-Jd-N2g"/>
                                 <include reference="DUq-iH-V4S"/>
                                 <include reference="Nsy-yW-XZL"/>
                                 <include reference="uuY-GI-8hE"/>
-                                <include reference="jgQ-pG-w6r"/>
-                                <include reference="tYR-IC-SLP"/>
                                 <include reference="3OH-EE-Zto"/>
                                 <include reference="7uR-9a-2SP"/>
                                 <include reference="Yw2-JK-WoR"/>
                                 <include reference="rgl-Gv-Uwu"/>
-                                <include reference="kXW-Jd-N2g"/>
+                                <include reference="LgZ-A5-0eP"/>
+                                <include reference="xVn-9w-Fbt"/>
                                 <include reference="9fO-TK-m5V"/>
                                 <include reference="DdI-RR-lsR"/>
                                 <include reference="HtA-sR-qmY"/>
-                                <include reference="LgZ-A5-0eP"/>
-                                <include reference="xVn-9w-Fbt"/>
+                                <include reference="jgQ-pG-w6r"/>
+                                <include reference="tYR-IC-SLP"/>
                             </mask>
                         </variation>
                     </view>
