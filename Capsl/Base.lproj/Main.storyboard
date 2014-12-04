@@ -784,7 +784,6 @@
                             <constraint firstAttribute="width" secondItem="col-p1-YKd" secondAttribute="width" id="9fO-TK-m5V"/>
                             <constraint firstItem="Hg3-VI-LXE" firstAttribute="top" secondItem="jZE-SC-Npr" secondAttribute="bottom" id="DUq-iH-V4S"/>
                             <constraint firstAttribute="bottomMargin" secondItem="col-p1-YKd" secondAttribute="bottom" constant="175" id="DdI-RR-lsR"/>
-                            <constraint firstItem="col-p1-YKd" firstAttribute="top" secondItem="Aef-Rp-DP2" secondAttribute="bottom" id="FlQ-jl-sQU"/>
                             <constraint firstAttribute="centerX" secondItem="col-p1-YKd" secondAttribute="centerX" id="HtA-sR-qmY"/>
                             <constraint firstItem="adF-cQ-9qF" firstAttribute="top" secondItem="Hg3-VI-LXE" secondAttribute="bottom" id="LgZ-A5-0eP"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Hg3-VI-LXE" secondAttribute="trailing" constant="-16" id="Nsy-yW-XZL"/>
@@ -814,7 +813,6 @@
                                 <exclude reference="kXW-Jd-N2g"/>
                                 <exclude reference="9fO-TK-m5V"/>
                                 <exclude reference="DdI-RR-lsR"/>
-                                <exclude reference="FlQ-jl-sQU"/>
                                 <exclude reference="HtA-sR-qmY"/>
                                 <exclude reference="LgZ-A5-0eP"/>
                                 <exclude reference="xVn-9w-Fbt"/>
@@ -838,7 +836,6 @@
                                 <include reference="kXW-Jd-N2g"/>
                                 <include reference="9fO-TK-m5V"/>
                                 <include reference="DdI-RR-lsR"/>
-                                <exclude reference="FlQ-jl-sQU"/>
                                 <include reference="HtA-sR-qmY"/>
                                 <include reference="LgZ-A5-0eP"/>
                                 <include reference="xVn-9w-Fbt"/>
@@ -849,6 +846,7 @@
                     <connections>
                         <outlet property="addAudioButton" destination="col-p1-YKd" id="why-vR-Ksu"/>
                         <outlet property="bottomAddAudioConstraint" destination="DdI-RR-lsR" id="Q4w-PE-qEz"/>
+                        <outlet property="bottomLabelConstraint" destination="7uR-9a-2SP" id="JFe-HB-Fk2"/>
                         <outlet property="bottomTextViewConstraint" destination="xVn-9w-Fbt" id="qgn-v0-TaI"/>
                         <outlet property="cancelButton" destination="z6Q-Dn-DDG" id="cpp-iG-eE7"/>
                         <outlet property="characterCountLabel" destination="Aef-Rp-DP2" id="SxP-cd-gxe"/>

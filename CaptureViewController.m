@@ -24,6 +24,7 @@
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *bottomTextViewConstraint;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *bottomAddAudioConstraint;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *bottomLabelConstraint;
 
 @end
 
@@ -407,6 +408,7 @@
                                                                 multiplier:1.0f
                                                                   constant:0.0f];
     [self.view addConstraint:self.bottomTextViewConstraint];
+
 }
 
 - (void)setAddAudioToBottom
