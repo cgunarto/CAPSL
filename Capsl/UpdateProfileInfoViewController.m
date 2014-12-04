@@ -65,21 +65,28 @@
 
 - (IBAction)onSaveBarButtonItemPressed:(UIBarButtonItem *)sender
 {
+    
 
+    [self.navigationController popToViewController:self.navigationController.childViewControllers[1] animated:YES];
 }
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
     NSInteger textLength = 0;
     textLength = [textField.text length] + [string length] - range.length;
-    NSLog(@"Length: %ld", (long)textLength);
 
     self.wordCountLabel.text = [NSString stringWithFormat:@"%ld/20", (long)textLength];
 
-    //enable Save Button when textfield is used
+    if (textLength > 19)
+    {
+        return NO;
+    }
 
+    //enable Save Button when textfield is used
     self.saveBarButtonItem.enabled = YES;
 
     return YES;
 }
+
+
 
 @end
