@@ -113,7 +113,7 @@
     
     else
     {
-        //Save it to Capsl
+        //Save it to Parse
         [self.createdCapsl saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error)
         {
             if (!error)
@@ -127,7 +127,12 @@
 
                 UIAlertAction *okButton = [UIAlertAction actionWithTitle:@"OK"
                                                                    style:UIAlertActionStyleDefault
-                                                                 handler:nil];
+                                                                 handler:^(UIAlertAction *action)
+                                                                 {
+                                                                     [alert dismissViewControllerAnimated:YES completion:nil];
+
+                                                                     [self performSegueWithIdentifier:@"unwindToChoose" sender:self];
+                                                                 }];
                 [alert addAction:okButton];
                 [self presentViewController:alert
                                    animated:YES

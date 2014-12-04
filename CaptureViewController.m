@@ -34,37 +34,56 @@
 {
     [super viewDidLoad];
 
-    self.textView.delegate = self;
+    //If VC isEditing, it is trying to create a Capsl message
+    if (self.isEditing)
+    {
+        self.textView.delegate = self;
 
-    //Setting CPSL sender
-    [Capslr returnCapslrFromPFUser:[PFUser currentUser] withCompletion:^(Capslr *currentCapslr, NSError *error)
-     {
-         self.createdCapsl.sender = currentCapslr;
-     }];
+        //Setting CPSL sender
+        [Capslr returnCapslrFromPFUser:[PFUser currentUser] withCompletion:^(Capslr *currentCapslr, NSError *error)
+         {
+             self.createdCapsl.sender = currentCapslr;
+         }];
 
-    //Initializing Capsl object and its type
-    self.createdCapsl = [Capsl object];
-    self.createdCapsl.type = @"multimedia";
-    self.navigationItem.leftBarButtonItem = self.cancelButton;
-    self.navigationItem.rightBarButtonItem = self.doneButton;
+        //Initializing Capsl object and its type
+        self.createdCapsl = [Capsl object];
+        self.createdCapsl.type = @"multimedia";
+        self.navigationItem.leftBarButtonItem = self.cancelButton;
+        self.navigationItem.rightBarButtonItem = self.doneButton;
+
+        self.imageView.userInteractionEnabled = YES;
+        self.textView.userInteractionEnabled = YES;
+    }
+
+    //If VC isEditing is NO, it is trying to unwrap and display a CPSL message
+    else
+    {
+        self.imageView.userInteractionEnabled = NO;
+        self.textView.userInteractionEnabled = NO;
+    }
+
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    // register for keyboard notifications
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(keyboardWillShow)
-                                                 name:UIKeyboardWillShowNotification
-                                               object:nil];
 
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(keyboardWillHide)
-                                                 name:UIKeyboardWillHideNotification
-                                               object:nil];
-    if (self.createdCapsl.audio)
+    if (self.isEditing)
     {
-        [self.addAudioButton setTitle:@"Audio added - tap to edit" forState:UIControlStateNormal];
+        // register for keyboard notifications
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(keyboardWillShow)
+                                                     name:UIKeyboardWillShowNotification
+                                                   object:nil];
+
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(keyboardWillHide)
+                                                     name:UIKeyboardWillHideNotification
+                                                   object:nil];
+        if (self.createdCapsl.audio)
+        {
+            [self.addAudioButton setTitle:@"Audio added - tap to edit" forState:UIControlStateNormal];
+        }
     }
 
 }
@@ -72,64 +91,69 @@
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
-    // unregister for keyboard notifications while not visible.
-    [[NSNotificationCenter defaultCenter] removeObserver:self
-                                                    name:UIKeyboardWillShowNotification
-                                                  object:nil];
 
-    [[NSNotificationCenter defaultCenter] removeObserver:self
-                                                    name:UIKeyboardWillHideNotification
-                                                  object:nil];
+    if (self.isEditing)
+    {
+        // unregister for keyboard notifications while not visible.
+        [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                        name:UIKeyboardWillShowNotification
+                                                      object:nil];
+
+        [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                        name:UIKeyboardWillHideNotification
+                                                      object:nil];
+    }
 }
 
 - (void)keyboardWillShow
 {
-    //If image is not nil, move the keyboard up by Keyboard height
-    //If image is nil, don't do anything
-    if (self.imageView.image)
+    if (self.isEditing)
     {
-//        [self setTextViewToTop];
-
-//
-//        //WHY DOESN'T THIS WORK?
-        CGRect rect = [[UIApplication sharedApplication] keyWindow].frame;
-        rect.origin.y -= kOFFSET_FOR_KEYBOARD;
-        rect.size.height += kOFFSET_FOR_KEYBOARD;
-        [[UIApplication sharedApplication] keyWindow].frame = rect;
-
-                // Animate the current view out of the way
-        if ([[UIApplication sharedApplication] keyWindow].frame.origin.y >= 0)
+        //If image is not nil, move the keyboard up by Keyboard height
+        //If image is nil, don't do anything
+        if (self.imageView.image)
         {
-            [self setViewMovedUp:YES];
-        }
-        else if ([[UIApplication sharedApplication] keyWindow].frame.origin.y < 0)
-        {
-            [self setViewMovedUp:NO];
+            CGRect rect = [[UIApplication sharedApplication] keyWindow].frame;
+            rect.origin.y -= kOFFSET_FOR_KEYBOARD;
+            rect.size.height += kOFFSET_FOR_KEYBOARD;
+            [[UIApplication sharedApplication] keyWindow].frame = rect;
+
+            // Animate the current view out of the way
+            if ([[UIApplication sharedApplication] keyWindow].frame.origin.y >= 0)
+            {
+                [self setViewMovedUp:YES];
+            }
+            else if ([[UIApplication sharedApplication] keyWindow].frame.origin.y < 0)
+            {
+                [self setViewMovedUp:NO];
+            }
         }
     }
-
 }
 
 - (void)keyboardWillHide
 {
-    //If image is not nil, move the keyboard down by Keyboard height
-    //If image is nil, don't do anything
-    if (self.imageView.image)
+    if (self.isEditing)
     {
-        // Animate the current view out of the way
-        if ([[UIApplication sharedApplication] keyWindow].frame.origin.y >= 0)
+        //If image is not nil, move the keyboard down by Keyboard height
+        //If image is nil, don't do anything
+        if (self.imageView.image)
         {
-            [self setViewMovedUp:YES];
+            // Animate the current view out of the way
+            if ([[UIApplication sharedApplication] keyWindow].frame.origin.y >= 0)
+            {
+                [self setViewMovedUp:YES];
+            }
+            else if ([[UIApplication sharedApplication] keyWindow].frame.origin.y < 0)
+            {
+                [self setViewMovedUp:NO];
+            }
         }
-        else if ([[UIApplication sharedApplication] keyWindow].frame.origin.y < 0)
-        {
-            [self setViewMovedUp:NO];
-        }
-//        [self setTextViewToBottom];
     }
 }
 
 //method to move the view up/down whenever the keyboard is shown/dismissed
+//is NOT called when isEditing is NO
 -(void)setViewMovedUp:(BOOL)movedUp
 {
     [UIView beginAnimations:nil context:NULL];
@@ -158,43 +182,83 @@
 
 #pragma mark Image Picker Related Methods
 
+//ImageView does not have user interaction enabled so the method below will not be enabled when editing
 - (IBAction)onImageTapped:(UITapGestureRecognizer *)sender
 {
+    //Trigger an action sheet, 1 goes to camera, 2 goes to photo folder
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"SELECT IMAGE SOURCE" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
 
-    if (![UIImagePickerController isSourceTypeAvailable: UIImagePickerControllerSourceTypeCamera])
-    {
-        UIAlertView *myAlertView = [[UIAlertView alloc] initWithTitle:@"Error"
-                                                              message:@"Device has no camera"
-                                                             delegate:nil
-                                                    cancelButtonTitle:@"OK"
-                                                    otherButtonTitles: nil];
-        [myAlertView show];
-
-    }
-
-    else
-    {
-        UIImagePickerController *picker = [[UIImagePickerController alloc] init];
-        picker.delegate = self;
-        picker.allowsEditing = YES;
-        picker.sourceType = UIImagePickerControllerSourceTypeCamera;
+    UIAlertAction *cameraButton = [UIAlertAction actionWithTitle:@"Camera"
+                                                           style:UIAlertActionStyleDefault
+                                                         handler:^(UIAlertAction *action)
+                                   {
 
 
-        [self presentViewController:picker animated:YES completion:NULL];
-    }
+                                       if (![UIImagePickerController isSourceTypeAvailable: UIImagePickerControllerSourceTypeCamera])
+                                       {
+                                           UIAlertView *myAlertView = [[UIAlertView alloc] initWithTitle:@"Error"
+                                                                                                 message:@"Device has no camera"
+                                                                                                delegate:nil
+                                                                                       cancelButtonTitle:@"OK"
+                                                                                       otherButtonTitles: nil];
+                                           [myAlertView show];
+
+                                       }
+                                       
+                                       else
+                                       {
+                                           UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+                                           picker.delegate = self;
+                                           picker.allowsEditing = YES;
+                                           picker.sourceType = UIImagePickerControllerSourceTypeCamera;
+                                           
+                                           
+                                           [self presentViewController:picker animated:YES completion:NULL];
+                                       }
+
+                                       [alert dismissViewControllerAnimated:YES completion:nil];
+
+                                   }];
+
+
+    UIAlertAction *libraryButton = [UIAlertAction actionWithTitle:@"Photo Library"
+                                                           style:UIAlertActionStyleDefault
+                                                         handler:^(UIAlertAction *action)
+                                   {
+                                       UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+                                       picker.delegate = self;
+                                       picker.allowsEditing = YES;
+                                       picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+
+                                       [self presentViewController:picker animated:YES completion:NULL];
+
+                                       [alert dismissViewControllerAnimated:YES completion:nil];
+                                       
+                                   }];
+
+
+
+    UIAlertAction* cancelButton = [UIAlertAction actionWithTitle:@"Cancel"
+                                                           style:UIAlertActionStyleDefault
+                                                         handler:^(UIAlertAction * action)
+                                   {
+                                       [alert dismissViewControllerAnimated:YES completion:nil];
+
+                                   }];
+
+    [alert addAction:cameraButton];
+    [alert addAction:libraryButton];
+    [alert addAction:cancelButton];
+
+    [self presentViewController:alert
+                       animated:YES
+                     completion:nil];
+
+
+
 }
 
-//TODO:CUSTOMIZE CAMERA OVERLAY
-- (IBAction)selectPhotoButtonPressed:(UIButton *)sender
-{
-    UIImagePickerController *picker = [[UIImagePickerController alloc] init];
-    picker.delegate = self;
-    picker.allowsEditing = YES;
-    picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-
-    [self presentViewController:picker animated:YES completion:NULL];
-}
-
+//Not called when isEditing is NO
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
     //Accessing uncropped image from info dictionary
@@ -212,6 +276,7 @@
 
 }
 
+//Not called when isEditing is NO
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
 {
     [picker dismissViewControllerAnimated:YES completion:NULL];
@@ -224,10 +289,9 @@
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     //If sender is Use Photo Button, pass info to next VC
-    if ([sender isEqual:self.doneButton])
+    if ([segue.identifier isEqualToString:@"segueToContactSearch"])
     {
         SearchContactViewController *searchContactVC = segue.destinationViewController;
-
         searchContactVC.createdCapsl = self.createdCapsl;
     }
 
@@ -241,6 +305,7 @@
     }
 }
 
+//Not available when isEditing is NO
 - (IBAction)onDoneButtonPressed:(UIBarButtonItem *)sender
 {
     if (self.createdCapsl.photo || self.createdCapsl.audio || self.createdCapsl.text)
@@ -267,6 +332,7 @@
 
 #pragma mark Text View Delegate
 
+//Not called when isEditing is NO
 - (void)textViewDidBeginEditing:(UITextView *)textView
 {
 //    [self.navigationController setNavigationBarHidden:YES];
@@ -286,6 +352,7 @@
     }
 }
 
+//Not called when isEditing is NO
 - (void)textViewDidEndEditing:(UITextView *)textView
 {
     self.createdCapsl.text = self.textView.text;
@@ -293,6 +360,7 @@
     [self.navigationController setNavigationBarHidden:NO];
 }
 
+//Not called when isEditing is NO
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
 {
     if ([text isEqualToString:@"\n"])
@@ -319,41 +387,9 @@
     [self.view addConstraint:self.bottomTextViewConstraint];
 }
 
-//TODO:NOT SURE WHY THIS ISN'T WORKING
 - (void)setAddAudioToBottom
 {
-//    [self.view removeConstraint:self.bottomAddAudioConstraint];
-//
-//    self.addAudioButton.translatesAutoresizingMaskIntoConstraints = NO;
-//
-//    self.bottomAddAudioConstraint = [NSLayoutConstraint constraintWithItem:self.addAudioButton
-//                                                                 attribute:NSLayoutAttributeBottom
-//                                                                 relatedBy:NSLayoutRelationEqual
-//                                                                    toItem:self.view
-//                                                                 attribute:NSLayoutAttributeBottom
-//                                                                multiplier:1.0f
-//                                                                  constant:0.0f];
-//    [self.view addConstraint:self.bottomAddAudioConstraint];
-
     self.bottomAddAudioConstraint.constant = 0;
-}
-
-
-- (void)setTextViewToTop
-{
-    [self.view removeConstraint:self.bottomTextViewConstraint];
-
-    self.textView.translatesAutoresizingMaskIntoConstraints = NO;
-
-    self.bottomTextViewConstraint = [NSLayoutConstraint constraintWithItem:self.textView
-                                                                 attribute:NSLayoutAttributeTop
-                                                                 relatedBy:NSLayoutRelationEqual
-                                                                    toItem:self.view
-                                                                 attribute:NSLayoutAttributeTop
-                                                                multiplier:1.0f
-                                                                  constant:0.0f];
-    [self.view addConstraint:self.bottomTextViewConstraint];
-    
 }
 
 - (IBAction)unWindToCaptureSegue:(UIStoryboardSegue *)segue
