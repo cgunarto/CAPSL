@@ -23,6 +23,14 @@
 
 //    [PFUser logOut];
 
+    [self.window setTintColor:[UIColor whiteColor]];
+    [[UINavigationBar appearance] setTranslucent:YES];
+    [[UINavigationBar appearance] setBarStyle:UIBarStyleBlackTranslucent];
+    [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
+    [[UIToolbar appearance] setBarStyle:UIBarStyleBlackTranslucent];
+    [[UIToolbar appearance] setTintColor:[UIColor whiteColor]];
+    [[UIToolbar appearance] setTranslucent:YES];
+    
     return YES;
 }
 
