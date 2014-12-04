@@ -243,7 +243,7 @@
 
 
     UIAlertAction* cancelButton = [UIAlertAction actionWithTitle:@"Cancel"
-                                                           style:UIAlertActionStyleDefault
+                                                           style:UIAlertActionStyleCancel
                                                          handler:^(UIAlertAction * action)
                                    {
                                        [alert dismissViewControllerAnimated:YES completion:nil];
@@ -339,7 +339,7 @@
 //Not called when isEditing is NO
 - (void)textViewDidBeginEditing:(UITextView *)textView
 {
-//    [self.navigationController setNavigationBarHidden:YES];
+    [self.navigationController setNavigationBarHidden:YES];
     self.characterCountLabel.hidden = NO;
 
     if ([textView.text isEqualToString:@"Enter Text Here"])
@@ -367,7 +367,11 @@
 - (void)textViewDidEndEditing:(UITextView *)textView
 {
     self.characterCountLabel.hidden = YES;
-    self.createdCapsl.text = self.textView.text;
+    if (self.textView.text && ![self.textView.text isEqualToString:@""])
+    {
+            self.createdCapsl.text = self.textView.text;
+    }
+
     [self resignFirstResponder];
     [self.navigationController setNavigationBarHidden:NO];
 
