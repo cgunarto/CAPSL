@@ -16,6 +16,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *recordPauseButton;
 @property (weak, nonatomic) IBOutlet UIButton *stopButton;
 @property (weak, nonatomic) IBOutlet UIButton *playButton;
+@property (strong, nonatomic) IBOutlet UIBarButtonItem *doneButton;
 
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *saveButton;
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *cancelButton;

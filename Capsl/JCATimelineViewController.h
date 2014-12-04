@@ -19,6 +19,8 @@
 @interface JCATimelineViewController : UIViewController
 
 @property NSArray *capslGrandArray;
+@property NSArray *sentCapslsGrandArray;
+@property BOOL showSent;
 
 - (void)centerCorrespondingMonthCell:(NSIndexPath *)indexPath;
 

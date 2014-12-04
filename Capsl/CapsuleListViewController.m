@@ -18,6 +18,8 @@
 
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *capslsBarButtonItem;
+@property NSArray *tableViewData;
+
 @property NSInteger availableCapslsCount;
 
 @end
@@ -86,12 +88,8 @@
 
         Capsl *capsl = self.capslsArray[indexPath.row];
 
-        NSDate *deliveryDate = capsl.deliveryTime;
-
-        cell.deliveryDateLabel.text = [JKCountDownTimer formatDateWithDate:deliveryDate];
-
         // updating timer string...
-        [cell updateTimeLabelForCapsl:capsl];
+        [cell updateLabelsForCapsl:capsl];
 
         cell.profileImage.layer.cornerRadius = cell.profileImage.frame.size.width/2;
         cell.profileImage.clipsToBounds = YES;
@@ -133,11 +131,7 @@
             }];
         }];
 
-        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-        [dateFormatter setDateFormat:@"MMM dd, yyyy hh:mm a"];
-        NSDate *deliveryDate = capsl.deliveryTime;
-
-        cell.deliveryDateLabel.text = [NSString stringWithFormat:@"%@", [dateFormatter stringFromDate:deliveryDate]];
+        [cell updateLabelsForCapsl:capsl];
 
         NSDate *viewedAtDate = capsl.viewedAt;
         if (viewedAtDate)
@@ -199,7 +193,7 @@
         if ([self.capslsBarButtonItem.title isEqual: @"Sent Capsules"])
         {
             Capsl *capsl = self.capslsArray[indexPath.row];
-            [cell updateTimeLabelForCapsl:capsl];
+            [cell updateLabelsForCapsl:capsl];
         }
         else
         {

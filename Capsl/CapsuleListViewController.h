@@ -13,7 +13,7 @@
 
 @property Capslr *capslr;
 
-@property (nonatomic)  NSArray *capslsArray;
+@property (nonatomic) NSArray *capslsArray;
 @property (nonatomic) NSArray *sentCapslsArray;
 @property (nonatomic) NSMutableArray *availableCapslsArray;
 

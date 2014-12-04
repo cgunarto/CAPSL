@@ -11,6 +11,7 @@
 @interface JCATimelineRootViewController : UIViewController
 
 @property NSArray *capslsArray;
+@property NSArray *sentCapslsArray;
 
 - (void)updateClocks;
 

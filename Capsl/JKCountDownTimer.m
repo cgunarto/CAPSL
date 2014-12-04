@@ -89,14 +89,14 @@
     return [NSString stringWithFormat:@"%02li:%02li:%02li", (long)hours, (long)minutes, (long)seconds];
 }
 
-+ (NSString *)formatDateWithDate:(NSDate *)date
++ (NSString *)getDateStringWithDate:(NSDate *)date
 {
     
     // Setting the delivery date
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
 
     //TODO: change date format with no LEADING ZERO
-    [dateFormatter setDateFormat:@"MMM dd, yyyy hh:mm a"];
+    [dateFormatter setDateFormat:@"MMM d, yyyy h:mm a"];
 
     NSString *dateString = [NSString stringWithFormat:@"%@", [dateFormatter stringFromDate:date]];
 

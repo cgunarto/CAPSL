@@ -20,6 +20,6 @@
 
 @property NSString *timerString;
 
-- (void)updateTimeLabelForCapsl:(Capsl *)capsl;
+- (void)updateLabelsForCapsl:(Capsl *)capsl;
 
 @end
