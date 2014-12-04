@@ -8,6 +8,7 @@
 
 #import "ChooseTypeViewController.h"
 #import "RecordAudioViewController.h"
+#import "CaptureViewController.h"
 
 @interface ChooseTypeViewController ()
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
@@ -26,6 +27,13 @@
 
 - (IBAction)unWindSegue:(UIStoryboardSegue *)segue
 {
+}
+
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    UINavigationController *navVC = segue.destinationViewController;
+    CaptureViewController *captureVC = navVC.childViewControllers[0];
+    captureVC.isEditing = YES;
 }
 
 

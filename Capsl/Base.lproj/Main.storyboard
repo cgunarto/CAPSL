@@ -1652,7 +1652,7 @@
                                     <rect key="frame" x="63" y="170" width="277" height="50"/>
                                 </variation>
                                 <connections>
-                                    <segue destination="NxB-sL-Vw3" kind="showDetail" id="vnb-5V-ixX"/>
+                                    <segue destination="NxB-sL-Vw3" kind="showDetail" identifier="segueToCapture" id="vnb-5V-ixX"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mkO-I1-IRX">
@@ -1665,7 +1665,7 @@
                                     <rect key="frame" x="63" y="236" width="124" height="52"/>
                                 </variation>
                                 <connections>
-                                    <segue destination="qp7-uz-JSC" kind="presentation" id="LT8-Z2-SIB"/>
+                                    <segue destination="qp7-uz-JSC" kind="presentation" identifier="segueToRecord" id="LT8-Z2-SIB"/>
                                 </connections>
                             </button>
                         </subviews>
