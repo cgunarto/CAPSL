@@ -31,9 +31,12 @@
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    UINavigationController *navVC = segue.destinationViewController;
-    CaptureViewController *captureVC = navVC.childViewControllers[0];
-    captureVC.isEditing = YES;
+    if ([segue.identifier isEqualToString:@"segueToCapture"])
+    {
+        UINavigationController *navVC = segue.destinationViewController;
+        CaptureViewController *captureVC = navVC.childViewControllers[0];
+        captureVC.isEditing = YES;
+    }
 }
 
 

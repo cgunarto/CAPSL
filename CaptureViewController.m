@@ -20,9 +20,11 @@
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *doneButton;
 @property (weak, nonatomic) IBOutlet UITextView *textView;
 @property (weak, nonatomic) IBOutlet UIButton *addAudioButton;
+@property (weak, nonatomic) IBOutlet UILabel *characterCountLabel;
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *bottomTextViewConstraint;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *bottomAddAudioConstraint;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *bottomLabelConstraint;
 
 @end
 
@@ -33,6 +35,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.characterCountLabel.hidden = YES;
 
     //If VC isEditing, it is trying to create a Capsl message
     if (self.isEditing)
@@ -53,6 +56,7 @@
 
         self.imageView.userInteractionEnabled = YES;
         self.textView.userInteractionEnabled = YES;
+
     }
 
     //If VC isEditing is NO, it is trying to unwrap and display a CPSL message
@@ -336,6 +340,7 @@
 - (void)textViewDidBeginEditing:(UITextView *)textView
 {
 //    [self.navigationController setNavigationBarHidden:YES];
+    self.characterCountLabel.hidden = NO;
 
     if ([textView.text isEqualToString:@"Enter Text Here"])
     {
@@ -352,12 +357,25 @@
     }
 }
 
+-(void)textViewDidChange:(UITextView *)textView
+{
+    NSInteger length = textView.text.length;
+    self.characterCountLabel.text = [NSString stringWithFormat:@"Character left: %li",150-length];
+}
+
 //Not called when isEditing is NO
 - (void)textViewDidEndEditing:(UITextView *)textView
 {
+    self.characterCountLabel.hidden = YES;
     self.createdCapsl.text = self.textView.text;
     [self resignFirstResponder];
     [self.navigationController setNavigationBarHidden:NO];
+
+    //If text is empty, enter text here shows up after editing is done
+    if ([textView.text isEqualToString:@""])
+    {
+        textView.text = @"Enter Text Here";
+    }
 }
 
 //Not called when isEditing is NO
@@ -366,6 +384,11 @@
     if ([text isEqualToString:@"\n"])
     {
         [textView resignFirstResponder];
+    }
+
+    if([[textView text] length] - range.length + text.length > 150)
+    {
+        return NO;
     }
     return YES;
 }
@@ -385,6 +408,7 @@
                                                                 multiplier:1.0f
                                                                   constant:0.0f];
     [self.view addConstraint:self.bottomTextViewConstraint];
+
 }
 
 - (void)setAddAudioToBottom
