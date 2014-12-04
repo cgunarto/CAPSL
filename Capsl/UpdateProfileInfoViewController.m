@@ -44,7 +44,7 @@
         self.textField.text = self.nameString;
         self.navigationItem.title = @"Name";
 
-        self.wordCountLabel.text = [NSString stringWithFormat:@"%lu/20", (unsigned long)self.nameString.length];
+        self.wordCountLabel.text = [NSString stringWithFormat:@"%lu/40", (unsigned long)self.nameString.length];
     }
     else if (self.usernameString)
     {
@@ -52,7 +52,7 @@
         self.textField.text = self.usernameString;
         self.navigationItem.title = @"Username";
 
-        self.wordCountLabel.text = [NSString stringWithFormat:@"%lu/20", (unsigned long)self.usernameString.length];
+        self.wordCountLabel.text = [NSString stringWithFormat:@"%lu/40", (unsigned long)self.usernameString.length];
     }
     else if (self.emailString)
     {
@@ -60,7 +60,7 @@
         self.textField.text = self.emailString;
         self.navigationItem.title = @"Email";
 
-        self.wordCountLabel.text = [NSString stringWithFormat:@"%lu/20", (unsigned long)self.emailString.length];
+        self.wordCountLabel.text = [NSString stringWithFormat:@"%lu/40", (unsigned long)self.emailString.length];
     }
 }
 
@@ -94,9 +94,9 @@
     NSInteger textLength = 0;
     textLength = [textField.text length] + [string length] - range.length;
 
-    self.wordCountLabel.text = [NSString stringWithFormat:@"%ld/20", (long)textLength];
+    self.wordCountLabel.text = [NSString stringWithFormat:@"%ld/40", (long)textLength];
 
-    if (textLength > 19)
+    if (textLength > 39)
     {
         return NO;
     }
