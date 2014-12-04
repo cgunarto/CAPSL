@@ -214,8 +214,8 @@
 
     [Capslr returnCapslrFromPFUser:[PFUser currentUser] withCompletion:^(Capslr *currentCapslr, NSError *error) {
         currentCapslr.profilePhoto = profilePhoto;
-        [currentCapslr saveInBackground];
         self.currentProfilePicture = self.chosenImage;
+        [currentCapslr saveInBackground];
     }];
 
     [picker dismissViewControllerAnimated:YES completion:NULL];
