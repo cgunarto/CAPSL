@@ -18,6 +18,8 @@
 
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 @property NSArray *tableViewData;
+@property NSMutableArray *senderPics;
+@property NSMutableArray *recipientPics;
 
 @property NSInteger availableCapslsCount;
 
@@ -32,10 +34,15 @@
 
     //TODO: fix capslCount!!
     
-    self.navigationController.navigationBar.backgroundColor = [UIColor greenColor];
     self.tableView.contentInset = UIEdgeInsetsMake(self.navigationController.navigationBar.frame.size.height, 0, 44, 0);
 
     self.availableCapslsCount = 0;
+
+    self.senderPics = [@[] mutableCopy];
+    self.recipientPics = [@[] mutableCopy];
+
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+
 
 //    for (NSDate *date in [self.capslsArray valueForKey:@"deliveryTime"])
 //    {
@@ -48,8 +55,6 @@
 
 }
 
-
-// Automatically reloads the tableview whenever capslsArray is updated..
 
 -(void)setShouldShowSent:(BOOL)shouldShowSent
 {
@@ -66,6 +71,9 @@
 
     [self.tableView reloadData];
 }
+
+
+// Automatically reloads the tableview whenever capslsArray is updated..
 
 //-(void)setCapslsArray:(NSArray *)capslsArray
 //{
@@ -90,34 +98,51 @@
 {
     CapslTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
 
-    Capsl *capsl = self.tableViewData[indexPath.row];
+    Capsl *capslForCell = self.tableViewData[indexPath.row];
 
     PFFile *profilePhoto = [[PFFile alloc] init];
 
+    NSMutableArray *profilePicArray = [@[] mutableCopy];
+
     if (self.shouldShowSent)
     {
-        cell.capslrLabel.text = capsl.recipient.username;
-        profilePhoto = capsl.recipient.profilePhoto;
+        cell.capslrLabel.text = capslForCell.recipient.username;
+        profilePhoto = capslForCell.recipient.profilePhoto;
+
+        profilePicArray = self.recipientPics;
     }
     else
     {
-        cell.capslrLabel.text = capsl.sender.username;
-        profilePhoto = capsl.sender.profilePhoto;
+        cell.capslrLabel.text = capslForCell.sender.username;
+        profilePhoto = capslForCell.sender.profilePhoto;
+        profilePicArray = self.senderPics;
     }
 
+
     //Sender Profile Image
+    if (profilePicArray.count != 0)
+    {
+        cell.profileImage.image = profilePicArray[indexPath.row];
+
+    }
+
     cell.profileImage.layer.cornerRadius = cell.profileImage.frame.size.width/2;
     cell.profileImage.clipsToBounds = YES;
 
-    if (!cell.profileImage.image)
-    {
+//    if ([cell.profileImage.image isEqual:[UIImage imageNamed:@"default"]])
+//    {
         [profilePhoto getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
             cell.profileImage.image = [UIImage imageWithData:data];
+//            [profilePicArray replaceObjectAtIndex:indexPath.row withObject:[UIImage imageWithData:data]];
         }];
-    }
+//    }
+//    else
+//    {
+//        cell.profileImage.image = profilePicArray[indexPath.row];
+//    }
 
     // updating timer string...
-    [cell updateLabelsForCapsl:capsl];
+    [cell updateLabelsForCapsl:capslForCell];
 
     //Capsl sent to...
 
@@ -128,8 +153,8 @@
 #pragma mark - Helper Method
 - (void)scrollToSoonestCapslWithCount:(NSInteger)openCapslsCount
 {
-    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:(openCapslsCount) inSection:0];
-    [self.tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionTop animated:NO];
+//    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:(openCapslsCount) inSection:0];
+//    [self.tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionTop animated:NO];
 }
 
 
