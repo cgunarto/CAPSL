@@ -367,6 +367,11 @@
     {
         [textView resignFirstResponder];
     }
+
+    if([[textView text] length] - range.length + text.length > 150)
+    {
+        return NO;
+    }
     return YES;
 }
 
