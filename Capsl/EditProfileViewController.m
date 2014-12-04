@@ -39,7 +39,6 @@
     [super viewDidLoad];
 
     self.navigationItem.title = @"My Profile";
-
 }
 
 -(void)setCurrenCapslrInfo:(NSArray *)currenCapslrInfo
@@ -84,7 +83,10 @@
     }else if (indexPath.section == 2) {
         cell = [tableView dequeueReusableCellWithIdentifier:@"buttonCell" forIndexPath:indexPath];
     }
-    
+
+#warning fix this later...
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+
     return cell;
 }
 
@@ -171,6 +173,8 @@
         }
     }
 }
+
+
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
 {
