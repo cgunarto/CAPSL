@@ -76,9 +76,24 @@
         }
         else if (self.usernameString)
         {
-            currentCapslr.username = self.textField.text;
-            [currentCapslr save];
-            [self.navigationController popToViewController:self.navigationController.childViewControllers[1] animated:YES];
+            // check to see if the username exists already
+            PFQuery *query = [PFUser query];
+            [query whereKey:@"username" equalTo:self.textField.text];
+            [query getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error) {
+                if ((!object))
+                {
+                    currentCapslr.username = self.textField.text;
+                    [PFUser currentUser].username = self.textField.text;
+                    [currentCapslr save];
+                    [[PFUser currentUser] save];
+
+                    [self.navigationController popToViewController:self.navigationController.childViewControllers[1] animated:YES];
+                }
+                else
+                {
+                    [self usernameExistsAlert];
+                }
+            }];
         }
         else if (self.emailString)
         {
@@ -114,6 +129,15 @@
     return YES;
 }
 
+
+- (void)usernameExistsAlert
+{
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"The username already exists" message:@"Please try a new username" preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *okButton = [UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleDefault handler:nil];
+
+    [alert addAction:okButton];
+    [self presentViewController:alert animated:YES completion:nil];
+}
 
 
 @end
