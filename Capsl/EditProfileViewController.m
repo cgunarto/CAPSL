@@ -18,7 +18,7 @@
 #define kEmailLabel @"Email"
 
 
-@interface EditProfileViewController () <UITableViewDataSource, UITableViewDelegate, UIImagePickerControllerDelegate>
+@interface EditProfileViewController () <UITableViewDataSource, UITableViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 
