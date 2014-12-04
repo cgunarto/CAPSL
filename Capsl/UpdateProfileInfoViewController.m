@@ -7,6 +7,7 @@
 //
 
 #import "UpdateProfileInfoViewController.h"
+#import "Capslr.h"
 
 @interface UpdateProfileInfoViewController () <UITextFieldDelegate>
 
@@ -65,9 +66,31 @@
 
 - (IBAction)onSaveBarButtonItemPressed:(UIBarButtonItem *)sender
 {
-    
+    [Capslr returnCapslrFromPFUser:[PFUser currentUser] withCompletion:^(Capslr *currentCapslr, NSError *error) {
+
+        if (self.nameString)
+        {
+            currentCapslr.name = self.textField.text;
+            [currentCapslr saveInBackground];
+        }
+        else if (self.usernameString)
+        {
+            currentCapslr.username = self.textField.text;
+            [currentCapslr saveInBackground];
+        }
+        else if (self.emailString)
+        {
+            currentCapslr.email = self.textField.text;
+            [currentCapslr saveInBackground];
+        }
+    }];
+
+    //TODO: ADD REFRESHING ANIMATION FOR SAVING
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
 
     [self.navigationController popToViewController:self.navigationController.childViewControllers[1] animated:YES];
+
+    });
 }
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {

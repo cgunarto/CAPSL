@@ -143,6 +143,11 @@
             cell.timerLabel.text = @"Not Opened";
         }
     }
+
+#warning fix later!!
+
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+
     return cell;
 }
 
