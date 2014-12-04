@@ -48,12 +48,9 @@
 
 #pragma mark View Controller Life Cycle
 
-- (void)viewDidLoad
+-(void)viewWillAppear:(BOOL)animated
 {
-    [super viewDidLoad];
-    self.segmentedControl.selectedSegmentIndex = 0;
-
-    [self showCapslViewCenter];
+    [super viewWillAppear:animated];
 
     [Capslr returnCapslrFromPFUser:[PFUser currentUser] withCompletion:^(Capslr *currentCapslr, NSError *error) {
 
@@ -67,6 +64,15 @@
             self.profilePictureImageView.image = [UIImage imageWithData:data];
         }];
     }];
+}
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    self.segmentedControl.selectedSegmentIndex = 0;
+
+    [self showCapslViewCenter];
+
 }
 
 //Segmented control toggles between CAPSLR and ADDRESS BOOK contact

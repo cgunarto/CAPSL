@@ -10,6 +10,7 @@
 #import "EditProfilePicTableViewCell.h"
 #import "Capslr.h"
 #import "UpdateProfileInfoViewController.h"
+#import "UpdateProfileInfoViewController.h"
 
 #define kNameLabel @"Name"
 #define kUsernameLabel @"Username"
@@ -30,13 +31,18 @@
 {
     [super viewWillAppear:animated];
 
-    self.infoArray = @[kNameLabel, kUsernameLabel, kEmailLabel];
+    [Capslr returnCapslrFromPFUser:[PFUser currentUser] withCompletion:^(Capslr *currentCapslr, NSError *error) {
+
+        self.currenCapslrInfo = @[currentCapslr.name, currentCapslr.username, currentCapslr.email];
+    }];
 }
 
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+
+    self.infoArray = @[kNameLabel, kUsernameLabel, kEmailLabel];
 
     self.navigationItem.title = @"My Profile";
 
@@ -219,6 +225,7 @@
     }
 
 }
+
 
 
 
