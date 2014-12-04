@@ -1820,12 +1820,25 @@
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hga-wp-OP4">
                                 <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="D9Q-jG-O59"/>
+                                    <constraint firstAttribute="width" constant="277" id="cLf-IF-GKu"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="18"/>
-                                <state key="normal" title="    PHOTO  |  AUDIO  |  TEXT" image="slr_camera2_filled-50">
+                                <state key="normal" title="PHOTO  |  AUDIO  |  TEXT">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
-                                <variation key="widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="63" y="170" width="277" height="50"/>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="D9Q-jG-O59"/>
+                                        <exclude reference="cLf-IF-GKu"/>
+                                    </mask>
+                                </variation>
+                                <variation key="widthClass=compact">
+                                    <mask key="constraints">
+                                        <include reference="D9Q-jG-O59"/>
+                                        <include reference="cLf-IF-GKu"/>
+                                    </mask>
                                 </variation>
                                 <connections>
                                     <segue destination="NxB-sL-Vw3" kind="showDetail" identifier="segueToCapture" id="vnb-5V-ixX"/>
@@ -1833,12 +1846,28 @@
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mkO-I1-IRX">
                                 <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="124" id="9Hd-s3-jdQ"/>
+                                    <constraint firstAttribute="height" constant="52" id="UCM-XB-twq"/>
+                                    <constraint firstAttribute="width" constant="124" id="hpD-O5-UBh"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="18"/>
-                                <state key="normal" title="      VIDEO" image="camcoder_pro_filled-50">
+                                <state key="normal" title="VIDEO">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
-                                <variation key="widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="63" y="236" width="124" height="52"/>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="9Hd-s3-jdQ"/>
+                                        <exclude reference="UCM-XB-twq"/>
+                                        <exclude reference="hpD-O5-UBh"/>
+                                    </mask>
+                                </variation>
+                                <variation key="widthClass=compact">
+                                    <mask key="constraints">
+                                        <include reference="9Hd-s3-jdQ"/>
+                                        <include reference="UCM-XB-twq"/>
+                                        <exclude reference="hpD-O5-UBh"/>
+                                    </mask>
                                 </variation>
                                 <connections>
                                     <segue destination="qp7-uz-JSC" kind="presentation" identifier="segueToRecord" id="LT8-Z2-SIB"/>
@@ -1850,7 +1879,13 @@
                             <constraint firstItem="2Ye-MZ-TAc" firstAttribute="top" secondItem="gSW-Fa-jHk" secondAttribute="bottom" id="1lB-Ir-VTU"/>
                             <constraint firstItem="gSW-Fa-jHk" firstAttribute="leading" secondItem="5GR-eB-ox7" secondAttribute="leadingMargin" constant="-16" id="FYd-iR-xHa"/>
                             <constraint firstItem="gSW-Fa-jHk" firstAttribute="top" secondItem="Dhp-r4-ygT" secondAttribute="bottom" id="IVP-xT-zZx"/>
+                            <constraint firstAttribute="centerX" secondItem="mkO-I1-IRX" secondAttribute="centerX" id="J1n-Fc-8uL"/>
+                            <constraint firstItem="mkO-I1-IRX" firstAttribute="top" secondItem="Hga-wp-OP4" secondAttribute="bottom" constant="8" id="K8M-6O-raG"/>
+                            <constraint firstAttribute="centerX" secondItem="Hga-wp-OP4" secondAttribute="centerX" id="Nuc-Dn-rXU"/>
+                            <constraint firstItem="Hga-wp-OP4" firstAttribute="top" secondItem="Dhp-r4-ygT" secondAttribute="bottom" constant="95" id="kIT-up-7Rb"/>
                             <constraint firstAttribute="trailingMargin" secondItem="gSW-Fa-jHk" secondAttribute="trailing" constant="-16" id="mSn-Fs-BOM"/>
+                            <constraint firstAttribute="centerX" secondItem="mkO-I1-IRX" secondAttribute="centerX" id="un0-B1-6eK"/>
+                            <constraint firstItem="mkO-I1-IRX" firstAttribute="top" secondItem="Hga-wp-OP4" secondAttribute="bottom" constant="8" id="zEA-6r-lXS"/>
                         </constraints>
                         <variation key="default">
                             <mask key="subviews">
@@ -1859,10 +1894,16 @@
                                 <exclude reference="mkO-I1-IRX"/>
                             </mask>
                             <mask key="constraints">
-                                <exclude reference="1lB-Ir-VTU"/>
                                 <exclude reference="FYd-iR-xHa"/>
                                 <exclude reference="IVP-xT-zZx"/>
                                 <exclude reference="mSn-Fs-BOM"/>
+                                <exclude reference="Nuc-Dn-rXU"/>
+                                <exclude reference="kIT-up-7Rb"/>
+                                <exclude reference="J1n-Fc-8uL"/>
+                                <exclude reference="K8M-6O-raG"/>
+                                <exclude reference="un0-B1-6eK"/>
+                                <exclude reference="zEA-6r-lXS"/>
+                                <exclude reference="1lB-Ir-VTU"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=compact">
@@ -1872,10 +1913,16 @@
                                 <include reference="mkO-I1-IRX"/>
                             </mask>
                             <mask key="constraints">
-                                <include reference="1lB-Ir-VTU"/>
                                 <include reference="FYd-iR-xHa"/>
                                 <include reference="IVP-xT-zZx"/>
                                 <include reference="mSn-Fs-BOM"/>
+                                <include reference="Nuc-Dn-rXU"/>
+                                <include reference="kIT-up-7Rb"/>
+                                <exclude reference="J1n-Fc-8uL"/>
+                                <exclude reference="K8M-6O-raG"/>
+                                <include reference="un0-B1-6eK"/>
+                                <include reference="zEA-6r-lXS"/>
+                                <include reference="1lB-Ir-VTU"/>
                             </mask>
                         </variation>
                     </view>
@@ -2922,9 +2969,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="camcoder_pro_filled-50" width="40" height="40"/>
         <image name="group-50" width="26" height="26"/>
-        <image name="slr_camera2_filled-50" width="50" height="50"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="Eln-db-Pjz"/>
