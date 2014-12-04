@@ -9,6 +9,7 @@
 #import "EditProfileViewController.h"
 #import "EditProfilePicTableViewCell.h"
 #import "Capslr.h"
+#import "UpdateProfileInfoViewController.h"
 
 #define kNameLabel @"Name"
 #define kUsernameLabel @"Username"
@@ -158,7 +159,15 @@
     {
         if (indexPath.row == 0)
         {
-            NSLog(@"HELLO!");
+            [self performSegueWithIdentifier:@"editNameSegue" sender:self.currenCapslrInfo[0]];
+        }
+        else if (indexPath.row == 1)
+        {
+            [self performSegueWithIdentifier:@"editUsernameSegue" sender:self.currenCapslrInfo[1]];
+        }
+        else if (indexPath.row == 2)
+        {
+            [self performSegueWithIdentifier:@"editEmailSegue" sender:self.currenCapslrInfo[2]];
         }
     }
 }
@@ -167,6 +176,8 @@
 {
     [picker dismissViewControllerAnimated:YES completion:NULL];
 }
+
+//TODO: implement this later
 
 //- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 //{
@@ -184,6 +195,25 @@
 //    [self setAddAudioToBottom];
 //    
 //}
+
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    UpdateProfileInfoViewController *updateProfileInfoVC = segue.destinationViewController;
+
+    if ([segue.identifier isEqual:@"editNameSegue"])
+    {
+        updateProfileInfoVC.nameString = self.currenCapslrInfo[0];
+    }
+    else if ([segue.identifier isEqual:@"editUsernameSegue"])
+    {
+        updateProfileInfoVC.usernameString = self.currenCapslrInfo[1];
+    }
+    else if ([segue.identifier isEqual:@"editEmailSegue"])
+    {
+        updateProfileInfoVC.emailString = self.currenCapslrInfo[2];
+    }
+
+}
 
 
 

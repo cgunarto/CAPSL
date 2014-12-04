@@ -9,9 +9,10 @@
 #import "UpdateProfileInfoViewController.h"
 
 @interface UpdateProfileInfoViewController ()
+
 @property (strong, nonatomic) IBOutlet UILabel *descriptionLabel;
 @property (strong, nonatomic) IBOutlet UITextField *textField;
-@property (strong, nonatomic) IBOutlet UILabel *worldCountLabel;
+@property (strong, nonatomic) IBOutlet UILabel *wordCountLabel;
 
 @end
 
@@ -21,6 +22,24 @@
 {
     [super viewDidLoad];
 
+
+    if (self.nameString)
+    {
+        self.textField.text = self.nameString;
+    }
+    else if (self.usernameString)
+    {
+        self.descriptionLabel.text = @"Enter your username";
+        self.textField.text = self.usernameString;
+    }
+    else if (self.emailString)
+    {
+        self.descriptionLabel.text = @"Enter your Email";
+        self.textField.text = self.emailString;
+    }
+
+//    self.textField.text = self.nameString;
+//    self.textField.text = self.usernameString;
 }
 
 

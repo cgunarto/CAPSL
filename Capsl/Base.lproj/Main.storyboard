@@ -1943,9 +1943,6 @@
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
-                                        <connections>
-                                            <segue destination="qOY-ih-VR1" kind="show" identifier="editNameSegue" id="2lo-WK-5pL"/>
-                                        </connections>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="buttonCell" id="Lre-No-kHJ">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -2014,16 +2011,19 @@
                     </view>
                     <connections>
                         <outlet property="tableView" destination="kFG-UX-p6j" id="Pi5-gI-5yo"/>
+                        <segue destination="qOY-ih-VR1" kind="show" identifier="editNameSegue" id="TpB-RA-nDW"/>
+                        <segue destination="qOY-ih-VR1" kind="show" identifier="editUsernameSegue" id="M1E-gX-npp"/>
+                        <segue destination="qOY-ih-VR1" kind="show" identifier="editEmailSegue" id="dAc-Nd-2MW"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6CZ-aX-Kan" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3109.5" y="2507"/>
         </scene>
-        <!--View Controller-->
+        <!--Update Profile Info View Controller-->
         <scene sceneID="kfg-WE-kqz">
             <objects>
-                <viewController id="qOY-ih-VR1" sceneMemberID="viewController">
+                <viewController id="qOY-ih-VR1" customClass="UpdateProfileInfoViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="ekf-SE-dpy"/>
                         <viewControllerLayoutGuide type="bottom" id="Olg-LO-v3u"/>
@@ -2100,14 +2100,14 @@
                                 <exclude reference="HQS-cd-0Ex"/>
                             </mask>
                             <mask key="constraints">
-                                <exclude reference="fB7-lQ-ga5"/>
-                                <exclude reference="h7r-Lc-uEN"/>
-                                <exclude reference="2Qb-2h-qYI"/>
-                                <exclude reference="CMj-MV-Zt4"/>
-                                <exclude reference="QnV-51-5EL"/>
                                 <exclude reference="AUa-H1-JtH"/>
                                 <exclude reference="HIm-XI-V2W"/>
                                 <exclude reference="zW5-br-ez2"/>
+                                <exclude reference="2Qb-2h-qYI"/>
+                                <exclude reference="CMj-MV-Zt4"/>
+                                <exclude reference="QnV-51-5EL"/>
+                                <exclude reference="fB7-lQ-ga5"/>
+                                <exclude reference="h7r-Lc-uEN"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=compact">
@@ -2117,21 +2117,26 @@
                                 <include reference="HQS-cd-0Ex"/>
                             </mask>
                             <mask key="constraints">
-                                <include reference="fB7-lQ-ga5"/>
-                                <include reference="h7r-Lc-uEN"/>
-                                <include reference="2Qb-2h-qYI"/>
-                                <include reference="CMj-MV-Zt4"/>
-                                <include reference="QnV-51-5EL"/>
                                 <include reference="AUa-H1-JtH"/>
                                 <include reference="HIm-XI-V2W"/>
                                 <include reference="zW5-br-ez2"/>
+                                <include reference="2Qb-2h-qYI"/>
+                                <include reference="CMj-MV-Zt4"/>
+                                <include reference="QnV-51-5EL"/>
+                                <include reference="fB7-lQ-ga5"/>
+                                <include reference="h7r-Lc-uEN"/>
                             </mask>
                         </variation>
                     </view>
+                    <connections>
+                        <outlet property="descriptionLabel" destination="hQp-53-dfm" id="OiM-cG-BDT"/>
+                        <outlet property="textField" destination="fcb-Hl-nZt" id="PWj-OL-2a7"/>
+                        <outlet property="wordCountLabel" destination="HQS-cd-0Ex" id="Igz-2P-jTe"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dC6-9B-gC0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3768" y="2507"/>
+            <point key="canvasLocation" x="3804" y="2507"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="4ch-3M-IRb">
@@ -2756,5 +2761,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="Eln-db-Pjz"/>
+        <segue reference="dAc-Nd-2MW"/>
     </inferredMetricsTieBreakers>
 </document>
