@@ -27,6 +27,9 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *bottomAddAudioConstraint;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *bottomLabelConstraint;
 
+#pragma mark NOT EDITING ONLY properties
+@property (weak, nonatomic) IBOutlet UIButton *exitButton;
+
 @end
 
 @implementation CaptureViewController
@@ -42,6 +45,7 @@
     if (self.isEditing)
     {
         self.textView.delegate = self;
+        self.exitButton.hidden = YES;
 
         //Setting CPSL sender
         [Capslr returnCapslrFromPFUser:[PFUser currentUser] withCompletion:^(Capslr *currentCapslr, NSError *error)
@@ -65,6 +69,8 @@
     {
         self.imageView.userInteractionEnabled = NO;
         self.textView.userInteractionEnabled = NO;
+        self.exitButton.hidden = NO;
+
     }
 
 }
@@ -427,6 +433,10 @@
 {
 }
 
+- (IBAction)onExitButtonPressed:(UIButton *)sender
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
 
 
 @end
