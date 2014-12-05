@@ -59,8 +59,6 @@ static NSString *kDatePickerID = @"datePicker"; // the cell containing the date 
     self.dataArray = @[itemOne, itemTwo];
 
     self.dateFormatter = [[NSDateFormatter alloc] init];
-    [self.dateFormatter setDateStyle:NSDateFormatterShortStyle];    // show short-style date format
-    [self.dateFormatter setTimeStyle:NSDateFormatterNoStyle];
 
     // obtain the picker view cell's height, works because the cell was pre-defined in our storyboard
     PickerTableViewCell *pickerViewCellToCheck = [self.tableView dequeueReusableCellWithIdentifier:kDatePickerID]; //datePickerCell
@@ -274,15 +272,21 @@ NSUInteger DeviceSystemMajorVersion()
         // we have either start or end date cells, populate their date field
         //
         cell.textLabel.text = [itemData valueForKey:kTitleKey];
+
         if ([itemData valueForKey:kDateKey])
         {
-            cell.detailTextLabel.text = [self.dateFormatter stringFromDate:[itemData valueForKey:kDateKey]];
+            NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+            [dateFormat setDateStyle:NSDateFormatterShortStyle];
+            cell.detailTextLabel.text = [dateFormat stringFromDate:[itemData valueForKey:kDateKey]];
         }
 
         if ([itemData valueForKey:kTimeKey])
         {
-            cell.detailTextLabel.text = [self.dateFormatter stringFromDate:[itemData valueForKey:kTimeKey]];
+            NSDateFormatter *timeFormat = [[NSDateFormatter alloc] init];
+            [timeFormat setTimeStyle:NSDateFormatterShortStyle];
+            cell.detailTextLabel.text = [timeFormat stringFromDate:[itemData valueForKey:kTimeKey]];
         }
+
 
     }
 
