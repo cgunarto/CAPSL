@@ -14,8 +14,13 @@
 
 @implementation CapslTableViewCell
 
-- (void)awakeFromNib {
+- (void)awakeFromNib
+{
     // Initialization code
+
+    self.lozengeView.layer.cornerRadius = 44;
+    [self layoutSubviews];
+
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -36,5 +41,10 @@
 
 }
 
+- (void)drawCell
+{
+
+
+}
 
 @end

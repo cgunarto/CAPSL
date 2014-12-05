@@ -20,7 +20,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.imageView.image = [UIImage imageNamed:@"mountain"];
+//    self.imageView.image = [UIImage imageNamed:@"mountain"];
+
+    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"mountain"]];
 }
 
 #pragma mark Segue
