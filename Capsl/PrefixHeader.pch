@@ -1,0 +1,19 @@
+//
+//  PrefixHeader.pch
+//  Capsl
+//
+//  Created by Mobile Making on 12/4/14.
+//  Copyright (c) 2014 Christina Gunarto. All rights reserved.
+//
+
+#ifndef Capsl_PrefixHeader_pch
+#define Capsl_PrefixHeader_pch
+
+#import "ConstantsHeader.h"
+
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+
+
+
+#endif

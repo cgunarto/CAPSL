@@ -33,7 +33,10 @@
     [super viewDidLoad];
 
     //TODO: fix capslCount!!
-    
+
+    self.view.backgroundColor = [UIColor clearColor];
+
+
     self.tableView.contentInset = UIEdgeInsetsMake(self.navigationController.navigationBar.frame.size.height, 0, 44, 0);
 
     self.availableCapslsCount = 0;
@@ -42,6 +45,8 @@
     self.recipientPics = [@[] mutableCopy];
 
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    self.tableView.backgroundColor = [UIColor clearColor];
+
 
 
 //    for (NSDate *date in [self.capslsArray valueForKey:@"deliveryTime"])
@@ -140,6 +145,8 @@
 //    {
 //        cell.profileImage.image = profilePicArray[indexPath.row];
 //    }
+
+    [cell drawCellForCapsl:capslForCell];
 
     // updating timer string...
     [cell updateLabelsForCapsl:capslForCell];

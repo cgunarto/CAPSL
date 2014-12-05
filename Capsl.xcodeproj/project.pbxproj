@@ -55,6 +55,7 @@
 		8D5A3DE11A2A4B4700A6485A /* UIImage+ImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D5A3DE01A2A4B4700A6485A /* UIImage+ImageEffects.m */; };
 		8DAC42441A2A9BD400A8859A /* JCAMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DAC42431A2A9BD400A8859A /* JCAMainViewController.m */; };
 		8DE360601A2D6E5800DAE08C /* ViewCapsulesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DE3605F1A2D6E5800DAE08C /* ViewCapsulesViewController.m */; };
+		8DEA789B1A31206900271A8A /* CapsuleListBackground.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DEA789A1A31206900271A8A /* CapsuleListBackground.m */; };
 		905E900D1A2F9D9700BF32E3 /* EditProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 905E900C1A2F9D9700BF32E3 /* EditProfileViewController.m */; };
 		905E90101A2FA3FC00BF32E3 /* EditProfilePicTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 905E900F1A2FA3FC00BF32E3 /* EditProfilePicTableViewCell.m */; };
 		905E90131A2FE55600BF32E3 /* UpdateProfileInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 905E90121A2FE55600BF32E3 /* UpdateProfileInfoViewController.m */; };
@@ -156,6 +157,10 @@
 		8DAC42431A2A9BD400A8859A /* JCAMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JCAMainViewController.m; sourceTree = "<group>"; };
 		8DE3605E1A2D6E5800DAE08C /* ViewCapsulesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ViewCapsulesViewController.h; path = ../ViewCapsulesViewController.h; sourceTree = "<group>"; };
 		8DE3605F1A2D6E5800DAE08C /* ViewCapsulesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ViewCapsulesViewController.m; path = ../ViewCapsulesViewController.m; sourceTree = "<group>"; };
+		8DEA78991A31206900271A8A /* CapsuleListBackground.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CapsuleListBackground.h; path = ../CapsuleListBackground.h; sourceTree = "<group>"; };
+		8DEA789A1A31206900271A8A /* CapsuleListBackground.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CapsuleListBackground.m; path = ../CapsuleListBackground.m; sourceTree = "<group>"; };
+		8DEA789C1A313CFC00271A8A /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
+		8DEA789D1A313DA800271A8A /* ConstantsHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ConstantsHeader.h; sourceTree = "<group>"; };
 		905E900B1A2F9D9700BF32E3 /* EditProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditProfileViewController.h; sourceTree = "<group>"; };
 		905E900C1A2F9D9700BF32E3 /* EditProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditProfileViewController.m; sourceTree = "<group>"; };
 		905E900E1A2FA3FC00BF32E3 /* EditProfilePicTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditProfilePicTableViewCell.h; sourceTree = "<group>"; };
@@ -236,6 +241,8 @@
 		4F69EBC01A252331009625AA /* Capsl */ = {
 			isa = PBXGroup;
 			children = (
+				8DEA789C1A313CFC00271A8A /* PrefixHeader.pch */,
+				8DEA789D1A313DA800271A8A /* ConstantsHeader.h */,
 				4F69EBC51A252331009625AA /* AppDelegate.h */,
 				4F69EBC61A252331009625AA /* AppDelegate.m */,
 				90CE52CD1A27C3350033087E /* LoginViewController.h */,
@@ -425,6 +432,8 @@
 				90CE52D41A27C5170033087E /* CapslTableViewCell.m */,
 				90C0DD151A27CCE500A50BCF /* JKCountDownTimer.h */,
 				90C0DD161A27CCE500A50BCF /* JKCountDownTimer.m */,
+				8DEA78991A31206900271A8A /* CapsuleListBackground.h */,
+				8DEA789A1A31206900271A8A /* CapsuleListBackground.m */,
 			);
 			name = "Capsl List View";
 			sourceTree = "<group>";
@@ -546,6 +555,7 @@
 				8D5A3DD91A2A4AFD00A6485A /* JCACapslViewController.m in Sources */,
 				8D5A3DDB1A2A4AFD00A6485A /* JCACapslCollectionViewCell.m in Sources */,
 				4F69EBEF1A253269009625AA /* ChooseTypeViewController.m in Sources */,
+				8DEA789B1A31206900271A8A /* CapsuleListBackground.m in Sources */,
 				905E90131A2FE55600BF32E3 /* UpdateProfileInfoViewController.m in Sources */,
 				4F69EBEC1A25320C009625AA /* MessageDetailViewController.m in Sources */,
 				905E90101A2FA3FC00BF32E3 /* EditProfilePicTableViewCell.m in Sources */,
@@ -692,6 +702,8 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = Capsl/PrefixHeader.pch;
 				INFOPLIST_FILE = Capsl/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -706,6 +718,8 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = Capsl/PrefixHeader.pch;
 				INFOPLIST_FILE = Capsl/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";

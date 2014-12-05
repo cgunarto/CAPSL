@@ -17,9 +17,11 @@
 @property (strong, nonatomic) IBOutlet UILabel *capslrLabel;
 @property (strong, nonatomic) IBOutlet UILabel *deliveryDateLabel;
 @property (strong, nonatomic) IBOutlet UILabel *timerLabel;
+@property (strong, nonatomic) IBOutlet UIView *lozengeView;
 
 @property NSString *timerString;
 
 - (void)updateLabelsForCapsl:(Capsl *)capsl;
+- (void)drawCellForCapsl:(Capsl *)capsl;
 
 @end
