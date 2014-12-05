@@ -54,6 +54,8 @@
 {
     [super viewWillAppear:animated];
 
+    [SVProgressHUD show];
+
     self.profilePictureImageView.image = self.updatedPicture;
 }
 
@@ -79,12 +81,9 @@
 
             self.profilePictureImageView.image = [UIImage imageWithData:data];
 
-            // Unhide the Edit button once the image finishes loading
-
-            [SVProgressHUD show];
-
             self.navigationItem.rightBarButtonItem.enabled = YES;
 
+            // Unhide the Edit button once the image finishes loading
             [SVProgressHUD dismiss];
         }];
     }];

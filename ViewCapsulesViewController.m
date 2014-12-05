@@ -12,6 +12,7 @@
 #import "JKCountDownTimer.h"
 #import "Capslr.h"
 #import "Capsl.h"
+#import "SVProgressHUD.h"
 
 @interface ViewCapsulesViewController ()
 
@@ -33,6 +34,8 @@
 {
     [super viewDidLoad];
 
+    [SVProgressHUD show];
+
     self.view.backgroundColor = [UIColor colorWithWhite:0.0 alpha:0.75];
     self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"wallpaperReceived"]];
 
@@ -48,6 +51,8 @@
             {
                 self.timelineRootVC.capslsArray = objects;
                 self.capslListVC.capslsArray = objects;
+
+                [SVProgressHUD dismiss];
 
                 NSInteger availableCapslsCount = 0;
 
@@ -65,6 +70,7 @@
             }
             else
             {
+                [SVProgressHUD showErrorWithStatus:@"Connection Error"];
                 NSLog(@"%@", error.localizedDescription);
             }
         }];
@@ -75,7 +81,8 @@
             {
                 self.capslListVC.sentCapslsArray = objects;
                 self.timelineRootVC.sentCapslsArray = objects;
-                
+
+                [SVProgressHUD dismiss];
             }
             else
             {
