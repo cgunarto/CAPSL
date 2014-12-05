@@ -159,6 +159,8 @@
 		8DE3605F1A2D6E5800DAE08C /* ViewCapsulesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ViewCapsulesViewController.m; path = ../ViewCapsulesViewController.m; sourceTree = "<group>"; };
 		8DEA78991A31206900271A8A /* CapsuleListBackground.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CapsuleListBackground.h; path = ../CapsuleListBackground.h; sourceTree = "<group>"; };
 		8DEA789A1A31206900271A8A /* CapsuleListBackground.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CapsuleListBackground.m; path = ../CapsuleListBackground.m; sourceTree = "<group>"; };
+		8DEA789C1A313CFC00271A8A /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
+		8DEA789D1A313DA800271A8A /* ConstantsHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ConstantsHeader.h; sourceTree = "<group>"; };
 		905E900B1A2F9D9700BF32E3 /* EditProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditProfileViewController.h; sourceTree = "<group>"; };
 		905E900C1A2F9D9700BF32E3 /* EditProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditProfileViewController.m; sourceTree = "<group>"; };
 		905E900E1A2FA3FC00BF32E3 /* EditProfilePicTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditProfilePicTableViewCell.h; sourceTree = "<group>"; };
@@ -239,6 +241,8 @@
 		4F69EBC01A252331009625AA /* Capsl */ = {
 			isa = PBXGroup;
 			children = (
+				8DEA789C1A313CFC00271A8A /* PrefixHeader.pch */,
+				8DEA789D1A313DA800271A8A /* ConstantsHeader.h */,
 				4F69EBC51A252331009625AA /* AppDelegate.h */,
 				4F69EBC61A252331009625AA /* AppDelegate.m */,
 				90CE52CD1A27C3350033087E /* LoginViewController.h */,
@@ -698,6 +702,8 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = Capsl/PrefixHeader.pch;
 				INFOPLIST_FILE = Capsl/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -712,6 +718,8 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = Capsl/PrefixHeader.pch;
 				INFOPLIST_FILE = Capsl/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";

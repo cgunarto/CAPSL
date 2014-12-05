@@ -146,7 +146,7 @@
 //        cell.profileImage.image = profilePicArray[indexPath.row];
 //    }
 
-    [cell drawCell];
+    [cell drawCellForCapsl:capslForCell];
 
     // updating timer string...
     [cell updateLabelsForCapsl:capslForCell];

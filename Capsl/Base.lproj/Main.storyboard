@@ -121,7 +121,7 @@
                         <viewControllerLayoutGuide type="bottom" id="pLo-bO-46Z"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="X9p-C9-HlJ">
-                        <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" editable="NO" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="nEm-xI-Xvh">
@@ -1638,7 +1638,7 @@
                                                 <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6JC-R8-5qu">
                                                     <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                                     <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="delivery date" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8aB-UJ-cmv">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="delivery date" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8aB-UJ-cmv">
                                                             <rect key="frame" x="123" y="55" width="126" height="18"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="18" id="ZvZ-zA-jRA"/>
@@ -1655,7 +1655,7 @@
                                                                 <rect key="frame" x="123" y="59" width="126" height="18"/>
                                                             </variation>
                                                             <variation key="widthClass=compact" misplaced="YES">
-                                                                <rect key="frame" x="88" y="63" width="248" height="18"/>
+                                                                <rect key="frame" x="88" y="62" width="88" height="18"/>
                                                                 <mask key="constraints">
                                                                     <include reference="ZvZ-zA-jRA"/>
                                                                 </mask>
@@ -1687,7 +1687,7 @@
                                                                 </mask>
                                                             </variation>
                                                         </imageView>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Timer" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Lji-1Y-YV1">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Timer" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Lji-1Y-YV1">
                                                             <rect key="frame" x="500" y="34" width="92" height="21"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="92" id="Q6E-8c-1bs"/>
@@ -1705,7 +1705,8 @@
                                                             <variation key="heightClass=compact" misplaced="YES">
                                                                 <rect key="frame" x="220" y="34" width="92" height="21"/>
                                                             </variation>
-                                                            <variation key="widthClass=compact">
+                                                            <variation key="widthClass=compact" misplaced="YES">
+                                                                <rect key="frame" x="88" y="25" width="88" height="39"/>
                                                                 <mask key="constraints">
                                                                     <exclude reference="Q6E-8c-1bs"/>
                                                                     <exclude reference="ae9-IO-Ibh"/>
@@ -1716,7 +1717,7 @@
                                                                 <rect key="frame" x="140" y="35" width="92" height="21"/>
                                                             </variation>
                                                         </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="From" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vw2-gs-VU7">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="From" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vw2-gs-VU7">
                                                             <rect key="frame" x="123" y="8" width="126" height="18"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="18" id="37R-qx-810"/>
@@ -1730,7 +1731,7 @@
                                                                 </mask>
                                                             </variation>
                                                             <variation key="widthClass=compact" misplaced="YES">
-                                                                <rect key="frame" x="88" y="9" width="248" height="18"/>
+                                                                <rect key="frame" x="88" y="8" width="88" height="18"/>
                                                                 <mask key="constraints">
                                                                     <include reference="37R-qx-810"/>
                                                                 </mask>
@@ -1772,20 +1773,20 @@
                                                             <exclude reference="MYf-hw-KGG"/>
                                                             <exclude reference="WqE-Hf-PIT"/>
                                                             <exclude reference="pa8-qn-ULW"/>
+                                                            <exclude reference="TQs-UA-CPm"/>
+                                                            <exclude reference="fsV-gf-8yt"/>
+                                                            <exclude reference="rRI-qE-wC5"/>
                                                             <exclude reference="Arc-fu-eXW"/>
                                                             <exclude reference="Wg1-EH-rbo"/>
                                                             <exclude reference="nHQ-RK-ZGG"/>
                                                             <exclude reference="zjL-gZ-Dxf"/>
-                                                            <exclude reference="TQs-UA-CPm"/>
-                                                            <exclude reference="fsV-gf-8yt"/>
-                                                            <exclude reference="rRI-qE-wC5"/>
                                                         </mask>
                                                     </variation>
                                                     <variation key="heightClass=compact" fixedFrame="YES">
                                                         <rect key="frame" x="8" y="7" width="584" height="86"/>
                                                     </variation>
                                                     <variation key="widthClass=compact" misplaced="YES">
-                                                        <rect key="frame" x="28" y="9" width="344" height="88"/>
+                                                        <rect key="frame" x="28" y="8" width="184" height="88"/>
                                                         <mask key="subviews">
                                                             <include reference="8aB-UJ-cmv"/>
                                                             <include reference="HAI-ck-GMZ"/>
@@ -1800,13 +1801,13 @@
                                                             <include reference="MYf-hw-KGG"/>
                                                             <include reference="WqE-Hf-PIT"/>
                                                             <include reference="pa8-qn-ULW"/>
+                                                            <include reference="TQs-UA-CPm"/>
+                                                            <include reference="fsV-gf-8yt"/>
+                                                            <include reference="rRI-qE-wC5"/>
                                                             <include reference="Arc-fu-eXW"/>
                                                             <exclude reference="Wg1-EH-rbo"/>
                                                             <include reference="nHQ-RK-ZGG"/>
                                                             <include reference="zjL-gZ-Dxf"/>
-                                                            <include reference="TQs-UA-CPm"/>
-                                                            <include reference="fsV-gf-8yt"/>
-                                                            <include reference="rRI-qE-wC5"/>
                                                         </mask>
                                                     </variation>
                                                 </view>

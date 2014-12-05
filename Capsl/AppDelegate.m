@@ -31,7 +31,6 @@
     [[UIToolbar appearance] setTintColor:[UIColor whiteColor]];
     [[UIToolbar appearance] setTranslucent:YES];
 
-    
     return YES;
 }
 
