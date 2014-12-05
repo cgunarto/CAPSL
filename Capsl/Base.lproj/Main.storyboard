@@ -833,6 +833,7 @@
                         <outlet property="doneButton" destination="n73-cQ-FAH" id="MSi-Ll-YNC"/>
                         <outlet property="exitButton" destination="UNe-X0-lle" id="zqR-0D-88T"/>
                         <outlet property="imageView" destination="Hg3-VI-LXE" id="4LV-VO-ege"/>
+                        <outlet property="tapToChangeLabel" destination="VHH-hP-3OW" id="Myn-JU-Obk"/>
                         <outlet property="textView" destination="Tjw-18-0nC" id="T4L-oH-noI"/>
                         <segue destination="g6O-c0-HJb" kind="presentation" identifier="segueToContactSearch" id="Eln-db-Pjz"/>
                     </connections>
