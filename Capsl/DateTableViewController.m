@@ -276,7 +276,7 @@ NSUInteger DeviceSystemMajorVersion()
         if ([itemData valueForKey:kDateKey])
         {
             NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
-            [dateFormat setDateStyle:NSDateFormatterShortStyle];
+            [dateFormat setDateStyle:NSDateFormatterLongStyle];
             cell.detailTextLabel.text = [dateFormat stringFromDate:[itemData valueForKey:kDateKey]];
         }
 
