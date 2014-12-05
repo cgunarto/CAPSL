@@ -533,7 +533,7 @@ NSUInteger DeviceSystemMajorVersion()
                                             {
                                                 [alert dismissViewControllerAnimated:YES completion:nil];
 
-                                                [self performSegueWithIdentifier:@"unwindSegue" sender:self];
+                                                [self performSegueWithIdentifier:@"unwindToChoose" sender:self];
                                             }];
                  [alert addAction:okButton];
                  [self presentViewController:alert

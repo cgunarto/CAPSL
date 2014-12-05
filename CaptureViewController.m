@@ -11,7 +11,8 @@
 #import "RecordAudioViewController.h"
 #import "Capsl.h"
 #import "Capslr.h"
-#define kOFFSET_FOR_KEYBOARD 200;
+#define kOFFSET_FOR_KEYBOARD 200
+#define kImageResolution 0.2f
 
 @interface CaptureViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextViewDelegate>
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
@@ -267,12 +268,14 @@
 {
     //Accessing uncropped image from info dictionary
     self.chosenImage = info[UIImagePickerControllerOriginalImage];
-    self.imageView.image = self.chosenImage;
+    NSData *imageData = UIImageJPEGRepresentation(self.chosenImage, kImageResolution);
+    self.imageView.image = [UIImage imageWithData:imageData];
+
 
     [picker dismissViewControllerAnimated:YES completion:NULL];
 
     //Settign CPSL image to be sent
-    NSData *imageData = UIImageJPEGRepresentation(self.chosenImage, 1.0f);
+    //TODO: DECIDE APPROPRIATE FILE SIZE
     self.createdCapsl.photo = [PFFile fileWithName:@"image.jpg" data:imageData];
 
     [self setTextViewToBottom];
