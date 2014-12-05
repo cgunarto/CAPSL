@@ -44,7 +44,7 @@
 - (void)drawCellForCapsl:(Capsl *)capsl
 {
 
-    self.lozengeView.backgroundColor = kSentCapsuleColor;
+    self.lozengeView.backgroundColor = kReceivedCapsuleColor;
 
 }
 

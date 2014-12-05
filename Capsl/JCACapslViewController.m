@@ -228,11 +228,11 @@ static NSString * const reuseIdentifier = @"CapslCell";
 
     if (self.showSent)
     {
-        cell.countdownLabel.backgroundColor = [UIColor colorWithHue:0.496 saturation:0.791 brightness:0.554 alpha:1.000];
+        cell.countdownLabel.backgroundColor = kSentCapsuleColor;
     }
     else
     {
-        cell.countdownLabel.backgroundColor = [UIColor colorWithHue:0.614 saturation:0.607 brightness:0.642 alpha:1.000];
+        cell.countdownLabel.backgroundColor = kReceivedCapsuleColor;
     }
 
     [cell layoutIfNeeded];
