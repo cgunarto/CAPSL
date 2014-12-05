@@ -139,7 +139,7 @@
 - (UIImage *)processWallpaper:(UIImage *)wallpaper
 {
 
-    UIColor *tintColor = [UIColor colorWithWhite:0.3 alpha:0.1];
+//    UIColor *tintColor = [UIColor colorWithWhite:0.3 alpha:0.1];
 //    wallpaper = [wallpaper applyBlurWithRadius:3 tintColor:tintColor saturationDeltaFactor:0.8 maskImage:nil];
 
     return wallpaper;

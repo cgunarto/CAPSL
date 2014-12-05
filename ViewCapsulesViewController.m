@@ -62,8 +62,6 @@
                 self.timelineRootVC.shouldShowSent = NO;
                 self.capslListVC.shouldShowSent = NO;
                 
-                [self.capslListVC scrollToSoonestCapslWithCount:availableCapslsCount];
-
             }
             else
             {
@@ -156,6 +154,7 @@
     [self.timelineRootVC updateClocks];
 
 }
+
 
 #pragma mark - actions
 

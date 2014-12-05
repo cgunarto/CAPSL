@@ -16,11 +16,8 @@
 - (void)updateLabelsForCapsl:(Capsl *)capsl
 {
 
-    NSDate *deliveryDate = capsl.deliveryTime;
-    NSTimeInterval timeInterval = [deliveryDate timeIntervalSinceNow];
-
-    self.countdownLabel.text = [[JKCountDownTimer getStringWithTimeInterval:timeInterval] uppercaseString];
-    self.deliveryDateLabel.text = [JKCountDownTimer getDateStringWithDate:deliveryDate];
+    self.countdownLabel.text = [[JKCountDownTimer getStatusStringWithCapsl:capsl] uppercaseString];
+    self.deliveryDateLabel.text = [JKCountDownTimer getDateStringWithDate:capsl.deliveryTime];
 
 //    [UIView setAnimationsEnabled:NO];
 //    [self.countdownButton setTitle:[JKCountDownTimer getStringWithTimeInterval:timeInterval] forState:UIControlStateNormal];
