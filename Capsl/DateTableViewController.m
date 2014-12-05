@@ -57,7 +57,9 @@ static NSString *kDatePickerID = @"datePicker"; // the cell containing the date 
     NSMutableDictionary *itemTwo = [@{ kTitleKey : @"Send Time",
                                          kTimeKey : [NSDate date] } mutableCopy];
 
-    self.dataArray = @[itemOne, itemTwo];
+    NSMutableDictionary *itemThree = [@{ kTitleKey : @""} mutableCopy];
+
+    self.dataArray = @[itemOne, itemTwo, itemThree];
 
     self.dateFormatter = [[NSDateFormatter alloc] init];
 
