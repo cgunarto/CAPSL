@@ -8,6 +8,7 @@
 
 #import "UpdateProfileInfoViewController.h"
 #import "Capslr.h"
+#import "SVProgressHUD.h"
 
 @interface UpdateProfileInfoViewController () <UITextFieldDelegate>
 
@@ -71,7 +72,9 @@
         if (self.nameString && self.nameString)
         {
             currentCapslr.name = self.textField.text;
+
             [currentCapslr save];
+
             [self.navigationController popToViewController:self.navigationController.childViewControllers[1] animated:YES];
         }
         else if (self.usernameString)
@@ -84,6 +87,7 @@
                 {
                     currentCapslr.username = self.textField.text;
                     [PFUser currentUser].username = self.textField.text;
+
                     [currentCapslr save];
                     [[PFUser currentUser] save];
 
@@ -101,7 +105,9 @@
             if ([self NSStringIsValidEmail:self.textField.text])
             {
                 currentCapslr.email = self.textField.text;
+
                 [currentCapslr save];
+
                 [self.navigationController popToViewController:self.navigationController.childViewControllers[1] animated:YES];
             }
             else

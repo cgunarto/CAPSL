@@ -13,6 +13,7 @@
 #define kRightInitialConstant -16
 #import "Capslr.h"
 #import "EditProfileViewController.h"
+#import "SVProgressHUD.h"
 
 //@class Capslr;
 
@@ -79,7 +80,12 @@
             self.profilePictureImageView.image = [UIImage imageWithData:data];
 
             // Unhide the Edit button once the image finishes loading
+
+            [SVProgressHUD show];
+
             self.navigationItem.rightBarButtonItem.enabled = YES;
+
+            [SVProgressHUD dismiss];
         }];
     }];
 }
