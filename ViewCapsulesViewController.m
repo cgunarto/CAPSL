@@ -34,6 +34,7 @@
     [super viewDidLoad];
 
     self.view.backgroundColor = [UIColor colorWithWhite:0.0 alpha:0.75];
+    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"wallpaperReceived"]];
 
     self.capslListVC.availableCapslsArray = [@[] mutableCopy];
 
