@@ -1065,7 +1065,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oq7-HL-oRl" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="BXy-bI-auN" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="4624.5" y="438"/>
+            <point key="canvasLocation" x="5241" y="438"/>
         </scene>
         <!--Search Contact View Controller-->
         <scene sceneID="2VP-Sn-w8a">
@@ -1307,7 +1307,7 @@
                                             <outlet property="phoneLabel" destination="r09-go-j4f" id="2aA-g9-xM3"/>
                                             <outlet property="photoImageView" destination="AbK-9q-g1U" id="qa5-rK-UmD"/>
                                             <outlet property="usernameLabel" destination="ccV-ba-HZ5" id="zRH-bY-WhW"/>
-                                            <segue destination="Cv4-wc-CeT" kind="presentation" identifier="segueToCompose" id="YlE-TN-ab3"/>
+                                            <segue destination="FSh-ys-SKu" kind="presentation" identifier="segueToCompose" id="1JY-YL-j2i"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -3276,7 +3276,7 @@
                     </connections>
                 </barButtonItem>
             </objects>
-            <point key="canvasLocation" x="5293.5" y="437"/>
+            <point key="canvasLocation" x="4537.5" y="438"/>
         </scene>
     </scenes>
     <resources>

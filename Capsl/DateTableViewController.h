@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+@class Capsl;
 
 @interface DateTableViewController : UITableViewController
+@property Capsl *createdCapsl;
+
 
 @end

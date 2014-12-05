@@ -8,6 +8,7 @@
 
 #import "DateTableViewController.h"
 #import "PickerTableViewCell.h"
+#import "Capsl.h"
 
 #define kPickerAnimationDuration    3   // duration for the animation to slide the date picker into view
 #define kDatePickerTag              99     // view tag identifiying the date picker view
@@ -444,6 +445,9 @@ NSUInteger DeviceSystemMajorVersion()
         [timeItemData setValue:targetedDatePicker.date forKey:kTimeKey];
 
         NSLog(@"DATE %@ TIME %@", itemData[kDateKey], timeItemData[kTimeKey]);
+
+        //TODO:SET CREATEDCPSL DATE HERE
+
         [self.tableView reloadData];
     }
 
@@ -455,6 +459,9 @@ NSUInteger DeviceSystemMajorVersion()
 
         NSLog(@"DATE %@ TIME %@", dateItemData[kDateKey], itemData[kTimeKey]);
         [self.tableView reloadData];
+
+        //TODO:SET CREATEDCPSL DATE HERE
+
 
     }
 
@@ -487,32 +494,6 @@ NSUInteger DeviceSystemMajorVersion()
     NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
     [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
