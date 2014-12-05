@@ -59,6 +59,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+
+    //Hide the Edit Button before picture loads for the first time.
+    self.navigationItem.rightBarButtonItem.enabled = NO;
+
     self.segmentedControl.selectedSegmentIndex = 0;
 
     [self showCapslViewCenter];
@@ -73,6 +77,9 @@
             self.profilePictureImageView.clipsToBounds = YES;
 
             self.profilePictureImageView.image = [UIImage imageWithData:data];
+
+            // Unhide the Edit button once the image finishes loading
+            self.navigationItem.rightBarButtonItem.enabled = YES;
         }];
     }];
 }

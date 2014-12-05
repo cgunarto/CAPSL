@@ -17,6 +17,8 @@
 @interface CaptureViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextViewDelegate>
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
 @property UIImage *chosenImage;
+@property (weak, nonatomic) IBOutlet UILabel *tapToChangeLabel;
+
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *cancelButton;
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *doneButton;
 @property (weak, nonatomic) IBOutlet UITextView *textView;
@@ -27,6 +29,9 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *bottomAddAudioConstraint;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *bottomLabelConstraint;
 
+#pragma mark NOT EDITING ONLY properties
+@property (weak, nonatomic) IBOutlet UIButton *exitButton;
+
 @end
 
 @implementation CaptureViewController
@@ -36,12 +41,13 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.characterCountLabel.hidden = YES;
 
     //If VC isEditing, it is trying to create a Capsl message
     if (self.isEditing)
     {
         self.textView.delegate = self;
+        self.exitButton.hidden = YES;
+        self.tapToChangeLabel.hidden = NO;
 
         //Setting CPSL sender
         [Capslr returnCapslrFromPFUser:[PFUser currentUser] withCompletion:^(Capslr *currentCapslr, NSError *error)
@@ -63,8 +69,44 @@
     //If VC isEditing is NO, it is trying to unwrap and display a CPSL message
     else
     {
+        self.characterCountLabel.hidden = YES;
+        self.tapToChangeLabel.hidden = YES;
+
         self.imageView.userInteractionEnabled = NO;
         self.textView.userInteractionEnabled = NO;
+        self.exitButton.hidden = NO;
+
+        //Show textview, automatically defaults to center if there is no image
+        if (self.textView.text)
+        {
+            self.textView.text = self.chosenCapsl.text;
+        }
+
+        //Display the Capsl photo if available
+        if (self.chosenCapsl.photo)
+        {
+            [self.chosenCapsl.photo getDataInBackgroundWithBlock:^(NSData *data, NSError *error)
+            {
+                self.imageView.image = [UIImage imageWithData:data];
+            }];
+
+            //If there is text, move it to bottom
+            if (self.chosenCapsl.text)
+            {
+                [self setTextViewToBottom];
+            }
+
+            //If there is no text, hide the textview
+            else
+            {
+                self.textView.hidden = YES;
+            }
+        }
+
+        //Show or Hide Audio Button depending if there is an audio message
+        self.addAudioButton.hidden = !self.chosenCapsl.audio;
+
+
     }
 
 }
@@ -427,6 +469,10 @@
 {
 }
 
+- (IBAction)onExitButtonPressed:(UIButton *)sender
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
 
 
 @end
