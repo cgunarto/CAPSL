@@ -33,6 +33,7 @@
 @property (strong, nonatomic) IBOutlet UIImageView *profilePictureImageView;
 @property NSArray *currentCapslrInfo;
 @property UIImage *updatedPicture;
+@property BOOL doNotShowActivityIndicator;
 
 @end
 
@@ -54,7 +55,10 @@
 {
     [super viewWillAppear:animated];
 
-    [SVProgressHUD show];
+    if (!self.doNotShowActivityIndicator)
+    {
+        [SVProgressHUD show];
+    }
 
     self.profilePictureImageView.image = self.updatedPicture;
 }
@@ -159,6 +163,7 @@
     EditProfileViewController *editVC = segue.sourceViewController;
     self.profilePictureImageView.image = editVC.updatedProfilePicture;
     self.updatedPicture = editVC.updatedProfilePicture;
+    self.doNotShowActivityIndicator = editVC.doNotShowActivityIndicator;
 }
 
 

@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "ProfileViewController.h"
 
 
 @interface EditProfileViewController : UIViewController
@@ -16,5 +16,6 @@
 @property (nonatomic) UIImage *currentProfilePicture;
 
 @property (nonatomic) UIImage *updatedProfilePicture;
+@property BOOL doNotShowActivityIndicator;
 
 @end
