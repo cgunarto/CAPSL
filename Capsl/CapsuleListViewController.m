@@ -12,7 +12,7 @@
 #import "JKCountDownTimer.h"
 #import "JCATimelineRootViewController.h"
 #import "JCAMainViewController.h"
-#import "MessageDetailViewController.h"
+#import "CaptureViewController.h"
 
 @interface CapsuleListViewController () <UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate>
 
@@ -259,8 +259,9 @@
     NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
     Capsl *capsl = self.tableViewData[indexPath.row];
 
-    MessageDetailViewController *messageDetailVC = segue.destinationViewController;
-    messageDetailVC.chosenCapsl = capsl;
+    CaptureViewController *vc = segue.destinationViewController;
+    vc.chosenCapsl = capsl;
+    vc.isEditing = NO;
 
 }
 

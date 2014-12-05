@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="vXZ-lx-hvc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="vXZ-lx-hvc">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
@@ -1970,19 +1970,17 @@
                                 <exclude reference="mkO-I1-IRX"/>
                             </mask>
                             <mask key="constraints">
-                                <exclude reference="FYd-iR-xHa"/>
-                                <exclude reference="IVP-xT-zZx"/>
-                                <exclude reference="mSn-Fs-BOM"/>
+                                <exclude reference="1lB-Ir-VTU"/>
                                 <exclude reference="5F3-MW-Nav"/>
                                 <exclude reference="ouJ-mO-CoN"/>
+                                <exclude reference="Uqr-eM-kVe"/>
+                                <exclude reference="jxz-Pa-Zlj"/>
+                                <exclude reference="y2O-UQ-fhp"/>
                                 <exclude reference="Nuc-Dn-rXU"/>
                                 <exclude reference="WVT-H9-AUy"/>
                                 <exclude reference="dSQ-bX-3rM"/>
                                 <exclude reference="g0m-cf-OVq"/>
                                 <exclude reference="kIT-up-7Rb"/>
-                                <exclude reference="Uqr-eM-kVe"/>
-                                <exclude reference="jxz-Pa-Zlj"/>
-                                <exclude reference="y2O-UQ-fhp"/>
                                 <exclude reference="8LI-aZ-RUW"/>
                                 <exclude reference="9oz-wE-ShZ"/>
                                 <exclude reference="J1n-Fc-8uL"/>
@@ -1991,7 +1989,9 @@
                                 <exclude reference="rjY-cB-owX"/>
                                 <exclude reference="un0-B1-6eK"/>
                                 <exclude reference="zEA-6r-lXS"/>
-                                <exclude reference="1lB-Ir-VTU"/>
+                                <exclude reference="FYd-iR-xHa"/>
+                                <exclude reference="IVP-xT-zZx"/>
+                                <exclude reference="mSn-Fs-BOM"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=compact">
@@ -2003,19 +2003,17 @@
                                 <include reference="mkO-I1-IRX"/>
                             </mask>
                             <mask key="constraints">
-                                <include reference="FYd-iR-xHa"/>
-                                <include reference="IVP-xT-zZx"/>
-                                <include reference="mSn-Fs-BOM"/>
+                                <include reference="1lB-Ir-VTU"/>
                                 <include reference="5F3-MW-Nav"/>
                                 <include reference="ouJ-mO-CoN"/>
+                                <include reference="Uqr-eM-kVe"/>
+                                <include reference="jxz-Pa-Zlj"/>
+                                <include reference="y2O-UQ-fhp"/>
                                 <exclude reference="Nuc-Dn-rXU"/>
                                 <include reference="WVT-H9-AUy"/>
                                 <include reference="dSQ-bX-3rM"/>
                                 <include reference="g0m-cf-OVq"/>
                                 <exclude reference="kIT-up-7Rb"/>
-                                <include reference="Uqr-eM-kVe"/>
-                                <include reference="jxz-Pa-Zlj"/>
-                                <include reference="y2O-UQ-fhp"/>
                                 <include reference="8LI-aZ-RUW"/>
                                 <include reference="9oz-wE-ShZ"/>
                                 <exclude reference="J1n-Fc-8uL"/>
@@ -2024,7 +2022,9 @@
                                 <exclude reference="rjY-cB-owX"/>
                                 <exclude reference="un0-B1-6eK"/>
                                 <exclude reference="zEA-6r-lXS"/>
-                                <include reference="1lB-Ir-VTU"/>
+                                <include reference="FYd-iR-xHa"/>
+                                <include reference="IVP-xT-zZx"/>
+                                <include reference="mSn-Fs-BOM"/>
                             </mask>
                         </variation>
                     </view>
