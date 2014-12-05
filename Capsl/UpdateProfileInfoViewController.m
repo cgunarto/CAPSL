@@ -97,9 +97,17 @@
         }
         else if (self.emailString)
         {
-            currentCapslr.email = self.textField.text;
-            [currentCapslr save];
-            [self.navigationController popToViewController:self.navigationController.childViewControllers[1] animated:YES];
+
+            if ([self NSStringIsValidEmail:self.textField.text])
+            {
+                currentCapslr.email = self.textField.text;
+                [currentCapslr save];
+                [self.navigationController popToViewController:self.navigationController.childViewControllers[1] animated:YES];
+            }
+            else
+            {
+                [self invalidEmailAlert];
+            }
         }
     }];
 
@@ -129,10 +137,33 @@
     return YES;
 }
 
+#pragma mark - Alert if username already exists
 
 - (void)usernameExistsAlert
 {
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"The username already exists" message:@"Please try a new username" preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *okButton = [UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleDefault handler:nil];
+
+    [alert addAction:okButton];
+    [self presentViewController:alert animated:YES completion:nil];
+}
+
+#pragma mark - check if email is valid
+
+-(BOOL) NSStringIsValidEmail:(NSString *)checkString
+{
+    BOOL stricterFilter = NO;
+    NSString *stricterFilterString = @"[A-Z0-9a-z\\._%+-]+@([A-Za-z0-9-]+\\.)+[A-Za-z]{2,4}";
+    NSString *laxString = @".+@([A-Za-z0-9-]+\\.)+[A-Za-z]{2}[A-Za-z]*";
+    NSString *emailRegex = stricterFilter ? stricterFilterString : laxString;
+    NSPredicate *emailTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", emailRegex];
+    return [emailTest evaluateWithObject:checkString];
+}
+
+#pragma mark - invalid email alert
+- (void)invalidEmailAlert
+{
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Invalid Email" message:@"Please try a new email" preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction *okButton = [UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleDefault handler:nil];
 
     [alert addAction:okButton];
