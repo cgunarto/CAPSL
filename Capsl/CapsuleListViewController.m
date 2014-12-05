@@ -22,6 +22,7 @@
 @property NSMutableArray *recipientPics;
 
 @property NSInteger availableCapslsCount;
+@property BOOL shouldShowMessage;
 
 @end
 
@@ -75,6 +76,9 @@
     }
 
     [self.tableView reloadData];
+
+    [self scrollToEarliestUnopenedCapsule];
+
 }
 
 
@@ -146,10 +150,7 @@
 //        cell.profileImage.image = profilePicArray[indexPath.row];
 //    }
 
-    [cell drawCellForCapsl:capslForCell];
-
-    // updating timer string...
-    [cell updateLabelsForCapsl:capslForCell];
+    [cell drawCellForCapsl:capslForCell ThatWasSent:self.shouldShowSent];
 
     //Capsl sent to...
 
@@ -158,28 +159,99 @@
 
 
 #pragma mark - Helper Method
-- (void)scrollToSoonestCapslWithCount:(NSInteger)openCapslsCount
+- (void)scrollToEarliestUnopenedCapsule
 {
+
+    // scroll to first unopened capsule in received, 3 capsules prior to first unopened in sent
+    for (int x = 0; x < self.tableViewData.count; x++)
+    {
+        Capsl *capsl = self.tableViewData[x];
+        int row = x;
+
+        if (!capsl.viewedAt)
+        {
+            // sent capsules
+            if (self.shouldShowSent)
+            {
+                // set index for 3 prior to first viewed if available, or else show first
+                if (x > 3)
+                {
+                    row = x - 3;
+                }
+                else
+                {
+                    row = 0;
+                }
+            }
+
+            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:row inSection:0];
+            [self.tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionTop animated:NO];
+
+            break;
+        }
+
+    }
+
+
 //    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:(openCapslsCount) inSection:0];
 //    [self.tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionTop animated:NO];
 }
 
+- (NSArray *)reverseArray:(NSArray *)arrayToReverse
+{
+
+    NSMutableArray *newArray = [@[] mutableCopy];
+    for (NSObject *object in arrayToReverse)
+    {
+        [newArray insertObject:object atIndex:0];
+    }
+
+    return [NSArray arrayWithArray:newArray];
+    
+}
 
 #pragma mark - Saving Data for Viewed At
+
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+
+}
+
+#pragma mark - segue life cycle
+
+- (BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender
+{
+
+    NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
 
     Capsl *capsl = self.tableViewData[indexPath.row];
     long elapsedSeconds = [capsl.deliveryTime timeIntervalSinceNow];
 
-    if ((!capsl.viewedAt) && elapsedSeconds <= 0)
-    {
-        capsl.viewedAt = [NSDate date];
-        [capsl saveInBackground];
-    }
-}
+    // don't open if the capsule is not ready!
 
-#pragma mark - segue life cycle
+    if (!self.shouldShowSent)
+    {
+        if (!capsl.viewedAt && elapsedSeconds < 0)
+        {
+            capsl.viewedAt = [NSDate date];
+            [capsl saveInBackground];
+        }
+
+        if (elapsedSeconds < 0)
+        {
+            return YES;
+        }
+        else
+        {
+            return NO;
+        }
+    }
+    else
+    {
+        return YES;
+    }
+
+}
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {

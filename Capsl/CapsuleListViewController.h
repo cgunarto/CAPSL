@@ -21,7 +21,7 @@
 
 - (void)updateClocks;
 
-- (void)scrollToSoonestCapslWithCount:(NSInteger)openCapslsCount;
+- (void)scrollToEarliestUnopenedCapsule;
 
 
 @end

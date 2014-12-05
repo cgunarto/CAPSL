@@ -22,6 +22,6 @@
 @property NSString *timerString;
 
 - (void)updateLabelsForCapsl:(Capsl *)capsl;
-- (void)drawCellForCapsl:(Capsl *)capsl;
+- (void)drawCellForCapsl:(Capsl *)capsl ThatWasSent:(BOOL)wasSent;
 
 @end
