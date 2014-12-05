@@ -17,7 +17,6 @@
 		4F69EBEC1A25320C009625AA /* MessageDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F69EBEB1A25320C009625AA /* MessageDetailViewController.m */; };
 		4F69EBEF1A253269009625AA /* ChooseTypeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F69EBEE1A253269009625AA /* ChooseTypeViewController.m */; };
 		4F69EBF21A25327A009625AA /* CaptureViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F69EBF11A25327A009625AA /* CaptureViewController.m */; };
-		4F69EBF51A25328F009625AA /* ComposeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F69EBF41A25328F009625AA /* ComposeViewController.m */; };
 		4F69EBF81A2532C8009625AA /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F69EBF71A2532C8009625AA /* ProfileViewController.m */; };
 		4F69EBFD1A253957009625AA /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F69EBF91A253957009625AA /* Bolts.framework */; };
 		4F69EBFE1A253957009625AA /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F69EBFA1A253957009625AA /* Parse.framework */; };
@@ -102,8 +101,6 @@
 		4F69EBEE1A253269009625AA /* ChooseTypeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChooseTypeViewController.m; sourceTree = "<group>"; };
 		4F69EBF01A25327A009625AA /* CaptureViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CaptureViewController.h; path = ../CaptureViewController.h; sourceTree = "<group>"; };
 		4F69EBF11A25327A009625AA /* CaptureViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CaptureViewController.m; path = ../CaptureViewController.m; sourceTree = "<group>"; };
-		4F69EBF31A25328F009625AA /* ComposeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ComposeViewController.h; sourceTree = "<group>"; };
-		4F69EBF41A25328F009625AA /* ComposeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ComposeViewController.m; sourceTree = "<group>"; };
 		4F69EBF61A2532C8009625AA /* ProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileViewController.h; sourceTree = "<group>"; };
 		4F69EBF71A2532C8009625AA /* ProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileViewController.m; sourceTree = "<group>"; };
 		4F69EBF91A253957009625AA /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
@@ -359,8 +356,6 @@
 				4F69EC391A2A72D9009625AA /* SearchContactViewController.m */,
 				4F7243791A314F86002CC918 /* DateTableViewController.h */,
 				4F72437A1A314F86002CC918 /* DateTableViewController.m */,
-				4F69EBF31A25328F009625AA /* ComposeViewController.h */,
-				4F69EBF41A25328F009625AA /* ComposeViewController.m */,
 			);
 			name = "Capture & Compose VCs";
 			sourceTree = "<group>";
@@ -593,7 +588,6 @@
 				90C61E621A2C4D3A003EFEF9 /* UIImage+RoundedCorner.m in Sources */,
 				4FC4EA201A2D1D4000D3D09D /* RecordVideoViewController.m in Sources */,
 				90CE52D21A27C36A0033087E /* SignUpViewController.m in Sources */,
-				4F69EBF51A25328F009625AA /* ComposeViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

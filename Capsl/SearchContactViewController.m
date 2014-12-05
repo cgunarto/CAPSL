@@ -11,7 +11,7 @@
 #import "Capslr.h"
 #import "Capsl.h"
 #import "AllContactTableViewCell.h"
-#import "ComposeViewController.h"
+#import "DateTableViewController.h"
 
 #define kTableViewHeight 94;
 
@@ -202,8 +202,8 @@
             }
 
             self.createdCapsl.recipient = capslr;
-            ComposeViewController *composeVC = segue.destinationViewController;
-            composeVC.createdCapsl = self.createdCapsl;
+            DateTableViewController *dateTableViewVC = segue.destinationViewController;
+            dateTableViewVC.createdCapsl = self.createdCapsl;
         }
 
         else
@@ -229,8 +229,8 @@
                  if (capslr)
                  {
                      self.createdCapsl.recipient = capslr;
-                     ComposeViewController *composeVC = segue.destinationViewController;
-                     composeVC.createdCapsl = self.createdCapsl;
+                     DateTableViewController *dateTableViewVC = segue.destinationViewController;
+                     dateTableViewVC.createdCapsl = self.createdCapsl;
                  }
 
                  //If NO, create that Cpslr object, save it, and then pass it
@@ -241,8 +241,8 @@
 
                      [newCapslr saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error)
                      {
-                         ComposeViewController *composeVC = segue.destinationViewController;
-                         composeVC.createdCapsl = self.createdCapsl;
+                         DateTableViewController *dateTableViewVC = segue.destinationViewController;
+                         dateTableViewVC.createdCapsl = self.createdCapsl;
                      }];
                  }
              }];

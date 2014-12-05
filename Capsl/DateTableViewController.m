@@ -512,6 +512,7 @@ NSUInteger DeviceSystemMajorVersion()
 
 - (IBAction)onSendButtonPressed:(UIButton *)sender
 {
+    NSLog(@"SEND BUTTON IS PRESSED");
     //save to Parse if there is a delivery time
     if (self.createdCapsl.deliveryTime)
     {
@@ -532,7 +533,7 @@ NSUInteger DeviceSystemMajorVersion()
                                             {
                                                 [alert dismissViewControllerAnimated:YES completion:nil];
 
-                                                [self performSegueWithIdentifier:@"unwindToChoose" sender:self];
+                                                [self performSegueWithIdentifier:@"unwindSegue" sender:self];
                                             }];
                  [alert addAction:okButton];
                  [self presentViewController:alert
