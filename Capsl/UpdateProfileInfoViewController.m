@@ -67,6 +67,8 @@
 
 - (IBAction)onSaveBarButtonItemPressed:(UIBarButtonItem *)sender
 {
+    [SVProgressHUD show];
+
     [Capslr returnCapslrFromPFUser:[PFUser currentUser] withCompletion:^(Capslr *currentCapslr, NSError *error) {
 
         if (self.nameString && self.nameString)
@@ -74,6 +76,7 @@
             currentCapslr.name = self.textField.text;
 
             [currentCapslr save];
+            [SVProgressHUD dismiss];
 
             [self.navigationController popToViewController:self.navigationController.childViewControllers[1] animated:YES];
         }
@@ -90,6 +93,7 @@
 
                     [currentCapslr save];
                     [[PFUser currentUser] save];
+                    [SVProgressHUD dismiss];
 
                     [self.navigationController popToViewController:self.navigationController.childViewControllers[1] animated:YES];
                 }
@@ -107,6 +111,7 @@
                 currentCapslr.email = self.textField.text;
 
                 [currentCapslr save];
+                [SVProgressHUD dismiss];
 
                 [self.navigationController popToViewController:self.navigationController.childViewControllers[1] animated:YES];
             }
