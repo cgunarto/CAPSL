@@ -3163,25 +3163,67 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="dateCell" textLabel="TrR-Xl-f71" detailTextLabel="65d-Ho-FCf" style="IBUITableViewCellStyleValue1" id="T0p-TK-Eb3">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="dateCell" rowHeight="100" id="T0p-TK-Eb3" customClass="PromptDateTableViewCell">
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="T0p-TK-Eb3" id="x14-ax-SJe">
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="TrR-Xl-f71">
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pVf-Al-XFh">
+                                            <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="243" id="rKa-Pk-73p"/>
+                                                <constraint firstAttribute="height" constant="58" id="xDd-2M-1xs"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="20"/>
+                                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
-                                        </label>
-                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Detail" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="65d-Ho-FCf">
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                            <color key="textColor" red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="calibratedRGB"/>
-                                            <nil key="highlightedColor"/>
+                                            <variation key="default">
+                                                <mask key="constraints">
+                                                    <exclude reference="rKa-Pk-73p"/>
+                                                    <exclude reference="xDd-2M-1xs"/>
+                                                </mask>
+                                            </variation>
+                                            <variation key="widthClass=compact">
+                                                <mask key="constraints">
+                                                    <include reference="rKa-Pk-73p"/>
+                                                    <include reference="xDd-2M-1xs"/>
+                                                </mask>
+                                            </variation>
                                         </label>
                                     </subviews>
+                                    <constraints>
+                                        <constraint firstItem="pVf-Al-XFh" firstAttribute="trailing" secondItem="x14-ax-SJe" secondAttribute="trailingMargin" id="NcT-gu-Xlv"/>
+                                        <constraint firstItem="pVf-Al-XFh" firstAttribute="trailing" secondItem="x14-ax-SJe" secondAttribute="trailingMargin" id="dEi-zN-30R"/>
+                                        <constraint firstAttribute="centerY" secondItem="pVf-Al-XFh" secondAttribute="centerY" id="wKF-ib-0Dq"/>
+                                        <constraint firstAttribute="centerY" secondItem="pVf-Al-XFh" secondAttribute="centerY" id="wnT-ky-Qbr"/>
+                                    </constraints>
+                                    <variation key="default">
+                                        <mask key="subviews">
+                                            <exclude reference="pVf-Al-XFh"/>
+                                        </mask>
+                                        <mask key="constraints">
+                                            <exclude reference="NcT-gu-Xlv"/>
+                                            <exclude reference="dEi-zN-30R"/>
+                                            <exclude reference="wKF-ib-0Dq"/>
+                                            <exclude reference="wnT-ky-Qbr"/>
+                                        </mask>
+                                    </variation>
+                                    <variation key="widthClass=compact">
+                                        <mask key="subviews">
+                                            <include reference="pVf-Al-XFh"/>
+                                        </mask>
+                                        <mask key="constraints">
+                                            <exclude reference="NcT-gu-Xlv"/>
+                                            <include reference="dEi-zN-30R"/>
+                                            <exclude reference="wKF-ib-0Dq"/>
+                                            <include reference="wnT-ky-Qbr"/>
+                                        </mask>
+                                    </variation>
                                 </tableViewCellContentView>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="dateLabel" destination="pVf-Al-XFh" id="0ld-5g-E9p"/>
+                                </connections>
                             </tableViewCell>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="datePicker" rowHeight="216" id="pzC-Bt-bvH" customClass="PickerTableViewCell">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -3276,7 +3318,7 @@
                     </connections>
                 </barButtonItem>
             </objects>
-            <point key="canvasLocation" x="4537.5" y="438"/>
+            <point key="canvasLocation" x="4537.5" y="434"/>
         </scene>
     </scenes>
     <resources>

@@ -8,6 +8,7 @@
 
 #import "DateTableViewController.h"
 #import "PickerTableViewCell.h"
+#import "PromptDateTableViewCell.h"
 #import "Capsl.h"
 
 #define kPickerAnimationDuration    3   // duration for the animation to slide the date picker into view
@@ -125,8 +126,8 @@ NSUInteger DeviceSystemMajorVersion()
     NSInteger targetedRow = indexPath.row;
     targetedRow++;
 
-    UITableViewCell *checkDatePickerCell =
-    [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:targetedRow inSection:0]];
+    PromptDateTableViewCell *checkDatePickerCell =
+    (PromptDateTableViewCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:targetedRow inSection:0]];
 
     UIDatePicker *checkDatePicker = (UIDatePicker *)[checkDatePickerCell viewWithTag:kDatePickerTag];
 
@@ -232,7 +233,7 @@ NSUInteger DeviceSystemMajorVersion()
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = nil;
+    PromptDateTableViewCell *cell = nil;
 
     NSString *cellID = kDateCellID;
 
@@ -270,21 +271,21 @@ NSUInteger DeviceSystemMajorVersion()
     if ([cellID isEqualToString:kDateCellID])
     {
         // we have either start or end date cells, populate their date field
-        //
+        //TODO: CHANGE THIS LABEL VALUE
         cell.textLabel.text = [itemData valueForKey:kTitleKey];
 
         if ([itemData valueForKey:kDateKey])
         {
             NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
             [dateFormat setDateStyle:NSDateFormatterLongStyle];
-            cell.detailTextLabel.text = [dateFormat stringFromDate:[itemData valueForKey:kDateKey]];
+            cell.dateLabel.text = [dateFormat stringFromDate:[itemData valueForKey:kDateKey]];
         }
 
         if ([itemData valueForKey:kTimeKey])
         {
             NSDateFormatter *timeFormat = [[NSDateFormatter alloc] init];
             [timeFormat setTimeStyle:NSDateFormatterShortStyle];
-            cell.detailTextLabel.text = [timeFormat stringFromDate:[itemData valueForKey:kTimeKey]];
+            cell.dateLabel.text = [timeFormat stringFromDate:[itemData valueForKey:kTimeKey]];
         }
 
 
@@ -399,7 +400,7 @@ NSUInteger DeviceSystemMajorVersion()
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+    PromptDateTableViewCell *cell = (PromptDateTableViewCell *)[tableView cellForRowAtIndexPath:indexPath];
     if (cell.reuseIdentifier == kDateCellID)
     {
         if (EMBEDDED_DATE_PICKER)
@@ -435,7 +436,7 @@ NSUInteger DeviceSystemMajorVersion()
         targetedCellIndexPath = [self.tableView indexPathForSelectedRow];
     }
 
-    UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:targetedCellIndexPath];
+    PromptDateTableViewCell *cell = (PromptDateTableViewCell*)[self.tableView cellForRowAtIndexPath:targetedCellIndexPath];
     UIDatePicker *targetedDatePicker = sender;
 
     // update our data model
@@ -465,14 +466,10 @@ NSUInteger DeviceSystemMajorVersion()
         [self.tableView reloadData];
 
         //TODO:SET CREATEDCPSL DATE HERE
-
-
     }
 
-
-
     // update the cell's date string
-    cell.detailTextLabel.text = [self.dateFormatter stringFromDate:targetedDatePicker.date];
+    cell.dateLabel.text = [self.dateFormatter stringFromDate:targetedDatePicker.date];
 }
 
 /*! User chose to finish using the UIDatePicker by pressing the "Done" button
