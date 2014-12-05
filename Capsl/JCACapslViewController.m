@@ -302,8 +302,8 @@ static NSString * const reuseIdentifier = @"CapslCell";
         if (!capsl.viewedAt)
         {
 
-            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:x inSection:0];
-            [self.tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionTop animated:NO];
+//            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:x inSection:0];
+//            [self.collectionViewData scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionTop animated:NO];
 
             break;
         }
