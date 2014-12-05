@@ -20,9 +20,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-//    self.imageView.image = [UIImage imageNamed:@"mountain"];
-
-    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"mountain"]];
 }
 
 #pragma mark Segue
@@ -41,5 +38,14 @@
     }
 }
 
+- (IBAction)onSendButtonPressed:(UIButton *)sender
+{
+    [self performSegueWithIdentifier:@"segueToCapture" sender:self];
+}
+
+- (IBAction)onRecordButtonPressed:(UIButton *)sender
+{
+    [self performSegueWithIdentifier:@"segueToRecord" sender:self];
+}
 
 @end
