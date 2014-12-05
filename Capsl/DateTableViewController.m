@@ -10,6 +10,7 @@
 #import "PickerTableViewCell.h"
 #import "PromptDateTableViewCell.h"
 #import "Capsl.h"
+#import "Capslr.h"
 
 #define kPickerAnimationDuration    3   // duration for the animation to slide the date picker into view
 #define kDatePickerTag              99     // view tag identifiying the date picker view
@@ -23,8 +24,10 @@
 #define kDateRow   0
 #define kTimeRow   1
 
-static NSString *kDateCellID = @"dateCell";     // the cells with the start or end date
+static NSString *kDateCellID = @"dateCell";     // the cell with date/time info
 static NSString *kDatePickerID = @"datePicker"; // the cell containing the date picker
+static NSString *kSendID = @"sendCell";  // the cell containing the date picker
+
 
 @interface DateTableViewController ()
 
@@ -244,10 +247,16 @@ NSUInteger DeviceSystemMajorVersion()
         // the indexPath is the one containing the inline date picker
         cellID = kDatePickerID;     // the current/opened date picker cell
     }
+
     else if ([self indexPathHasDate:indexPath])
     {
         // the indexPath is one that contains the date information
         cellID = kDateCellID;       // the start/end date cells
+    }
+
+    else
+    {
+        cellID = kSendID;
     }
 
     cell = [tableView dequeueReusableCellWithIdentifier:cellID];
@@ -453,7 +462,8 @@ NSUInteger DeviceSystemMajorVersion()
 
         NSLog(@"DATE %@ TIME %@", itemData[kDateKey], timeItemData[kTimeKey]);
 
-        //TODO:SET CREATEDCPSL DATE HERE
+        self.createdCapsl.deliveryTime = targetedDatePicker.date;
+        NSLog(@"Created Capsl Delivery time is %@", targetedDatePicker.date);
 
         [self.tableView reloadData];
     }
@@ -467,7 +477,9 @@ NSUInteger DeviceSystemMajorVersion()
         NSLog(@"DATE %@ TIME %@", dateItemData[kDateKey], itemData[kTimeKey]);
         [self.tableView reloadData];
 
-        //TODO:SET CREATEDCPSL DATE HERE
+        self.createdCapsl.deliveryTime = targetedDatePicker.date;
+        NSLog(@"Created Capsl Delivery time is %@", targetedDatePicker.date);
+
     }
 
     // update the cell's date string
@@ -496,6 +508,63 @@ NSUInteger DeviceSystemMajorVersion()
     // deselect the current table cell
     NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
     [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
+}
+
+- (IBAction)onSendButtonPressed:(UIButton *)sender
+{
+    //save to Parse if there is a delivery time
+    if (self.createdCapsl.deliveryTime)
+    {
+        [self.createdCapsl saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error)
+         {
+             if (!error)
+             {
+                 Capslr *recipient= self.createdCapsl.recipient;
+                 NSString *message = [NSString stringWithFormat:@"Capsl sent to %@", recipient.username];
+
+                 UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Message Sent!"
+                                                                                message:message
+                                                                         preferredStyle:UIAlertControllerStyleAlert];
+
+                 UIAlertAction *okButton = [UIAlertAction actionWithTitle:@"OK"
+                                                                    style:UIAlertActionStyleDefault
+                                                                  handler:^(UIAlertAction *action)
+                                            {
+                                                [alert dismissViewControllerAnimated:YES completion:nil];
+
+                                                [self performSegueWithIdentifier:@"unwindToChoose" sender:self];
+                                            }];
+                 [alert addAction:okButton];
+                 [self presentViewController:alert
+                                    animated:YES
+                                  completion:nil];
+
+             }
+
+             else
+             {
+                 NSLog(@"there is an error %@", error.localizedDescription);
+             }
+         }];
+    }
+
+    else
+    {
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"NO DELIVERY DATE CHOSEN"
+                                                                       message:@"Please choose a delivery date"
+                                                                preferredStyle:UIAlertControllerStyleAlert];
+
+        UIAlertAction *okButton = [UIAlertAction actionWithTitle:@"OK"
+                                                           style:UIAlertActionStyleDefault
+                                                         handler:nil];
+        [alert addAction:okButton];
+        [self presentViewController:alert
+                           animated:YES
+                         completion:nil];
+
+    }
+
+
 }
 
 
