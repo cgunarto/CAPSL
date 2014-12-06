@@ -540,6 +540,11 @@ NSUInteger DeviceSystemMajorVersion()
                                     animated:YES
                                   completion:nil];
 
+//                 //TODO: Add Push Message to recipient
+//                 PFQuery *pushQuery = [PFInstallation Query];
+//                 [pushQuery whereKey:@"installationUser" containedIn:<#(NSArray *)#>]
+//
+
              }
 
              else

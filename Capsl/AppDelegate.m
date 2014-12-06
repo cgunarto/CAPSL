@@ -50,6 +50,10 @@
     // Store the deviceToken in the current installation and save it to Parse.
     PFInstallation *currentInstallation = [PFInstallation currentInstallation];
     [currentInstallation setDeviceTokenFromData:deviceToken];
+
+    //grab Capslr from [PFUser currentUser] then set that to capslr attribute of currentInstallation
+    //so we can refer it back to them later
+
     currentInstallation.channels = @[ @"global" ];
     [currentInstallation saveInBackground];
 }
