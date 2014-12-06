@@ -703,7 +703,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "ffa7fec6-7b60-46eb-8f26-03309b6e0aca";
+				PROVISIONING_PROFILE = "ad419d51-b688-4bfb-9a82-669b4398d0fb";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -739,7 +739,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PROVISIONING_PROFILE = "ffa7fec6-7b60-46eb-8f26-03309b6e0aca";
+				PROVISIONING_PROFILE = "ad419d51-b688-4bfb-9a82-669b4398d0fb";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -760,7 +760,7 @@
 				INFOPLIST_FILE = Capsl/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "ffa7fec6-7b60-46eb-8f26-03309b6e0aca";
+				PROVISIONING_PROFILE = "ad419d51-b688-4bfb-9a82-669b4398d0fb";
 			};
 			name = Debug;
 		};
@@ -779,7 +779,7 @@
 				INFOPLIST_FILE = Capsl/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "ffa7fec6-7b60-46eb-8f26-03309b6e0aca";
+				PROVISIONING_PROFILE = "ad419d51-b688-4bfb-9a82-669b4398d0fb";
 			};
 			name = Release;
 		};
