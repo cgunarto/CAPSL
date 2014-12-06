@@ -540,7 +540,7 @@ NSUInteger DeviceSystemMajorVersion()
                                     animated:YES
                                   completion:nil];
 
-                 //Adding a push message to the recipient when they get a message
+                 //SENDING PUSH MESSAGE to the recipient when they get a message
                  PFQuery *pushQuery = [PFInstallation query];
 
                  [pushQuery whereKey:@"capslr" equalTo:self.createdCapsl.recipient];
