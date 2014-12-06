@@ -96,7 +96,7 @@
     CGFloat screenWidth = [UIScreen mainScreen].bounds.size.width;
     CGFloat screenHeight = [UIScreen mainScreen].bounds.size.height;
 
-    //TODO:change the width
+    //TODO:change the width of video, constraint video format
     [self.videoController.view setFrame:CGRectMake (0, 0, screenWidth, screenHeight)];
     [self.view addSubview:self.videoController.view];
 
