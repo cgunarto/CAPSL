@@ -540,11 +540,19 @@ NSUInteger DeviceSystemMajorVersion()
                                     animated:YES
                                   completion:nil];
 
-//                 //TODO: Add Push Message to recipient
-//                 PFQuery *pushQuery = [PFInstallation Query];
-//                 [pushQuery whereKey:@"installationUser" containedIn:<#(NSArray *)#>]
-//
+                 //TODO: Add Push Message to recipient
+                 PFQuery *pushQuery = [PFInstallation query];
+                 [pushQuery whereKey:@"capslr" equalTo:self.createdCapsl.recipient];
 
+                 PFPush *push = [[PFPush alloc]init];
+
+                 NSString *pushString = [NSString stringWithFormat:@"You just got a Capsl from %@!", self.createdCapsl.sender.name];
+                 [push setQuery:pushQuery];
+                 [push setMessage:pushString];
+                 [push sendPushInBackground];
+
+                 //TODO: Send push to multiple devic tokens
+                 //TODO: Set it to open a message
              }
 
              else

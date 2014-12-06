@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import <Parse/Parse.h>
+#import "Capslr.h"
 
 @interface AppDelegate ()
 
@@ -47,15 +48,30 @@
 
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
 {
-    // Store the deviceToken in the current installation and save it to Parse.
-    PFInstallation *currentInstallation = [PFInstallation currentInstallation];
-    [currentInstallation setDeviceTokenFromData:deviceToken];
+    //Get current Capslr and then register the Capslr in the current installation
+    [Capslr returnCapslrFromPFUser:[PFUser currentUser] withCompletion:^(Capslr *currentCapslr, NSError *error)
+    {
+        if (!error)
+        {
+            // Store the deviceToken in the current installation and save it to Parse.
+            PFInstallation *currentInstallation = [PFInstallation currentInstallation];
+            currentInstallation[@"capslr"] = currentCapslr;
+            [currentInstallation setDeviceTokenFromData:deviceToken];
+            currentInstallation.channels = @[ @"global" ];
+            [currentInstallation saveInBackground];
+        }
+        else
+        {
+            NSLog(@"%@", error.localizedDescription);
+        }
+    }];
+
+
 
     //grab Capslr from [PFUser currentUser] then set that to capslr attribute of currentInstallation
     //so we can refer it back to them later
 
-    currentInstallation.channels = @[ @"global" ];
-    [currentInstallation saveInBackground];
+
 }
 
 - (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error
