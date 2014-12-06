@@ -264,19 +264,6 @@
                         }];
                     }
                 }];
-
-
-//                [[PFUser currentUser] deleteInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-//                    if (!error)
-//                    {
-//                        PFQuery *query = [Capslr query];
-//                        [query whereKey:@"objectId" equalTo:<#(id)#>]
-//
-//
-//                        [PFUser logOut];
-//                        [self manageLogin];
-//                    }
-//                }];
             }
         }];
 

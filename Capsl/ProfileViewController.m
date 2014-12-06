@@ -58,9 +58,21 @@
     if (!self.doNotShowActivityIndicator)
     {
         [SVProgressHUD show];
-    }
+        if (!self.updatedPicture)
+        {
+            self.profilePictureImageView.image = [UIImage imageNamed:@"default"];
+            [SVProgressHUD dismiss];
 
-    self.profilePictureImageView.image = self.updatedPicture;
+            self.navigationItem.rightBarButtonItem.enabled = YES;
+        }
+        else
+        {
+            self.profilePictureImageView.image = self.updatedPicture;
+
+            [SVProgressHUD dismiss];
+            self.navigationItem.rightBarButtonItem.enabled = YES;
+        }
+    }
 }
 
 - (void)viewDidLoad
@@ -72,25 +84,64 @@
 
     self.segmentedControl.selectedSegmentIndex = 0;
 
-    [self showCapslViewCenter];
-
     [Capslr returnCapslrFromPFUser:[PFUser currentUser] withCompletion:^(Capslr *currentCapslr, NSError *error) {
+        if (!error)
+        {
+            if (!currentCapslr.name)
+            {
+                currentCapslr.name = @"No Name";
+                [currentCapslr save];
+            }
 
-        self.currentCapslrInfo = @[currentCapslr.name, currentCapslr.username, currentCapslr.email];
+            self.currentCapslrInfo = @[currentCapslr.name, currentCapslr.username, currentCapslr.email];
 
-        [currentCapslr.profilePhoto getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
+            [currentCapslr.profilePhoto getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
 
-            self.profilePictureImageView.layer.cornerRadius = self.profilePictureImageView.frame.size.width/2;
-            self.profilePictureImageView.clipsToBounds = YES;
+                self.profilePictureImageView.layer.cornerRadius = self.profilePictureImageView.frame.size.width/2;
+                self.profilePictureImageView.clipsToBounds = YES;
 
-            self.profilePictureImageView.image = [UIImage imageWithData:data];
+                if (!currentCapslr.profilePhoto) {
+                    self.profilePictureImageView.image = [UIImage imageNamed:@"default"];
+                    self.navigationItem.rightBarButtonItem.enabled = YES;
+                    [SVProgressHUD dismiss];
+                }
+                else
+                {
+                    self.profilePictureImageView.image = [UIImage imageWithData:data];
 
-            self.navigationItem.rightBarButtonItem.enabled = YES;
+                    self.navigationItem.rightBarButtonItem.enabled = YES;
 
-            // Unhide the Edit button once the image finishes loading
-            [SVProgressHUD dismiss];
-        }];
+                    // Unhide the Edit button once the image finishes loading
+                    [SVProgressHUD dismiss];
+                }
+            }];
+        }
     }];
+
+//    [Capslr returnCapslrFromPFUser:[PFUser currentUser] withCompletion:^(Capslr *currentCapslr, NSError *error) {
+//
+//        if (!error) {
+//            if (!currentCapslr.name) {
+//                currentCapslr.name = @"No Name";
+//                [currentCapslr save];
+//            }
+//        }
+//
+//        self.currentCapslrInfo = @[currentCapslr.name, currentCapslr.username, currentCapslr.email];
+//
+//        [currentCapslr.profilePhoto getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
+//
+//            self.profilePictureImageView.layer.cornerRadius = self.profilePictureImageView.frame.size.width/2;
+//            self.profilePictureImageView.clipsToBounds = YES;
+//
+//            self.profilePictureImageView.image = [UIImage imageWithData:data];
+//
+//            self.navigationItem.rightBarButtonItem.enabled = YES;
+//
+//            // Unhide the Edit button once the image finishes loading
+//            [SVProgressHUD dismiss];
+//        }];
+//    }];
 }
 
 //Segmented control toggles between CAPSLR and ADDRESS BOOK contact
