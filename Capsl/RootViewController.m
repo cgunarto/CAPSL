@@ -102,6 +102,28 @@
 //Sent to the delegate when a PFUser is logged in
 - (void) logInViewController:(PFLogInViewController *)logInController didLogInUser:(PFUser *)user
 {
+    //Initiates the currentInstallation user's cpslr a the Capslr object of the PFUser Current user
+    //PFInstallation is also called in AppDelegate, when the user first installs the app
+    [Capslr returnCapslrFromPFUser:user withCompletion:^(Capslr *currentCapslr, NSError *error)
+    {
+        PFInstallation *installation = [PFInstallation currentInstallation];
+        installation[@"capslr"]=currentCapslr;
+        [installation saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error)
+        {
+            if (!error)
+            {
+                //TODO:clear badge?
+            }
+            else
+            {
+                NSLog(@"error %@", error.localizedDescription);
+            }
+        }];
+    }];
+
+
+
+
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
