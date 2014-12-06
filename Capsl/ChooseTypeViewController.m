@@ -13,6 +13,8 @@
 
 @interface ChooseTypeViewController ()
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
+@property (strong, nonatomic) IBOutlet UIButton *sendPhotoButton;
+@property (strong, nonatomic) IBOutlet UIButton *sendVideoButton;
 
 @end
 
@@ -23,6 +25,14 @@
     [super viewDidLoad];
 
 //    self.view.backgroundColor = [UIColor colorWithPatternImage:kChooseScreenWallpaper];
+
+    self.sendPhotoButton.layer.cornerRadius = 44;
+    self.sendPhotoButton.layer.borderColor = [[UIColor whiteColor] CGColor];
+    self.sendPhotoButton.layer.borderWidth = 1;
+
+    self.sendVideoButton.layer.cornerRadius = 44;
+    self.sendVideoButton.layer.borderColor = [[UIColor whiteColor] CGColor];
+    self.sendVideoButton.layer.borderWidth = 1;
 
 
 }
@@ -41,16 +51,6 @@
         CaptureViewController *captureVC = navVC.childViewControllers[0];
         captureVC.isEditing = YES;
     }
-}
-
-- (IBAction)onSendButtonPressed:(UIButton *)sender
-{
-    [self performSegueWithIdentifier:@"segueToCapture" sender:self];
-}
-
-- (IBAction)onRecordButtonPressed:(UIButton *)sender
-{
-    [self performSegueWithIdentifier:@"segueToRecord" sender:self];
 }
 
 @end

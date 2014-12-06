@@ -501,16 +501,16 @@
                         <outlet property="searchResultsDelegate" destination="b02-oj-3a1" id="QLH-Si-FR4"/>
                     </connections>
                 </searchDisplayController>
-                <barButtonItem title="SEND CAPSULE" id="WTc-xi-ULI">
-                    <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    <connections>
-                        <action selector="onSendCapsuleButtonTapped:" destination="b02-oj-3a1" id="6SQ-Zf-IzH"/>
-                    </connections>
-                </barButtonItem>
                 <barButtonItem title="VIEW CAPSULES" id="Cr9-Bm-dSW">
                     <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <connections>
                         <action selector="onViewCapsulesButtonTapped:" destination="b02-oj-3a1" id="OxV-KI-3ZW"/>
+                    </connections>
+                </barButtonItem>
+                <barButtonItem title="SEND CAPSULE" id="WTc-xi-ULI">
+                    <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <connections>
+                        <action selector="onSendCapsuleButtonTapped:" destination="b02-oj-3a1" id="6SQ-Zf-IzH"/>
                     </connections>
                 </barButtonItem>
             </objects>
@@ -1359,8 +1359,8 @@
                                     <constraint firstAttribute="height" constant="30" id="nkW-za-0Dc"/>
                                 </constraints>
                                 <segments>
-                                    <segment title="My Capsules"/>
-                                    <segment title="Sent Capsules"/>
+                                    <segment title="MY CAPSULES"/>
+                                    <segment title="SENT CAPSULES"/>
                                 </segments>
                                 <variation key="default">
                                     <mask key="constraints">
@@ -1377,6 +1377,9 @@
                                     <mask key="constraints">
                                         <include reference="nkW-za-0Dc"/>
                                     </mask>
+                                </variation>
+                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="16" y="7" width="368" height="29"/>
                                 </variation>
                                 <connections>
                                     <action selector="onSegmentedControlValueChanged:" destination="7Xl-td-eUr" eventType="valueChanged" id="7Sw-s4-Mpa"/>
@@ -1825,14 +1828,61 @@
                                 <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mkO-I1-IRX">
+                                <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="124" id="9Hd-s3-jdQ"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="124" id="Jx4-s1-ADK"/>
+                                    <constraint firstAttribute="height" constant="52" id="UCM-XB-twq"/>
+                                    <constraint firstAttribute="height" constant="52" id="VcW-iz-XIF">
+                                        <variation key="widthClass=compact" constant="88"/>
+                                    </constraint>
+                                    <constraint firstAttribute="width" constant="124" id="c0f-rs-aBE">
+                                        <variation key="widthClass=compact" constant="368"/>
+                                    </constraint>
+                                    <constraint firstAttribute="width" constant="124" id="hpD-O5-UBh"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="52" id="vtK-Pm-N9O"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="18"/>
+                                <state key="normal" title="VIDEO">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="9Hd-s3-jdQ"/>
+                                        <exclude reference="Jx4-s1-ADK"/>
+                                        <exclude reference="UCM-XB-twq"/>
+                                        <exclude reference="VcW-iz-XIF"/>
+                                        <exclude reference="c0f-rs-aBE"/>
+                                        <exclude reference="hpD-O5-UBh"/>
+                                        <exclude reference="vtK-Pm-N9O"/>
+                                    </mask>
+                                </variation>
+                                <variation key="widthClass=compact">
+                                    <mask key="constraints">
+                                        <exclude reference="9Hd-s3-jdQ"/>
+                                        <exclude reference="Jx4-s1-ADK"/>
+                                        <exclude reference="UCM-XB-twq"/>
+                                        <include reference="VcW-iz-XIF"/>
+                                        <exclude reference="c0f-rs-aBE"/>
+                                        <exclude reference="hpD-O5-UBh"/>
+                                        <exclude reference="vtK-Pm-N9O"/>
+                                    </mask>
+                                </variation>
+                                <connections>
+                                    <segue destination="qp7-uz-JSC" kind="presentation" identifier="segueToRecord" id="LT8-Z2-SIB"/>
+                                </connections>
+                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hga-wp-OP4">
                                 <rect key="frame" x="-23" y="-15" width="46" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="D9Q-jG-O59"/>
                                     <constraint firstAttribute="width" constant="277" id="cLf-IF-GKu"/>
-                                    <constraint firstAttribute="height" constant="77" id="ywQ-7x-yvV"/>
+                                    <constraint firstAttribute="height" constant="77" id="ywQ-7x-yvV">
+                                        <variation key="widthClass=compact" constant="88"/>
+                                    </constraint>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="25"/>
+                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="18"/>
                                 <state key="normal" title="PHOTO  |  AUDIO  |  TEXT">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -1854,106 +1904,16 @@
                                     <segue destination="NxB-sL-Vw3" kind="showDetail" identifier="segueToCapture" id="vnb-5V-ixX"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="06J-CD-1qt">
-                                <rect key="frame" x="-23" y="-15" width="46" height="30"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="406" id="V7o-Rt-WGc"/>
-                                    <constraint firstAttribute="height" constant="108" id="rHJ-tg-coG"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="115"/>
-                                <state key="normal" title="SEND">
-                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <variation key="default">
-                                    <mask key="constraints">
-                                        <exclude reference="V7o-Rt-WGc"/>
-                                        <exclude reference="rHJ-tg-coG"/>
-                                    </mask>
-                                </variation>
-                                <variation key="widthClass=compact">
-                                    <mask key="constraints">
-                                        <include reference="V7o-Rt-WGc"/>
-                                        <include reference="rHJ-tg-coG"/>
-                                    </mask>
-                                </variation>
-                                <connections>
-                                    <action selector="onSendButtonPressed:" destination="bzT-6p-7YM" eventType="touchUpInside" id="XkC-Hk-njS"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5gD-xN-usv">
-                                <rect key="frame" x="-23" y="-15" width="46" height="30"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="99" id="Oq3-VA-1dQ"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="75"/>
-                                <state key="normal" title="RECORD">
-                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <variation key="default">
-                                    <mask key="constraints">
-                                        <exclude reference="Oq3-VA-1dQ"/>
-                                    </mask>
-                                </variation>
-                                <variation key="widthClass=compact">
-                                    <mask key="constraints">
-                                        <include reference="Oq3-VA-1dQ"/>
-                                    </mask>
-                                </variation>
-                                <connections>
-                                    <action selector="onRecordButtonPressed:" destination="bzT-6p-7YM" eventType="touchUpInside" id="oD9-KF-9cb"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mkO-I1-IRX">
-                                <rect key="frame" x="-23" y="-15" width="46" height="30"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="124" id="9Hd-s3-jdQ"/>
-                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="124" id="Jx4-s1-ADK"/>
-                                    <constraint firstAttribute="height" constant="52" id="UCM-XB-twq"/>
-                                    <constraint firstAttribute="height" constant="52" id="VcW-iz-XIF"/>
-                                    <constraint firstAttribute="width" constant="124" id="c0f-rs-aBE"/>
-                                    <constraint firstAttribute="width" constant="124" id="hpD-O5-UBh"/>
-                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="52" id="vtK-Pm-N9O"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="25"/>
-                                <state key="normal" title="VIDEO">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <variation key="default">
-                                    <mask key="constraints">
-                                        <exclude reference="9Hd-s3-jdQ"/>
-                                        <exclude reference="Jx4-s1-ADK"/>
-                                        <exclude reference="UCM-XB-twq"/>
-                                        <exclude reference="VcW-iz-XIF"/>
-                                        <exclude reference="c0f-rs-aBE"/>
-                                        <exclude reference="hpD-O5-UBh"/>
-                                        <exclude reference="vtK-Pm-N9O"/>
-                                    </mask>
-                                </variation>
-                                <variation key="widthClass=compact">
-                                    <mask key="constraints">
-                                        <exclude reference="9Hd-s3-jdQ"/>
-                                        <exclude reference="Jx4-s1-ADK"/>
-                                        <exclude reference="UCM-XB-twq"/>
-                                        <include reference="VcW-iz-XIF"/>
-                                        <include reference="c0f-rs-aBE"/>
-                                        <exclude reference="hpD-O5-UBh"/>
-                                        <exclude reference="vtK-Pm-N9O"/>
-                                    </mask>
-                                </variation>
-                                <connections>
-                                    <segue destination="qp7-uz-JSC" kind="presentation" identifier="segueToRecord" id="LT8-Z2-SIB"/>
-                                </connections>
-                            </button>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="2Ye-MZ-TAc" firstAttribute="top" secondItem="gSW-Fa-jHk" secondAttribute="bottom" id="1lB-Ir-VTU"/>
-                            <constraint firstItem="06J-CD-1qt" firstAttribute="top" secondItem="Dhp-r4-ygT" secondAttribute="bottom" constant="41" id="5F3-MW-Nav"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Hga-wp-OP4" secondAttribute="trailing" constant="20" id="1si-xi-SAx"/>
+                            <constraint firstItem="mkO-I1-IRX" firstAttribute="leading" secondItem="5GR-eB-ox7" secondAttribute="leadingMargin" id="5jr-1z-VBm"/>
                             <constraint firstAttribute="centerX" secondItem="mkO-I1-IRX" secondAttribute="centerX" id="8LI-aZ-RUW"/>
+                            <constraint firstItem="mkO-I1-IRX" firstAttribute="trailing" secondItem="5GR-eB-ox7" secondAttribute="trailingMargin" constant="-20" id="9o9-g4-yJr"/>
                             <constraint firstItem="mkO-I1-IRX" firstAttribute="top" secondItem="Hga-wp-OP4" secondAttribute="bottom" constant="108" id="9oz-wE-ShZ">
-                                <variation key="widthClass=compact" constant="104"/>
+                                <variation key="widthClass=compact" constant="226"/>
                             </constraint>
                             <constraint firstItem="gSW-Fa-jHk" firstAttribute="leading" secondItem="5GR-eB-ox7" secondAttribute="leadingMargin" constant="-16" id="FYd-iR-xHa"/>
                             <constraint firstItem="gSW-Fa-jHk" firstAttribute="top" secondItem="Dhp-r4-ygT" secondAttribute="bottom" id="IVP-xT-zZx"/>
@@ -1963,89 +1923,94 @@
                             <constraint firstAttribute="centerX" secondItem="mkO-I1-IRX" secondAttribute="centerX" id="Qgq-LF-5Qi">
                                 <variation key="widthClass=compact" constant="9"/>
                             </constraint>
-                            <constraint firstAttribute="trailingMargin" secondItem="5gD-xN-usv" secondAttribute="trailing" constant="-16" id="Uqr-eM-kVe"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Hga-wp-OP4" secondAttribute="trailing" constant="-16" id="WVT-H9-AUy"/>
+                            <constraint firstItem="mkO-I1-IRX" firstAttribute="top" secondItem="Hga-wp-OP4" secondAttribute="bottom" constant="30" id="XWi-zK-KFL"/>
                             <constraint firstItem="Hga-wp-OP4" firstAttribute="top" secondItem="Dhp-r4-ygT" secondAttribute="bottom" constant="78" id="dSQ-bX-3rM">
                                 <variation key="widthClass=compact" constant="117"/>
                             </constraint>
+                            <constraint firstItem="2Ye-MZ-TAc" firstAttribute="top" secondItem="mkO-I1-IRX" secondAttribute="bottom" constant="81" id="fbq-Fk-p33">
+                                <variation key="widthClass=compact" constant="88"/>
+                            </constraint>
                             <constraint firstItem="Hga-wp-OP4" firstAttribute="leading" secondItem="5GR-eB-ox7" secondAttribute="leadingMargin" constant="-16" id="g0m-cf-OVq"/>
-                            <constraint firstItem="5gD-xN-usv" firstAttribute="leading" secondItem="5GR-eB-ox7" secondAttribute="leadingMargin" constant="-16" id="jxz-Pa-Zlj"/>
                             <constraint firstItem="Hga-wp-OP4" firstAttribute="top" secondItem="Dhp-r4-ygT" secondAttribute="bottom" constant="95" id="kIT-up-7Rb"/>
                             <constraint firstAttribute="trailingMargin" secondItem="gSW-Fa-jHk" secondAttribute="trailing" constant="-16" id="mSn-Fs-BOM"/>
-                            <constraint firstAttribute="centerX" secondItem="06J-CD-1qt" secondAttribute="centerX" id="ouJ-mO-CoN"/>
+                            <constraint firstItem="mkO-I1-IRX" firstAttribute="trailing" secondItem="5GR-eB-ox7" secondAttribute="trailingMargin" id="qC2-NK-Irh"/>
+                            <constraint firstItem="mkO-I1-IRX" firstAttribute="leading" secondItem="5GR-eB-ox7" secondAttribute="leadingMargin" constant="20" id="rZ9-hI-IgS"/>
                             <constraint firstItem="mkO-I1-IRX" firstAttribute="top" secondItem="Hga-wp-OP4" secondAttribute="bottom" constant="8" id="rjY-cB-owX">
                                 <variation key="widthClass=compact" constant="116"/>
                             </constraint>
                             <constraint firstAttribute="centerX" secondItem="mkO-I1-IRX" secondAttribute="centerX" id="un0-B1-6eK">
                                 <variation key="widthClass=compact" constant="9"/>
                             </constraint>
-                            <constraint firstItem="5gD-xN-usv" firstAttribute="top" secondItem="Hga-wp-OP4" secondAttribute="bottom" constant="29" id="y2O-UQ-fhp"/>
+                            <constraint firstItem="Hga-wp-OP4" firstAttribute="leading" secondItem="5GR-eB-ox7" secondAttribute="leadingMargin" constant="20" id="xfH-jx-q8D"/>
                             <constraint firstItem="mkO-I1-IRX" firstAttribute="top" secondItem="Hga-wp-OP4" secondAttribute="bottom" constant="8" id="zEA-6r-lXS"/>
                         </constraints>
                         <variation key="default">
                             <mask key="subviews">
                                 <exclude reference="gSW-Fa-jHk"/>
-                                <exclude reference="Hga-wp-OP4"/>
-                                <exclude reference="06J-CD-1qt"/>
-                                <exclude reference="5gD-xN-usv"/>
                                 <exclude reference="mkO-I1-IRX"/>
+                                <exclude reference="Hga-wp-OP4"/>
                             </mask>
                             <mask key="constraints">
-                                <exclude reference="1lB-Ir-VTU"/>
-                                <exclude reference="5F3-MW-Nav"/>
-                                <exclude reference="ouJ-mO-CoN"/>
-                                <exclude reference="Uqr-eM-kVe"/>
-                                <exclude reference="jxz-Pa-Zlj"/>
-                                <exclude reference="y2O-UQ-fhp"/>
+                                <exclude reference="FYd-iR-xHa"/>
+                                <exclude reference="IVP-xT-zZx"/>
+                                <exclude reference="mSn-Fs-BOM"/>
+                                <exclude reference="1si-xi-SAx"/>
                                 <exclude reference="Nuc-Dn-rXU"/>
                                 <exclude reference="WVT-H9-AUy"/>
                                 <exclude reference="dSQ-bX-3rM"/>
                                 <exclude reference="g0m-cf-OVq"/>
                                 <exclude reference="kIT-up-7Rb"/>
+                                <exclude reference="xfH-jx-q8D"/>
+                                <exclude reference="5jr-1z-VBm"/>
                                 <exclude reference="8LI-aZ-RUW"/>
+                                <exclude reference="9o9-g4-yJr"/>
                                 <exclude reference="9oz-wE-ShZ"/>
                                 <exclude reference="J1n-Fc-8uL"/>
                                 <exclude reference="K8M-6O-raG"/>
                                 <exclude reference="Qgq-LF-5Qi"/>
+                                <exclude reference="XWi-zK-KFL"/>
+                                <exclude reference="qC2-NK-Irh"/>
+                                <exclude reference="rZ9-hI-IgS"/>
                                 <exclude reference="rjY-cB-owX"/>
                                 <exclude reference="un0-B1-6eK"/>
                                 <exclude reference="zEA-6r-lXS"/>
-                                <exclude reference="FYd-iR-xHa"/>
-                                <exclude reference="IVP-xT-zZx"/>
-                                <exclude reference="mSn-Fs-BOM"/>
+                                <exclude reference="1lB-Ir-VTU"/>
+                                <exclude reference="fbq-Fk-p33"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=compact">
                             <mask key="subviews">
                                 <include reference="gSW-Fa-jHk"/>
-                                <include reference="Hga-wp-OP4"/>
-                                <include reference="06J-CD-1qt"/>
-                                <include reference="5gD-xN-usv"/>
                                 <include reference="mkO-I1-IRX"/>
+                                <include reference="Hga-wp-OP4"/>
                             </mask>
                             <mask key="constraints">
-                                <include reference="1lB-Ir-VTU"/>
-                                <include reference="5F3-MW-Nav"/>
-                                <include reference="ouJ-mO-CoN"/>
-                                <include reference="Uqr-eM-kVe"/>
-                                <include reference="jxz-Pa-Zlj"/>
-                                <include reference="y2O-UQ-fhp"/>
-                                <exclude reference="Nuc-Dn-rXU"/>
-                                <include reference="WVT-H9-AUy"/>
-                                <include reference="dSQ-bX-3rM"/>
-                                <include reference="g0m-cf-OVq"/>
-                                <exclude reference="kIT-up-7Rb"/>
-                                <include reference="8LI-aZ-RUW"/>
-                                <include reference="9oz-wE-ShZ"/>
-                                <exclude reference="J1n-Fc-8uL"/>
-                                <exclude reference="K8M-6O-raG"/>
-                                <exclude reference="Qgq-LF-5Qi"/>
-                                <exclude reference="rjY-cB-owX"/>
-                                <exclude reference="un0-B1-6eK"/>
-                                <exclude reference="zEA-6r-lXS"/>
                                 <include reference="FYd-iR-xHa"/>
                                 <include reference="IVP-xT-zZx"/>
                                 <include reference="mSn-Fs-BOM"/>
+                                <include reference="1si-xi-SAx"/>
+                                <exclude reference="Nuc-Dn-rXU"/>
+                                <exclude reference="WVT-H9-AUy"/>
+                                <exclude reference="dSQ-bX-3rM"/>
+                                <exclude reference="g0m-cf-OVq"/>
+                                <exclude reference="kIT-up-7Rb"/>
+                                <include reference="xfH-jx-q8D"/>
+                                <exclude reference="5jr-1z-VBm"/>
+                                <exclude reference="8LI-aZ-RUW"/>
+                                <include reference="9o9-g4-yJr"/>
+                                <exclude reference="9oz-wE-ShZ"/>
+                                <exclude reference="J1n-Fc-8uL"/>
+                                <exclude reference="K8M-6O-raG"/>
+                                <exclude reference="Qgq-LF-5Qi"/>
+                                <include reference="XWi-zK-KFL"/>
+                                <exclude reference="qC2-NK-Irh"/>
+                                <include reference="rZ9-hI-IgS"/>
+                                <exclude reference="rjY-cB-owX"/>
+                                <exclude reference="un0-B1-6eK"/>
+                                <exclude reference="zEA-6r-lXS"/>
+                                <include reference="1lB-Ir-VTU"/>
+                                <include reference="fbq-Fk-p33"/>
                             </mask>
                         </variation>
                     </view>
@@ -2053,6 +2018,8 @@
                     <nil key="simulatedStatusBarMetrics"/>
                     <connections>
                         <outlet property="imageView" destination="gSW-Fa-jHk" id="eUB-Oq-9cx"/>
+                        <outlet property="sendPhotoButton" destination="Hga-wp-OP4" id="K92-dj-AM5"/>
+                        <outlet property="sendVideoButton" destination="mkO-I1-IRX" id="hBv-2p-bvd"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="H71-hM-pXh" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -3385,8 +3352,8 @@
         <image name="wallpaperRoad_blurred" width="375" height="667"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="THB-3X-bqr"/>
         <segue reference="rll-5A-arG"/>
-        <segue reference="Eln-db-Pjz"/>
         <segue reference="dAc-Nd-2MW"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -31,6 +31,17 @@
     [[UIToolbar appearance] setTintColor:[UIColor whiteColor]];
     [[UIToolbar appearance] setTranslucent:YES];
 
+    NSDictionary *toolBarTextAttributes = @{
+                                 NSFontAttributeName: [UIFont fontWithName:@"Avenir-Book" size:18.0]
+                                 };
+    [[UIBarButtonItem appearance] setTitleTextAttributes:toolBarTextAttributes forState:UIControlStateNormal];
+
+    NSDictionary *segmentedControlTextAttributes = @{
+                                            NSFontAttributeName: [UIFont fontWithName:@"Avenir-Book" size:12.0]
+                                            };
+
+    [[UISegmentedControl appearance] setTitleTextAttributes:segmentedControlTextAttributes forState:UIControlStateNormal];
+
     return YES;
 }
 
