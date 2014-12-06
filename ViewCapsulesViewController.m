@@ -44,11 +44,15 @@
         capslr.objectId = currentCapslr.objectId;
 
         //calling class method to get capsls for current user only
+        //TODO: Add Local Notification - clear first and then schedule 64 max
+        //Todo: maybe add 2 nofication for stretch goal
+        //Order by opening date
         [Capsl searchCapslByKey:@"recipient" orderByAscending:@"deliveryTime" equalTo:capslr completion:^(NSArray *objects, NSError *error) {
             if (!error)
             {
                 self.timelineRootVC.capslsArray = objects;
                 self.capslListVC.capslsArray = objects;
+                NSMutableArray *unviewedCapslArray = [@[]mutableCopy];
 
                 [SVProgressHUD dismiss];
 
@@ -64,8 +68,58 @@
 
                 self.timelineRootVC.shouldShowSent = NO;
                 self.capslListVC.shouldShowSent = NO;
-                
+
+                //Notification for when app is unlocked
+                //Clear all local notifications
+                //TODO:How will the app refresh if user hasn't been inside the app for a long time
+                [[UIApplication sharedApplication] cancelAllLocalNotifications];
+
+                //Check for ViewedAt Capsls and add it to the array
+                for (Capsl *capsl in objects)
+                {
+                    if (capsl.viewedAt == nil)
+                    {
+                        [unviewedCapslArray addObject:capsl];
+                    }
+                }
+
+                //Check if there are more than 64 capsules
+                //If YES, only make it for the first 64 - capsule is already ordered
+                if (unviewedCapslArray.count > 64)
+                {
+                    for (int i = 0; i < 64; i++)
+                    {
+                        Capsl *capsl = objects[i];
+                        UILocalNotification* localNotification = [[UILocalNotification alloc]init];
+                        localNotification.fireDate = capsl.deliveryTime;
+                        localNotification.alertBody = [NSString stringWithFormat: @"Message from %@ is unlocked, click to view!", capsl.sender.name];
+                        localNotification.alertAction = @"View Message";
+                        localNotification.timeZone = [NSTimeZone defaultTimeZone];
+                        localNotification.applicationIconBadgeNumber = [[UIApplication sharedApplication] applicationIconBadgeNumber] + 1;
+
+                        [[UIApplication sharedApplication] scheduleLocalNotification:localNotification];
+                    }
+                }
+
+                //IF less than 64 - just create how ever many there are
+                else
+                {
+                    for (Capsl *capsl in unviewedCapslArray)
+                    {
+                        UILocalNotification* localNotification = [[UILocalNotification alloc]init];
+                        localNotification.fireDate = capsl.deliveryTime;
+                        localNotification.alertBody = [NSString stringWithFormat: @"Message from %@ is unlocked, click to view!", capsl.sender.name];
+                        localNotification.alertAction = @"View Message";
+                        localNotification.timeZone = [NSTimeZone defaultTimeZone];
+                        localNotification.applicationIconBadgeNumber = [[UIApplication sharedApplication] applicationIconBadgeNumber] + 1;
+
+                        [[UIApplication sharedApplication] scheduleLocalNotification:localNotification];
+                    }
+                }
+//                To check for all notification
+//                NSArray *localNotifications = [[UIApplication sharedApplication] scheduledLocalNotifications];
             }
+
             else
             {
                 [SVProgressHUD showErrorWithStatus:@"Connection Error"];

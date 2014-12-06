@@ -105,7 +105,7 @@
     AVAudioSession *audioSession = [AVAudioSession sharedInstance];
     [audioSession setActive:NO error:nil];
 
-    //TODO: Set Capsl NSData with recorded audio file
+    //TODO: Limit Audio Data File
     self.audioData = [[NSData alloc] initWithContentsOfURL:self.recorder.url];
     self.createdCapsl.audio = [PFFile fileWithName:@"audio.m4a" data:self.audioData];
 

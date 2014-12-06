@@ -224,7 +224,6 @@
             [capsl saveInBackground];
 
             #warning Check if this works when testflight is sent
-            //TODO:Add Notification to send to sender, telling them CAPSL has been viewed
             //SENDING PUSH MESSAGE to the sender, when CAPSL is viewed by recipient
             PFQuery *pushQuery = [PFInstallation query];
             [pushQuery whereKey:@"capslr" equalTo:capsl.sender];

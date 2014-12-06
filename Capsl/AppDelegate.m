@@ -41,6 +41,15 @@
     [application registerUserNotificationSettings:settings];
     [application registerForRemoteNotifications];
 
+
+    // Handle launching from a local notification
+    UILocalNotification *localNotification = [launchOptions objectForKey:UIApplicationLaunchOptionsLocalNotificationKey];
+    if (localNotification)
+    {
+        // Set icon badge number to zero
+        application.applicationIconBadgeNumber = 0;
+    }
+
     return YES;
 }
 
@@ -70,6 +79,25 @@
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
 {
     [PFPush handlePush:userInfo];
+}
+
+//If the app is running while local notification is delivered
+- (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification
+{
+    //TODO:Figure out how to do this with UIAlertController
+    UIApplicationState state = [application applicationState];
+    if (state == UIApplicationStateActive)
+    {
+
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Message unlocked"
+                                                        message:notification.alertBody
+                                                       delegate:self cancelButtonTitle:@"OK"
+                                              otherButtonTitles:nil];
+        [alert show];
+
+        // Set icon badge number to zero
+        application.applicationIconBadgeNumber = 0;
+    }
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {
