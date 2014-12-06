@@ -169,6 +169,13 @@
         [[[UIAlertView alloc] initWithTitle:@"Missing Information" message:@"Make sure you fill out all of the information" delegate:nil cancelButtonTitle:@"ok" otherButtonTitles:nil] show];
     }
 
+    [PFCloud callFunctionInBackground:@"sendVerificationCode" withParameters:@{@"phoneNumber":signUpController.signUpView.additionalField.text}];
+
+    UIAlertView * alert =[[UIAlertView alloc ] initWithTitle:@"Phone Number Verification" message:@"Enter your code" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles: nil];
+    alert.alertViewStyle = UIAlertViewStylePlainTextInput;
+    [alert addButtonWithTitle:@"Ok"];
+    [alert show];
+
     return informationComplete;
 }
 
