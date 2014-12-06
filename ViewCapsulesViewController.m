@@ -13,6 +13,7 @@
 #import "Capslr.h"
 #import "Capsl.h"
 #import "SVProgressHUD.h"
+#import "JCALocalNotification.h"
 
 @interface ViewCapsulesViewController ()
 
@@ -44,12 +45,14 @@
         capslr.objectId = currentCapslr.objectId;
 
         //calling class method to get capsls for current user only
+        //TODO: Add Local Notification - clear first and then schedule 64 max
+        //Todo: maybe add 2 nofication for stretch goal
+        //Order by opening date
         [Capsl searchCapslByKey:@"recipient" orderByAscending:@"deliveryTime" equalTo:capslr completion:^(NSArray *objects, NSError *error) {
             if (!error)
             {
                 self.timelineRootVC.capslsArray = objects;
                 self.capslListVC.capslsArray = objects;
-
                 [SVProgressHUD dismiss];
 
                 NSInteger availableCapslsCount = 0;
@@ -64,8 +67,9 @@
 
                 self.timelineRootVC.shouldShowSent = NO;
                 self.capslListVC.shouldShowSent = NO;
-                
+                [self clearAndcreateLocalNotificationsFromCapslObjects:objects];
             }
+
             else
             {
                 [SVProgressHUD showErrorWithStatus:@"Connection Error"];
@@ -204,6 +208,26 @@
         self.timelineRootVC = segue.destinationViewController;
     }
 
+}
+
+#pragma mark - Local Notification Helper Method
+- (void)clearAndcreateLocalNotificationsFromCapslObjects:(NSArray *)objects
+{
+    //Cancel all notifications before creating new ones
+    [[UIApplication sharedApplication] cancelAllLocalNotifications];
+
+    //IF application is active, create notifications but CONSOLIDATE all that is about to be shown NOW
+    UIApplication *application = [UIApplication sharedApplication];
+    if (application.applicationState == UIApplicationStateActive)
+    {
+        [JCALocalNotification consolidateNowLocalNotificationsFromCapslObjectsArray:objects];
+    }
+
+    //ELSE Create and store local notifications for unViewedCapsl from an array of Capsl Objects
+    else
+    {
+        [JCALocalNotification createLocalNotificationForUnviewedCapslFromCapslObjectsArray:objects];
+    }
 }
 
 
