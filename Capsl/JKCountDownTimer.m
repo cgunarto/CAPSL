@@ -19,14 +19,21 @@
 @implementation JKCountDownTimer
 
 
-+ (NSString *)getStringWithTimeInterval:(NSTimeInterval)timeInterval
++ (NSString *)getStatusStringWithCapsl:(Capsl *)capsl
 {
+
+    NSDate *deliveryDate = capsl.deliveryTime;
+    NSTimeInterval timeInterval = [deliveryDate timeIntervalSinceNow];
 
     NSString *dateString = [NSString string];
 
     if (timeInterval <= 0)
     {
         dateString = @"Unlocked";
+    }
+    if (timeInterval <= 0 && capsl.viewedAt)
+    {
+        dateString = @"Viewed";
     }
     if (timeInterval > 0 && timeInterval <= kDayInSeconds)
     {

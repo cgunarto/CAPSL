@@ -12,6 +12,7 @@
 #import "JKCountDownTimer.h"
 #import "Capslr.h"
 #import "Capsl.h"
+#import "SVProgressHUD.h"
 
 @interface ViewCapsulesViewController ()
 
@@ -33,12 +34,12 @@
 {
     [super viewDidLoad];
 
-    self.view.backgroundColor = [UIColor colorWithWhite:0.0 alpha:0.75];
-    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"wallpaperReceived"]];
+    self.view.backgroundColor = [UIColor colorWithPatternImage:kViewCapsulesWallpaper];
 
     self.capslListVC.availableCapslsArray = [@[] mutableCopy];
 
     [Capslr returnCapslrFromPFUser:[PFUser currentUser] withCompletion:^(Capslr *currentCapslr, NSError *error) {
+
         Capslr *capslr = [Capslr object];
         capslr.objectId = currentCapslr.objectId;
 
@@ -48,6 +49,8 @@
             {
                 self.timelineRootVC.capslsArray = objects;
                 self.capslListVC.capslsArray = objects;
+
+                [SVProgressHUD dismiss];
 
                 NSInteger availableCapslsCount = 0;
 
@@ -62,11 +65,10 @@
                 self.timelineRootVC.shouldShowSent = NO;
                 self.capslListVC.shouldShowSent = NO;
                 
-                [self.capslListVC scrollToSoonestCapslWithCount:availableCapslsCount];
-
             }
             else
             {
+                [SVProgressHUD showErrorWithStatus:@"Connection Error"];
                 NSLog(@"%@", error.localizedDescription);
             }
         }];
@@ -77,7 +79,6 @@
             {
                 self.capslListVC.sentCapslsArray = objects;
                 self.timelineRootVC.sentCapslsArray = objects;
-                
             }
             else
             {
@@ -132,6 +133,8 @@
         [self.timelineContainer setNeedsDisplay];
         [self.view bringSubviewToFront:self.sentReceivedSegmentedControl];
 
+        self.view.backgroundColor = [UIColor colorWithPatternImage:kTimelineWallpaper];
+
     }
     else
     {
@@ -143,6 +146,9 @@
         [self.capslListContainer setHidden:NO];
         [self.timelineContainer removeFromSuperview];
         [self.view bringSubviewToFront:self.sentReceivedSegmentedControl];
+
+        self.view.backgroundColor = [UIColor colorWithPatternImage:kViewCapsulesWallpaper];
+
     }
     
 }
@@ -156,6 +162,7 @@
     [self.timelineRootVC updateClocks];
 
 }
+
 
 #pragma mark - actions
 

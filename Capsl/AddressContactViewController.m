@@ -9,6 +9,7 @@
 #import "AddressContactViewController.h"
 #import "Contact.h"
 #import <MessageUI/MessageUI.h>
+#import "SVProgressHUD.h"
 #define kSMSInviteMessage @"Join CAPSL so I can send you a digital time capsule";
 
 @interface AddressContactViewController () <UITableViewDelegate, UITableViewDataSource, MFMessageComposeViewControllerDelegate>
@@ -22,6 +23,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+
     [Contact retrieveAllContactsWithBlock:^(NSArray *contacts)
      {
          self.contactsArray = [contacts mutableCopy];

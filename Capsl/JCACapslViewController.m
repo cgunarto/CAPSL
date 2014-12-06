@@ -57,13 +57,14 @@ static NSString * const reuseIdentifier = @"CapslCell";
 {
     [super viewWillAppear:animated];
     [self updateData];
-    [self scrollToUnopened];
+//    [self scrollToEarliestUnopenedCapsule];
 }
 
 - (void)setCapslGrandArray:(NSArray *)capslGrandArray
 {
     _capslGrandArray = capslGrandArray;
     [self updateData];
+//    [self scrollToEarliestUnopenedCapsule];
 
 }
 
@@ -71,6 +72,7 @@ static NSString * const reuseIdentifier = @"CapslCell";
 {
     _sentCapslsGrandArray = sentCapslsGrandArray;
     [self updateData];
+//    [self scrollToEarliestUnopenedCapsule];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -127,13 +129,18 @@ static NSString * const reuseIdentifier = @"CapslCell";
 
     Capsl *capsl = [self getCapslWithIndexPath:indexPath];
 
+    PFFile *profilePhoto = [[PFFile alloc] init];
+
     if (self.showSent)
     {
         cell.nameLabel.text = capsl.recipient.username;
+        profilePhoto = capsl.recipient.profilePhoto;
     }
     else
     {
         cell.nameLabel.text = capsl.sender.username;
+        profilePhoto = capsl.sender.profilePhoto;
+
     //    cell.nameLabel.text = self.monthsOfTheYear[indexPath.section % 12];
     }
 
@@ -141,7 +148,11 @@ static NSString * const reuseIdentifier = @"CapslCell";
 
     [cell updateLabelsForCapsl:capsl];
 
-    cell.profilePicView.image = [UIImage imageNamed:@"profilepic1"];
+    [profilePhoto getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
+        cell.profilePicView.image = [UIImage imageWithData:data];
+    }];
+
+//    cell.profilePicView.image = [UIImage imageNamed:@"profilepic1"];
 
     if (!capsl.objectId)
     {
@@ -268,20 +279,36 @@ static NSString * const reuseIdentifier = @"CapslCell";
 
 - (void)updateData
 {
-    if (self.showSent == NO)
+    if (self.showSent)
     {
-        self.collectionViewData = self.capslGrandArray;
+        self.collectionViewData = self.sentCapslsGrandArray;
     }
     else
     {
-        self.collectionViewData = self.sentCapslsGrandArray;
+        self.collectionViewData = self.capslGrandArray;
     }
 
     [self.capslView reloadData];
 }
 
-- (void)scrollToUnopened
+- (void)scrollToEarliestUnopenedCapsule
 {
+
+    // scroll to first unopened capsule in received, 3 capsules prior to first unopened in sent
+    for (int x = 0; x < self.collectionViewData.count; x++)
+    {
+        Capsl *capsl = self.collectionViewData[x];
+
+        if (!capsl.viewedAt)
+        {
+
+//            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:x inSection:0];
+//            [self.collectionViewData scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionTop animated:NO];
+
+            break;
+        }
+
+    }
 
 }
 

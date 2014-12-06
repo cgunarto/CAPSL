@@ -9,6 +9,7 @@
 #import "ChooseTypeViewController.h"
 #import "RecordAudioViewController.h"
 #import "CaptureViewController.h"
+#import "SVProgressHUD.h"
 
 @interface ChooseTypeViewController ()
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
@@ -20,9 +21,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-//    self.imageView.image = [UIImage imageNamed:@"mountain"];
 
-    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"mountain"]];
+    self.view.backgroundColor = [UIColor colorWithPatternImage:kChooseScreenWallpaper];
+
+
 }
 
 #pragma mark Segue
@@ -41,5 +43,14 @@
     }
 }
 
+- (IBAction)onSendButtonPressed:(UIButton *)sender
+{
+    [self performSegueWithIdentifier:@"segueToCapture" sender:self];
+}
+
+- (IBAction)onRecordButtonPressed:(UIButton *)sender
+{
+    [self performSegueWithIdentifier:@"segueToRecord" sender:self];
+}
 
 @end

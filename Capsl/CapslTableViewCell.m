@@ -34,17 +34,25 @@
 - (void)updateLabelsForCapsl:(Capsl *)capsl
 {
 
-    NSDate *deliveryDate = capsl.deliveryTime;
-    NSTimeInterval timeInterval = [deliveryDate timeIntervalSinceNow];
-    self.timerLabel.text = [[JKCountDownTimer getStringWithTimeInterval:timeInterval] uppercaseString];
-    self.deliveryDateLabel.text = [JKCountDownTimer getDateStringWithDate:deliveryDate];
+    self.timerLabel.text = [[JKCountDownTimer getStatusStringWithCapsl:capsl] uppercaseString];
+    self.deliveryDateLabel.text = [JKCountDownTimer getDateStringWithDate:capsl.deliveryTime];
 
 }
 
-- (void)drawCellForCapsl:(Capsl *)capsl
+- (void)drawCellForCapsl:(Capsl *)capsl ThatWasSent:(BOOL)wasSent
 {
 
-    self.lozengeView.backgroundColor = kReceivedCapsuleColor;
+    if (wasSent)
+    {
+        self.lozengeView.backgroundColor = kSentCapsuleColor;
+    }
+    else
+    {
+        self.lozengeView.backgroundColor = kReceivedCapsuleColor;
+    }
+    
+    // updating timer string...
+    [self updateLabelsForCapsl:capsl];
 
 }
 

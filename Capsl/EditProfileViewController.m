@@ -34,6 +34,8 @@
 {
     [super viewWillAppear:animated];
 
+    self.doNotShowActivityIndicator = YES;
+
     [Capslr returnCapslrFromPFUser:[PFUser currentUser] withCompletion:^(Capslr *currentCapslr, NSError *error) {
 
         self.currenCapslrInfo = @[currentCapslr.name, currentCapslr.username, currentCapslr.email];
@@ -168,6 +170,15 @@
 
         UIAlertAction *delete = [UIAlertAction actionWithTitle:@"Delete" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
             // add code here
+            [Capslr returnCapslrFromPFUser:[PFUser currentUser] withCompletion:^(Capslr *currentCapslr, NSError *error) {
+                currentCapslr.profilePhoto = nil;
+
+                self.updatedProfilePicture = nil;
+                [self.tableView reloadData];
+                [currentCapslr save];
+
+                [alert dismissViewControllerAnimated:YES completion:nil];
+            }];
         }];
 
         UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"Cancel"
@@ -264,7 +275,7 @@
     [alert addAction:noButton];
     [alert addAction:yesButton];
 
-    [self presentViewController:alert animated:yesButton completion:nil];
+    [self presentViewController:alert animated:YES completion:nil];
 }
 
 - (void)showRootViewController

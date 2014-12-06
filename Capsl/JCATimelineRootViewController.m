@@ -36,7 +36,7 @@
     self.timelineVC.showSent = self.shouldShowSent;
     self.capslVC.showSent = self.shouldShowSent;
 
-
+//    [self prefersStatusBarHidden];
     [self setWallpaper];
 
 }
@@ -49,6 +49,15 @@
     [self.view addSubview:self.capslContainerView];
     [self.view addSubview:self.timelineContainerView];
 
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+
+    [self.view addSubview:self.capslContainerView];
+    [self.view addSubview:self.timelineContainerView];
+    
 }
 
 -(void)setShouldShowSent:(BOOL)shouldShowSent
@@ -67,6 +76,10 @@
 
 }
 
+// - (BOOL)prefersStatusBarHidden
+//{
+//    return YES;
+//}
 
 - (void)didReceiveMemoryWarning
 {
@@ -121,11 +134,11 @@
 
     if (self.shouldShowSent)
     {
-        wallpaper = [self processWallpaper:[UIImage imageNamed:@"wallpaperSent"]];
+//        wallpaper = [self processWallpaper:[UIImage imageNamed:@"wallpaperSent"]];
     }
     else
     {
-        wallpaper = [self processWallpaper:[UIImage imageNamed:@"wallpaperReceived"]];
+//        wallpaper = [self processWallpaper:[UIImage imageNamed:@"wallpaperReceived"]];
     }
 
     self.wallpaperView = [[UIImageView alloc] initWithImage:wallpaper];
@@ -139,7 +152,7 @@
 - (UIImage *)processWallpaper:(UIImage *)wallpaper
 {
 
-    UIColor *tintColor = [UIColor colorWithWhite:0.3 alpha:0.1];
+//    UIColor *tintColor = [UIColor colorWithWhite:0.3 alpha:0.1];
 //    wallpaper = [wallpaper applyBlurWithRadius:3 tintColor:tintColor saturationDeltaFactor:0.8 maskImage:nil];
 
     return wallpaper;

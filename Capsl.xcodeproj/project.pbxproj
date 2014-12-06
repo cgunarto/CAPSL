@@ -17,7 +17,6 @@
 		4F69EBEC1A25320C009625AA /* MessageDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F69EBEB1A25320C009625AA /* MessageDetailViewController.m */; };
 		4F69EBEF1A253269009625AA /* ChooseTypeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F69EBEE1A253269009625AA /* ChooseTypeViewController.m */; };
 		4F69EBF21A25327A009625AA /* CaptureViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F69EBF11A25327A009625AA /* CaptureViewController.m */; };
-		4F69EBF51A25328F009625AA /* ComposeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F69EBF41A25328F009625AA /* ComposeViewController.m */; };
 		4F69EBF81A2532C8009625AA /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F69EBF71A2532C8009625AA /* ProfileViewController.m */; };
 		4F69EBFD1A253957009625AA /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F69EBF91A253957009625AA /* Bolts.framework */; };
 		4F69EBFE1A253957009625AA /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F69EBFA1A253957009625AA /* Parse.framework */; };
@@ -43,6 +42,9 @@
 		4F69EC371A291CAA009625AA /* CapslrContactViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F69EC361A291CAA009625AA /* CapslrContactViewController.m */; };
 		4F69EC3A1A2A72D9009625AA /* SearchContactViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F69EC391A2A72D9009625AA /* SearchContactViewController.m */; };
 		4F69EC3D1A2A83E3009625AA /* AllContactTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F69EC3C1A2A83E3009625AA /* AllContactTableViewCell.m */; };
+		4F72437B1A314F86002CC918 /* DateTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F72437A1A314F86002CC918 /* DateTableViewController.m */; };
+		4F72437E1A314F97002CC918 /* PickerTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F72437D1A314F97002CC918 /* PickerTableViewCell.m */; };
+		4F7243811A3159C7002CC918 /* PromptDateTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F7243801A3159C7002CC918 /* PromptDateTableViewCell.m */; };
 		4FC4EA181A2B021D00D3D09D /* RecordAudioViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FC4EA171A2B021D00D3D09D /* RecordAudioViewController.m */; };
 		4FC4EA201A2D1D4000D3D09D /* RecordVideoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FC4EA1F1A2D1D4000D3D09D /* RecordVideoViewController.m */; };
 		8D1B839F1A2FC55F00C0121F /* Images 14-23-23-125.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8D1B839E1A2FC55F00C0121F /* Images 14-23-23-125.xcassets */; };
@@ -53,9 +55,12 @@
 		8D5A3DDC1A2A4AFD00A6485A /* JCATimelineMonthCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D5A3DD51A2A4AFD00A6485A /* JCATimelineMonthCollectionViewCell.m */; };
 		8D5A3DDD1A2A4AFD00A6485A /* JCATimeline.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D5A3DD71A2A4AFD00A6485A /* JCATimeline.m */; };
 		8D5A3DE11A2A4B4700A6485A /* UIImage+ImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D5A3DE01A2A4B4700A6485A /* UIImage+ImageEffects.m */; };
+		8D6A97721A32321500ECA7D9 /* CrossDissolveSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D6A97711A32321500ECA7D9 /* CrossDissolveSegue.m */; };
 		8DAC42441A2A9BD400A8859A /* JCAMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DAC42431A2A9BD400A8859A /* JCAMainViewController.m */; };
 		8DE360601A2D6E5800DAE08C /* ViewCapsulesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DE3605F1A2D6E5800DAE08C /* ViewCapsulesViewController.m */; };
 		8DEA789B1A31206900271A8A /* CapsuleListBackground.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DEA789A1A31206900271A8A /* CapsuleListBackground.m */; };
+		905073921A32182900B40E45 /* SVProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 9050738F1A32182900B40E45 /* SVProgressHUD.m */; };
+		905073931A32182900B40E45 /* SVProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 905073901A32182900B40E45 /* SVProgressHUD.bundle */; };
 		905E900D1A2F9D9700BF32E3 /* EditProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 905E900C1A2F9D9700BF32E3 /* EditProfileViewController.m */; };
 		905E90101A2FA3FC00BF32E3 /* EditProfilePicTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 905E900F1A2FA3FC00BF32E3 /* EditProfilePicTableViewCell.m */; };
 		905E90131A2FE55600BF32E3 /* UpdateProfileInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 905E90121A2FE55600BF32E3 /* UpdateProfileInfoViewController.m */; };
@@ -99,8 +104,6 @@
 		4F69EBEE1A253269009625AA /* ChooseTypeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChooseTypeViewController.m; sourceTree = "<group>"; };
 		4F69EBF01A25327A009625AA /* CaptureViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CaptureViewController.h; path = ../CaptureViewController.h; sourceTree = "<group>"; };
 		4F69EBF11A25327A009625AA /* CaptureViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CaptureViewController.m; path = ../CaptureViewController.m; sourceTree = "<group>"; };
-		4F69EBF31A25328F009625AA /* ComposeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ComposeViewController.h; sourceTree = "<group>"; };
-		4F69EBF41A25328F009625AA /* ComposeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ComposeViewController.m; sourceTree = "<group>"; };
 		4F69EBF61A2532C8009625AA /* ProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileViewController.h; sourceTree = "<group>"; };
 		4F69EBF71A2532C8009625AA /* ProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileViewController.m; sourceTree = "<group>"; };
 		4F69EBF91A253957009625AA /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
@@ -134,6 +137,12 @@
 		4F69EC391A2A72D9009625AA /* SearchContactViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchContactViewController.m; sourceTree = "<group>"; };
 		4F69EC3B1A2A83E3009625AA /* AllContactTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AllContactTableViewCell.h; sourceTree = "<group>"; };
 		4F69EC3C1A2A83E3009625AA /* AllContactTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AllContactTableViewCell.m; sourceTree = "<group>"; };
+		4F7243791A314F86002CC918 /* DateTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DateTableViewController.h; sourceTree = "<group>"; };
+		4F72437A1A314F86002CC918 /* DateTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DateTableViewController.m; sourceTree = "<group>"; };
+		4F72437C1A314F97002CC918 /* PickerTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PickerTableViewCell.h; sourceTree = "<group>"; };
+		4F72437D1A314F97002CC918 /* PickerTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PickerTableViewCell.m; sourceTree = "<group>"; };
+		4F72437F1A3159C7002CC918 /* PromptDateTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PromptDateTableViewCell.h; sourceTree = "<group>"; };
+		4F7243801A3159C7002CC918 /* PromptDateTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PromptDateTableViewCell.m; sourceTree = "<group>"; };
 		4FC4EA161A2B021D00D3D09D /* RecordAudioViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecordAudioViewController.h; sourceTree = "<group>"; };
 		4FC4EA171A2B021D00D3D09D /* RecordAudioViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecordAudioViewController.m; sourceTree = "<group>"; };
 		4FC4EA1E1A2D1D4000D3D09D /* RecordVideoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecordVideoViewController.h; sourceTree = "<group>"; };
@@ -153,6 +162,8 @@
 		8D5A3DD71A2A4AFD00A6485A /* JCATimeline.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JCATimeline.m; sourceTree = "<group>"; };
 		8D5A3DDF1A2A4B4700A6485A /* UIImage+ImageEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ImageEffects.h"; sourceTree = "<group>"; };
 		8D5A3DE01A2A4B4700A6485A /* UIImage+ImageEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ImageEffects.m"; sourceTree = "<group>"; };
+		8D6A97701A32321500ECA7D9 /* CrossDissolveSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CrossDissolveSegue.h; path = ../CrossDissolveSegue.h; sourceTree = "<group>"; };
+		8D6A97711A32321500ECA7D9 /* CrossDissolveSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CrossDissolveSegue.m; path = ../CrossDissolveSegue.m; sourceTree = "<group>"; };
 		8DAC42421A2A9BD400A8859A /* JCAMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JCAMainViewController.h; sourceTree = "<group>"; };
 		8DAC42431A2A9BD400A8859A /* JCAMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JCAMainViewController.m; sourceTree = "<group>"; };
 		8DE3605E1A2D6E5800DAE08C /* ViewCapsulesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ViewCapsulesViewController.h; path = ../ViewCapsulesViewController.h; sourceTree = "<group>"; };
@@ -161,6 +172,10 @@
 		8DEA789A1A31206900271A8A /* CapsuleListBackground.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CapsuleListBackground.m; path = ../CapsuleListBackground.m; sourceTree = "<group>"; };
 		8DEA789C1A313CFC00271A8A /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		8DEA789D1A313DA800271A8A /* ConstantsHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ConstantsHeader.h; sourceTree = "<group>"; };
+		9050738E1A32182900B40E45 /* SVProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVProgressHUD.h; sourceTree = "<group>"; };
+		9050738F1A32182900B40E45 /* SVProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVProgressHUD.m; sourceTree = "<group>"; };
+		905073901A32182900B40E45 /* SVProgressHUD.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = SVProgressHUD.bundle; sourceTree = "<group>"; };
+		905073911A32182900B40E45 /* SVProgressHUD-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SVProgressHUD-Prefix.pch"; sourceTree = "<group>"; };
 		905E900B1A2F9D9700BF32E3 /* EditProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditProfileViewController.h; sourceTree = "<group>"; };
 		905E900C1A2F9D9700BF32E3 /* EditProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditProfileViewController.m; sourceTree = "<group>"; };
 		905E900E1A2FA3FC00BF32E3 /* EditProfilePicTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditProfilePicTableViewCell.h; sourceTree = "<group>"; };
@@ -257,10 +272,12 @@
 				8DC55F3A1A2B8B4500AF1AB8 /* Capsule View */,
 				4FC4EA191A2B027500D3D09D /* Capture & Compose VCs */,
 				4FC4EA1A1A2B030000D3D09D /* Profile & Contact VCs */,
+				8D6A97731A32322400ECA7D9 /* Custom Segues */,
 				4F69EC1C1A253B8E009625AA /* Model */,
 				8D5A3DE21A2A4B4D00A6485A /* Categories */,
 				8D1B839E1A2FC55F00C0121F /* Images 14-23-23-125.xcassets */,
 				4F69EBD01A252331009625AA /* LaunchScreen.xib */,
+				905073941A32183900B40E45 /* Custom Activity Indicator */,
 				4F69EBC11A252331009625AA /* Supporting Files */,
 			);
 			path = Capsl;
@@ -327,6 +344,10 @@
 				4F69EC301A291504009625AA /* Contact.m */,
 				4F69EC3B1A2A83E3009625AA /* AllContactTableViewCell.h */,
 				4F69EC3C1A2A83E3009625AA /* AllContactTableViewCell.m */,
+				4F72437C1A314F97002CC918 /* PickerTableViewCell.h */,
+				4F72437D1A314F97002CC918 /* PickerTableViewCell.m */,
+				4F72437F1A3159C7002CC918 /* PromptDateTableViewCell.h */,
+				4F7243801A3159C7002CC918 /* PromptDateTableViewCell.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -344,8 +365,8 @@
 				4FC4EA1F1A2D1D4000D3D09D /* RecordVideoViewController.m */,
 				4F69EC381A2A72D9009625AA /* SearchContactViewController.h */,
 				4F69EC391A2A72D9009625AA /* SearchContactViewController.m */,
-				4F69EBF31A25328F009625AA /* ComposeViewController.h */,
-				4F69EBF41A25328F009625AA /* ComposeViewController.m */,
+				4F7243791A314F86002CC918 /* DateTableViewController.h */,
+				4F72437A1A314F86002CC918 /* DateTableViewController.m */,
 			);
 			name = "Capture & Compose VCs";
 			sourceTree = "<group>";
@@ -403,6 +424,15 @@
 			name = Categories;
 			sourceTree = "<group>";
 		};
+		8D6A97731A32322400ECA7D9 /* Custom Segues */ = {
+			isa = PBXGroup;
+			children = (
+				8D6A97701A32321500ECA7D9 /* CrossDissolveSegue.h */,
+				8D6A97711A32321500ECA7D9 /* CrossDissolveSegue.m */,
+			);
+			name = "Custom Segues";
+			sourceTree = "<group>";
+		};
 		8DC55F3A1A2B8B4500AF1AB8 /* Capsule View */ = {
 			isa = PBXGroup;
 			children = (
@@ -421,6 +451,17 @@
 				8D5A3DDE1A2A4B0700A6485A /* Timeline VCs */,
 			);
 			name = "View Capsules";
+			sourceTree = "<group>";
+		};
+		905073941A32183900B40E45 /* Custom Activity Indicator */ = {
+			isa = PBXGroup;
+			children = (
+				9050738E1A32182900B40E45 /* SVProgressHUD.h */,
+				9050738F1A32182900B40E45 /* SVProgressHUD.m */,
+				905073901A32182900B40E45 /* SVProgressHUD.bundle */,
+				905073911A32182900B40E45 /* SVProgressHUD-Prefix.pch */,
+			);
+			name = "Custom Activity Indicator";
 			sourceTree = "<group>";
 		};
 		90CE52D61A27C5200033087E /* Capsl List View */ = {
@@ -521,6 +562,7 @@
 				4F69EBCD1A252331009625AA /* Main.storyboard in Resources */,
 				8D1B839F1A2FC55F00C0121F /* Images 14-23-23-125.xcassets in Resources */,
 				4F69EBD21A252331009625AA /* LaunchScreen.xib in Resources */,
+				905073931A32182900B40E45 /* SVProgressHUD.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -561,12 +603,17 @@
 				905E90101A2FA3FC00BF32E3 /* EditProfilePicTableViewCell.m in Sources */,
 				4FC4EA181A2B021D00D3D09D /* RecordAudioViewController.m in Sources */,
 				4F69EC221A253D2B009625AA /* Capsl.m in Sources */,
+				905073921A32182900B40E45 /* SVProgressHUD.m in Sources */,
 				4F69EC341A291C92009625AA /* AddressContactViewController.m in Sources */,
 				4F69EC1F1A253BE5009625AA /* Capslr.m in Sources */,
+				4F72437E1A314F97002CC918 /* PickerTableViewCell.m in Sources */,
 				4F69EC3D1A2A83E3009625AA /* AllContactTableViewCell.m in Sources */,
+				4F7243811A3159C7002CC918 /* PromptDateTableViewCell.m in Sources */,
+				4F72437B1A314F86002CC918 /* DateTableViewController.m in Sources */,
 				90C0DD171A27CCE500A50BCF /* JKCountDownTimer.m in Sources */,
 				90CE52CF1A27C3350033087E /* LoginViewController.m in Sources */,
 				8DE360601A2D6E5800DAE08C /* ViewCapsulesViewController.m in Sources */,
+				8D6A97721A32321500ECA7D9 /* CrossDissolveSegue.m in Sources */,
 				8D5A3DD81A2A4AFD00A6485A /* JCATimelineRootViewController.m in Sources */,
 				4F69EBC41A252331009625AA /* main.m in Sources */,
 				4F69EBF21A25327A009625AA /* CaptureViewController.m in Sources */,
@@ -575,7 +622,6 @@
 				90C61E621A2C4D3A003EFEF9 /* UIImage+RoundedCorner.m in Sources */,
 				4FC4EA201A2D1D4000D3D09D /* RecordVideoViewController.m in Sources */,
 				90CE52D21A27C36A0033087E /* SignUpViewController.m in Sources */,
-				4F69EBF51A25328F009625AA /* ComposeViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

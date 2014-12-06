@@ -19,7 +19,7 @@
 
 @interface JKCountDownTimer : NSTimer
 
-+ (NSString *)getStringWithTimeInterval:(NSTimeInterval)timeInterval;
++ (NSString *)getStatusStringWithCapsl:(Capsl *)capsl;
 
 + (NSString *)getDateStringWithDate:(NSDate *)date;
 

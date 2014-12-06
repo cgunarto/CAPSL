@@ -12,7 +12,7 @@
 #import "JKCountDownTimer.h"
 #import "JCATimelineRootViewController.h"
 #import "JCAMainViewController.h"
-#import "MessageDetailViewController.h"
+#import "CaptureViewController.h"
 
 @interface CapsuleListViewController () <UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate>
 
@@ -22,22 +22,20 @@
 @property NSMutableArray *recipientPics;
 
 @property NSInteger availableCapslsCount;
+@property BOOL shouldShowMessage;
 
 @end
 
 @implementation CapsuleListViewController
 
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 
-    //TODO: fix capslCount!!
-
     self.view.backgroundColor = [UIColor clearColor];
 
 
-    self.tableView.contentInset = UIEdgeInsetsMake(self.navigationController.navigationBar.frame.size.height, 0, 44, 0);
+//    self.tableView.contentInset = UIEdgeInsetsMake(self.navigationController.navigationBar.frame.size.height + 20, 0, 44, 0);
 
     self.availableCapslsCount = 0;
 
@@ -47,19 +45,12 @@
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.backgroundColor = [UIColor clearColor];
 
-
-
-//    for (NSDate *date in [self.capslsArray valueForKey:@"deliveryTime"])
-//    {
-//        if ([date timeIntervalSinceNow] < 0)
-//        {
-//            availableCapslsCount++;
-//        }
-//    }
-
+    // make transparent the system toolbar that is there to space the bottom of scroll
+    [self.navigationController.toolbar setBackgroundImage:[UIImage new] forToolbarPosition:UIBarPositionAny barMetrics:UIBarMetricsDefault];
+    self.navigationController.navigationBar.shadowImage = [UIImage new];
+    self.navigationController.navigationBar.translucent = YES;
 
 }
-
 
 -(void)setShouldShowSent:(BOOL)shouldShowSent
 {
@@ -75,6 +66,9 @@
     }
 
     [self.tableView reloadData];
+
+    [self scrollToEarliestUnopenedCapsule];
+
 }
 
 
@@ -146,40 +140,106 @@
 //        cell.profileImage.image = profilePicArray[indexPath.row];
 //    }
 
-    [cell drawCellForCapsl:capslForCell];
-
-    // updating timer string...
-    [cell updateLabelsForCapsl:capslForCell];
-
-    //Capsl sent to...
+    [cell drawCellForCapsl:capslForCell ThatWasSent:self.shouldShowSent];
 
     return cell;
 }
 
 
 #pragma mark - Helper Method
-- (void)scrollToSoonestCapslWithCount:(NSInteger)openCapslsCount
+- (void)scrollToEarliestUnopenedCapsule
 {
+
+    // scroll to first unopened capsule in received, 3 capsules prior to first unopened in sent
+    for (int x = 0; x < self.tableViewData.count; x++)
+    {
+        Capsl *capsl = self.tableViewData[x];
+        int row = x;
+
+        if (!capsl.viewedAt)
+        {
+            // sent capsules
+            if (self.shouldShowSent)
+            {
+                // set index for 3 prior to first viewed if available, or else show first
+                if (x > 3)
+                {
+                    row = x - 3;
+                }
+                else
+                {
+                    row = 0;
+                }
+            }
+
+            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:row inSection:0];
+            [self.tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionTop animated:NO];
+
+            break;
+        }
+
+    }
+
+
 //    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:(openCapslsCount) inSection:0];
 //    [self.tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionTop animated:NO];
 }
 
+- (NSArray *)reverseArray:(NSArray *)arrayToReverse
+{
+
+    NSMutableArray *newArray = [@[] mutableCopy];
+    for (NSObject *object in arrayToReverse)
+    {
+        [newArray insertObject:object atIndex:0];
+    }
+
+    return [NSArray arrayWithArray:newArray];
+    
+}
 
 #pragma mark - Saving Data for Viewed At
+
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+
+}
+
+#pragma mark - segue life cycle
+
+- (BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender
+{
+
+    NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
 
     Capsl *capsl = self.tableViewData[indexPath.row];
     long elapsedSeconds = [capsl.deliveryTime timeIntervalSinceNow];
 
-    if ((!capsl.viewedAt) && elapsedSeconds <= 0)
-    {
-        capsl.viewedAt = [NSDate date];
-        [capsl saveInBackground];
-    }
-}
+    // don't open if the capsule is not ready!
 
-#pragma mark - segue life cycle
+    if (!self.shouldShowSent)
+    {
+        if (!capsl.viewedAt && elapsedSeconds < 0)
+        {
+            capsl.viewedAt = [NSDate date];
+            [capsl saveInBackground];
+        }
+
+        if (elapsedSeconds < 0)
+        {
+            return YES;
+        }
+        else
+        {
+            return NO;
+        }
+    }
+    else
+    {
+        return YES;
+    }
+
+}
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
@@ -187,8 +247,9 @@
     NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
     Capsl *capsl = self.tableViewData[indexPath.row];
 
-    MessageDetailViewController *messageDetailVC = segue.destinationViewController;
-    messageDetailVC.chosenCapsl = capsl;
+    CaptureViewController *vc = segue.destinationViewController;
+    vc.chosenCapsl = capsl;
+    vc.isEditing = NO;
 
 }
 
