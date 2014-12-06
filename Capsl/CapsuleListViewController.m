@@ -215,6 +215,26 @@
         {
             capsl.viewedAt = [NSDate date];
             [capsl saveInBackground];
+
+            #warning Check if this works when testflight is sent
+            //TODO:Add Notification to send to sender, telling them CAPSL has been viewed
+            //SENDING PUSH MESSAGE to the sender, when CAPSL is viewed by recipient
+            PFQuery *pushQuery = [PFInstallation query];
+            [pushQuery whereKey:@"capslr" equalTo:capsl.sender];
+
+            PFPush *push = [[PFPush alloc]init];
+            //TODO: Send push to multiple device tokens
+            //TODO: Set it to open a message or the right page
+            NSString *pushString = [NSString stringWithFormat:@"%@ viewed your Capsl", capsl.recipient.name];
+            [push setQuery:pushQuery];
+            [push setMessage:pushString];
+            [push sendPushInBackgroundWithBlock:^(BOOL succeeded, NSError *error)
+             {
+                 if (error)
+                 {
+                     NSLog(@"%@ error", error.localizedDescription);
+                 }
+             }];
         }
 
         if (elapsedSeconds < 0)

@@ -102,6 +102,7 @@
 //Sent to the delegate when a PFUser is logged in
 - (void) logInViewController:(PFLogInViewController *)logInController didLogInUser:(PFUser *)user
 {
+    //TODO: check if user is on a device or not, check if user has logged in from multiple device
     //Initiates the currentInstallation user's cpslr a the Capslr object of the PFUser Current user
     //PFInstallation is also called in AppDelegate, when the user first installs the app
     [Capslr returnCapslrFromPFUser:user withCompletion:^(Capslr *currentCapslr, NSError *error)
