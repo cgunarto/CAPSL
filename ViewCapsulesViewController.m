@@ -42,6 +42,7 @@
     self.capslListVC.availableCapslsArray = [@[] mutableCopy];
 
     [Capslr returnCapslrFromPFUser:[PFUser currentUser] withCompletion:^(Capslr *currentCapslr, NSError *error) {
+
         Capslr *capslr = [Capslr object];
         capslr.objectId = currentCapslr.objectId;
 
@@ -81,8 +82,6 @@
             {
                 self.capslListVC.sentCapslsArray = objects;
                 self.timelineRootVC.sentCapslsArray = objects;
-
-                [SVProgressHUD dismiss];
             }
             else
             {
