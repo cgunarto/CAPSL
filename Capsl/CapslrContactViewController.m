@@ -11,6 +11,7 @@
 #import "Contact.h"
 #import "Capslr.h"
 
+
 @interface CapslrContactViewController () <UITableViewDelegate, UITableViewDataSource>
 @property (nonatomic, strong) NSArray *capslrArray;
 @property (nonatomic, strong) NSArray *contactsArray;

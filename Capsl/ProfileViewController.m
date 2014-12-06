@@ -13,6 +13,7 @@
 #define kRightInitialConstant -16
 #import "Capslr.h"
 #import "EditProfileViewController.h"
+#import "SVProgressHUD.h"
 
 //@class Capslr;
 
@@ -32,6 +33,7 @@
 @property (strong, nonatomic) IBOutlet UIImageView *profilePictureImageView;
 @property NSArray *currentCapslrInfo;
 @property UIImage *updatedPicture;
+@property BOOL doNotShowActivityIndicator;
 
 @end
 
@@ -52,6 +54,11 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+
+    if (!self.doNotShowActivityIndicator)
+    {
+        [SVProgressHUD show];
+    }
 
     self.profilePictureImageView.image = self.updatedPicture;
 }
@@ -78,8 +85,10 @@
 
             self.profilePictureImageView.image = [UIImage imageWithData:data];
 
-            // Unhide the Edit button once the image finishes loading
             self.navigationItem.rightBarButtonItem.enabled = YES;
+
+            // Unhide the Edit button once the image finishes loading
+            [SVProgressHUD dismiss];
         }];
     }];
 }
@@ -154,6 +163,7 @@
     EditProfileViewController *editVC = segue.sourceViewController;
     self.profilePictureImageView.image = editVC.updatedProfilePicture;
     self.updatedPicture = editVC.updatedProfilePicture;
+    self.doNotShowActivityIndicator = editVC.doNotShowActivityIndicator;
 }
 
 

@@ -28,15 +28,11 @@
 
 @implementation CapsuleListViewController
 
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 
-    //TODO: fix capslCount!!
-
     self.view.backgroundColor = [UIColor clearColor];
-
 
     self.tableView.contentInset = UIEdgeInsetsMake(self.navigationController.navigationBar.frame.size.height, 0, 44, 0);
 
@@ -47,20 +43,7 @@
 
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.backgroundColor = [UIColor clearColor];
-
-
-
-//    for (NSDate *date in [self.capslsArray valueForKey:@"deliveryTime"])
-//    {
-//        if ([date timeIntervalSinceNow] < 0)
-//        {
-//            availableCapslsCount++;
-//        }
-//    }
-
-
 }
-
 
 -(void)setShouldShowSent:(BOOL)shouldShowSent
 {
@@ -150,8 +133,6 @@
 //    }
 
     [cell drawCellForCapsl:capslForCell ThatWasSent:self.shouldShowSent];
-
-    //Capsl sent to...
 
     return cell;
 }
