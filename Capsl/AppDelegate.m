@@ -45,7 +45,7 @@
 }
 
 #pragma mark Added for Push Notification
-
+#warning check if deviceToken checking works
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
 {
     if (deviceToken)
