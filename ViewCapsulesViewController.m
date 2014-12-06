@@ -13,6 +13,7 @@
 #import "Capslr.h"
 #import "Capsl.h"
 #import "SVProgressHUD.h"
+#import "JCALocalNotification.h"
 
 @interface ViewCapsulesViewController ()
 
@@ -52,8 +53,6 @@
             {
                 self.timelineRootVC.capslsArray = objects;
                 self.capslListVC.capslsArray = objects;
-                NSMutableArray *unviewedCapslArray = [@[]mutableCopy];
-
                 [SVProgressHUD dismiss];
 
                 NSInteger availableCapslsCount = 0;
@@ -68,57 +67,7 @@
 
                 self.timelineRootVC.shouldShowSent = NO;
                 self.capslListVC.shouldShowSent = NO;
-
-                //Notification for when app is unlocked
-                //Clear all local notifications
-                //TODO:How will the app refresh if user hasn't been inside the app for a long time
-                //TODO:If there are more than one message to be 
-                [[UIApplication sharedApplication] cancelAllLocalNotifications];
-
-                //Check for unviewed capsl and add it to the array
-                for (Capsl *capsl in objects)
-                {
-                    if (capsl.viewedAt == nil)
-                    {
-                        [unviewedCapslArray addObject:capsl];
-                    }
-                }
-
-                //Check if there are more than 64 capsules
-                //If YES, only make it for the first 64 - capsule is already ordered
-                if (unviewedCapslArray.count > 64)
-                {
-                    for (int i = 0; i < 64; i++)
-                    {
-                        Capsl *capsl = objects[i];
-                        UILocalNotification* localNotification = [[UILocalNotification alloc]init];
-                        localNotification.fireDate = capsl.deliveryTime;
-                        localNotification.alertBody = [NSString stringWithFormat: @"Message from %@ is unlocked, click to view!", capsl.sender.name];
-                        localNotification.alertAction = @"View Message";
-                        localNotification.timeZone = [NSTimeZone defaultTimeZone];
-                        localNotification.applicationIconBadgeNumber = [[UIApplication sharedApplication] applicationIconBadgeNumber] + 1;
-
-                        [[UIApplication sharedApplication] scheduleLocalNotification:localNotification];
-                    }
-                }
-
-                //IF less than 64 - just create how ever many there are
-                else
-                {
-                    for (Capsl *capsl in unviewedCapslArray)
-                    {
-                        UILocalNotification* localNotification = [[UILocalNotification alloc]init];
-                        localNotification.fireDate = capsl.deliveryTime;
-                        localNotification.alertBody = [NSString stringWithFormat: @"Message from %@ is unlocked, click to view!", capsl.sender.name];
-                        localNotification.alertAction = @"View Message";
-                        localNotification.timeZone = [NSTimeZone defaultTimeZone];
-                        localNotification.applicationIconBadgeNumber = [[UIApplication sharedApplication] applicationIconBadgeNumber] + 1;
-
-                        [[UIApplication sharedApplication] scheduleLocalNotification:localNotification];
-                    }
-                }
-//                To check for all notification
-//                NSArray *localNotifications = [[UIApplication sharedApplication] scheduledLocalNotifications];
+                [self clearAndcreateLocalNotificationsFromCapslObjects:objects];
             }
 
             else
@@ -259,6 +208,26 @@
         self.timelineRootVC = segue.destinationViewController;
     }
 
+}
+
+#pragma mark - Local Notification Helper Method
+- (void)clearAndcreateLocalNotificationsFromCapslObjects:(NSArray *)objects
+{
+    //Cancel all notifications before creating new ones
+    [[UIApplication sharedApplication] cancelAllLocalNotifications];
+
+    //IF application is active, create notifications but CONSOLIDATE all that is about to be shown NOW
+    UIApplication *application = [UIApplication sharedApplication];
+    if (application.applicationState == UIApplicationStateActive)
+    {
+        [JCALocalNotification consolidateNowLocalNotificationsFromCapslObjectsArray:objects];
+    }
+
+    //ELSE Create and store local notifications for unViewedCapsl from an array of Capsl Objects
+    else
+    {
+        [JCALocalNotification createLocalNotificationForUnviewedCapslFromCapslObjectsArray:objects];
+    }
 }
 
 

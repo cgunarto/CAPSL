@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4F33B1AD1A33A246004444FB /* JCALocalNotification.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F33B1AC1A33A246004444FB /* JCALocalNotification.m */; };
 		4F69EBC41A252331009625AA /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F69EBC31A252331009625AA /* main.m */; };
 		4F69EBC71A252331009625AA /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F69EBC61A252331009625AA /* AppDelegate.m */; };
 		4F69EBCA1A252331009625AA /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F69EBC91A252331009625AA /* RootViewController.m */; };
@@ -84,6 +85,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4F33B1AB1A33A246004444FB /* JCALocalNotification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JCALocalNotification.h; sourceTree = "<group>"; };
+		4F33B1AC1A33A246004444FB /* JCALocalNotification.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JCALocalNotification.m; sourceTree = "<group>"; };
 		4F69EBBE1A252331009625AA /* Capsl.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Capsl.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4F69EBC21A252331009625AA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4F69EBC31A252331009625AA /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -348,6 +351,8 @@
 				4F72437D1A314F97002CC918 /* PickerTableViewCell.m */,
 				4F72437F1A3159C7002CC918 /* PromptDateTableViewCell.h */,
 				4F7243801A3159C7002CC918 /* PromptDateTableViewCell.m */,
+				4F33B1AB1A33A246004444FB /* JCALocalNotification.h */,
+				4F33B1AC1A33A246004444FB /* JCALocalNotification.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -582,6 +587,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8DAC42441A2A9BD400A8859A /* JCAMainViewController.m in Sources */,
+				4F33B1AD1A33A246004444FB /* JCALocalNotification.m in Sources */,
 				4F69EC311A291504009625AA /* Contact.m in Sources */,
 				905E900D1A2F9D9700BF32E3 /* EditProfileViewController.m in Sources */,
 				4F69EBCA1A252331009625AA /* RootViewController.m in Sources */,
