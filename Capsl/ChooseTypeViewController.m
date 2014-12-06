@@ -22,7 +22,7 @@
 {
     [super viewDidLoad];
 
-    self.view.backgroundColor = [UIColor colorWithPatternImage:kChooseScreenWallpaper];
+//    self.view.backgroundColor = [UIColor colorWithPatternImage:kChooseScreenWallpaper];
 
 
 }

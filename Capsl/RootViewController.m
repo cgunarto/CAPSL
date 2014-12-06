@@ -45,7 +45,7 @@
     self.sendButtonLeftConstraint.constant = [[UIScreen mainScreen] bounds].size.width * 0.5;
     self.viewButtonRightConstraint.constant = [[UIScreen mainScreen] bounds].size.width * 0.5;
 
-    self.view.backgroundColor = [UIColor colorWithPatternImage:kSplashWallpaper];
+//    self.view.backgroundColor = [UIColor colorWithPatternImage:kSplashWallpaper];
 
 }
 
