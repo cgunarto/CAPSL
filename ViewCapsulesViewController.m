@@ -33,8 +33,7 @@
 {
     [super viewDidLoad];
 
-    self.view.backgroundColor = [UIColor colorWithWhite:0.0 alpha:0.75];
-    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"wallpaperReceived"]];
+    self.view.backgroundColor = [UIColor colorWithPatternImage:kViewCapsulesWallpaper];
 
     self.capslListVC.availableCapslsArray = [@[] mutableCopy];
 
@@ -130,6 +129,8 @@
         [self.timelineContainer setNeedsDisplay];
         [self.view bringSubviewToFront:self.sentReceivedSegmentedControl];
 
+        self.view.backgroundColor = [UIColor colorWithPatternImage:kTimelineWallpaper];
+
     }
     else
     {
@@ -141,6 +142,9 @@
         [self.capslListContainer setHidden:NO];
         [self.timelineContainer removeFromSuperview];
         [self.view bringSubviewToFront:self.sentReceivedSegmentedControl];
+
+        self.view.backgroundColor = [UIColor colorWithPatternImage:kViewCapsulesWallpaper];
+
     }
     
 }

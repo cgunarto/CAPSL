@@ -10,7 +10,7 @@
 
 @interface JCAMainViewController ()
 
-@property (strong, nonatomic) IBOutlet UIView *capsuleListContainerView;
+@property (strong, nonatomic) IBOutlet UIView *viewCapsulesContainerView;
 @property (strong, nonatomic) IBOutlet UIView *chooseTypeContainerView;
 @property NSMutableArray *toolbarButtons;
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *sendCapsuleButton;
@@ -20,13 +20,15 @@
 
 @implementation JCAMainViewController
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
+
     // Do any additional setup after loading the view.
 
     self.toolbarButtons = [self.toolBar.items mutableCopy];
 
-    [self.view addSubview:self.capsuleListContainerView];
+    [self.view addSubview:self.viewCapsulesContainerView];
     [self.view addSubview:self.chooseTypeContainerView];
 
     if (self.showChooseVC == YES)
@@ -45,6 +47,24 @@
 
 }
 
+//- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator
+//{
+//    if (UIInterfaceOrientationIsLandscape([UIDevice currentDevice].orientation))
+//    {
+//        [self prefersStatusBarHidden];
+//    }
+//}
+//
+
+- (BOOL)prefersStatusBarHidden
+{
+    if (UIInterfaceOrientationIsPortrait([UIDevice currentDevice].orientation))
+    {
+        return NO;
+    }
+
+    return YES;
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -76,7 +96,7 @@
 //        nil;
 //    }];
 
-    [self.capsuleListContainerView setHidden:YES];
+    [self.viewCapsulesContainerView setHidden:YES];
     [self.chooseTypeContainerView setHidden:NO];
     [self.toolbarButtons removeObject:self.sendCapsuleButton];
     [self.toolbarButtons insertObject:self.viewCapsulesButton atIndex:2];
@@ -91,7 +111,7 @@
 //        nil;
 //    }];
 
-    [self.capsuleListContainerView setHidden:NO];
+    [self.viewCapsulesContainerView setHidden:NO];
     [self.chooseTypeContainerView setHidden:YES];
     [self.toolbarButtons removeObject:self.viewCapsulesButton];
     [self.toolbarButtons insertObject:self.sendCapsuleButton atIndex:2];
@@ -110,7 +130,7 @@
     }
     else if ([segue.identifier isEqualToString:@"chooseTypeSegue"])
     {
-        [self.capsuleListContainerView setHidden:YES];
+        [self.viewCapsulesContainerView setHidden:YES];
         [self.chooseTypeContainerView setHidden:NO];
 
     }
