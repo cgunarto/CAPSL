@@ -47,13 +47,19 @@
 
 }
 
-//- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator
-//{
+
+
+- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator
+{
+
+    NSLog(@"FIRE");
 //    if (UIInterfaceOrientationIsLandscape([UIDevice currentDevice].orientation))
 //    {
 //        [self prefersStatusBarHidden];
 //    }
-//}
+//    [self.view layoutIfNeeded];
+
+}
 //
 
 - (BOOL)prefersStatusBarHidden
@@ -64,6 +70,8 @@
     }
 
     return YES;
+
+
 }
 
 - (void)didReceiveMemoryWarning {

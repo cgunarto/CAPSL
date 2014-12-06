@@ -38,7 +38,7 @@
     self.view.backgroundColor = [UIColor clearColor];
 
 
-    self.tableView.contentInset = UIEdgeInsetsMake(self.navigationController.navigationBar.frame.size.height, 0, 44, 0);
+//    self.tableView.contentInset = UIEdgeInsetsMake(self.navigationController.navigationBar.frame.size.height + 20, 0, 44, 0);
 
     self.availableCapslsCount = 0;
 
@@ -48,6 +48,10 @@
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.backgroundColor = [UIColor clearColor];
 
+    // make transparent the system toolbar that is there to space the bottom of scroll
+    [self.navigationController.toolbar setBackgroundImage:[UIImage new] forToolbarPosition:UIBarPositionAny barMetrics:UIBarMetricsDefault];
+    self.navigationController.navigationBar.shadowImage = [UIImage new];
+    self.navigationController.navigationBar.translucent = YES;
 
 
 //    for (NSDate *date in [self.capslsArray valueForKey:@"deliveryTime"])

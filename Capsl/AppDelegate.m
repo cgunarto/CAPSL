@@ -30,9 +30,6 @@
     [[UIToolbar appearance] setBarStyle:UIBarStyleBlackTranslucent];
     [[UIToolbar appearance] setTintColor:[UIColor whiteColor]];
     [[UIToolbar appearance] setTranslucent:YES];
-//    [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:YES];
-//    [[UIApplication sharedApplication] setStatusBarOrientation:UIInterfaceOrientationPortrait];
-//    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
 
     return YES;
 }
