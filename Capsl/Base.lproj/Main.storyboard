@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="vXZ-lx-hvc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="vXZ-lx-hvc">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
@@ -41,7 +41,7 @@
                                     </mask>
                                 </variation>
                                 <connections>
-                                    <action selector="onDecisionButtonPressed:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="hIe-UX-e2x"/>
+                                    <action selector="onDecisionButtonPressed:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="0zf-35-dOS"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kgd-cy-fsY">
@@ -66,16 +66,24 @@
                                     </mask>
                                 </variation>
                                 <connections>
-                                    <action selector="onDecisionButtonPressed:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="8zn-wS-ycX"/>
+                                    <action selector="onDecisionButtonPressed:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="xja-R4-dT4"/>
                                 </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="Kgd-cy-fsY" secondAttribute="bottom" constant="267" id="LQE-85-fsL"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="Kgd-cy-fsY" secondAttribute="trailing" constant="90" id="RvQ-MI-OXB"/>
-                            <constraint firstItem="Opr-sl-vid" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" constant="96" id="SVr-7Z-D0m"/>
-                            <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="Opr-sl-vid" secondAttribute="bottom" constant="267" id="Zjd-TC-d7W"/>
+                            <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="Kgd-cy-fsY" secondAttribute="bottom" constant="267" id="LQE-85-fsL">
+                                <variation key="heightClass=regular-widthClass=compact" constant="94"/>
+                            </constraint>
+                            <constraint firstAttribute="trailingMargin" secondItem="Kgd-cy-fsY" secondAttribute="trailing" constant="90" id="RvQ-MI-OXB">
+                                <variation key="heightClass=regular-widthClass=compact" constant="84"/>
+                            </constraint>
+                            <constraint firstItem="Opr-sl-vid" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" constant="96" id="SVr-7Z-D0m">
+                                <variation key="heightClass=regular-widthClass=compact" constant="85"/>
+                            </constraint>
+                            <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="Opr-sl-vid" secondAttribute="bottom" constant="267" id="Zjd-TC-d7W">
+                                <variation key="heightClass=regular-widthClass=compact" constant="94"/>
+                            </constraint>
                         </constraints>
                         <variation key="default">
                             <mask key="subviews">
@@ -105,7 +113,7 @@
                     <connections>
                         <outlet property="sendCapsuleButton" destination="Kgd-cy-fsY" id="xSe-Mr-2zW"/>
                         <outlet property="viewCapsulesButton" destination="Opr-sl-vid" id="noR-Xu-FBR"/>
-                        <segue destination="b02-oj-3a1" kind="showDetail" identifier="toMainViewControllerSegue" id="VSQ-tw-hiH"/>
+                        <segue destination="b02-oj-3a1" kind="custom" identifier="toMainViewControllerSegue" customClass="CrossDissolveSegue" id="yLs-3W-vIO"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
@@ -281,13 +289,13 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8Le-dB-JDz">
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8Le-dB-JDz" userLabel="View Capsule Container View">
                                 <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                                 <connections>
                                     <segue destination="7Xl-td-eUr" kind="embed" identifier="viewCapsulesSegue" id="DIM-cN-col"/>
                                 </connections>
                             </containerView>
-                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Vr6-T6-uD9">
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Vr6-T6-uD9" userLabel="Choose Type Container View">
                                 <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                                 <connections>
                                     <segue destination="bzT-6p-7YM" kind="embed" identifier="chooseTypeSegue" id="qZ6-uT-Uc5"/>
@@ -416,12 +424,12 @@
                         </variation>
                     </view>
                     <connections>
-                        <outlet property="capsuleListContainerView" destination="8Le-dB-JDz" id="E8b-WM-SgO"/>
                         <outlet property="chooseTypeContainerView" destination="Vr6-T6-uD9" id="Ijr-AP-FNK"/>
                         <outlet property="searchDisplayController" destination="R4G-fA-eOr" id="rcZ-KU-SRI"/>
                         <outlet property="sendCapsuleButton" destination="WTc-xi-ULI" id="FCO-BQ-edX"/>
                         <outlet property="toolBar" destination="Rb7-8t-FZm" id="PAY-kO-ubn"/>
                         <outlet property="viewCapsulesButton" destination="Cr9-Bm-dSW" id="U7a-gE-MRE"/>
+                        <outlet property="viewCapsulesContainerView" destination="8Le-dB-JDz" id="4df-dQ-lhU"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="c7e-s0-ejQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1377,13 +1385,14 @@
                                     </mask>
                                 </variation>
                                 <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="17" y="7" width="368" height="31"/>
+                                    <rect key="frame" x="18" y="6" width="368" height="31"/>
                                 </variation>
                                 <connections>
                                     <action selector="onSegmentedControlValueChanged:" destination="7Xl-td-eUr" eventType="valueChanged" id="7Sw-s4-Mpa"/>
                                 </connections>
                             </segmentedControl>
                         </subviews>
+                        <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="trailingMargin" secondItem="176-jE-9B6" secondAttribute="trailing" constant="-16" id="74a-oh-OEh"/>
                             <constraint firstItem="VVo-uI-EQc" firstAttribute="top" secondItem="loW-9Y-mC8" secondAttribute="bottom" constant="8" id="74l-Mh-A1a"/>
@@ -1392,8 +1401,10 @@
                             <constraint firstItem="lkG-ai-fz1" firstAttribute="leading" secondItem="i5V-1V-tZh" secondAttribute="leadingMargin" constant="-16" id="E3o-1n-mfz"/>
                             <constraint firstItem="176-jE-9B6" firstAttribute="leading" secondItem="i5V-1V-tZh" secondAttribute="leadingMargin" constant="-16" id="L6m-Q1-N2H"/>
                             <constraint firstItem="VVo-uI-EQc" firstAttribute="trailing" secondItem="i5V-1V-tZh" secondAttribute="trailingMargin" id="LQo-g0-rhC"/>
+                            <constraint firstItem="176-jE-9B6" firstAttribute="top" secondItem="i5V-1V-tZh" secondAttribute="topMargin" id="O5o-ee-Zl0"/>
                             <constraint firstItem="176-jE-9B6" firstAttribute="leading" secondItem="i5V-1V-tZh" secondAttribute="leadingMargin" constant="-16" id="O7L-81-EL0"/>
                             <constraint firstItem="4PN-2K-2ap" firstAttribute="top" secondItem="176-jE-9B6" secondAttribute="bottom" id="Ovv-io-tly"/>
+                            <constraint firstItem="VVo-uI-EQc" firstAttribute="top" secondItem="i5V-1V-tZh" secondAttribute="topMargin" constant="8" id="PaL-q4-e02"/>
                             <constraint firstItem="lkG-ai-fz1" firstAttribute="top" secondItem="loW-9Y-mC8" secondAttribute="bottom" id="TjT-rx-2gc"/>
                             <constraint firstItem="VVo-uI-EQc" firstAttribute="trailing" secondItem="i5V-1V-tZh" secondAttribute="trailingMargin" id="VJT-uO-4g6"/>
                             <constraint firstItem="VVo-uI-EQc" firstAttribute="leading" secondItem="i5V-1V-tZh" secondAttribute="leadingMargin" id="Y3l-Pn-EZJ"/>
@@ -1421,6 +1432,7 @@
                                 <exclude reference="rKx-Xy-FHv"/>
                                 <exclude reference="74l-Mh-A1a"/>
                                 <exclude reference="LQo-g0-rhC"/>
+                                <exclude reference="PaL-q4-e02"/>
                                 <exclude reference="VJT-uO-4g6"/>
                                 <exclude reference="Y3l-Pn-EZJ"/>
                                 <exclude reference="bsz-vW-pWr"/>
@@ -1428,6 +1440,7 @@
                                 <exclude reference="74a-oh-OEh"/>
                                 <exclude reference="Cec-zR-AZG"/>
                                 <exclude reference="L6m-Q1-N2H"/>
+                                <exclude reference="O5o-ee-Zl0"/>
                                 <exclude reference="O7L-81-EL0"/>
                                 <exclude reference="mKy-kV-NJt"/>
                                 <exclude reference="y6I-nI-ueF"/>
@@ -1448,8 +1461,9 @@
                             <mask key="constraints">
                                 <include reference="Ovv-io-tly"/>
                                 <include reference="rKx-Xy-FHv"/>
-                                <include reference="74l-Mh-A1a"/>
+                                <exclude reference="74l-Mh-A1a"/>
                                 <include reference="LQo-g0-rhC"/>
+                                <include reference="PaL-q4-e02"/>
                                 <include reference="Y3l-Pn-EZJ"/>
                                 <include reference="Cec-zR-AZG"/>
                                 <include reference="L6m-Q1-N2H"/>
@@ -1472,8 +1486,9 @@
                                 <include reference="bsz-vW-pWr"/>
                                 <include reference="maf-Eg-yMp"/>
                                 <include reference="74a-oh-OEh"/>
+                                <include reference="O5o-ee-Zl0"/>
                                 <include reference="O7L-81-EL0"/>
-                                <include reference="mKy-kV-NJt"/>
+                                <exclude reference="mKy-kV-NJt"/>
                                 <include reference="E3o-1n-mfz"/>
                                 <include reference="dfm-Ev-zvh"/>
                                 <include reference="u4R-zP-GBy"/>
@@ -1493,7 +1508,7 @@
         <!--Capsule List View Controller-->
         <scene sceneID="NZY-3G-5QX">
             <objects>
-                <viewController automaticallyAdjustsScrollViewInsets="NO" id="yHn-iw-5rP" customClass="CapsuleListViewController" sceneMemberID="viewController">
+                <viewController id="yHn-iw-5rP" customClass="CapsuleListViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Li9-e8-fG2"/>
                         <viewControllerLayoutGuide type="bottom" id="cHl-Di-IXr"/>
@@ -1528,17 +1543,11 @@
                                                                     <exclude reference="ZvZ-zA-jRA"/>
                                                                 </mask>
                                                             </variation>
-                                                            <variation key="heightClass=compact" ambiguous="YES" misplaced="YES">
-                                                                <rect key="frame" x="123" y="59" width="126" height="18"/>
-                                                            </variation>
                                                             <variation key="widthClass=compact" misplaced="YES">
                                                                 <rect key="frame" x="88" y="62" width="88" height="18"/>
                                                                 <mask key="constraints">
                                                                     <include reference="ZvZ-zA-jRA"/>
                                                                 </mask>
-                                                            </variation>
-                                                            <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                                <rect key="frame" x="106" y="56" width="216" height="29"/>
                                                             </variation>
                                                         </label>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="HAI-ck-GMZ">
@@ -1552,9 +1561,6 @@
                                                                 <mask key="constraints">
                                                                     <exclude reference="9z9-7l-KXp"/>
                                                                 </mask>
-                                                            </variation>
-                                                            <variation key="heightClass=compact" misplaced="YES">
-                                                                <rect key="frame" x="28" y="8" width="70" height="70"/>
                                                             </variation>
                                                             <variation key="widthClass=compact">
                                                                 <mask key="constraints">
@@ -1579,9 +1585,6 @@
                                                                     <exclude reference="yuB-Rl-K3l"/>
                                                                 </mask>
                                                             </variation>
-                                                            <variation key="heightClass=compact" misplaced="YES">
-                                                                <rect key="frame" x="220" y="34" width="92" height="21"/>
-                                                            </variation>
                                                             <variation key="widthClass=compact" misplaced="YES">
                                                                 <rect key="frame" x="88" y="25" width="88" height="39"/>
                                                                 <mask key="constraints">
@@ -1589,9 +1592,6 @@
                                                                     <exclude reference="ae9-IO-Ibh"/>
                                                                     <include reference="yuB-Rl-K3l"/>
                                                                 </mask>
-                                                            </variation>
-                                                            <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                                <rect key="frame" x="140" y="35" width="92" height="21"/>
                                                             </variation>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="From" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vw2-gs-VU7">
@@ -1612,9 +1612,6 @@
                                                                 <mask key="constraints">
                                                                     <include reference="37R-qx-810"/>
                                                                 </mask>
-                                                            </variation>
-                                                            <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                                <rect key="frame" x="123" y="8" width="126" height="18"/>
                                                             </variation>
                                                         </label>
                                                     </subviews>
@@ -1659,8 +1656,8 @@
                                                             <exclude reference="zjL-gZ-Dxf"/>
                                                         </mask>
                                                     </variation>
-                                                    <variation key="heightClass=compact" fixedFrame="YES">
-                                                        <rect key="frame" x="8" y="7" width="584" height="86"/>
+                                                    <variation key="heightClass=compact" ambiguous="YES">
+                                                        <rect key="frame" x="0.0" y="0.0" width="0.0" height="0.0"/>
                                                     </variation>
                                                     <variation key="widthClass=compact" misplaced="YES">
                                                         <rect key="frame" x="28" y="8" width="184" height="88"/>
@@ -1752,9 +1749,12 @@
                             <constraint firstAttribute="trailingMargin" secondItem="6sN-U3-hhX" secondAttribute="trailing" constant="-16" id="AH3-hC-fwb"/>
                             <constraint firstItem="6sN-U3-hhX" firstAttribute="leading" secondItem="Hu5-cb-d6f" secondAttribute="leadingMargin" constant="-16" id="Aen-xm-rsq"/>
                             <constraint firstItem="6sN-U3-hhX" firstAttribute="leading" secondItem="Hu5-cb-d6f" secondAttribute="leadingMargin" constant="-16" id="ApP-rt-8Jc"/>
+                            <constraint firstItem="6sN-U3-hhX" firstAttribute="top" secondItem="Hu5-cb-d6f" secondAttribute="topMargin" id="Fef-to-3SM"/>
                             <constraint firstAttribute="trailingMargin" secondItem="6sN-U3-hhX" secondAttribute="trailing" constant="-16" id="GW0-Qj-B0R"/>
                             <constraint firstAttribute="trailing" secondItem="6sN-U3-hhX" secondAttribute="trailing" id="HGr-SJ-gcL"/>
-                            <constraint firstItem="6sN-U3-hhX" firstAttribute="bottom" secondItem="cHl-Di-IXr" secondAttribute="top" id="JY9-wu-IPr"/>
+                            <constraint firstItem="6sN-U3-hhX" firstAttribute="bottom" secondItem="cHl-Di-IXr" secondAttribute="top" id="JY9-wu-IPr">
+                                <variation key="widthClass=compact" constant="44"/>
+                            </constraint>
                             <constraint firstItem="cHl-Di-IXr" firstAttribute="top" secondItem="6sN-U3-hhX" secondAttribute="bottom" id="RMB-ea-JJs"/>
                             <constraint firstItem="6sN-U3-hhX" firstAttribute="top" secondItem="Hu5-cb-d6f" secondAttribute="top" id="TYn-cJ-csh"/>
                             <constraint firstItem="6sN-U3-hhX" firstAttribute="leading" secondItem="Hu5-cb-d6f" secondAttribute="leadingMargin" constant="-16" id="XUe-Ix-SDx"/>
@@ -1769,6 +1769,7 @@
                             <mask key="constraints">
                                 <exclude reference="4IK-Uf-GHd"/>
                                 <exclude reference="ApP-rt-8Jc"/>
+                                <exclude reference="Fef-to-3SM"/>
                                 <exclude reference="GW0-Qj-B0R"/>
                                 <exclude reference="HGr-SJ-gcL"/>
                                 <exclude reference="JY9-wu-IPr"/>
@@ -1801,9 +1802,10 @@
                             <mask key="constraints">
                                 <exclude reference="AH3-hC-fwb"/>
                                 <exclude reference="Aen-xm-rsq"/>
+                                <include reference="Fef-to-3SM"/>
                                 <include reference="HGr-SJ-gcL"/>
                                 <include reference="JY9-wu-IPr"/>
-                                <include reference="TYn-cJ-csh"/>
+                                <exclude reference="TYn-cJ-csh"/>
                                 <exclude reference="stk-si-8fa"/>
                                 <include reference="zCQ-Gp-zUu"/>
                                 <exclude reference="cTb-xH-IYu"/>
@@ -1836,7 +1838,7 @@
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="gSW-Fa-jHk">
                                 <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
-                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hga-wp-OP4">
                                 <rect key="frame" x="-23" y="-15" width="46" height="30"/>
@@ -3133,13 +3135,16 @@
         <!--Navigation Controller-->
         <scene sceneID="TA5-SX-Ndi">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="k4a-4n-S3M" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" toolbarHidden="NO" id="k4a-4n-S3M" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="TPp-Hx-8jF">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
+                    <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="UM8-8r-xqt">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </toolbar>
                     <connections>
                         <segue destination="yHn-iw-5rP" kind="relationship" relationship="rootViewController" id="u4f-Xi-GFz"/>
                     </connections>
@@ -3311,6 +3316,9 @@
                                                     <include reference="1Bc-0H-eEB"/>
                                                     <include reference="46b-VT-Qvc"/>
                                                 </mask>
+                                            </variation>
+                                            <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                <rect key="frame" x="88" y="27" width="225" height="47"/>
                                             </variation>
                                             <connections>
                                                 <action selector="onSendButtonPressed:" destination="FSh-ys-SKu" eventType="touchUpInside" id="Oio-qW-F6r"/>

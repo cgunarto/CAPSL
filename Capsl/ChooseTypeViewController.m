@@ -21,6 +21,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+
+    self.view.backgroundColor = [UIColor colorWithPatternImage:kChooseScreenWallpaper];
+
+
 }
 
 #pragma mark Segue

@@ -2,16 +2,18 @@
   "images" : [
     {
       "idiom" : "universal",
-      "scale" : "1x"
+      "scale" : "1x",
+      "filename" : "wallpaperRoad.png"
     },
     {
       "idiom" : "universal",
-      "scale" : "2x"
+      "scale" : "2x",
+      "filename" : "wallpaperRoad@2x.png"
     },
     {
       "idiom" : "universal",
       "scale" : "3x",
-      "filename" : "orange_space__stock__by_euderion-d78baao.jpg"
+      "filename" : "wallpaperRoad@3x.png"
     }
   ],
   "info" : {

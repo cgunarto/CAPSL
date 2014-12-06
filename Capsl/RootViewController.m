@@ -31,6 +31,8 @@
     self.sendCapsuleButton.alpha = 0;
     self.viewCapsulesButton.alpha = 0;
 
+    self.view.backgroundColor = [UIColor colorWithPatternImage:kSplashWallpaper];
+
 }
 
 //View did appear - for login/signup modal view
@@ -42,6 +44,11 @@
 
 }
 
+//- (BOOL)prefersStatusBarHidden
+//{
+//    
+//    return YES;
+//}
 
 -(void)manageLogin
 {
@@ -222,6 +229,7 @@
 {
 
     [self performSegueWithIdentifier:@"toMainViewControllerSegue" sender:sender];
+
 
 }
 
