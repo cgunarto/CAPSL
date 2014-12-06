@@ -2,16 +2,18 @@
   "images" : [
     {
       "idiom" : "universal",
-      "scale" : "1x"
+      "scale" : "1x",
+      "filename" : "wallpaperRoad.png"
     },
     {
       "idiom" : "universal",
       "scale" : "2x",
-      "filename" : "upload.jpg"
+      "filename" : "wallpaperRoad@2x.png"
     },
     {
       "idiom" : "universal",
-      "scale" : "3x"
+      "scale" : "3x",
+      "filename" : "wallpaperRoad@3x.png"
     }
   ],
   "info" : {
