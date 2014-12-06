@@ -90,7 +90,6 @@
 
 - (IBAction)onViewCapsulesButtonTapped:(UIBarButtonItem *)sender
 {
-
     [self showCapsulesVCContainer];
     
 }

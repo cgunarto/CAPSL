@@ -34,6 +34,8 @@
 {
     [super viewWillAppear:animated];
 
+    self.doNotShowActivityIndicator = YES;
+
     [Capslr returnCapslrFromPFUser:[PFUser currentUser] withCompletion:^(Capslr *currentCapslr, NSError *error) {
 
         self.currenCapslrInfo = @[currentCapslr.name, currentCapslr.username, currentCapslr.email];

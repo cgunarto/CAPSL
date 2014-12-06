@@ -12,6 +12,7 @@
 #import "JKCountDownTimer.h"
 #import "Capslr.h"
 #import "Capsl.h"
+#import "SVProgressHUD.h"
 
 @interface ViewCapsulesViewController ()
 
@@ -38,6 +39,7 @@
     self.capslListVC.availableCapslsArray = [@[] mutableCopy];
 
     [Capslr returnCapslrFromPFUser:[PFUser currentUser] withCompletion:^(Capslr *currentCapslr, NSError *error) {
+
         Capslr *capslr = [Capslr object];
         capslr.objectId = currentCapslr.objectId;
 
@@ -47,6 +49,8 @@
             {
                 self.timelineRootVC.capslsArray = objects;
                 self.capslListVC.capslsArray = objects;
+
+                [SVProgressHUD dismiss];
 
                 NSInteger availableCapslsCount = 0;
 
@@ -64,6 +68,7 @@
             }
             else
             {
+                [SVProgressHUD showErrorWithStatus:@"Connection Error"];
                 NSLog(@"%@", error.localizedDescription);
             }
         }];
@@ -74,7 +79,6 @@
             {
                 self.capslListVC.sentCapslsArray = objects;
                 self.timelineRootVC.sentCapslsArray = objects;
-                
             }
             else
             {

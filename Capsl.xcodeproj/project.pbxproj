@@ -59,6 +59,8 @@
 		8DAC42441A2A9BD400A8859A /* JCAMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DAC42431A2A9BD400A8859A /* JCAMainViewController.m */; };
 		8DE360601A2D6E5800DAE08C /* ViewCapsulesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DE3605F1A2D6E5800DAE08C /* ViewCapsulesViewController.m */; };
 		8DEA789B1A31206900271A8A /* CapsuleListBackground.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DEA789A1A31206900271A8A /* CapsuleListBackground.m */; };
+		905073921A32182900B40E45 /* SVProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 9050738F1A32182900B40E45 /* SVProgressHUD.m */; };
+		905073931A32182900B40E45 /* SVProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 905073901A32182900B40E45 /* SVProgressHUD.bundle */; };
 		905E900D1A2F9D9700BF32E3 /* EditProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 905E900C1A2F9D9700BF32E3 /* EditProfileViewController.m */; };
 		905E90101A2FA3FC00BF32E3 /* EditProfilePicTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 905E900F1A2FA3FC00BF32E3 /* EditProfilePicTableViewCell.m */; };
 		905E90131A2FE55600BF32E3 /* UpdateProfileInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 905E90121A2FE55600BF32E3 /* UpdateProfileInfoViewController.m */; };
@@ -170,6 +172,10 @@
 		8DEA789A1A31206900271A8A /* CapsuleListBackground.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CapsuleListBackground.m; path = ../CapsuleListBackground.m; sourceTree = "<group>"; };
 		8DEA789C1A313CFC00271A8A /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		8DEA789D1A313DA800271A8A /* ConstantsHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ConstantsHeader.h; sourceTree = "<group>"; };
+		9050738E1A32182900B40E45 /* SVProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVProgressHUD.h; sourceTree = "<group>"; };
+		9050738F1A32182900B40E45 /* SVProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVProgressHUD.m; sourceTree = "<group>"; };
+		905073901A32182900B40E45 /* SVProgressHUD.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = SVProgressHUD.bundle; sourceTree = "<group>"; };
+		905073911A32182900B40E45 /* SVProgressHUD-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SVProgressHUD-Prefix.pch"; sourceTree = "<group>"; };
 		905E900B1A2F9D9700BF32E3 /* EditProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditProfileViewController.h; sourceTree = "<group>"; };
 		905E900C1A2F9D9700BF32E3 /* EditProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditProfileViewController.m; sourceTree = "<group>"; };
 		905E900E1A2FA3FC00BF32E3 /* EditProfilePicTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditProfilePicTableViewCell.h; sourceTree = "<group>"; };
@@ -271,6 +277,7 @@
 				8D5A3DE21A2A4B4D00A6485A /* Categories */,
 				8D1B839E1A2FC55F00C0121F /* Images 14-23-23-125.xcassets */,
 				4F69EBD01A252331009625AA /* LaunchScreen.xib */,
+				905073941A32183900B40E45 /* Custom Activity Indicator */,
 				4F69EBC11A252331009625AA /* Supporting Files */,
 			);
 			path = Capsl;
@@ -446,6 +453,17 @@
 			name = "View Capsules";
 			sourceTree = "<group>";
 		};
+		905073941A32183900B40E45 /* Custom Activity Indicator */ = {
+			isa = PBXGroup;
+			children = (
+				9050738E1A32182900B40E45 /* SVProgressHUD.h */,
+				9050738F1A32182900B40E45 /* SVProgressHUD.m */,
+				905073901A32182900B40E45 /* SVProgressHUD.bundle */,
+				905073911A32182900B40E45 /* SVProgressHUD-Prefix.pch */,
+			);
+			name = "Custom Activity Indicator";
+			sourceTree = "<group>";
+		};
 		90CE52D61A27C5200033087E /* Capsl List View */ = {
 			isa = PBXGroup;
 			children = (
@@ -544,6 +562,7 @@
 				4F69EBCD1A252331009625AA /* Main.storyboard in Resources */,
 				8D1B839F1A2FC55F00C0121F /* Images 14-23-23-125.xcassets in Resources */,
 				4F69EBD21A252331009625AA /* LaunchScreen.xib in Resources */,
+				905073931A32182900B40E45 /* SVProgressHUD.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -584,6 +603,7 @@
 				905E90101A2FA3FC00BF32E3 /* EditProfilePicTableViewCell.m in Sources */,
 				4FC4EA181A2B021D00D3D09D /* RecordAudioViewController.m in Sources */,
 				4F69EC221A253D2B009625AA /* Capsl.m in Sources */,
+				905073921A32182900B40E45 /* SVProgressHUD.m in Sources */,
 				4F69EC341A291C92009625AA /* AddressContactViewController.m in Sources */,
 				4F69EC1F1A253BE5009625AA /* Capslr.m in Sources */,
 				4F72437E1A314F97002CC918 /* PickerTableViewCell.m in Sources */,

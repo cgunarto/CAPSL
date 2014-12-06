@@ -9,6 +9,7 @@
 #import "ChooseTypeViewController.h"
 #import "RecordAudioViewController.h"
 #import "CaptureViewController.h"
+#import "SVProgressHUD.h"
 
 @interface ChooseTypeViewController ()
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;

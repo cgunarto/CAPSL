@@ -41,8 +41,9 @@
                      animations:^{
                          destinationViewController.view.alpha = 1;                     }
                      completion:^(BOOL finished){
-                         [destinationViewController.view removeFromSuperview]; // remove from temp super view
                          [sourceViewController presentViewController:destinationViewController animated:NO completion:NULL]; // present VC
+                         [destinationViewController.view removeFromSuperview]; // remove from temp super view
+
                      }];
 
 
