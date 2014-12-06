@@ -14,9 +14,11 @@
 #import "SignUpViewController.h"
 #import "JCAMainViewController.h"
 
-@interface RootViewController () <PFLogInViewControllerDelegate, PFSignUpViewControllerDelegate>
+@interface RootViewController () <PFLogInViewControllerDelegate, PFSignUpViewControllerDelegate, UIAlertViewDelegate>
 @property (strong, nonatomic) IBOutlet UIButton *sendCapsuleButton;
 @property (strong, nonatomic) IBOutlet UIButton *viewCapsulesButton;
+
+@property UITextField *verificationCode;
 
 @end
 
@@ -167,14 +169,13 @@
     //Display an alert if field wasn't completed
     if (!informationComplete) {
         [[[UIAlertView alloc] initWithTitle:@"Missing Information" message:@"Make sure you fill out all of the information" delegate:nil cancelButtonTitle:@"ok" otherButtonTitles:nil] show];
+
+//        UIAlertView * alert =[[UIAlertView alloc ] initWithTitle:@"Phone Number Verification" message:@"Enter your code" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles: nil];
+//        alert.alertViewStyle = UIAlertViewStylePlainTextInput;
+//        [alert addButtonWithTitle:@"Ok"];
+//        [alert show];
+
     }
-
-    [PFCloud callFunctionInBackground:@"sendVerificationCode" withParameters:@{@"phoneNumber":signUpController.signUpView.additionalField.text}];
-
-    UIAlertView * alert =[[UIAlertView alloc ] initWithTitle:@"Phone Number Verification" message:@"Enter your code" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles: nil];
-    alert.alertViewStyle = UIAlertViewStylePlainTextInput;
-    [alert addButtonWithTitle:@"Ok"];
-    [alert show];
 
     return informationComplete;
 }
@@ -188,6 +189,15 @@
     capslr.phone = signUpController.signUpView.additionalField.text;
     capslr.user = user;
 
+    [PFCloud callFunctionInBackground:@"sendVerificationCode" withParameters:@{@"phoneNumber":signUpController.signUpView.additionalField.text}];
+
+    UIAlertView * alert =[[UIAlertView alloc ] initWithTitle:@"Phone Number Verification" message:@"Enter your code" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles: nil];
+    alert.alertViewStyle = UIAlertViewStylePlainTextInput;
+    [alert addButtonWithTitle:@"Ok"];
+    [alert show];
+
+
+
     [capslr saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         if (error)
         {
@@ -200,6 +210,56 @@
             [self dismissViewControllerAnimated:YES completion:nil];
         }
     }];
+}
+
+- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == 1)
+    {
+        UITextField *verificationCode = [alertView textFieldAtIndex:0];
+
+        [PFCloud callFunctionInBackground:@"verifyPhoneNumber" withParameters:@{@"phoneVerificationCode":verificationCode.text} block:^(id object, NSError *error) {
+            if ([object isEqualToString:@"Success"])
+            {
+                NSLog(@"PHONE NUMBER VERIFIED!!!");
+            }
+            else
+            {
+                NSLog(@"WRONG CODE!!");
+
+                [Capslr returnCapslrFromPFUser:[PFUser currentUser] withCompletion:^(Capslr *currentCapslr, NSError *error) {
+                    if (!error) {
+                        [currentCapslr deleteInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+                            if (!error)
+                            {
+                                [[PFUser currentUser] deleteInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+                                    if (!error)
+                                    {
+                                        [PFUser logOut];
+                                        [self manageLogin];
+                                    }
+                                }];
+                            }
+                        }];
+                    }
+                }];
+
+
+//                [[PFUser currentUser] deleteInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+//                    if (!error)
+//                    {
+//                        PFQuery *query = [Capslr query];
+//                        [query whereKey:@"objectId" equalTo:<#(id)#>]
+//
+//
+//                        [PFUser logOut];
+//                        [self manageLogin];
+//                    }
+//                }];
+            }
+        }];
+
+    }
 }
 
 //Sent the delegate when the sign up attempt fails
