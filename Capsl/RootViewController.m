@@ -214,6 +214,27 @@
 
 - (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
 {
+
+    if (buttonIndex == 0)
+    {
+        [Capslr returnCapslrFromPFUser:[PFUser currentUser] withCompletion:^(Capslr *currentCapslr, NSError *error) {
+            if (!error) {
+                [currentCapslr deleteInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+                    if (!error)
+                    {
+                        [[PFUser currentUser] deleteInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+                            if (!error)
+                            {
+                                [PFUser logOut];
+                                [self manageLogin];
+                            }
+                        }];
+                    }
+                }];
+            }
+        }];
+    }
+
     if (buttonIndex == 1)
     {
         UITextField *verificationCode = [alertView textFieldAtIndex:0];
