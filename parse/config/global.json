@@ -1,0 +1,11 @@
+{
+    "applications": {
+        "CAPSL": {
+            "applicationId": "5JY7Z39SraGkmGmWprsSCyUBRKVk9T58IPDygfl1", 
+            "masterKey": "Cm5oNuUTTrfznq8SR9YEJUM3JHXCZGEwsKtYMeMi"
+        }, 
+        "_default": {
+            "link": "CAPSL"
+        }
+    }
+}
