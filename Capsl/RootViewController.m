@@ -14,9 +14,11 @@
 #import "SignUpViewController.h"
 #import "JCAMainViewController.h"
 
-@interface RootViewController () <PFLogInViewControllerDelegate, PFSignUpViewControllerDelegate>
+@interface RootViewController () <PFLogInViewControllerDelegate, PFSignUpViewControllerDelegate, NSLayoutManagerDelegate>
 @property (strong, nonatomic) IBOutlet UIButton *sendCapsuleButton;
 @property (strong, nonatomic) IBOutlet UIButton *viewCapsulesButton;
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *viewButtonRightConstraint;
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *sendButtonLeftConstraint;
 
 @end
 
@@ -30,6 +32,18 @@
 
     self.sendCapsuleButton.alpha = 0;
     self.viewCapsulesButton.alpha = 0;
+
+    self.sendCapsuleButton.layer.cornerRadius = 20;
+    self.sendCapsuleButton.layer.borderColor = [[UIColor whiteColor] CGColor];
+    self.sendCapsuleButton.layer.borderWidth = 1;
+
+    self.viewCapsulesButton.layer.cornerRadius = 20;
+    self.viewCapsulesButton.layer.borderColor = [[UIColor whiteColor] CGColor];
+    self.viewCapsulesButton.layer.borderWidth = 1;
+
+
+    self.sendButtonLeftConstraint.constant = [[UIScreen mainScreen] bounds].size.width * 0.5;
+    self.viewButtonRightConstraint.constant = [[UIScreen mainScreen] bounds].size.width * 0.5;
 
     self.view.backgroundColor = [UIColor colorWithPatternImage:kSplashWallpaper];
 
