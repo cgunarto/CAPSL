@@ -117,31 +117,6 @@
             }];
         }
     }];
-
-//    [Capslr returnCapslrFromPFUser:[PFUser currentUser] withCompletion:^(Capslr *currentCapslr, NSError *error) {
-//
-//        if (!error) {
-//            if (!currentCapslr.name) {
-//                currentCapslr.name = @"No Name";
-//                [currentCapslr save];
-//            }
-//        }
-//
-//        self.currentCapslrInfo = @[currentCapslr.name, currentCapslr.username, currentCapslr.email];
-//
-//        [currentCapslr.profilePhoto getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
-//
-//            self.profilePictureImageView.layer.cornerRadius = self.profilePictureImageView.frame.size.width/2;
-//            self.profilePictureImageView.clipsToBounds = YES;
-//
-//            self.profilePictureImageView.image = [UIImage imageWithData:data];
-//
-//            self.navigationItem.rightBarButtonItem.enabled = YES;
-//
-//            // Unhide the Edit button once the image finishes loading
-//            [SVProgressHUD dismiss];
-//        }];
-//    }];
 }
 
 //Segmented control toggles between CAPSLR and ADDRESS BOOK contact
