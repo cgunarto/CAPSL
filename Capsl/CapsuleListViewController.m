@@ -33,10 +33,7 @@
     [super viewDidLoad];
 
     self.view.backgroundColor = [UIColor clearColor];
-
-
 //    self.tableView.contentInset = UIEdgeInsetsMake(self.navigationController.navigationBar.frame.size.height + 20, 0, 44, 0);
-
     self.availableCapslsCount = 0;
 
     self.senderPics = [@[] mutableCopy];
@@ -223,7 +220,6 @@
             capsl.viewedAt = [NSDate date];
             [capsl saveInBackground];
 
-            #warning Check if this works when testflight is sent
             //SENDING PUSH MESSAGE to the sender, when CAPSL is viewed by recipient
             PFQuery *pushQuery = [PFInstallation query];
             [pushQuery whereKey:@"capslr" equalTo:capsl.sender];

@@ -72,9 +72,10 @@
                 //Notification for when app is unlocked
                 //Clear all local notifications
                 //TODO:How will the app refresh if user hasn't been inside the app for a long time
+                //TODO:If there are more than one message to be 
                 [[UIApplication sharedApplication] cancelAllLocalNotifications];
 
-                //Check for ViewedAt Capsls and add it to the array
+                //Check for unviewed capsl and add it to the array
                 for (Capsl *capsl in objects)
                 {
                     if (capsl.viewedAt == nil)

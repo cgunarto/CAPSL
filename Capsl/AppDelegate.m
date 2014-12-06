@@ -17,6 +17,7 @@
 @implementation AppDelegate
 
 
+//In regards to push notification: this is called whenuser taps the default button in the alert or tap/click the app icon
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     //Correct applicationID and client key for Parse - Capsl
@@ -75,6 +76,8 @@
 {
     
 }
+
+//In regards to push notification: this is called whenuser taps the DEFAULT button in the alert or tap/click the app icon
 //Allows Parse to create a modal alert and display the push notification's content when a push is received when the app is active.
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
 {
@@ -84,12 +87,11 @@
 //If the app is running while local notification is delivered
 - (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification
 {
-    //TODO:Figure out how to do this with UIAlertController
+    //TODO:Figure out how to do this with UIAlertController, can't present AlertController via AppDelegate right now
     UIApplicationState state = [application applicationState];
     if (state == UIApplicationStateActive)
     {
-
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Message unlocked"
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"You've got messages!"
                                                         message:notification.alertBody
                                                        delegate:self cancelButtonTitle:@"OK"
                                               otherButtonTitles:nil];
