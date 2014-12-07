@@ -487,9 +487,7 @@
 - (void)verticalCenterText
 {
 
-    CGFloat height = ceilf([self.textView sizeThatFits:self.textView.frame.size].height);
-
-    CGFloat topoffset = ([self.textView bounds].size.height + height * [self.textView zoomScale])/2.0;
+    CGFloat topoffset = ([self.textView bounds].size.height - [self.textView contentSize].height * [self.textView zoomScale])/2.0;
     topoffset = ( topoffset < 0.0 ? 0.0 : topoffset );
     self.textView.contentOffset = (CGPoint){.x = 0, .y = -topoffset};
 
