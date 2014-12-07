@@ -32,6 +32,21 @@
     [super viewDidLoad];
 //    [PFUser logOut];
 
+    // Check to see if user quit before entering verification code
+
+    [Capslr returnCapslrFromPFUser:[PFUser currentUser] withCompletion:^(Capslr *currentCapslr, NSError *error) {
+        if (!currentCapslr.name)
+        {
+            [[PFUser currentUser] deleteInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+                if (!error)
+                {
+                    [PFUser logOut];
+                    [self manageLogin];
+                }
+            }];
+        }
+    }];
+
     self.sendCapsuleButton.alpha = 0;
     self.viewCapsulesButton.alpha = 0;
 
@@ -262,6 +277,10 @@
             if ([object isEqualToString:@"Success"])
             {
                 NSLog(@"PHONE NUMBER VERIFIED!!!");
+                [Capslr returnCapslrFromPFUser:[PFUser currentUser] withCompletion:^(Capslr *currentCapslr, NSError *error) {
+                    currentCapslr.name = @"No Name";
+                    [currentCapslr save];
+                }];
             }
             else
             {
