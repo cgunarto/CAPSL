@@ -301,83 +301,6 @@
 }
 
 
-- (IBAction)onImageTapped:(UITapGestureRecognizer *)sender
-{
-    //Trigger an action sheet, 1 goes to camera, 2 goes to photo folder
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"SELECT IMAGE SOURCE" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
-
-    UIAlertAction *cameraButton = [UIAlertAction actionWithTitle:@"Camera"
-                                                           style:UIAlertActionStyleDefault
-                                                         handler:^(UIAlertAction *action)
-                                   {
-
-
-                                       if (![UIImagePickerController isSourceTypeAvailable: UIImagePickerControllerSourceTypeCamera])
-                                       {
-                                           UIAlertView *myAlertView = [[UIAlertView alloc] initWithTitle:@"Error"
-                                                                                                 message:@"Device has no camera"
-                                                                                                delegate:nil
-                                                                                       cancelButtonTitle:@"OK"
-                                                                                       otherButtonTitles: nil];
-                                           [myAlertView show];
-
-                                       }
-                                       
-                                       else
-                                       {
-                                           UIImagePickerController *picker = [[UIImagePickerController alloc] init];
-                                           picker.delegate = self;
-                                           picker.allowsEditing = YES;
-                                           picker.sourceType = UIImagePickerControllerSourceTypeCamera;
-                                           
-                                           
-                                           [self presentViewController:picker animated:YES completion:NULL];
-                                       }
-
-                                       [alert dismissViewControllerAnimated:YES completion:nil];
-
-                                   }];
-
-
-    UIAlertAction *libraryButton = [UIAlertAction actionWithTitle:@"Photo Library"
-                                                           style:UIAlertActionStyleDefault
-                                                         handler:^(UIAlertAction *action)
-                                   {
-                                       UIImagePickerController *picker = [[UIImagePickerController alloc] init];
-                                       picker.delegate = self;
-                                       picker.allowsEditing = YES;
-                                       picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-
-                                       [self presentViewController:picker animated:YES completion:NULL];
-
-                                       [alert dismissViewControllerAnimated:YES completion:nil];
-                                       
-                                   }];
-
-
-
-    UIAlertAction* cancelButton = [UIAlertAction actionWithTitle:@"Cancel"
-                                                           style:UIAlertActionStyleCancel
-                                                         handler:^(UIAlertAction * action)
-                                   {
-                                       [alert dismissViewControllerAnimated:YES completion:nil];
-
-                                   }];
-
-    [alert addAction:cameraButton];
-    [alert addAction:libraryButton];
-    [alert addAction:cancelButton];
-
-    [self presentViewController:alert
-                       animated:YES
-                     completion:nil];
-
-
-
-}
-
-
-
 //Not called when isEditing is NO
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
@@ -465,9 +388,9 @@
     [self.navigationController setNavigationBarHidden:YES animated:YES];
     self.characterCountLabel.hidden = NO;
 
-    [self verticalCenterText];
-
     [self shouldMoveViewUpForKeyboard:YES];
+
+    [self verticalCenterText];
 
     self.enterTextButton.hidden = YES;
 
@@ -523,10 +446,12 @@
     return YES;
 }
 
-- (void)textViewDidChangeSelection:(UITextView *)textView
+- (IBAction)onEditTextButtonPressed:(UIButton *)sender
 {
-//    [self verticalCenterText];
+
+    [self.textView becomeFirstResponder];
 }
+
 
 #pragma mark Text View Observer for center vert align
 

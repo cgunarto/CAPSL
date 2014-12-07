@@ -835,9 +835,6 @@
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <gestureRecognizers/>
-                                <connections>
-                                    <outletCollection property="gestureRecognizers" destination="c4q-uJ-KCm" appends="YES" id="iwv-Fh-SUF"/>
-                                </connections>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tap to change image" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VHH-hP-3OW">
                                 <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
@@ -957,6 +954,9 @@
                                         <include reference="oI0-c0-PIe"/>
                                     </mask>
                                 </variation>
+                                <connections>
+                                    <action selector="onEditTextButtonPressed:" destination="ILH-s3-dTC" eventType="touchUpInside" id="F0o-Ow-bha"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ygr-Gb-nbm" userLabel="Add Photo Button">
                                 <rect key="frame" x="-23" y="-15" width="46" height="30"/>
@@ -1143,12 +1143,6 @@
                         <action selector="onDoneButtonPressed:" destination="ILH-s3-dTC" id="ckK-pm-aqO"/>
                     </connections>
                 </barButtonItem>
-                <tapGestureRecognizer id="c4q-uJ-KCm">
-                    <connections>
-                        <action selector="onImageTapped:" destination="ILH-s3-dTC" id="jrb-gl-hvD"/>
-                        <outlet property="delegate" destination="ILH-s3-dTC" id="db2-B6-hyP"/>
-                    </connections>
-                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="3910.5" y="438"/>
         </scene>
