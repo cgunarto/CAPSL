@@ -20,6 +20,8 @@
 
 @property (nonatomic, strong) NSString *objectId;
 
+@property (nonatomic) BOOL isVerified;
+
 + (void)returnCapslrWithContactsArray:(NSArray *)Contacts withCompletion:(void(^)(NSArray *capslrObjectsArray, NSError *error))complete;
 + (void)returnCapslrFromPFUser:(PFUser *)user withCompletion:(void(^)(Capslr *currentCapslr, NSError *error))complete;
 

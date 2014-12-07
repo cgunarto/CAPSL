@@ -32,6 +32,30 @@
     [super viewDidLoad];
 //    [PFUser logOut];
 
+    // Check to see if user quit before entering verification code
+
+    if ([PFUser currentUser])
+    {
+        [Capslr returnCapslrFromPFUser:[PFUser currentUser] withCompletion:^(Capslr *currentCapslr, NSError *error) {
+            if (!currentCapslr.isVerified)
+            {
+                [currentCapslr deleteInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+                    if (!error)
+                    {
+                        [[PFUser currentUser] deleteInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+                            if (!error)
+                            {
+                                [PFUser logOut];
+                                [self manageLogin];
+                            }
+                        }];
+                    }
+                }];
+            }
+        }];
+    }
+
+
     self.sendCapsuleButton.alpha = 0;
     self.viewCapsulesButton.alpha = 0;
 
@@ -174,21 +198,39 @@
     //Loop through all submitted data
     for (id key in info) {
         NSString *field = [info objectForKey:key];
-        if (!field || field.length == 0) {
+        if (!field || field.length == 0)
+        {
             informationComplete = NO;
-            break;
         }
+
+        else if (![signUpController.signUpView.additionalField.text hasPrefix:@"1"] && signUpController.signUpView.additionalField.text.length <= 11 && signUpController.signUpView.additionalField.text.length != 10)
+        {
+            informationComplete = NO;
+
+        }
+
+        else if (![signUpController.signUpView.additionalField.text hasPrefix:@"1"] && signUpController.signUpView.additionalField.text.length >= 11)
+        {
+            informationComplete = NO;
+        }
+
+        else if ([signUpController.signUpView.additionalField.text hasPrefix:@"1"] && signUpController.signUpView.additionalField.text.length != 11)
+        {
+            informationComplete = NO;
+        }
+
+        else if (![signUpController.signUpView.additionalField.text hasPrefix:@"1"] && signUpController.signUpView.additionalField.text.length == 10)
+        {
+            signUpController.signUpView.additionalField.text = [NSString stringWithFormat:@"1%@", field];
+            informationComplete = YES;
+        }
+
     }
 
     //Display an alert if field wasn't completed
     if (!informationComplete) {
-        [[[UIAlertView alloc] initWithTitle:@"Missing Information" message:@"Make sure you fill out all of the information" delegate:nil cancelButtonTitle:@"ok" otherButtonTitles:nil] show];
 
-//        UIAlertView * alert =[[UIAlertView alloc ] initWithTitle:@"Phone Number Verification" message:@"Enter your code" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles: nil];
-//        alert.alertViewStyle = UIAlertViewStylePlainTextInput;
-//        [alert addButtonWithTitle:@"Ok"];
-//        [alert show];
-
+        [[[UIAlertView alloc] initWithTitle:@"Incorrect Information" message:@"Make sure you fill out all of the information correctly" delegate:nil cancelButtonTitle:@"ok" otherButtonTitles:nil] show];
     }
 
     return informationComplete;
@@ -257,6 +299,10 @@
             if ([object isEqualToString:@"Success"])
             {
                 NSLog(@"PHONE NUMBER VERIFIED!!!");
+                [Capslr returnCapslrFromPFUser:[PFUser currentUser] withCompletion:^(Capslr *currentCapslr, NSError *error) {
+                    currentCapslr.isVerified = YES;
+                    [currentCapslr save];
+                }];
             }
             else
             {

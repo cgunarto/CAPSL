@@ -18,6 +18,7 @@
 @dynamic phone;
 @dynamic profilePhoto;
 @dynamic friends;
+@dynamic isVerified;
 
 @dynamic objectId;
 

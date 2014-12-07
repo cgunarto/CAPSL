@@ -118,6 +118,7 @@
             else
             {
                 [self invalidEmailAlert];
+                [SVProgressHUD dismiss];
             }
         }
     }];
