@@ -34,26 +34,26 @@
 
     // Check to see if user quit before entering verification code
 
-    if ([PFUser currentUser])
-    {
-        [Capslr returnCapslrFromPFUser:[PFUser currentUser] withCompletion:^(Capslr *currentCapslr, NSError *error) {
-            if (!currentCapslr.name)
-            {
-                [currentCapslr deleteInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-                    if (!error)
-                    {
-                        [[PFUser currentUser] deleteInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-                            if (!error)
-                            {
-                                [PFUser logOut];
-                                [self manageLogin];
-                            }
-                        }];
-                    }
-                }];
-            }
-        }];
-    }
+//    if ([PFUser currentUser])
+//    {
+//        [Capslr returnCapslrFromPFUser:[PFUser currentUser] withCompletion:^(Capslr *currentCapslr, NSError *error) {
+//            if (!currentCapslr.name)
+//            {
+//                [currentCapslr deleteInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+//                    if (!error)
+//                    {
+//                        [[PFUser currentUser] deleteInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+//                            if (!error)
+//                            {
+//                                [PFUser logOut];
+//                                [self manageLogin];
+//                            }
+//                        }];
+//                    }
+//                }];
+//            }
+//        }];
+//    }
 
 
     self.sendCapsuleButton.alpha = 0;
