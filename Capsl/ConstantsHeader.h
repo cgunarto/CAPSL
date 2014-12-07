@@ -16,6 +16,8 @@
 #define kSplashWallpaper [UIImage imageNamed:@"wallpaperRoad"]
 #define kViewCapsulesWallpaper [UIImage imageNamed:@"wallpaperRoad_blurred"]
 #define kChooseScreenWallpaper [UIImage imageNamed:@"wallpaperRoad_blurred"]
-#define kTimelineWallpaper [UIImage imageNamed:@"wallpaperSpace_blurred"]
+#define kTimelineWallpaper [UIImage imageNamed:@"lake"]
+#define kTimelineWallpaperSent [UIImage imageNamed:@"china"]
+#define kTimelineWallpaperReceived [UIImage imageNamed:@"china"]
 
 #endif
