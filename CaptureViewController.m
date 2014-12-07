@@ -13,6 +13,8 @@
 #import "Capslr.h"
 #define kOFFSET_FOR_KEYBOARD 200
 #define kImageResolution 0.2f
+#define kTextViewDistanceFromBottom 100.0f
+#define kCharacterLimit 120
 
 @interface CaptureViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextViewDelegate>
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
@@ -24,10 +26,14 @@
 @property (weak, nonatomic) IBOutlet UITextView *textView;
 @property (weak, nonatomic) IBOutlet UIButton *addAudioButton;
 @property (weak, nonatomic) IBOutlet UILabel *characterCountLabel;
+@property (strong, nonatomic) IBOutlet UIButton *enterTextButton;
+@property (strong, nonatomic) IBOutlet UIButton *addPhotoButton;
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *bottomTextViewConstraint;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *bottomAddAudioConstraint;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *bottomLabelConstraint;
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *addAudioButtonCenterYConstraint;
+
+@property CGSize kbSize;
 
 #pragma mark NOT EDITING ONLY properties
 @property (weak, nonatomic) IBOutlet UIButton *exitButton;
@@ -41,6 +47,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+
 
     //If VC isEditing, it is trying to create a Capsl message
     if (self.isEditing)
@@ -64,12 +71,16 @@
         self.imageView.userInteractionEnabled = YES;
         self.textView.userInteractionEnabled = YES;
 
+        [self processButton:self.enterTextButton withImageName:@"lowercase-50"];
+        [self processButton:self.addPhotoButton withImageName:@"camera-50"];
+        [self processButton:self.addAudioButton withImageName:@"audio_wave-50"];
+
     }
 
     //If VC isEditing is NO, it is trying to unwrap and display a CPSL message
     else
     {
-        self.characterCountLabel.hidden = YES;
+
         self.tapToChangeLabel.hidden = YES;
 
         self.imageView.userInteractionEnabled = NO;
@@ -109,6 +120,7 @@
 
     }
 
+
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -119,12 +131,12 @@
     {
         // register for keyboard notifications
         [[NSNotificationCenter defaultCenter] addObserver:self
-                                                 selector:@selector(keyboardWillShow)
+                                                 selector:@selector(keyboardWillShow:)
                                                      name:UIKeyboardWillShowNotification
                                                    object:nil];
 
         [[NSNotificationCenter defaultCenter] addObserver:self
-                                                 selector:@selector(keyboardWillHide)
+                                                 selector:@selector(keyboardWillHide:)
                                                      name:UIKeyboardWillHideNotification
                                                    object:nil];
         if (self.createdCapsl.audio)
@@ -132,6 +144,7 @@
             [self.addAudioButton setTitle:@"Audio added - tap to edit" forState:UIControlStateNormal];
         }
     }
+
 
 }
 
@@ -152,73 +165,55 @@
     }
 }
 
-- (void)keyboardWillShow
+# pragma mark - keyboard behavior
+
+- (void)keyboardWillShow:(NSNotification *)notification
 {
     if (self.isEditing)
     {
         //If image is not nil, move the keyboard up by Keyboard height
         //If image is nil, don't do anything
-        if (self.imageView.image)
-        {
-            CGRect rect = [[UIApplication sharedApplication] keyWindow].frame;
-            rect.origin.y -= kOFFSET_FOR_KEYBOARD;
-            rect.size.height += kOFFSET_FOR_KEYBOARD;
-            [[UIApplication sharedApplication] keyWindow].frame = rect;
 
-            // Animate the current view out of the way
-            if ([[UIApplication sharedApplication] keyWindow].frame.origin.y >= 0)
-            {
-                [self setViewMovedUp:YES];
-            }
-            else if ([[UIApplication sharedApplication] keyWindow].frame.origin.y < 0)
-            {
-                [self setViewMovedUp:NO];
-            }
-        }
+        NSDictionary *userInfo = [notification userInfo];
+        self.kbSize = [[userInfo objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
+
     }
 }
 
-- (void)keyboardWillHide
+- (void)keyboardWillHide:(NSNotification *)notification
 {
-    if (self.isEditing)
-    {
-        //If image is not nil, move the keyboard down by Keyboard height
-        //If image is nil, don't do anything
-        if (self.imageView.image)
-        {
-            // Animate the current view out of the way
-            if ([[UIApplication sharedApplication] keyWindow].frame.origin.y >= 0)
-            {
-                [self setViewMovedUp:YES];
-            }
-            else if ([[UIApplication sharedApplication] keyWindow].frame.origin.y < 0)
-            {
-                [self setViewMovedUp:NO];
-            }
-        }
-    }
+
+    NSDictionary *userInfo = [notification userInfo];
+    self.kbSize = [[userInfo objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
+
 }
 
 //method to move the view up/down whenever the keyboard is shown/dismissed
 //is NOT called when isEditing is NO
--(void)setViewMovedUp:(BOOL)movedUp
+-(void)shouldMoveViewUpForKeyboard:(BOOL)moveUp
 {
     [UIView beginAnimations:nil context:NULL];
     [UIView setAnimationDuration:0.3]; // if you want to slide up the view
 
     //Move the whole application's frame instead of the view
     CGRect rect = [[UIApplication sharedApplication] keyWindow].frame;
-    if (movedUp)
+    CGFloat textViewDistFromBottom = (rect.size.height - self.textView.frame.origin.y - self.textView.frame.size.height);
+
+    NSLog(@"%f", self.textView.frame.origin.y);
+    NSLog(@"%f", self.textView.frame.size.height);
+
+
+    if (moveUp)
     {
         // 1. move the view's origin up so that the text field that will be hidden come above the keyboard
         // 2. increase the size of the view so that the area behind the keyboard is covered up.
-        rect.origin.y -= kOFFSET_FOR_KEYBOARD;
+        rect.origin.y -= (self.kbSize.height - textViewDistFromBottom);
         rect.size.height = [UIScreen mainScreen].bounds.size.height;
     }
     else
     {
         // revert back to the normal state.
-        rect.origin.y += kOFFSET_FOR_KEYBOARD;
+        rect.origin.y += (self.kbSize.height - textViewDistFromBottom);
         rect.size.height = [UIScreen mainScreen].bounds.size.height;
     }
     [[UIApplication sharedApplication] keyWindow].frame = rect;
@@ -230,6 +225,82 @@
 #pragma mark Image Picker Related Methods
 
 //ImageView does not have user interaction enabled so the method below will not be enabled when editing
+
+- (IBAction)onAddPhotoButtonTapped:(UIButton *)sender
+{
+
+    //Trigger an action sheet, 1 goes to camera, 2 goes to photo folder
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"SELECT IMAGE SOURCE" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+
+    UIAlertAction *cameraButton = [UIAlertAction actionWithTitle:@"Camera"
+                                                           style:UIAlertActionStyleDefault
+                                                         handler:^(UIAlertAction *action)
+                                   {
+
+
+                                       if (![UIImagePickerController isSourceTypeAvailable: UIImagePickerControllerSourceTypeCamera])
+                                       {
+                                           UIAlertView *myAlertView = [[UIAlertView alloc] initWithTitle:@"Error"
+                                                                                                 message:@"Device has no camera"
+                                                                                                delegate:nil
+                                                                                       cancelButtonTitle:@"OK"
+                                                                                       otherButtonTitles: nil];
+                                           [myAlertView show];
+
+                                       }
+
+                                       else
+                                       {
+                                           UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+                                           picker.delegate = self;
+                                           picker.allowsEditing = YES;
+                                           picker.sourceType = UIImagePickerControllerSourceTypeCamera;
+
+
+                                           [self presentViewController:picker animated:YES completion:NULL];
+                                       }
+
+                                       [alert dismissViewControllerAnimated:YES completion:nil];
+
+                                   }];
+
+
+    UIAlertAction *libraryButton = [UIAlertAction actionWithTitle:@"Photo Library"
+                                                            style:UIAlertActionStyleDefault
+                                                          handler:^(UIAlertAction *action)
+                                    {
+                                        UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+                                        picker.delegate = self;
+                                        picker.allowsEditing = YES;
+                                        picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+
+                                        [self presentViewController:picker animated:YES completion:NULL];
+
+                                        [alert dismissViewControllerAnimated:YES completion:nil];
+
+                                    }];
+
+
+
+    UIAlertAction* cancelButton = [UIAlertAction actionWithTitle:@"Cancel"
+                                                           style:UIAlertActionStyleCancel
+                                                         handler:^(UIAlertAction * action)
+                                   {
+                                       [alert dismissViewControllerAnimated:YES completion:nil];
+                                       
+                                   }];
+    
+    [alert addAction:cameraButton];
+    [alert addAction:libraryButton];
+    [alert addAction:cancelButton];
+    
+    [self presentViewController:alert
+                       animated:YES
+                     completion:nil];
+
+}
+
+
 - (IBAction)onImageTapped:(UITapGestureRecognizer *)sender
 {
     //Trigger an action sheet, 1 goes to camera, 2 goes to photo folder
@@ -305,6 +376,8 @@
 
 }
 
+
+
 //Not called when isEditing is NO
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
@@ -330,8 +403,6 @@
 {
     [picker dismissViewControllerAnimated:YES completion:NULL];
 }
-
-
 
 #pragma mark Segue and Next Button
 
@@ -384,28 +455,31 @@
 //Not called when isEditing is NO
 - (void)textViewDidBeginEditing:(UITextView *)textView
 {
-    [self.navigationController setNavigationBarHidden:YES];
     self.characterCountLabel.hidden = NO;
 
-    if ([textView.text isEqualToString:@"Enter Text Here"])
-    {
-        textView.text = @"";
-    }
+//    [textView addObserver:self forKeyPath:@"contentSize" options:(NSKeyValueObservingOptionNew) context:NULL];
 
-    if (self.imageView.image)
-    {
-        //move the main view, so that the keyboard does not hide it.
-        if  (self.textView.frame.origin.y >= 0)
-        {
-            [self setViewMovedUp:YES];
-        }
-    }
+//    textView.contentOffset = (CGPoint){.x = 0, .y = -(self.textView.bounds.size.height / 2)};
+
+
+    [self.navigationController setNavigationBarHidden:YES animated:YES];
+    self.characterCountLabel.hidden = NO;
+
+    [self verticalCenterText];
+
+    [self shouldMoveViewUpForKeyboard:YES];
+
+    self.enterTextButton.hidden = YES;
+
 }
 
 -(void)textViewDidChange:(UITextView *)textView
 {
+
+    [self verticalCenterText];
+
     NSInteger length = textView.text.length;
-    self.characterCountLabel.text = [NSString stringWithFormat:@"Character left: %li",150-length];
+    self.characterCountLabel.text = [NSString stringWithFormat:@"%li / %i", kCharacterLimit - length, kCharacterLimit];
 }
 
 //Not called when isEditing is NO
@@ -418,29 +492,59 @@
     }
 
     [self resignFirstResponder];
-    [self.navigationController setNavigationBarHidden:NO];
+    [self.navigationController setNavigationBarHidden:NO animated:YES];
+
+    [self verticalCenterText];
 
     //If text is empty, enter text here shows up after editing is done
     if ([textView.text isEqualToString:@""])
     {
-        textView.text = @"Enter Text Here";
+        self.enterTextButton.hidden = NO;
     }
+
+    [self shouldMoveViewUpForKeyboard:NO];
+
 }
 
 //Not called when isEditing is NO
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
 {
+
+
     if ([text isEqualToString:@"\n"])
     {
         [textView resignFirstResponder];
     }
 
-    if([[textView text] length] - range.length + text.length > 150)
+    if([[textView text] length] - range.length + text.length > kCharacterLimit)
     {
         return NO;
     }
     return YES;
 }
+
+- (void)textViewDidChangeSelection:(UITextView *)textView
+{
+//    [self verticalCenterText];
+}
+
+#pragma mark Text View Observer for center vert align
+
+- (void)verticalCenterText
+{
+
+    CGFloat topoffset = ([self.textView bounds].size.height - [self.textView contentSize].height * [self.textView zoomScale])/2.0;
+    topoffset = ( topoffset < 0.0 ? 0.0 : topoffset );
+    self.textView.contentOffset = (CGPoint){.x = 0, .y = -topoffset};
+
+}
+
+//-(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
+//    UITextView *txtview = object;
+//    CGFloat topoffset = ([txtview bounds].size.height - [txtview contentSize].height * [txtview zoomScale])/2.0;
+//    topoffset = ( topoffset < 0.0 ? 0.0 : topoffset );
+//    txtview.contentOffset = (CGPoint){.x = 0, .y = -topoffset};
+//}
 
 #pragma mark Text View Placement
 - (void)setTextViewToBottom
@@ -455,14 +559,28 @@
                                                                     toItem:self.view
                                                                  attribute:NSLayoutAttributeBottom
                                                                 multiplier:1.0f
-                                                                  constant:0.0f];
+                                                                  constant:-kTextViewDistanceFromBottom];
     [self.view addConstraint:self.bottomTextViewConstraint];
+    [self verticalCenterText];
 
 }
 
 - (void)setAddAudioToBottom
 {
-    self.bottomAddAudioConstraint.constant = 0;
+
+    [self.view removeConstraint:self.addAudioButtonCenterYConstraint];
+
+    self.addAudioButton.translatesAutoresizingMaskIntoConstraints = NO;
+
+    self.addAudioButtonCenterYConstraint = [NSLayoutConstraint constraintWithItem:self.addAudioButton
+                                                                 attribute:NSLayoutAttributeCenterY
+                                                                 relatedBy:NSLayoutRelationEqual
+                                                                    toItem:self.view
+                                                                 attribute:NSLayoutAttributeBottom
+                                                                multiplier:1.0f
+                                                                  constant:-kTextViewDistanceFromBottom / 2];
+    [self.view addConstraint:self.addAudioButtonCenterYConstraint];
+
 }
 
 - (IBAction)unWindToCaptureSegue:(UIStoryboardSegue *)segue
@@ -472,6 +590,30 @@
 - (IBAction)onExitButtonPressed:(UIButton *)sender
 {
     [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (IBAction)onCancelButtonPressed:(UIBarButtonItem *)sender
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+#pragma mark - helper methods
+
+- (void)processButton:(UIButton *)button withImageName:(NSString *)buttonName
+{
+
+//    UIButton *button = [UIButton buttonWithType:UIButtonTypeSystem];
+//    UIImage *image = [[UIImage imageNamed:buttonName] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+//    [button setImage:image forState:UIControlStateNormal];
+
+    UIImage *image = [[UIImage imageNamed:buttonName] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+    [button setImage:image forState:UIControlStateNormal];
+
+    button.layer.borderWidth = 1.0;
+    button.layer.borderColor = [[UIColor whiteColor] CGColor];
+    button.layer.cornerRadius = 30;
+    button.tintColor = [UIColor whiteColor];
+
 }
 
 
