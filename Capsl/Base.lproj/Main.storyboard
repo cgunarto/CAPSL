@@ -955,34 +955,6 @@
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <gestureRecognizers/>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tap to change image" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VHH-hP-3OW">
-                                <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="39" id="Qtk-hc-hIN"/>
-                                    <constraint firstAttribute="height" constant="50" id="SrK-xy-M5E"/>
-                                    <constraint firstAttribute="width" constant="295" id="nAA-69-Fii"/>
-                                    <constraint firstAttribute="width" constant="264" id="wWw-At-Ng9"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="17"/>
-                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                                <variation key="default">
-                                    <mask key="constraints">
-                                        <exclude reference="Qtk-hc-hIN"/>
-                                        <exclude reference="SrK-xy-M5E"/>
-                                        <exclude reference="nAA-69-Fii"/>
-                                        <exclude reference="wWw-At-Ng9"/>
-                                    </mask>
-                                </variation>
-                                <variation key="widthClass=compact">
-                                    <mask key="constraints">
-                                        <exclude reference="Qtk-hc-hIN"/>
-                                        <include reference="SrK-xy-M5E"/>
-                                        <include reference="nAA-69-Fii"/>
-                                        <exclude reference="wWw-At-Ng9"/>
-                                    </mask>
-                                </variation>
-                            </label>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Tjw-18-0nC">
                                 <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.35000000000000003" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -1155,17 +1127,14 @@
                             <constraint firstItem="col-p1-YKd" firstAttribute="centerY" secondItem="5n6-ct-hLT" secondAttribute="bottomMargin" multiplier="0.8" id="bgt-ED-UBe"/>
                             <constraint firstItem="Ygr-Gb-nbm" firstAttribute="centerY" secondItem="5n6-ct-hLT" secondAttribute="bottomMargin" multiplier="0.2" id="dDL-Gz-VUu"/>
                             <constraint firstItem="Hg3-VI-LXE" firstAttribute="top" secondItem="5n6-ct-hLT" secondAttribute="topMargin" id="hWg-SJ-2PP"/>
-                            <constraint firstAttribute="centerX" secondItem="VHH-hP-3OW" secondAttribute="centerX" id="jgQ-pG-w6r"/>
                             <constraint firstAttribute="centerX" secondItem="Aef-Rp-DP2" secondAttribute="centerX" id="kXW-Jd-N2g"/>
                             <constraint firstItem="UNe-X0-lle" firstAttribute="leading" secondItem="5n6-ct-hLT" secondAttribute="leadingMargin" id="laR-ml-Ewi"/>
                             <constraint firstItem="Tjw-18-0nC" firstAttribute="height" secondItem="5n6-ct-hLT" secondAttribute="height" multiplier="0.3" constant="20" id="rgl-Gv-Uwu"/>
-                            <constraint firstItem="VHH-hP-3OW" firstAttribute="top" secondItem="jZE-SC-Npr" secondAttribute="bottom" constant="56" id="tYR-IC-SLP"/>
                             <constraint firstItem="qzr-lB-qQX" firstAttribute="centerY" secondItem="Tjw-18-0nC" secondAttribute="centerY" id="w9m-bY-Wky"/>
                         </constraints>
                         <variation key="default">
                             <mask key="subviews">
                                 <exclude reference="Hg3-VI-LXE"/>
-                                <exclude reference="VHH-hP-3OW"/>
                                 <exclude reference="Tjw-18-0nC"/>
                                 <exclude reference="UNe-X0-lle"/>
                                 <exclude reference="Aef-Rp-DP2"/>
@@ -1175,8 +1144,6 @@
                             </mask>
                             <mask key="constraints">
                                 <exclude reference="kXW-Jd-N2g"/>
-                                <exclude reference="jgQ-pG-w6r"/>
-                                <exclude reference="tYR-IC-SLP"/>
                                 <exclude reference="E1r-Aa-Tn7"/>
                                 <exclude reference="CoM-C9-ChG"/>
                                 <exclude reference="laR-ml-Ewi"/>
@@ -1204,8 +1171,6 @@
                             </mask>
                             <mask key="constraints">
                                 <include reference="kXW-Jd-N2g"/>
-                                <include reference="jgQ-pG-w6r"/>
-                                <include reference="tYR-IC-SLP"/>
                                 <include reference="CoM-C9-ChG"/>
                                 <include reference="laR-ml-Ewi"/>
                                 <include reference="HtA-sR-qmY"/>
@@ -1251,7 +1216,6 @@
                         <outlet property="enterTextButton" destination="qzr-lB-qQX" id="iXv-kt-7hG"/>
                         <outlet property="exitButton" destination="UNe-X0-lle" id="zqR-0D-88T"/>
                         <outlet property="imageView" destination="Hg3-VI-LXE" id="4LV-VO-ege"/>
-                        <outlet property="tapToChangeLabel" destination="VHH-hP-3OW" id="Myn-JU-Obk"/>
                         <outlet property="textView" destination="Tjw-18-0nC" id="T4L-oH-noI"/>
                         <segue destination="g6O-c0-HJb" kind="presentation" identifier="segueToContactSearch" id="Eln-db-Pjz"/>
                     </connections>
@@ -2067,6 +2031,7 @@
                                 </connections>
                             </tableView>
                         </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailingMargin" secondItem="6sN-U3-hhX" secondAttribute="trailing" constant="-16" id="4IK-Uf-GHd"/>
                             <constraint firstAttribute="trailingMargin" secondItem="6sN-U3-hhX" secondAttribute="trailing" constant="-16" id="AH3-hC-fwb"/>
@@ -3259,7 +3224,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="shg-QP-90E" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-346.5" y="2360.25"/>
+            <point key="canvasLocation" x="-308" y="2698.5"/>
         </scene>
         <!--Timeline View Controller-->
         <scene sceneID="YIi-TE-PEU">
@@ -3387,7 +3352,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="358.5" y="2360.25"/>
+            <point key="canvasLocation" x="354" y="2518.5"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="XtY-Yz-xSb">

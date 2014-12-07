@@ -19,7 +19,6 @@
 @interface CaptureViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextViewDelegate>
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
 @property UIImage *chosenImage;
-@property (weak, nonatomic) IBOutlet UILabel *tapToChangeLabel;
 
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *cancelButton;
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *doneButton;
@@ -54,7 +53,6 @@
     {
         self.textView.delegate = self;
         self.exitButton.hidden = YES;
-        self.tapToChangeLabel.hidden = NO;
 
         //Setting CPSL sender
         [Capslr returnCapslrFromPFUser:[PFUser currentUser] withCompletion:^(Capslr *currentCapslr, NSError *error)
@@ -82,16 +80,27 @@
     else
     {
 
-        self.tapToChangeLabel.hidden = YES;
+        self.enterTextButton.hidden = YES;
+        self.addPhotoButton.hidden = YES;
+        self.addAudioButton.hidden = YES;
 
         self.imageView.userInteractionEnabled = NO;
+        [self.view addSubview:self.textView];
         self.textView.userInteractionEnabled = NO;
         self.exitButton.hidden = NO;
 
         //Show textview, automatically defaults to center if there is no image
         if (self.textView.text)
         {
+
             self.textView.text = self.chosenCapsl.text;
+
+            CGSize contentSize = self.textView.contentSize;
+            contentSize.height = ceilf([self.textView sizeThatFits:self.textView.frame.size].height);
+            self.textView.contentSize = contentSize;
+
+            [self verticalCenterText];
+
         }
 
         //Display the Capsl photo if available
@@ -116,6 +125,7 @@
         }
 
         //Show or Hide Audio Button depending if there is an audio message
+        //TODO: if there is no text and no photo put audio button in center of screen with text view background
         self.addAudioButton.hidden = !self.chosenCapsl.audio;
 
 
