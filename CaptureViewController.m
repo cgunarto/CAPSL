@@ -504,7 +504,8 @@
                                                                  attribute:NSLayoutAttributeBottom
                                                                 multiplier:1.0f
                                                                   constant:-kTextViewDistanceFromBottom];
-    [self.view addConstraint:self.bottomTextViewConstraint];
+
+//    [self.view addConstraint:self.bottomTextViewConstraint];
     [self verticalCenterText];
 
 }

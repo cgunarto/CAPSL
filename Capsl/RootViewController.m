@@ -76,6 +76,7 @@
 
 }
 
+
 //View did appear - for login/signup modal view
 -(void)viewDidAppear:(BOOL)animated
 {
@@ -84,6 +85,7 @@
     [self manageLogin];
 
 }
+
 
 //- (BOOL)prefersStatusBarHidden
 //{

@@ -34,6 +34,7 @@
 @property NSArray *currentCapslrInfo;
 @property UIImage *updatedPicture;
 @property BOOL doNotShowActivityIndicator;
+@property EditProfileViewController *editVC;
 
 @end
 
@@ -54,6 +55,9 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+
+    // To hide the subview
+    self.view.backgroundColor = [UIColor blackColor];
 
     if (!self.doNotShowActivityIndicator)
     {
