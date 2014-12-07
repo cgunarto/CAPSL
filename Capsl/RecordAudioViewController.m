@@ -14,17 +14,17 @@
 
 @interface RecordAudioViewController () <AVAudioRecorderDelegate, AVAudioPlayerDelegate>
 @property (weak, nonatomic) IBOutlet UIButton *recordPauseButton;
-@property (weak, nonatomic) IBOutlet UIButton *stopButton;
+@property (weak, nonatomic) IBOutlet UIButton *endRecordingButton;
 @property (weak, nonatomic) IBOutlet UIButton *playButton;
-@property (strong, nonatomic) IBOutlet UIBarButtonItem *doneButton;
+@property (weak, nonatomic) IBOutlet UIButton *deleteRecordingButton;
+
+//@property (strong, nonatomic) IBOutlet UIBarButtonItem *doneButton;
 
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *saveButton;
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *cancelButton;
 
 @property AVAudioRecorder *recorder;
 @property AVAudioPlayer *player;
-
-@property NSData *audioData;
 
 
 @end
@@ -33,20 +33,21 @@
 
 //code referenced from Appcoda http://www.appcoda.com/ios-avfoundation-framework-tutorial/
 //TODO:need to create CPSL and perform segueToCompose
+//TODO: AUDIO - add isEDITING
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 
-    // TODO: CLEAN and put in its own method?
-    // Disable Stop/Play button when application launches
-    [self.stopButton setEnabled:NO];
-    [self.playButton setEnabled:NO];
+    //Disable endRecordingButton when app launches
+    [self.endRecordingButton setEnabled:NO];
+    [self setButtonStateToReflectAudioAvailability];
 
     self.navigationItem.leftBarButtonItem = self.cancelButton;
     self.navigationItem.rightBarButtonItem = self.saveButton;
 
     // Set the audio file
+    //TODO: DECIDE IF IT NEEDS OT BE IN THE DOCUMENTS DIRECTORY
     NSArray *pathComponents = [NSArray arrayWithObjects:
                                [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject],
                                @"MyAudio.m4a",
@@ -71,14 +72,17 @@
     [self.recorder prepareToRecord];
 }
 
+
 - (IBAction)onRecordButtonTapped:(UIButton *)sender
 {
     // Stop the audio player before recording
-    if (self.player.playing) {
+    if (self.player.playing)
+    {
         [self.player stop];
     }
 
-    if (!self.recorder.recording) {
+    if (!self.recorder.recording)
+    {
         AVAudioSession *session = [AVAudioSession sharedInstance];
         [session setActive:YES error:nil];
 
@@ -94,11 +98,14 @@
         [self.recordPauseButton setTitle:@"Record" forState:UIControlStateNormal];
     }
 
-    [self.stopButton setEnabled:YES];
+    [self.endRecordingButton setEnabled:YES];
+
+    //When user is recording, they can't play the recording until recording ends
     [self.playButton setEnabled:NO];
 }
 
-- (IBAction)onStopTapped:(UIButton *)sender
+//Whatever is recorded is saved only when the EndRecording Button is tapped
+- (IBAction)onEndRecordingTapped:(UIButton *)sender
 {
     [self.recorder stop];
 
@@ -113,21 +120,78 @@
 
 - (IBAction)onPlayTapped:(UIButton *)sender
 {
-    if (!self.recorder.recording){
-        self.player = [[AVAudioPlayer alloc] initWithContentsOfURL:self.recorder.url error:nil];
+    if (!self.recorder.recording)
+    {
+        //Playing from document's directory self.player = [[AVAudioPlayer alloc] initWithContentsOfURL:self.recorder.url error:nil];
+
+        self.player = [[AVAudioPlayer alloc] initWithData:self.audioData fileTypeHint:@"m4a" error:nil];
         [self.player setDelegate:self];
         [self.player play];
     }
+
 }
+
+- (IBAction)onDeleteRecordingButtonTapped:(UIButton *)sender
+{
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"DELETE?"
+                                                                   message:@"Are you sure you want to delete current recording?"
+                                                            preferredStyle:UIAlertControllerStyleActionSheet];
+
+    UIAlertAction *yesButton = [UIAlertAction actionWithTitle:@"Yes"
+                                                        style:UIAlertActionStyleDefault
+                                                      handler:^(UIAlertAction *action)
+    {
+        [self deleteRecordedAudio];
+        [self setButtonStateToReflectAudioAvailability];
+    }];
+
+    UIAlertAction *cancelButton = [UIAlertAction actionWithTitle:@"Cancel"
+                                                           style:UIAlertActionStyleCancel
+                                                         handler:^(UIAlertAction *action)
+    {
+         [alert dismissViewControllerAnimated:YES completion:nil];
+    }];
+
+    [alert addAction:yesButton];
+    [alert addAction:cancelButton];
+    [self presentViewController:alert
+                       animated:YES
+                     completion:nil];
+}
+
+#pragma mark Helper Method
+
+- (void)deleteRecordedAudio
+{
+    NSLog(@"Audio Deleted");
+    self.audioData = nil;
+    self.createdCapsl.audio = nil;
+    //TODO: Delete it in the default directory
+}
+
+- (void) setButtonStateToReflectAudioAvailability
+{
+    if (self.audioData)
+    {
+        [self.deleteRecordingButton setEnabled:YES];
+        [self.playButton setEnabled:YES];
+    }
+    else
+    {
+        [self.deleteRecordingButton setEnabled:NO];
+        [self.playButton setEnabled:NO];
+    }
+}
+
 
 #pragma mark AVAudioRecorderDelegate
 //Delegate method for handling interruption during recording
 - (void) audioRecorderDidFinishRecording:(AVAudioRecorder *)avrecorder successfully:(BOOL)flag
 {
     [self.recordPauseButton setTitle:@"Record" forState:UIControlStateNormal];
+    [self.endRecordingButton setEnabled:NO];
 
-    [self.stopButton setEnabled:NO];
-    [self.playButton setEnabled:YES];
+    [self setButtonStateToReflectAudioAvailability];
 }
 
 #pragma mark AVAudioPlayerDelegate
@@ -142,34 +206,6 @@
 }
 
 #pragma mark Next Button and Segue
-
-- (IBAction)onNextButtonPressed:(UIButton *)sender
-{
-    if (self.createdCapsl.audio != nil)
-    {
-        //Fire off segueToContactSearch segue
-        //Pass data to Search Contact VC
-        [self performSegueWithIdentifier:@"segueToContactSearch" sender:self.stopButton];
-    }
-
-    //If audio is empty, don't move forward yet
-    else
-    {
-        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"RECORDER EMPTY"
-                                                                       message:@"Please record an audio message"
-                                                                preferredStyle:UIAlertControllerStyleAlert];
-
-        UIAlertAction *okButton = [UIAlertAction actionWithTitle:@"OK"
-                                                           style:UIAlertActionStyleDefault
-                                                         handler:nil];
-        [alert addAction:okButton];
-        [self presentViewController:alert
-                           animated:YES
-                         completion:nil];
-
-    }
-
-}
 
 - (BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender
 {
@@ -198,15 +234,9 @@
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    //If sender is SAVE button, pass the createdCpsl Info
-    if ([sender isEqual:self.saveButton])
-    {
-        if (self.createdCapsl.audio)
-        {
-            CaptureViewController *captureVC = segue.destinationViewController;
-            captureVC.createdCapsl = self.createdCapsl;
-        }
-    }
+    CaptureViewController *captureVC = segue.destinationViewController;
+    captureVC.createdCapsl = self.createdCapsl;
+    captureVC.audioData = self.audioData;
 }
 
 

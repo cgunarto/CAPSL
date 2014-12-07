@@ -12,6 +12,7 @@
 @interface CaptureViewController : UIViewController
 @property Capsl *createdCapsl;
 @property Capsl *chosenCapsl;
+@property NSData *audioData;
 
 @property BOOL isEditing;
 

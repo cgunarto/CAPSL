@@ -211,7 +211,7 @@ NSUInteger DeviceSystemMajorVersion()
 {
     if ([self indexPathHasPicker:indexPath])
     {
-    #warning need to check
+        //TODO: set it dynamically 
         return 216; //self.pickerCellRowHeight;
     }
 
