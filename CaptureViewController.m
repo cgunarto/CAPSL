@@ -352,6 +352,9 @@
         UINavigationController *navVC = segue.destinationViewController;
         RecordAudioViewController *recordVC = navVC.childViewControllers[0];
         recordVC.createdCapsl = self.createdCapsl;
+
+        //This is here so that if the user had already recorded and is going back to the page, they can replay audio data they had created
+        recordVC.audioData = self.audioData;
     }
 }
 
