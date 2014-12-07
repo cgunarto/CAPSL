@@ -168,7 +168,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="bnp-JG-TQ5">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="bnp-JG-TQ5">
                                 <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="100" id="1hv-hN-MGE"/>
@@ -391,7 +391,6 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gLJ-VE-AB3" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <exit id="iHr-KK-LPD" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="2167.5" y="1890"/>
         </scene>
@@ -1070,6 +1069,7 @@
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <gestureRecognizers/>
                         <constraints>
                             <constraint firstAttribute="trailingMargin" secondItem="Hg3-VI-LXE" secondAttribute="trailing" constant="-16" id="0KW-ny-56e"/>
                             <constraint firstAttribute="centerX" secondItem="Ygr-Gb-nbm" secondAttribute="centerX" id="1yt-AJ-jqo"/>
@@ -1167,6 +1167,9 @@
                                 <include reference="hWg-SJ-2PP"/>
                             </mask>
                         </variation>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="b2A-R3-ryU" appends="YES" id="CMw-E9-Un0"/>
+                        </connections>
                     </view>
                     <navigationItem key="navigationItem" id="DGT-FQ-rL0"/>
                     <connections>
@@ -1196,6 +1199,11 @@
                         <action selector="onDoneButtonPressed:" destination="ILH-s3-dTC" id="ckK-pm-aqO"/>
                     </connections>
                 </barButtonItem>
+                <tapGestureRecognizer id="b2A-R3-ryU">
+                    <connections>
+                        <action selector="onViewTapped:" destination="ILH-s3-dTC" id="Gaw-nd-4dN"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="3910.5" y="438"/>
         </scene>
@@ -2387,7 +2395,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="n2I-vu-zSl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3110" y="1894.5"/>
+            <point key="canvasLocation" x="3148.5" y="1890"/>
         </scene>
         <!--Address Contact View Controller-->
         <scene sceneID="lpI-v5-1AS">
@@ -2476,7 +2484,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5h5-XE-Hxm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3109.5" y="3066.5"/>
+            <point key="canvasLocation" x="2167.5" y="2565"/>
         </scene>
         <!--Edit Profile View Controller-->
         <scene sceneID="wMC-9p-R1S">
@@ -2626,14 +2634,14 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6CZ-aX-Kan" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="7Zz-qh-Lo6" userLabel="Exit" sceneMemberID="exit"/>
                 <barButtonItem title="Back" id="e9p-wQ-UlS">
                     <connections>
-                        <action selector="onBackBarButtonItemPressed:" destination="iX6-Dw-liI" id="8tL-5Q-w89"/>
-                        <segue destination="iHr-KK-LPD" kind="unwind" identifier="toProfileVC" unwindAction="unwindToProfileViewSegue:" id="mga-So-zVI"/>
+                        <segue destination="7Zz-qh-Lo6" kind="unwind" unwindAction="unwindToProfileViewSegue:" id="YhJ-9N-uoc"/>
                     </connections>
                 </barButtonItem>
             </objects>
-            <point key="canvasLocation" x="3109.5" y="2523"/>
+            <point key="canvasLocation" x="3064.5" y="2577"/>
         </scene>
         <!--Update Profile Info View Controller-->
         <scene sceneID="kfg-WE-kqz">
@@ -3621,7 +3629,7 @@
         <!--Navigation Controller-->
         <scene sceneID="MYO-tp-J0H">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="fsF-ct-we6" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="RootNavController" automaticallyAdjustsScrollViewInsets="NO" id="fsF-ct-we6" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="67B-bk-56B">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -3662,8 +3670,8 @@
         <image name="wallpaperRoad_blurred" width="375" height="667"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="dAc-Nd-2MW"/>
         <segue reference="rll-5A-arG"/>
         <segue reference="Eln-db-Pjz"/>
+        <segue reference="dAc-Nd-2MW"/>
     </inferredMetricsTieBreakers>
 </document>

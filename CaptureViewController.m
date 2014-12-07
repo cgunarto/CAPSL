@@ -30,7 +30,6 @@
 @property (strong, nonatomic) IBOutlet UIButton *addPhotoButton;
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *bottomTextViewConstraint;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *bottomLabelConstraint;
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *addAudioButtonCenterYConstraint;
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *addAudioButtonWidthConstraint;
 
@@ -201,10 +200,6 @@
     CGRect rect = [[UIApplication sharedApplication] keyWindow].frame;
     CGFloat textViewDistFromBottom = (rect.size.height - self.textView.frame.origin.y - self.textView.frame.size.height);
 
-    NSLog(@"%f", self.textView.frame.origin.y);
-    NSLog(@"%f", self.textView.frame.size.height);
-
-
     if (moveUp)
     {
         // 1. move the view's origin up so that the text field that will be hidden come above the keyboard
@@ -318,7 +313,15 @@
     //TODO: DECIDE APPROPRIATE FILE SIZE
     self.createdCapsl.photo = [PFFile fileWithName:@"image.jpg" data:imageData];
 
+    // darken textview for better text visibility
     self.textView.backgroundColor = [UIColor colorWithWhite:0.0 alpha:0.5];
+
+    // add shadow to character counter label
+    self.characterCountLabel.layer.shadowColor = [UIColor blackColor].CGColor;
+    self.characterCountLabel.layer.shadowOpacity = 0.3;
+    self.characterCountLabel.layer.shadowRadius = 1;
+    self.characterCountLabel.layer.shadowOffset = CGSizeMake(0, 1.5f);
+
     [self setTextViewToBottom];
     [self setAddAudioToBottom];
     [self makeNavBarTransparent:NO];
@@ -385,6 +388,7 @@
 //Not called when isEditing is NO
 - (void)textViewDidBeginEditing:(UITextView *)textView
 {
+
     self.characterCountLabel.hidden = NO;
 
 //    [textView addObserver:self forKeyPath:@"contentSize" options:(NSKeyValueObservingOptionNew) context:NULL];
@@ -400,6 +404,8 @@
     [self verticalCenterText];
 
     self.enterTextButton.hidden = YES;
+
+    self.addPhotoButton.userInteractionEnabled = NO;
 
 }
 
@@ -434,6 +440,9 @@
 
     [self shouldMoveViewUpForKeyboard:NO];
 
+    self.addPhotoButton.userInteractionEnabled = YES;
+
+
 }
 
 //Not called when isEditing is NO
@@ -453,12 +462,18 @@
     return YES;
 }
 
+#pragma mark actions
+
 - (IBAction)onEditTextButtonPressed:(UIButton *)sender
 {
 
     [self.textView becomeFirstResponder];
 }
 
+- (IBAction)onViewTapped:(UITapGestureRecognizer *)sender
+{
+    [self.textView resignFirstResponder];
+}
 
 #pragma mark Text View Observer for center vert align
 

@@ -24,6 +24,8 @@
 {
     [super viewDidLoad];
 
+    self.navigationItem.titleView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"logo_header"]];
+
 //    self.view.backgroundColor = [UIColor colorWithPatternImage:kChooseScreenWallpaper];
 
     self.sendPhotoButton.layer.cornerRadius = 44;

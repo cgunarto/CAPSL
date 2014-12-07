@@ -12,6 +12,7 @@
 #import "UpdateProfileInfoViewController.h"
 #import "UpdateProfileInfoViewController.h"
 #import "RootViewController.h"
+#import "CrossDissolveSegue.h"
 
 #define kNameLabel @"Name"
 #define kUsernameLabel @"Username"
@@ -246,20 +247,25 @@
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    UpdateProfileInfoViewController *updateProfileInfoVC = segue.destinationViewController;
 
-    if ([segue.identifier isEqual:@"editNameSegue"])
+    if (![segue.identifier isEqualToString:@"segueToRoot"])
     {
-        updateProfileInfoVC.nameString = self.currenCapslrInfo[0];
+        UpdateProfileInfoViewController *updateProfileInfoVC = segue.destinationViewController;
+
+        if ([segue.identifier isEqualToString:@"editNameSegue"])
+        {
+            updateProfileInfoVC.nameString = self.currenCapslrInfo[0];
+        }
+        else if ([segue.identifier isEqualToString:@"editUsernameSegue"])
+        {
+            updateProfileInfoVC.usernameString = self.currenCapslrInfo[1];
+        }
+        else if ([segue.identifier isEqualToString:@"editEmailSegue"])
+        {
+            updateProfileInfoVC.emailString = self.currenCapslrInfo[2];
+        }
     }
-    else if ([segue.identifier isEqual:@"editUsernameSegue"])
-    {
-        updateProfileInfoVC.usernameString = self.currenCapslrInfo[1];
-    }
-    else if ([segue.identifier isEqual:@"editEmailSegue"])
-    {
-        updateProfileInfoVC.emailString = self.currenCapslrInfo[2];
-    }
+
 }
 
 - (void)logOutAlert
@@ -280,17 +286,25 @@
 
 - (void)showRootViewController
 {
-    RootViewController *rootVC = [self.storyboard instantiateViewControllerWithIdentifier: NSStringFromClass([RootViewController class])];
 
-//    [self.navigationController pushViewController:rootVC animated:YES];
-    [self presentViewController:rootVC animated:YES completion:nil];
+//    [self performSegueWithIdentifier:@"segueToRoot" sender:self.updatedProfilePicture];
+
+//    RootViewController *rootVC = [self.storyboard instantiateViewControllerWithIdentifier: NSStringFromClass([RootViewController class])];
+//
+//    [self presentViewController:rootVC animated:NO completion:nil];
+//
+
+    UINavigationController *rootNav = [self.storyboard instantiateInitialViewController];
+
+    [self presentViewController:rootNav animated:NO completion:nil];
+
 }
 
-- (IBAction)onBackBarButtonItemPressed:(UIBarButtonItem *)sender
-{
-    [self performSegueWithIdentifier:@"toProfileVC" sender:self.updatedProfilePicture];
-}
-
+//- (IBAction)onBackBarButtonItemPressed:(UIBarButtonItem *)sender
+//{
+//    [self performSegueWithIdentifier:@"toProfileVC" sender:self.updatedProfilePicture];
+//}
+//
 
 
 @end
