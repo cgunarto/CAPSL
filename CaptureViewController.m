@@ -32,6 +32,7 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *bottomTextViewConstraint;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *bottomLabelConstraint;
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *addAudioButtonCenterYConstraint;
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *addAudioButtonWidthConstraint;
 
 @property CGSize kbSize;
 
@@ -74,6 +75,7 @@
         [self processButton:self.enterTextButton withImageName:@"lowercase-50"];
         [self processButton:self.addPhotoButton withImageName:@"camera-50"];
         [self processButton:self.addAudioButton withImageName:@"audio_wave-50"];
+        [self makeNavBarTransparent:YES];
 
     }
 
@@ -141,7 +143,7 @@
                                                    object:nil];
         if (self.createdCapsl.audio)
         {
-            [self.addAudioButton setTitle:@"Audio added - tap to edit" forState:UIControlStateNormal];
+            [self updateAudioButton];
         }
     }
 
@@ -316,8 +318,10 @@
     //TODO: DECIDE APPROPRIATE FILE SIZE
     self.createdCapsl.photo = [PFFile fileWithName:@"image.jpg" data:imageData];
 
+    self.textView.backgroundColor = [UIColor colorWithWhite:0.0 alpha:0.5];
     [self setTextViewToBottom];
     [self setAddAudioToBottom];
+    [self makeNavBarTransparent:NO];
 
 }
 
@@ -359,7 +363,7 @@
     else
     {
         UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"NO CAPSL CREATED"
-                                                                       message:@"Choose a photo, record audio, or write text"
+                                                                       message:@"Add a photo, record audio, or write a message"
                                                                 preferredStyle:UIAlertControllerStyleAlert];
 
         UIAlertAction *okButton = [UIAlertAction actionWithTitle:@"OK"
@@ -527,10 +531,6 @@
 - (void)processButton:(UIButton *)button withImageName:(NSString *)buttonName
 {
 
-//    UIButton *button = [UIButton buttonWithType:UIButtonTypeSystem];
-//    UIImage *image = [[UIImage imageNamed:buttonName] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
-//    [button setImage:image forState:UIControlStateNormal];
-
     UIImage *image = [[UIImage imageNamed:buttonName] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
     [button setImage:image forState:UIControlStateNormal];
 
@@ -539,7 +539,46 @@
     button.layer.cornerRadius = 30;
     button.tintColor = [UIColor whiteColor];
 
+    button.layer.shadowColor = [UIColor blackColor].CGColor;
+    button.layer.shadowOpacity = 0.3;
+    button.layer.shadowRadius = 1;
+    button.layer.shadowOffset = CGSizeMake(0, 1.5f);
+
 }
 
+- (void)makeNavBarTransparent:(BOOL)makeTransparent
+{
+
+    if (makeTransparent)
+    {
+        [self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarPosition:UIBarPositionAny barMetrics:UIBarMetricsDefault];
+        self.navigationController.navigationBar.shadowImage = [UIImage new];
+        self.navigationController.navigationBar.translucent = YES;
+    }
+    else
+    {
+        [self.navigationController.navigationBar setBackgroundImage:nil forBarPosition:UIBarPositionAny barMetrics:UIBarMetricsDefault];
+        self.navigationController.navigationBar.shadowImage = nil;
+        self.navigationController.navigationBar.translucent = YES;
+
+    }
+
+
+}
+
+- (void)updateAudioButton
+{
+
+    [self.addAudioButton setImage:nil forState:UIControlStateNormal];
+    [self.addAudioButton setTitle:@"AUDIO ADDED" forState:UIControlStateNormal];
+
+    NSString *stringForButton = @"AUDIO ADDED";
+    CGSize stringsize = [stringForButton sizeWithAttributes:@{
+                                                              NSFontAttributeName: [UIFont fontWithName:self.addAudioButton.titleLabel.font.fontName size:self.addAudioButton.titleLabel.font.pointSize]
+                                                              }];
+
+    self.addAudioButtonWidthConstraint.constant = stringsize.width + 40;
+
+}
 
 @end

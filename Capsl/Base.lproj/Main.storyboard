@@ -866,7 +866,7 @@
                             </label>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Tjw-18-0nC">
                                 <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.35000000000000003" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                 <gestureRecognizers/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" name="AvenirNext-Bold" family="Avenir Next" pointSize="25"/>
@@ -969,14 +969,14 @@
                                 </state>
                                 <variation key="default">
                                     <mask key="constraints">
-                                        <exclude reference="ceg-8K-gzW"/>
                                         <exclude reference="KxT-ko-LZ3"/>
+                                        <exclude reference="ceg-8K-gzW"/>
                                     </mask>
                                 </variation>
                                 <variation key="heightClass=regular-widthClass=compact">
                                     <mask key="constraints">
-                                        <include reference="ceg-8K-gzW"/>
                                         <include reference="KxT-ko-LZ3"/>
+                                        <include reference="ceg-8K-gzW"/>
                                     </mask>
                                 </variation>
                                 <connections>
@@ -1054,26 +1054,26 @@
                                 <exclude reference="col-p1-YKd"/>
                             </mask>
                             <mask key="constraints">
+                                <exclude reference="kXW-Jd-N2g"/>
                                 <exclude reference="jgQ-pG-w6r"/>
                                 <exclude reference="tYR-IC-SLP"/>
-                                <exclude reference="0KW-ny-56e"/>
-                                <exclude reference="TvU-WP-xp3"/>
-                                <exclude reference="hWg-SJ-2PP"/>
+                                <exclude reference="E1r-Aa-Tn7"/>
                                 <exclude reference="CoM-C9-ChG"/>
                                 <exclude reference="laR-ml-Ewi"/>
                                 <exclude reference="1yt-AJ-jqo"/>
                                 <exclude reference="dDL-Gz-VUu"/>
+                                <exclude reference="HtA-sR-qmY"/>
+                                <exclude reference="bgt-ED-UBe"/>
+                                <exclude reference="avp-am-phT"/>
+                                <exclude reference="w9m-bY-Wky"/>
                                 <exclude reference="3OH-EE-Zto"/>
                                 <exclude reference="IhP-45-gb4"/>
                                 <exclude reference="TY9-cZ-Kqd"/>
                                 <exclude reference="Yw2-JK-WoR"/>
                                 <exclude reference="rgl-Gv-Uwu"/>
-                                <exclude reference="kXW-Jd-N2g"/>
-                                <exclude reference="avp-am-phT"/>
-                                <exclude reference="w9m-bY-Wky"/>
-                                <exclude reference="HtA-sR-qmY"/>
-                                <exclude reference="bgt-ED-UBe"/>
-                                <exclude reference="E1r-Aa-Tn7"/>
+                                <exclude reference="0KW-ny-56e"/>
+                                <exclude reference="TvU-WP-xp3"/>
+                                <exclude reference="hWg-SJ-2PP"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=compact">
@@ -1083,15 +1083,15 @@
                                 <include reference="col-p1-YKd"/>
                             </mask>
                             <mask key="constraints">
+                                <include reference="kXW-Jd-N2g"/>
                                 <include reference="jgQ-pG-w6r"/>
                                 <include reference="tYR-IC-SLP"/>
                                 <include reference="CoM-C9-ChG"/>
                                 <include reference="laR-ml-Ewi"/>
+                                <include reference="HtA-sR-qmY"/>
                                 <include reference="3OH-EE-Zto"/>
                                 <include reference="Yw2-JK-WoR"/>
                                 <include reference="rgl-Gv-Uwu"/>
-                                <include reference="kXW-Jd-N2g"/>
-                                <include reference="HtA-sR-qmY"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
@@ -1102,17 +1102,17 @@
                                 <include reference="Ygr-Gb-nbm"/>
                             </mask>
                             <mask key="constraints">
+                                <include reference="E1r-Aa-Tn7"/>
+                                <include reference="1yt-AJ-jqo"/>
+                                <include reference="dDL-Gz-VUu"/>
+                                <include reference="bgt-ED-UBe"/>
+                                <include reference="avp-am-phT"/>
+                                <include reference="w9m-bY-Wky"/>
+                                <include reference="IhP-45-gb4"/>
+                                <include reference="TY9-cZ-Kqd"/>
                                 <include reference="0KW-ny-56e"/>
                                 <include reference="TvU-WP-xp3"/>
                                 <include reference="hWg-SJ-2PP"/>
-                                <include reference="1yt-AJ-jqo"/>
-                                <include reference="dDL-Gz-VUu"/>
-                                <include reference="IhP-45-gb4"/>
-                                <include reference="TY9-cZ-Kqd"/>
-                                <include reference="avp-am-phT"/>
-                                <include reference="w9m-bY-Wky"/>
-                                <include reference="bgt-ED-UBe"/>
-                                <include reference="E1r-Aa-Tn7"/>
                             </mask>
                         </variation>
                     </view>
@@ -1120,6 +1120,7 @@
                     <connections>
                         <outlet property="addAudioButton" destination="col-p1-YKd" id="why-vR-Ksu"/>
                         <outlet property="addAudioButtonCenterYConstraint" destination="bgt-ED-UBe" id="O0v-F5-fld"/>
+                        <outlet property="addAudioButtonWidthConstraint" destination="v6w-TD-szf" id="05l-Ff-J8G"/>
                         <outlet property="addPhotoButton" destination="Ygr-Gb-nbm" id="glT-7u-Xmx"/>
                         <outlet property="cancelButton" destination="z6Q-Dn-DDG" id="cpp-iG-eE7"/>
                         <outlet property="characterCountLabel" destination="Aef-Rp-DP2" id="SxP-cd-gxe"/>
@@ -1138,7 +1139,7 @@
                         <action selector="onCancelButtonPressed:" destination="ILH-s3-dTC" id="u1u-mA-deU"/>
                     </connections>
                 </barButtonItem>
-                <barButtonItem systemItem="done" id="n73-cQ-FAH">
+                <barButtonItem systemItem="done" id="n73-cQ-FAH" userLabel="Next">
                     <connections>
                         <action selector="onDoneButtonPressed:" destination="ILH-s3-dTC" id="ckK-pm-aqO"/>
                     </connections>
@@ -3540,7 +3541,7 @@
                     </tableView>
                     <navigationItem key="navigationItem" id="zqW-Wr-1TD"/>
                     <connections>
-                        <outlet property="doneButton" destination="stI-J9-f2p" id="iJp-Ny-vTc"/>
+                        <outlet property="nextButton" destination="stI-J9-f2p" id="Xmr-nM-cEI"/>
                         <outlet property="pickerView" destination="PAm-L4-znW" id="X5N-hl-dOs"/>
                         <segue destination="dxW-fP-DJZ" kind="unwind" identifier="unwindToChoose" unwindAction="unWindSegue:" id="nFO-ky-tjk"/>
                     </connections>

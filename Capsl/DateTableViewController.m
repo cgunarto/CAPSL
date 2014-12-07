@@ -42,7 +42,7 @@ static NSString *kSendID = @"sendCell";  // the cell containing the date picker
 @property (nonatomic, strong) IBOutlet UIDatePicker *pickerView;
 
 // this button appears only when the date picker is shown (iOS 6.1.x or earlier)
-@property (strong, nonatomic) IBOutlet UIBarButtonItem *doneButton;
+@property (strong, nonatomic) IBOutlet UIBarButtonItem *nextButton;
 
 @end
 
@@ -402,7 +402,7 @@ NSUInteger DeviceSystemMajorVersion()
         [UIView animateWithDuration:kPickerAnimationDuration animations: ^{ self.pickerView.frame = endFrame; }
                          completion:^(BOOL finished) {
                              // add the "Done" button to the nav bar
-                             self.navigationItem.rightBarButtonItem = self.doneButton;
+                             self.navigationItem.rightBarButtonItem = self.nextButton;
                          }];
     }
 }
