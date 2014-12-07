@@ -294,9 +294,11 @@
 //    [self presentViewController:rootVC animated:NO completion:nil];
 //
 
-    UINavigationController *rootNav = [self.storyboard instantiateInitialViewController];
+    UINavigationController *rootNav = [self.storyboard instantiateInitialViewController];;
 
-    [self presentViewController:rootNav animated:NO completion:nil];
+    [self.view.window setRootViewController:rootNav];
+
+//    [self presentViewController:rootNav animated:NO completion:nil];
 
 }
 
