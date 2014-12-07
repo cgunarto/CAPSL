@@ -540,6 +540,25 @@ NSUInteger DeviceSystemMajorVersion()
                                     animated:YES
                                   completion:nil];
 
+                 //SENDING PUSH MESSAGE to the recipient when they get a message
+                 PFQuery *pushQuery = [PFInstallation query];
+
+                 [pushQuery whereKey:@"capslr" equalTo:self.createdCapsl.recipient];
+
+                 PFPush *push = [[PFPush alloc]init];
+
+                 //TODO: Send push to multiple device tokens
+                 //TODO: Set it to open a message
+                 NSString *pushString = [NSString stringWithFormat:@"You got a Capsl message from %@!", self.createdCapsl.sender.name];
+                 [push setQuery:pushQuery];
+                 [push setMessage:pushString];
+                 [push sendPushInBackgroundWithBlock:^(BOOL succeeded, NSError *error)
+                 {
+                     if (error)
+                     {
+                         NSLog(@"%@ error", error.localizedDescription);
+                     }
+                 }];
              }
 
              else

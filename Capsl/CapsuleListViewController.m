@@ -33,10 +33,7 @@
     [super viewDidLoad];
 
     self.view.backgroundColor = [UIColor clearColor];
-
-
 //    self.tableView.contentInset = UIEdgeInsetsMake(self.navigationController.navigationBar.frame.size.height + 20, 0, 44, 0);
-
     self.availableCapslsCount = 0;
 
     self.senderPics = [@[] mutableCopy];
@@ -91,7 +88,6 @@
     return self.tableViewData.count;
 
 }
-
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -223,6 +219,24 @@
         {
             capsl.viewedAt = [NSDate date];
             [capsl saveInBackground];
+
+            //SENDING PUSH MESSAGE to the sender, when CAPSL is viewed by recipient
+            PFQuery *pushQuery = [PFInstallation query];
+            [pushQuery whereKey:@"capslr" equalTo:capsl.sender];
+
+            PFPush *push = [[PFPush alloc]init];
+            //TODO: Send push to multiple device tokens
+            //TODO: Set it to open a message or the right page
+            NSString *pushString = [NSString stringWithFormat:@"%@ viewed your Capsl", capsl.recipient.name];
+            [push setQuery:pushQuery];
+            [push setMessage:pushString];
+            [push sendPushInBackgroundWithBlock:^(BOOL succeeded, NSError *error)
+             {
+                 if (error)
+                 {
+                     NSLog(@"%@ error", error.localizedDescription);
+                 }
+             }];
         }
 
         if (elapsedSeconds < 0)

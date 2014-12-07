@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4F33B1AD1A33A246004444FB /* JCALocalNotification.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F33B1AC1A33A246004444FB /* JCALocalNotification.m */; };
 		4F69EBC41A252331009625AA /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F69EBC31A252331009625AA /* main.m */; };
 		4F69EBC71A252331009625AA /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F69EBC61A252331009625AA /* AppDelegate.m */; };
 		4F69EBCA1A252331009625AA /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F69EBC91A252331009625AA /* RootViewController.m */; };
@@ -84,6 +85,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4F33B1AB1A33A246004444FB /* JCALocalNotification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JCALocalNotification.h; sourceTree = "<group>"; };
+		4F33B1AC1A33A246004444FB /* JCALocalNotification.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JCALocalNotification.m; sourceTree = "<group>"; };
 		4F69EBBE1A252331009625AA /* Capsl.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Capsl.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4F69EBC21A252331009625AA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4F69EBC31A252331009625AA /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -348,6 +351,8 @@
 				4F72437D1A314F97002CC918 /* PickerTableViewCell.m */,
 				4F72437F1A3159C7002CC918 /* PromptDateTableViewCell.h */,
 				4F7243801A3159C7002CC918 /* PromptDateTableViewCell.m */,
+				4F33B1AB1A33A246004444FB /* JCALocalNotification.h */,
+				4F33B1AC1A33A246004444FB /* JCALocalNotification.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -528,6 +533,7 @@
 				TargetAttributes = {
 					4F69EBBD1A252331009625AA = {
 						CreatedOnToolsVersion = 6.1;
+						DevelopmentTeam = EP9GA36X8K;
 					};
 					4F69EBD61A252331009625AA = {
 						CreatedOnToolsVersion = 6.1;
@@ -581,6 +587,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8DAC42441A2A9BD400A8859A /* JCAMainViewController.m in Sources */,
+				4F33B1AD1A33A246004444FB /* JCALocalNotification.m in Sources */,
 				4F69EC311A291504009625AA /* Contact.m in Sources */,
 				905E900D1A2F9D9700BF32E3 /* EditProfileViewController.m in Sources */,
 				4F69EBCA1A252331009625AA /* RootViewController.m in Sources */,
@@ -681,7 +688,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iOS Development: Christina Gunarto (CNG5MLR6H4)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iOS Development: Christina Gunarto (CNG5MLR6H4)";
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -701,6 +709,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				PROVISIONING_PROFILE = "ad419d51-b688-4bfb-9a82-669b4398d0fb";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -722,7 +731,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iOS Development: Christina Gunarto (CNG5MLR6H4)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iOS Development: Christina Gunarto (CNG5MLR6H4)";
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -735,6 +745,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				PROVISIONING_PROFILE = "ad419d51-b688-4bfb-9a82-669b4398d0fb";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -744,6 +755,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -753,6 +766,7 @@
 				INFOPLIST_FILE = Capsl/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -760,6 +774,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -769,6 +785,7 @@
 				INFOPLIST_FILE = Capsl/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};

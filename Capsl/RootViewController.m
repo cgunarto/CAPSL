@@ -14,11 +14,13 @@
 #import "SignUpViewController.h"
 #import "JCAMainViewController.h"
 
-@interface RootViewController () <PFLogInViewControllerDelegate, PFSignUpViewControllerDelegate, NSLayoutManagerDelegate>
+@interface RootViewController () <PFLogInViewControllerDelegate, PFSignUpViewControllerDelegate, UIAlertViewDelegate>
 @property (strong, nonatomic) IBOutlet UIButton *sendCapsuleButton;
 @property (strong, nonatomic) IBOutlet UIButton *viewCapsulesButton;
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *viewButtonRightConstraint;
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *sendButtonLeftConstraint;
+
+@property UITextField *verificationCode;
 
 @end
 
@@ -123,6 +125,29 @@
 //Sent to the delegate when a PFUser is logged in
 - (void) logInViewController:(PFLogInViewController *)logInController didLogInUser:(PFUser *)user
 {
+    //TODO: check if user is on a device or not, check if user has logged in from multiple device
+    //Initiates the currentInstallation user's cpslr a the Capslr object of the PFUser Current user
+    //PFInstallation is also called in AppDelegate, when the user first installs the app
+    [Capslr returnCapslrFromPFUser:user withCompletion:^(Capslr *currentCapslr, NSError *error)
+    {
+        PFInstallation *installation = [PFInstallation currentInstallation];
+        installation[@"capslr"]=currentCapslr;
+        [installation saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error)
+        {
+            if (!error)
+            {
+                //TODO:clear badge?
+            }
+            else
+            {
+                NSLog(@"error %@", error.localizedDescription);
+            }
+        }];
+    }];
+
+
+
+
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
@@ -158,6 +183,12 @@
     //Display an alert if field wasn't completed
     if (!informationComplete) {
         [[[UIAlertView alloc] initWithTitle:@"Missing Information" message:@"Make sure you fill out all of the information" delegate:nil cancelButtonTitle:@"ok" otherButtonTitles:nil] show];
+
+//        UIAlertView * alert =[[UIAlertView alloc ] initWithTitle:@"Phone Number Verification" message:@"Enter your code" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles: nil];
+//        alert.alertViewStyle = UIAlertViewStylePlainTextInput;
+//        [alert addButtonWithTitle:@"Ok"];
+//        [alert show];
+
     }
 
     return informationComplete;
@@ -172,6 +203,15 @@
     capslr.phone = signUpController.signUpView.additionalField.text;
     capslr.user = user;
 
+    [PFCloud callFunctionInBackground:@"sendVerificationCode" withParameters:@{@"phoneNumber":signUpController.signUpView.additionalField.text}];
+
+    UIAlertView * alert =[[UIAlertView alloc ] initWithTitle:@"Phone Number Verification" message:@"Enter your code" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles: nil];
+    alert.alertViewStyle = UIAlertViewStylePlainTextInput;
+    [alert addButtonWithTitle:@"Ok"];
+    [alert show];
+
+
+
     [capslr saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         if (error)
         {
@@ -184,6 +224,64 @@
             [self dismissViewControllerAnimated:YES completion:nil];
         }
     }];
+}
+
+- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
+{
+
+    if (buttonIndex == 0)
+    {
+        [Capslr returnCapslrFromPFUser:[PFUser currentUser] withCompletion:^(Capslr *currentCapslr, NSError *error) {
+            if (!error) {
+                [currentCapslr deleteInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+                    if (!error)
+                    {
+                        [[PFUser currentUser] deleteInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+                            if (!error)
+                            {
+                                [PFUser logOut];
+                                [self manageLogin];
+                            }
+                        }];
+                    }
+                }];
+            }
+        }];
+    }
+
+    if (buttonIndex == 1)
+    {
+        UITextField *verificationCode = [alertView textFieldAtIndex:0];
+
+        [PFCloud callFunctionInBackground:@"verifyPhoneNumber" withParameters:@{@"phoneVerificationCode":verificationCode.text} block:^(id object, NSError *error) {
+            if ([object isEqualToString:@"Success"])
+            {
+                NSLog(@"PHONE NUMBER VERIFIED!!!");
+            }
+            else
+            {
+                NSLog(@"WRONG CODE!!");
+
+                [Capslr returnCapslrFromPFUser:[PFUser currentUser] withCompletion:^(Capslr *currentCapslr, NSError *error) {
+                    if (!error) {
+                        [currentCapslr deleteInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+                            if (!error)
+                            {
+                                [[PFUser currentUser] deleteInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+                                    if (!error)
+                                    {
+                                        [PFUser logOut];
+                                        [self manageLogin];
+                                    }
+                                }];
+                            }
+                        }];
+                    }
+                }];
+            }
+        }];
+
+    }
 }
 
 //Sent the delegate when the sign up attempt fails

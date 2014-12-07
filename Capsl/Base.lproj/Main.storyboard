@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="vXZ-lx-hvc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="vXZ-lx-hvc">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
@@ -610,59 +610,126 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fSy-W1-wUz">
-                                <rect key="frame" x="-23" y="-15" width="46" height="30"/>
-                                <color key="backgroundColor" red="0.50196081399917603" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <state key="normal" title="RECORD">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <variation key="widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="111" y="247" width="64" height="30"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6hM-1s-RaB">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fSy-W1-wUz">
+                                        <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                        <color key="backgroundColor" red="0.50196081399917603" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <state key="normal" title="RECORD">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="onRecordButtonTapped:" destination="Vgx-hR-DGD" eventType="touchUpInside" id="wDL-1K-7xi"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SeJ-cV-lRw">
+                                        <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                        <color key="backgroundColor" red="0.50196081399917603" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <state key="normal" title="PLAY">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="onPlayTapped:" destination="Vgx-hR-DGD" eventType="touchUpInside" id="BNt-f7-NCt"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9ZE-4q-zUy">
+                                        <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                        <color key="backgroundColor" red="0.50196081399917603" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <state key="normal" title="STOP">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="onStopTapped:" destination="Vgx-hR-DGD" eventType="touchUpInside" id="6vs-aq-8Ot"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" red="0.70196080207824707" green="0.70196080207824707" blue="0.70196080207824707" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstItem="fSy-W1-wUz" firstAttribute="leading" secondItem="6hM-1s-RaB" secondAttribute="leading" constant="65" id="0XL-TC-PiW"/>
+                                    <constraint firstAttribute="bottom" secondItem="9ZE-4q-zUy" secondAttribute="bottom" constant="32" id="3OB-03-A6G"/>
+                                    <constraint firstAttribute="bottom" secondItem="SeJ-cV-lRw" secondAttribute="bottom" constant="32" id="3mD-qA-2fl"/>
+                                    <constraint firstItem="SeJ-cV-lRw" firstAttribute="top" secondItem="6hM-1s-RaB" secondAttribute="top" constant="33" id="4w4-4H-fLB"/>
+                                    <constraint firstItem="9ZE-4q-zUy" firstAttribute="leading" secondItem="SeJ-cV-lRw" secondAttribute="trailing" constant="62" id="Afq-sy-wR3"/>
+                                    <constraint firstItem="9ZE-4q-zUy" firstAttribute="leading" secondItem="SeJ-cV-lRw" secondAttribute="trailing" constant="62" id="FuV-aP-KP1"/>
+                                    <constraint firstItem="fSy-W1-wUz" firstAttribute="top" secondItem="6hM-1s-RaB" secondAttribute="top" constant="33" id="Vdf-xP-E5G"/>
+                                    <constraint firstItem="9ZE-4q-zUy" firstAttribute="top" secondItem="6hM-1s-RaB" secondAttribute="top" constant="33" id="Xsr-Hl-boW"/>
+                                    <constraint firstItem="SeJ-cV-lRw" firstAttribute="leading" secondItem="fSy-W1-wUz" secondAttribute="trailing" constant="58" id="eVP-4z-u0g"/>
+                                    <constraint firstAttribute="trailing" secondItem="9ZE-4q-zUy" secondAttribute="trailing" constant="73" id="gce-GF-idH"/>
+                                    <constraint firstItem="SeJ-cV-lRw" firstAttribute="leading" secondItem="fSy-W1-wUz" secondAttribute="trailing" constant="58" id="nPS-L3-vfb"/>
+                                    <constraint firstAttribute="bottom" secondItem="fSy-W1-wUz" secondAttribute="bottom" constant="32" id="sjp-AZ-ZRM"/>
+                                    <constraint firstAttribute="height" constant="95" id="xNe-1G-20S"/>
+                                </constraints>
+                                <variation key="default">
+                                    <mask key="subviews">
+                                        <exclude reference="fSy-W1-wUz"/>
+                                        <exclude reference="SeJ-cV-lRw"/>
+                                        <exclude reference="9ZE-4q-zUy"/>
+                                    </mask>
+                                    <mask key="constraints">
+                                        <exclude reference="xNe-1G-20S"/>
+                                        <exclude reference="3OB-03-A6G"/>
+                                        <exclude reference="Afq-sy-wR3"/>
+                                        <exclude reference="FuV-aP-KP1"/>
+                                        <exclude reference="Xsr-Hl-boW"/>
+                                        <exclude reference="gce-GF-idH"/>
+                                        <exclude reference="3mD-qA-2fl"/>
+                                        <exclude reference="4w4-4H-fLB"/>
+                                        <exclude reference="eVP-4z-u0g"/>
+                                        <exclude reference="nPS-L3-vfb"/>
+                                        <exclude reference="0XL-TC-PiW"/>
+                                        <exclude reference="Vdf-xP-E5G"/>
+                                        <exclude reference="sjp-AZ-ZRM"/>
+                                    </mask>
                                 </variation>
-                                <connections>
-                                    <action selector="onRecordButtonTapped:" destination="Vgx-hR-DGD" eventType="touchUpInside" id="wDL-1K-7xi"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9ZE-4q-zUy">
-                                <rect key="frame" x="-23" y="-15" width="46" height="30"/>
-                                <color key="backgroundColor" red="0.50196081399917603" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <state key="normal" title="STOP">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <variation key="widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="218" y="247" width="41" height="30"/>
+                                <variation key="widthClass=compact">
+                                    <mask key="subviews">
+                                        <include reference="fSy-W1-wUz"/>
+                                        <include reference="SeJ-cV-lRw"/>
+                                        <include reference="9ZE-4q-zUy"/>
+                                    </mask>
+                                    <mask key="constraints">
+                                        <include reference="xNe-1G-20S"/>
+                                        <include reference="3OB-03-A6G"/>
+                                        <include reference="Afq-sy-wR3"/>
+                                        <include reference="FuV-aP-KP1"/>
+                                        <include reference="Xsr-Hl-boW"/>
+                                        <include reference="gce-GF-idH"/>
+                                        <include reference="3mD-qA-2fl"/>
+                                        <include reference="4w4-4H-fLB"/>
+                                        <include reference="eVP-4z-u0g"/>
+                                        <include reference="nPS-L3-vfb"/>
+                                        <include reference="0XL-TC-PiW"/>
+                                        <include reference="Vdf-xP-E5G"/>
+                                        <include reference="sjp-AZ-ZRM"/>
+                                    </mask>
                                 </variation>
-                                <connections>
-                                    <action selector="onStopTapped:" destination="Vgx-hR-DGD" eventType="touchUpInside" id="6vs-aq-8Ot"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SeJ-cV-lRw">
-                                <rect key="frame" x="-23" y="-15" width="46" height="30"/>
-                                <color key="backgroundColor" red="0.50196081399917603" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <state key="normal" title="PLAY">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <variation key="widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="169" y="312" width="37" height="30"/>
-                                </variation>
-                                <connections>
-                                    <action selector="onPlayTapped:" destination="Vgx-hR-DGD" eventType="touchUpInside" id="BNt-f7-NCt"/>
-                                </connections>
-                            </button>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="6hM-1s-RaB" firstAttribute="top" secondItem="viq-Eu-Lp1" secondAttribute="bottom" constant="203" id="1Vn-R6-YhC"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="6hM-1s-RaB" secondAttribute="trailing" constant="-16" id="1hQ-3Q-3ny"/>
+                            <constraint firstItem="6hM-1s-RaB" firstAttribute="leading" secondItem="jQj-Ud-E42" secondAttribute="leadingMargin" constant="-16" id="TUZ-FC-zxy"/>
+                        </constraints>
                         <variation key="default">
                             <mask key="subviews">
-                                <exclude reference="fSy-W1-wUz"/>
-                                <exclude reference="9ZE-4q-zUy"/>
-                                <exclude reference="SeJ-cV-lRw"/>
+                                <exclude reference="6hM-1s-RaB"/>
+                            </mask>
+                            <mask key="constraints">
+                                <exclude reference="1Vn-R6-YhC"/>
+                                <exclude reference="1hQ-3Q-3ny"/>
+                                <exclude reference="TUZ-FC-zxy"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=compact">
                             <mask key="subviews">
-                                <include reference="fSy-W1-wUz"/>
-                                <include reference="9ZE-4q-zUy"/>
-                                <include reference="SeJ-cV-lRw"/>
+                                <include reference="6hM-1s-RaB"/>
+                            </mask>
+                            <mask key="constraints">
+                                <include reference="1Vn-R6-YhC"/>
+                                <include reference="1hQ-3Q-3ny"/>
+                                <include reference="TUZ-FC-zxy"/>
                             </mask>
                         </variation>
                     </view>

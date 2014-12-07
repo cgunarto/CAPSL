@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import <Parse/Parse.h>
+#import "Capslr.h"
 
 @interface AppDelegate ()
 
@@ -16,6 +17,7 @@
 @implementation AppDelegate
 
 
+//In regards to push notification: this is called whenuser taps the default button in the alert or tap/click the app icon
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     //Correct applicationID and client key for Parse - Capsl
@@ -42,7 +44,73 @@
 
     [[UISegmentedControl appearance] setTitleTextAttributes:segmentedControlTextAttributes forState:UIControlStateNormal];
 
+    // Register for Push Notifications
+    UIUserNotificationType userNotificationTypes = (UIUserNotificationTypeAlert |
+                                                    UIUserNotificationTypeBadge |
+                                                    UIUserNotificationTypeSound);
+    UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:userNotificationTypes
+                                                                             categories:nil];
+    [application registerUserNotificationSettings:settings];
+    [application registerForRemoteNotifications];
+
+
+    // Handle launching from a local notification
+    UILocalNotification *localNotification = [launchOptions objectForKey:UIApplicationLaunchOptionsLocalNotificationKey];
+    if (localNotification)
+    {
+        // Set icon badge number to zero
+        application.applicationIconBadgeNumber = 0;
+    }
+
     return YES;
+}
+
+#pragma mark Added for Push Notification
+#warning check if deviceToken checking works
+- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
+{
+    if (deviceToken)
+    {
+        PFInstallation *currentInstallation = [PFInstallation currentInstallation];
+        [currentInstallation setDeviceTokenFromData:deviceToken];
+        currentInstallation.channels = @[ @"global" ];
+        [currentInstallation saveInBackground];
+    }
+}
+
+- (void)applicationDidBecomeActive:(UIApplication *)application
+{
+    // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+}
+
+- (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error
+{
+    
+}
+
+//In regards to push notification: this is called whenuser taps the DEFAULT button in the alert or tap/click the app icon
+//Allows Parse to create a modal alert and display the push notification's content when a push is received when the app is active.
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
+{
+    [PFPush handlePush:userInfo];
+}
+
+//If the app is running while local notification is delivered
+- (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification
+{
+    //TODO:Figure out how to do this with UIAlertController, can't present AlertController via AppDelegate right now
+    UIApplicationState state = [application applicationState];
+    if (state == UIApplicationStateActive)
+    {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"CAPSULE UNLOCKED"
+                                                        message:notification.alertBody
+                                                       delegate:self cancelButtonTitle:@"OK"
+                                              otherButtonTitles:nil];
+        [alert show];
+
+        // Set icon badge number to zero
+        application.applicationIconBadgeNumber = 0;
+    }
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {
@@ -59,9 +127,6 @@
     // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
 }
 
-- (void)applicationDidBecomeActive:(UIApplication *)application {
-    // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
-}
 
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
