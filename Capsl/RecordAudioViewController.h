@@ -12,4 +12,6 @@
 @interface RecordAudioViewController : UIViewController
 @property Capsl *createdCapsl;
 
+@property NSData *audioData;
+
 @end
