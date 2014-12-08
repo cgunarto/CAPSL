@@ -20,11 +20,6 @@
 @property (weak, nonatomic) IBOutlet UIButton *playButton;
 @property (weak, nonatomic) IBOutlet UIButton *deleteRecordingButton;
 
-//@property (strong, nonatomic) IBOutlet UIBarButtonItem *doneButton;
-
-@property (strong, nonatomic) IBOutlet UIBarButtonItem *saveButton;
-@property (strong, nonatomic) IBOutlet UIBarButtonItem *cancelButton;
-
 @property AVAudioRecorder *recorder;
 @property AVAudioPlayer *player;
 
@@ -34,7 +29,6 @@
 @implementation RecordAudioViewController
 
 //code referenced from Appcoda http://www.appcoda.com/ios-avfoundation-framework-tutorial/
-//TODO:need to create CPSL and perform segueToCompose
 //TODO: AUDIO - add isEDITING
 
 - (void)viewDidLoad
@@ -44,12 +38,12 @@
     //Disable endRecordingButton when app launches
     [self.endRecordingButton setEnabled:NO];
     [self setButtonStateToReflectAudioAvailability];
+    [self setUpAudioSessionAndRecorder];
+}
 
-    self.navigationItem.leftBarButtonItem = self.cancelButton;
-    self.navigationItem.rightBarButtonItem = self.saveButton;
-
+- (void)setUpAudioSessionAndRecorder
+{
     // Set the audio file
-    //TODO: DECIDE IF IT NEEDS OT BE IN THE DOCUMENTS DIRECTORY
     NSArray *pathComponents = [NSArray arrayWithObjects:
                                [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject],
                                @"MyAudio.m4a",
@@ -222,31 +216,6 @@
 }
 
 #pragma mark Next Button and Segue
-
-- (BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender
-{
-    if ([sender isEqual:self.saveButton])
-    {
-        if (self.createdCapsl.audio == nil)
-        {
-            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"NO AUDIO TO SAVE"
-                                                                           message:@"Please record a message"
-                                                                    preferredStyle:UIAlertControllerStyleAlert];
-
-            UIAlertAction *okButton = [UIAlertAction actionWithTitle:@"OK"
-                                                               style:UIAlertActionStyleDefault
-                                                             handler:nil];
-            [alert addAction:okButton];
-            [self presentViewController:alert
-                               animated:YES
-                             completion:nil];
-
-            return NO;
-        }
-    }
-
-    return YES;
-}
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
