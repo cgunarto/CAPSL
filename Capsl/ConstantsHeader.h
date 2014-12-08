@@ -20,5 +20,7 @@
 #define kTimelineWallpaperSent [UIImage imageNamed:@"china"]
 #define kTimelineWallpaperReceived [UIImage imageNamed:@"china"]
 #define kProfileBackground [UIImage imageNamed:@"lake_portrait"]
+#define kEditProfileBackground [UIImage imageNamed:@"lake_portrait 2"]
+#define kUpdateProfileBackground [UIImage imageNamed:@"lake_portrait 3"]
 
 #endif

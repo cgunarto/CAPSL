@@ -12,7 +12,6 @@
 
 @interface UpdateProfileInfoViewController () <UITextFieldDelegate>
 
-@property (strong, nonatomic) IBOutlet UILabel *descriptionLabel;
 @property (strong, nonatomic) IBOutlet UITextField *textField;
 @property (strong, nonatomic) IBOutlet UILabel *wordCountLabel;
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *saveBarButtonItem;
@@ -43,13 +42,12 @@
     if (self.nameString)
     {
         self.textField.text = self.nameString;
-        self.navigationItem.title = @"Name";
+        self.navigationItem.title = [@"Name" uppercaseString];
 
         self.wordCountLabel.text = [NSString stringWithFormat:@"%lu/40", (unsigned long)self.nameString.length];
     }
     else if (self.usernameString)
     {
-        self.descriptionLabel.text = @"Enter your username.";
         self.textField.text = self.usernameString;
         self.navigationItem.title = @"Username";
 
@@ -57,12 +55,14 @@
     }
     else if (self.emailString)
     {
-        self.descriptionLabel.text = @"Enter your Email.";
         self.textField.text = self.emailString;
         self.navigationItem.title = @"Email";
 
         self.wordCountLabel.text = [NSString stringWithFormat:@"%lu/40", (unsigned long)self.emailString.length];
     }
+
+    self.view.backgroundColor = [UIColor colorWithPatternImage:kUpdateProfileBackground];
+
 }
 
 - (IBAction)onSaveBarButtonItemPressed:(UIBarButtonItem *)sender
