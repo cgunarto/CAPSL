@@ -686,7 +686,7 @@
 {
 
     int imageNumber = arc4random_uniform(4) + 1;
-    UIImage *image = [UIImage imageNamed:[NSString stringWithFormat:@"wallpaperTexture %i", imageNumber]];
+    UIImage *image = [UIImage imageNamed:[NSString stringWithFormat:@"wallpaperTexture-%i", imageNumber]];
     return image;
 
 }
