@@ -24,6 +24,7 @@ typedef void(^searchCapslByRecipientBlock)(NSArray *objects, NSError *error);
 @property (nonatomic, strong) PFFile *video;
 @property (nonatomic, strong) PFFile *audio;
 @property (nonatomic, strong) NSString *text;
+@property (nonatomic, strong) NSNumber *wallpaperIndex;
 
 @property (nonatomic, strong) NSDate *deliveryTime;
 

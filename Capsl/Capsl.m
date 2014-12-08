@@ -21,6 +21,7 @@
 @dynamic video;
 @dynamic audio;
 @dynamic text;
+@dynamic wallpaperIndex;
 
 @dynamic deliveryTime;
 

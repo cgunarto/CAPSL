@@ -141,10 +141,9 @@
         //TODO: if there is no text and no photo put audio button in center of screen with text view background
         self.addAudioButton.hidden = !self.chosenCapsl.audio;
 
-
     }
 
-    self.view.backgroundColor = [UIColor colorWithPatternImage:[self getRandomBackground]];
+    self.view.backgroundColor = [UIColor colorWithPatternImage:[self getBackgroundImage]];
 
 }
 
@@ -682,10 +681,21 @@
 
 }
 
-- (UIImage *)getRandomBackground
+- (UIImage *)getBackgroundImage
 {
 
-    int imageNumber = arc4random_uniform(4) + 1;
+    int imageNumber;
+
+    if (self.isEditing)
+    {
+        imageNumber = arc4random_uniform(4) + 1;
+        self.chosenCapsl.wallpaperIndex = [NSNumber numberWithInt:imageNumber];
+    }
+    else
+    {
+        imageNumber = [self.chosenCapsl.wallpaperIndex intValue];
+    }
+
     UIImage *image = [UIImage imageNamed:[NSString stringWithFormat:@"wallpaperTexture-%i", imageNumber]];
     return image;
 
