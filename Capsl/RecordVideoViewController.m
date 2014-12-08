@@ -25,6 +25,10 @@
 @property (strong, nonatomic) NSURL *videoURL;
 @property (strong, nonatomic) MPMoviePlayerController *videoController;
 
+//isEditing only property
+@property (weak, nonatomic) IBOutlet UIButton *exitPlayVideoButton;
+@property (weak, nonatomic) IBOutlet UIButton *playVideoButton;
+
 @end
 
 @implementation RecordVideoViewController
@@ -34,6 +38,15 @@
     [super viewDidLoad];
     self.navigationItem.leftBarButtonItem = self.cancelButton;
     self.navigationItem.rightBarButtonItem = self.doneButton;
+    [self.exitPlayVideoButton setHidden:YES];
+    [self.playVideoButton setHidden:YES];
+
+    if (self.isEditing)
+    {
+        [self.recordVideo setHidden:YES];
+        [self.exitPlayVideoButton setHidden:NO];
+        [self.playVideoButton setHidden:NO];
+    }
 }
 
 #pragma mark Record button and methods
@@ -168,7 +181,12 @@
 {
 }
 
-#pragma mark - segue life cycle
+- (IBAction)onExitRecordVideo:(UIButton *)sender {
+}
+
+- (IBAction)onPlaybuttonPressed:(UIButton *)sender {
+}
+
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {

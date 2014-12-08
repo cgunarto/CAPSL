@@ -12,4 +12,9 @@
 @interface RecordVideoViewController : UIViewController
 @property Capsl *createdCapsl;
 
+//for when BOOL isEditing
+@property Capsl *chosenCapsl;
+
+@property BOOL isEditing;
+
 @end

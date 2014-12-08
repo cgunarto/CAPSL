@@ -13,6 +13,7 @@
 #import "JCATimelineRootViewController.h"
 #import "JCAMainViewController.h"
 #import "CaptureViewController.h"
+#import "RecordVideoViewController.h"
 
 @interface CapsuleListViewController () <UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate>
 
@@ -198,7 +199,17 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+        Capsl *capsl = self.tableViewData[indexPath.row];
+    
+        if ([capsl.type isEqualToString:@"multimedia"])
+        {
+            [self performSegueWithIdentifier:@"multimediaSegue" sender:self];
+        }
 
+        if ([capsl.type isEqualToString:@"video"])
+        {
+            [self performSegueWithIdentifier:@"videoSegue" sender:self];
+        }
 }
 
 #pragma mark - segue life cycle
@@ -261,9 +272,21 @@
     NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
     Capsl *capsl = self.tableViewData[indexPath.row];
 
-    CaptureViewController *vc = segue.destinationViewController;
-    vc.chosenCapsl = capsl;
-    vc.isEditing = NO;
+    if ([segue.identifier isEqualToString:@"multimediaSegue"])
+    {
+        CaptureViewController *vc = segue.destinationViewController;
+        vc.chosenCapsl = capsl;
+        vc.isEditing = NO;
+    }
+
+    if ([segue.identifier isEqualToString:@"videoSegue"])
+    {
+        RecordVideoViewController *recordVC = segue.destinationViewController;
+        recordVC.isEditing = YES;
+//        vc.chosenCapsl = capsl;
+//        vc.isEditing = NO;
+    }
+
 
 }
 
