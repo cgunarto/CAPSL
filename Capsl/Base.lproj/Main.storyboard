@@ -870,26 +870,13 @@
                     </view>
                     <navigationItem key="navigationItem" id="gaZ-zy-Ftb"/>
                     <connections>
-                        <outlet property="cancelButton" destination="4bY-XC-FNH" id="eiF-27-5Ia"/>
                         <outlet property="deleteRecordingButton" destination="T4n-2k-zJU" id="x18-hJ-0wH"/>
                         <outlet property="endRecordingButton" destination="9ZE-4q-zUy" id="J2R-5F-3FI"/>
                         <outlet property="playButton" destination="SeJ-cV-lRw" id="9hx-aK-Uz5"/>
                         <outlet property="recordPauseButton" destination="fSy-W1-wUz" id="h4W-4a-fRs"/>
-                        <outlet property="saveButton" destination="Bp7-Fh-YNq" id="Jhf-EA-Jy2"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2vm-oA-mNu" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <exit id="wyg-As-9oh" userLabel="Exit" sceneMemberID="exit"/>
-                <barButtonItem systemItem="stop" id="4bY-XC-FNH">
-                    <connections>
-                        <segue destination="wyg-As-9oh" kind="unwind" unwindAction="unWindToCaptureSegue:" id="j6I-iV-OT9"/>
-                    </connections>
-                </barButtonItem>
-                <barButtonItem systemItem="save" id="Bp7-Fh-YNq">
-                    <connections>
-                        <segue destination="wyg-As-9oh" kind="unwind" unwindAction="unWindToCaptureSegue:" id="mjp-fb-8pI"/>
-                    </connections>
-                </barButtonItem>
             </objects>
             <point key="canvasLocation" x="4317" y="-57"/>
         </scene>

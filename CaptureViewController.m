@@ -16,7 +16,13 @@
 #define kTextViewDistanceFromBottom 100.0f
 #define kCharacterLimit 120
 
-@interface CaptureViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextViewDelegate>
+@import AVFoundation;
+
+@interface CaptureViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextViewDelegate, AVAudioPlayerDelegate>
+
+@property  RecordAudioViewController *recordAudioVC;
+@property (strong, nonatomic) IBOutlet UIView *audioControlsContainerView;
+
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
 @property UIImage *chosenImage;
 
@@ -28,14 +34,13 @@
 @property (strong, nonatomic) IBOutlet UIButton *enterTextButton;
 @property (strong, nonatomic) IBOutlet UIButton *addPhotoButton;
 @property (weak, nonatomic) IBOutlet UIButton *exitAudioButton;
-@property  RecordAudioViewController *recordAudioVC;
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *bottomTextViewConstraint;
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *addAudioButtonCenterYConstraint;
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *addAudioButtonWidthConstraint;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *audioControlsCenterYConstraint;
 
-@property (strong, nonatomic) IBOutlet UIView *audioControlsContainerView;
+@property AVAudioPlayer *player;
 
 @property CGSize kbSize;
 
@@ -55,15 +60,16 @@
 {
     [super viewDidLoad];
 
+    //CONDITION FOR NONEDITING AND EDITING
     self.exitAudioButton.hidden = YES;
+    self.audioControlsContainerView.hidden = YES;
+    [self makeNavBarTransparent:YES];
 
     //If VC isEditing, it is trying to create a Capsl message
     if (self.isEditing)
     {
         self.textView.delegate = self;
         self.exitButton.hidden = YES;
-        self.audioControlsContainerView.hidden = YES;
-
         //Setting CPSL sender
         [Capslr returnCapslrFromPFUser:[PFUser currentUser] withCompletion:^(Capslr *currentCapslr, NSError *error)
          {
@@ -82,8 +88,6 @@
         [self processButton:self.enterTextButton withImageName:@"lowercase-50"];
         [self processButton:self.addPhotoButton withImageName:@"camera-50"];
         [self processButton:self.addAudioButton withImageName:@"audio_wave-50"];
-        [self makeNavBarTransparent:YES];
-
     }
 
     //If VC isEditing is NO, it is trying to unwrap and display a CPSL message
@@ -92,7 +96,7 @@
 
         self.enterTextButton.hidden = YES;
         self.addPhotoButton.hidden = YES;
-        self.addAudioButton.hidden = YES;
+        self.addAudioButton.hidden = NO;
         self.audioControlsContainerView.hidden = YES;
 
         self.imageView.userInteractionEnabled = NO;
@@ -100,6 +104,25 @@
         self.textView.userInteractionEnabled = NO;
         self.exitButton.hidden = NO;
         [self processExitButton];
+
+
+        //Get the audio data early -- show addAudio button which should be play button
+        [self.chosenCapsl.audio getDataInBackgroundWithBlock:^(NSData *data, NSError *error)
+         {
+             if (!error)
+             {
+                 self.audioData = data;
+                 [self processButton:self.addAudioButton withImageName:@"audio_wave-50"];
+//                 if (self.chosenCapsl.photo)
+//                 {
+//                     [self setAddAudioToBottom];
+//                 }
+             }
+             else
+             {
+                 NSLog(@"error for getting audio: %@", error.localizedDescription);
+             }
+         }];
 
         //Show textview, automatically defaults to center if there is no image
         if (self.textView.text)
@@ -361,13 +384,24 @@
 
 - (IBAction)onAddAudioButtonPressed:(UIButton *)sender
 {
-    self.audioControlsContainerView.hidden = NO;
-    self.addAudioButton.hidden = YES;
-    self.exitAudioButton.hidden = NO;
-    self.recordAudioVC.createdCapsl = self.createdCapsl;
-    self.recordAudioVC.audioData = self.audioData;
+    if (self.isEditing)
+    {
+        self.addAudioButton.hidden = YES;
+        self.exitAudioButton.hidden = NO;
+        self.audioControlsContainerView.hidden = NO;
+        self.recordAudioVC.createdCapsl = self.createdCapsl;
+        self.recordAudioVC.audioData = self.audioData;
+        [self.navigationController setNavigationBarHidden:YES animated:YES];
+    }
 
-    [self.navigationController setNavigationBarHidden:YES animated:YES];
+    //If not editing, pass audio data from chosenCapsl
+    //TODO: DELETE THIS bc it seems unecessary but need to double check
+    else
+    {
+        self.player = [[AVAudioPlayer alloc] initWithData:self.audioData fileTypeHint:@"m4a" error:nil];
+        [self.player setDelegate:self];
+        [self.player play];
+    }
 }
 
 - (IBAction)onExitAudioButtonPressed:(UIButton *)sender
@@ -379,8 +413,9 @@
     self.createdCapsl = self.recordAudioVC.createdCapsl;
     self.audioData = self.recordAudioVC.audioData;
 
-    [self updateAudioButton];
+    [self.navigationController setNavigationBarHidden:NO animated:YES];
 
+    [self updateAudioButton];
 }
 
 
@@ -400,10 +435,6 @@
     if ([segue.identifier isEqualToString:@"segueToAudio"])
     {
         self.recordAudioVC = segue.destinationViewController;
-//        self.recordAudioVC.createdCapsl = self.createdCapsl;
-//
-//        //This is here so that if the user had already recorded and is going back to the page, they can replay audio data they had created
-//        recordVC.audioData = self.audioData;
     }
 }
 

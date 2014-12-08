@@ -20,61 +20,26 @@
 @property (weak, nonatomic) IBOutlet UIButton *playButton;
 @property (weak, nonatomic) IBOutlet UIButton *deleteRecordingButton;
 
-//@property (strong, nonatomic) IBOutlet UIBarButtonItem *doneButton;
-
-@property (strong, nonatomic) IBOutlet UIBarButtonItem *saveButton;
-@property (strong, nonatomic) IBOutlet UIBarButtonItem *cancelButton;
-
 @property AVAudioRecorder *recorder;
 @property AVAudioPlayer *player;
-
 
 @end
 
 @implementation RecordAudioViewController
 
 //code referenced from Appcoda http://www.appcoda.com/ios-avfoundation-framework-tutorial/
-//TODO:need to create CPSL and perform segueToCompose
-//TODO: AUDIO - add isEDITING
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 
-    //Disable endRecordingButton when app launches
     [self.endRecordingButton setEnabled:NO];
+    [self setUpAudioSessionAndRecorder];
     [self setButtonStateToReflectAudioAvailability];
-
-    self.navigationItem.leftBarButtonItem = self.cancelButton;
-    self.navigationItem.rightBarButtonItem = self.saveButton;
-
-    // Set the audio file
-    //TODO: DECIDE IF IT NEEDS OT BE IN THE DOCUMENTS DIRECTORY
-    NSArray *pathComponents = [NSArray arrayWithObjects:
-                               [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject],
-                               @"MyAudio.m4a",
-                               nil];
-    NSURL *outputFileURL = [NSURL fileURLWithPathComponents:pathComponents];
-
-    // Setup audio session
-    AVAudioSession *session = [AVAudioSession sharedInstance];
-    [session setCategory:AVAudioSessionCategoryPlayAndRecord error:nil];
-
-    // Define the recorder setting
-    NSMutableDictionary *recordSetting = [[NSMutableDictionary alloc] init];
-
-    [recordSetting setValue:[NSNumber numberWithInt:kAudioFormatMPEG4AAC] forKey:AVFormatIDKey];
-    [recordSetting setValue:[NSNumber numberWithFloat:44100.0] forKey:AVSampleRateKey];
-    [recordSetting setValue:[NSNumber numberWithInt: 2] forKey:AVNumberOfChannelsKey];
-
-    // Initiate and prepare the recorder
-    self.recorder = [[AVAudioRecorder alloc] initWithURL:outputFileURL settings:recordSetting error:NULL];
-    self.recorder.delegate = self;
-    self.recorder.meteringEnabled = YES;
-
-    [self.recorder prepareToRecord];
 }
 
+
+#pragma mark Audio Control Button Methods
 
 - (IBAction)onRecordButtonTapped:(UIButton *)sender
 {
@@ -89,12 +54,9 @@
         AVAudioSession *session = [AVAudioSession sharedInstance];
         [session setActive:YES error:nil];
 
-        // Start recording
-//        [self.recorder record];
-
         [self.recorder recordForDuration:kMaxAudioDuration];
-
         [self.recordPauseButton setTitle:@"Pause" forState:UIControlStateNormal];
+        //Code to record without max duration - [self.recorder record];
     }
 
     else
@@ -129,7 +91,6 @@
     if (!self.recorder.recording)
     {
         //Playing from document's directory self.player = [[AVAudioPlayer alloc] initWithContentsOfURL:self.recorder.url error:nil];
-
         self.player = [[AVAudioPlayer alloc] initWithData:self.audioData fileTypeHint:@"m4a" error:nil];
         [self.player setDelegate:self];
         [self.player play];
@@ -167,15 +128,42 @@
 
 #pragma mark Helper Method
 
+//Initial Audio Session and Recording set up
+- (void)setUpAudioSessionAndRecorder
+{
+    // Set the audio file
+    NSArray *pathComponents = [NSArray arrayWithObjects:
+                               [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject],
+                               @"MyAudio.m4a",
+                               nil];
+    NSURL *outputFileURL = [NSURL fileURLWithPathComponents:pathComponents];
+
+    // Setup audio session
+    AVAudioSession *session = [AVAudioSession sharedInstance];
+    [session setCategory:AVAudioSessionCategoryPlayAndRecord error:nil];
+
+    // Define the recorder setting
+    NSMutableDictionary *recordSetting = [[NSMutableDictionary alloc] init];
+
+    [recordSetting setValue:[NSNumber numberWithInt:kAudioFormatMPEG4AAC] forKey:AVFormatIDKey];
+    [recordSetting setValue:[NSNumber numberWithFloat:44100.0] forKey:AVSampleRateKey];
+    [recordSetting setValue:[NSNumber numberWithInt: 2] forKey:AVNumberOfChannelsKey];
+
+    // Initiate and prepare the recorder
+    self.recorder = [[AVAudioRecorder alloc] initWithURL:outputFileURL settings:recordSetting error:NULL];
+    self.recorder.delegate = self;
+    self.recorder.meteringEnabled = YES;
+
+    [self.recorder prepareToRecord];
+}
+
 - (void)deleteRecordedAudio
 {
     NSLog(@"Audio Deleted");
     self.audioData = nil;
     self.createdCapsl.audio = nil;
 
-    #warning may not work, need to test
     [self.recorder deleteRecording];
-    //TODO: Delete it in the default directory
 }
 
 - (void) setButtonStateToReflectAudioAvailability
@@ -194,6 +182,7 @@
 
 
 #pragma mark AVAudioRecorderDelegate
+
 //Delegate method for handling interruption during recording
 - (void) audioRecorderDidFinishRecording:(AVAudioRecorder *)avrecorder successfully:(BOOL)flag
 {
@@ -222,31 +211,6 @@
 }
 
 #pragma mark Next Button and Segue
-
-- (BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender
-{
-    if ([sender isEqual:self.saveButton])
-    {
-        if (self.createdCapsl.audio == nil)
-        {
-            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"NO AUDIO TO SAVE"
-                                                                           message:@"Please record a message"
-                                                                    preferredStyle:UIAlertControllerStyleAlert];
-
-            UIAlertAction *okButton = [UIAlertAction actionWithTitle:@"OK"
-                                                               style:UIAlertActionStyleDefault
-                                                             handler:nil];
-            [alert addAction:okButton];
-            [self presentViewController:alert
-                               animated:YES
-                             completion:nil];
-
-            return NO;
-        }
-    }
-
-    return YES;
-}
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
