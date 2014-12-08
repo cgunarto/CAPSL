@@ -2086,7 +2086,6 @@
                                             <outlet property="lozengeView" destination="6JC-R8-5qu" id="WEQ-uV-nSV"/>
                                             <outlet property="profileImage" destination="HAI-ck-GMZ" id="0ej-Df-dMh"/>
                                             <outlet property="timerLabel" destination="Lji-1Y-YV1" id="Sbu-5o-cfO"/>
-                                            <segue destination="ILH-s3-dTC" kind="presentation" id="rll-5A-arG"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -2174,6 +2173,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="6sN-U3-hhX" id="6g1-rY-Oot"/>
+                        <segue destination="ILH-s3-dTC" kind="presentation" identifier="multimediaSegue" id="BeW-T3-OQ1"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RDH-cC-bCK" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -3906,8 +3906,8 @@
         <image name="wallpaperRoad_blurred" width="375" height="667"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="dAc-Nd-2MW"/>
-        <segue reference="rll-5A-arG"/>
+        <segue reference="BeW-T3-OQ1"/>
         <segue reference="Eln-db-Pjz"/>
+        <segue reference="dAc-Nd-2MW"/>
     </inferredMetricsTieBreakers>
 </document>

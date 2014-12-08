@@ -198,7 +198,12 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-
+        Capsl *capsl = self.tableViewData[indexPath.row];
+    
+        if ([capsl.type isEqualToString:@"multimedia"])
+        {
+            [self performSegueWithIdentifier:@"multimediaSegue" sender:self];
+        }
 }
 
 #pragma mark - segue life cycle
