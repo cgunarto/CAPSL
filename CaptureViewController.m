@@ -379,6 +379,8 @@
     self.createdCapsl = self.recordAudioVC.createdCapsl;
     self.audioData = self.recordAudioVC.audioData;
 
+    [self.navigationController setNavigationBarHidden:NO animated:YES];
+
     [self updateAudioButton];
 
 }
