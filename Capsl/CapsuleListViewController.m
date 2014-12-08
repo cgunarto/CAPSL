@@ -56,6 +56,7 @@
     if (_shouldShowSent)
     {
         self.tableViewData = self.sentCapslsArray;
+        
     }
     else
     {

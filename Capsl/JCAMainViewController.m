@@ -7,6 +7,7 @@
 //
 
 #import "JCAMainViewController.h"
+#import "ViewCapsulesViewController.h"
 
 @interface JCAMainViewController ()
 
@@ -133,6 +134,12 @@
 
     if ([segue.identifier isEqualToString:@"viewCapsulesSegue"])
     {
+        ViewCapsulesViewController *vc = segue.destinationViewController;
+        vc.capslsArray = self.capslsArray;
+        vc.sentCapslsArray = self.sentCapslsArray;
+        
+        vc.availableCapslsArray = self.availableCapslsArray;
+        vc.shouldShowSent = self.shouldShowSent;
     }
     else if ([segue.identifier isEqualToString:@"chooseTypeSegue"])
     {
