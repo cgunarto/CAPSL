@@ -2759,7 +2759,7 @@
                                                         </mask>
                                                     </variation>
                                                     <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                        <rect key="frame" x="108.5" y="17.5" width="103" height="25"/>
+                                                        <rect key="frame" x="108.5" y="17" width="103" height="25"/>
                                                         <mask key="constraints">
                                                             <include reference="DtZ-t4-0kA"/>
                                                             <include reference="m03-xX-XHr"/>
