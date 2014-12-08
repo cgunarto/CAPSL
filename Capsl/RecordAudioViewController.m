@@ -23,22 +23,19 @@
 @property AVAudioRecorder *recorder;
 @property AVAudioPlayer *player;
 
-
 @end
 
 @implementation RecordAudioViewController
 
 //code referenced from Appcoda http://www.appcoda.com/ios-avfoundation-framework-tutorial/
-//TODO: AUDIO - add isEDITING
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 
-    //Disable endRecordingButton when app launches
     [self.endRecordingButton setEnabled:NO];
-    [self setButtonStateToReflectAudioAvailability];
     [self setUpAudioSessionAndRecorder];
+    [self setButtonStateToReflectAudioAvailability];
 }
 
 
@@ -94,7 +91,6 @@
     if (!self.recorder.recording)
     {
         //Playing from document's directory self.player = [[AVAudioPlayer alloc] initWithContentsOfURL:self.recorder.url error:nil];
-
         self.player = [[AVAudioPlayer alloc] initWithData:self.audioData fileTypeHint:@"m4a" error:nil];
         [self.player setDelegate:self];
         [self.player play];
@@ -186,6 +182,7 @@
 
 
 #pragma mark AVAudioRecorderDelegate
+
 //Delegate method for handling interruption during recording
 - (void) audioRecorderDidFinishRecording:(AVAudioRecorder *)avrecorder successfully:(BOOL)flag
 {
