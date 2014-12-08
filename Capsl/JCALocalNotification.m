@@ -89,7 +89,18 @@
 {
     UILocalNotification* localNotification = [[UILocalNotification alloc]init];
     localNotification.fireDate = capsl.deliveryTime;
-    localNotification.alertBody = [NSString stringWithFormat: @"Message from %@ is unlocked, click to view!", capsl.sender.name];
+
+    //Use first name if not use username(required at sign up)
+    if (capsl.sender.name)
+    {
+        localNotification.alertBody = [NSString stringWithFormat: @"Message from %@ is unlocked, click to view!", capsl.sender.name];
+    }
+    else
+    {
+        localNotification.alertBody = [NSString stringWithFormat: @"Message from %@ is unlocked, click to view!", capsl.sender.username];
+
+    }
+
     localNotification.alertAction = @"View Message";
     localNotification.timeZone = [NSTimeZone defaultTimeZone];
     localNotification.applicationIconBadgeNumber = [[UIApplication sharedApplication] applicationIconBadgeNumber] + 1;
