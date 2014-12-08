@@ -168,6 +168,8 @@
 {
 }
 
+#pragma mark - segue life cycle
+
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     if ([sender isEqual:self.doneButton])
