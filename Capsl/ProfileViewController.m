@@ -36,6 +36,9 @@
 @property BOOL doNotShowActivityIndicator;
 @property EditProfileViewController *editVC;
 
+@property (strong, nonatomic) IBOutlet UIView *addressBookContainerView;
+@property (strong, nonatomic) IBOutlet UIView *capslrContainerView;
+
 @end
 
 
@@ -57,7 +60,7 @@
     [super viewWillAppear:animated];
 
     // To hide the subview
-    self.view.backgroundColor = [UIColor blackColor];
+//    self.view.backgroundColor = [UIColor blackColor];
 
     if (!self.doNotShowActivityIndicator)
     {
@@ -77,6 +80,8 @@
             self.navigationItem.rightBarButtonItem.enabled = YES;
         }
     }
+
+    self.view.backgroundColor = [UIColor colorWithPatternImage:kProfileBackground];
 }
 
 - (void)viewDidLoad
@@ -87,6 +92,7 @@
     self.navigationItem.rightBarButtonItem.enabled = NO;
 
     self.segmentedControl.selectedSegmentIndex = 0;
+    self.addressBookContainerView.hidden = YES;
 
     [Capslr returnCapslrFromPFUser:[PFUser currentUser] withCompletion:^(Capslr *currentCapslr, NSError *error) {
         if (!error)
@@ -98,6 +104,8 @@
             }
 
             self.currentCapslrInfo = @[currentCapslr.name, currentCapslr.username, currentCapslr.email];
+
+            self.title = [currentCapslr.username uppercaseString];
 
             [currentCapslr.profilePhoto getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
 
@@ -153,29 +161,38 @@
 //User sees that CPSLR friend list by default
 - (void)showCapslViewCenter
 {
-    self.cpslrLeftConstraint.constant = kLeftInitialConstant;
-    self.cpslrRightConstraint.constant = kRightInitialConstant;
+    self.addressBookContainerView.hidden = YES;
+    self.capslrContainerView.hidden = NO;
 
-    CGFloat screenwidth = [UIScreen mainScreen].bounds.size.width;
-
-    self.addressLeftConstraint.constant = self.addressLeftConstraint.constant + screenwidth;
-    self.addressRightConstraint.constant = self.addressRightConstraint.constant - screenwidth;
-
-    [self.view layoutIfNeeded];
+//    self.cpslrLeftConstraint.constant = kLeftInitialConstant;
+//    self.cpslrRightConstraint.constant = kRightInitialConstant;
+//
+//    CGFloat screenwidth = [UIScreen mainScreen].bounds.size.width;
+//
+//    [UIView animateWithDuration:0.5 animations:^{
+//        self.addressLeftConstraint.constant = self.addressLeftConstraint.constant + screenwidth;
+//        self.addressRightConstraint.constant = self.addressRightConstraint.constant - screenwidth;
+//
+//    } completion:nil];
+//
+//    [self.view layoutIfNeeded];
 }
 
 //User sees Address at center - move CPSLR friend to left and Bring Address Book into center
 - (void)showAddressViewCenter
 {
-    self.addressLeftConstraint.constant = kLeftInitialConstant;
-    self.addressRightConstraint.constant = kRightInitialConstant;
 
-    CGFloat screenwidth = [UIScreen mainScreen].bounds.size.width;
-
-    self.cpslrLeftConstraint.constant = self.cpslrLeftConstraint.constant - screenwidth;
-    self.cpslrRightConstraint.constant = self.cpslrRightConstraint.constant + screenwidth;
-
-    [self.view layoutIfNeeded];
+    self.addressBookContainerView.hidden = NO;
+    self.capslrContainerView.hidden = YES;
+//    self.addressLeftConstraint.constant = kLeftInitialConstant;
+//    self.addressRightConstraint.constant = kRightInitialConstant;
+//
+//    CGFloat screenwidth = [UIScreen mainScreen].bounds.size.width;
+//
+//    self.cpslrLeftConstraint.constant = self.cpslrLeftConstraint.constant - screenwidth;
+//    self.cpslrRightConstraint.constant = self.cpslrRightConstraint.constant + screenwidth;
+//
+//    [self.view layoutIfNeeded];
 }
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender

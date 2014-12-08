@@ -31,6 +31,7 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *bottomTextViewConstraint;
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *addAudioButtonCenterYConstraint;
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *addAudioButtonWidthConstraint;
+@property (strong, nonatomic) IBOutlet UIView *audioControlsContainerView;
 
 @property CGSize kbSize;
 
@@ -53,6 +54,7 @@
     {
         self.textView.delegate = self;
         self.exitButton.hidden = YES;
+        self.audioControlsContainerView.hidden = YES;
 
         //Setting CPSL sender
         [Capslr returnCapslrFromPFUser:[PFUser currentUser] withCompletion:^(Capslr *currentCapslr, NSError *error)
@@ -83,16 +85,19 @@
         self.enterTextButton.hidden = YES;
         self.addPhotoButton.hidden = YES;
         self.addAudioButton.hidden = YES;
+        self.audioControlsContainerView.hidden = YES;
 
         self.imageView.userInteractionEnabled = NO;
         [self.view addSubview:self.textView];
         self.textView.userInteractionEnabled = NO;
         self.exitButton.hidden = NO;
+        [self processExitButton];
 
         //Show textview, automatically defaults to center if there is no image
         if (self.textView.text)
         {
 
+            //TODO: trouble shoot vertical alignment for viewing capsules
             self.textView.text = self.chosenCapsl.text;
 
             CGSize contentSize = self.textView.contentSize;
@@ -359,8 +364,7 @@
     //Accessing it through the NavVC
     if ([segue.identifier isEqualToString:@"segueToAudio"])
     {
-        UINavigationController *navVC = segue.destinationViewController;
-        RecordAudioViewController *recordVC = navVC.childViewControllers[0];
+        RecordAudioViewController *recordVC = segue.destinationViewController;
         recordVC.createdCapsl = self.createdCapsl;
 
         //This is here so that if the user had already recorded and is going back to the page, they can replay audio data they had created
@@ -518,7 +522,7 @@
                                                                 multiplier:1.0f
                                                                   constant:-kTextViewDistanceFromBottom];
 
-//    [self.view addConstraint:self.bottomTextViewConstraint];
+    [self.view addConstraint:self.bottomTextViewConstraint];
     [self verticalCenterText];
 
 }
@@ -572,6 +576,16 @@
     button.layer.shadowOpacity = 0.3;
     button.layer.shadowRadius = 1;
     button.layer.shadowOffset = CGSizeMake(0, 1.5f);
+
+}
+
+- (void)processExitButton
+{
+
+    self.exitButton.layer.shadowColor = [UIColor blackColor].CGColor;
+    self.exitButton.layer.shadowOpacity = 0.3;
+    self.exitButton.layer.shadowRadius = 1;
+    self.exitButton.layer.shadowOffset = CGSizeMake(0, 1.5f);
 
 }
 
