@@ -13,6 +13,7 @@
 #import "JCATimelineRootViewController.h"
 #import "JCAMainViewController.h"
 #import "CaptureViewController.h"
+#import "RecordVideoViewController.h"
 
 @interface CapsuleListViewController () <UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate>
 
@@ -199,14 +200,18 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    Capsl *capsl = self.tableViewData[indexPath.row];
+    NSString *segueName = [NSString stringWithFormat:@"%@Segue", capsl.type];
 
+    //Segue to different VC depending on CAPSULE name
+    [self shouldPerformSegueWithIdentifier:segueName sender:self];
+    [self performSegueWithIdentifier:segueName sender:self];
 }
 
 #pragma mark - segue life cycle
 
 - (BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender
 {
-
     NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
 
     Capsl *capsl = self.tableViewData[indexPath.row];
@@ -216,6 +221,7 @@
 
     if (!self.shouldShowSent)
     {
+        //if it's unviewed and unlocked
         if (!capsl.viewedAt && elapsedSeconds < 0)
         {
             capsl.viewedAt = [NSDate date];
@@ -240,6 +246,7 @@
              }];
         }
 
+        //if it's unlocked
         if (elapsedSeconds < 0)
         {
             return YES;
@@ -262,9 +269,22 @@
     NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
     Capsl *capsl = self.tableViewData[indexPath.row];
 
-    CaptureViewController *vc = segue.destinationViewController;
-    vc.chosenCapsl = capsl;
-    vc.isEditing = NO;
+    if ([segue.identifier isEqualToString:@"multimediaSegue"])
+    {
+        CaptureViewController *vc = segue.destinationViewController;
+        vc.chosenCapsl = capsl;
+        vc.isEditing = NO;
+    }
+
+    if ([segue.identifier isEqualToString:@"videoSegue"])
+    {
+        RecordVideoViewController *recordVC = segue.destinationViewController;
+        recordVC.isEditing = NO;
+        recordVC.chosenCapsl = capsl;
+//        vc.chosenCapsl = capsl;
+//        vc.isEditing = NO;
+    }
+
 
 }
 

@@ -25,6 +25,11 @@
 @property (strong, nonatomic) NSURL *videoURL;
 @property (strong, nonatomic) MPMoviePlayerController *videoController;
 
+//isEditing only property
+@property (weak, nonatomic) IBOutlet UIButton *exitPlayVideoButton;
+@property (weak, nonatomic) IBOutlet UIButton *playVideoButton;
+@property (strong, nonatomic) NSData *videoData;
+
 @end
 
 @implementation RecordVideoViewController
@@ -34,6 +39,19 @@
     [super viewDidLoad];
     self.navigationItem.leftBarButtonItem = self.cancelButton;
     self.navigationItem.rightBarButtonItem = self.doneButton;
+    [self.exitPlayVideoButton setHidden:YES];
+    [self.playVideoButton setHidden:YES];
+    [self.playVideoButton setEnabled:NO];
+
+    if (self.isEditing == NO)
+    {
+        [self.recordVideo setHidden:YES];
+        [self.exitPlayVideoButton setHidden:NO];
+
+        [self.playVideoButton setHidden:NO];
+        [self.playVideoButton setEnabled:YES];
+
+    }
 }
 
 #pragma mark Record button and methods
@@ -167,6 +185,41 @@
 - (IBAction)onCancelButtonPressed:(UIBarButtonItem *)sender
 {
 }
+
+- (IBAction)onExitRecordVideo:(UIButton *)sender
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+//Play for isEditing
+- (IBAction)onPlaybuttonPressed:(UIButton *)sender
+{
+    //Enable only when data is available
+    //TODO: PLAY IN LANDSCAPE
+
+         NSURL *url = [NSURL URLWithString:self.chosenCapsl.video.url];
+
+         self.videoController = [[MPMoviePlayerController alloc] initWithContentURL:url];
+
+         CGFloat screenWidth = [UIScreen mainScreen].bounds.size.width;
+         CGFloat screenHeight = [UIScreen mainScreen].bounds.size.height;
+
+         //TODO:change the width of video, constraint video format
+         [self.videoController.view setFrame:CGRectMake (0, 0, screenWidth, screenHeight)];
+         [self.view addSubview:self.videoController.view];
+
+         //Adds notification after the video is finished playing
+         [[NSNotificationCenter defaultCenter] addObserver:self
+                                                  selector:@selector(videoPlayBackDidFinish:)
+                                                      name:MPMoviePlayerPlaybackDidFinishNotification
+                                                    object:self.videoController];
+             
+             
+         [self.videoController play];
+
+
+}
+
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
