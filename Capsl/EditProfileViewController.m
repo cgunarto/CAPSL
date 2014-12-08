@@ -54,9 +54,11 @@
 
     self.infoArray = @[kNameLabel, kUsernameLabel, kEmailLabel];
 
-    self.navigationItem.title = @"My Profile";
+    self.navigationItem.title = @"Profile";
 
     //TODO: fix top inset issue
+
+    self.view.backgroundColor = [UIColor colorWithPatternImage:kEditProfileBackground];
 
 }
 
@@ -113,13 +115,12 @@
     {
         cell = [tableView dequeueReusableCellWithIdentifier:@"dataCell" forIndexPath:indexPath];
 
-        cell.textLabel.text = self.infoArray[indexPath.row];
+        cell.textLabel.text = [self.infoArray[indexPath.row] uppercaseString];
         cell.detailTextLabel.text = self.currenCapslrInfo[indexPath.row];
         [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
 
     }else if (indexPath.section == 2) {
         cell = [tableView dequeueReusableCellWithIdentifier:@"buttonCell" forIndexPath:indexPath];
-        cell.textLabel.text = @"LOGOUT";
     }
 
 #warning fix this later...

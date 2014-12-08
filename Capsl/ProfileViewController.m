@@ -82,6 +82,10 @@
     }
 
     self.view.backgroundColor = [UIColor colorWithPatternImage:kProfileBackground];
+
+    self.profilePictureImageView.layer.cornerRadius = 50;
+    [self.profilePictureImageView setClipsToBounds:YES];
+
 }
 
 - (void)viewDidLoad
@@ -109,7 +113,7 @@
 
             [currentCapslr.profilePhoto getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
 
-                self.profilePictureImageView.layer.cornerRadius = self.profilePictureImageView.frame.size.width/2;
+
                 self.profilePictureImageView.clipsToBounds = YES;
 
                 if (!currentCapslr.profilePhoto) {
