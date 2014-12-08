@@ -44,6 +44,10 @@
 
     [[UISegmentedControl appearance] setTitleTextAttributes:segmentedControlTextAttributes forState:UIControlStateNormal];
 
+    [[UINavigationBar appearance] setTitleTextAttributes: @{
+                                                           NSFontAttributeName: [UIFont fontWithName:@"Avenir-Medium" size:18.0]
+                                                           }];
+
     // Register for Push Notifications
     UIUserNotificationType userNotificationTypes = (UIUserNotificationTypeAlert |
                                                     UIUserNotificationTypeBadge |

@@ -94,6 +94,7 @@
         if (self.textView.text)
         {
 
+            //TODO: trouble shoot vertical alignment for viewing capsules
             self.textView.text = self.chosenCapsl.text;
 
             CGSize contentSize = self.textView.contentSize;
@@ -360,8 +361,7 @@
     //Accessing it through the NavVC
     if ([segue.identifier isEqualToString:@"segueToAudio"])
     {
-        UINavigationController *navVC = segue.destinationViewController;
-        RecordAudioViewController *recordVC = navVC.childViewControllers[0];
+        RecordAudioViewController *recordVC = segue.destinationViewController;
         recordVC.createdCapsl = self.createdCapsl;
 
         //This is here so that if the user had already recorded and is going back to the page, they can replay audio data they had created
