@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="fsF-ct-we6">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="fsF-ct-we6">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
@@ -1416,34 +1416,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="TcA-dM-lMz">
-                                <rect key="frame" x="-61" y="-14" width="123" height="29"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="199" id="Jbj-bk-C4t">
-                                        <variation key="heightClass=regular-widthClass=compact" constant="368"/>
-                                    </constraint>
-                                    <constraint firstAttribute="height" constant="28" id="bsL-Kg-2fS"/>
-                                </constraints>
-                                <segments>
-                                    <segment title="CAPSL USERS"/>
-                                    <segment title="ADDRESS BOOK"/>
-                                </segments>
-                                <variation key="default">
-                                    <mask key="constraints">
-                                        <exclude reference="Jbj-bk-C4t"/>
-                                        <exclude reference="bsL-Kg-2fS"/>
-                                    </mask>
-                                </variation>
-                                <variation key="widthClass=compact">
-                                    <mask key="constraints">
-                                        <include reference="Jbj-bk-C4t"/>
-                                        <include reference="bsL-Kg-2fS"/>
-                                    </mask>
-                                </variation>
-                                <connections>
-                                    <action selector="onContactTypeChosen:" destination="g6O-c0-HJb" eventType="valueChanged" id="LgQ-4v-5pM"/>
-                                </connections>
-                            </segmentedControl>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="94" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="tzr-2W-cbO">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1713,6 +1685,37 @@
                                     <outlet property="delegate" destination="g6O-c0-HJb" id="09j-nl-yuo"/>
                                 </connections>
                             </searchBar>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="TcA-dM-lMz">
+                                <rect key="frame" x="-61" y="-14" width="123" height="29"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="199" id="Jbj-bk-C4t">
+                                        <variation key="heightClass=regular-widthClass=compact" constant="368"/>
+                                    </constraint>
+                                    <constraint firstAttribute="height" constant="28" id="bsL-Kg-2fS"/>
+                                </constraints>
+                                <segments>
+                                    <segment title="CAPSL USERS"/>
+                                    <segment title="ADDRESS BOOK"/>
+                                </segments>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="Jbj-bk-C4t"/>
+                                        <exclude reference="bsL-Kg-2fS"/>
+                                    </mask>
+                                </variation>
+                                <variation key="widthClass=compact">
+                                    <mask key="constraints">
+                                        <include reference="Jbj-bk-C4t"/>
+                                        <include reference="bsL-Kg-2fS"/>
+                                    </mask>
+                                </variation>
+                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="16" y="15" width="368" height="29"/>
+                                </variation>
+                                <connections>
+                                    <action selector="onContactTypeChosen:" destination="g6O-c0-HJb" eventType="valueChanged" id="LgQ-4v-5pM"/>
+                                </connections>
+                            </segmentedControl>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -1729,9 +1732,9 @@
                         </constraints>
                         <variation key="default">
                             <mask key="subviews">
-                                <exclude reference="TcA-dM-lMz"/>
                                 <exclude reference="tzr-2W-cbO"/>
                                 <exclude reference="IzC-ho-b09"/>
+                                <exclude reference="TcA-dM-lMz"/>
                             </mask>
                             <mask key="constraints">
                                 <exclude reference="0pA-Te-4vc"/>
@@ -1748,9 +1751,9 @@
                         </variation>
                         <variation key="widthClass=compact">
                             <mask key="subviews">
-                                <include reference="TcA-dM-lMz"/>
                                 <include reference="tzr-2W-cbO"/>
                                 <include reference="IzC-ho-b09"/>
+                                <include reference="TcA-dM-lMz"/>
                             </mask>
                             <mask key="constraints">
                                 <include reference="0pA-Te-4vc"/>
@@ -1787,7 +1790,7 @@
                     </connections>
                 </searchDisplayController>
             </objects>
-            <point key="canvasLocation" x="4743" y="438"/>
+            <point key="canvasLocation" x="5451" y="438"/>
         </scene>
         <!--View Capsules View Controller-->
         <scene sceneID="nfk-ov-wJ4">
@@ -2856,7 +2859,7 @@
                                                         </mask>
                                                     </variation>
                                                     <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                        <rect key="frame" x="108.5" y="17.5" width="103" height="25"/>
+                                                        <rect key="frame" x="109" y="17" width="103" height="25"/>
                                                         <mask key="constraints">
                                                             <include reference="DtZ-t4-0kA"/>
                                                             <include reference="m03-xX-XHr"/>
@@ -3957,7 +3960,7 @@
                     </connections>
                 </barButtonItem>
             </objects>
-            <point key="canvasLocation" x="5452.5" y="438"/>
+            <point key="canvasLocation" x="6160.5" y="438"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="MYO-tp-J0H">
