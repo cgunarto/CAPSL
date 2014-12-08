@@ -17,6 +17,10 @@
 #define kCharacterLimit 120
 
 @interface CaptureViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextViewDelegate>
+
+@property  RecordAudioViewController *recordAudioVC;
+@property (strong, nonatomic) IBOutlet UIView *audioControlsContainerView;
+
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
 @property UIImage *chosenImage;
 
@@ -28,14 +32,11 @@
 @property (strong, nonatomic) IBOutlet UIButton *enterTextButton;
 @property (strong, nonatomic) IBOutlet UIButton *addPhotoButton;
 @property (weak, nonatomic) IBOutlet UIButton *exitAudioButton;
-@property  RecordAudioViewController *recordAudioVC;
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *bottomTextViewConstraint;
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *addAudioButtonCenterYConstraint;
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *addAudioButtonWidthConstraint;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *audioControlsCenterYConstraint;
-
-@property (strong, nonatomic) IBOutlet UIView *audioControlsContainerView;
 
 @property CGSize kbSize;
 
