@@ -11,6 +11,7 @@
 #import "PromptDateTableViewCell.h"
 #import "Capsl.h"
 #import "Capslr.h"
+#import "RootViewController.h"
 
 #define kPickerAnimationDuration    3   // duration for the animation to slide the date picker into view
 #define kDatePickerTag              99     // view tag identifiying the date picker view
@@ -533,7 +534,7 @@ NSUInteger DeviceSystemMajorVersion()
                                             {
                                                 [alert dismissViewControllerAnimated:YES completion:nil];
 
-                                                [self performSegueWithIdentifier:@"unwindToChoose" sender:self];
+                                                [self showRootViewController];
                                             }];
                  [alert addAction:okButton];
                  [self presentViewController:alert
@@ -585,6 +586,13 @@ NSUInteger DeviceSystemMajorVersion()
     }
 
 
+}
+
+
+- (void)showRootViewController
+{
+    UINavigationController *rootNav = [self.storyboard instantiateInitialViewController];;
+    [self.view.window setRootViewController:rootNav];
 }
 
 

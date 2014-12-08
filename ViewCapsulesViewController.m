@@ -41,6 +41,8 @@
 
     self.capslListVC.capslsArray = self.capslsArray;
     self.capslListVC.sentCapslsArray = self.sentCapslsArray;
+    self.timelineRootVC.capslsArray = self.capslsArray;
+    self.timelineRootVC.sentCapslsArray = self.sentCapslsArray;
 
     self.timelineRootVC.shouldShowSent = NO;
     self.capslListVC.shouldShowSent = NO;

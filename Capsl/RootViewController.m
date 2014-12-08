@@ -35,21 +35,22 @@
 
 @implementation RootViewController
 
-
-- (void)viewDidLoad
+- (void)viewWillAppear:(BOOL)animated
 {
-    [super viewDidLoad];
-//    [PFUser logOut];
-
-    [SVProgressHUD show];
-    self.viewCapsulesButton.enabled = NO;
-    self.sendCapsuleButton.enabled = NO;
+    [super viewWillAppear:animated];
+    //    [PFUser logOut];
 
     // Check to see if user quit before entering verification code
 
     if ([PFUser currentUser])
     {
+        [SVProgressHUD show];
+
         [Capslr returnCapslrFromPFUser:[PFUser currentUser] withCompletion:^(Capslr *currentCapslr, NSError *error) {
+
+            self.viewCapsulesButton.enabled = NO;
+            self.sendCapsuleButton.enabled = NO;
+
             if (!currentCapslr.isVerified)
             {
                 [currentCapslr deleteInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
@@ -87,11 +88,11 @@
                             }
                         }
 
-//                        self.timelineRootVC.shouldShowSent = NO;
+                        //                        self.timelineRootVC.shouldShowSent = NO;
                         self.shouldShowSent = NO;
-//                        [self clearAndcreateLocalNotificationsFromCapslObjects:objects];
+                        //                        [self clearAndcreateLocalNotificationsFromCapslObjects:objects];
                     }
-                    
+
                     else
                     {
                         NSLog(@"%@", error.localizedDescription);
@@ -99,21 +100,53 @@
                 }];
 
                 [Capsl searchCapslByKey:@"sender" orderByAscending:@"deliveryTime" equalTo:capslr completion:^(NSArray *objects, NSError *error) {
-                        if (!error)
-                        {
-                            self.sentCapslsArray = objects;
-                            [SVProgressHUD dismiss];
-                            self.viewCapsulesButton.enabled = YES;
-                            self.sendCapsuleButton.enabled = YES;
-                        }
-                        else
-                        {
-                            NSLog(@"%@", error.localizedDescription);
-                        }
-                    }];
+                    if (!error)
+                    {
+                        self.sentCapslsArray = objects;
+                        [SVProgressHUD dismiss];
+                        self.viewCapsulesButton.enabled = YES;
+                        self.sendCapsuleButton.enabled = YES;
+                    }
+                    else
+                    {
+                        NSLog(@"%@", error.localizedDescription);
+                    }
+                }];
             }
         }];
     }
+
+    self.navigationItem.titleView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"logo_header"]];
+
+    self.sendCapsuleButton.alpha = 0;
+    self.viewCapsulesButton.alpha = 0;
+
+    self.sendCapsuleButton.layer.cornerRadius = 20;
+    self.sendCapsuleButton.layer.borderColor = [[UIColor whiteColor] CGColor];
+    self.sendCapsuleButton.layer.borderWidth = 1;
+
+    self.viewCapsulesButton.layer.cornerRadius = 20;
+    self.viewCapsulesButton.layer.borderColor = [[UIColor whiteColor] CGColor];
+    self.viewCapsulesButton.layer.borderWidth = 1;
+
+
+    self.sendButtonLeftConstraint.constant = [[UIScreen mainScreen] bounds].size.width * 0.5;
+    self.viewButtonRightConstraint.constant = [[UIScreen mainScreen] bounds].size.width * 0.5;
+    
+    //    self.view.backgroundColor = [UIColor colorWithPatternImage:kSplashWallpaper];
+    
+}
+
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+//    [PFUser logOut];
+
+    // Check to see if user quit before entering verification code
+    self.viewCapsulesButton.enabled = NO;
+    self.sendCapsuleButton.enabled = NO;
+
 
     self.navigationItem.titleView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"logo_header"]];
 
