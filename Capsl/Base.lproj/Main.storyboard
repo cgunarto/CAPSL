@@ -968,7 +968,7 @@
                         <subviews>
                             <imageView contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Hg3-VI-LXE">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <gestureRecognizers/>
                             </imageView>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Tjw-18-0nC">
@@ -2633,7 +2633,8 @@
                                                             <exclude reference="mGu-sF-Gp6"/>
                                                         </mask>
                                                     </variation>
-                                                    <variation key="heightClass=regular-widthClass=compact">
+                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                        <rect key="frame" x="100" y="20" width="120" height="120"/>
                                                         <mask key="constraints">
                                                             <include reference="jsa-Pt-4g7"/>
                                                             <include reference="mGu-sF-Gp6"/>
@@ -2655,7 +2656,8 @@
                                                             <exclude reference="tG8-Ii-le1"/>
                                                         </mask>
                                                     </variation>
-                                                    <variation key="heightClass=regular-widthClass=compact">
+                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                        <rect key="frame" x="98" y="148" width="124" height="21"/>
                                                         <mask key="constraints">
                                                             <include reference="hdo-j4-oqY"/>
                                                             <include reference="tG8-Ii-le1"/>
@@ -2769,7 +2771,8 @@
                                                             <exclude reference="m03-xX-XHr"/>
                                                         </mask>
                                                     </variation>
-                                                    <variation key="heightClass=regular-widthClass=compact">
+                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                        <rect key="frame" x="108.5" y="17.5" width="103" height="25"/>
                                                         <mask key="constraints">
                                                             <include reference="DtZ-t4-0kA"/>
                                                             <include reference="m03-xX-XHr"/>
@@ -2977,8 +2980,8 @@
                             <constraint firstItem="fcb-Hl-nZt" firstAttribute="top" secondItem="ekf-SE-dpy" secondAttribute="bottom" constant="71" id="QnV-51-5EL">
                                 <variation key="heightClass=regular-widthClass=compact" constant="259"/>
                             </constraint>
-                            <constraint firstItem="fcb-Hl-nZt" firstAttribute="bottom" secondItem="Olg-LO-v3u" secondAttribute="centerY" constant="400" id="YhQ-g3-UAj">
-                                <variation key="heightClass=regular-widthClass=compact" constant="-400"/>
+                            <constraint firstItem="fcb-Hl-nZt" firstAttribute="bottom" relation="lessThanOrEqual" secondItem="Olg-LO-v3u" secondAttribute="centerY" id="YhQ-g3-UAj">
+                                <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
                             </constraint>
                             <constraint firstAttribute="centerY" secondItem="fcb-Hl-nZt" secondAttribute="bottom" id="qzc-S7-dnZ">
                                 <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>

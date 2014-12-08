@@ -144,6 +144,7 @@
 
     }
 
+    self.view.backgroundColor = [UIColor colorWithPatternImage:[self getRandomBackground]];
 
 }
 
@@ -678,6 +679,15 @@
         //TODO:Button needs to change back for NO AUDIO
         NSLog(@"Button needs to change back for NO AUDIO");
     }
+
+}
+
+- (UIImage *)getRandomBackground
+{
+
+    int imageNumber = arc4random_uniform(4) + 1;
+    UIImage *image = [UIImage imageNamed:[NSString stringWithFormat:@"wallpaperTexture %i", imageNumber]];
+    return image;
 
 }
 
