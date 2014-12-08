@@ -978,14 +978,14 @@
                                 <exclude reference="8Yl-ca-yue"/>
                             </mask>
                             <mask key="constraints">
+                                <exclude reference="UVs-SE-wMQ"/>
+                                <exclude reference="3ZJ-mz-Emu"/>
+                                <exclude reference="FV8-9b-3Nk"/>
+                                <exclude reference="OGG-tg-97Y"/>
+                                <exclude reference="Sm8-Zz-gxG"/>
                                 <exclude reference="F1s-X4-t9b"/>
                                 <exclude reference="Rah-nO-RMz"/>
                                 <exclude reference="f67-rA-hHX"/>
-                                <exclude reference="OGG-tg-97Y"/>
-                                <exclude reference="Sm8-Zz-gxG"/>
-                                <exclude reference="3ZJ-mz-Emu"/>
-                                <exclude reference="FV8-9b-3Nk"/>
-                                <exclude reference="UVs-SE-wMQ"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=compact">
@@ -1000,14 +1000,14 @@
                                 <include reference="8Yl-ca-yue"/>
                             </mask>
                             <mask key="constraints">
+                                <include reference="UVs-SE-wMQ"/>
+                                <include reference="3ZJ-mz-Emu"/>
+                                <include reference="FV8-9b-3Nk"/>
+                                <include reference="OGG-tg-97Y"/>
+                                <include reference="Sm8-Zz-gxG"/>
                                 <include reference="F1s-X4-t9b"/>
                                 <include reference="Rah-nO-RMz"/>
                                 <include reference="f67-rA-hHX"/>
-                                <include reference="OGG-tg-97Y"/>
-                                <include reference="Sm8-Zz-gxG"/>
-                                <include reference="3ZJ-mz-Emu"/>
-                                <include reference="FV8-9b-3Nk"/>
-                                <include reference="UVs-SE-wMQ"/>
                             </mask>
                         </variation>
                     </view>
@@ -4003,9 +4003,9 @@
         <image name="wallpaperRoad_blurred" width="375" height="667"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="k95-R4-CRQ"/>
-        <segue reference="BeW-T3-OQ1"/>
-        <segue reference="THB-3X-bqr"/>
         <segue reference="dAc-Nd-2MW"/>
+        <segue reference="BeW-T3-OQ1"/>
+        <segue reference="k95-R4-CRQ"/>
+        <segue reference="THB-3X-bqr"/>
     </inferredMetricsTieBreakers>
 </document>

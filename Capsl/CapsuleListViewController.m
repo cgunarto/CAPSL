@@ -282,7 +282,8 @@
     if ([segue.identifier isEqualToString:@"videoSegue"])
     {
         RecordVideoViewController *recordVC = segue.destinationViewController;
-        recordVC.isEditing = YES;
+        recordVC.isEditing = NO;
+        recordVC.chosenCapsl = capsl;
 //        vc.chosenCapsl = capsl;
 //        vc.isEditing = NO;
     }
