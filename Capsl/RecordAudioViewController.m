@@ -166,6 +166,9 @@
     NSLog(@"Audio Deleted");
     self.audioData = nil;
     self.createdCapsl.audio = nil;
+
+    #warning may not work, need to test
+    [self.recorder deleteRecording];
     //TODO: Delete it in the default directory
 }
 
