@@ -55,6 +55,23 @@
 
 #pragma mark View Controller Life Cycle
 
+-(void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+
+    [Capslr returnCapslrFromPFUser:[PFUser currentUser] withCompletion:^(Capslr *currentCapslr, NSError *error) {
+        if (!error)
+        {
+            [currentCapslr.profilePhoto getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
+                if (!error)
+                {
+                    self.profilePictureImageView.image = [UIImage imageWithData:data];
+                }
+            }];
+        }
+    }];
+}
+
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
