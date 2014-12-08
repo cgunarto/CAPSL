@@ -88,7 +88,6 @@
         [self processButton:self.enterTextButton withImageName:@"lowercase-50"];
         [self processButton:self.addPhotoButton withImageName:@"camera-50"];
         [self processButton:self.addAudioButton withImageName:@"audio_wave-50"];
-
     }
 
     //If VC isEditing is NO, it is trying to unwrap and display a CPSL message
@@ -114,6 +113,10 @@
              {
                  self.audioData = data;
                  [self processButton:self.addAudioButton withImageName:@"audio_wave-50"];
+//                 if (self.chosenCapsl.photo)
+//                 {
+//                     [self setAddAudioToBottom];
+//                 }
              }
              else
              {
@@ -399,7 +402,6 @@
         [self.player setDelegate:self];
         [self.player play];
     }
-
 }
 
 - (IBAction)onExitAudioButtonPressed:(UIButton *)sender
@@ -414,7 +416,6 @@
     [self.navigationController setNavigationBarHidden:NO animated:YES];
 
     [self updateAudioButton];
-
 }
 
 
