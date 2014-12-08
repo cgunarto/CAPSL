@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="fsF-ct-we6">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="fsF-ct-we6">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
@@ -772,18 +772,10 @@
                                     </mask>
                                     <mask key="constraints">
                                         <exclude reference="xNe-1G-20S"/>
-                                        <exclude reference="0XL-TC-PiW"/>
-                                        <exclude reference="Qu9-n6-Dji"/>
-                                        <exclude reference="Vdf-xP-E5G"/>
-                                        <exclude reference="bTP-gN-L07"/>
-                                        <exclude reference="sjp-AZ-ZRM"/>
                                         <exclude reference="4mC-NG-7TJ"/>
                                         <exclude reference="AoD-dc-Ig8"/>
                                         <exclude reference="FzL-qX-NxN"/>
                                         <exclude reference="YES-gJ-qCp"/>
-                                        <exclude reference="X0C-Fm-OLi"/>
-                                        <exclude reference="fnz-MG-q0K"/>
-                                        <exclude reference="oNP-yq-UNh"/>
                                         <exclude reference="3mD-qA-2fl"/>
                                         <exclude reference="4w4-4H-fLB"/>
                                         <exclude reference="Gmr-Oc-G6A"/>
@@ -791,6 +783,14 @@
                                         <exclude reference="ePT-cc-pxq"/>
                                         <exclude reference="eVP-4z-u0g"/>
                                         <exclude reference="nPS-L3-vfb"/>
+                                        <exclude reference="X0C-Fm-OLi"/>
+                                        <exclude reference="fnz-MG-q0K"/>
+                                        <exclude reference="oNP-yq-UNh"/>
+                                        <exclude reference="0XL-TC-PiW"/>
+                                        <exclude reference="Qu9-n6-Dji"/>
+                                        <exclude reference="Vdf-xP-E5G"/>
+                                        <exclude reference="bTP-gN-L07"/>
+                                        <exclude reference="sjp-AZ-ZRM"/>
                                     </mask>
                                 </variation>
                                 <variation key="widthClass=compact">
@@ -802,18 +802,10 @@
                                     </mask>
                                     <mask key="constraints">
                                         <include reference="xNe-1G-20S"/>
-                                        <exclude reference="0XL-TC-PiW"/>
-                                        <include reference="Qu9-n6-Dji"/>
-                                        <exclude reference="Vdf-xP-E5G"/>
-                                        <include reference="bTP-gN-L07"/>
-                                        <exclude reference="sjp-AZ-ZRM"/>
                                         <exclude reference="4mC-NG-7TJ"/>
                                         <include reference="AoD-dc-Ig8"/>
                                         <exclude reference="FzL-qX-NxN"/>
                                         <include reference="YES-gJ-qCp"/>
-                                        <include reference="X0C-Fm-OLi"/>
-                                        <exclude reference="fnz-MG-q0K"/>
-                                        <include reference="oNP-yq-UNh"/>
                                         <exclude reference="3mD-qA-2fl"/>
                                         <exclude reference="4w4-4H-fLB"/>
                                         <include reference="Gmr-Oc-G6A"/>
@@ -821,6 +813,14 @@
                                         <exclude reference="ePT-cc-pxq"/>
                                         <exclude reference="eVP-4z-u0g"/>
                                         <exclude reference="nPS-L3-vfb"/>
+                                        <include reference="X0C-Fm-OLi"/>
+                                        <exclude reference="fnz-MG-q0K"/>
+                                        <include reference="oNP-yq-UNh"/>
+                                        <exclude reference="0XL-TC-PiW"/>
+                                        <include reference="Qu9-n6-Dji"/>
+                                        <exclude reference="Vdf-xP-E5G"/>
+                                        <include reference="bTP-gN-L07"/>
+                                        <exclude reference="sjp-AZ-ZRM"/>
                                     </mask>
                                 </variation>
                             </view>

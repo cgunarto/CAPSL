@@ -88,6 +88,7 @@
         [self.view addSubview:self.textView];
         self.textView.userInteractionEnabled = NO;
         self.exitButton.hidden = NO;
+        [self processExitButton];
 
         //Show textview, automatically defaults to center if there is no image
         if (self.textView.text)
@@ -571,6 +572,16 @@
     button.layer.shadowOpacity = 0.3;
     button.layer.shadowRadius = 1;
     button.layer.shadowOffset = CGSizeMake(0, 1.5f);
+
+}
+
+- (void)processExitButton
+{
+
+    self.exitButton.layer.shadowColor = [UIColor blackColor].CGColor;
+    self.exitButton.layer.shadowOpacity = 0.3;
+    self.exitButton.layer.shadowRadius = 1;
+    self.exitButton.layer.shadowOffset = CGSizeMake(0, 1.5f);
 
 }
 
