@@ -720,7 +720,7 @@
     if (self.isEditing)
     {
         imageNumber = arc4random_uniform(4) + 1;
-        self.chosenCapsl.wallpaperIndex = [NSNumber numberWithInt:imageNumber];
+        self.createdCapsl.wallpaperIndex = [NSNumber numberWithInt:imageNumber];
     }
     else
     {
