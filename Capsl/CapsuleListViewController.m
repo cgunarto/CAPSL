@@ -199,24 +199,18 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-        Capsl *capsl = self.tableViewData[indexPath.row];
-    
-        if ([capsl.type isEqualToString:@"multimedia"])
-        {
-            [self performSegueWithIdentifier:@"multimediaSegue" sender:self];
-        }
+    Capsl *capsl = self.tableViewData[indexPath.row];
+    NSString *segueName = [NSString stringWithFormat:@"%@Segue", capsl.type];
 
-        if ([capsl.type isEqualToString:@"video"])
-        {
-            [self performSegueWithIdentifier:@"videoSegue" sender:self];
-        }
+    //Segue to different VC depending on CAPSULE name
+    [self shouldPerformSegueWithIdentifier:segueName sender:self];
+    [self performSegueWithIdentifier:segueName sender:self];
 }
 
 #pragma mark - segue life cycle
 
 - (BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender
 {
-
     NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
 
     Capsl *capsl = self.tableViewData[indexPath.row];
@@ -226,6 +220,7 @@
 
     if (!self.shouldShowSent)
     {
+        //if it's unviewed and unlocked
         if (!capsl.viewedAt && elapsedSeconds < 0)
         {
             capsl.viewedAt = [NSDate date];
@@ -250,6 +245,7 @@
              }];
         }
 
+        //if it's unlocked
         if (elapsedSeconds < 0)
         {
             return YES;
