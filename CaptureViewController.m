@@ -31,6 +31,7 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *bottomTextViewConstraint;
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *addAudioButtonCenterYConstraint;
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *addAudioButtonWidthConstraint;
+@property (strong, nonatomic) IBOutlet UIView *audioControlsContainerView;
 
 @property CGSize kbSize;
 
@@ -53,6 +54,7 @@
     {
         self.textView.delegate = self;
         self.exitButton.hidden = YES;
+        self.audioControlsContainerView.hidden = YES;
 
         //Setting CPSL sender
         [Capslr returnCapslrFromPFUser:[PFUser currentUser] withCompletion:^(Capslr *currentCapslr, NSError *error)
@@ -83,6 +85,7 @@
         self.enterTextButton.hidden = YES;
         self.addPhotoButton.hidden = YES;
         self.addAudioButton.hidden = YES;
+        self.audioControlsContainerView.hidden = YES;
 
         self.imageView.userInteractionEnabled = NO;
         [self.view addSubview:self.textView];
@@ -519,7 +522,7 @@
                                                                 multiplier:1.0f
                                                                   constant:-kTextViewDistanceFromBottom];
 
-//    [self.view addConstraint:self.bottomTextViewConstraint];
+    [self.view addConstraint:self.bottomTextViewConstraint];
     [self verticalCenterText];
 
 }

@@ -11,6 +11,7 @@
 #import "Capslr.h"
 #import "UpdateProfileInfoViewController.h"
 #import "UpdateProfileInfoViewController.h"
+#import "EditProfilePicTableViewCell.h"
 #import "RootViewController.h"
 #import "CrossDissolveSegue.h"
 
@@ -55,6 +56,8 @@
 
     self.navigationItem.title = @"My Profile";
 
+    //TODO: fix top inset issue
+
 }
 
 -(void)setChosenImage:(UIImage *)chosenImage
@@ -92,16 +95,22 @@
     return 44;
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
     UITableViewCell *cell;
 
-    if (indexPath.section == 0) {
+    if (indexPath.section == 0)
+    {
         cell = [tableView dequeueReusableCellWithIdentifier:@"profilePic" forIndexPath:indexPath];
 
-        cell.imageView.image = self.updatedProfilePicture;
-        cell.textLabel.text = @"Edit Photo";
+        EditProfilePicTableViewCell *customCell = (EditProfilePicTableViewCell *)cell;
+        customCell.profileImageView.image = self.updatedProfilePicture;
+//        customCell.editProfilePhotoLabel.text = @"Change Photo";
+        cell = customCell;
 
-    }else if (indexPath.section == 1) {
+    }
+    else if (indexPath.section == 1)
+    {
         cell = [tableView dequeueReusableCellWithIdentifier:@"dataCell" forIndexPath:indexPath];
 
         cell.textLabel.text = self.infoArray[indexPath.row];

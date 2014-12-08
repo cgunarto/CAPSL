@@ -10,8 +10,11 @@
 
 @implementation EditProfilePicTableViewCell
 
-- (void)awakeFromNib {
-    // Initialization code
+- (void)awakeFromNib
+{
+
+    self.profileImageView.layer.cornerRadius = 60;
+
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
