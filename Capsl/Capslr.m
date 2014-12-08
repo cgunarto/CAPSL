@@ -59,7 +59,7 @@
              {
                  for (Capslr *capslr in capslrArray)
                  {
-                     if ([contact.number isEqualToString:capslr.phone])
+                     if ([capslr.phone containsString:contact.number])
                      {
                          [capslrContact addObject:capslr];
                      }
