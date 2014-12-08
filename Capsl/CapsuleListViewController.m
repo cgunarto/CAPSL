@@ -198,13 +198,21 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-
+//    Capsl *capsl = self.tableViewData[indexPath.row];
+//
+//    if ([capsl.type isEqualToString:@"multimedia"])
+//    {
+//        [self performSegueWithIdentifier:@"multimediaSegue" sender:self];
+//    }
 }
 
 #pragma mark - segue life cycle
 
 - (BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender
 {
+    //TODO:Change segue depending if capsl.type is "multimedia" or "video"
+    //Multimedia uses "multimediaSegue"
+    //Vide uses ?
 
     NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
 
@@ -212,9 +220,9 @@
     long elapsedSeconds = [capsl.deliveryTime timeIntervalSinceNow];
 
     // don't open if the capsule is not ready!
-
     if (!self.shouldShowSent)
     {
+        //If capsule can be tapped and is tapped to be viewed
         if (!capsl.viewedAt && elapsedSeconds < 0)
         {
             capsl.viewedAt = [NSDate date];
@@ -243,11 +251,13 @@
         {
             return YES;
         }
+
         else
         {
             return NO;
         }
     }
+
     else
     {
         return YES;
@@ -282,18 +292,18 @@
     }
 }
 
-// Alert when timer expires
--(void)presentCanOpenMeAlert
-{
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"CAPSL UNLOCKED!" message:nil preferredStyle:UIAlertControllerStyleAlert];
-    UIAlertAction *okButton = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-        // UNLOCK CAPSL!!
-
-    }];
-
-    [alert addAction:okButton];
-    [self presentViewController:alert animated:YES completion:nil];
-}
+//// Alert when timer expires -- Don't need it anymore in lieu of local notification
+//-(void)presentCanOpenMeAlert
+//{
+//    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"CAPSL UNLOCKED!" message:nil preferredStyle:UIAlertControllerStyleAlert];
+//    UIAlertAction *okButton = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+//        // UNLOCK CAPSL!!
+//
+//    }];
+//
+//    [alert addAction:okButton];
+//    [self presentViewController:alert animated:YES completion:nil];
+//}
 
 
 @end
