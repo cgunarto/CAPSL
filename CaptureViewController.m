@@ -27,10 +27,14 @@
 @property (weak, nonatomic) IBOutlet UILabel *characterCountLabel;
 @property (strong, nonatomic) IBOutlet UIButton *enterTextButton;
 @property (strong, nonatomic) IBOutlet UIButton *addPhotoButton;
+@property (weak, nonatomic) IBOutlet UIButton *exitAudioButton;
+@property  RecordAudioViewController *recordAudioVC;
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *bottomTextViewConstraint;
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *addAudioButtonCenterYConstraint;
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *addAudioButtonWidthConstraint;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *audioControlsCenterYConstraint;
+
 @property (strong, nonatomic) IBOutlet UIView *audioControlsContainerView;
 
 @property CGSize kbSize;
@@ -44,10 +48,14 @@
 
 #pragma mark View Controller Life Cycle
 
+//Check if there is audio data, and pass it to the embed segue on addAudioButton tapped
+//On exitAudio button pressed, store the audioData from childVC into self.audio
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 
+    self.exitAudioButton.hidden = YES;
 
     //If VC isEditing, it is trying to create a Capsl message
     if (self.isEditing)
@@ -349,6 +357,33 @@
     [picker dismissViewControllerAnimated:YES completion:NULL];
 }
 
+#pragma mark Add Audio Related Method
+
+- (IBAction)onAddAudioButtonPressed:(UIButton *)sender
+{
+    self.audioControlsContainerView.hidden = NO;
+    self.addAudioButton.hidden = YES;
+    self.exitAudioButton.hidden = NO;
+    self.recordAudioVC.createdCapsl = self.createdCapsl;
+    self.recordAudioVC.audioData = self.audioData;
+
+    [self.navigationController setNavigationBarHidden:YES animated:YES];
+}
+
+- (IBAction)onExitAudioButtonPressed:(UIButton *)sender
+{
+    self.audioControlsContainerView.hidden = YES;
+    self.exitAudioButton.hidden = YES;
+    self.addAudioButton.hidden = NO;
+
+    self.createdCapsl = self.recordAudioVC.createdCapsl;
+    self.audioData = self.recordAudioVC.audioData;
+
+    [self updateAudioButton];
+
+}
+
+
 #pragma mark Segue and Next Button
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
@@ -364,11 +399,11 @@
     //Accessing it through the NavVC
     if ([segue.identifier isEqualToString:@"segueToAudio"])
     {
-        RecordAudioViewController *recordVC = segue.destinationViewController;
-        recordVC.createdCapsl = self.createdCapsl;
-
-        //This is here so that if the user had already recorded and is going back to the page, they can replay audio data they had created
-        recordVC.audioData = self.audioData;
+        self.recordAudioVC = segue.destinationViewController;
+//        self.recordAudioVC.createdCapsl = self.createdCapsl;
+//
+//        //This is here so that if the user had already recorded and is going back to the page, they can replay audio data they had created
+//        recordVC.audioData = self.audioData;
     }
 }
 
@@ -543,6 +578,20 @@
                                                                   constant:-kTextViewDistanceFromBottom / 2];
     [self.view addConstraint:self.addAudioButtonCenterYConstraint];
 
+    [self.view removeConstraint:self.audioControlsCenterYConstraint];
+
+    self.audioControlsContainerView.translatesAutoresizingMaskIntoConstraints = NO;
+
+    self.audioControlsCenterYConstraint = [NSLayoutConstraint constraintWithItem:self.audioControlsContainerView
+                                                                        attribute:NSLayoutAttributeCenterY
+                                                                        relatedBy:NSLayoutRelationEqual
+                                                                           toItem:self.view
+                                                                        attribute:NSLayoutAttributeBottom
+                                                                       multiplier:1.0f
+                                                                         constant:-kTextViewDistanceFromBottom / 2];
+    [self.view addConstraint:self.audioControlsCenterYConstraint];
+
+
 }
 
 - (IBAction)unWindToCaptureSegue:(UIStoryboardSegue *)segue
@@ -611,16 +660,24 @@
 
 - (void)updateAudioButton
 {
+    if (self.audioData)
+    {
+        [self.addAudioButton setImage:nil forState:UIControlStateNormal];
+        [self.addAudioButton setTitle:@"AUDIO ADDED" forState:UIControlStateNormal];
 
-    [self.addAudioButton setImage:nil forState:UIControlStateNormal];
-    [self.addAudioButton setTitle:@"AUDIO ADDED" forState:UIControlStateNormal];
+        NSString *stringForButton = @"AUDIO ADDED";
+        CGSize stringsize = [stringForButton sizeWithAttributes:@{
+                                                                  NSFontAttributeName: [UIFont fontWithName:self.addAudioButton.titleLabel.font.fontName size:self.addAudioButton.titleLabel.font.pointSize]
+                                                                  }];
 
-    NSString *stringForButton = @"AUDIO ADDED";
-    CGSize stringsize = [stringForButton sizeWithAttributes:@{
-                                                              NSFontAttributeName: [UIFont fontWithName:self.addAudioButton.titleLabel.font.fontName size:self.addAudioButton.titleLabel.font.pointSize]
-                                                              }];
+        self.addAudioButtonWidthConstraint.constant = stringsize.width + 40;
+    }
 
-    self.addAudioButtonWidthConstraint.constant = stringsize.width + 40;
+    if (self.audioData == nil)
+    {
+        //TODO:Button needs to change back for NO AUDIO
+        NSLog(@"Button needs to change back for NO AUDIO");
+    }
 
 }
 

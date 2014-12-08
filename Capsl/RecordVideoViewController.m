@@ -10,6 +10,8 @@
 #import "SearchContactViewController.h"
 #import "Capslr.h"
 #import "Capsl.h"
+#define kMaxVideoSeconds 60
+#define kVideoQuality UIImagePickerControllerQualityTypeMedium
 
 @import MediaPlayer;
 @import MobileCoreServices;
@@ -45,6 +47,9 @@
         picker.allowsEditing = YES;
         picker.sourceType = UIImagePickerControllerSourceTypeCamera;
         picker.mediaTypes = [[NSArray alloc]initWithObjects:(NSString *) kUTTypeMovie, nil];
+
+        [picker setVideoMaximumDuration:kMaxVideoSeconds];
+        [picker setVideoQuality:kVideoQuality];
 
         [self presentViewController:picker animated:YES completion:NULL];
     }

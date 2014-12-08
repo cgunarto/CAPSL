@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="fsF-ct-we6">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="fsF-ct-we6">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
@@ -1119,6 +1119,9 @@
                                         <include reference="v6w-TD-szf"/>
                                     </mask>
                                 </variation>
+                                <connections>
+                                    <action selector="onAddAudioButtonPressed:" destination="ILH-s3-dTC" eventType="touchUpInside" id="Uu1-VK-4uc"/>
+                                </connections>
                             </button>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3By-6L-tI0" userLabel="Audio Controls Container View">
                                 <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
@@ -1139,6 +1142,31 @@
                                     <segue destination="Vgx-hR-DGD" kind="embed" identifier="segueToAudio" id="v9O-Yz-Ced"/>
                                 </connections>
                             </containerView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dgQ-e8-o1D">
+                                <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="GfA-8l-wkM"/>
+                                    <constraint firstAttribute="width" constant="30" id="Xgc-uO-jiE"/>
+                                </constraints>
+                                <state key="normal" image="close-50">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="GfA-8l-wkM"/>
+                                        <exclude reference="Xgc-uO-jiE"/>
+                                    </mask>
+                                </variation>
+                                <variation key="heightClass=regular-widthClass=compact">
+                                    <mask key="constraints">
+                                        <include reference="GfA-8l-wkM"/>
+                                        <include reference="Xgc-uO-jiE"/>
+                                    </mask>
+                                </variation>
+                                <connections>
+                                    <action selector="onExitAudioButtonPressed:" destination="ILH-s3-dTC" eventType="touchUpInside" id="IRw-Ty-6mI"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <gestureRecognizers/>
@@ -1154,6 +1182,7 @@
                             </constraint>
                             <constraint firstAttribute="centerY" secondItem="Tjw-18-0nC" secondAttribute="centerY" id="TY9-cZ-Kqd"/>
                             <constraint firstItem="Hg3-VI-LXE" firstAttribute="leading" secondItem="5n6-ct-hLT" secondAttribute="leadingMargin" constant="-16" id="TvU-WP-xp3"/>
+                            <constraint firstItem="dgQ-e8-o1D" firstAttribute="leading" secondItem="5n6-ct-hLT" secondAttribute="leadingMargin" id="WOT-UY-t95"/>
                             <constraint firstAttribute="trailingMargin" secondItem="3By-6L-tI0" secondAttribute="trailing" constant="-16" id="Xex-km-FGX"/>
                             <constraint firstAttribute="centerX" secondItem="Tjw-18-0nC" secondAttribute="centerX" id="Yw2-JK-WoR"/>
                             <constraint firstAttribute="centerX" secondItem="qzr-lB-qQX" secondAttribute="centerX" id="avp-am-phT"/>
@@ -1163,6 +1192,7 @@
                             <constraint firstItem="Hg3-VI-LXE" firstAttribute="top" secondItem="5n6-ct-hLT" secondAttribute="topMargin" id="hWg-SJ-2PP"/>
                             <constraint firstItem="3By-6L-tI0" firstAttribute="leading" secondItem="5n6-ct-hLT" secondAttribute="leadingMargin" constant="-16" id="i1o-lv-bPQ"/>
                             <constraint firstAttribute="centerX" secondItem="Aef-Rp-DP2" secondAttribute="centerX" id="kXW-Jd-N2g"/>
+                            <constraint firstItem="adF-cQ-9qF" firstAttribute="top" secondItem="dgQ-e8-o1D" secondAttribute="bottom" constant="14" id="l1A-r7-ARn"/>
                             <constraint firstItem="UNe-X0-lle" firstAttribute="leading" secondItem="5n6-ct-hLT" secondAttribute="leadingMargin" id="laR-ml-Ewi"/>
                             <constraint firstItem="Tjw-18-0nC" firstAttribute="height" secondItem="5n6-ct-hLT" secondAttribute="height" multiplier="0.3" constant="20" id="rgl-Gv-Uwu"/>
                             <constraint firstItem="qzr-lB-qQX" firstAttribute="centerY" secondItem="Tjw-18-0nC" secondAttribute="centerY" id="w9m-bY-Wky"/>
@@ -1177,29 +1207,32 @@
                                 <exclude reference="Ygr-Gb-nbm"/>
                                 <exclude reference="col-p1-YKd"/>
                                 <exclude reference="3By-6L-tI0"/>
+                                <exclude reference="dgQ-e8-o1D"/>
                             </mask>
                             <mask key="constraints">
-                                <exclude reference="kXW-Jd-N2g"/>
-                                <exclude reference="E1r-Aa-Tn7"/>
+                                <exclude reference="0KW-ny-56e"/>
+                                <exclude reference="TvU-WP-xp3"/>
+                                <exclude reference="hWg-SJ-2PP"/>
                                 <exclude reference="CoM-C9-ChG"/>
                                 <exclude reference="laR-ml-Ewi"/>
                                 <exclude reference="1yt-AJ-jqo"/>
                                 <exclude reference="dDL-Gz-VUu"/>
-                                <exclude reference="HtA-sR-qmY"/>
-                                <exclude reference="bgt-ED-UBe"/>
-                                <exclude reference="avp-am-phT"/>
-                                <exclude reference="w9m-bY-Wky"/>
-                                <exclude reference="Xex-km-FGX"/>
-                                <exclude reference="dkc-H6-aEe"/>
-                                <exclude reference="i1o-lv-bPQ"/>
                                 <exclude reference="3OH-EE-Zto"/>
                                 <exclude reference="IhP-45-gb4"/>
                                 <exclude reference="TY9-cZ-Kqd"/>
                                 <exclude reference="Yw2-JK-WoR"/>
                                 <exclude reference="rgl-Gv-Uwu"/>
-                                <exclude reference="0KW-ny-56e"/>
-                                <exclude reference="TvU-WP-xp3"/>
-                                <exclude reference="hWg-SJ-2PP"/>
+                                <exclude reference="kXW-Jd-N2g"/>
+                                <exclude reference="avp-am-phT"/>
+                                <exclude reference="w9m-bY-Wky"/>
+                                <exclude reference="Xex-km-FGX"/>
+                                <exclude reference="dkc-H6-aEe"/>
+                                <exclude reference="i1o-lv-bPQ"/>
+                                <exclude reference="HtA-sR-qmY"/>
+                                <exclude reference="bgt-ED-UBe"/>
+                                <exclude reference="WOT-UY-t95"/>
+                                <exclude reference="E1r-Aa-Tn7"/>
+                                <exclude reference="l1A-r7-ARn"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=compact">
@@ -1209,13 +1242,13 @@
                                 <include reference="col-p1-YKd"/>
                             </mask>
                             <mask key="constraints">
-                                <include reference="kXW-Jd-N2g"/>
                                 <include reference="CoM-C9-ChG"/>
                                 <include reference="laR-ml-Ewi"/>
-                                <include reference="HtA-sR-qmY"/>
                                 <include reference="3OH-EE-Zto"/>
                                 <include reference="Yw2-JK-WoR"/>
                                 <include reference="rgl-Gv-Uwu"/>
+                                <include reference="kXW-Jd-N2g"/>
+                                <include reference="HtA-sR-qmY"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
@@ -1225,22 +1258,25 @@
                                 <include reference="qzr-lB-qQX"/>
                                 <include reference="Ygr-Gb-nbm"/>
                                 <include reference="3By-6L-tI0"/>
+                                <include reference="dgQ-e8-o1D"/>
                             </mask>
                             <mask key="constraints">
-                                <include reference="E1r-Aa-Tn7"/>
+                                <include reference="0KW-ny-56e"/>
+                                <include reference="TvU-WP-xp3"/>
+                                <include reference="hWg-SJ-2PP"/>
                                 <include reference="1yt-AJ-jqo"/>
                                 <include reference="dDL-Gz-VUu"/>
-                                <include reference="bgt-ED-UBe"/>
+                                <include reference="IhP-45-gb4"/>
+                                <include reference="TY9-cZ-Kqd"/>
                                 <include reference="avp-am-phT"/>
                                 <include reference="w9m-bY-Wky"/>
                                 <include reference="Xex-km-FGX"/>
                                 <include reference="dkc-H6-aEe"/>
                                 <include reference="i1o-lv-bPQ"/>
-                                <include reference="IhP-45-gb4"/>
-                                <include reference="TY9-cZ-Kqd"/>
-                                <include reference="0KW-ny-56e"/>
-                                <include reference="TvU-WP-xp3"/>
-                                <include reference="hWg-SJ-2PP"/>
+                                <include reference="bgt-ED-UBe"/>
+                                <include reference="WOT-UY-t95"/>
+                                <include reference="E1r-Aa-Tn7"/>
+                                <include reference="l1A-r7-ARn"/>
                             </mask>
                         </variation>
                         <connections>
@@ -1253,11 +1289,13 @@
                         <outlet property="addAudioButtonCenterYConstraint" destination="bgt-ED-UBe" id="O0v-F5-fld"/>
                         <outlet property="addAudioButtonWidthConstraint" destination="v6w-TD-szf" id="05l-Ff-J8G"/>
                         <outlet property="addPhotoButton" destination="Ygr-Gb-nbm" id="glT-7u-Xmx"/>
+                        <outlet property="audioControlsCenterYConstraint" destination="dkc-H6-aEe" id="W5T-E3-Mqe"/>
                         <outlet property="audioControlsContainerView" destination="3By-6L-tI0" id="n9y-sL-Bae"/>
                         <outlet property="cancelButton" destination="z6Q-Dn-DDG" id="cpp-iG-eE7"/>
                         <outlet property="characterCountLabel" destination="Aef-Rp-DP2" id="SxP-cd-gxe"/>
                         <outlet property="doneButton" destination="n73-cQ-FAH" id="MSi-Ll-YNC"/>
                         <outlet property="enterTextButton" destination="qzr-lB-qQX" id="iXv-kt-7hG"/>
+                        <outlet property="exitAudioButton" destination="dgQ-e8-o1D" id="SSg-eX-cbb"/>
                         <outlet property="exitButton" destination="UNe-X0-lle" id="zqR-0D-88T"/>
                         <outlet property="imageView" destination="Hg3-VI-LXE" id="4LV-VO-ege"/>
                         <outlet property="textView" destination="Tjw-18-0nC" id="T4L-oH-noI"/>

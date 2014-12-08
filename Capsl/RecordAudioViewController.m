@@ -10,6 +10,8 @@
 #import "CaptureViewController.h"
 #import "Capsl.h"
 #import "Capslr.h"
+#define kMaxAudioDuration 60
+
 @import AVFoundation;
 
 @interface RecordAudioViewController () <AVAudioRecorderDelegate, AVAudioPlayerDelegate>
@@ -69,6 +71,7 @@
     self.recorder = [[AVAudioRecorder alloc] initWithURL:outputFileURL settings:recordSetting error:NULL];
     self.recorder.delegate = self;
     self.recorder.meteringEnabled = YES;
+
     [self.recorder prepareToRecord];
 }
 
@@ -87,7 +90,10 @@
         [session setActive:YES error:nil];
 
         // Start recording
-        [self.recorder record];
+//        [self.recorder record];
+
+        [self.recorder recordForDuration:kMaxAudioDuration];
+
         [self.recordPauseButton setTitle:@"Pause" forState:UIControlStateNormal];
     }
 
@@ -166,6 +172,9 @@
     NSLog(@"Audio Deleted");
     self.audioData = nil;
     self.createdCapsl.audio = nil;
+
+    #warning may not work, need to test
+    [self.recorder deleteRecording];
     //TODO: Delete it in the default directory
 }
 
@@ -190,6 +199,13 @@
 {
     [self.recordPauseButton setTitle:@"Record" forState:UIControlStateNormal];
     [self.endRecordingButton setEnabled:NO];
+
+    AVAudioSession *audioSession = [AVAudioSession sharedInstance];
+    [audioSession setActive:NO error:nil];
+
+    //TODO: Limit Audio Data File
+    self.audioData = [[NSData alloc] initWithContentsOfURL:self.recorder.url];
+    self.createdCapsl.audio = [PFFile fileWithName:@"audio.m4a" data:self.audioData];
 
     [self setButtonStateToReflectAudioAvailability];
 }
