@@ -10,9 +10,11 @@
 
 @implementation AllContactTableViewCell
 
+
 - (void)awakeFromNib
 {
-//    self.photoImageView.backgroundColor = kProfilPicBackgroundColor;
+    [super awakeFromNib];
+    self.photoImageView.backgroundColor = kProfilPicBackgroundColor;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -23,7 +25,7 @@
 
 - (void)prepareForReuse
 {
-    self.photoImageView.backgroundColor = kProfilPicBackgroundColor;
+//    self.photoImageView.backgroundColor = kProfilPicBackgroundColor;
 }
 
 @end

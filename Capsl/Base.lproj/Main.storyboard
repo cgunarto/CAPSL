@@ -1081,9 +1081,6 @@
                                         <include reference="kRQ-7H-Yes"/>
                                     </mask>
                                 </variation>
-                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="16" y="64" width="30" height="30"/>
-                                </variation>
                                 <connections>
                                     <action selector="onExitButtonPressed:" destination="ILH-s3-dTC" eventType="touchUpInside" id="pTt-kY-P0z"/>
                                 </connections>
@@ -1414,6 +1411,7 @@
                                     </constraint>
                                     <constraint firstAttribute="height" constant="444" id="xvX-KI-gR3"/>
                                 </constraints>
+                                <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <searchBar key="tableHeaderView" contentMode="redraw" barStyle="black" id="IzC-ho-b09">
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -1446,6 +1444,7 @@
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="AbK-9q-g1U">
                                                     <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                                    <color key="backgroundColor" white="0.5" alpha="0.5" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="70" id="aUU-Pm-mhm"/>
                                                         <constraint firstAttribute="height" constant="70" id="ha7-Sn-aJB"/>
@@ -3784,9 +3783,8 @@
                                                     <include reference="xDd-2M-1xs"/>
                                                 </mask>
                                             </variation>
-                                            <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                            <variation key="heightClass=regular-widthClass=compact">
                                                 <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="30"/>
-                                                <rect key="frame" x="8" y="8" width="384" height="63"/>
                                                 <mask key="constraints">
                                                     <exclude reference="rKa-Pk-73p"/>
                                                     <exclude reference="xDd-2M-1xs"/>

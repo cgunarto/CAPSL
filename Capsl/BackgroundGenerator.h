@@ -13,4 +13,6 @@
 
 + (UIImage *)blurImage:(UIImage *)image;
 
++ (UIImage *)generateDefaultBackground;
+
 @end

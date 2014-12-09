@@ -83,9 +83,16 @@ static NSString *kSendID = @"sendCell";  // the cell containing the date picker
 
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
 
-    self.view.backgroundColor = [UIColor colorWithPatternImage:[BackgroundGenerator blurImage:self.backgroundImage]];
-
     self.title = @"Delivery Date";
+
+    if (self.backgroundImage)
+    {
+        self.view.backgroundColor = [UIColor colorWithPatternImage:[BackgroundGenerator blurImage:self.backgroundImage]];
+    }
+    else
+    {
+        self.view.backgroundColor = [UIColor colorWithPatternImage:[BackgroundGenerator generateDefaultBackground]];
+    }
 
 }
 
