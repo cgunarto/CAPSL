@@ -145,9 +145,12 @@
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    UINavigationController *navVC = segue.destinationViewController;
-    SearchContactViewController *searchContactVC = navVC.childViewControllers[0];
-    searchContactVC.createdCapsl = self.createdCapsl;
+    if ([segue.identifier isEqualToString:@"segueToSearchContact"])
+    {
+        UINavigationController *navVC = segue.destinationViewController;
+        SearchContactViewController *searchContactVC = navVC.childViewControllers[0];
+        searchContactVC.createdCapsl = self.createdCapsl;
+    }
 }
 
 
