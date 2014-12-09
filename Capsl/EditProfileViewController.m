@@ -14,6 +14,7 @@
 #import "EditProfilePicTableViewCell.h"
 #import "RootViewController.h"
 #import "CrossDissolveSegue.h"
+#import "SVProgressHUD.h"
 
 #define kNameLabel @"Name"
 #define kUsernameLabel @"Username"
@@ -23,10 +24,10 @@
 @interface EditProfileViewController () <UITableViewDataSource, UITableViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
+@property (strong, nonatomic) IBOutlet UIBarButtonItem *exitBarButtonItem;
 
 @property NSArray *infoArray;
 @property (nonatomic)  UIImage *chosenImage;
-@property (strong, nonatomic) IBOutlet UIBarButtonItem *backBarButtonItem;
 
 @end
 
@@ -49,8 +50,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
-    self.navigationItem.leftBarButtonItem = self.backBarButtonItem;
 
     self.infoArray = @[kNameLabel, kUsernameLabel, kEmailLabel];
 
@@ -106,7 +105,7 @@
         cell = [tableView dequeueReusableCellWithIdentifier:@"profilePic" forIndexPath:indexPath];
 
         EditProfilePicTableViewCell *customCell = (EditProfilePicTableViewCell *)cell;
-        customCell.profileImageView.image = self.updatedProfilePicture;
+        customCell.profileImageView.image = self.currentProfilePicture;
 //        customCell.editProfilePhotoLabel.text = @"Change Photo";
         cell = customCell;
 
@@ -186,7 +185,9 @@
 
                 self.updatedProfilePicture = nil;
                 [self.tableView reloadData];
+                [SVProgressHUD show];
                 [currentCapslr save];
+                [SVProgressHUD dismiss];
 
                 [alert dismissViewControllerAnimated:YES completion:nil];
             }];
@@ -238,6 +239,9 @@
 {
 
     //Accessing uncropped image from info dictionary
+
+    [SVProgressHUD show];
+
     self.chosenImage = info[UIImagePickerControllerOriginalImage];
 
     NSData *imageData = UIImageJPEGRepresentation(self.chosenImage, 0.5f);
@@ -246,10 +250,8 @@
     [Capslr returnCapslrFromPFUser:[PFUser currentUser] withCompletion:^(Capslr *currentCapslr, NSError *error) {
         currentCapslr.profilePhoto = profilePhoto;
         self.currentProfilePicture = self.chosenImage;
-
-        self.updatedProfilePicture = self.chosenImage;
-
-        [currentCapslr saveInBackground];
+        [currentCapslr save];
+        [SVProgressHUD dismiss];
     }];
 
     [picker dismissViewControllerAnimated:YES completion:NULL];
@@ -311,6 +313,12 @@
 //    [self presentViewController:rootNav animated:NO completion:nil];
 
 }
+
+- (IBAction)onExitBarButtonItemPressed:(UIBarButtonItem *)sender
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
 
 //- (IBAction)onBackBarButtonItemPressed:(UIBarButtonItem *)sender
 //{

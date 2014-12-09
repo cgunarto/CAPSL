@@ -39,58 +39,67 @@
 
     self.capslListVC.availableCapslsArray = [@[] mutableCopy];
 
-    [Capslr returnCapslrFromPFUser:[PFUser currentUser] withCompletion:^(Capslr *currentCapslr, NSError *error) {
+    self.capslListVC.capslsArray = self.capslsArray;
+    self.capslListVC.sentCapslsArray = self.sentCapslsArray;
+    self.timelineRootVC.capslsArray = self.capslsArray;
+    self.timelineRootVC.sentCapslsArray = self.sentCapslsArray;
 
-        Capslr *capslr = [Capslr object];
-        capslr.objectId = currentCapslr.objectId;
+    self.timelineRootVC.shouldShowSent = NO;
+    self.capslListVC.shouldShowSent = NO;
+    [self clearAndcreateLocalNotificationsFromCapslObjects:self.capslsArray];
 
-        //calling class method to get capsls for current user only
-        //TODO: Add Local Notification - clear first and then schedule 64 max
-        //Todo: maybe add 2 nofication for stretch goal
-        //Order by opening date
-        [Capsl searchCapslByKey:@"recipient" orderByAscending:@"deliveryTime" equalTo:capslr completion:^(NSArray *objects, NSError *error) {
-            if (!error)
-            {
-                self.timelineRootVC.capslsArray = objects;
-                self.capslListVC.capslsArray = objects;
-                [SVProgressHUD dismiss];
-
-                NSInteger availableCapslsCount = 0;
-
-                for (NSDate *date in [objects valueForKey:@"deliveryTime"])
-                {
-                    if ([date timeIntervalSinceNow] < 0)
-                    {
-                        availableCapslsCount++;
-                    }
-                }
-
-                self.timelineRootVC.shouldShowSent = NO;
-                self.capslListVC.shouldShowSent = NO;
-                [self clearAndcreateLocalNotificationsFromCapslObjects:objects];
-            }
-
-            else
-            {
-                [SVProgressHUD showErrorWithStatus:@"Connection Error"];
-                NSLog(@"%@", error.localizedDescription);
-            }
-        }];
-
-        // get data for capsls sent
-        [Capsl searchCapslByKey:@"sender" orderByAscending:@"deliveryTime" equalTo:capslr completion:^(NSArray *objects, NSError *error) {
-            if (!error)
-            {
-                self.capslListVC.sentCapslsArray = objects;
-                self.timelineRootVC.sentCapslsArray = objects;
-            }
-            else
-            {
-                NSLog(@"%@", error.localizedDescription);
-            }
-        }];
-
-    }];
+//    [Capslr returnCapslrFromPFUser:[PFUser currentUser] withCompletion:^(Capslr *currentCapslr, NSError *error) {
+//
+//        Capslr *capslr = [Capslr object];
+//        capslr.objectId = currentCapslr.objectId;
+//
+//        //calling class method to get capsls for current user only
+//        //TODO: Add Local Notification - clear first and then schedule 64 max
+//        //Todo: maybe add 2 nofication for stretch goal
+//        //Order by opening date
+//        [Capsl searchCapslByKey:@"recipient" orderByAscending:@"deliveryTime" equalTo:capslr completion:^(NSArray *objects, NSError *error) {
+//            if (!error)
+//            {
+//                self.timelineRootVC.capslsArray = objects;
+//                self.capslListVC.capslsArray = objects;
+//                [SVProgressHUD dismiss];
+//
+//                NSInteger availableCapslsCount = 0;
+//
+//                for (NSDate *date in [objects valueForKey:@"deliveryTime"])
+//                {
+//                    if ([date timeIntervalSinceNow] < 0)
+//                    {
+//                        availableCapslsCount++;
+//                    }
+//                }
+//
+//                self.timelineRootVC.shouldShowSent = NO;
+//                self.capslListVC.shouldShowSent = NO;
+//                [self clearAndcreateLocalNotificationsFromCapslObjects:objects];
+//            }
+//
+//            else
+//            {
+//                [SVProgressHUD showErrorWithStatus:@"Connection Error"];
+//                NSLog(@"%@", error.localizedDescription);
+//            }
+//        }];
+//
+//        // get data for capsls sent
+//        [Capsl searchCapslByKey:@"sender" orderByAscending:@"deliveryTime" equalTo:capslr completion:^(NSArray *objects, NSError *error) {
+//            if (!error)
+//            {
+//                self.capslListVC.sentCapslsArray = objects;
+//                self.timelineRootVC.sentCapslsArray = objects;
+//            }
+//            else
+//            {
+//                NSLog(@"%@", error.localizedDescription);
+//            }
+//        }];
+//
+//    }];
 
 //    [self.view addSubview:self.sentReceivedSegmentedControl];
 //    [self.view bringSubviewToFront:self.sentReceivedSegmentedControl];
@@ -109,7 +118,6 @@
     // put timer here
 
     self.timer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(updateUIInSubviews) userInfo:nil repeats:YES];
-
 }
 
 - (void)viewWillDisappear:(BOOL)animated

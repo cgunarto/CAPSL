@@ -8,11 +8,13 @@
 
 #import "RootViewController.h"
 #import "Capslr.h"
+#import "Capsl.h"
 #import <Parse/Parse.h>
 #import <ParseUI/ParseUI.h>
 #import "LoginViewController.h"
 #import "SignUpViewController.h"
 #import "JCAMainViewController.h"
+#import "SVProgressHUD.h"
 
 @interface RootViewController () <PFLogInViewControllerDelegate, PFSignUpViewControllerDelegate, UIAlertViewDelegate>
 @property (strong, nonatomic) IBOutlet UIButton *sendCapsuleButton;
@@ -22,21 +24,34 @@
 
 @property UITextField *verificationCode;
 
+//refactoring
+@property (nonatomic) NSArray *capslsArray;
+@property (nonatomic) NSArray *sentCapslsArray;
+@property (nonatomic) NSMutableArray *availableCapslsArray;
+@property UIImage *currentProfileImage;
+
+@property (nonatomic) BOOL shouldShowSent;
+
 @end
 
 @implementation RootViewController
 
-
-- (void)viewDidLoad
+- (void)viewWillAppear:(BOOL)animated
 {
-    [super viewDidLoad];
-//    [PFUser logOut];
+    [super viewWillAppear:animated];
+    //    [PFUser logOut];
 
     // Check to see if user quit before entering verification code
 
     if ([PFUser currentUser])
     {
+        [SVProgressHUD show];
+
         [Capslr returnCapslrFromPFUser:[PFUser currentUser] withCompletion:^(Capslr *currentCapslr, NSError *error) {
+
+            self.viewCapsulesButton.enabled = NO;
+            self.sendCapsuleButton.enabled = NO;
+
             if (!currentCapslr.isVerified)
             {
                 [currentCapslr deleteInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
@@ -47,13 +62,98 @@
                             {
                                 [PFUser logOut];
                                 [self manageLogin];
+
+                                [SVProgressHUD dismiss];
                             }
                         }];
+                    }
+                }];
+
+            }
+            else
+            {
+                [currentCapslr.profilePhoto getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
+                    self.currentProfileImage = [UIImage imageWithData:data];
+
+                }];
+
+                Capslr *capslr = [Capslr object];
+                capslr.objectId = currentCapslr.objectId;
+
+                [Capsl searchCapslByKey:@"recipient" orderByAscending:@"deliveryTime" equalTo:capslr completion:^(NSArray *objects, NSError *error) {
+                    if (!error)
+                    {
+                        self.capslsArray = objects;
+
+                        NSInteger availableCapslsCount = 0;
+
+                        for (NSDate *date in [objects valueForKey:@"deliveryTime"])
+                        {
+                            if ([date timeIntervalSinceNow] < 0)
+                            {
+                                availableCapslsCount++;
+                            }
+                        }
+
+                        //                        self.timelineRootVC.shouldShowSent = NO;
+                        self.shouldShowSent = NO;
+                        //                        [self clearAndcreateLocalNotificationsFromCapslObjects:objects];
+                    }
+
+                    else
+                    {
+                        NSLog(@"%@", error.localizedDescription);
+                    }
+                }];
+
+                [Capsl searchCapslByKey:@"sender" orderByAscending:@"deliveryTime" equalTo:capslr completion:^(NSArray *objects, NSError *error) {
+                    if (!error)
+                    {
+                        self.sentCapslsArray = objects;
+                        [SVProgressHUD dismiss];
+                        self.viewCapsulesButton.enabled = YES;
+                        self.sendCapsuleButton.enabled = YES;
+                    }
+                    else
+                    {
+                        NSLog(@"%@", error.localizedDescription);
                     }
                 }];
             }
         }];
     }
+
+    self.navigationItem.titleView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"logo_header"]];
+
+    self.sendCapsuleButton.alpha = 0;
+    self.viewCapsulesButton.alpha = 0;
+
+    self.sendCapsuleButton.layer.cornerRadius = 20;
+    self.sendCapsuleButton.layer.borderColor = [[UIColor whiteColor] CGColor];
+    self.sendCapsuleButton.layer.borderWidth = 1;
+
+    self.viewCapsulesButton.layer.cornerRadius = 20;
+    self.viewCapsulesButton.layer.borderColor = [[UIColor whiteColor] CGColor];
+    self.viewCapsulesButton.layer.borderWidth = 1;
+
+
+    self.sendButtonLeftConstraint.constant = [[UIScreen mainScreen] bounds].size.width * 0.5;
+    self.viewButtonRightConstraint.constant = [[UIScreen mainScreen] bounds].size.width * 0.5;
+    
+    //    self.view.backgroundColor = [UIColor colorWithPatternImage:kSplashWallpaper];
+    
+}
+
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+//    [PFUser logOut];
+
+    // Check to see if user quit before entering verification code
+    self.viewCapsulesButton.enabled = NO;
+    self.sendCapsuleButton.enabled = NO;
+
 
     self.navigationItem.titleView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"logo_header"]];
 
@@ -384,6 +484,11 @@
     else
     {
         vc.showChooseVC = NO;
+        vc.capslsArray = self.capslsArray;
+        vc.sentCapslsArray = self.sentCapslsArray;
+        vc.availableCapslsArray = self.availableCapslsArray;
+        vc.shouldShowSent = self.shouldShowSent;
+        vc.currentProfileImage = self.currentProfileImage;
     }
 }
 
