@@ -82,9 +82,8 @@
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
-    NSLog(@"Finished picking");
-
     self.videoURL = info[UIImagePickerControllerMediaURL];
+
     [picker dismissViewControllerAnimated:YES completion:NULL];
 
     self.createdCapsl = [Capsl object];
@@ -94,9 +93,12 @@
      {
          self.createdCapsl.sender = currentCapslr;
      }];
-
     //Initializing Capsl object and its type
     self.createdCapsl.type = @"video";
+
+    //set created capsule video
+    NSData *videoData = [[NSData alloc] initWithContentsOfURL:self.videoURL];
+    self.createdCapsl.video = [PFFile fileWithName:@"video.mov" data:videoData];
 
     [self performSegueWithIdentifier:@"segueToSearchContact" sender:self];
 }
@@ -148,7 +150,7 @@
     if ([segue.identifier isEqualToString:@"segueToSearchContact"])
     {
         UINavigationController *navVC = segue.destinationViewController;
-        SearchContactViewController *searchContactVC = navVC.childViewControllers[0];
+        SearchContactViewController *searchContactVC = navVC.childViewControllers.firstObject;
         searchContactVC.createdCapsl = self.createdCapsl;
     }
 }
