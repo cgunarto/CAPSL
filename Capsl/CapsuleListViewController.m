@@ -15,12 +15,16 @@
 #import "CaptureViewController.h"
 #import "RecordVideoViewController.h"
 
+@import MediaPlayer;
+
 @interface CapsuleListViewController () <UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate>
 
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 @property NSArray *tableViewData;
 @property NSMutableArray *senderPics;
 @property NSMutableArray *recipientPics;
+
+@property (strong, nonatomic) MPMoviePlayerViewController *videoController;
 
 @property NSInteger availableCapslsCount;
 @property BOOL shouldShowMessage;
@@ -200,11 +204,25 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     Capsl *capsl = self.tableViewData[indexPath.row];
-    NSString *segueName = [NSString stringWithFormat:@"%@Segue", capsl.type];
 
-    //Segue to different VC depending on CAPSULE name
-    [self shouldPerformSegueWithIdentifier:segueName sender:self];
-    [self performSegueWithIdentifier:segueName sender:self];
+    if ([capsl.type isEqualToString:@"multimedia"])
+    {
+        NSString *segueName = [NSString stringWithFormat:@"%@Segue", capsl.type];
+        [self shouldPerformSegueWithIdentifier:segueName sender:self];
+        [self performSegueWithIdentifier:segueName sender:self];
+    }
+
+    else
+    {
+        //TODO: Return to same orientation when it opens and closes
+        NSURL *url = [NSURL URLWithString:capsl.video.url];
+        self.videoController = [[MPMoviePlayerViewController alloc] init];
+        self.videoController.moviePlayer.movieSourceType = MPMovieSourceTypeStreaming;
+        [self.videoController.moviePlayer setContentURL:url];
+
+        [self presentViewController:self.videoController animated:YES completion:nil];
+    }
+
 }
 
 #pragma mark - segue life cycle
