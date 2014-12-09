@@ -38,7 +38,7 @@
 {
     [super viewWillAppear:animated];
 
-    self.capslsArray;
+    [self scrollToEarliestUnopenedCapsule];
 
     [self.tableView reloadData];
 }
