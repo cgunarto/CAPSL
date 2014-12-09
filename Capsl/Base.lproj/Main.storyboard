@@ -2319,7 +2319,7 @@
                                     </mask>
                                 </variation>
                                 <connections>
-                                    <segue destination="qp7-uz-JSC" kind="presentation" identifier="segueToRecord" id="LT8-Z2-SIB"/>
+                                    <segue destination="qp7-uz-JSC" kind="presentation" identifier="segueToRecord" animates="NO" id="LT8-Z2-SIB"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hga-wp-OP4">
