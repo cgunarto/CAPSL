@@ -392,6 +392,9 @@
 - (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
 {
 
+    self.sendCapsuleButton.enabled = NO;
+    self.viewCapsulesButton.enabled = NO;
+
     if (buttonIndex == 0)
     {
         [Capslr returnCapslrFromPFUser:[PFUser currentUser] withCompletion:^(Capslr *currentCapslr, NSError *error) {
@@ -431,26 +434,53 @@
                     currentCapslr.name = @" ";
                     [currentCapslr save];
 
-                    PFQuery *query = [Capsl query];
-                    [query whereKey:@"objectId" equalTo:@"D1ruCY5eCd"];
-                    [query getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error) {
 
-                        // set object to @"" to for reuse purposes...
-                        object[@"recipient"] = @"";
-                        object[@"recipient"] = currentCapslr;
+                    // Setting up onboarding capsules
 
-                        // Onboarding capsl opens in 3 minutes
-                        NSDate *deliveryDate = [currentCapslr.createdAt dateByAddingTimeInterval:(60*3)];
-                        object[@"deliveryTime"] = @"";
-                        object[@"deliveryTime"] = deliveryDate;
+                    Capsl *onboardingCapsl = [Capsl object];
+                    Capslr *theCapslTeam = [Capslr objectWithoutDataWithClassName:@"Capslr" objectId:@"xpUlEgxIac"];
+                    onboardingCapsl.sender = theCapslTeam;
+                    onboardingCapsl.recipient = currentCapslr;
 
-                        [object saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-                            if (!error)
-                            {
-                                [self showRootViewController];
-                            }
-                        }];
+//                    Onboarding capsl opens in 3 minutes
+                    NSDate *deliveryDate = [currentCapslr.createdAt dateByAddingTimeInterval:(60*3)];
+
+                    onboardingCapsl.deliveryTime = deliveryDate;
+                    onboardingCapsl.wallpaperIndex = @1;
+                    onboardingCapsl.text = @"Welcome to Capsl";
+                    onboardingCapsl.type = @"multimedia";
+
+                    [onboardingCapsl saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+                        if (!error)
+                        {
+                            [self showRootViewController];
+                        }
                     }];
+
+
+
+
+
+//                    PFQuery *query = [Capsl query];
+//                    [query whereKey:@"objectId" equalTo:@"D1ruCY5eCd"];
+//                    [query getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error) {
+//
+//                        // set object to @"" to for reuse purposes...
+//                        object[@"recipient"] = @"";
+//                        object[@"recipient"] = currentCapslr;
+//
+//                        // Onboarding capsl opens in 3 minutes
+//                        NSDate *deliveryDate = [currentCapslr.createdAt dateByAddingTimeInterval:(60*3)];
+//                        object[@"deliveryTime"] = @"";
+//                        object[@"deliveryTime"] = deliveryDate;
+//
+//                        [object saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+//                            if (!error)
+//                            {
+//                                [self showRootViewController];
+//                            }
+//                        }];
+//                    }];
                 }];
             }
             else
