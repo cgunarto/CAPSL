@@ -38,8 +38,6 @@
 {
     [super viewWillAppear:animated];
 
-    [self scrollToEarliestUnopenedCapsule];
-
     [self.tableView reloadData];
 }
 
@@ -61,6 +59,8 @@
     [self.navigationController.toolbar setBackgroundImage:[UIImage new] forToolbarPosition:UIBarPositionAny barMetrics:UIBarMetricsDefault];
     self.navigationController.navigationBar.shadowImage = [UIImage new];
     self.navigationController.navigationBar.translucent = YES;
+
+    [self scrollToEarliestUnopenedCapsule];
 
 }
 
