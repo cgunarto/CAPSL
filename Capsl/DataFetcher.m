@@ -10,15 +10,15 @@
 
 @implementation DataFetcher
 
-+ (NSArray *)getCapsls
-{
-    return nil;
-}
-
-+ (Capslr *)getCurrentCapslr
-{
-    return nil;
-}
+//+ (NSArray *)getCapsls
+//{
+//    //
+//}
+//
+//+ (Capslr *)getCurrentCapslr
+//{
+//    //
+//}
 
 
 @end

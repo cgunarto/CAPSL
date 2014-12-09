@@ -12,7 +12,7 @@
 
 @interface DataFetcher : NSObject
 
-+ (NSArray *)getCapsls;
-+ (Capslr *)getCurrentCapslr;
+//+ (NSArray *)getCapsls;
+//+ (Capslr *)getCurrentCapslr;
 
 @end
