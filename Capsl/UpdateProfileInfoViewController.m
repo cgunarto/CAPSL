@@ -42,7 +42,7 @@
     if (self.nameString)
     {
         self.textField.text = self.nameString;
-        self.navigationItem.title = [@"Name" uppercaseString];
+        self.navigationItem.title = @"Name";
 
         self.wordCountLabel.text = [NSString stringWithFormat:@"%lu/40", (unsigned long)self.nameString.length];
     }

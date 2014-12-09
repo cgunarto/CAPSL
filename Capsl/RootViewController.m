@@ -28,6 +28,7 @@
 @property (nonatomic) NSArray *capslsArray;
 @property (nonatomic) NSArray *sentCapslsArray;
 @property (nonatomic) NSMutableArray *availableCapslsArray;
+@property UIImage *currentProfileImage;
 
 @property (nonatomic) BOOL shouldShowSent;
 
@@ -67,9 +68,15 @@
                         }];
                     }
                 }];
+
             }
             else
             {
+                [currentCapslr.profilePhoto getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
+                    self.currentProfileImage = [UIImage imageWithData:data];
+
+                }];
+
                 Capslr *capslr = [Capslr object];
                 capslr.objectId = currentCapslr.objectId;
 
@@ -481,6 +488,7 @@
         vc.sentCapslsArray = self.sentCapslsArray;
         vc.availableCapslsArray = self.availableCapslsArray;
         vc.shouldShowSent = self.shouldShowSent;
+        vc.currentProfileImage = self.currentProfileImage;
     }
 }
 

@@ -14,6 +14,7 @@
 #import "EditProfilePicTableViewCell.h"
 #import "RootViewController.h"
 #import "CrossDissolveSegue.h"
+#import "SVProgressHUD.h"
 
 #define kNameLabel @"Name"
 #define kUsernameLabel @"Username"
@@ -104,7 +105,7 @@
         cell = [tableView dequeueReusableCellWithIdentifier:@"profilePic" forIndexPath:indexPath];
 
         EditProfilePicTableViewCell *customCell = (EditProfilePicTableViewCell *)cell;
-        customCell.profileImageView.image = self.updatedProfilePicture;
+        customCell.profileImageView.image = self.currentProfilePicture;
 //        customCell.editProfilePhotoLabel.text = @"Change Photo";
         cell = customCell;
 
@@ -184,7 +185,9 @@
 
                 self.updatedProfilePicture = nil;
                 [self.tableView reloadData];
+                [SVProgressHUD show];
                 [currentCapslr save];
+                [SVProgressHUD dismiss];
 
                 [alert dismissViewControllerAnimated:YES completion:nil];
             }];
@@ -236,6 +239,9 @@
 {
 
     //Accessing uncropped image from info dictionary
+
+    [SVProgressHUD show];
+
     self.chosenImage = info[UIImagePickerControllerOriginalImage];
 
     NSData *imageData = UIImageJPEGRepresentation(self.chosenImage, 0.5f);
@@ -244,10 +250,8 @@
     [Capslr returnCapslrFromPFUser:[PFUser currentUser] withCompletion:^(Capslr *currentCapslr, NSError *error) {
         currentCapslr.profilePhoto = profilePhoto;
         self.currentProfilePicture = self.chosenImage;
-
-        self.updatedProfilePicture = self.chosenImage;
-
-        [currentCapslr saveInBackground];
+        [currentCapslr save];
+        [SVProgressHUD dismiss];
     }];
 
     [picker dismissViewControllerAnimated:YES completion:NULL];

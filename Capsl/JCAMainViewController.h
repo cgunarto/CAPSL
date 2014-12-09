@@ -17,6 +17,7 @@
 @property (nonatomic) NSArray *capslsArray;
 @property (nonatomic) NSArray *sentCapslsArray;
 @property (nonatomic) NSMutableArray *availableCapslsArray;
+@property UIImage *currentProfileImage;
 @property BOOL shouldShowSent;
 
 @end

@@ -8,6 +8,8 @@
 
 #import "JCAMainViewController.h"
 #import "ViewCapsulesViewController.h"
+#import "EditProfileViewController.h"
+#import "Capslr.h"
 
 @interface JCAMainViewController ()
 
@@ -20,6 +22,23 @@
 @end
 
 @implementation JCAMainViewController
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [Capslr returnCapslrFromPFUser:[PFUser currentUser] withCompletion:^(Capslr *currentCapslr, NSError *error) {
+        if (!error)
+        {
+            [currentCapslr.profilePhoto getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
+                self.currentProfileImage = [UIImage imageWithData:data];
+            }];
+        }
+        else
+        {
+            NSLog(@"%@", error.localizedDescription);
+        }
+    }];
+}
 
 - (void)viewDidLoad
 {
@@ -147,15 +166,18 @@
         [self.chooseTypeContainerView setHidden:NO];
 
     }
-    else
+    else if ([segue.identifier isEqualToString:@"contactsSegue"])
     {
-        
+        UINavigationController *navVC = segue.destinationViewController;
+        EditProfileViewController *editVC = navVC.childViewControllers.firstObject;
+        editVC.currentProfilePicture = self.currentProfileImage;
     }
     
 }
 
 - (IBAction)unWindSegueToMain:(UIStoryboardSegue *)segue
 {
+
 }
 
 

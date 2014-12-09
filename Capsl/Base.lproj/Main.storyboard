@@ -2804,7 +2804,7 @@
                                         <color key="backgroundColor" white="0.0" alpha="0.34999999999999998" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                         <connections>
                                             <outlet property="editProfilePhotoLabel" destination="UpY-WE-h4E" id="gY9-0s-uwH"/>
-                                            <outlet property="profileImageView" destination="Y7r-xj-R99" id="fRQ-eM-opI"/>
+                                            <outlet property="profileImageView" destination="Y7r-xj-R99" id="ruY-uJ-1jm"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="dataCell" textLabel="sjR-Pq-tjh" detailTextLabel="7dx-Ti-WLA" rowHeight="60" style="IBUITableViewCellStyleValue2" id="rrW-1n-TL8">
