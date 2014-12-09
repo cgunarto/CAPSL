@@ -160,8 +160,7 @@
     //Make the profile rounded
     allContactCell.photoImageView.layer.cornerRadius = allContactCell.photoImageView.frame.size.width/2;
     allContactCell.photoImageView.clipsToBounds = YES;
-    allContactCell.textLabel.text = @"test";
-    allContactCell.backgroundColor = [UIColor clearColor];
+    allContactCell.photoImageView.backgroundColor = kProfilPicBackgroundColor;
     allContactCell.contentView.backgroundColor = [UIColor clearColor];
 
 
@@ -197,12 +196,16 @@
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    Capslr *capslr = nil;
+    Capslr *capslr = [Capslr object];
 
     if ([segue.identifier isEqualToString:@"segueToDatePicker"])
     {
+        UINavigationController *navVC = segue.destinationViewController;
+        DateTableViewController *dateTableViewVC = navVC.childViewControllers.firstObject;
+        dateTableViewVC.backgroundImage = self.backgroundImage;
+
         NSIndexPath *indexPath = nil;
-        
+
         if (self.segmentedControl.selectedSegmentIndex == 0)
         {
             if (self.searchDisplayController.active)
@@ -217,8 +220,6 @@
             }
 
             self.createdCapsl.recipient = capslr;
-            UINavigationController *navVC = segue.destinationViewController;
-            DateTableViewController *dateTableViewVC = navVC.childViewControllers.firstObject;
             dateTableViewVC.createdCapsl = self.createdCapsl;
         }
 
@@ -245,8 +246,6 @@
                  if (capslr)
                  {
                      self.createdCapsl.recipient = capslr;
-                     UINavigationController *navVC = segue.destinationViewController;
-                     DateTableViewController *dateTableViewVC = navVC.childViewControllers.firstObject;
                      dateTableViewVC.createdCapsl = self.createdCapsl;
                  }
 
@@ -258,13 +257,15 @@
 
                      [newCapslr saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error)
                      {
-                         UINavigationController *navVC = segue.destinationViewController;
-                         DateTableViewController *dateTableViewVC = navVC.childViewControllers.firstObject;
                          dateTableViewVC.createdCapsl = self.createdCapsl;
                      }];
                  }
              }];
         }
+
+
+
+
     }
 }
 

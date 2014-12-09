@@ -11,6 +11,7 @@
 
 @interface DateTableViewController : UITableViewController
 @property Capsl *createdCapsl;
+@property UIImage *backgroundImage;
 
 
 @end

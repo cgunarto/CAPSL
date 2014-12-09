@@ -491,6 +491,7 @@
 
     [self.navigationController setNavigationBarHidden:YES animated:YES];
     self.characterCountLabel.hidden = NO;
+    [self updateCharacterLengthLabel];
 
     [self shouldMoveViewUpForKeyboard:YES];
 
@@ -499,6 +500,7 @@
     self.enterTextButton.hidden = YES;
 
     self.addPhotoButton.userInteractionEnabled = NO;
+    
 
 }
 
@@ -507,8 +509,7 @@
 
     [self verticalCenterText];
 
-    NSInteger length = textView.text.length;
-    self.characterCountLabel.text = [NSString stringWithFormat:@"%li / %i", kCharacterLimit - length, kCharacterLimit];
+    [self updateCharacterLengthLabel];
 }
 
 //Not called when isEditing is NO
@@ -752,5 +753,12 @@
     return image;
 
 }
+
+- (void)updateCharacterLengthLabel
+{
+    NSInteger length = self.textView.text.length;
+    self.characterCountLabel.text = [NSString stringWithFormat:@"%li / %i", kCharacterLimit - length, kCharacterLimit];
+}
+
 
 @end
