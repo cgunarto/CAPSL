@@ -23,25 +23,25 @@
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *doneButton;
 
 @property (strong, nonatomic) NSURL *videoURL;
-@property (strong, nonatomic) MPMoviePlayerController *videoController;
 
-//isEditing only property
 @property (weak, nonatomic) IBOutlet UIButton *exitPlayVideoButton;
-@property (weak, nonatomic) IBOutlet UIButton *playVideoButton;
 @property (strong, nonatomic) NSData *videoData;
 
 @end
 
 @implementation RecordVideoViewController
 
-//When page is here, record button needs to go up
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.navigationItem.leftBarButtonItem = self.cancelButton;
-    self.navigationItem.rightBarButtonItem = self.doneButton;
+    self.view.backgroundColor = [UIColor clearColor];
+    [self showVideoRecorder];
+}
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    self.view.backgroundColor = [UIColor clearColor];
     [self showVideoRecorder];
 }
 
@@ -82,6 +82,8 @@
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
+    NSLog(@"Finished picking");
+
     self.videoURL = info[UIImagePickerControllerMediaURL];
     [picker dismissViewControllerAnimated:YES completion:NULL];
 
@@ -96,56 +98,14 @@
     //Initializing Capsl object and its type
     self.createdCapsl.type = @"video";
 
-
-    //set created capsule video
-    NSData *videoData = [[NSData alloc] initWithContentsOfURL:self.videoURL];
-    self.createdCapsl.video = [PFFile fileWithName:@"video.mov" data:videoData];
-
-
-    self.videoController = [[MPMoviePlayerController alloc] init];
-    [self.videoController setContentURL:self.videoURL];
-
-    CGFloat screenWidth = [UIScreen mainScreen].bounds.size.width;
-    CGFloat screenHeight = [UIScreen mainScreen].bounds.size.height;
-    CGRect frame = CGRectMake(0, 0, screenWidth, screenHeight);
-
-    //TODO:change the width of video, constraint video format
-    [self.videoController.view setFrame:frame];
-
-    self.videoController.controlStyle = MPMovieControlStyleFullscreen;
-    [self.view addSubview:self.videoController.view];
-
-    //Adds notification after the video is finished playing
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(videoPlayBackDidFinish:)
-                                                 name:MPMoviePlayerPlaybackDidFinishNotification
-                                               object:self.videoController];
-
-
-    [self.videoController play];
-
+    [self performSegueWithIdentifier:@"segueToSearchContact" sender:self];
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
 {
+    NSLog(@"Camera exited");
 //    [picker dismissViewControllerAnimated:YES completion:NULL];
     [self performSegueWithIdentifier:@"unwindToCapture" sender:self];
-}
-
-- (void)videoPlayBackDidFinish:(NSNotification *)notification
-{
-    [[NSNotificationCenter defaultCenter]removeObserver:self name:MPMoviePlayerPlaybackDidFinishNotification object:nil];
-
-    // Stop the video player and remove it from view
-//    [self.videoController stop];
-//    [self.videoController.view removeFromSuperview];
-//    self.videoController = nil;
-
-    // Display a message
-    UIAlertView *alert = [[UIAlertView alloc]
-                          initWithTitle:@"Video Playback" message:@"Just finished the video playback. The video is now removed." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-    [alert show];
-
 }
 
 
@@ -183,21 +143,11 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
-//Play for isEditing
-- (IBAction)onPlaybuttonPressed:(UIButton *)sender
-{
-
-}
-
-
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    if ([sender isEqual:self.doneButton])
-    {
-        UINavigationController *navVC = segue.destinationViewController;
-        SearchContactViewController *searchContactVC = navVC.childViewControllers.firstObject;
-        searchContactVC.createdCapsl = self.createdCapsl;
-    }
+    UINavigationController *navVC = segue.destinationViewController;
+    SearchContactViewController *searchContactVC = navVC.childViewControllers[0];
+    searchContactVC.createdCapsl = self.createdCapsl;
 }
 
 
