@@ -34,29 +34,20 @@
 
 @implementation RecordVideoViewController
 
+//When page is here, record button needs to go up
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     self.navigationItem.leftBarButtonItem = self.cancelButton;
     self.navigationItem.rightBarButtonItem = self.doneButton;
-    [self.exitPlayVideoButton setHidden:YES];
-    [self.playVideoButton setHidden:YES];
-    [self.playVideoButton setEnabled:NO];
 
-    if (self.isEditing == NO)
-    {
-        [self.recordVideo setHidden:YES];
-        [self.exitPlayVideoButton setHidden:NO];
-
-        [self.playVideoButton setHidden:NO];
-        [self.playVideoButton setEnabled:YES];
-
-    }
+    [self showVideoRecorder];
 }
 
 #pragma mark Record button and methods
 
-- (IBAction)onRecordButtonPressed:(UIButton *)sender
+- (void)showVideoRecorder
 {
     if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera])
     {
@@ -195,31 +186,6 @@
 //Play for isEditing
 - (IBAction)onPlaybuttonPressed:(UIButton *)sender
 {
-    //Enable only when data is available
-    //TODO: PLAY IN LANDSCAPE
-
-         NSURL *url = [NSURL URLWithString:self.chosenCapsl.video.url];
-
-         self.videoController = [[MPMoviePlayerController alloc] initWithContentURL:url];
-
-         CGFloat screenWidth = [UIScreen mainScreen].bounds.size.width;
-         CGFloat screenHeight = [UIScreen mainScreen].bounds.size.height;
-
-         //TODO:change the width of video, constraint video format
-        self.videoController.view.frame = self.view.bounds;
-        self.videoController.controlStyle = MPMovieControlStyleFullscreen;
-
-        [self.view addSubview:self.videoController.view];
-
-         //Adds notification after the video is finished playing
-         [[NSNotificationCenter defaultCenter] addObserver:self
-                                                  selector:@selector(videoPlayBackDidFinish:)
-                                                      name:MPMoviePlayerPlaybackDidFinishNotification
-                                                    object:self.videoController];
-             
-             
-         [self.videoController play];
-
 
 }
 
