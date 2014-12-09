@@ -15,6 +15,8 @@
 #import "CaptureViewController.h"
 #import "RecordVideoViewController.h"
 
+@import MediaPlayer;
+
 @interface CapsuleListViewController () <UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate>
 
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
@@ -22,12 +24,21 @@
 @property NSMutableArray *senderPics;
 @property NSMutableArray *recipientPics;
 
+@property (strong, nonatomic) MPMoviePlayerViewController *videoController;
+
 @property NSInteger availableCapslsCount;
 @property BOOL shouldShowMessage;
 
 @end
 
 @implementation CapsuleListViewController
+
+//TODO: delete video segue in Storyboard
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self.tableView reloadData];
+}
 
 - (void)viewDidLoad
 {
@@ -57,6 +68,7 @@
     if (_shouldShowSent)
     {
         self.tableViewData = self.sentCapslsArray;
+        
     }
     else
     {
@@ -200,11 +212,32 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     Capsl *capsl = self.tableViewData[indexPath.row];
-    NSString *segueName = [NSString stringWithFormat:@"%@Segue", capsl.type];
 
-    //Segue to different VC depending on CAPSULE name
-    [self shouldPerformSegueWithIdentifier:segueName sender:self];
-    [self performSegueWithIdentifier:segueName sender:self];
+    //If it's multimedia Capsl
+    if ([capsl.type isEqualToString:@"multimedia"])
+    {
+        [self shouldPerformSegueWithIdentifier:@"multimediaSegue" sender:self];
+        [self performSegueWithIdentifier:@"multimediaSegue" sender:self];
+    }
+
+    //If it's a video
+    else
+    {
+        [self playVideo:capsl];
+    }
+}
+
+#pragma mark Playing Video
+
+- (void)playVideo:(Capsl *)capsl
+{
+    //TODO: Return to same orientation when it opens and closes
+    NSURL *url = [NSURL URLWithString:capsl.video.url];
+    self.videoController = [[MPMoviePlayerViewController alloc] init];
+    self.videoController.moviePlayer.movieSourceType = MPMovieSourceTypeStreaming;
+    [self.videoController.moviePlayer setContentURL:url];
+
+    [self presentViewController:self.videoController animated:YES completion:nil];
 }
 
 #pragma mark - segue life cycle
@@ -264,7 +297,6 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-
     NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
     Capsl *capsl = self.tableViewData[indexPath.row];
 
@@ -274,17 +306,6 @@
         vc.chosenCapsl = capsl;
         vc.isEditing = NO;
     }
-
-    if ([segue.identifier isEqualToString:@"videoSegue"])
-    {
-        RecordVideoViewController *recordVC = segue.destinationViewController;
-        recordVC.isEditing = NO;
-        recordVC.chosenCapsl = capsl;
-//        vc.chosenCapsl = capsl;
-//        vc.isEditing = NO;
-    }
-
-
 }
 
 #pragma mark - helper methods
@@ -300,19 +321,6 @@
         [cell updateLabelsForCapsl:capsl];
 
     }
-}
-
-// Alert when timer expires
--(void)presentCanOpenMeAlert
-{
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"CAPSL UNLOCKED!" message:nil preferredStyle:UIAlertControllerStyleAlert];
-    UIAlertAction *okButton = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-        // UNLOCK CAPSL!!
-
-    }];
-
-    [alert addAction:okButton];
-    [self presentViewController:alert animated:YES completion:nil];
 }
 
 

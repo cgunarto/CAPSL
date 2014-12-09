@@ -108,19 +108,20 @@
 
     //set created capsule video
     NSData *videoData = [[NSData alloc] initWithContentsOfURL:self.videoURL];
-    //TODO:convert to mp4?
     self.createdCapsl.video = [PFFile fileWithName:@"video.mov" data:videoData];
 
 
     self.videoController = [[MPMoviePlayerController alloc] init];
-
     [self.videoController setContentURL:self.videoURL];
 
     CGFloat screenWidth = [UIScreen mainScreen].bounds.size.width;
     CGFloat screenHeight = [UIScreen mainScreen].bounds.size.height;
+    CGRect frame = CGRectMake(0, 0, screenWidth, screenHeight);
 
     //TODO:change the width of video, constraint video format
-    [self.videoController.view setFrame:CGRectMake (0, 0, screenWidth, screenHeight)];
+    [self.videoController.view setFrame:frame];
+
+    self.videoController.controlStyle = MPMovieControlStyleFullscreen;
     [self.view addSubview:self.videoController.view];
 
     //Adds notification after the video is finished playing
@@ -145,9 +146,9 @@
     [[NSNotificationCenter defaultCenter]removeObserver:self name:MPMoviePlayerPlaybackDidFinishNotification object:nil];
 
     // Stop the video player and remove it from view
-    [self.videoController stop];
-    [self.videoController.view removeFromSuperview];
-    self.videoController = nil;
+//    [self.videoController stop];
+//    [self.videoController.view removeFromSuperview];
+//    self.videoController = nil;
 
     // Display a message
     UIAlertView *alert = [[UIAlertView alloc]
@@ -205,8 +206,10 @@
          CGFloat screenHeight = [UIScreen mainScreen].bounds.size.height;
 
          //TODO:change the width of video, constraint video format
-         [self.videoController.view setFrame:CGRectMake (0, 0, screenWidth, screenHeight)];
-         [self.view addSubview:self.videoController.view];
+        self.videoController.view.frame = self.view.bounds;
+        self.videoController.controlStyle = MPMovieControlStyleFullscreen;
+
+        [self.view addSubview:self.videoController.view];
 
          //Adds notification after the video is finished playing
          [[NSNotificationCenter defaultCenter] addObserver:self
