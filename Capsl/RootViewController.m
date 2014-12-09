@@ -420,8 +420,32 @@
                 NSLog(@"PHONE NUMBER VERIFIED!!!");
                 [Capslr returnCapslrFromPFUser:[PFUser currentUser] withCompletion:^(Capslr *currentCapslr, NSError *error) {
                     currentCapslr.isVerified = YES;
+                    currentCapslr.name = @"No Name";
+
+                    NSData *imageData = UIImageJPEGRepresentation([UIImage imageNamed:@"default"], 0.5f);
+                    PFFile *defaultPhoto = [PFFile fileWithData:imageData];
+                    currentCapslr.profilePhoto = defaultPhoto;
                     [currentCapslr save];
+
+//                    PFQuery *queryForCAPSLTeam = [Capslr query];
+//                    [queryForCAPSLTeam whereKey:@"username" equalTo:@"The CAPSL Team"];
+//                    [queryForCAPSLTeam getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error) {
+//                        id CAPSLTeamObjectId = object.objectId;
+//
+//                        PFQuery *query = [Capsl query];
+//                        [query whereKey:@"sender" equalTo:CAPSLTeamObjectId];
+//                        [query getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error) {
+////                            object = nil;
+//                            [object setValue:currentCapslr.objectId forKey:@"recipient"];
+//                            NSDate *deliverDate = [currentCapslr.createdAt dateByAddingTimeInterval:(60*5)];
+//                            [object setValue:deliverDate forKey:@"deliverTime"];
+//                            
+//                        }];
+//
+//                    }];
                 }];
+
+                
             }
             else
             {
