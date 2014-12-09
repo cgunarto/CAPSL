@@ -112,7 +112,7 @@
                     if (!error)
                     {
                         self.sentCapslsArray = objects;
-//                        [SVProgressHUD dismiss];
+                        [SVProgressHUD dismiss];
                         self.viewCapsulesButton.enabled = YES;
                         self.sendCapsuleButton.enabled = YES;
                     }
