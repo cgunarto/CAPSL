@@ -126,10 +126,10 @@
 
 }
 
-- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
-
-    [picker dismissViewControllerAnimated:YES completion:NULL];
-
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
+{
+//    [picker dismissViewControllerAnimated:YES completion:NULL];
+    [self performSegueWithIdentifier:@"unwindToCapture" sender:self];
 }
 
 - (void)videoPlayBackDidFinish:(NSNotification *)notification

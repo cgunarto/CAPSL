@@ -1010,7 +1010,7 @@
                 <barButtonItem systemItem="cancel" id="BF8-J5-PTc">
                     <connections>
                         <action selector="onCancelButtonPressed:" destination="GuB-P9-wPV" id="ZyN-kQ-k0J"/>
-                        <segue destination="EsB-iG-aF3" kind="unwind" unwindAction="unWindSegue:" id="iiP-0P-0Ys"/>
+                        <segue destination="EsB-iG-aF3" kind="unwind" identifier="unwindToCapture" unwindAction="unWindSegue:" id="iiP-0P-0Ys"/>
                     </connections>
                 </barButtonItem>
                 <barButtonItem systemItem="done" id="Hg0-6E-Egb">
