@@ -54,74 +54,54 @@
             self.viewCapsulesButton.enabled = NO;
             self.sendCapsuleButton.enabled = NO;
 
-            if (!currentCapslr.isVerified)
-            {
-                [currentCapslr deleteInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-                    if (!error)
+
+            [currentCapslr.profilePhoto getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
+                self.currentProfileImage = [UIImage imageWithData:data];
+
+            }];
+
+            Capslr *capslr = [Capslr object];
+            capslr.objectId = currentCapslr.objectId;
+
+            [Capsl searchCapslByKey:@"recipient" orderByAscending:@"deliveryTime" equalTo:capslr completion:^(NSArray *objects, NSError *error) {
+                if (!error)
+                {
+                    self.capslsArray = objects;
+
+                    NSInteger availableCapslsCount = 0;
+
+                    for (NSDate *date in [objects valueForKey:@"deliveryTime"])
                     {
-                        [[PFUser currentUser] deleteInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-                            if (!error)
-                            {
-                                [PFUser logOut];
-                                [self manageLogin];
-
-                                [SVProgressHUD dismiss];
-                            }
-                        }];
-                    }
-                }];
-
-            }
-            else
-            {
-                [currentCapslr.profilePhoto getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
-                    self.currentProfileImage = [UIImage imageWithData:data];
-
-                }];
-
-                Capslr *capslr = [Capslr object];
-                capslr.objectId = currentCapslr.objectId;
-
-                [Capsl searchCapslByKey:@"recipient" orderByAscending:@"deliveryTime" equalTo:capslr completion:^(NSArray *objects, NSError *error) {
-                    if (!error)
-                    {
-                        self.capslsArray = objects;
-
-                        NSInteger availableCapslsCount = 0;
-
-                        for (NSDate *date in [objects valueForKey:@"deliveryTime"])
+                        if ([date timeIntervalSinceNow] < 0)
                         {
-                            if ([date timeIntervalSinceNow] < 0)
-                            {
-                                availableCapslsCount++;
-                            }
+                            availableCapslsCount++;
                         }
-
-                        //                        self.timelineRootVC.shouldShowSent = NO;
-                        self.shouldShowSent = NO;
-                        //                        [self clearAndcreateLocalNotificationsFromCapslObjects:objects];
                     }
 
-                    else
-                    {
-                        NSLog(@"%@", error.localizedDescription);
-                    }
-                }];
+                    //                        self.timelineRootVC.shouldShowSent = NO;
+                    self.shouldShowSent = NO;
+                    //                        [self clearAndcreateLocalNotificationsFromCapslObjects:objects];
+                }
 
-                [Capsl searchCapslByKey:@"sender" orderByAscending:@"deliveryTime" equalTo:capslr completion:^(NSArray *objects, NSError *error) {
-                    if (!error)
-                    {
-                        self.sentCapslsArray = objects;
-                        [SVProgressHUD dismiss];
-                        self.viewCapsulesButton.enabled = YES;
-                        self.sendCapsuleButton.enabled = YES;
-                    }
-                    else
-                    {
-                        NSLog(@"%@", error.localizedDescription);
-                    }
-                }];
-            }
+                else
+                {
+                    NSLog(@"%@", error.localizedDescription);
+                }
+            }];
+
+            [Capsl searchCapslByKey:@"sender" orderByAscending:@"deliveryTime" equalTo:capslr completion:^(NSArray *objects, NSError *error) {
+                if (!error)
+                {
+                    self.sentCapslsArray = objects;
+                    [SVProgressHUD dismiss];
+                    self.viewCapsulesButton.enabled = YES;
+                    self.sendCapsuleButton.enabled = YES;
+                }
+                else
+                {
+                    NSLog(@"%@", error.localizedDescription);
+                }
+            }];
         }];
     }
 
@@ -151,6 +131,38 @@
 {
     [super viewDidLoad];
 //    [PFUser logOut];
+
+    if ([PFUser currentUser])
+    {
+        [SVProgressHUD setBackgroundColor:[UIColor clearColor]];
+        [SVProgressHUD setForegroundColor:[UIColor whiteColor]];
+        [SVProgressHUD show];
+
+        [Capslr returnCapslrFromPFUser:[PFUser currentUser] withCompletion:^(Capslr *currentCapslr, NSError *error) {
+
+            self.viewCapsulesButton.enabled = NO;
+            self.sendCapsuleButton.enabled = NO;
+
+            if (!currentCapslr.isVerified)
+            {
+                [currentCapslr deleteInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+                    if (!error)
+                    {
+                        [[PFUser currentUser] deleteInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+                            if (!error)
+                            {
+                                [PFUser logOut];
+                                [self manageLogin];
+
+                                [SVProgressHUD dismiss];
+                            }
+                        }];
+                    }
+                }];
+                
+            }
+        }];
+    }
 
     // Check to see if user quit before entering verification code
     self.viewCapsulesButton.enabled = NO;
@@ -314,7 +326,7 @@
 
         }
 
-        else if (![signUpController.signUpView.additionalField.text hasPrefix:@"1"] && signUpController.signUpView.additionalField.text.length >= 11)
+        else if (![signUpController.signUpView.additionalField.text hasPrefix:@"1"] && signUpController.signUpView.additionalField.text.length > 11)
         {
             informationComplete = NO;
         }
