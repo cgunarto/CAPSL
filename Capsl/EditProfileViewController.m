@@ -23,10 +23,10 @@
 @interface EditProfileViewController () <UITableViewDataSource, UITableViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
+@property (strong, nonatomic) IBOutlet UIBarButtonItem *exitBarButtonItem;
 
 @property NSArray *infoArray;
 @property (nonatomic)  UIImage *chosenImage;
-@property (strong, nonatomic) IBOutlet UIBarButtonItem *backBarButtonItem;
 
 @end
 
@@ -49,8 +49,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
-    self.navigationItem.leftBarButtonItem = self.backBarButtonItem;
 
     self.infoArray = @[kNameLabel, kUsernameLabel, kEmailLabel];
 
@@ -311,6 +309,12 @@
 //    [self presentViewController:rootNav animated:NO completion:nil];
 
 }
+
+- (IBAction)onExitBarButtonItemPressed:(UIBarButtonItem *)sender
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
 
 //- (IBAction)onBackBarButtonItemPressed:(UIBarButtonItem *)sender
 //{

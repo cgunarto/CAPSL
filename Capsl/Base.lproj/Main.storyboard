@@ -2995,7 +2995,13 @@
                             </mask>
                         </variation>
                     </view>
-                    <navigationItem key="navigationItem" id="sti-vs-ccH"/>
+                    <navigationItem key="navigationItem" id="sti-vs-ccH">
+                        <barButtonItem key="leftBarButtonItem" systemItem="stop" id="GH1-BY-X2q">
+                            <connections>
+                                <action selector="onExitBarButtonItemPressed:" destination="iX6-Dw-liI" id="tZj-5B-pav"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="kFG-UX-p6j" id="Pi5-gI-5yo"/>
                         <segue destination="qOY-ih-VR1" kind="show" identifier="editNameSegue" id="TpB-RA-nDW"/>

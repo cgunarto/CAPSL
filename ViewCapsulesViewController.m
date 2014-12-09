@@ -118,7 +118,6 @@
     // put timer here
 
     self.timer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(updateUIInSubviews) userInfo:nil repeats:YES];
-
 }
 
 - (void)viewWillDisappear:(BOOL)animated
