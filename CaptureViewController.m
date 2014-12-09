@@ -491,6 +491,7 @@
 
     [self.navigationController setNavigationBarHidden:YES animated:YES];
     self.characterCountLabel.hidden = NO;
+    [self updateCharacterLengthLabel];
 
     [self shouldMoveViewUpForKeyboard:YES];
 
@@ -499,6 +500,7 @@
     self.enterTextButton.hidden = YES;
 
     self.addPhotoButton.userInteractionEnabled = NO;
+    
 
 }
 
@@ -507,8 +509,7 @@
 
     [self verticalCenterText];
 
-    NSInteger length = textView.text.length;
-    self.characterCountLabel.text = [NSString stringWithFormat:@"%li / %i", kCharacterLimit - length, kCharacterLimit];
+    [self updateCharacterLengthLabel];
 }
 
 //Not called when isEditing is NO
@@ -517,7 +518,11 @@
     self.characterCountLabel.hidden = YES;
     if (self.textView.text && ![self.textView.text isEqualToString:@""])
     {
-            self.createdCapsl.text = self.textView.text;
+        self.createdCapsl.text = self.textView.text;
+    }
+    else
+    {
+        self.createdCapsl.text = nil;
     }
 
     [self resignFirstResponder];
@@ -525,7 +530,7 @@
 
     [self verticalCenterText];
 
-    //If text is empty, enter text here shows up after editing is done
+    //If text is empty, show text edit button again after editing is done
     if ([textView.text isEqualToString:@""])
     {
         self.enterTextButton.hidden = NO;
@@ -748,5 +753,12 @@
     return image;
 
 }
+
+- (void)updateCharacterLengthLabel
+{
+    NSInteger length = self.textView.text.length;
+    self.characterCountLabel.text = [NSString stringWithFormat:@"%li / %i", kCharacterLimit - length, kCharacterLimit];
+}
+
 
 @end

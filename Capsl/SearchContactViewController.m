@@ -57,6 +57,8 @@
 
     self.view.backgroundColor = [UIColor colorWithPatternImage:[BackgroundGenerator blurImage:self.backgroundImage]];
 
+    self.searchDisplayController.searchResultsTableView.backgroundColor = [UIColor greenColor];
+
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -100,14 +102,16 @@
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+
     AllContactTableViewCell *allContactCell = (AllContactTableViewCell *)[self.tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
+
 
     //If selectedSegement is 0, CPSLR contact - extract Capslr object
     if (self.segmentedControl.selectedSegmentIndex == 0)
     {
         Capslr *capslr = nil;
 
-        if (tableView == self.searchDisplayController.searchResultsTableView)
+        if ([tableView isEqual:self.searchDisplayController.searchResultsTableView])
         {
             capslr = [self.searchResults objectAtIndex:indexPath.row];
         }
@@ -139,7 +143,7 @@
     {
         Contact *contact = nil;
 
-        if (tableView == self.searchDisplayController.searchResultsTableView)
+        if ([tableView isEqual:self.searchDisplayController.searchResultsTableView])
         {
             contact = [self.searchResults objectAtIndex:indexPath.row];
         }
@@ -156,13 +160,18 @@
     //Make the profile rounded
     allContactCell.photoImageView.layer.cornerRadius = allContactCell.photoImageView.frame.size.width/2;
     allContactCell.photoImageView.clipsToBounds = YES;
+    allContactCell.photoImageView.backgroundColor = kProfilPicBackgroundColor;
+    allContactCell.contentView.backgroundColor = [UIColor clearColor];
+
 
     return allContactCell;
+
+
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    if (tableView == self.searchDisplayController.searchResultsTableView)
+    if ([tableView isEqual:self.searchDisplayController.searchResultsTableView])
     {
         return [self.searchResults count];
     }
@@ -187,12 +196,16 @@
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    Capslr *capslr = nil;
+    Capslr *capslr = [Capslr object];
 
-    if ([segue.identifier isEqualToString:@"segueToCompose"])
+    if ([segue.identifier isEqualToString:@"segueToDatePicker"])
     {
+        UINavigationController *navVC = segue.destinationViewController;
+        DateTableViewController *dateTableViewVC = navVC.childViewControllers.firstObject;
+        dateTableViewVC.backgroundImage = self.backgroundImage;
+
         NSIndexPath *indexPath = nil;
-        
+
         if (self.segmentedControl.selectedSegmentIndex == 0)
         {
             if (self.searchDisplayController.active)
@@ -207,8 +220,6 @@
             }
 
             self.createdCapsl.recipient = capslr;
-            UINavigationController *navVC = segue.destinationViewController;
-            DateTableViewController *dateTableViewVC = navVC.childViewControllers.firstObject;
             dateTableViewVC.createdCapsl = self.createdCapsl;
         }
 
@@ -235,7 +246,6 @@
                  if (capslr)
                  {
                      self.createdCapsl.recipient = capslr;
-                     DateTableViewController *dateTableViewVC = segue.destinationViewController;
                      dateTableViewVC.createdCapsl = self.createdCapsl;
                  }
 
@@ -247,12 +257,15 @@
 
                      [newCapslr saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error)
                      {
-                         DateTableViewController *dateTableViewVC = segue.destinationViewController;
                          dateTableViewVC.createdCapsl = self.createdCapsl;
                      }];
                  }
              }];
         }
+
+
+
+
     }
 }
 

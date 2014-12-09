@@ -61,6 +61,7 @@
     self.navigationController.navigationBar.translucent = YES;
 
     [self scrollToEarliestUnopenedCapsule];
+
 }
 
 -(void)setShouldShowSent:(BOOL)shouldShowSent

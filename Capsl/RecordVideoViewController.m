@@ -194,7 +194,8 @@
 {
     if ([sender isEqual:self.doneButton])
     {
-        SearchContactViewController *searchContactVC = segue.destinationViewController;
+        UINavigationController *navVC = segue.destinationViewController;
+        SearchContactViewController *searchContactVC = navVC.childViewControllers.firstObject;
         searchContactVC.createdCapsl = self.createdCapsl;
     }
 }

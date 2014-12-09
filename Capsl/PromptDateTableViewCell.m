@@ -10,8 +10,9 @@
 
 @implementation PromptDateTableViewCell
 
-- (void)awakeFromNib {
-    // Initialization code
+- (void)awakeFromNib
+{
+
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

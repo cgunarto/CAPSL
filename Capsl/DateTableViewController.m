@@ -12,6 +12,7 @@
 #import "Capsl.h"
 #import "Capslr.h"
 #import "RootViewController.h"
+#import "BackgroundGenerator.h"
 
 #define kPickerAnimationDuration    3   // duration for the animation to slide the date picker into view
 #define kDatePickerTag              99     // view tag identifiying the date picker view
@@ -41,6 +42,7 @@ static NSString *kSendID = @"sendCell";  // the cell containing the date picker
 @property (assign) NSInteger pickerCellRowHeight;
 
 @property (nonatomic, strong) IBOutlet UIDatePicker *pickerView;
+@property (strong, nonatomic) IBOutlet UIButton *sendButton;
 
 // this button appears only when the date picker is shown (iOS 6.1.x or earlier)
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *nextButton;
@@ -80,6 +82,11 @@ static NSString *kSendID = @"sendCell";  // the cell containing the date picker
                                                object:nil];
 
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+
+    self.view.backgroundColor = [UIColor colorWithPatternImage:[BackgroundGenerator blurImage:self.backgroundImage]];
+
+    self.title = @"Delivery Date";
+
 }
 
 - (void)dealloc
@@ -196,8 +203,11 @@ NSUInteger DeviceSystemMajorVersion()
 - (BOOL)indexPathHasDate:(NSIndexPath *)indexPath
 {
     BOOL hasDate = NO;
-
-    if ((indexPath.row == kDateRow) ||
+    if (indexPath.section == 1)
+    {
+        return hasDate;
+    }
+    else if ((indexPath.row == kDateRow) ||
         (indexPath.row == kTimeRow || ([self hasInlineDatePicker] && (indexPath.row == kTimeRow + 1) ) ))
     {
         hasDate = YES;
@@ -218,23 +228,40 @@ NSUInteger DeviceSystemMajorVersion()
 
     else
     {
-        return 100;
+        return 60;
     }
 
 //    return ([self indexPathHasPicker:indexPath] ? self.pickerCellRowHeight : self.tableView.rowHeight);
 
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
+{
+    return 20;
+}
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return 2;
+}
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    if ([self hasInlineDatePicker])
+    if (section == 0 && [self hasInlineDatePicker])
     {
         // we have a date picker, so allow for it in the number of rows in this section
         NSInteger numRows = self.dataArray.count;
-        return ++numRows;
+        return ++numRows - 1;
+    }
+    else if (section == 0)
+    {
+        return self.dataArray.count - 1;
+    }
+    else
+    {
+        return 1;
     }
 
-    return self.dataArray.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -262,7 +289,7 @@ NSUInteger DeviceSystemMajorVersion()
 
     cell = [tableView dequeueReusableCellWithIdentifier:cellID];
 
-    if (indexPath.row == 0)
+    if (indexPath.section == 0 && indexPath.row == 0)
     {
         // we decide here that first cell in the table is not selectable (it's just an indicator)
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -276,6 +303,10 @@ NSUInteger DeviceSystemMajorVersion()
     {
         modelRow--;
     }
+    if (indexPath.section == 1)
+    {
+        modelRow = 2;
+    }
 
     NSDictionary *itemData = self.dataArray[modelRow];
 
@@ -284,7 +315,7 @@ NSUInteger DeviceSystemMajorVersion()
     {
         // we have either start or end date cells, populate their date field
         //TODO: CHANGE THIS LABEL VALUE
-        cell.textLabel.text = [itemData valueForKey:kTitleKey];
+//        cell.textLabel.text = [itemData valueForKey:kTitleKey];
 
         if ([itemData valueForKey:kDateKey])
         {
@@ -600,7 +631,5 @@ NSUInteger DeviceSystemMajorVersion()
     UINavigationController *rootNav = [self.storyboard instantiateInitialViewController];;
     [self.view.window setRootViewController:rootNav];
 }
-
-
 
 @end
