@@ -1403,7 +1403,8 @@
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="94" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="tzr-2W-cbO">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.5" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.34999999999999998" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="444" id="mib-6e-S5O">
                                         <variation key="heightClass=regular-widthClass=compact" constant="800"/>
@@ -1656,7 +1657,7 @@
                                             <outlet property="phoneLabel" destination="r09-go-j4f" id="2aA-g9-xM3"/>
                                             <outlet property="photoImageView" destination="AbK-9q-g1U" id="qa5-rK-UmD"/>
                                             <outlet property="usernameLabel" destination="ccV-ba-HZ5" id="zRH-bY-WhW"/>
-                                            <segue destination="7kV-3W-4Mk" kind="presentation" identifier="segueToCompose" id="1JY-YL-j2i"/>
+                                            <segue destination="7kV-3W-4Mk" kind="presentation" identifier="segueToDatePicker" id="1JY-YL-j2i"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -1775,7 +1776,6 @@
                     <connections>
                         <outlet property="dismissButton" destination="VmT-db-c1D" id="7AG-OS-2N0"/>
                         <outlet property="searchBar" destination="IzC-ho-b09" id="94t-0r-wHZ"/>
-                        <outlet property="searchDisplayController" destination="uUI-vY-uqp" id="ib3-9o-w7t"/>
                         <outlet property="segmentedControl" destination="TcA-dM-lMz" id="ejx-F9-ty0"/>
                         <outlet property="tableView" destination="tzr-2W-cbO" id="gvP-Ff-orI"/>
                     </connections>
@@ -1791,7 +1791,7 @@
                     </connections>
                 </searchDisplayController>
             </objects>
-            <point key="canvasLocation" x="6060" y="438"/>
+            <point key="canvasLocation" x="5871" y="438"/>
         </scene>
         <!--View Capsules View Controller-->
         <scene sceneID="nfk-ov-wJ4">
@@ -3132,7 +3132,7 @@
                     </connections>
                 </barButtonItem>
             </objects>
-            <point key="canvasLocation" x="4896" y="2532"/>
+            <point key="canvasLocation" x="4896" y="2538"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="4ch-3M-IRb">
@@ -3977,7 +3977,7 @@
                     </connections>
                 </barButtonItem>
             </objects>
-            <point key="canvasLocation" x="7968" y="438"/>
+            <point key="canvasLocation" x="7350" y="438"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="MYO-tp-J0H">
@@ -4049,7 +4049,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ScY-ZJ-hDV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="7050" y="438"/>
+            <point key="canvasLocation" x="6600" y="438"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="2gM-8N-xw1">
@@ -4080,6 +4080,6 @@
         <segue reference="esk-03-B5N"/>
         <segue reference="dAc-Nd-2MW"/>
         <segue reference="s4P-Kd-1fI"/>
-        <segue reference="Eln-db-Pjz"/>
+        <segue reference="THB-3X-bqr"/>
     </inferredMetricsTieBreakers>
 </document>

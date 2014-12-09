@@ -517,7 +517,11 @@
     self.characterCountLabel.hidden = YES;
     if (self.textView.text && ![self.textView.text isEqualToString:@""])
     {
-            self.createdCapsl.text = self.textView.text;
+        self.createdCapsl.text = self.textView.text;
+    }
+    else
+    {
+        self.createdCapsl.text = nil;
     }
 
     [self resignFirstResponder];
@@ -525,7 +529,7 @@
 
     [self verticalCenterText];
 
-    //If text is empty, enter text here shows up after editing is done
+    //If text is empty, show text edit button again after editing is done
     if ([textView.text isEqualToString:@""])
     {
         self.enterTextButton.hidden = NO;
