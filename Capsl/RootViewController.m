@@ -429,29 +429,45 @@
                     NSData *imageData = UIImageJPEGRepresentation([UIImage imageNamed:@"default"], 0.5f);
                     PFFile *defaultPhoto = [PFFile fileWithData:imageData];
                     currentCapslr.profilePhoto = defaultPhoto;
+
+                    //TODO: Fix this later
                     currentCapslr.name = @" ";
                     [currentCapslr save];
 
                     PFQuery *query = [Capsl query];
                     [query whereKey:@"objectId" equalTo:@"D1ruCY5eCd"];
                     [query getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error) {
-                        if (!error)
-                        {
-//                            object = nil;
-                            object[@"recipient"] = currentCapslr.objectId;
-//                            [object setValue:currentCapslr.objectId forKey:@"recipient"];
+                        currentCapslr.objectId = [object valueForKey:@"recipient"];
 
-                            NSDate *deliverDate = [currentCapslr.createdAt dateByAddingTimeInterval:(60*5)];
-                            object[@"deliveryTime"] = deliverDate;
 
-//                            [object setValue:deliverDate forKey:@"deliverTime"];
-                        }
-                        else
-                        {
-                            NSLog(@"%@", error.localizedDescription);
-                        }
+
+                        currentCapslr.objectId = object[@"recipient"];
+                        NSDate *deliverDate = [currentCapslr.createdAt dateByAddingTimeInterval:(60*5)];
+                        object[@"deliveryTime"] = deliverDate;
+
 
                     }];
+
+                    // working on onboarding capsl for new users...
+
+//                    [query getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error) {
+//                        if (!error)
+//                        {
+////                            object = nil;
+//                            object[@"recipient"] = currentCapslr.objectId;
+////                            [object setValue:currentCapslr.objectId forKey:@"recipient"];
+//
+//                            NSDate *deliverDate = [currentCapslr.createdAt dateByAddingTimeInterval:(60*5)];
+//                            object[@"deliveryTime"] = deliverDate;
+//
+////                            [object setValue:deliverDate forKey:@"deliverTime"];
+//                        }
+//                        else
+//                        {
+//                            NSLog(@"%@", error.localizedDescription);
+//                        }
+//
+//                    }];
 
                 }];
             
