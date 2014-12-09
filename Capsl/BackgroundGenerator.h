@@ -7,7 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
 @interface BackgroundGenerator : NSObject
+
++ (UIImage *)blurImage:(UIImage *)image;
 
 @end

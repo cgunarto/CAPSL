@@ -10,8 +10,8 @@
 @class Capsl;
 
 @interface SearchContactViewController : UIViewController
-@property (strong, nonatomic) UIImage *chosenImage;
 @property Capsl *createdCapsl;
+@property UIImage *backgroundImage;
 
 
 @end

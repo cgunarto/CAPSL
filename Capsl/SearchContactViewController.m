@@ -12,12 +12,14 @@
 #import "Capsl.h"
 #import "AllContactTableViewCell.h"
 #import "DateTableViewController.h"
+#import "BackgroundGenerator.h"
 
 #define kTableViewHeight 94;
 
 @interface SearchContactViewController () <UITableViewDataSource, UITableViewDelegate, UISearchDisplayDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
+@property (strong, nonatomic) IBOutlet UIBarButtonItem *dismissButton;
 
 @property (nonatomic, strong) NSArray *capslrArray;
 @property (nonatomic, strong) NSArray *contactsArray;
@@ -52,6 +54,9 @@
           }];
          
      }];
+
+    self.view.backgroundColor = [UIColor colorWithPatternImage:[BackgroundGenerator blurImage:self.backgroundImage]];
+
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -202,7 +207,8 @@
             }
 
             self.createdCapsl.recipient = capslr;
-            DateTableViewController *dateTableViewVC = segue.destinationViewController;
+            UINavigationController *navVC = segue.destinationViewController;
+            DateTableViewController *dateTableViewVC = navVC.childViewControllers.firstObject;
             dateTableViewVC.createdCapsl = self.createdCapsl;
         }
 
@@ -266,6 +272,15 @@
     }
     [self.tableView reloadData];
 
+}
+
+#pragma mark - Actions
+
+- (IBAction)onDismissButtonTapped:(UIBarButtonItem *)sender
+{
+
+    [self dismissViewControllerAnimated:YES completion:nil];
+    
 }
 
 

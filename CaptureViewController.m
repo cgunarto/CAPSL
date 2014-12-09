@@ -26,6 +26,8 @@
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
 @property UIImage *chosenImage;
 
+@property UIImage *wallpaperImage;
+
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *cancelButton;
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *doneButton;
 @property (weak, nonatomic) IBOutlet UITextView *textView;
@@ -426,11 +428,22 @@
     //If sender is Use Photo Button, pass info to next VC
     if ([segue.identifier isEqualToString:@"segueToContactSearch"])
     {
-        SearchContactViewController *searchContactVC = segue.destinationViewController;
+        UINavigationController *navVC = segue.destinationViewController;
+        SearchContactViewController *searchContactVC = navVC.childViewControllers.firstObject;
         searchContactVC.createdCapsl = self.createdCapsl;
+
+        if (self.chosenImage)
+        {
+            searchContactVC.backgroundImage = self.chosenImage;
+        }
+        else
+        {
+            searchContactVC.backgroundImage = self.wallpaperImage;
+        }
+
     }
 
-    //Passig whatever created to RecordAudioVC so audioVC can add audio files
+    //Passing whatever created to RecordAudioVC so audioVC can add audio files
     //Accessing it through the NavVC
     if ([segue.identifier isEqualToString:@"segueToAudio"])
     {
@@ -721,6 +734,7 @@
     {
         imageNumber = arc4random_uniform(4) + 1;
         self.createdCapsl.wallpaperIndex = [NSNumber numberWithInt:imageNumber];
+
     }
     else
     {
@@ -728,6 +742,8 @@
     }
 
     UIImage *image = [UIImage imageNamed:[NSString stringWithFormat:@"wallpaperTexture-%i", imageNumber]];
+    self.wallpaperImage = image;
+
     return image;
 
 }
