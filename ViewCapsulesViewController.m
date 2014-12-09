@@ -24,6 +24,8 @@
 @property (strong, nonatomic) IBOutlet UISegmentedControl *sentReceivedSegmentedControl;
 @property NSTimer *timer;
 
+#warning Is this supposed to be an NSOperationQueue
+@property NSOperationQueue *observer;
 
 @property Capslr *capslr;
 
@@ -115,16 +117,23 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
+    [super viewWillAppear:animated];
     // put timer here
-
     self.timer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(updateUIInSubviews) userInfo:nil repeats:YES];
+
+    //have the app listen to the kRefreshData
+
+
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {
+    [super viewWillDisappear:animated];
     // invalidate timer here
-
     [self.timer invalidate];
+
+    //have the app delete the observer, otherwise it will be added more than once
+
 }
 
 - (void)didReceiveMemoryWarning {

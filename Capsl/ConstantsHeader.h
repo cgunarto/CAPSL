@@ -24,6 +24,7 @@
 #define kProfileBackground [UIImage imageNamed:@"lake_portrait"]
 #define kEditProfileBackground [UIImage imageNamed:@"lake_portrait 2"]
 #define kUpdateProfileBackground [UIImage imageNamed:@"lake_portrait 3"]
+#define kRefreshData @"updateData"
 
 
 #endif

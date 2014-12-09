@@ -85,6 +85,9 @@
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+
+    //Send a notification that kRefreshData so other VCs who are 'listening' can refresh
+    [[NSNotificationCenter defaultCenter] postNotificationName:kRefreshData object:nil];
 }
 
 - (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error
@@ -114,6 +117,9 @@
 
         // Set icon badge number to zero
         application.applicationIconBadgeNumber = 0;
+
+        //Posting a notification so that VC that's listening can decide to refresh data
+        [[NSNotificationCenter defaultCenter] postNotificationName:kRefreshData object:nil];
     }
 }
 
