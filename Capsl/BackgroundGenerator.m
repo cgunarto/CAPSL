@@ -16,11 +16,12 @@
 
     [self imageResize:image];
 
-    UIColor *tintColor = [UIColor colorWithWhite:0.3 alpha:0.1];
-    UIImage *blurredImage = [image applyBlurWithRadius:20 tintColor:tintColor saturationDeltaFactor:0.8 maskImage:nil];
+//    UIColor *tintColor = [UIColor colorWithWhite:0.3 alpha:0.1];
+//    UIImage *blurredImage = [image applyBlurWithRadius:20 tintColor:tintColor saturationDeltaFactor:0.8 maskImage:nil];
 
-    return blurredImage;
-    
+//    return blurredImage;
+
+    return image;
 }
 
 + (UIImage *)imageResize :(UIImage *)img

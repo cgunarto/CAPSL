@@ -55,9 +55,15 @@
          
      }];
 
-    self.view.backgroundColor = [UIColor colorWithPatternImage:[BackgroundGenerator blurImage:self.backgroundImage]];
-
-    self.searchDisplayController.searchResultsTableView.backgroundColor = [UIColor greenColor];
+    if (self.createdCapsl.photo)
+    {
+        UIImage *processedImage = [BackgroundGenerator blurImage:self.backgroundImage];
+        self.view.backgroundColor = [UIColor colorWithPatternImage:processedImage];
+    }
+    else
+    {
+        self.view.backgroundColor = [UIColor colorWithPatternImage:self.backgroundImage];
+    }
 
 }
 

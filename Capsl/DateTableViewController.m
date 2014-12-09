@@ -85,13 +85,19 @@ static NSString *kSendID = @"sendCell";  // the cell containing the date picker
 
     self.title = @"Delivery Date";
 
-    if (self.backgroundImage)
+    if (!self.backgroundImage)
+    {
+
+        self.view.backgroundColor = [UIColor colorWithPatternImage:[BackgroundGenerator generateDefaultBackground]];
+
+    }
+    else if (self.createdCapsl.photo)
     {
         self.view.backgroundColor = [UIColor colorWithPatternImage:[BackgroundGenerator blurImage:self.backgroundImage]];
     }
     else
     {
-        self.view.backgroundColor = [UIColor colorWithPatternImage:[BackgroundGenerator generateDefaultBackground]];
+        self.view.backgroundColor = [UIColor colorWithPatternImage:self.backgroundImage];
     }
 
 }
