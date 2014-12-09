@@ -437,42 +437,16 @@
                     PFQuery *query = [Capsl query];
                     [query whereKey:@"objectId" equalTo:@"D1ruCY5eCd"];
                     [query getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error) {
-                        currentCapslr.objectId = [object valueForKey:@"recipient"];
 
+                        object [@"recipient"] = nil;
+                        object[@"recipient"] = currentCapslr;
 
-
-                        currentCapslr.objectId = object[@"recipient"];
-                        NSDate *deliverDate = [currentCapslr.createdAt dateByAddingTimeInterval:(60*5)];
-                        object[@"deliveryTime"] = deliverDate;
-
-
+                        object[@"deliveryTime"] = nil;
+                        NSDate *deliveryDate = [currentCapslr.createdAt dateByAddingTimeInterval:(60*5)];
+                        object[@"deliveryTime"] = deliveryDate;
+                        [object save];
                     }];
-
-                    // working on onboarding capsl for new users...
-
-//                    [query getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error) {
-//                        if (!error)
-//                        {
-////                            object = nil;
-//                            object[@"recipient"] = currentCapslr.objectId;
-////                            [object setValue:currentCapslr.objectId forKey:@"recipient"];
-//
-//                            NSDate *deliverDate = [currentCapslr.createdAt dateByAddingTimeInterval:(60*5)];
-//                            object[@"deliveryTime"] = deliverDate;
-//
-////                            [object setValue:deliverDate forKey:@"deliverTime"];
-//                        }
-//                        else
-//                        {
-//                            NSLog(@"%@", error.localizedDescription);
-//                        }
-//
-//                    }];
-
                 }];
-            
-
-                
             }
             else
             {
