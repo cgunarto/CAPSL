@@ -205,13 +205,14 @@
 {
     Capsl *capsl = self.tableViewData[indexPath.row];
 
+    //If it's multimedia Capsl
     if ([capsl.type isEqualToString:@"multimedia"])
     {
-        NSString *segueName = [NSString stringWithFormat:@"%@Segue", capsl.type];
-        [self shouldPerformSegueWithIdentifier:segueName sender:self];
-        [self performSegueWithIdentifier:segueName sender:self];
+        [self shouldPerformSegueWithIdentifier:@"multimediaSegue" sender:self];
+        [self performSegueWithIdentifier:@"multimediaSegue" sender:self];
     }
 
+    //If it's a video
     else
     {
         //TODO: Return to same orientation when it opens and closes
