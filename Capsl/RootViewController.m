@@ -432,13 +432,11 @@
                     currentCapslr.name = @" ";
                     [currentCapslr save];
 
-                    PFQuery *queryForCAPSLTeam = [Capslr query];
-                    [queryForCAPSLTeam whereKey:@"username" equalTo:@"The CAPSL Team"];
-                    [queryForCAPSLTeam getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error) {
-
-                        PFQuery *query = [Capsl query];
-                        [query whereKey:@"sender" equalTo:object.objectId];
-                        [query getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error) {
+                    PFQuery *query = [Capsl query];
+                    [query whereKey:@"objectId" equalTo:@"D1ruCY5eCd"];
+                    [query getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error) {
+                        if (!error)
+                        {
 //                            object = nil;
                             object[@"recipient"] = currentCapslr.objectId;
 //                            [object setValue:currentCapslr.objectId forKey:@"recipient"];
@@ -447,11 +445,16 @@
                             object[@"deliveryTime"] = deliverDate;
 
 //                            [object setValue:deliverDate forKey:@"deliverTime"];
-
-                        }];
+                        }
+                        else
+                        {
+                            NSLog(@"%@", error.localizedDescription);
+                        }
 
                     }];
+
                 }];
+            
 
                 
             }
