@@ -417,14 +417,14 @@
         [PFCloud callFunctionInBackground:@"verifyPhoneNumber" withParameters:@{@"phoneVerificationCode":verificationCode.text} block:^(id object, NSError *error) {
             if ([object isEqualToString:@"Success"])
             {
-                NSLog(@"PHONE NUMBER VERIFIED!!!");
+                NSLog(@"Phone number verified");
                 [Capslr returnCapslrFromPFUser:[PFUser currentUser] withCompletion:^(Capslr *currentCapslr, NSError *error) {
                     currentCapslr.isVerified = YES;
-                    currentCapslr.name = @"No Name";
 
                     NSData *imageData = UIImageJPEGRepresentation([UIImage imageNamed:@"default"], 0.5f);
                     PFFile *defaultPhoto = [PFFile fileWithData:imageData];
                     currentCapslr.profilePhoto = defaultPhoto;
+                    currentCapslr.name = @"";
                     [currentCapslr save];
 
 //                    PFQuery *queryForCAPSLTeam = [Capslr query];

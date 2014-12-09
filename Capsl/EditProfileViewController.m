@@ -38,6 +38,8 @@
     [super viewWillAppear:animated];
 
     self.doNotShowActivityIndicator = YES;
+    
+    self.infoArray = @[kNameLabel, kUsernameLabel, kEmailLabel];
 
     [Capslr returnCapslrFromPFUser:[PFUser currentUser] withCompletion:^(Capslr *currentCapslr, NSError *error) {
 
