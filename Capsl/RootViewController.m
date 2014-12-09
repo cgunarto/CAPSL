@@ -45,6 +45,8 @@
 
     if ([PFUser currentUser])
     {
+        [SVProgressHUD setBackgroundColor:[UIColor clearColor]];
+        [SVProgressHUD setForegroundColor:[UIColor whiteColor]];
         [SVProgressHUD show];
 
         [Capslr returnCapslrFromPFUser:[PFUser currentUser] withCompletion:^(Capslr *currentCapslr, NSError *error) {
