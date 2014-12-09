@@ -13,6 +13,9 @@
 #import "JCATimelineRootViewController.h"
 #import "JCAMainViewController.h"
 #import "CaptureViewController.h"
+#import "RecordVideoViewController.h"
+
+@import MediaPlayer;
 
 @interface CapsuleListViewController () <UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate>
 
@@ -21,6 +24,8 @@
 @property NSMutableArray *senderPics;
 @property NSMutableArray *recipientPics;
 
+@property (strong, nonatomic) MPMoviePlayerViewController *videoController;
+
 @property NSInteger availableCapslsCount;
 @property BOOL shouldShowMessage;
 
@@ -28,19 +33,20 @@
 
 @implementation CapsuleListViewController
 
+//TODO: delete video segue in Storyboard
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+
+    [self.tableView reloadData];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 
     self.view.backgroundColor = [UIColor clearColor];
-
-<<<<<<< HEAD
-
 //    self.tableView.contentInset = UIEdgeInsetsMake(self.navigationController.navigationBar.frame.size.height + 20, 0, 44, 0);
-=======
-    self.tableView.contentInset = UIEdgeInsetsMake(self.navigationController.navigationBar.frame.size.height, 0, 44, 0);
->>>>>>> Development
-
     self.availableCapslsCount = 0;
 
     self.senderPics = [@[] mutableCopy];
@@ -48,25 +54,17 @@
 
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.backgroundColor = [UIColor clearColor];
-<<<<<<< HEAD
 
     // make transparent the system toolbar that is there to space the bottom of scroll
     [self.navigationController.toolbar setBackgroundImage:[UIImage new] forToolbarPosition:UIBarPositionAny barMetrics:UIBarMetricsDefault];
     self.navigationController.navigationBar.shadowImage = [UIImage new];
     self.navigationController.navigationBar.translucent = YES;
 
-
-//    for (NSDate *date in [self.capslsArray valueForKey:@"deliveryTime"])
-//    {
-//        if ([date timeIntervalSinceNow] < 0)
-//        {
-//            availableCapslsCount++;
-//        }
-//    }
-
-
+    [self scrollToEarliestUnopenedCapsule];
+<<<<<<< HEAD
 =======
->>>>>>> Development
+
+>>>>>>> Dev3
 }
 
 -(void)setShouldShowSent:(BOOL)shouldShowSent
@@ -76,6 +74,7 @@
     if (_shouldShowSent)
     {
         self.tableViewData = self.sentCapslsArray;
+        
     }
     else
     {
@@ -108,7 +107,6 @@
     return self.tableViewData.count;
 
 }
-
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -219,29 +217,86 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    Capsl *capsl = self.tableViewData[indexPath.row];
 
+    //If it's multimedia Capsl
+    if ([capsl.type isEqualToString:@"multimedia"])
+    {
+        BOOL capslIsUnlocked = [self shouldPerformSegueWithIdentifier:@"multimediaSegue" sender:self];
+        if (capslIsUnlocked)
+        {
+            [self performSegueWithIdentifier:@"multimediaSegue" sender:self];
+
+        }
+    }
+
+    //If it's a video
+    else
+    {
+        BOOL capslIsAvailable = [self isCapslAvailableToView:capsl];
+        if (capslIsAvailable)
+        {
+            [self playVideo:capsl];
+        }
+    }
+}
+
+#pragma mark Playing Video
+
+- (void)playVideo:(Capsl *)capsl
+{
+    //TODO: Return to same orientation when it opens and closes
+    NSURL *url = [NSURL URLWithString:capsl.video.url];
+    self.videoController = [[MPMoviePlayerViewController alloc] init];
+    self.videoController.moviePlayer.movieSourceType = MPMovieSourceTypeStreaming;
+    [self.videoController.moviePlayer setContentURL:url];
+
+    [self presentViewController:self.videoController animated:YES completion:nil];
 }
 
 #pragma mark - segue life cycle
 
 - (BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender
 {
-
     NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
 
     Capsl *capsl = self.tableViewData[indexPath.row];
+    return [self isCapslAvailableToView:capsl];
+}
+
+- (BOOL)isCapslAvailableToView:(Capsl *)capsl
+{
     long elapsedSeconds = [capsl.deliveryTime timeIntervalSinceNow];
 
     // don't open if the capsule is not ready!
-
     if (!self.shouldShowSent)
     {
+        //if it's unviewed and unlocked
         if (!capsl.viewedAt && elapsedSeconds < 0)
         {
             capsl.viewedAt = [NSDate date];
             [capsl saveInBackground];
+
+            //SENDING PUSH MESSAGE to the sender, when CAPSL is viewed by recipient
+            PFQuery *pushQuery = [PFInstallation query];
+            [pushQuery whereKey:@"capslr" equalTo:capsl.sender];
+
+            PFPush *push = [[PFPush alloc]init];
+            //TODO: Send push to multiple device tokens
+            //TODO: Set it to open a message or the right page
+            NSString *pushString = [NSString stringWithFormat:@"%@ viewed your Capsl", capsl.recipient.name];
+            [push setQuery:pushQuery];
+            [push setMessage:pushString];
+            [push sendPushInBackgroundWithBlock:^(BOOL succeeded, NSError *error)
+             {
+                 if (error)
+                 {
+                     NSLog(@"%@ error", error.localizedDescription);
+                 }
+             }];
         }
 
+        //if it's unlocked
         if (elapsedSeconds < 0)
         {
             return YES;
@@ -251,23 +306,23 @@
             return NO;
         }
     }
-    else
-    {
-        return YES;
-    }
 
+    return YES;
 }
+
+
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-
     NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
     Capsl *capsl = self.tableViewData[indexPath.row];
 
-    CaptureViewController *vc = segue.destinationViewController;
-    vc.chosenCapsl = capsl;
-    vc.isEditing = NO;
-
+    if ([segue.identifier isEqualToString:@"multimediaSegue"])
+    {
+        CaptureViewController *vc = segue.destinationViewController;
+        vc.chosenCapsl = capsl;
+        vc.isEditing = NO;
+    }
 }
 
 #pragma mark - helper methods
@@ -283,19 +338,6 @@
         [cell updateLabelsForCapsl:capsl];
 
     }
-}
-
-// Alert when timer expires
--(void)presentCanOpenMeAlert
-{
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"CAPSL UNLOCKED!" message:nil preferredStyle:UIAlertControllerStyleAlert];
-    UIAlertAction *okButton = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-        // UNLOCK CAPSL!!
-
-    }];
-
-    [alert addAction:okButton];
-    [self presentViewController:alert animated:YES completion:nil];
 }
 
 

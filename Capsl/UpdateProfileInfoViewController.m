@@ -74,14 +74,14 @@
 
     [Capslr returnCapslrFromPFUser:[PFUser currentUser] withCompletion:^(Capslr *currentCapslr, NSError *error) {
 
-        if (self.nameString && self.nameString)
+        if (self.nameString)
         {
             currentCapslr.name = self.textField.text;
 
             [currentCapslr save];
             [SVProgressHUD dismiss];
 
-            [self.navigationController popToViewController:self.navigationController.childViewControllers[1] animated:YES];
+            [self.navigationController popViewControllerAnimated:YES];
         }
         else if (self.usernameString)
         {
@@ -98,7 +98,7 @@
                     [[PFUser currentUser] save];
                     [SVProgressHUD dismiss];
 
-                    [self.navigationController popToViewController:self.navigationController.childViewControllers[1] animated:YES];
+                    [self.navigationController popViewControllerAnimated:YES];
                 }
                 else
                 {
@@ -116,7 +116,7 @@
                 [currentCapslr save];
                 [SVProgressHUD dismiss];
 
-                [self.navigationController popToViewController:self.navigationController.childViewControllers[1] animated:YES];
+                [self.navigationController popViewControllerAnimated:YES];
             }
             else
             {

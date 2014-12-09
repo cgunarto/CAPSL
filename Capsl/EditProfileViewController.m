@@ -37,11 +37,10 @@
 {
     [super viewWillAppear:animated];
 
-    self.doNotShowActivityIndicator = YES;
-
     [Capslr returnCapslrFromPFUser:[PFUser currentUser] withCompletion:^(Capslr *currentCapslr, NSError *error) {
 
         self.currenCapslrInfo = @[currentCapslr.name, currentCapslr.username, currentCapslr.email];
+        [self.tableView reloadData];
     }];
 
 }
@@ -180,13 +179,19 @@
 
         UIAlertAction *delete = [UIAlertAction actionWithTitle:@"Delete" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
             // add code here
-            [Capslr returnCapslrFromPFUser:[PFUser currentUser] withCompletion:^(Capslr *currentCapslr, NSError *error) {
-                currentCapslr.profilePhoto = nil;
 
-                self.updatedProfilePicture = nil;
-                [self.tableView reloadData];
-                [SVProgressHUD show];
+            [SVProgressHUD show];
+
+            [Capslr returnCapslrFromPFUser:[PFUser currentUser] withCompletion:^(Capslr *currentCapslr, NSError *error) {
+
+                NSData *imageData = UIImageJPEGRepresentation([UIImage imageNamed:@"default"], 0.5f);
+                PFFile *defaultPhoto = [PFFile fileWithData:imageData];
+                currentCapslr.profilePhoto = defaultPhoto;
+
+                self.currentProfilePicture = [UIImage imageNamed:@"default"];
+
                 [currentCapslr save];
+                [self.tableView reloadData];
                 [SVProgressHUD dismiss];
 
                 [alert dismissViewControllerAnimated:YES completion:nil];

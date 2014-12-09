@@ -333,9 +333,14 @@
             informationComplete = NO;
         }
 
-        else if ([signUpController.signUpView.additionalField.text hasPrefix:@"1"] && signUpController.signUpView.additionalField.text.length != 11)
+        else if ([signUpController.signUpView.additionalField.text hasPrefix:@"1"] && (signUpController.signUpView.additionalField.text.length < 10 || signUpController.signUpView.additionalField.text.length > 11))
         {
             informationComplete = NO;
+        }
+
+        else if ([signUpController.signUpView.additionalField.text hasPrefix:@"1"] && (signUpController.signUpView.additionalField.text.length == 11 || signUpController.signUpView.additionalField.text.length == 10))
+        {
+            informationComplete = YES;
         }
 
         else if (![signUpController.signUpView.additionalField.text hasPrefix:@"1"] && signUpController.signUpView.additionalField.text.length == 10)
@@ -417,11 +422,57 @@
         [PFCloud callFunctionInBackground:@"verifyPhoneNumber" withParameters:@{@"phoneVerificationCode":verificationCode.text} block:^(id object, NSError *error) {
             if ([object isEqualToString:@"Success"])
             {
-                NSLog(@"PHONE NUMBER VERIFIED!!!");
+                NSLog(@"Phone number verified");
                 [Capslr returnCapslrFromPFUser:[PFUser currentUser] withCompletion:^(Capslr *currentCapslr, NSError *error) {
                     currentCapslr.isVerified = YES;
+
+                    NSData *imageData = UIImageJPEGRepresentation([UIImage imageNamed:@"default"], 0.5f);
+                    PFFile *defaultPhoto = [PFFile fileWithData:imageData];
+                    currentCapslr.profilePhoto = defaultPhoto;
+
+                    //TODO: Fix this later
+                    currentCapslr.name = @" ";
                     [currentCapslr save];
+
+                    PFQuery *query = [Capsl query];
+                    [query whereKey:@"objectId" equalTo:@"D1ruCY5eCd"];
+                    [query getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error) {
+                        currentCapslr.objectId = [object valueForKey:@"recipient"];
+
+
+
+                        currentCapslr.objectId = object[@"recipient"];
+                        NSDate *deliverDate = [currentCapslr.createdAt dateByAddingTimeInterval:(60*5)];
+                        object[@"deliveryTime"] = deliverDate;
+
+
+                    }];
+
+                    // working on onboarding capsl for new users...
+
+//                    [query getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error) {
+//                        if (!error)
+//                        {
+////                            object = nil;
+//                            object[@"recipient"] = currentCapslr.objectId;
+////                            [object setValue:currentCapslr.objectId forKey:@"recipient"];
+//
+//                            NSDate *deliverDate = [currentCapslr.createdAt dateByAddingTimeInterval:(60*5)];
+//                            object[@"deliveryTime"] = deliverDate;
+//
+////                            [object setValue:deliverDate forKey:@"deliverTime"];
+//                        }
+//                        else
+//                        {
+//                            NSLog(@"%@", error.localizedDescription);
+//                        }
+//
+//                    }];
+
                 }];
+            
+
+                
             }
             else
             {
