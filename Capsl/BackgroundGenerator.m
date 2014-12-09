@@ -17,7 +17,7 @@
     [self imageResize:image];
 
     UIColor *tintColor = [UIColor colorWithWhite:0.3 alpha:0.1];
-    UIImage *blurredImage = [image applyBlurWithRadius:20 tintColor:nil saturationDeltaFactor:0.8 maskImage:nil];
+    UIImage *blurredImage = [image applyBlurWithRadius:20 tintColor:tintColor saturationDeltaFactor:0.8 maskImage:nil];
 
     return blurredImage;
     
@@ -35,6 +35,17 @@
     UIImage* newImage = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
     return newImage;
+}
+
++ (UIImage *)generateDefaultBackground
+{
+
+    int imageNumber;
+    imageNumber = arc4random_uniform(4) + 1;
+    UIImage *image = [UIImage imageNamed:[NSString stringWithFormat:@"wallpaperTexture-%i", imageNumber]];
+
+    return image;
+
 }
 
 @end

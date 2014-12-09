@@ -160,7 +160,6 @@
     //Make the profile rounded
     allContactCell.photoImageView.layer.cornerRadius = allContactCell.photoImageView.frame.size.width/2;
     allContactCell.photoImageView.clipsToBounds = YES;
-    allContactCell.photoImageView.backgroundColor = kProfilPicBackgroundColor;
     allContactCell.contentView.backgroundColor = [UIColor clearColor];
 
 
