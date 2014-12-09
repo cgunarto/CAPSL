@@ -429,7 +429,7 @@
                     NSData *imageData = UIImageJPEGRepresentation([UIImage imageNamed:@"default"], 0.5f);
                     PFFile *defaultPhoto = [PFFile fileWithData:imageData];
                     currentCapslr.profilePhoto = defaultPhoto;
-                    currentCapslr.name = @"";
+                    currentCapslr.name = @" ";
                     [currentCapslr save];
 
                     PFQuery *queryForCAPSLTeam = [Capslr query];
