@@ -30,6 +30,7 @@
 @property (nonatomic) NSArray *sentCapslsArray;
 @property (nonatomic) NSMutableArray *availableCapslsArray;
 @property UIImage *currentProfileImage;
+@property NSArray *onboardingCapsl;
 
 @property (nonatomic) BOOL shouldShowSent;
 
@@ -40,7 +41,6 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    //    [PFUser logOut];
 
     // Check to see if user quit before entering verification code
 
@@ -79,10 +79,7 @@
                             availableCapslsCount++;
                         }
                     }
-
-                    //                        self.timelineRootVC.shouldShowSent = NO;
                     self.shouldShowSent = NO;
-                    //                        [self clearAndcreateLocalNotificationsFromCapslObjects:objects];
                 }
 
                 else
@@ -438,13 +435,21 @@
                     [query whereKey:@"objectId" equalTo:@"D1ruCY5eCd"];
                     [query getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error) {
 
-                        object [@"recipient"] = nil;
+                        // set object to @"" to for reuse purposes...
+                        object[@"recipient"] = @"";
                         object[@"recipient"] = currentCapslr;
 
-                        object[@"deliveryTime"] = nil;
-                        NSDate *deliveryDate = [currentCapslr.createdAt dateByAddingTimeInterval:(60*5)];
+                        // Onboarding capsl opens in 3 minutes
+                        NSDate *deliveryDate = [currentCapslr.createdAt dateByAddingTimeInterval:(60*3)];
+                        object[@"deliveryTime"] = @"";
                         object[@"deliveryTime"] = deliveryDate;
-                        [object save];
+
+                        [object saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+                            if (!error)
+                            {
+                                [self showRootViewController];
+                            }
+                        }];
                     }];
                 }];
             }
@@ -472,6 +477,13 @@
         }];
 
     }
+}
+
+- (void)showRootViewController
+{
+    UINavigationController *rootNav = [self.storyboard instantiateInitialViewController];;
+
+    [self.view.window setRootViewController:rootNav];
 }
 
 //Sent the delegate when the sign up attempt fails
