@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="fsF-ct-we6">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="fsF-ct-we6">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
@@ -374,11 +374,7 @@
                                 <action selector="onDismissButtonPressed:" destination="Wa2-xN-V6f" id="7Bs-MO-U4N"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="edit" id="Jxf-qR-mEl">
-                            <connections>
-                                <segue destination="iX6-Dw-liI" kind="show" identifier="editProfileSegue" id="5I1-SD-8Oo"/>
-                            </connections>
-                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="edit" id="Jxf-qR-mEl"/>
                     </navigationItem>
                     <connections>
                         <outlet property="addressBookContainerView" destination="jgq-Fu-yjg" id="0Lg-9O-m6t"/>
@@ -394,7 +390,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gLJ-VE-AB3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2167.5" y="1890"/>
+            <point key="canvasLocation" x="4465.5" y="1848"/>
         </scene>
         <!--Main View Controller-->
         <scene sceneID="Tgh-Nv-NJR">
@@ -434,7 +430,7 @@
                                 <items>
                                     <barButtonItem image="group-50" id="3wG-kT-Ne1">
                                         <connections>
-                                            <segue destination="gsb-4i-RUz" kind="presentation" identifier="contactsSegue" id="k0a-qe-noT"/>
+                                            <segue destination="aEd-si-JjD" kind="presentation" identifier="contactsSegue" id="DK2-rp-3zh"/>
                                         </connections>
                                     </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="2l5-SH-g4G"/>
@@ -1709,9 +1705,6 @@
                                         <include reference="bsL-Kg-2fS"/>
                                     </mask>
                                 </variation>
-                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="16" y="15" width="368" height="29"/>
-                                </variation>
                                 <connections>
                                     <action selector="onContactTypeChosen:" destination="g6O-c0-HJb" eventType="valueChanged" id="LgQ-4v-5pM"/>
                                 </connections>
@@ -2593,7 +2586,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="n2I-vu-zSl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3148.5" y="1890"/>
+            <point key="canvasLocation" x="5122.5" y="1758"/>
         </scene>
         <!--Address Contact View Controller-->
         <scene sceneID="lpI-v5-1AS">
@@ -2679,7 +2672,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5h5-XE-Hxm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2167.5" y="2565"/>
+            <point key="canvasLocation" x="5122.5" y="1938"/>
         </scene>
         <!--Edit Profile View Controller-->
         <scene sceneID="wMC-9p-R1S">
@@ -3002,8 +2995,8 @@
                             </mask>
                         </variation>
                     </view>
+                    <navigationItem key="navigationItem" id="sti-vs-ccH"/>
                     <connections>
-                        <outlet property="backBarButtonItem" destination="e9p-wQ-UlS" id="I8E-ZK-al5"/>
                         <outlet property="tableView" destination="kFG-UX-p6j" id="Pi5-gI-5yo"/>
                         <segue destination="qOY-ih-VR1" kind="show" identifier="editNameSegue" id="TpB-RA-nDW"/>
                         <segue destination="qOY-ih-VR1" kind="show" identifier="editUsernameSegue" id="M1E-gX-npp"/>
@@ -3011,14 +3004,8 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6CZ-aX-Kan" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <exit id="7Zz-qh-Lo6" userLabel="Exit" sceneMemberID="exit"/>
-                <barButtonItem title="Back" id="e9p-wQ-UlS">
-                    <connections>
-                        <segue destination="7Zz-qh-Lo6" kind="unwind" unwindAction="unwindToProfileViewSegue:" id="YhJ-9N-uoc"/>
-                    </connections>
-                </barButtonItem>
             </objects>
-            <point key="canvasLocation" x="3064.5" y="2577"/>
+            <point key="canvasLocation" x="3136.5" y="2538"/>
         </scene>
         <!--Update Profile Info View Controller-->
         <scene sceneID="kfg-WE-kqz">
@@ -3122,7 +3109,7 @@
                     </connections>
                 </barButtonItem>
             </objects>
-            <point key="canvasLocation" x="3804" y="2523"/>
+            <point key="canvasLocation" x="3978" y="2532"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="4ch-3M-IRb">
@@ -3140,7 +3127,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iNB-g3-bJF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1250" y="1890"/>
+            <point key="canvasLocation" x="3745.5" y="1848"/>
         </scene>
         <!--Timeline Root View Controller-->
         <scene sceneID="qy5-Cf-hN4">
@@ -3997,6 +3984,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dql-1f-TGB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1374" y="897"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="wb4-Ie-mdV">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="aEd-si-JjD" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="MJ2-GA-4bu">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="iX6-Dw-liI" kind="relationship" relationship="rootViewController" id="DF6-Sd-SIT"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vJE-Sc-n1l" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2326.5" y="2532"/>
         </scene>
     </scenes>
     <resources>
