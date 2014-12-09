@@ -216,14 +216,22 @@
     //If it's multimedia Capsl
     if ([capsl.type isEqualToString:@"multimedia"])
     {
-        [self shouldPerformSegueWithIdentifier:@"multimediaSegue" sender:self];
-        [self performSegueWithIdentifier:@"multimediaSegue" sender:self];
+        BOOL capslIsUnlocked = [self shouldPerformSegueWithIdentifier:@"multimediaSegue" sender:self];
+        if (capslIsUnlocked)
+        {
+            [self performSegueWithIdentifier:@"multimediaSegue" sender:self];
+
+        }
     }
 
     //If it's a video
     else
     {
-        [self playVideo:capsl];
+        BOOL capslIsAvailable = [self isCapslAvailableToView:capsl];
+        if (capslIsAvailable)
+        {
+            [self playVideo:capsl];
+        }
     }
 }
 
@@ -247,10 +255,14 @@
     NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
 
     Capsl *capsl = self.tableViewData[indexPath.row];
+    return [self isCapslAvailableToView:capsl];
+}
+
+- (BOOL)isCapslAvailableToView:(Capsl *)capsl
+{
     long elapsedSeconds = [capsl.deliveryTime timeIntervalSinceNow];
 
     // don't open if the capsule is not ready!
-
     if (!self.shouldShowSent)
     {
         //if it's unviewed and unlocked
@@ -288,12 +300,11 @@
             return NO;
         }
     }
-    else
-    {
-        return YES;
-    }
 
+    return YES;
 }
+
+
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
