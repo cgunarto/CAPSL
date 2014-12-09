@@ -20,6 +20,7 @@
 #define kTitleKey       @"title"   // key for obtaining the data source item's title
 #define kDateKey        @"date"    // key for obtaining the data source item's date value
 #define kTimeKey        @"time"   // key for obtaining the data source item's date value
+#define kMinutesHeadSendDate 2
 
 
 // keep track of which rows have date cells
@@ -56,12 +57,15 @@ static NSString *kSendID = @"sendCell";  // the cell containing the date picker
     [super viewDidLoad];
 
     // setup our data source - what gets populated in the table view cell array
+    //NSDate ahead of current time
+    NSTimeInterval secondsAhead = kMinutesHeadSendDate * 60;
+    NSDate *dateWithMinimum = [[NSDate date] dateByAddingTimeInterval:secondsAhead];
 
     NSMutableDictionary *itemOne = [@{ kTitleKey : @"Send Date",
-                                       kDateKey : [NSDate date] } mutableCopy];
+                                       kDateKey : dateWithMinimum } mutableCopy];
 
     NSMutableDictionary *itemTwo = [@{ kTitleKey : @"Send Time",
-                                         kTimeKey : [NSDate date] } mutableCopy];
+                                         kTimeKey : dateWithMinimum } mutableCopy];
 
     NSMutableDictionary *itemThree = [@{ kTitleKey : @""} mutableCopy];
 
@@ -635,7 +639,24 @@ NSUInteger DeviceSystemMajorVersion()
 - (IBAction)onCancelButtonPressed:(UIBarButtonItem *)sender
 {
 
-    
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Sure you want to cancel?"
+                                                                   message:@"You will loose your changes"
+                                                            preferredStyle:UIAlertControllerStyleAlert];
+
+    UIAlertAction *okButton = [UIAlertAction actionWithTitle:@"Yes"
+                                                       style:UIAlertActionStyleDefault
+                                                     handler:^(UIAlertAction *action) {
+                                                         [self performSegueWithIdentifier:@"unwindToMain" sender:self];
+                                                     }];
+
+    UIAlertAction *goBackButton = [UIAlertAction actionWithTitle:@"Go back" style:UIAlertActionStyleCancel handler:nil];
+
+    [alert addAction:okButton];
+    [alert addAction:goBackButton];
+
+    [self presentViewController:alert
+                       animated:YES
+                     completion:nil];
 
 }
 
