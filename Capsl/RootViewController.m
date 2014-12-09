@@ -333,9 +333,14 @@
             informationComplete = NO;
         }
 
-        else if ([signUpController.signUpView.additionalField.text hasPrefix:@"1"] && signUpController.signUpView.additionalField.text.length != 11)
+        else if ([signUpController.signUpView.additionalField.text hasPrefix:@"1"] && (signUpController.signUpView.additionalField.text.length < 10 || signUpController.signUpView.additionalField.text.length > 11))
         {
             informationComplete = NO;
+        }
+
+        else if ([signUpController.signUpView.additionalField.text hasPrefix:@"1"] && (signUpController.signUpView.additionalField.text.length == 11 || signUpController.signUpView.additionalField.text.length == 10))
+        {
+            informationComplete = YES;
         }
 
         else if (![signUpController.signUpView.additionalField.text hasPrefix:@"1"] && signUpController.signUpView.additionalField.text.length == 10)
@@ -427,22 +432,25 @@
                     currentCapslr.name = @"";
                     [currentCapslr save];
 
-//                    PFQuery *queryForCAPSLTeam = [Capslr query];
-//                    [queryForCAPSLTeam whereKey:@"username" equalTo:@"The CAPSL Team"];
-//                    [queryForCAPSLTeam getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error) {
-//                        id CAPSLTeamObjectId = object.objectId;
-//
-//                        PFQuery *query = [Capsl query];
-//                        [query whereKey:@"sender" equalTo:CAPSLTeamObjectId];
-//                        [query getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error) {
-////                            object = nil;
+                    PFQuery *queryForCAPSLTeam = [Capslr query];
+                    [queryForCAPSLTeam whereKey:@"username" equalTo:@"The CAPSL Team"];
+                    [queryForCAPSLTeam getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error) {
+
+                        PFQuery *query = [Capsl query];
+                        [query whereKey:@"sender" equalTo:object.objectId];
+                        [query getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error) {
+//                            object = nil;
+                            object[@"recipient"] = currentCapslr.objectId;
 //                            [object setValue:currentCapslr.objectId forKey:@"recipient"];
-//                            NSDate *deliverDate = [currentCapslr.createdAt dateByAddingTimeInterval:(60*5)];
+
+                            NSDate *deliverDate = [currentCapslr.createdAt dateByAddingTimeInterval:(60*5)];
+                            object[@"deliveryTime"] = deliverDate;
+
 //                            [object setValue:deliverDate forKey:@"deliverTime"];
-//                            
-//                        }];
-//
-//                    }];
+
+                        }];
+
+                    }];
                 }];
 
                 
