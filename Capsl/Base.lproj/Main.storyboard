@@ -3949,6 +3949,7 @@
                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="nd1-mJ-Zk4">
                             <connections>
                                 <action selector="onCancelButtonPressed:" destination="FSh-ys-SKu" id="L9t-3L-IZV"/>
+                                <segue destination="dxW-fP-DJZ" kind="unwind" unwindAction="unWindSegueToMain:" id="m6n-rG-Sjn"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
