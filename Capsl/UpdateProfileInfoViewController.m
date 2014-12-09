@@ -74,7 +74,7 @@
 
     [Capslr returnCapslrFromPFUser:[PFUser currentUser] withCompletion:^(Capslr *currentCapslr, NSError *error) {
 
-        if (self.nameString && self.nameString)
+        if (self.nameString)
         {
             currentCapslr.name = self.textField.text;
 
