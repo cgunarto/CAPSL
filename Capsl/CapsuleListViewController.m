@@ -37,6 +37,9 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+
+    self.capslsArray;
+
     [self.tableView reloadData];
 }
 

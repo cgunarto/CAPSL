@@ -500,12 +500,15 @@
     else
     {
         vc.showChooseVC = NO;
-        vc.capslsArray = self.capslsArray;
-        vc.sentCapslsArray = self.sentCapslsArray;
-        vc.availableCapslsArray = self.availableCapslsArray;
-        vc.shouldShowSent = self.shouldShowSent;
-        vc.currentProfileImage = self.currentProfileImage;
     }
+
+    vc.capslsArray = self.capslsArray;
+    vc.sentCapslsArray = self.sentCapslsArray;
+    vc.availableCapslsArray = self.availableCapslsArray;
+    vc.shouldShowSent = self.shouldShowSent;
+    vc.currentProfileImage = self.currentProfileImage;
+
+
 }
 
 @end
