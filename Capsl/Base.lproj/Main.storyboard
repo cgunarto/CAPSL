@@ -594,7 +594,7 @@
                     </connections>
                 </barButtonItem>
             </objects>
-            <point key="canvasLocation" x="423" y="147"/>
+            <point key="canvasLocation" x="423" y="99"/>
         </scene>
         <!--Record Audio View Controller-->
         <scene sceneID="dxg-4x-l5b">
@@ -961,24 +961,12 @@
                                 <exclude reference="Jrq-Hr-dbd"/>
                             </mask>
                             <mask key="constraints">
-                                <exclude reference="UVs-SE-wMQ"/>
-                                <exclude reference="xaw-bh-PRZ"/>
-                                <exclude reference="3ZJ-mz-Emu"/>
-                                <exclude reference="FV8-9b-3Nk"/>
-                                <exclude reference="Fde-UI-wFc"/>
-                                <exclude reference="VmY-zK-toL"/>
                                 <exclude reference="3cd-NJ-3vi"/>
                                 <exclude reference="8vB-l7-WgS"/>
                                 <exclude reference="6b2-sx-CqE"/>
                                 <exclude reference="OGG-tg-97Y"/>
                                 <exclude reference="Sm8-Zz-gxG"/>
                                 <exclude reference="jRz-zv-4FF"/>
-                                <exclude reference="7ax-3U-h5F"/>
-                                <exclude reference="9jO-xb-YST"/>
-                                <exclude reference="F1s-X4-t9b"/>
-                                <exclude reference="Rah-nO-RMz"/>
-                                <exclude reference="bO0-yd-nKy"/>
-                                <exclude reference="f67-rA-hHX"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=compact">
@@ -987,16 +975,10 @@
                                 <include reference="Jrq-Hr-dbd"/>
                             </mask>
                             <mask key="constraints">
-                                <include reference="xaw-bh-PRZ"/>
-                                <include reference="Fde-UI-wFc"/>
-                                <include reference="VmY-zK-toL"/>
                                 <include reference="3cd-NJ-3vi"/>
                                 <include reference="8vB-l7-WgS"/>
                                 <include reference="6b2-sx-CqE"/>
                                 <include reference="jRz-zv-4FF"/>
-                                <include reference="7ax-3U-h5F"/>
-                                <include reference="9jO-xb-YST"/>
-                                <include reference="bO0-yd-nKy"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=compact">
@@ -1010,14 +992,8 @@
                                 <include reference="lXU-mT-j1U"/>
                             </mask>
                             <mask key="constraints">
-                                <include reference="UVs-SE-wMQ"/>
-                                <include reference="3ZJ-mz-Emu"/>
-                                <include reference="FV8-9b-3Nk"/>
                                 <include reference="OGG-tg-97Y"/>
                                 <include reference="Sm8-Zz-gxG"/>
-                                <include reference="F1s-X4-t9b"/>
-                                <include reference="Rah-nO-RMz"/>
-                                <include reference="f67-rA-hHX"/>
                             </mask>
                         </variation>
                     </view>
@@ -1026,7 +1002,6 @@
                         <outlet property="cancelButton" destination="BF8-J5-PTc" id="zfO-DB-bPv"/>
                         <outlet property="doneButton" destination="Hg0-6E-Egb" id="6cO-u7-dyA"/>
                         <outlet property="exitPlayVideoButton" destination="lXU-mT-j1U" id="4Ci-ee-ZIf"/>
-                        <outlet property="playVideoButton" destination="8Yl-ca-yue" id="ab7-mg-jPY"/>
                         <outlet property="recordVideo" destination="Jrq-Hr-dbd" id="DzR-OB-Ej2"/>
                         <segue destination="Kc0-lc-7Ad" kind="presentation" identifier="segueToSearchContact" id="THB-3X-bqr"/>
                     </connections>
@@ -1986,7 +1961,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zdj-oj-Mv9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-789" y="765"/>
+            <point key="canvasLocation" x="-957" y="897"/>
         </scene>
         <!--Capsule List View Controller-->
         <scene sceneID="NZY-3G-5QX">
