@@ -59,6 +59,7 @@
 		8D5A3DDD1A2A4AFD00A6485A /* JCATimeline.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D5A3DD71A2A4AFD00A6485A /* JCATimeline.m */; };
 		8D5A3DE11A2A4B4700A6485A /* UIImage+ImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D5A3DE01A2A4B4700A6485A /* UIImage+ImageEffects.m */; };
 		8D6A97721A32321500ECA7D9 /* CrossDissolveSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D6A97711A32321500ECA7D9 /* CrossDissolveSegue.m */; };
+		8D7E3CF41A36B03E0010C39C /* DataFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D7E3CF31A36B03E0010C39C /* DataFetcher.m */; };
 		8DAC42441A2A9BD400A8859A /* JCAMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DAC42431A2A9BD400A8859A /* JCAMainViewController.m */; };
 		8DE360601A2D6E5800DAE08C /* ViewCapsulesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DE3605F1A2D6E5800DAE08C /* ViewCapsulesViewController.m */; };
 		8DEA789B1A31206900271A8A /* CapsuleListBackground.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DEA789A1A31206900271A8A /* CapsuleListBackground.m */; };
@@ -173,6 +174,8 @@
 		8D5A3DE01A2A4B4700A6485A /* UIImage+ImageEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ImageEffects.m"; sourceTree = "<group>"; };
 		8D6A97701A32321500ECA7D9 /* CrossDissolveSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CrossDissolveSegue.h; path = ../CrossDissolveSegue.h; sourceTree = "<group>"; };
 		8D6A97711A32321500ECA7D9 /* CrossDissolveSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CrossDissolveSegue.m; path = ../CrossDissolveSegue.m; sourceTree = "<group>"; };
+		8D7E3CF21A36B03E0010C39C /* DataFetcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataFetcher.h; sourceTree = "<group>"; };
+		8D7E3CF31A36B03E0010C39C /* DataFetcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataFetcher.m; sourceTree = "<group>"; };
 		8DAC42421A2A9BD400A8859A /* JCAMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JCAMainViewController.h; sourceTree = "<group>"; };
 		8DAC42431A2A9BD400A8859A /* JCAMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JCAMainViewController.m; sourceTree = "<group>"; };
 		8DE3605E1A2D6E5800DAE08C /* ViewCapsulesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ViewCapsulesViewController.h; path = ../ViewCapsulesViewController.h; sourceTree = "<group>"; };
@@ -407,6 +410,8 @@
 		8D23D82E1A3586DA007C6E2C /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				8D7E3CF21A36B03E0010C39C /* DataFetcher.h */,
+				8D7E3CF31A36B03E0010C39C /* DataFetcher.m */,
 				90C0DD151A27CCE500A50BCF /* JKCountDownTimer.h */,
 				90C0DD161A27CCE500A50BCF /* JKCountDownTimer.m */,
 				8D23D82B1A3586C6007C6E2C /* BackgroundGenerator.h */,
@@ -611,6 +616,7 @@
 				905E900D1A2F9D9700BF32E3 /* EditProfileViewController.m in Sources */,
 				4F69EBCA1A252331009625AA /* RootViewController.m in Sources */,
 				4F69EBF81A2532C8009625AA /* ProfileViewController.m in Sources */,
+				8D7E3CF41A36B03E0010C39C /* DataFetcher.m in Sources */,
 				4F69EBC71A252331009625AA /* AppDelegate.m in Sources */,
 				8D23D82A1A356B82007C6E2C /* LogoutButtonTableViewCell.m in Sources */,
 				8D5A3DDC1A2A4AFD00A6485A /* JCATimelineMonthCollectionViewCell.m in Sources */,

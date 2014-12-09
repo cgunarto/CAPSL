@@ -15,6 +15,7 @@
 #import "SignUpViewController.h"
 #import "JCAMainViewController.h"
 #import "SVProgressHUD.h"
+#import "DataFetcher.h"
 
 @interface RootViewController () <PFLogInViewControllerDelegate, PFSignUpViewControllerDelegate, UIAlertViewDelegate>
 @property (strong, nonatomic) IBOutlet UIButton *sendCapsuleButton;
@@ -45,6 +46,7 @@
 
     if ([PFUser currentUser])
     {
+
         [SVProgressHUD setBackgroundColor:[UIColor clearColor]];
         [SVProgressHUD setForegroundColor:[UIColor whiteColor]];
         [SVProgressHUD show];
