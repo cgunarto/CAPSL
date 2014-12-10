@@ -17,6 +17,11 @@
 #import "SVProgressHUD.h"
 #import "DataFetcher.h"
 
+#define kTwoMinutesInSeconds 120
+#define kTwoDaysInSeconds 172800
+#define kWeekInSeconds 604800
+
+
 @interface RootViewController () <PFLogInViewControllerDelegate, PFSignUpViewControllerDelegate, UIAlertViewDelegate>
 @property (strong, nonatomic) IBOutlet UIButton *sendCapsuleButton;
 @property (strong, nonatomic) IBOutlet UIButton *viewCapsulesButton;
@@ -85,6 +90,7 @@
                 else
                 {
                     NSLog(@"%@", error.localizedDescription);
+                    [self error:error];
                 }
             }];
 
@@ -99,6 +105,7 @@
                 else
                 {
                     NSLog(@"%@", error.localizedDescription);
+                    [self error:error];
                 }
             }];
         }];
@@ -155,10 +162,25 @@
 
                                 [SVProgressHUD dismiss];
                             }
+                            else
+                            {
+                                NSLog(@"%@", error.localizedDescription);
+                                [self error:error];
+                            }
                         }];
+                    }
+                    else
+                    {
+                        NSLog(@"%@", error.localizedDescription);
+                        [self error:error];
                     }
                 }];
                 
+            }
+            else
+            {
+                NSLog(@"%@", error.localizedDescription);
+                [self error:error];
             }
         }];
     }
@@ -184,9 +206,6 @@
 
     self.sendButtonLeftConstraint.constant = [[UIScreen mainScreen] bounds].size.width * 0.5;
     self.viewButtonRightConstraint.constant = [[UIScreen mainScreen] bounds].size.width * 0.5;
-
-//    self.view.backgroundColor = [UIColor colorWithPatternImage:kSplashWallpaper];
-
 }
 
 
@@ -199,12 +218,6 @@
 
 }
 
-
-//- (BOOL)prefersStatusBarHidden
-//{
-//    
-//    return YES;
-//}
 
 -(void)manageLogin
 {
@@ -270,19 +283,28 @@
     //PFInstallation is also called in AppDelegate, when the user first installs the app
     [Capslr returnCapslrFromPFUser:user withCompletion:^(Capslr *currentCapslr, NSError *error)
     {
-        PFInstallation *installation = [PFInstallation currentInstallation];
-        installation[@"capslr"]=currentCapslr;
-        [installation saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error)
+        if (!error)
         {
-            if (!error)
-            {
-                //TODO:clear badge?
-            }
-            else
-            {
-                NSLog(@"error %@", error.localizedDescription);
-            }
-        }];
+            PFInstallation *installation = [PFInstallation currentInstallation];
+            installation[@"capslr"]=currentCapslr;
+            [installation saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error)
+             {
+                 if (!error)
+                 {
+                     //TODO:clear badge?
+                 }
+                 else
+                 {
+                     NSLog(@"error %@", error.localizedDescription);
+                     [self error:error];
+                 }
+             }];
+        }
+        else
+        {
+            NSLog(@"%@", error.localizedDescription);
+            [self error:error];
+        }
     }];
 
 
@@ -408,9 +430,24 @@
                                 [PFUser logOut];
                                 [self manageLogin];
                             }
+                            else
+                            {
+                                NSLog(@"%@", error.localizedDescription);
+                                [self error:error];
+                            }
                         }];
                     }
+                    else
+                    {
+                        NSLog(@"%@", error.localizedDescription);
+                        [self error:error];
+                    }
                 }];
+            }
+            else
+            {
+                NSLog(@"%@", error.localizedDescription);
+                [self error:error];
             }
         }];
     }
@@ -437,50 +474,7 @@
 
                     // Setting up onboarding capsules
 
-                    Capsl *onboardingCapsl = [Capsl object];
-                    Capslr *theCapslTeam = [Capslr objectWithoutDataWithClassName:@"Capslr" objectId:@"xpUlEgxIac"];
-                    onboardingCapsl.sender = theCapslTeam;
-                    onboardingCapsl.recipient = currentCapslr;
-
-//                    Onboarding capsl opens in 3 minutes
-                    NSDate *deliveryDate = [currentCapslr.createdAt dateByAddingTimeInterval:(60*3)];
-
-                    onboardingCapsl.deliveryTime = deliveryDate;
-                    onboardingCapsl.wallpaperIndex = @1;
-                    onboardingCapsl.text = @"Welcome to Capsl";
-                    onboardingCapsl.type = @"multimedia";
-
-                    [onboardingCapsl saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-                        if (!error)
-                        {
-                            [self showRootViewController];
-                        }
-                    }];
-
-
-
-
-
-//                    PFQuery *query = [Capsl query];
-//                    [query whereKey:@"objectId" equalTo:@"D1ruCY5eCd"];
-//                    [query getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error) {
-//
-//                        // set object to @"" to for reuse purposes...
-//                        object[@"recipient"] = @"";
-//                        object[@"recipient"] = currentCapslr;
-//
-//                        // Onboarding capsl opens in 3 minutes
-//                        NSDate *deliveryDate = [currentCapslr.createdAt dateByAddingTimeInterval:(60*3)];
-//                        object[@"deliveryTime"] = @"";
-//                        object[@"deliveryTime"] = deliveryDate;
-//
-//                        [object saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-//                            if (!error)
-//                            {
-//                                [self showRootViewController];
-//                            }
-//                        }];
-//                    }];
+                    [self createOnboardingCapsls:currentCapslr];
                 }];
             }
             else
@@ -498,9 +492,24 @@
                                         [PFUser logOut];
                                         [self manageLogin];
                                     }
+                                    else
+                                    {
+                                        NSLog(@"%@", error.localizedDescription);
+                                        [self error:error];
+                                    }
                                 }];
                             }
+                            else
+                            {
+                                NSLog(@"%@", error.localizedDescription);
+                                [self error:error];
+                            }
                         }];
+                    }
+                    else
+                    {
+                        NSLog(@"%@", error.localizedDescription);
+                        [self error:error];
                     }
                 }];
             }
@@ -509,12 +518,6 @@
     }
 }
 
-- (void)showRootViewController
-{
-    UINavigationController *rootNav = [self.storyboard instantiateInitialViewController];;
-
-    [self.view.window setRootViewController:rootNav];
-}
 
 //Sent the delegate when the sign up attempt fails
 - (void)signUpViewController:(PFSignUpViewController *)signUpController didFailToSignUpWithError:(NSError *)error
@@ -574,8 +577,60 @@
     vc.availableCapslsArray = self.availableCapslsArray;
     vc.shouldShowSent = self.shouldShowSent;
     vc.currentProfileImage = self.currentProfileImage;
+}
+
+#pragma mark - helper method
+- (void)createOnboardingCapsls:(Capslr *)currentCapslr
+{
+    // CAPSULE #1 - opens in 5 minutes
+    Capsl *onboardingCapsl = [Capsl object];
+    Capslr *theCapslTeam = [Capslr objectWithoutDataWithClassName:@"Capslr" objectId:@"xpUlEgxIac"];
+    onboardingCapsl.sender = theCapslTeam;
+    onboardingCapsl.recipient = currentCapslr;
+
+    NSDate *deliveryDate = [currentCapslr.createdAt dateByAddingTimeInterval:(kTwoDaysInSeconds)];
+    onboardingCapsl.deliveryTime = deliveryDate;
+    onboardingCapsl.wallpaperIndex = @1;
+    onboardingCapsl.text = @"Welcome to Capsl";
+    onboardingCapsl.type = @"multimedia";
+
+    // CAPSULE #2 - opens in 24 hours
+    Capsl *onboardingCapsl2 = [Capsl object];
+    onboardingCapsl2.sender = theCapslTeam;
+    onboardingCapsl2.recipient = currentCapslr;
+
+    NSDate *deliveryDate2 = [currentCapslr.createdAt dateByAddingTimeInterval:(kTwoDaysInSeconds)];
+    onboardingCapsl2.deliveryTime = deliveryDate2;
+    onboardingCapsl2.wallpaperIndex = @2;
+    onboardingCapsl2.text = @"Opening in 24 hours";
+    onboardingCapsl2.type = @"multimedia";
+
+    // CAPSULE #3 - opens in a week
+    Capsl *onboardingCapsl3 = [Capsl object];
+    onboardingCapsl3.sender = theCapslTeam;
+    onboardingCapsl3.recipient = currentCapslr;
+
+    NSDate *deliveryDate3 = [currentCapslr.createdAt dateByAddingTimeInterval:(kWeekInSeconds)];
+    onboardingCapsl3.deliveryTime = deliveryDate3;
+    onboardingCapsl3.wallpaperIndex = @3;
+    onboardingCapsl3.text = @"Opening in a week";
+    onboardingCapsl3.type = @"multimedia";
+
+    // need to save one by one to make sure they all save... not sure how to optimize this(?)
+    [onboardingCapsl save];
+    [onboardingCapsl2 save];
+    [onboardingCapsl3 save];
+
+    // go back to rootVC
+    [self showRootViewController];
+}
 
 
+- (void)showRootViewController
+{
+    UINavigationController *rootNav = [self.storyboard instantiateInitialViewController];;
+
+    [self.view.window setRootViewController:rootNav];
 }
 
 @end
