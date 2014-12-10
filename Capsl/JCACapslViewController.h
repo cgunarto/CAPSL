@@ -18,6 +18,8 @@
 
 @interface JCACapslViewController : UIViewController
 
+@property (nonatomic, strong) NSArray *capslsArray;
+@property (nonatomic, strong) NSArray *sentCapslsArray;
 @property (nonatomic, strong) NSArray *capslGrandArray;
 @property (nonatomic, strong) NSArray *sentCapslsGrandArray;
 @property (nonatomic, strong) Capsl *soonestUnopenedCapsl;
@@ -26,8 +28,9 @@
 @property NSArray *sentCapslYearNumbers;
 @property BOOL showSent;
 
-- (void)showCapslAtYear:(NSInteger)yearMultiplier andMonth:(NSInteger)monthIndex withAnimation:(BOOL)animated;
+- (void)showCapslWithYearMultiplier:(NSInteger)yearMultiplier andMonthIndex:(NSInteger)monthIndex andCapslIndex:(NSInteger)capsl withAnimation:(BOOL)animated;
 - (void)updateClocks;
+- (void)updateUserInterface;
 
 @property (nonatomic, weak) id <CapslViewDelegate> delegate;
 

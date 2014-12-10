@@ -11,6 +11,7 @@
 #import "Capsl.h"
 #import "Capslr.h"
 #import "JKCountDownTimer.h"
+#import "IndexConverter.h"
 #import <QuartzCore/QuartzCore.h>
 
 @interface JCACapslViewController () <UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout>
@@ -79,10 +80,13 @@ static NSString * const reuseIdentifier = @"CapslCell";
     // Dispose of any resources that can be recreated.
 }
 
-- (void)showCapslAtYear:(NSInteger)yearMultiplier andMonth:(NSInteger)monthIndex withAnimation:(BOOL)animated
+- (void)showCapslWithYearMultiplier:(NSInteger)yearMultiplier
+                      andMonthIndex:(NSInteger)monthIndex
+                      andCapslIndex:(NSInteger)capsl
+                      withAnimation:(BOOL)animated
 {
 
-    NSIndexPath *monthIndexPath = [NSIndexPath indexPathForItem:0 inSection:(yearMultiplier * 12) + monthIndex];
+    NSIndexPath *monthIndexPath = [NSIndexPath indexPathForItem:capsl inSection:(yearMultiplier * 12) + monthIndex];
 
     UICollectionViewLayoutAttributes *attributes = [self.capslView layoutAttributesForItemAtIndexPath:monthIndexPath];
     CGRect capslRect = attributes.frame;
@@ -299,13 +303,31 @@ static NSString * const reuseIdentifier = @"CapslCell";
     NSInteger month = [self.soonestUnopenedCapsl getMonthForCapsl];
 
     NSInteger multiplierForYear = [self.capslYearNumbers indexOfObject:[NSString stringWithFormat:@"%li", (long)year]];
+    NSInteger monthIndex = month - 1;
 
-    NSInteger section = (multiplierForYear * 12 + month) - 1;
+    NSArray *currentArray = [NSArray array];
+
+    if (self.showSent)
+    {
+        currentArray = self.sentCapslsArray;
+    }
+    else
+    {
+        currentArray = self.capslsArray;
+    }
+
+    NSInteger capslIndex = [IndexConverter indexForSoonestUnopenedCapsuleInArrayInItsOwnMonth:currentArray];
+
+    [self showCapslWithYearMultiplier:multiplierForYear andMonthIndex:monthIndex andCapslIndex:capslIndex withAnimation:YES];
+
+    
+
+//    NSInteger section = (multiplierForYear * 12 + month) - 1;
 
     //TODO: solve for item index based on mont
- NSIndexPath *indexPath = [NSIndexPath indexPathForItem:0 inSection:section];
-
-    [self.capslView scrollToItemAtIndexPath:indexPath atScrollPosition:UICollectionViewScrollPositionLeft animated:YES];
+// NSIndexPath *indexPath = [NSIndexPath indexPathForItem:0 inSection:section];
+//
+//    [self.capslView scrollToItemAtIndexPath:indexPath atScrollPosition:UICollectionViewScrollPositionLeft animated:YES];
 
 }
 

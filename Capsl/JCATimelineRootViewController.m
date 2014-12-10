@@ -46,7 +46,7 @@
 {
     if (newCollection.verticalSizeClass == UIUserInterfaceSizeClassCompact)
     {
-        NSLog(@"landscape");
+        [self.capslVC updateUserInterface];
     }
 
 }
@@ -78,6 +78,9 @@
 
     self.timelineVC.showSent = _shouldShowSent;
     self.capslVC.showSent = _shouldShowSent;
+
+    self.capslVC.capslsArray = self.capslsArray;
+    self.capslVC.sentCapslsArray = self.sentCapslsArray;
 
     self.capslVC.soonestUnopenedCapsl = [self getSoonestUnopenedCapslFromArray:self.capslsArray];
     self.capslVC.soonestUnopenedSentCapsl = [self getSoonestUnopenedCapslFromArray:self.sentCapslsArray];
@@ -122,7 +125,7 @@
 
 //    self.capslVC.delegate = nil;
 
-    [self.capslVC showCapslAtYear:yearMultiplier andMonth:monthIndex withAnimation:didTap];
+    [self.capslVC showCapslWithYearMultiplier:yearMultiplier andMonthIndex:monthIndex andCapslIndex:0 withAnimation:didTap];
 
 }
 
