@@ -10,6 +10,7 @@
 #import "JCATimelineRootViewController.h"
 #import "JCACapslViewController.h"
 #import "JCATimelineViewController.h"
+#import "IndexConverter.h"
 #import "UIImage+ImageEffects.h"
 #import "BackgroundGenerator.h"
 #import "Capsl.h"
@@ -78,10 +79,22 @@
     self.timelineVC.showSent = _shouldShowSent;
     self.capslVC.showSent = _shouldShowSent;
 
-    self.capslVC.capslGrandArray = [self processCapsls:self.capslsArray];
-    self.capslVC.sentCapslsGrandArray = [self processCapsls:self.sentCapslsArray];
+    self.capslVC.soonestUnopenedCapsl = [self getSoonestUnopenedCapslFromArray:self.capslsArray];
+    self.capslVC.soonestUnopenedSentCapsl = [self getSoonestUnopenedCapslFromArray:self.sentCapslsArray];
+
+    self.timelineVC.capslYearNumbers = [self getArrayOfYearNumbersFromCapsls:self.capslsArray];
+    self.capslVC.capslYearNumbers = self.timelineVC.capslYearNumbers;
+    self.timelineVC.sentCapslYearNumbers = [self getArrayOfYearNumbersFromCapsls:self.sentCapslsArray];
+    self.capslVC.sentCapslYearNumbers = self.timelineVC.sentCapslYearNumbers;
+
+    self.timelineVC.capslCounts = [self convertCapslsToDictOfYearMonthCapsuleCount:self.capslsArray];
+    self.timelineVC.sentCapslCounts = [self convertCapslsToDictOfYearMonthCapsuleCount:self.sentCapslsArray];
+
     self.timelineVC.capslGrandArray = [self processCapsls:self.capslsArray];
+    self.capslVC.capslGrandArray = self.timelineVC.capslGrandArray;
     self.timelineVC.sentCapslsGrandArray = [self processCapsls:self.sentCapslsArray];
+    self.capslVC.sentCapslsGrandArray = self.timelineVC.sentCapslsGrandArray;
+
 
     [self setWallpaper];
 
@@ -269,6 +282,66 @@
 
 }
 
+- (NSArray *)getArrayOfYearNumbersFromCapsls:(NSArray *)capsls
+{
+
+    Capsl *firstCapsl = capsls.firstObject;
+    Capsl *lastCapsl = capsls.lastObject;
+    NSInteger firstYear = [firstCapsl getYearForCapsl];
+    NSInteger lastYear = [lastCapsl getYearForCapsl];
+
+    NSMutableArray *yearNumbers = [@[] mutableCopy];
+
+    for (NSInteger y = (firstYear - 1); y <= (lastYear + 1); y++)
+    {
+        [yearNumbers addObject:[NSString stringWithFormat:@"%li", (long)y]];
+    }
+
+    return [NSArray arrayWithArray:yearNumbers];
+
+}
+
+- (NSDictionary *)convertCapslsToDictOfYearMonthCapsuleCount:(NSArray *)capsls
+{
+
+    NSMutableDictionary *dictionaryOfYearKeys = [NSMutableDictionary dictionary];
+
+    // create a dictionary where key is year and object is array with month name, and capsule count for that month
+    for (Capsl *capsl in capsls)
+    {
+        NSInteger capslYear = [capsl getYearForCapsl];
+        NSInteger capslMonth = [capsl getMonthForCapsl];
+        NSString *yearString = [NSString stringWithFormat:@"%ld", (long)capslYear];
+        NSString *monthString = [NSString stringWithFormat:@"%ld", (long)capslMonth];
+
+        if (![[dictionaryOfYearKeys allKeys] containsObject:yearString])
+        {
+            [dictionaryOfYearKeys setObject:[NSMutableDictionary dictionary] forKey:yearString];
+        }
+
+        NSMutableDictionary *dictOfMonths = [dictionaryOfYearKeys objectForKey:yearString];
+
+        if (![[dictOfMonths allKeys] containsObject:monthString])
+        {
+            [dictOfMonths setObject:@0 forKey:monthString];
+        }
+
+        NSNumber *newCount = [NSNumber numberWithInteger:[[dictOfMonths objectForKey:monthString] integerValue] + 1];
+
+        [dictOfMonths setObject:newCount forKey:monthString];
+
+    }
+
+    return dictionaryOfYearKeys;
+}
+
+- (Capsl *)getSoonestUnopenedCapslFromArray:(NSArray *)dataArray
+{
+    NSInteger index = [IndexConverter indexForSoonestUnopenedCapsuleInArray:dataArray];
+    Capsl *soonestUnopenedCapsl = dataArray[index];
+    return soonestUnopenedCapsl;
+}
+
 #pragma mark - segue life cycle
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
@@ -287,8 +360,6 @@
 
     // temporary manual override to show sent vs received capsls
 
-
-    
 }
 
 @end

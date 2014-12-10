@@ -19,7 +19,6 @@
 @property UICollectionViewFlowLayout *flowLayout;
 @property CGFloat screenHeight;
 @property CGFloat scrubBarMonthSegment;
-@property NSArray *yearsWithCapsls;
 @property NSArray *capslsInAYear;
 @property NSArray *monthsOfTheYear;
 @property NSArray *collectionViewData;
@@ -56,14 +55,14 @@ static NSString * const reuseIdentifier = @"CapslCell";
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [self updateData];
+    [self updateUserInterface];
 //    [self scrollToEarliestUnopenedCapsule];
 }
 
 - (void)setCapslGrandArray:(NSArray *)capslGrandArray
 {
     _capslGrandArray = capslGrandArray;
-    [self updateData];
+    [self updateUserInterface];
 //    [self scrollToEarliestUnopenedCapsule];
 
 }
@@ -71,7 +70,7 @@ static NSString * const reuseIdentifier = @"CapslCell";
 - (void)setSentCapslsGrandArray:(NSArray *)sentCapslsGrandArray
 {
     _sentCapslsGrandArray = sentCapslsGrandArray;
-    [self updateData];
+    [self updateUserInterface];
 //    [self scrollToEarliestUnopenedCapsule];
 }
 
@@ -277,7 +276,7 @@ static NSString * const reuseIdentifier = @"CapslCell";
 
 }
 
-- (void)updateData
+- (void)updateUserInterface
 {
     if (self.showSent)
     {
@@ -289,27 +288,24 @@ static NSString * const reuseIdentifier = @"CapslCell";
     }
 
     [self.capslView reloadData];
+
+    [self scrollToEarliestUnopenedCapsule];
 }
 
 - (void)scrollToEarliestUnopenedCapsule
 {
 
-    // scroll to first unopened capsule in received, 3 capsules prior to first unopened in sent
-    for (int x = 0; x < self.collectionViewData.count; x++)
-    {
-        Capsl *capsl = self.collectionViewData[x];
+    NSInteger year = [self.soonestUnopenedCapsl getYearForCapsl];
+    NSInteger month = [self.soonestUnopenedCapsl getMonthForCapsl];
 
-        if (!capsl.viewedAt)
-        {
+    NSInteger multiplierForYear = [self.capslYearNumbers indexOfObject:[NSString stringWithFormat:@"%li", (long)year]];
 
-//            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:x inSection:0];
-//            [self.collectionViewData scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionTop animated:NO];
+    NSInteger section = (multiplierForYear * 12 + month) - 1;
 
-            break;
-        }
+    //TODO: solve for item index based on mont
+ NSIndexPath *indexPath = [NSIndexPath indexPathForItem:0 inSection:section];
 
-    }
-
+    [self.capslView scrollToItemAtIndexPath:indexPath atScrollPosition:UICollectionViewScrollPositionLeft animated:YES];
 
 }
 

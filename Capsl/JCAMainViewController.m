@@ -132,8 +132,17 @@
 //        nil;
 //    }];
 
-    [self.viewCapsulesContainerView setHidden:YES];
     [self.chooseTypeContainerView setHidden:NO];
+    self.chooseTypeContainerView.alpha = 0;
+
+    [UIView animateWithDuration:0.5 animations:^{
+        self.viewCapsulesContainerView.alpha = 0;
+        self.chooseTypeContainerView.alpha = 1;
+    } completion:nil];
+
+    [self.viewCapsulesContainerView setHidden:YES];
+
+
     [self.toolbarButtons removeObject:self.sendCapsuleButton];
     [self.toolbarButtons insertObject:self.viewCapsulesButton atIndex:2];
 //    [self.view bringSubviewToFront:self.toolBar];
@@ -148,7 +157,15 @@
 //    }];
 
     [self.viewCapsulesContainerView setHidden:NO];
+    self.viewCapsulesContainerView.alpha = 0;
+
+    [UIView animateWithDuration:0.5 animations:^{
+        self.viewCapsulesContainerView.alpha = 1;
+        self.chooseTypeContainerView.alpha = 0;
+    } completion:nil];
+
     [self.chooseTypeContainerView setHidden:YES];
+    
     [self.toolbarButtons removeObject:self.viewCapsulesButton];
     [self.toolbarButtons insertObject:self.sendCapsuleButton atIndex:2];
 //    [self.view bringSubviewToFront:self.toolBar];

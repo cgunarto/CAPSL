@@ -20,6 +20,11 @@
 
 @property (nonatomic) NSArray *capslGrandArray;
 @property (nonatomic) NSArray *sentCapslsGrandArray;
+@property (nonatomic) NSArray *capslYearNumbers;
+@property (nonatomic) NSArray *sentCapslYearNumbers;
+@property (nonatomic) NSDictionary *capslCounts;
+@property (nonatomic) NSDictionary *sentCapslCounts;
+
 @property BOOL showSent;
 
 - (void)centerCorrespondingMonthCell:(NSIndexPath *)indexPath;

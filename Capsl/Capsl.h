@@ -35,4 +35,8 @@ typedef void(^searchCapslByRecipientBlock)(NSArray *objects, NSError *error);
 
 + (void)searchCapslByKey:(NSString *)key orderByAscending:(NSString *)key equalTo:(id)object completion:(searchCapslByRecipientBlock)complete;
 
+- (NSInteger)getYearForCapsl;
+
+- (NSInteger)getMonthForCapsl;
+
 @end
