@@ -570,7 +570,7 @@
 #pragma mark - helper method
 - (void)createOnboardingCapsls:(Capslr *)currentCapslr
 {
-    Capsl *onboardingCapsl1 = [[Capsl alloc] initWithCurrentCapslr:currentCapslr withIndex:@1 withWelcomeText:@"Welcome To Capsl! We hope you enjoy Capsl. If you have any questions email us at thecapslteam@gmail.com. Thanks!" withTimeInterval:kTwoMinutesInSeconds];
+    Capsl *onboardingCapsl1 = [[Capsl alloc] initWithCurrentCapslr:currentCapslr withIndex:@1 withWelcomeText:@"Welcome To Capsl! If you have any questions email us at thecapslteam@gmail.com. We hope you enjoy Capsl!" withTimeInterval:kTwoMinutesInSeconds];
     [onboardingCapsl1 save];
 
     Capsl *onboardingCapsl2 = [[Capsl alloc] initWithCurrentCapslr:currentCapslr withIndex:@2 withWelcomeText:@"Opening in 24 hours" withTimeInterval:kTwoDaysInSeconds];
