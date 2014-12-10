@@ -46,6 +46,7 @@
 		4F72437B1A314F86002CC918 /* DateTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F72437A1A314F86002CC918 /* DateTableViewController.m */; };
 		4F72437E1A314F97002CC918 /* PickerTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F72437D1A314F97002CC918 /* PickerTableViewCell.m */; };
 		4F7243811A3159C7002CC918 /* PromptDateTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F7243801A3159C7002CC918 /* PromptDateTableViewCell.m */; };
+		4FB6B77A1A38F8E90003DE0B /* JCALockNavController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FB6B7791A38F8E90003DE0B /* JCALockNavController.m */; };
 		4FC4EA181A2B021D00D3D09D /* RecordAudioViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FC4EA171A2B021D00D3D09D /* RecordAudioViewController.m */; };
 		4FC4EA201A2D1D4000D3D09D /* RecordVideoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FC4EA1F1A2D1D4000D3D09D /* RecordVideoViewController.m */; };
 		8D1B839F1A2FC55F00C0121F /* Images 14-23-23-125.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8D1B839E1A2FC55F00C0121F /* Images 14-23-23-125.xcassets */; };
@@ -151,6 +152,8 @@
 		4F72437D1A314F97002CC918 /* PickerTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PickerTableViewCell.m; sourceTree = "<group>"; };
 		4F72437F1A3159C7002CC918 /* PromptDateTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PromptDateTableViewCell.h; sourceTree = "<group>"; };
 		4F7243801A3159C7002CC918 /* PromptDateTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PromptDateTableViewCell.m; sourceTree = "<group>"; };
+		4FB6B7781A38F8E90003DE0B /* JCALockNavController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JCALockNavController.h; sourceTree = "<group>"; };
+		4FB6B7791A38F8E90003DE0B /* JCALockNavController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JCALockNavController.m; sourceTree = "<group>"; };
 		4FC4EA161A2B021D00D3D09D /* RecordAudioViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecordAudioViewController.h; sourceTree = "<group>"; };
 		4FC4EA171A2B021D00D3D09D /* RecordAudioViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecordAudioViewController.m; sourceTree = "<group>"; };
 		4FC4EA1E1A2D1D4000D3D09D /* RecordVideoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecordVideoViewController.h; sourceTree = "<group>"; };
@@ -286,6 +289,8 @@
 				4F69EBC91A252331009625AA /* RootViewController.m */,
 				8DAC42421A2A9BD400A8859A /* JCAMainViewController.h */,
 				8DAC42431A2A9BD400A8859A /* JCAMainViewController.m */,
+				4FB6B7781A38F8E90003DE0B /* JCALockNavController.h */,
+				4FB6B7791A38F8E90003DE0B /* JCALockNavController.m */,
 				8DE360611A2D6E6500DAE08C /* View Capsules */,
 				8DC55F3A1A2B8B4500AF1AB8 /* Capsule View */,
 				4FC4EA191A2B027500D3D09D /* Capture & Compose VCs */,
@@ -665,6 +670,7 @@
 				90C61E671A2C4EA3003EFEF9 /* UIImage+Alpha.m in Sources */,
 				90C61E621A2C4D3A003EFEF9 /* UIImage+RoundedCorner.m in Sources */,
 				4FC4EA201A2D1D4000D3D09D /* RecordVideoViewController.m in Sources */,
+				4FB6B77A1A38F8E90003DE0B /* JCALockNavController.m in Sources */,
 				8D7E3CF71A36FDE50010C39C /* SendCapsuleTableViewCell.m in Sources */,
 				90CE52D21A27C36A0033087E /* SignUpViewController.m in Sources */,
 			);
