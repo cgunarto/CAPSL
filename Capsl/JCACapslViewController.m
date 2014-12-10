@@ -12,7 +12,11 @@
 #import "Capslr.h"
 #import "JKCountDownTimer.h"
 #import "IndexConverter.h"
+#import "CaptureViewController.h"
 #import <QuartzCore/QuartzCore.h>
+
+@import MediaPlayer;
+
 
 @interface JCACapslViewController () <UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout>
 
@@ -23,6 +27,8 @@
 @property NSArray *capslsInAYear;
 @property NSArray *monthsOfTheYear;
 @property NSArray *collectionViewData;
+
+@property (strong, nonatomic) MPMoviePlayerViewController *videoController;
 
 @end
 
@@ -201,6 +207,51 @@ static NSString * const reuseIdentifier = @"CapslCell";
     return footerSize;
 }
 
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    Capsl *capsl = [self getCapslWithIndexPath:indexPath];
+
+    if ([capsl.type isEqualToString:@"multimedia"])
+    {
+        BOOL capslIsUnlocked = [self shouldPerformSegueWithIdentifier:@"multimediaSegue" sender:capsl];
+        if (capslIsUnlocked)
+        {
+            [self performSegueWithIdentifier:@"multimediaSegue" sender:self];
+        }
+    }
+
+//    //If it's a video
+//    else
+//    {
+//        BOOL capslIsAvailable = [self isCapslAvailableToView:capsl];
+//        if (capslIsAvailable)
+//        {
+//            [self playVideo:capsl];
+//        }
+//    }
+//
+//    Check if the capsl is multimedia or video
+//    Check if it's unlocked and unviewed
+
+}
+
+//Is there a check for when capsule is ready to be opened or not?? similar
+
+
+
+#pragma mark Playing Video
+
+- (void)playVideo:(Capsl *)capsl
+{
+    //TODO: Return to same orientation when it opens and closes
+    NSURL *url = [NSURL URLWithString:capsl.video.url];
+    self.videoController = [[MPMoviePlayerViewController alloc] init];
+    self.videoController.moviePlayer.movieSourceType = MPMovieSourceTypeStreaming;
+    [self.videoController.moviePlayer setContentURL:url];
+
+    [self presentViewController:self.videoController animated:YES completion:nil];
+}
+
 #pragma mark scroll view methods
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
@@ -331,6 +382,74 @@ static NSString * const reuseIdentifier = @"CapslCell";
 
 }
 
+#pragma mark - segue life cycle
+
+- (BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(Capsl*)capsl
+{
+    return [self isCapslAvailableToView:capsl];
+}
+
+
+- (BOOL)isCapslAvailableToView:(Capsl *)capsl
+{
+    long elapsedSeconds = [capsl.deliveryTime timeIntervalSinceNow];
+
+    // don't open if the capsule is not ready!
+    if (!self.showSent)
+    {
+        //if it's unviewed and unlocked
+        if (!capsl.viewedAt && elapsedSeconds < 0)
+        {
+            capsl.viewedAt = [NSDate date];
+            [capsl saveInBackground];
+
+            //SENDING PUSH MESSAGE to the sender, when CAPSL is viewed by recipient
+            PFQuery *pushQuery = [PFInstallation query];
+            [pushQuery whereKey:@"capslr" equalTo:capsl.sender];
+
+            PFPush *push = [[PFPush alloc]init];
+            //TODO: Send push to multiple device tokens
+            //TODO: Set it to open a message or the right page
+            NSString *pushString = [NSString stringWithFormat:@"%@ viewed your Capsl", capsl.recipient.name];
+            [push setQuery:pushQuery];
+            [push setMessage:pushString];
+            [push sendPushInBackgroundWithBlock:^(BOOL succeeded, NSError *error)
+             {
+                 if (error)
+                 {
+                     NSLog(@"%@ error", error.localizedDescription);
+                 }
+             }];
+        }
+
+        //if it's unlocked
+        if (elapsedSeconds < 0)
+        {
+            return YES;
+        }
+        else
+        {
+            return NO;
+        }
+    }
+
+    return YES;
+}
+//
+//
+//
+//- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+//{
+//    NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
+//    Capsl *capsl = self.tableViewData[indexPath.row];
+//
+//    if ([segue.identifier isEqualToString:@"multimediaSegue"])
+//    {
+//        CaptureViewController *vc = segue.destinationViewController;
+//        vc.chosenCapsl = capsl;
+//        vc.isEditing = NO;
+//    }
+//}
 
 
 @end
