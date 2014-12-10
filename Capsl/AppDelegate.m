@@ -100,6 +100,7 @@
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
 {
     [PFPush handlePush:userInfo];
+    [[NSNotificationCenter defaultCenter] postNotificationName:kRefreshData object:nil];
 }
 
 //If the app is running while local notification is delivered
