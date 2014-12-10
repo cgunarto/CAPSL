@@ -99,18 +99,45 @@
 }
 
 // For Date
-+ (NSString *)getDateStringWithDate:(NSDate *)date
++ (NSString *)getDateStringWithDate:(NSDate *)date withCapsl:(Capsl *)capsl
 {
-    
-    // Setting the delivery date
+
+    NSDate *deliveryDate = capsl.deliveryTime;
+    NSTimeInterval timeInterval = [deliveryDate timeIntervalSinceNow];
 
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
 
-    [dateFormatter setDateFormat:@"MMM d, yyyy | h:mm a"];
+    NSString *timeString = [NSString string];
 
-    NSString *dateString = [NSString stringWithFormat:@"%@", [dateFormatter stringFromDate:date]];
+    NSCalendarUnit dayOfWeek = NSCalendarUnitWeekday;
+    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+    NSInteger todaysDay = [calendar component:dayOfWeek fromDate:[NSDate date]];
 
-    return dateString;
+    NSInteger daysUntilSunday = 8 - todaysDay;
+    NSTimeInterval timeFromStartOfTodayThroughSaturday = kDayInSeconds * daysUntilSunday;
+
+    NSDate *startOfToday = [calendar startOfDayForDate:[NSDate date]];
+
+    NSTimeInterval timeSinceMidnightToday = [startOfToday timeIntervalSinceNow];
+
+    NSTimeInterval timeFromNowUntilSunday = timeSinceMidnightToday + timeFromStartOfTodayThroughSaturday;
+
+    // Setting the delivery date
+
+    if (timeInterval > timeFromNowUntilSunday)
+    {
+        [dateFormatter setDateFormat:@"h:mm a"];
+
+        timeString = [NSString stringWithFormat:@"%@", [dateFormatter stringFromDate:date]];
+    }
+    else
+    {
+        [dateFormatter setDateFormat:@"MMM d, yyyy | h:mm a"];
+
+        timeString = [NSString stringWithFormat:@"%@", [dateFormatter stringFromDate:date]];
+    }
+
+    return timeString;
 }
 
 

@@ -17,7 +17,7 @@
 {
 
     self.countdownLabel.text = [[JKCountDownTimer getStatusStringWithCapsl:capsl] uppercaseString];
-    self.deliveryDateLabel.text = [JKCountDownTimer getDateStringWithDate:capsl.deliveryTime];
+    self.deliveryDateLabel.text = [JKCountDownTimer getDateStringWithDate:capsl.deliveryTime withCapsl:capsl];
 
 //    [UIView setAnimationsEnabled:NO];
 //    [self.countdownButton setTitle:[JKCountDownTimer getStringWithTimeInterval:timeInterval] forState:UIControlStateNormal];
