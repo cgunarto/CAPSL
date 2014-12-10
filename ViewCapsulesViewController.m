@@ -14,6 +14,7 @@
 #import "Capsl.h"
 #import "SVProgressHUD.h"
 #import "JCALocalNotification.h"
+#import "IndexConverter.h"
 
 @interface ViewCapsulesViewController ()
 
@@ -201,7 +202,6 @@
 
 }
 
-
 #pragma mark - actions
 
 - (IBAction)onSegmentedControlValueChanged:(UISegmentedControl *)sender
@@ -226,7 +226,6 @@
 
 }
 
-
 #pragma mark - segue life cycle
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
@@ -244,7 +243,8 @@
 
 }
 
-#pragma mark - Local Notification Helper Method
+#pragma mark - Helper Method
+
 - (void)clearAndcreateLocalNotificationsFromCapslObjects:(NSArray *)objects
 {
     //Cancel all notifications before creating new ones
@@ -262,6 +262,7 @@
     {
         [JCALocalNotification createLocalNotificationForUnviewedCapslFromCapslObjectsArray:objects];
     }
+    
 }
 
 

@@ -14,6 +14,7 @@
 #import "JCAMainViewController.h"
 #import "CaptureViewController.h"
 #import "RecordVideoViewController.h"
+#import "IndexConverter.h"
 
 @import MediaPlayer;
 
@@ -167,35 +168,27 @@
 - (void)scrollToEarliestUnopenedCapsule
 {
 
+    NSInteger index = [IndexConverter indexForSoonestUnopenedCapsuleInArray:self.tableViewData];
+
     // scroll to first unopened capsule in received, 3 capsules prior to first unopened in sent
-    for (int x = 0; x < self.tableViewData.count; x++)
-    {
-        Capsl *capsl = self.tableViewData[x];
-        int row = x;
-
-        if (!capsl.viewedAt)
-        {
             // sent capsules
-            if (self.shouldShowSent)
-            {
-                // set index for 3 prior to first viewed if available, or else show first
-                if (x > 3)
-                {
-                    row = x - 3;
-                }
-                else
-                {
-                    row = 0;
-                }
-            }
 
-            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:row inSection:0];
-            [self.tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionTop animated:NO];
-
-            break;
+    if (self.shouldShowSent)
+    {
+        // set index for 3 prior to first viewed if available, or else show first
+        if (index > 3)
+        {
+            index = index - 3;
         }
-
+        else
+        {
+            index = 0;
+        }
+        
     }
+
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:index inSection:0];
+    [self.tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionTop animated:NO];
 
 
 //    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:(openCapslsCount) inSection:0];

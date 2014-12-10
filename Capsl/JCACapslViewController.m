@@ -310,6 +310,9 @@ static NSString * const reuseIdentifier = @"CapslCell";
 
     }
 
+
 }
+
+
 
 @end
