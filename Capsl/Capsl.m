@@ -89,4 +89,28 @@
     return timeInterval;
 }
 
+- (NSInteger)getYearForCapsl
+{
+
+    NSDateFormatter *yearFormatter = [[NSDateFormatter alloc] init];
+    yearFormatter.dateFormat = @"yyyy";
+
+    NSInteger year = [[NSString stringWithFormat:@"%@", [yearFormatter stringFromDate:self.deliveryTime]] intValue];
+
+    return year;
+
+}
+
+- (NSInteger)getMonthForCapsl
+{
+
+    NSDateFormatter *monthFormatter = [[NSDateFormatter alloc] init];
+    monthFormatter.dateFormat = @"MM";
+
+    int month = [[NSString stringWithFormat:@"%@", [monthFormatter stringFromDate:self.deliveryTime]] intValue];
+
+    return month;
+
+}
+
 @end

@@ -73,6 +73,27 @@
     [self.tableView reloadData];
 }
 
+#pragma mark Lock Orientation
+
+- (BOOL) shouldAutorotate
+{
+    return NO;
+}
+
+-(NSUInteger)supportedInterfaceOrientations
+{
+    return UIInterfaceOrientationMaskPortrait;
+}
+
+- (UIInterfaceOrientation) preferredInterfaceOrientationForPresentation {
+    // Return the orientation you'd prefer - this is what it launches to. The
+    // user can still rotate. You don't have to implement this method, in which
+    // case it launches in the current orientation
+    return UIInterfaceOrientationPortrait;
+}
+
+#pragma mark Filtering Search
+
 //Filtering for search results
 - (void)filterContentForSearchText:(NSString*)searchText scope:(NSString*)scope
 {

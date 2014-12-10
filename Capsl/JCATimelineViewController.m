@@ -223,6 +223,16 @@
     [self.timelineView reloadData];
 }
 
+- (NSArray *)getCapslCountPerMonthWithGrandArray
+{
+    return nil;
+}
+
+- (NSArray *)getYearNumbersWithGrandArray
+{
+    return nil;
+}
+
 
 #pragma mark - actions
 

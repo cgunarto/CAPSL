@@ -34,4 +34,29 @@
 
 }
 
++ (NSInteger)indexForSoonestUnopenedCapsuleInArrayInItsOwnMonth:(NSArray*)dataArray
+{
+
+    Capsl *soonestCapsl = dataArray[[self indexForSoonestUnopenedCapsuleInArray:dataArray]];
+    NSInteger year = [soonestCapsl getYearForCapsl];
+    NSInteger month = [soonestCapsl getMonthForCapsl];
+
+    NSMutableArray *capslsFromTheSameMonth = [@[] mutableCopy];
+
+    for (Capsl *capsl in dataArray)
+    {
+        if (([capsl getYearForCapsl] == year) && ([capsl getMonthForCapsl] == month))
+        {
+
+            [capslsFromTheSameMonth addObject:capsl];
+
+        }
+    }
+
+    NSInteger index = [self indexForSoonestUnopenedCapsuleInArray:capslsFromTheSameMonth];
+
+    return index;
+
+}
+
 @end

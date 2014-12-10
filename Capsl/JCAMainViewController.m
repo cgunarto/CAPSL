@@ -108,6 +108,27 @@
     // Dispose of any resources that can be recreated.
 }
 
+//#pragma mark Lock Orientation
+//
+//- (BOOL) shouldAutorotate
+//{
+//    return YES;
+//}
+//
+//-(NSUInteger)supportedInterfaceOrientations
+//{
+//    return UIInterfaceOrientationMaskPortrait | UIInterfaceOrientationMaskLandscapeLeft | UIInterfaceOrientationMaskLandscapeRight;
+//}
+//
+//- (UIInterfaceOrientation) preferredInterfaceOrientationForPresentation {
+//    // Return the orientation you'd prefer - this is what it launches to. The
+//    // user can still rotate. You don't have to implement this method, in which
+//    // case it launches in the current orientation
+//    return UIInterfaceOrientationPortrait;
+//}
+
+
+
 #pragma mark - Actions
 
 - (IBAction)onSendCapsuleButtonTapped:(UIBarButtonItem *)sender
@@ -132,8 +153,17 @@
 //        nil;
 //    }];
 
-    [self.viewCapsulesContainerView setHidden:YES];
     [self.chooseTypeContainerView setHidden:NO];
+    self.chooseTypeContainerView.alpha = 0;
+
+    [UIView animateWithDuration:0.5 animations:^{
+        self.viewCapsulesContainerView.alpha = 0;
+        self.chooseTypeContainerView.alpha = 1;
+    } completion:nil];
+
+    [self.viewCapsulesContainerView setHidden:YES];
+
+
     [self.toolbarButtons removeObject:self.sendCapsuleButton];
     [self.toolbarButtons insertObject:self.viewCapsulesButton atIndex:2];
 //    [self.view bringSubviewToFront:self.toolBar];
@@ -148,7 +178,15 @@
 //    }];
 
     [self.viewCapsulesContainerView setHidden:NO];
+    self.viewCapsulesContainerView.alpha = 0;
+
+    [UIView animateWithDuration:0.5 animations:^{
+        self.viewCapsulesContainerView.alpha = 1;
+        self.chooseTypeContainerView.alpha = 0;
+    } completion:nil];
+
     [self.chooseTypeContainerView setHidden:YES];
+    
     [self.toolbarButtons removeObject:self.viewCapsulesButton];
     [self.toolbarButtons insertObject:self.sendCapsuleButton atIndex:2];
 //    [self.view bringSubviewToFront:self.toolBar];

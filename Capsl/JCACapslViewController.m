@@ -11,6 +11,7 @@
 #import "Capsl.h"
 #import "Capslr.h"
 #import "JKCountDownTimer.h"
+#import "IndexConverter.h"
 #import <QuartzCore/QuartzCore.h>
 
 @interface JCACapslViewController () <UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout>
@@ -19,7 +20,6 @@
 @property UICollectionViewFlowLayout *flowLayout;
 @property CGFloat screenHeight;
 @property CGFloat scrubBarMonthSegment;
-@property NSArray *yearsWithCapsls;
 @property NSArray *capslsInAYear;
 @property NSArray *monthsOfTheYear;
 @property NSArray *collectionViewData;
@@ -56,14 +56,14 @@ static NSString * const reuseIdentifier = @"CapslCell";
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [self updateData];
+    [self updateUserInterface];
 //    [self scrollToEarliestUnopenedCapsule];
 }
 
 - (void)setCapslGrandArray:(NSArray *)capslGrandArray
 {
     _capslGrandArray = capslGrandArray;
-    [self updateData];
+    [self updateUserInterface];
 //    [self scrollToEarliestUnopenedCapsule];
 
 }
@@ -71,7 +71,7 @@ static NSString * const reuseIdentifier = @"CapslCell";
 - (void)setSentCapslsGrandArray:(NSArray *)sentCapslsGrandArray
 {
     _sentCapslsGrandArray = sentCapslsGrandArray;
-    [self updateData];
+    [self updateUserInterface];
 //    [self scrollToEarliestUnopenedCapsule];
 }
 
@@ -80,10 +80,13 @@ static NSString * const reuseIdentifier = @"CapslCell";
     // Dispose of any resources that can be recreated.
 }
 
-- (void)showCapslAtYear:(NSInteger)yearMultiplier andMonth:(NSInteger)monthIndex withAnimation:(BOOL)animated
+- (void)showCapslWithYearMultiplier:(NSInteger)yearMultiplier
+                      andMonthIndex:(NSInteger)monthIndex
+                      andCapslIndex:(NSInteger)capsl
+                      withAnimation:(BOOL)animated
 {
 
-    NSIndexPath *monthIndexPath = [NSIndexPath indexPathForItem:0 inSection:(yearMultiplier * 12) + monthIndex];
+    NSIndexPath *monthIndexPath = [NSIndexPath indexPathForItem:capsl inSection:(yearMultiplier * 12) + monthIndex];
 
     UICollectionViewLayoutAttributes *attributes = [self.capslView layoutAttributesForItemAtIndexPath:monthIndexPath];
     CGRect capslRect = attributes.frame;
@@ -277,7 +280,7 @@ static NSString * const reuseIdentifier = @"CapslCell";
 
 }
 
-- (void)updateData
+- (void)updateUserInterface
 {
     if (self.showSent)
     {
@@ -289,27 +292,42 @@ static NSString * const reuseIdentifier = @"CapslCell";
     }
 
     [self.capslView reloadData];
+
+    [self scrollToEarliestUnopenedCapsule];
 }
 
 - (void)scrollToEarliestUnopenedCapsule
 {
 
-    // scroll to first unopened capsule in received, 3 capsules prior to first unopened in sent
-    for (int x = 0; x < self.collectionViewData.count; x++)
+    NSInteger year = [self.soonestUnopenedCapsl getYearForCapsl];
+    NSInteger month = [self.soonestUnopenedCapsl getMonthForCapsl];
+
+    NSInteger multiplierForYear = [self.capslYearNumbers indexOfObject:[NSString stringWithFormat:@"%li", (long)year]];
+    NSInteger monthIndex = month - 1;
+
+    NSArray *currentArray = [NSArray array];
+
+    if (self.showSent)
     {
-        Capsl *capsl = self.collectionViewData[x];
-
-        if (!capsl.viewedAt)
-        {
-
-//            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:x inSection:0];
-//            [self.collectionViewData scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionTop animated:NO];
-
-            break;
-        }
-
+        currentArray = self.sentCapslsArray;
+    }
+    else
+    {
+        currentArray = self.capslsArray;
     }
 
+    NSInteger capslIndex = [IndexConverter indexForSoonestUnopenedCapsuleInArrayInItsOwnMonth:currentArray];
+
+    [self showCapslWithYearMultiplier:multiplierForYear andMonthIndex:monthIndex andCapslIndex:capslIndex withAnimation:YES];
+
+    
+
+//    NSInteger section = (multiplierForYear * 12 + month) - 1;
+
+    //TODO: solve for item index based on mont
+// NSIndexPath *indexPath = [NSIndexPath indexPathForItem:0 inSection:section];
+//
+//    [self.capslView scrollToItemAtIndexPath:indexPath atScrollPosition:UICollectionViewScrollPositionLeft animated:YES];
 
 }
 

@@ -31,6 +31,28 @@
 
 @implementation ViewCapsulesViewController
 
+
+//
+//#pragma mark Lock Orientation
+//
+//- (BOOL) shouldAutorotate
+//{
+//    return YES;
+//}
+//
+//-(NSUInteger)supportedInterfaceOrientations
+//{
+//    return UIInterfaceOrientationMaskPortrait | UIInterfaceOrientationMaskLandscapeLeft | UIInterfaceOrientationMaskLandscapeRight;
+//}
+//
+//- (UIInterfaceOrientation) preferredInterfaceOrientationForPresentation {
+//    // Return the orientation you'd prefer - this is what it launches to. The
+//    // user can still rotate. You don't have to implement this method, in which
+//    // case it launches in the current orientation
+//    return UIInterfaceOrientationMaskPortrait | UIInterfaceOrientationMaskLandscapeLeft | UIInterfaceOrientationMaskLandscapeRight;
+//}
+
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];

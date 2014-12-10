@@ -14,4 +14,7 @@
 
 + (NSInteger)indexForSoonestUnopenedCapsuleInArray:(NSArray *)dataArray;
 
++ (NSInteger)indexForSoonestUnopenedCapsuleInArrayInItsOwnMonth:(NSArray*)dataArray;
+
+
 @end
