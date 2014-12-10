@@ -61,6 +61,7 @@
 		8D6A97721A32321500ECA7D9 /* CrossDissolveSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D6A97711A32321500ECA7D9 /* CrossDissolveSegue.m */; };
 		8D7E3CF41A36B03E0010C39C /* DataFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D7E3CF31A36B03E0010C39C /* DataFetcher.m */; };
 		8D7E3CF71A36FDE50010C39C /* SendCapsuleTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D7E3CF61A36FDE50010C39C /* SendCapsuleTableViewCell.m */; };
+		8DABE4AC1A37DDAC00A97498 /* IndexConverter.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DABE4AB1A37DDAC00A97498 /* IndexConverter.m */; };
 		8DAC42441A2A9BD400A8859A /* JCAMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DAC42431A2A9BD400A8859A /* JCAMainViewController.m */; };
 		8DE360601A2D6E5800DAE08C /* ViewCapsulesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DE3605F1A2D6E5800DAE08C /* ViewCapsulesViewController.m */; };
 		8DEA789B1A31206900271A8A /* CapsuleListBackground.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DEA789A1A31206900271A8A /* CapsuleListBackground.m */; };
@@ -179,6 +180,8 @@
 		8D7E3CF31A36B03E0010C39C /* DataFetcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataFetcher.m; sourceTree = "<group>"; };
 		8D7E3CF51A36FDE50010C39C /* SendCapsuleTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SendCapsuleTableViewCell.h; sourceTree = "<group>"; };
 		8D7E3CF61A36FDE50010C39C /* SendCapsuleTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SendCapsuleTableViewCell.m; sourceTree = "<group>"; };
+		8DABE4AA1A37DDAC00A97498 /* IndexConverter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IndexConverter.h; sourceTree = "<group>"; };
+		8DABE4AB1A37DDAC00A97498 /* IndexConverter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IndexConverter.m; sourceTree = "<group>"; };
 		8DAC42421A2A9BD400A8859A /* JCAMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JCAMainViewController.h; sourceTree = "<group>"; };
 		8DAC42431A2A9BD400A8859A /* JCAMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JCAMainViewController.m; sourceTree = "<group>"; };
 		8DE3605E1A2D6E5800DAE08C /* ViewCapsulesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ViewCapsulesViewController.h; path = ../ViewCapsulesViewController.h; sourceTree = "<group>"; };
@@ -421,6 +424,8 @@
 				90C0DD161A27CCE500A50BCF /* JKCountDownTimer.m */,
 				8D23D82B1A3586C6007C6E2C /* BackgroundGenerator.h */,
 				8D23D82C1A3586C6007C6E2C /* BackgroundGenerator.m */,
+				8DABE4AA1A37DDAC00A97498 /* IndexConverter.h */,
+				8DABE4AB1A37DDAC00A97498 /* IndexConverter.m */,
 			);
 			name = Utilities;
 			sourceTree = "<group>";
@@ -625,6 +630,7 @@
 				4F69EBC71A252331009625AA /* AppDelegate.m in Sources */,
 				8D23D82A1A356B82007C6E2C /* LogoutButtonTableViewCell.m in Sources */,
 				8D5A3DDC1A2A4AFD00A6485A /* JCATimelineMonthCollectionViewCell.m in Sources */,
+				8DABE4AC1A37DDAC00A97498 /* IndexConverter.m in Sources */,
 				8D5A3DDD1A2A4AFD00A6485A /* JCATimeline.m in Sources */,
 				90C61E681A2C4EA3003EFEF9 /* UIImage+Resize.m in Sources */,
 				8D5A3DE11A2A4B4700A6485A /* UIImage+ImageEffects.m in Sources */,
@@ -806,8 +812,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Christina Gunarto (5FCLB5W36M)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Christina Gunarto (5FCLB5W36M)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",

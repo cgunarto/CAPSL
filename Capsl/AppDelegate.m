@@ -87,6 +87,14 @@
     
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
 
+    //Resetting badge installation number to 0 for remote notification
+    PFInstallation *currentInstallation = [PFInstallation currentInstallation];
+    if (currentInstallation.badge != 0)
+    {
+        currentInstallation.badge = 0;
+        [currentInstallation saveEventually];
+    }
+
     //Send a notification that kRefreshData so other VCs who are 'listening' can refresh
     [[NSNotificationCenter defaultCenter] postNotificationName:kRefreshData object:nil];
 }
