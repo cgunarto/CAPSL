@@ -479,7 +479,7 @@
             }
             else
             {
-                NSLog(@"WRONG CODE!!");
+                NSLog(@"wrong verification");
 
                 [Capslr returnCapslrFromPFUser:[PFUser currentUser] withCompletion:^(Capslr *currentCapslr, NSError *error) {
                     if (!error) {
@@ -588,7 +588,7 @@
     onboardingCapsl.sender = theCapslTeam;
     onboardingCapsl.recipient = currentCapslr;
 
-    NSDate *deliveryDate = [currentCapslr.createdAt dateByAddingTimeInterval:(kTwoDaysInSeconds)];
+    NSDate *deliveryDate = [currentCapslr.createdAt dateByAddingTimeInterval:(kTwoMinutesInSeconds)];
     onboardingCapsl.deliveryTime = deliveryDate;
     onboardingCapsl.wallpaperIndex = @1;
     onboardingCapsl.text = @"Welcome to Capsl";

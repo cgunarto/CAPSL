@@ -23,6 +23,8 @@
 
 + (NSString *)getDateStringWithDate:(NSDate *)date;
 
++ (NSString *)getDateForLater:(NSDate *)date;
+
 //
 //@property NSTimer *timer;
 //@property NSDate *deliveryDate;

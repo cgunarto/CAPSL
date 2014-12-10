@@ -19,6 +19,7 @@
 @implementation JKCountDownTimer
 
 
+// For Timer
 + (NSString *)getStatusStringWithCapsl:(Capsl *)capsl
 {
 
@@ -41,14 +42,14 @@
     }
     if (timeInterval > kDayInSeconds)
     {
-        dateString = [self englishStringFromTimeInterval:timeInterval];
+        dateString = [self englishStringFromTimeInterval:timeInterval capsl:capsl];
     }
 
     return dateString;
 
 }
 
-+ (NSString *)englishStringFromTimeInterval:(NSTimeInterval)timeInterval
++ (NSString *)englishStringFromTimeInterval:(NSTimeInterval)timeInterval capsl:(Capsl *)capsl
 {
     NSString *timeString = [NSString string];
 
@@ -79,7 +80,8 @@
     }
     else if (timeInterval > timeFromNowUntilSunday)
     {
-        timeString = @"Later";
+        NSDate *deliveryDate = capsl.deliveryTime;
+        timeString = [self getDateForLater:deliveryDate];
     }
 
     return timeString;
@@ -96,19 +98,32 @@
     return [NSString stringWithFormat:@"%02li:%02li:%02li", (long)hours, (long)minutes, (long)seconds];
 }
 
+// For Date
 + (NSString *)getDateStringWithDate:(NSDate *)date
 {
     
     // Setting the delivery date
+
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
 
-    //TODO: change date format with no LEADING ZERO
-    [dateFormatter setDateFormat:@"MMM d, yyyy h:mm a"];
+    [dateFormatter setDateFormat:@"MMM d, yyyy | h:mm a"];
 
     NSString *dateString = [NSString stringWithFormat:@"%@", [dateFormatter stringFromDate:date]];
 
     return dateString;
+}
 
+
++ (NSString *)getDateForLater:(NSDate *)date
+{
+    // Setting the delivery date
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+
+    [dateFormatter setDateFormat:@"MMM d, yyyy"];
+
+    NSString *dateString = [NSString stringWithFormat:@"%@", [dateFormatter stringFromDate:date]];
+
+    return dateString;
 }
 
 
