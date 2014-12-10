@@ -22,6 +22,6 @@
 - (void)updateClocks;
 
 - (void)scrollToEarliestUnopenedCapsule;
-
+- (void)updateUserInterface;
 
 @end

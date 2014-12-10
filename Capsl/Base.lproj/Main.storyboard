@@ -154,7 +154,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="423" y="-622.5"/>
+            <point key="canvasLocation" x="423" y="-682.5"/>
         </scene>
         <!--Profile View Controller-->
         <scene sceneID="cNy-iX-CZU">
@@ -428,7 +428,7 @@
                                     <constraint firstAttribute="height" constant="44" id="oDh-T6-vVd"/>
                                 </constraints>
                                 <items>
-                                    <barButtonItem image="group-50" id="3wG-kT-Ne1">
+                                    <barButtonItem image="edit_user-50" id="3wG-kT-Ne1">
                                         <connections>
                                             <segue destination="8Q1-6W-z4z" kind="presentation" identifier="contactsSegue" id="Xzz-SX-Buk"/>
                                         </connections>
@@ -1744,7 +1744,7 @@
                             </connections>
                         </barButtonItem>
                         <segmentedControl key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" id="TcA-dM-lMz">
-                            <rect key="frame" x="-61" y="-14" width="123" height="29"/>
+                            <rect key="frame" x="182" y="38" width="237" height="29"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="199" id="Jbj-bk-C4t">
@@ -4057,7 +4057,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7sS-vm-5wW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-495" y="-622.5"/>
+            <point key="canvasLocation" x="-495" y="-682.5"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="JdM-Ku-ycz">
@@ -4134,7 +4134,7 @@
     </scenes>
     <resources>
         <image name="close-50" width="50" height="50"/>
-        <image name="group-50" width="26" height="26"/>
+        <image name="edit_user-50" width="26" height="26"/>
         <image name="wallpaperRoad" width="375" height="667"/>
         <image name="wallpaperRoad_blurred" width="375" height="667"/>
     </resources>
