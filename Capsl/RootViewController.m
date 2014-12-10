@@ -566,43 +566,13 @@
 #pragma mark - helper method
 - (void)createOnboardingCapsls:(Capslr *)currentCapslr
 {
-    // CAPSULE #1 - opens in 5 minutes
-    Capsl *onboardingCapsl = [Capsl object];
-    Capslr *theCapslTeam = [Capslr objectWithoutDataWithClassName:@"Capslr" objectId:@"xpUlEgxIac"];
-    onboardingCapsl.sender = theCapslTeam;
-    onboardingCapsl.recipient = currentCapslr;
+    Capsl *onboardingCapsl1 = [[Capsl alloc] initWithCurrentCapslr:currentCapslr withIndex:@1 withWelcomeText:@"Welcome To Capsl!" withTimeInterval:kTwoMinutesInSeconds];
+    [onboardingCapsl1 save];
 
-    NSDate *deliveryDate = [currentCapslr.createdAt dateByAddingTimeInterval:(kTwoMinutesInSeconds)];
-    onboardingCapsl.deliveryTime = deliveryDate;
-    onboardingCapsl.wallpaperIndex = @1;
-    onboardingCapsl.text = @"Welcome to Capsl";
-    onboardingCapsl.type = @"multimedia";
-
-    // CAPSULE #2 - opens in 24 hours
-    Capsl *onboardingCapsl2 = [Capsl object];
-    onboardingCapsl2.sender = theCapslTeam;
-    onboardingCapsl2.recipient = currentCapslr;
-
-    NSDate *deliveryDate2 = [currentCapslr.createdAt dateByAddingTimeInterval:(kTwoDaysInSeconds)];
-    onboardingCapsl2.deliveryTime = deliveryDate2;
-    onboardingCapsl2.wallpaperIndex = @2;
-    onboardingCapsl2.text = @"Opening in 24 hours";
-    onboardingCapsl2.type = @"multimedia";
-
-    // CAPSULE #3 - opens in a week
-    Capsl *onboardingCapsl3 = [Capsl object];
-    onboardingCapsl3.sender = theCapslTeam;
-    onboardingCapsl3.recipient = currentCapslr;
-
-    NSDate *deliveryDate3 = [currentCapslr.createdAt dateByAddingTimeInterval:(kWeekInSeconds)];
-    onboardingCapsl3.deliveryTime = deliveryDate3;
-    onboardingCapsl3.wallpaperIndex = @3;
-    onboardingCapsl3.text = @"Opening in a week";
-    onboardingCapsl3.type = @"multimedia";
-
-    // need to save one by one to make sure they all save... not sure how to optimize this(?)
-    [onboardingCapsl save];
+    Capsl *onboardingCapsl2 = [[Capsl alloc] initWithCurrentCapslr:currentCapslr withIndex:@2 withWelcomeText:@"Opening in 24 hours" withTimeInterval:kTwoDaysInSeconds];
     [onboardingCapsl2 save];
+
+    Capsl *onboardingCapsl3 = [[Capsl alloc] initWithCurrentCapslr:currentCapslr withIndex:@3 withWelcomeText:@"Opening in a week" withTimeInterval:kWeekInSeconds];
     [onboardingCapsl3 save];
 
     // go back to rootVC
