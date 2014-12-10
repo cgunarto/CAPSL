@@ -167,6 +167,28 @@
     
 }
 
+
+#pragma mark - override Setters
+
+-(void)setCapslsArray:(NSArray *)capslsArray
+{
+
+    _capslsArray = capslsArray;
+    //tell the two new view controllers to update
+    [self.capslListVC updateUserInterface];
+    self.timelineRootVC.capslsArray = _capslsArray;
+
+}
+
+- (void)setSentCapslsArray:(NSArray *)sentCapslsArray
+{
+
+    _sentCapslsArray = sentCapslsArray;
+    [self.capslListVC updateUserInterface];
+    self.timelineRootVC.sentCapslsArray = _sentCapslsArray;
+
+}
+
 #pragma mark - helper methods
 
 - (void)updateUIInSubviews

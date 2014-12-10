@@ -15,6 +15,7 @@
 
 @property (strong, nonatomic) IBOutlet UIView *viewCapsulesContainerView;
 @property (strong, nonatomic) IBOutlet UIView *chooseTypeContainerView;
+@property ViewCapsulesViewController *viewCapsulesVC;
 @property NSMutableArray *toolbarButtons;
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *sendCapsuleButton;
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *viewCapsulesButton;
@@ -93,6 +94,15 @@
 
 }
 
+- (void)setCapslsArray:(NSArray *)capslsArray
+{
+
+    _capslsArray = capslsArray;
+
+    self.viewCapsulesVC.capslsArray = _capslsArray;
+
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -153,12 +163,12 @@
 
     if ([segue.identifier isEqualToString:@"viewCapsulesSegue"])
     {
-        ViewCapsulesViewController *vc = segue.destinationViewController;
-        vc.capslsArray = self.capslsArray;
-        vc.sentCapslsArray = self.sentCapslsArray;
+        self.viewCapsulesVC = segue.destinationViewController;
+        self.viewCapsulesVC.capslsArray = self.capslsArray;
+        self.viewCapsulesVC.sentCapslsArray = self.sentCapslsArray;
         
-        vc.availableCapslsArray = self.availableCapslsArray;
-        vc.shouldShowSent = self.shouldShowSent;
+        self.viewCapsulesVC.availableCapslsArray = self.availableCapslsArray;
+        self.viewCapsulesVC.shouldShowSent = self.shouldShowSent;
     }
     else if ([segue.identifier isEqualToString:@"chooseTypeSegue"])
     {
