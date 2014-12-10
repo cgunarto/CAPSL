@@ -180,7 +180,7 @@
         {
             index = index - 3;
         }
-        else
+        else if (index == 0)
         {
             index = 0;
         }
