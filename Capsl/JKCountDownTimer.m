@@ -154,26 +154,6 @@
 }
 
 
-- (NSTimeInterval)setupTimer
-{
-    NSCalendarUnit dayOfWeek = NSCalendarUnitWeekday;
-    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
-    NSInteger todaysDay = [calendar component:dayOfWeek fromDate:[NSDate date]];
-
-    NSInteger daysUntilSunday = 8 - todaysDay;
-    NSTimeInterval timeFromStartOfTodayThroughSaturday = kDayInSeconds * daysUntilSunday;
-    NSTimeInterval timeFromStartOfTodayThroughTomorrow = kDayInSeconds * 2;
-
-    NSDate *startOfToday = [calendar startOfDayForDate:[NSDate date]];
-
-    NSTimeInterval timeSinceMidnightToday = [startOfToday timeIntervalSinceNow];
-
-    NSTimeInterval timeFromNowUntilSunday = timeSinceMidnightToday + timeFromStartOfTodayThroughSaturday;
-
-    return timeFromNowUntilSunday;
-}
-
-
 //-(instancetype)init
 //{
 //
