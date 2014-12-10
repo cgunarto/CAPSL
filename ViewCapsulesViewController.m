@@ -24,7 +24,6 @@
 @property (strong, nonatomic) IBOutlet UISegmentedControl *sentReceivedSegmentedControl;
 @property NSTimer *timer;
 
-
 @property Capslr *capslr;
 
 @end
@@ -115,15 +114,16 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
+    [super viewWillAppear:animated];
     // put timer here
-
     self.timer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(updateUIInSubviews) userInfo:nil repeats:YES];
+
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {
+    [super viewWillDisappear:animated];
     // invalidate timer here
-
     [self.timer invalidate];
 }
 
@@ -175,6 +175,8 @@
 
     _capslsArray = capslsArray;
     //tell the two new view controllers to update
+    self.capslListVC.capslsArray = _capslsArray;
+    self.capslListVC.shouldShowSent = NO;
     [self.capslListVC updateUserInterface];
     self.timelineRootVC.capslsArray = _capslsArray;
 
@@ -182,8 +184,8 @@
 
 - (void)setSentCapslsArray:(NSArray *)sentCapslsArray
 {
-
     _sentCapslsArray = sentCapslsArray;
+    self.capslListVC.sentCapslsArray = _sentCapslsArray;
     [self.capslListVC updateUserInterface];
     self.timelineRootVC.sentCapslsArray = _sentCapslsArray;
 

@@ -39,6 +39,9 @@
 
 @property (nonatomic) BOOL shouldShowSent;
 
+@property NSObject *observer;
+@property JCAMainViewController *JCAMainVC;
+
 @end
 
 @implementation RootViewController
@@ -48,106 +51,41 @@
     [super viewWillAppear:animated];
 
     // Check to see if user quit before entering verification code
-
     if ([PFUser currentUser])
     {
-
-        [SVProgressHUD setBackgroundColor:[UIColor clearColor]];
-        [SVProgressHUD setForegroundColor:[UIColor whiteColor]];
-        [SVProgressHUD show];
-
-        [Capslr returnCapslrFromPFUser:[PFUser currentUser] withCompletion:^(Capslr *currentCapslr, NSError *error) {
-
-            self.viewCapsulesButton.enabled = NO;
-            self.sendCapsuleButton.enabled = NO;
-
-
-            [currentCapslr.profilePhoto getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
-                self.currentProfileImage = [UIImage imageWithData:data];
-
-            }];
-
-            Capslr *capslr = [Capslr object];
-            capslr.objectId = currentCapslr.objectId;
-
-            [Capsl searchCapslByKey:@"recipient" orderByAscending:@"deliveryTime" equalTo:capslr completion:^(NSArray *objects, NSError *error) {
-                if (!error)
-                {
-                    self.capslsArray = objects;
-
-                    NSInteger availableCapslsCount = 0;
-
-                    for (NSDate *date in [objects valueForKey:@"deliveryTime"])
-                    {
-                        if ([date timeIntervalSinceNow] < 0)
-                        {
-                            availableCapslsCount++;
-                        }
-                    }
-                    self.shouldShowSent = NO;
-                }
-
-                else
-                {
-                    NSLog(@"%@", error.localizedDescription);
-                    [self error:error];
-                }
-            }];
-
-            [Capsl searchCapslByKey:@"sender" orderByAscending:@"deliveryTime" equalTo:capslr completion:^(NSArray *objects, NSError *error) {
-                if (!error)
-                {
-                    self.sentCapslsArray = objects;
-                    [SVProgressHUD dismiss];
-                    self.viewCapsulesButton.enabled = YES;
-                    self.sendCapsuleButton.enabled = YES;
-                }
-                else
-                {
-                    NSLog(@"%@", error.localizedDescription);
-                    [self error:error];
-                }
-            }];
-        }];
+        [self showLoadingIndicator];
+        [self disableSendViewButton];
+        [self queryAndUpdateCurrentUserCapsules];
     }
 
-    self.navigationItem.titleView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"logo_header"]];
-
-    self.sendCapsuleButton.alpha = 0;
-    self.viewCapsulesButton.alpha = 0;
-
-    self.sendCapsuleButton.layer.cornerRadius = 20;
-    self.sendCapsuleButton.layer.borderColor = [[UIColor whiteColor] CGColor];
-    self.sendCapsuleButton.layer.borderWidth = 1;
-
-    self.viewCapsulesButton.layer.cornerRadius = 20;
-    self.viewCapsulesButton.layer.borderColor = [[UIColor whiteColor] CGColor];
-    self.viewCapsulesButton.layer.borderWidth = 1;
-
-
-    self.sendButtonLeftConstraint.constant = [[UIScreen mainScreen] bounds].size.width * 0.5;
-    self.viewButtonRightConstraint.constant = [[UIScreen mainScreen] bounds].size.width * 0.5;
-    
-    //    self.view.backgroundColor = [UIColor colorWithPatternImage:kSplashWallpaper];
-    
+    [self styleButtons];
+    //    self.view.backgroundColor = [UIColor colorWithPatternImage:kSplashWallpaper];    
 }
-
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-//    [PFUser logOut];
+    //[PFUser logOut];
 
+    self.observer =  [[NSNotificationCenter defaultCenter]addObserverForName:kRefreshData object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *note)
+                      {
+                          if ([PFUser currentUser])
+                          {
+                                      [self showLoadingIndicator];
+                                      [self disableSendViewButton];
+                                      [self queryAndUpdateCurrentUserCapsules];
+
+                          }
+                      }];
+
+    //If user is curren but is NOT verified, then delete their capsl and user info
     if ([PFUser currentUser])
     {
-        [SVProgressHUD setBackgroundColor:[UIColor clearColor]];
-        [SVProgressHUD setForegroundColor:[UIColor whiteColor]];
-        [SVProgressHUD show];
+        [self showLoadingIndicator];
 
-        [Capslr returnCapslrFromPFUser:[PFUser currentUser] withCompletion:^(Capslr *currentCapslr, NSError *error) {
-
-            self.viewCapsulesButton.enabled = NO;
-            self.sendCapsuleButton.enabled = NO;
+        [Capslr returnCapslrFromPFUser:[PFUser currentUser] withCompletion:^(Capslr *currentCapslr, NSError *error) \
+        {
+            [self disableSendViewButton];
 
             if (!currentCapslr.isVerified)
             {
@@ -162,34 +100,67 @@
 
                                 [SVProgressHUD dismiss];
                             }
-                            else
-                            {
-                                NSLog(@"%@", error.localizedDescription);
-                                [self error:error];
-                            }
                         }];
-                    }
-                    else
-                    {
-                        NSLog(@"%@", error.localizedDescription);
-                        [self error:error];
                     }
                 }];
                 
-            }
-            else
-            {
-                NSLog(@"%@", error.localizedDescription);
-                [self error:error];
             }
         }];
     }
 
     // Check to see if user quit before entering verification code
+    [self disableSendViewButton];
+    [self styleButtons];
+
+    //self.view.backgroundColor = [UIColor colorWithPatternImage:kSplashWallpaper];
+
+}
+
+
+//View did appear - for login/signup modal view
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    [self manageLogin];
+
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+//    [[NSNotificationCenter defaultCenter] removeObserver:self.observer];
+}
+
+
+//- (BOOL)prefersStatusBarHidden
+//{
+//    
+//    return YES;
+//}
+
+#pragma mark Indicator and initial View set up
+
+- (void)showLoadingIndicator
+{
+    [SVProgressHUD setBackgroundColor:[UIColor clearColor]];
+    [SVProgressHUD setForegroundColor:[UIColor whiteColor]];
+    [SVProgressHUD show];
+}
+
+- (void)disableSendViewButton
+{
     self.viewCapsulesButton.enabled = NO;
     self.sendCapsuleButton.enabled = NO;
+}
 
+- (void)enableSendViewButton
+{
+    self.viewCapsulesButton.enabled = YES;
+    self.sendCapsuleButton.enabled = YES;
+}
 
+- (void)styleButtons
+{
     self.navigationItem.titleView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"logo_header"]];
 
     self.sendCapsuleButton.alpha = 0;
@@ -208,16 +179,68 @@
     self.viewButtonRightConstraint.constant = [[UIScreen mainScreen] bounds].size.width * 0.5;
 }
 
+#pragma mark Query
 
-//View did appear - for login/signup modal view
--(void)viewDidAppear:(BOOL)animated
+- (void)queryAndUpdateCurrentUserCapsules
 {
-    [super viewDidAppear:animated];
+    [Capslr returnCapslrFromPFUser:[PFUser currentUser] withCompletion:^(Capslr *currentCapslr, NSError *error)
+     {
+         //getting profile photo for profile page
+         [currentCapslr.profilePhoto getDataInBackgroundWithBlock:^(NSData *data, NSError *error)
+          {
+              self.currentProfileImage = [UIImage imageWithData:data];
 
-    [self manageLogin];
+          }];
 
+         //Get receiped capsl
+         [Capsl searchCapslByKey:@"recipient" orderByAscending:@"deliveryTime" equalTo:currentCapslr completion:^(NSArray *objects, NSError *error)
+          {
+              if (!error)
+              {
+                  self.capslsArray = objects;
+                  self.JCAMainVC.capslsArray = self.capslsArray;
+
+                  NSInteger availableCapslsCount = 0;
+
+                  for (NSDate *date in [objects valueForKey:@"deliveryTime"])
+                  {
+                      if ([date timeIntervalSinceNow] < 0)
+                      {
+                          availableCapslsCount++;
+                      }
+                  }
+
+                  self.shouldShowSent = NO;
+                  [self enableSendViewButton];
+              }
+
+              else
+              {
+                  NSLog(@"%@", error.localizedDescription);
+              }
+          }];
+
+         // Get sent capsl
+         [Capsl searchCapslByKey:@"sender" orderByAscending:@"deliveryTime" equalTo:currentCapslr completion:^(NSArray *objects, NSError *error)
+          {
+              if (!error)
+              {
+                  self.sentCapslsArray = objects;
+                  self.JCAMainVC.sentCapslsArray = self.sentCapslsArray;
+
+                  [SVProgressHUD dismiss];
+
+              }
+              else
+              {
+                  NSLog(@"%@", error.localizedDescription);
+              }
+          }];
+     }];
 }
 
+
+#pragma mark Login
 
 -(void)manageLogin
 {
@@ -283,28 +306,19 @@
     //PFInstallation is also called in AppDelegate, when the user first installs the app
     [Capslr returnCapslrFromPFUser:user withCompletion:^(Capslr *currentCapslr, NSError *error)
     {
-        if (!error)
+        PFInstallation *installation = [PFInstallation currentInstallation];
+        installation[@"capslr"]=currentCapslr;
+        [installation saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error)
         {
-            PFInstallation *installation = [PFInstallation currentInstallation];
-            installation[@"capslr"]=currentCapslr;
-            [installation saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error)
-             {
-                 if (!error)
-                 {
-                     //TODO:clear badge?
-                 }
-                 else
-                 {
-                     NSLog(@"error %@", error.localizedDescription);
-                     [self error:error];
-                 }
-             }];
-        }
-        else
-        {
-            NSLog(@"%@", error.localizedDescription);
-            [self error:error];
-        }
+            if (!error)
+            {
+                //TODO:clear badge?
+            }
+            else
+            {
+                NSLog(@"error %@", error.localizedDescription);
+            }
+        }];
     }];
 
 
@@ -430,24 +444,9 @@
                                 [PFUser logOut];
                                 [self manageLogin];
                             }
-                            else
-                            {
-                                NSLog(@"%@", error.localizedDescription);
-                                [self error:error];
-                            }
                         }];
                     }
-                    else
-                    {
-                        NSLog(@"%@", error.localizedDescription);
-                        [self error:error];
-                    }
                 }];
-            }
-            else
-            {
-                NSLog(@"%@", error.localizedDescription);
-                [self error:error];
             }
         }];
     }
@@ -492,24 +491,9 @@
                                         [PFUser logOut];
                                         [self manageLogin];
                                     }
-                                    else
-                                    {
-                                        NSLog(@"%@", error.localizedDescription);
-                                        [self error:error];
-                                    }
                                 }];
                             }
-                            else
-                            {
-                                NSLog(@"%@", error.localizedDescription);
-                                [self error:error];
-                            }
                         }];
-                    }
-                    else
-                    {
-                        NSLog(@"%@", error.localizedDescription);
-                        [self error:error];
                     }
                 }];
             }
@@ -560,8 +544,8 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-
     JCAMainViewController *vc = segue.destinationViewController;
+    self.JCAMainVC = segue.destinationViewController;
 
     if ([sender isEqual:self.sendCapsuleButton])
     {
