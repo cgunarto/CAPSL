@@ -175,6 +175,8 @@
 
     _capslsArray = capslsArray;
     //tell the two new view controllers to update
+    self.capslListVC.capslsArray = _capslsArray;
+    self.capslListVC.shouldShowSent = NO;
     [self.capslListVC updateUserInterface];
     self.timelineRootVC.capslsArray = _capslsArray;
 
@@ -182,8 +184,8 @@
 
 - (void)setSentCapslsArray:(NSArray *)sentCapslsArray
 {
-
     _sentCapslsArray = sentCapslsArray;
+    self.capslListVC.sentCapslsArray = _sentCapslsArray;
     [self.capslListVC updateUserInterface];
     self.timelineRootVC.sentCapslsArray = _sentCapslsArray;
 

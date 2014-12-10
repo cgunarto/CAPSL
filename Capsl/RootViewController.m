@@ -34,6 +34,7 @@
 @property (nonatomic) BOOL shouldShowSent;
 
 @property NSObject *observer;
+@property JCAMainViewController *JCAMainVC;
 
 @end
 
@@ -42,13 +43,6 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-
-    self.observer =  [[NSNotificationCenter defaultCenter]addObserverForName:kRefreshData object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *note)
-    {
-        [self showLoadingIndicator];
-        [self disableSendViewButton];
-        [self queryAndUpdateCurrentUserCapsules];
-    }];
 
     // Check to see if user quit before entering verification code
     if ([PFUser currentUser])
@@ -66,6 +60,17 @@
 {
     [super viewDidLoad];
     //[PFUser logOut];
+
+    self.observer =  [[NSNotificationCenter defaultCenter]addObserverForName:kRefreshData object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *note)
+                      {
+                          if ([PFUser currentUser])
+                          {
+                                      [self showLoadingIndicator];
+                                      [self disableSendViewButton];
+                                      [self queryAndUpdateCurrentUserCapsules];
+
+                          }
+                      }];
 
     //If user is curren but is NOT verified, then delete their capsl and user info
     if ([PFUser currentUser])
@@ -117,7 +122,7 @@
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
-    [[NSNotificationCenter defaultCenter] removeObserver:self.observer];
+//    [[NSNotificationCenter defaultCenter] removeObserver:self.observer];
 }
 
 
@@ -187,6 +192,8 @@
               if (!error)
               {
                   self.capslsArray = objects;
+                  self.JCAMainVC.capslsArray = self.capslsArray;
+
                   NSInteger availableCapslsCount = 0;
 
                   for (NSDate *date in [objects valueForKey:@"deliveryTime"])
@@ -213,6 +220,8 @@
               if (!error)
               {
                   self.sentCapslsArray = objects;
+                  self.JCAMainVC.sentCapslsArray = self.sentCapslsArray;
+
                   [SVProgressHUD dismiss];
 
               }
@@ -559,8 +568,8 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-
     JCAMainViewController *vc = segue.destinationViewController;
+    self.JCAMainVC = segue.destinationViewController;
 
     if ([sender isEqual:self.sendCapsuleButton])
     {
@@ -576,8 +585,6 @@
     vc.availableCapslsArray = self.availableCapslsArray;
     vc.shouldShowSent = self.shouldShowSent;
     vc.currentProfileImage = self.currentProfileImage;
-
-
 }
 
 @end
