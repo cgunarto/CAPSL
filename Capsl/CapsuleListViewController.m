@@ -78,6 +78,11 @@
         self.tableViewData = self.capslsArray;
     }
 
+    [self updateUserInterface];
+}
+
+- (void)updateUserInterface
+{
     [self.tableView reloadData];
 
     [self scrollToEarliestUnopenedCapsule];
