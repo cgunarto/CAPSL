@@ -11,6 +11,7 @@
 #import "JCACapslViewController.h"
 #import "JCATimelineViewController.h"
 #import "UIImage+ImageEffects.h"
+#import "BackgroundGenerator.h"
 #import "Capsl.h"
 
 #define kNumOfTimelinePrefixYears 1
@@ -37,6 +38,15 @@
     self.capslVC.showSent = self.shouldShowSent;
 
 //    [self prefersStatusBarHidden];
+
+}
+
+- (void)willTransitionToTraitCollection:(UITraitCollection *)newCollection withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator
+{
+    if (newCollection.verticalSizeClass == UIUserInterfaceSizeClassCompact)
+    {
+        NSLog(@"landscape");
+    }
 
 }
 
@@ -133,7 +143,7 @@
 
     UIImage *wallpaper = [[UIImage alloc] init];
 
-    wallpaper = [self processWallpaper:kTimelineWallpaper];
+    wallpaper = [BackgroundGenerator blurImage:kTimelineWallpaper];
 
     if (self.shouldShowSent)
     {
