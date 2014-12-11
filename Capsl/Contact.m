@@ -87,6 +87,7 @@
                                                      contact.lastName = lastName;
                                                      contact.nickName = nickName;
                                                      contact.photo = photo;
+                                                     contact.allNameString = [NSString stringWithFormat:@"%@%@",firstName,lastName];
                                                      
                                                      //Add the contact object to our array
                                                      if (contact.number != nil)

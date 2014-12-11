@@ -119,7 +119,7 @@
     else
     {
         //TODO:add last name
-        NSPredicate *resultPredicate = [NSPredicate predicateWithFormat:@"firstName contains[c] %@", searchText];
+        NSPredicate *resultPredicate = [NSPredicate predicateWithFormat:@"allNameString contains[c] %@", searchText];
         self.searchResults = [[self.contactsArray filteredArrayUsingPredicate:resultPredicate] mutableCopy];
     }
 }
