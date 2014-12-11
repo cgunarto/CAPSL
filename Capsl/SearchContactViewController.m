@@ -191,7 +191,14 @@
         allContactCell.nameLabel.text = [contact fullName];
         allContactCell.usernameLabel.text = contact.nickName;
         allContactCell.phoneLabel.text = contact.number;
-        allContactCell.photoImageView.image = [UIImage imageWithData:contact.photo];
+        if (contact.photo)
+        {
+            allContactCell.photoImageView.image = [UIImage imageWithData:contact.photo];
+        }
+        else
+        {
+            allContactCell.photoImageView.image = [UIImage imageNamed:@"default"];
+        }
     }
 
     //Make the profile rounded
