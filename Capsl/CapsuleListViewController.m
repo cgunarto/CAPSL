@@ -146,17 +146,9 @@
     cell.profileImage.layer.cornerRadius = cell.profileImage.frame.size.width/2;
     cell.profileImage.clipsToBounds = YES;
 
-//    if ([cell.profileImage.image isEqual:[UIImage imageNamed:@"default"]])
-//    {
-        [profilePhoto getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
+    [profilePhoto getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
             cell.profileImage.image = [UIImage imageWithData:data];
-//            [profilePicArray replaceObjectAtIndex:indexPath.row withObject:[UIImage imageWithData:data]];
         }];
-//    }
-//    else
-//    {
-//        cell.profileImage.image = profilePicArray[indexPath.row];
-//    }
 
     [cell drawCellForCapsl:capslForCell ThatWasSent:self.shouldShowSent];
 

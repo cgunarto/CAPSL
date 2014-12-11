@@ -2184,10 +2184,10 @@
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <connections>
                                             <outlet property="capslrLabel" destination="Vw2-gs-VU7" id="Wxw-4M-av9"/>
+                                            <outlet property="countdownLabel" destination="Lji-1Y-YV1" id="w5f-h6-JmF"/>
                                             <outlet property="deliveryDateLabel" destination="8aB-UJ-cmv" id="wUW-Gj-55C"/>
                                             <outlet property="lozengeView" destination="6JC-R8-5qu" id="WEQ-uV-nSV"/>
                                             <outlet property="profileImage" destination="HAI-ck-GMZ" id="0ej-Df-dMh"/>
-                                            <outlet property="timerLabel" destination="Lji-1Y-YV1" id="Sbu-5o-cfO"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>

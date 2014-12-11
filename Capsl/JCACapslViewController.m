@@ -153,7 +153,7 @@ static NSString * const reuseIdentifier = @"CapslCell";
     //    cell.nameLabel.text = self.monthsOfTheYear[indexPath.section % 12];
     }
 
-    [self drawCell:cell];
+    [cell drawCellforSentCapsl:capsl withSentStatus:self.showSent];
 
     [cell updateLabelsForCapsl:capsl];
 
@@ -260,44 +260,6 @@ static NSString * const reuseIdentifier = @"CapslCell";
 }
 
 #pragma mark - helper methods
-
-- (JCACapslCollectionViewCell *)drawCell:(JCACapslCollectionViewCell *)cell
-{
-//    NSArray *constraints = [cell.profilePicView constraints];
-//    [cell.profilePicView removeConstraints:constraints];
-
-    NSLayoutConstraint *widthConstraint = [NSLayoutConstraint constraintWithItem:cell.profilePicView attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:cell attribute:NSLayoutAttributeWidth multiplier:1.0 constant:0];
-    NSLayoutConstraint *heightConstraint = [NSLayoutConstraint constraintWithItem:cell.profilePicView attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:cell.profilePicView attribute:NSLayoutAttributeWidth multiplier:1.0 constant:0];
-
-    [cell addSubview:cell.profilePicView];
-    [cell sendSubviewToBack:cell.profilePicView];
-    [cell addConstraints:@[widthConstraint, heightConstraint]];
-
-    cell.profilePicView.layer.cornerRadius = cell.frame.size.width/2;
-
-
-    [cell.profilePicView setContentMode:UIViewContentModeScaleAspectFill];
-    [cell.profilePicView setClipsToBounds:YES];
-
-//    cell.profilePicView.layer.borderColor = [UIColor blackColor].CGColor;
-//    cell.profilePicView.layer.borderWidth = 1.0;
-
-    cell.countdownLabel.layer.cornerRadius = cell.countdownLabel.frame.size.height/2;
-    cell.countdownLabel.clipsToBounds = YES;
-
-    if (self.showSent)
-    {
-        cell.countdownLabel.backgroundColor = kSentCapsuleColor;
-    }
-    else
-    {
-        cell.countdownLabel.backgroundColor = kReceivedCapsuleColor;
-    }
-
-    [cell layoutIfNeeded];
-
-    return cell;
-}
 
 - (void)updateClocks
 {

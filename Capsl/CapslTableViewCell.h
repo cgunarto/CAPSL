@@ -16,7 +16,7 @@
 @property (strong, nonatomic) IBOutlet UIImageView *profileImage;
 @property (strong, nonatomic) IBOutlet UILabel *capslrLabel;
 @property (strong, nonatomic) IBOutlet UILabel *deliveryDateLabel;
-@property (strong, nonatomic) IBOutlet UILabel *timerLabel;
+@property (strong, nonatomic) IBOutlet UILabel *countdownLabel;
 @property (strong, nonatomic) IBOutlet UIView *lozengeView;
 
 @property NSString *timerString;

@@ -8,9 +8,6 @@
 
 #import "JKCountDownTimer.h"
 #import "Capsl.h"
-#define kSixHoursInSeconds 21600
-#define kDayInSeconds 86400
-#define kWeekInSeconds 604800
 
 @interface JKCountDownTimer ()
 
@@ -23,8 +20,7 @@
 + (NSString *)getStatusStringWithCapsl:(Capsl *)capsl
 {
 
-    NSDate *deliveryDate = capsl.deliveryTime;
-    NSTimeInterval timeInterval = [deliveryDate timeIntervalSinceNow];
+    NSTimeInterval timeInterval = [capsl getTimeIntervalUntilDelivery];
 
     NSString *dateString = [NSString string];
 
@@ -48,6 +44,8 @@
     return dateString;
 
 }
+
+
 
 + (NSString *)englishStringFromTimeInterval:(NSTimeInterval)timeInterval capsl:(Capsl *)capsl
 {

@@ -11,9 +11,18 @@
 
 #define testValue @"test value"
 
-#define kReceivedCapsuleColor [UIColor colorWithHue:0.578 saturation:0.601 brightness:0.642 alpha:1.000]
-#define kSentCapsuleColor [UIColor colorWithHue:0.496 saturation:0.791 brightness:0.554 alpha:1.000]
+
+
+#define kReceivedCapsuleColor [UIColor colorWithHue:0.575 saturation:0.438 brightness:0.751 alpha:1.000]
+#define kReceivedViewedTextColor [UIColor colorWithHue:0.573 saturation:0.222 brightness:0.866 alpha:1.000]
+#define kReceivedViewedCapsuleColor [UIColor colorWithHue:0.577 saturation:0.554 brightness:0.624 alpha:1.000]
+
+#define kSentCapsuleColor [UIColor colorWithHue:0.492 saturation:0.648 brightness:0.656 alpha:1.000]
+#define kSentViewedTextColor [UIColor colorWithHue:0.489 saturation:0.293 brightness:0.820 alpha:1.000]
+#define kSentViewedCapsuleColor [UIColor colorWithHue:0.496 saturation:0.791 brightness:0.554 alpha:1.000]
+
 #define kProfilPicBackgroundColor [UIColor colorWithWhite:0.5 alpha:0.5]
+
 
 #define kSplashWallpaper [UIImage imageNamed:@"wallpaperRoad"]
 #define kViewCapsulesWallpaper [UIImage imageNamed:@"wallpaperRoad_blurred"]
@@ -25,5 +34,9 @@
 #define kEditProfileBackground [UIImage imageNamed:@"lake_portrait 2"]
 #define kUpdateProfileBackground [UIImage imageNamed:@"lake_portrait 3"]
 #define kRefreshData @"updateData"
+
+#define kSixHoursInSeconds 21600
+#define kDayInSeconds 86400
+#define kWeekInSeconds 604800
 
 #endif

@@ -571,7 +571,7 @@
 				TargetAttributes = {
 					4F69EBBD1A252331009625AA = {
 						CreatedOnToolsVersion = 6.1;
-						DevelopmentTeam = EP9GA36X8K;
+						DevelopmentTeam = 5FCLB5W36M;
 					};
 					4F69EBD61A252331009625AA = {
 						CreatedOnToolsVersion = 6.1;
@@ -732,8 +732,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iOS Development: Christina Gunarto (CNG5MLR6H4)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iOS Development: Christina Gunarto (CNG5MLR6H4)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Eli Newsom (334Z7M9CA9)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Eli Newsom (334Z7M9CA9)";
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -753,7 +753,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "ad419d51-b688-4bfb-9a82-669b4398d0fb";
+				PROVISIONING_PROFILE = "b1ef187d-c825-4eef-83b8-1f36ad6fb1b6";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -775,8 +775,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iOS Development: Christina Gunarto (CNG5MLR6H4)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iOS Development: Christina Gunarto (CNG5MLR6H4)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Eli Newsom (334Z7M9CA9)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Eli Newsom (334Z7M9CA9)";
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -789,7 +789,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PROVISIONING_PROFILE = "ad419d51-b688-4bfb-9a82-669b4398d0fb";
+				PROVISIONING_PROFILE = "b1ef187d-c825-4eef-83b8-1f36ad6fb1b6";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};

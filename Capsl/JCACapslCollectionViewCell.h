@@ -17,5 +17,6 @@
 @property (strong, nonatomic) IBOutlet UILabel *countdownLabel;
 
 - (void)updateLabelsForCapsl:(Capsl *)capsl;
+- (void)drawCellforSentCapsl:(Capsl *)capsl withSentStatus:(BOOL)showSent;
 
 @end
