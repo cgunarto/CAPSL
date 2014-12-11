@@ -35,15 +35,16 @@
 {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor clearColor];
+    self.exitPlayVideoButton.hidden = YES;
     [self showVideoRecorder];
 }
 
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    self.view.backgroundColor = [UIColor clearColor];
-    [self showVideoRecorder];
-}
+//- (void)viewWillAppear:(BOOL)animated
+//{
+//    [super viewWillAppear:animated];
+//    self.view.backgroundColor = [UIColor clearColor];
+//    [self showVideoRecorder];
+//}
 
 #pragma mark Lock Orientation
 
@@ -125,7 +126,7 @@
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
 {
     NSLog(@"Camera exited");
-//    [picker dismissViewControllerAnimated:YES completion:NULL];
+    [picker dismissViewControllerAnimated:YES completion:NULL];
     [self performSegueWithIdentifier:@"unwindToCapture" sender:self];
 }
 
