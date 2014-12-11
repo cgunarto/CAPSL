@@ -639,6 +639,7 @@ NSUInteger DeviceSystemMajorVersion()
              {
                  NSLog(@"there is an error %@", error.localizedDescription);
                  [SVProgressHUD dismiss];
+
              }
          }];
     }
