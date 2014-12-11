@@ -23,6 +23,8 @@
 
 #define kProfilPicBackgroundColor [UIColor colorWithWhite:0.5 alpha:0.5]
 
+#define kAlertControllerTintColor [UIColor blackColor]
+
 
 #define kSplashWallpaper [UIImage imageNamed:@"wallpaperRoad"]
 #define kViewCapsulesWallpaper [UIImage imageNamed:@"wallpaperRoad_blurred"]

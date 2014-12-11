@@ -155,8 +155,8 @@
 		4F7243801A3159C7002CC918 /* PromptDateTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PromptDateTableViewCell.m; sourceTree = "<group>"; };
 		4FB6B7781A38F8E90003DE0B /* JCALockNavController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JCALockNavController.h; sourceTree = "<group>"; };
 		4FB6B7791A38F8E90003DE0B /* JCALockNavController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JCALockNavController.m; sourceTree = "<group>"; };
-		4FB6B77B1A3988660003DE0B /* UILabel+WhiteUIDatePickerLabels.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UILabel+WhiteUIDatePickerLabels.h"; sourceTree = "<group>"; };
-		4FB6B77C1A3988670003DE0B /* UILabel+WhiteUIDatePickerLabels.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UILabel+WhiteUIDatePickerLabels.m"; sourceTree = "<group>"; };
+		4FB6B77B1A3988660003DE0B /* UILabel+WhiteUIDatePickerLabels.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UILabel+WhiteUIDatePickerLabels.h"; path = "../UILabel+WhiteUIDatePickerLabels.h"; sourceTree = "<group>"; };
+		4FB6B77C1A3988670003DE0B /* UILabel+WhiteUIDatePickerLabels.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UILabel+WhiteUIDatePickerLabels.m"; path = "../UILabel+WhiteUIDatePickerLabels.m"; sourceTree = "<group>"; };
 		4FC4EA161A2B021D00D3D09D /* RecordAudioViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecordAudioViewController.h; sourceTree = "<group>"; };
 		4FC4EA171A2B021D00D3D09D /* RecordAudioViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecordAudioViewController.m; sourceTree = "<group>"; };
 		4FC4EA1E1A2D1D4000D3D09D /* RecordVideoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecordVideoViewController.h; sourceTree = "<group>"; };
@@ -260,7 +260,6 @@
 		4F69EBB51A252331009625AA = {
 			isa = PBXGroup;
 			children = (
-				4FB6B77E1A3988700003DE0B /* Label */,
 				4F69EBCB1A252331009625AA /* Main.storyboard */,
 				4F69EBC01A252331009625AA /* Capsl */,
 				4F69EBDA1A252331009625AA /* CapslTests */,
@@ -382,15 +381,6 @@
 			name = Model;
 			sourceTree = "<group>";
 		};
-		4FB6B77E1A3988700003DE0B /* Label */ = {
-			isa = PBXGroup;
-			children = (
-				4FB6B77B1A3988660003DE0B /* UILabel+WhiteUIDatePickerLabels.h */,
-				4FB6B77C1A3988670003DE0B /* UILabel+WhiteUIDatePickerLabels.m */,
-			);
-			name = Label;
-			sourceTree = "<group>";
-		};
 		4FC4EA191A2B027500D3D09D /* Capture & Compose VCs */ = {
 			isa = PBXGroup;
 			children = (
@@ -470,6 +460,8 @@
 		8D5A3DE21A2A4B4D00A6485A /* Categories */ = {
 			isa = PBXGroup;
 			children = (
+				4FB6B77B1A3988660003DE0B /* UILabel+WhiteUIDatePickerLabels.h */,
+				4FB6B77C1A3988670003DE0B /* UILabel+WhiteUIDatePickerLabels.m */,
 				90C61E601A2C4D3A003EFEF9 /* UIImage+RoundedCorner.h */,
 				90C61E611A2C4D3A003EFEF9 /* UIImage+RoundedCorner.m */,
 				90C61E631A2C4EA3003EFEF9 /* UIImage+Alpha.h */,

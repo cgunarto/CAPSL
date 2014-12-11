@@ -647,6 +647,9 @@ NSUInteger DeviceSystemMajorVersion()
                                                            style:UIAlertActionStyleDefault
                                                          handler:nil];
         [alert addAction:okButton];
+
+        [alert.view setTintColor:kAlertControllerTintColor];
+
         [self presentViewController:alert
                            animated:YES
                          completion:nil];
@@ -673,6 +676,8 @@ NSUInteger DeviceSystemMajorVersion()
 
     [alert addAction:okButton];
     [alert addAction:goBackButton];
+
+    [alert.view setTintColor:kAlertControllerTintColor];
 
     [self presentViewController:alert
                        animated:YES

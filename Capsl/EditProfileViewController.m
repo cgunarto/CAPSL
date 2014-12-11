@@ -178,6 +178,8 @@
                                                                      delegate:nil
                                                             cancelButtonTitle:@"OK"
                                                             otherButtonTitles: nil];
+
+                [myAlertView setTintColor:kAlertControllerTintColor];
                 [myAlertView show];
 
             }
@@ -316,6 +318,8 @@
 
     [alert addAction:noButton];
     [alert addAction:yesButton];
+
+    [alert.view setTintColor:kAlertControllerTintColor];
 
     [self presentViewController:alert animated:YES completion:nil];
 }

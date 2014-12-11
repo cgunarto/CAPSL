@@ -309,6 +309,8 @@
                                                                                                 delegate:nil
                                                                                        cancelButtonTitle:@"OK"
                                                                                        otherButtonTitles: nil];
+
+                                           [myAlertView setTintColor:kAlertControllerTintColor];
                                            [myAlertView show];
 
                                        }
@@ -357,7 +359,8 @@
     [alert addAction:cameraButton];
     [alert addAction:libraryButton];
     [alert addAction:cancelButton];
-    
+
+    [alert.view setTintColor:kAlertControllerTintColor];
     [self presentViewController:alert
                        animated:YES
                      completion:nil];
@@ -488,6 +491,9 @@
                                                            style:UIAlertActionStyleDefault
                                                          handler:nil];
         [alert addAction:okButton];
+
+        [alert.view setTintColor:kAlertControllerTintColor];
+
         [self presentViewController:alert
                            animated:YES
                          completion:nil];

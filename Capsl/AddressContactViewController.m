@@ -75,6 +75,9 @@
                                                                style:UIAlertActionStyleDefault
                                                              handler:nil];
             [alert addAction:okButton];
+
+            [alert.view setTintColor:kAlertControllerTintColor];
+
             [self presentViewController:alert
                                animated:YES
                              completion:nil];
@@ -104,6 +107,9 @@
                                                            style:UIAlertActionStyleDefault
                                                          handler:nil];
         [alert addAction:okButton];
+
+        [alert.view setTintColor:kAlertControllerTintColor];
+
         [self presentViewController:alert
                            animated:YES
                          completion:nil];
