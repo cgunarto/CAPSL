@@ -121,6 +121,12 @@
     }
 }
 
+- (void)searchDisplayController:(UISearchDisplayController *)controller willShowSearchResultsTableView:(UITableView *)tableView
+{
+    UIImage *processedImage = [BackgroundGenerator blurImage:self.backgroundImage];
+    [tableView setBackgroundColor:[UIColor colorWithPatternImage:processedImage]];
+}
+
 -(BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchString:(NSString *)searchString
 {
     [self.searchDisplayController.searchResultsTableView setBackgroundColor:[UIColor clearColor]];
