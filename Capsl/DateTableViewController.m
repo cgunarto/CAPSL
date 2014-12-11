@@ -660,7 +660,7 @@ NSUInteger DeviceSystemMajorVersion()
 {
 
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Sure you want to cancel?"
-                                                                   message:@"You will loose your changes"
+                                                                   message:@"You will lose your changes"
                                                             preferredStyle:UIAlertControllerStyleAlert];
 
     UIAlertAction *okButton = [UIAlertAction actionWithTitle:@"Yes"
