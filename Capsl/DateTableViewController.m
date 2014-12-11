@@ -13,6 +13,7 @@
 #import "Capslr.h"
 #import "RootViewController.h"
 #import "BackgroundGenerator.h"
+#import "SVProgressHUD.h"
 
 #define kPickerAnimationDuration    3   // duration for the animation to slide the date picker into view
 #define kDatePickerTag              99     // view tag identifiying the date picker view
@@ -585,11 +586,15 @@ NSUInteger DeviceSystemMajorVersion()
     //save to Parse if there is a delivery time
     if (self.createdCapsl.deliveryTime)
     {
+        [self showLoadingIndicator];
         [self.createdCapsl saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error)
          {
              if (!error)
              {
                  Capslr *recipient= self.createdCapsl.recipient;
+
+                 [SVProgressHUD dismiss];
+
                  NSString *message = [NSString stringWithFormat:@"Capsl sent to %@", recipient.username];
 
                  UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Message Sent!"
@@ -633,6 +638,7 @@ NSUInteger DeviceSystemMajorVersion()
              else
              {
                  NSLog(@"there is an error %@", error.localizedDescription);
+                 [SVProgressHUD dismiss];
              }
          }];
     }
@@ -654,6 +660,7 @@ NSUInteger DeviceSystemMajorVersion()
                            animated:YES
                          completion:nil];
 
+        [SVProgressHUD dismiss];
     }
 
 
@@ -689,6 +696,15 @@ NSUInteger DeviceSystemMajorVersion()
 {
     UINavigationController *rootNav = [self.storyboard instantiateInitialViewController];;
     [self.view.window setRootViewController:rootNav];
+}
+
+#pragma mark Indicator and initial View set up
+
+- (void)showLoadingIndicator
+{
+    [SVProgressHUD setBackgroundColor:[UIColor clearColor]];
+    [SVProgressHUD setForegroundColor:[UIColor whiteColor]];
+    [SVProgressHUD show];
 }
 
 @end
