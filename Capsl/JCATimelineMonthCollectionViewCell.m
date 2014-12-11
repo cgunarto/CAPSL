@@ -10,4 +10,9 @@
 
 @implementation JCATimelineMonthCollectionViewCell
 
+- (void)prepareForReuse
+{
+    [self.countLabel removeFromSuperview];
+}
+
 @end

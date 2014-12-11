@@ -11,5 +11,6 @@
 @interface JCATimelineMonthCollectionViewCell : UICollectionViewCell
 
 @property (strong, nonatomic) IBOutlet UILabel *monthLabel;
+@property (strong, nonatomic) IBOutlet UILabel *countLabel;
 
 @end

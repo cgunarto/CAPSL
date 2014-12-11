@@ -179,7 +179,7 @@ static NSString * const reuseIdentifier = @"CapslCell";
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    CGSize cellSize = CGSizeMake(self.view.frame.size.height * 0.4, self.view.frame.size.height * 0.8);
+    CGSize cellSize = CGSizeMake(self.view.frame.size.height * 0.5, self.view.frame.size.height);
     return cellSize;
 }
 

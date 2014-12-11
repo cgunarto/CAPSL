@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="fsF-ct-we6">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="fsF-ct-we6">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
@@ -3576,7 +3576,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="Wiw-f6-T3g">
-                                    <size key="itemSize" width="50" height="44"/>
+                                    <size key="itemSize" width="50" height="80"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
@@ -3586,47 +3586,103 @@
                                         <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="0.0" y="0.0" width="50" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="50" height="80"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kzl-qi-aul">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kzl-qi-aul" userLabel="Month Label">
                                                     <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="10" id="yvn-Y4-kd2"/>
+                                                    </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
+                                                    <variation key="default">
+                                                        <mask key="constraints">
+                                                            <exclude reference="yvn-Y4-kd2"/>
+                                                        </mask>
+                                                    </variation>
+                                                    <variation key="heightClass=compact">
+                                                        <mask key="constraints">
+                                                            <include reference="yvn-Y4-kd2"/>
+                                                        </mask>
+                                                    </variation>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rwx-iZ-8Zm" userLabel="Count Label">
+                                                    <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" placeholder="YES" id="NM9-Io-z1l">
+                                                            <variation key="heightClass=compact" constant="20"/>
+                                                        </constraint>
+                                                        <constraint firstAttribute="height" placeholder="YES" id="WB1-U4-HKS">
+                                                            <variation key="heightClass=compact" constant="20"/>
+                                                        </constraint>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="14"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                                    <nil key="highlightedColor"/>
+                                                    <variation key="default">
+                                                        <mask key="constraints">
+                                                            <exclude reference="NM9-Io-z1l"/>
+                                                            <exclude reference="WB1-U4-HKS"/>
+                                                        </mask>
+                                                    </variation>
+                                                    <variation key="heightClass=compact">
+                                                        <mask key="constraints">
+                                                            <include reference="NM9-Io-z1l"/>
+                                                            <include reference="WB1-U4-HKS"/>
+                                                        </mask>
+                                                    </variation>
                                                 </label>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
                                         <constraints>
-                                            <constraint firstItem="kzl-qi-aul" firstAttribute="top" secondItem="AN7-OS-hn4" secondAttribute="topMargin" constant="5" id="Rfy-B7-FXz"/>
+                                            <constraint firstItem="kzl-qi-aul" firstAttribute="top" secondItem="AN7-OS-hn4" secondAttribute="topMargin" constant="5" id="Rfy-B7-FXz">
+                                                <variation key="heightClass=compact" constant="18"/>
+                                            </constraint>
+                                            <constraint firstAttribute="centerX" secondItem="rwx-iZ-8Zm" secondAttribute="centerX" placeholder="YES" id="Xfg-g3-Mr0">
+                                                <variation key="heightClass=compact" constant="0.0"/>
+                                            </constraint>
                                             <constraint firstItem="kzl-qi-aul" firstAttribute="trailing" secondItem="AN7-OS-hn4" secondAttribute="trailingMargin" id="fYz-T9-Rzy"/>
+                                            <constraint firstItem="rwx-iZ-8Zm" firstAttribute="centerY" secondItem="AN7-OS-hn4" secondAttribute="bottom" multiplier="0.4" placeholder="YES" id="lxZ-k9-4VY">
+                                                <variation key="heightClass=compact" constant="1"/>
+                                            </constraint>
                                             <constraint firstItem="kzl-qi-aul" firstAttribute="leading" secondItem="AN7-OS-hn4" secondAttribute="leadingMargin" id="mGy-Sm-ORE"/>
-                                            <constraint firstAttribute="bottomMargin" secondItem="kzl-qi-aul" secondAttribute="bottom" constant="5" id="sJ0-g2-gP9"/>
+                                            <constraint firstAttribute="bottomMargin" secondItem="kzl-qi-aul" secondAttribute="bottom" id="sJ0-g2-gP9">
+                                                <variation key="heightClass=compact" constant="0.0"/>
+                                            </constraint>
                                         </constraints>
                                         <variation key="default">
                                             <mask key="subviews">
                                                 <exclude reference="kzl-qi-aul"/>
+                                                <exclude reference="rwx-iZ-8Zm"/>
                                             </mask>
                                             <mask key="constraints">
                                                 <exclude reference="Rfy-B7-FXz"/>
                                                 <exclude reference="fYz-T9-Rzy"/>
                                                 <exclude reference="mGy-Sm-ORE"/>
                                                 <exclude reference="sJ0-g2-gP9"/>
+                                                <exclude reference="Xfg-g3-Mr0"/>
+                                                <exclude reference="lxZ-k9-4VY"/>
                                             </mask>
                                         </variation>
                                         <variation key="heightClass=compact">
                                             <mask key="subviews">
                                                 <include reference="kzl-qi-aul"/>
+                                                <include reference="rwx-iZ-8Zm"/>
                                             </mask>
                                             <mask key="constraints">
-                                                <include reference="Rfy-B7-FXz"/>
+                                                <exclude reference="Rfy-B7-FXz"/>
                                                 <include reference="fYz-T9-Rzy"/>
                                                 <include reference="mGy-Sm-ORE"/>
                                                 <include reference="sJ0-g2-gP9"/>
+                                                <include reference="Xfg-g3-Mr0"/>
+                                                <include reference="lxZ-k9-4VY"/>
                                             </mask>
                                         </variation>
                                         <connections>
+                                            <outlet property="countLabel" destination="rwx-iZ-8Zm" id="pMs-SH-XOH"/>
                                             <outlet property="monthLabel" destination="kzl-qi-aul" id="xb5-b8-ESI"/>
                                         </connections>
                                     </collectionViewCell>

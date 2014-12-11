@@ -14,7 +14,9 @@
 
 @property (strong, nonatomic) IBOutlet UICollectionView *timelineView;
 @property NSArray *monthStrings;
+@property NSArray *arrayOfYearNumbers;
 @property NSMutableArray *arrayOfMonths;
+@property NSArray *arrayOfCapslCounts;
 @property NSArray *collectionViewData;
 
 @property CGFloat screenWidth;
@@ -87,6 +89,19 @@
 
     JCATimelineMonthCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"cell" forIndexPath:indexPath];
 
+    NSInteger countIndex = (indexPath.section * 12) + indexPath.item;
+    NSString *countString = self.arrayOfCapslCounts[countIndex];
+
+    if ([countString isEqual:[NSNull null]])
+    {
+        [self drawEmptyCountDotForCell:cell];
+    }
+    else
+    {
+        [self drawCountDotForCell:cell];
+        cell.countLabel.text = [(NSNumber *)countString stringValue];
+    }
+    
     cell.monthLabel.text = self.arrayOfMonths[indexPath.item];
 
     return cell;
@@ -214,13 +229,55 @@
     if (self.showSent == NO)
     {
         self.collectionViewData = self.capslGrandArray;
+        self.arrayOfYearNumbers = self.capslYearNumbers;
+        self.arrayOfCapslCounts = [self getArrayOfCapsuleCountsWithCountsDictionary:self.capslCounts];
     }
     else
     {
         self.collectionViewData = self.sentCapslsGrandArray;
+        self.arrayOfYearNumbers = self.sentCapslYearNumbers;
+        self.arrayOfCapslCounts = [self getArrayOfCapsuleCountsWithCountsDictionary:self.sentCapslCounts];
+
     }
 
     [self.timelineView reloadData];
+}
+
+- (NSArray *)getArrayOfCapsuleCountsWithCountsDictionary:(NSDictionary *)dict
+{
+
+    NSMutableArray *arrayOfCounts = [@[] mutableCopy];
+
+    // create empty array to mirror array of month labels
+    for (int x = 1; x <= (self.arrayOfYearNumbers.count * 12); x++)
+    {
+        [arrayOfCounts addObject:[NSNull null]];
+    }
+
+    NSArray *yearsWithCapsls = [dict allKeys];
+
+    for (NSString *yearString in yearsWithCapsls)
+    {
+
+        NSDictionary *dictOfMonths = [dict objectForKey:yearString];
+
+        NSArray *monthStrings = [dictOfMonths allKeys];
+
+        for (NSString *month in monthStrings)
+        {
+
+            NSString *numberOfCapsls = [dictOfMonths objectForKey:month];
+            NSInteger yearMultiplier = [self.arrayOfYearNumbers indexOfObject:yearString];
+            NSInteger index = (yearMultiplier * 12) + ([month integerValue] - 1);
+
+            [arrayOfCounts replaceObjectAtIndex:index withObject:numberOfCapsls];
+
+        }
+
+    }
+
+    return arrayOfCounts;
+
 }
 
 - (NSArray *)getCapslCountPerMonthWithGrandArray
@@ -233,6 +290,89 @@
     return nil;
 }
 
+- (void)drawEmptyCountDotForCell:(JCATimelineMonthCollectionViewCell *)cell
+{
+
+    [cell addSubview:cell.countLabel];
+//    [cell removeConstraints:cell.constraints];
+
+    [self centerDot:cell];
+    NSLayoutConstraint *widthConstraint = [NSLayoutConstraint constraintWithItem:cell.countLabel attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0 constant:5.0];
+    NSLayoutConstraint *heightConstraint = [NSLayoutConstraint constraintWithItem:cell.countLabel attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0 constant:5.0];
+
+    [cell addConstraints:@[widthConstraint, heightConstraint]];
+
+
+//    CGRect dotFrame = cell.countLabel.frame;
+//    dotFrame.size = CGSizeMake(5.0, 5.0);
+//    cell.countLabel.frame = dotFrame;
+    cell.countLabel.backgroundColor = [UIColor whiteColor];
+    cell.countLabel.layer.cornerRadius = 2.5;
+    cell.countLabel.clipsToBounds = YES;
+
+}
+
+- (void)drawCountDotForCell:(JCATimelineMonthCollectionViewCell *)cell
+{
+
+    //test code
+    [cell addSubview:cell.countLabel];
+//    [cell removeConstraints:cell.constraints];
+
+    [self centerDot:cell];
+    NSLayoutConstraint *widthConstraint = [NSLayoutConstraint constraintWithItem:cell.countLabel attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0 constant:25.0];
+    NSLayoutConstraint *heightConstraint = [NSLayoutConstraint constraintWithItem:cell.countLabel attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0 constant:25.0];
+
+    [cell addConstraints:@[widthConstraint, heightConstraint]];
+
+    if (self.showSent)
+    {
+        cell.countLabel.backgroundColor = kSentCapsuleColor;
+    }
+    else
+    {
+        cell.countLabel.backgroundColor = kReceivedCapsuleColor;
+    }
+
+    cell.countLabel.layer.cornerRadius = 12.5;
+    cell.countLabel.clipsToBounds = YES;
+
+    //end test code
+
+/* good code    [self.view addSubview:cell];
+
+    [self centerDot:cell];
+
+
+    CGRect dotFrame = cell.countLabel.frame;
+    dotFrame.size = CGSizeMake(20, 20);
+    cell.countLabel.frame = dotFrame;
+
+    if (self.showSent)
+    {
+        cell.countLabel.backgroundColor = kSentCapsuleColor;
+    }
+    else
+    {
+        cell.countLabel.backgroundColor = kReceivedCapsuleColor;
+    }
+
+    cell.countLabel.layer.cornerRadius = 10;
+    cell.countLabel.clipsToBounds = YES;
+ 
+ */
+
+}
+
+- (void)centerDot:(JCATimelineMonthCollectionViewCell *)cell
+{
+
+    NSLayoutConstraint *centerYConstraint = [NSLayoutConstraint constraintWithItem:cell.countLabel attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:cell attribute:NSLayoutAttributeBottom multiplier:0.4 constant:0];
+    NSLayoutConstraint *centerXConstraint = [NSLayoutConstraint constraintWithItem:cell.countLabel attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:cell attribute:NSLayoutAttributeCenterX multiplier:1.0 constant:0];
+
+    [cell addConstraints:@[centerXConstraint, centerYConstraint]];
+
+}
 
 #pragma mark - actions
 

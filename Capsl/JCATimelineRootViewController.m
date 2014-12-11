@@ -300,6 +300,7 @@
         [yearNumbers addObject:[NSString stringWithFormat:@"%li", (long)y]];
     }
 
+    // this includes empty prefix and suffix years as well as empty years in between
     return [NSArray arrayWithArray:yearNumbers];
 
 }
@@ -309,7 +310,7 @@
 
     NSMutableDictionary *dictionaryOfYearKeys = [NSMutableDictionary dictionary];
 
-    // create a dictionary where key is year and object is array with month name, and capsule count for that month
+    // create a dictionary where key is year and object is another dictionary with month name key, and capsule count for that month as value
     for (Capsl *capsl in capsls)
     {
         NSInteger capslYear = [capsl getYearForCapsl];

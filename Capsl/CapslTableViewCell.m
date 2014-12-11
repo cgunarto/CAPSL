@@ -30,7 +30,6 @@
 }
 
 
-
 - (void)updateLabelsForCapsl:(Capsl *)capsl
 {
 

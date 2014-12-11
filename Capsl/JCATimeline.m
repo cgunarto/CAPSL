@@ -17,14 +17,14 @@
 
     //draw left segment
     UIBezierPath *leftSegment = [UIBezierPath bezierPath];
-    [leftSegment moveToPoint:CGPointMake(0.0, self.frame.size.height/2)];
-    [leftSegment addLineToPoint:CGPointMake(self.frame.size.width/24 * 11, self.frame.size.height/2)];
+    [leftSegment moveToPoint:CGPointMake(0.0, self.frame.size.height * 0.4)];
+    [leftSegment addLineToPoint:CGPointMake(self.frame.size.width/30 * 14, self.frame.size.height* 0.4)];
     leftSegment.lineWidth = 1;
     [leftSegment stroke];
 
     // circle
-    UIBezierPath *centerArc = [UIBezierPath bezierPathWithArcCenter:CGPointMake(self.frame.size.width/2, self.frame.size.height/2)
-                                                         radius:self.frame.size.width/12/2
+    UIBezierPath *centerArc = [UIBezierPath bezierPathWithArcCenter:CGPointMake(self.frame.size.width/2, self.frame.size.height * 0.4)
+                                                         radius:self.frame.size.width/15/2
                                                      startAngle:0
                                                        endAngle:M_PI * 2
                                                       clockwise:NO];
@@ -34,8 +34,8 @@
 
     // draw right segment
     UIBezierPath *rightSegment = [UIBezierPath bezierPath];
-    [rightSegment moveToPoint:CGPointMake(self.frame.size.width/24 * 13, self.frame.size.height/2)];
-    [rightSegment addLineToPoint:CGPointMake(self.frame.size.width, self.frame.size.height/2)];
+    [rightSegment moveToPoint:CGPointMake(self.frame.size.width/30 * 16, self.frame.size.height * 0.4)];
+    [rightSegment addLineToPoint:CGPointMake(self.frame.size.width, self.frame.size.height * 0.4)];
     rightSegment.lineWidth = 1;
     [rightSegment stroke];
 
