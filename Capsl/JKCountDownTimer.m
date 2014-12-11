@@ -101,7 +101,7 @@
 // For Date
 + (NSString *)getDateStringWithDate:(NSDate *)date withCapsl:(Capsl *)capsl
 {
-
+    //TODO: Refactor later
     NSDate *deliveryDate = capsl.deliveryTime;
     NSTimeInterval timeInterval = [deliveryDate timeIntervalSinceNow];
 
