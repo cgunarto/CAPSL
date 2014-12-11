@@ -66,17 +66,19 @@
 
 }
 
+- (void)viewDidAppear:(BOOL)animated
+{
+    //Tableview needs to be reloaded otherwise profile pic will not show up the first time view loads
+    [self.tableView reloadData];
+}
+
+#pragma mark Setter for TBV Data
+
 -(void)setTableViewDataArray:(NSMutableArray *)tableViewDataArray
 {
     _tableViewDataArray = tableViewDataArray;
     [self.tableView reloadData];
 
-}
-
-- (void)viewDidAppear:(BOOL)animated
-{
-    //Tableview needs to be reloaded otherwise profile pic will not show up the first time view loads
-    [self.tableView reloadData];
 }
 
 #pragma mark Lock Orientation
