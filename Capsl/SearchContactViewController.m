@@ -78,8 +78,9 @@
 {
     _tableViewDataArray = tableViewDataArray;
     [self.tableView reloadData];
-
+//    [self.searchDisplayController.searchResultsTableView reloadData];
 }
+
 
 #pragma mark Lock Orientation
 
@@ -110,6 +111,8 @@
     {
         NSPredicate *resultPredicate = [NSPredicate predicateWithFormat:@"username contains[c] %@", searchText];
         self.searchResults = [[self.capslrArray filteredArrayUsingPredicate:resultPredicate] mutableCopy];
+        NSLog(@"%lu",(unsigned long)self.searchResults.count);
+
     }
 
     //If selecteSegment is 1 (Address contact), predicate for username
@@ -121,10 +124,12 @@
     }
 }
 
-- (void)searchDisplayController:(UISearchDisplayController *)controller willShowSearchResultsTableView:(UITableView *)tableView
+- (void)searchDisplayController:(UISearchDisplayController *)controller willShowSearchResultsTableView:(UITableView*)tableView
 {
     UIImage *processedImage = [BackgroundGenerator blurImage:self.backgroundImage];
     [tableView setBackgroundColor:[UIColor colorWithPatternImage:processedImage]];
+    tableView.tag = 1;
+
 }
 
 -(BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchString:(NSString *)searchString
@@ -154,7 +159,7 @@
     {
         Capslr *capslr = nil;
 
-        if ([tableView isEqual:self.searchDisplayController.searchResultsTableView])
+        if (tableView == self.searchDisplayController.searchResultsTableView)
         {
             capslr = [self.searchResults objectAtIndex:indexPath.row];
         }
@@ -186,7 +191,7 @@
     {
         Contact *contact = nil;
 
-        if ([tableView isEqual:self.searchDisplayController.searchResultsTableView])
+        if (tableView.tag == 1)
         {
             contact = [self.searchResults objectAtIndex:indexPath.row];
         }
@@ -213,7 +218,7 @@
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    if ([tableView isEqual:self.searchDisplayController.searchResultsTableView])
+    if (tableView.tag == 1)
     {
         return [self.searchResults count];
     }
