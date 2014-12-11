@@ -216,27 +216,21 @@ static NSString * const reuseIdentifier = @"CapslCell";
         BOOL capslIsUnlocked = [self shouldPerformSegueWithIdentifier:@"multimediaSegue" sender:capsl];
         if (capslIsUnlocked)
         {
-            [self performSegueWithIdentifier:@"multimediaSegue" sender:self];
+            [self performSegueWithIdentifier:@"multimediaSegue" sender:capsl];
         }
     }
 
-//    //If it's a video
-//    else
-//    {
-//        BOOL capslIsAvailable = [self isCapslAvailableToView:capsl];
-//        if (capslIsAvailable)
-//        {
-//            [self playVideo:capsl];
-//        }
-//    }
-//
-//    Check if the capsl is multimedia or video
-//    Check if it's unlocked and unviewed
+    //If it's a video
+    if ([capsl.type isEqualToString:@"video"])
+    {
+        BOOL capslIsAvailable = [self isCapslAvailableToView:capsl];
+        if (capslIsAvailable)
+        {
+            [self playVideo:capsl];
+        }
+    }
 
 }
-
-//Is there a check for when capsule is ready to be opened or not?? similar
-
 
 
 #pragma mark Playing Video
@@ -435,21 +429,20 @@ static NSString * const reuseIdentifier = @"CapslCell";
 
     return YES;
 }
-//
-//
-//
-//- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-//{
-//    NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
-//    Capsl *capsl = self.tableViewData[indexPath.row];
-//
-//    if ([segue.identifier isEqualToString:@"multimediaSegue"])
-//    {
-//        CaptureViewController *vc = segue.destinationViewController;
-//        vc.chosenCapsl = capsl;
-//        vc.isEditing = NO;
-//    }
-//}
+
+#pragma mark Segue
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(Capsl*)capsl
+{
+    if ([segue.identifier isEqualToString:@"multimediaSegue"])
+    {
+        CaptureViewController *vc = segue.destinationViewController;
+        vc.chosenCapsl = capsl;
+        vc.isEditing = NO;
+    }
+}
+
+
 
 
 @end
