@@ -121,10 +121,14 @@
     }
 }
 
+- (void)searchDisplayController:(UISearchDisplayController *)controller willShowSearchResultsTableView:(UITableView *)tableView
+{
+    UIImage *processedImage = [BackgroundGenerator blurImage:self.backgroundImage];
+    [tableView setBackgroundColor:[UIColor colorWithPatternImage:processedImage]];
+}
+
 -(BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchString:(NSString *)searchString
 {
-    [self.searchDisplayController.searchResultsTableView setBackgroundColor:[UIColor clearColor]];
-
     [self filterContentForSearchText:searchString
                                scope:[[self.searchDisplayController.searchBar scopeButtonTitles]
                                       objectAtIndex:[self.searchDisplayController.searchBar
@@ -183,6 +187,8 @@
         if ([tableView isEqual:self.searchDisplayController.searchResultsTableView])
         {
             contact = [self.searchResults objectAtIndex:indexPath.row];
+
+            UIImage *processedImage = [BackgroundGenerator blurImage:self.backgroundImage];
         }
         else
         {
@@ -205,7 +211,7 @@
     allContactCell.photoImageView.layer.cornerRadius = allContactCell.photoImageView.frame.size.width/2;
     allContactCell.photoImageView.clipsToBounds = YES;
     allContactCell.contentView.backgroundColor = [UIColor clearColor];
-
+    allContactCell.backgroundColor = [UIColor clearColor];
 
     return allContactCell;
 
