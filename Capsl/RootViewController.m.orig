@@ -8,17 +8,21 @@
 
 #import "RootViewController.h"
 #import "Capslr.h"
+#import "Capsl.h"
 #import <Parse/Parse.h>
 #import <ParseUI/ParseUI.h>
 #import "LoginViewController.h"
 #import "SignUpViewController.h"
 #import "JCAMainViewController.h"
+#import "SVProgressHUD.h"
+#import "DataFetcher.h"
 
-<<<<<<< HEAD
-@interface RootViewController () <PFLogInViewControllerDelegate, PFSignUpViewControllerDelegate, NSLayoutManagerDelegate>
-=======
+#define kTwoMinutesInSeconds 120
+#define kTwoDaysInSeconds 172800
+#define kWeekInSeconds 604800
+
+
 @interface RootViewController () <PFLogInViewControllerDelegate, PFSignUpViewControllerDelegate, UIAlertViewDelegate>
->>>>>>> Development
 @property (strong, nonatomic) IBOutlet UIButton *sendCapsuleButton;
 @property (strong, nonatomic) IBOutlet UIButton *viewCapsulesButton;
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *viewButtonRightConstraint;
@@ -26,15 +30,214 @@
 
 @property UITextField *verificationCode;
 
+//refactoring
+@property (nonatomic) NSArray *capslsArray;
+@property (nonatomic) NSArray *sentCapslsArray;
+@property (nonatomic) NSMutableArray *availableCapslsArray;
+@property UIImage *currentProfileImage;
+@property NSArray *onboardingCapsl;
+
+@property (nonatomic) BOOL shouldShowSent;
+
+@property NSObject *observer;
+@property JCAMainViewController *JCAMainVC;
+
 @end
 
 @implementation RootViewController
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+
+    // Check to see if user quit before entering verification code
+    if ([PFUser currentUser])
+    {
+<<<<<<< HEAD
+
+        [SVProgressHUD setBackgroundColor:[UIColor clearColor]];
+        [SVProgressHUD setForegroundColor:[UIColor whiteColor]];
+        [SVProgressHUD show];
+
+        [Capslr returnCapslrFromPFUser:[PFUser currentUser] withCompletion:^(Capslr *currentCapslr, NSError *error) {
+
+            self.viewCapsulesButton.enabled = NO;
+            self.sendCapsuleButton.enabled = NO;
+
+
+            [currentCapslr.profilePhoto getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
+                self.currentProfileImage = [UIImage imageWithData:data];
+
+            }];
+
+            Capslr *capslr = [Capslr object];
+            capslr.objectId = currentCapslr.objectId;
+
+            [Capsl searchCapslByKey:@"recipient" orderByAscending:@"deliveryTime" equalTo:capslr completion:^(NSArray *objects, NSError *error) {
+                if (!error)
+                {
+                    self.capslsArray = objects;
+
+                    NSInteger availableCapslsCount = 0;
+
+                    for (NSDate *date in [objects valueForKey:@"deliveryTime"])
+                    {
+                        if ([date timeIntervalSinceNow] < 0)
+                        {
+                            availableCapslsCount++;
+                        }
+                    }
+                    self.shouldShowSent = NO;
+                }
+
+                else
+                {
+                    NSLog(@"%@", error.localizedDescription);
+                    [self error:error];
+                }
+            }];
+
+            [Capsl searchCapslByKey:@"sender" orderByAscending:@"deliveryTime" equalTo:capslr completion:^(NSArray *objects, NSError *error) {
+                if (!error)
+                {
+                    self.sentCapslsArray = objects;
+                    [SVProgressHUD dismiss];
+                    self.viewCapsulesButton.enabled = YES;
+                    self.sendCapsuleButton.enabled = YES;
+                }
+                else
+                {
+                    NSLog(@"%@", error.localizedDescription);
+                    [self error:error];
+                }
+            }];
+        }];
+=======
+        [self showLoadingIndicator];
+        [self disableSendViewButton];
+        [self queryAndUpdateCurrentUserCapsules];
+>>>>>>> Dev3
+    }
+
+    [self styleButtons];
+    //    self.view.backgroundColor = [UIColor colorWithPatternImage:kSplashWallpaper];    
+}
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-//    [PFUser logOut];
+    //[PFUser logOut];
+
+    self.observer =  [[NSNotificationCenter defaultCenter]addObserverForName:kRefreshData object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *note)
+                      {
+                          if ([PFUser currentUser])
+                          {
+                                      [self showLoadingIndicator];
+                                      [self disableSendViewButton];
+                                      [self queryAndUpdateCurrentUserCapsules];
+
+                          }
+                      }];
+
+    //If user is curren but is NOT verified, then delete their capsl and user info
+    if ([PFUser currentUser])
+    {
+        [self showLoadingIndicator];
+
+        [Capslr returnCapslrFromPFUser:[PFUser currentUser] withCompletion:^(Capslr *currentCapslr, NSError *error) \
+        {
+            [self disableSendViewButton];
+
+            if (!currentCapslr.isVerified)
+            {
+                [currentCapslr deleteInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+                    if (!error)
+                    {
+                        [[PFUser currentUser] deleteInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+                            if (!error)
+                            {
+                                [PFUser logOut];
+                                [self manageLogin];
+
+                                [SVProgressHUD dismiss];
+                            }
+                            else
+                            {
+                                NSLog(@"%@", error.localizedDescription);
+                                [self error:error];
+                            }
+                        }];
+                    }
+                    else
+                    {
+                        NSLog(@"%@", error.localizedDescription);
+                        [self error:error];
+                    }
+                }];
+                
+            }
+            else
+            {
+                NSLog(@"%@", error.localizedDescription);
+                [self error:error];
+            }
+        }];
+    }
+
+    // Check to see if user quit before entering verification code
+    [self disableSendViewButton];
+    [self styleButtons];
+
+    //self.view.backgroundColor = [UIColor colorWithPatternImage:kSplashWallpaper];
+
+}
+
+
+//View did appear - for login/signup modal view
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    [self manageLogin];
+
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+//    [[NSNotificationCenter defaultCenter] removeObserver:self.observer];
+}
+
+
+//- (BOOL)prefersStatusBarHidden
+//{
+//    
+//    return YES;
+//}
+
+#pragma mark Indicator and initial View set up
+
+- (void)showLoadingIndicator
+{
+    [SVProgressHUD setBackgroundColor:[UIColor clearColor]];
+    [SVProgressHUD setForegroundColor:[UIColor whiteColor]];
+    [SVProgressHUD show];
+}
+
+- (void)disableSendViewButton
+{
+    self.viewCapsulesButton.enabled = NO;
+    self.sendCapsuleButton.enabled = NO;
+}
+
+- (void)enableSendViewButton
+{
+    self.viewCapsulesButton.enabled = YES;
+    self.sendCapsuleButton.enabled = YES;
+}
+
+- (void)styleButtons
+{
+    self.navigationItem.titleView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"logo_header"]];
 
     self.sendCapsuleButton.alpha = 0;
     self.viewCapsulesButton.alpha = 0;
@@ -50,26 +253,74 @@
 
     self.sendButtonLeftConstraint.constant = [[UIScreen mainScreen] bounds].size.width * 0.5;
     self.viewButtonRightConstraint.constant = [[UIScreen mainScreen] bounds].size.width * 0.5;
-
-//    self.view.backgroundColor = [UIColor colorWithPatternImage:kSplashWallpaper];
-
 }
 
-//View did appear - for login/signup modal view
--(void)viewDidAppear:(BOOL)animated
+#pragma mark Query
+
+- (void)queryAndUpdateCurrentUserCapsules
 {
-    [super viewDidAppear:animated];
+    [Capslr returnCapslrFromPFUser:[PFUser currentUser] withCompletion:^(Capslr *currentCapslr, NSError *error)
+     {
+         //getting profile photo for profile page
+         [currentCapslr.profilePhoto getDataInBackgroundWithBlock:^(NSData *data, NSError *error)
+          {
+              self.currentProfileImage = [UIImage imageWithData:data];
 
-    [self manageLogin];
+          }];
 
+         //Get receiped capsl
+         [Capsl searchCapslByKey:@"recipient" orderByAscending:@"deliveryTime" equalTo:currentCapslr completion:^(NSArray *objects, NSError *error)
+          {
+              if (!error)
+              {
+                  self.capslsArray = objects;
+                  self.JCAMainVC.capslsArray = self.capslsArray;
+
+                  NSInteger availableCapslsCount = 0;
+
+                  for (NSDate *date in [objects valueForKey:@"deliveryTime"])
+                  {
+                      if ([date timeIntervalSinceNow] < 0)
+                      {
+                          availableCapslsCount++;
+                      }
+                  }
+
+                  self.shouldShowSent = NO;
+                  [self enableSendViewButton];
+              }
+
+              else
+              {
+                  NSLog(@"%@", error.localizedDescription);
+              }
+          }];
+
+         // Get sent capsl
+         [Capsl searchCapslByKey:@"sender" orderByAscending:@"deliveryTime" equalTo:currentCapslr completion:^(NSArray *objects, NSError *error)
+          {
+              if (!error)
+              {
+                  self.sentCapslsArray = objects;
+                  self.JCAMainVC.sentCapslsArray = self.sentCapslsArray;
+
+                  [SVProgressHUD dismiss];
+
+              }
+              else
+              {
+                  NSLog(@"%@", error.localizedDescription);
+              }
+          }];
+     }];
 }
 
-//- (BOOL)prefersStatusBarHidden
-//{
-//    
-//    return YES;
-//}
 
+<<<<<<< HEAD
+=======
+#pragma mark Login
+
+>>>>>>> Dev3
 -(void)manageLogin
 {
     if (![PFUser currentUser]) {
@@ -134,19 +385,28 @@
     //PFInstallation is also called in AppDelegate, when the user first installs the app
     [Capslr returnCapslrFromPFUser:user withCompletion:^(Capslr *currentCapslr, NSError *error)
     {
-        PFInstallation *installation = [PFInstallation currentInstallation];
-        installation[@"capslr"]=currentCapslr;
-        [installation saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error)
+        if (!error)
         {
-            if (!error)
-            {
-                //TODO:clear badge?
-            }
-            else
-            {
-                NSLog(@"error %@", error.localizedDescription);
-            }
-        }];
+            PFInstallation *installation = [PFInstallation currentInstallation];
+            installation[@"capslr"]=currentCapslr;
+            [installation saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error)
+             {
+                 if (!error)
+                 {
+                     //TODO:clear badge?
+                 }
+                 else
+                 {
+                     NSLog(@"error %@", error.localizedDescription);
+                     [self error:error];
+                 }
+             }];
+        }
+        else
+        {
+            NSLog(@"%@", error.localizedDescription);
+            [self error:error];
+        }
     }];
 
 
@@ -178,21 +438,44 @@
     //Loop through all submitted data
     for (id key in info) {
         NSString *field = [info objectForKey:key];
-        if (!field || field.length == 0) {
+        if (!field || field.length == 0)
+        {
             informationComplete = NO;
-            break;
         }
+
+        else if (![signUpController.signUpView.additionalField.text hasPrefix:@"1"] && signUpController.signUpView.additionalField.text.length <= 11 && signUpController.signUpView.additionalField.text.length != 10)
+        {
+            informationComplete = NO;
+
+        }
+
+        else if (![signUpController.signUpView.additionalField.text hasPrefix:@"1"] && signUpController.signUpView.additionalField.text.length > 11)
+        {
+            informationComplete = NO;
+        }
+
+        else if ([signUpController.signUpView.additionalField.text hasPrefix:@"1"] && (signUpController.signUpView.additionalField.text.length < 10 || signUpController.signUpView.additionalField.text.length > 11))
+        {
+            informationComplete = NO;
+        }
+
+        else if ([signUpController.signUpView.additionalField.text hasPrefix:@"1"] && (signUpController.signUpView.additionalField.text.length == 11 || signUpController.signUpView.additionalField.text.length == 10))
+        {
+            informationComplete = YES;
+        }
+
+        else if (![signUpController.signUpView.additionalField.text hasPrefix:@"1"] && signUpController.signUpView.additionalField.text.length == 10)
+        {
+            signUpController.signUpView.additionalField.text = [NSString stringWithFormat:@"1%@", field];
+            informationComplete = YES;
+        }
+
     }
 
     //Display an alert if field wasn't completed
     if (!informationComplete) {
-        [[[UIAlertView alloc] initWithTitle:@"Missing Information" message:@"Make sure you fill out all of the information" delegate:nil cancelButtonTitle:@"ok" otherButtonTitles:nil] show];
 
-//        UIAlertView * alert =[[UIAlertView alloc ] initWithTitle:@"Phone Number Verification" message:@"Enter your code" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles: nil];
-//        alert.alertViewStyle = UIAlertViewStylePlainTextInput;
-//        [alert addButtonWithTitle:@"Ok"];
-//        [alert show];
-
+        [[[UIAlertView alloc] initWithTitle:@"Incorrect Information" message:@"Make sure you fill out all of the information correctly" delegate:nil cancelButtonTitle:@"ok" otherButtonTitles:nil] show];
     }
 
     return informationComplete;
@@ -233,6 +516,9 @@
 - (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
 {
 
+    self.sendCapsuleButton.enabled = NO;
+    self.viewCapsulesButton.enabled = NO;
+
     if (buttonIndex == 0)
     {
         [Capslr returnCapslrFromPFUser:[PFUser currentUser] withCompletion:^(Capslr *currentCapslr, NSError *error) {
@@ -246,9 +532,24 @@
                                 [PFUser logOut];
                                 [self manageLogin];
                             }
+                            else
+                            {
+                                NSLog(@"%@", error.localizedDescription);
+                                [self error:error];
+                            }
                         }];
                     }
+                    else
+                    {
+                        NSLog(@"%@", error.localizedDescription);
+                        [self error:error];
+                    }
                 }];
+            }
+            else
+            {
+                NSLog(@"%@", error.localizedDescription);
+                [self error:error];
             }
         }];
     }
@@ -260,11 +561,27 @@
         [PFCloud callFunctionInBackground:@"verifyPhoneNumber" withParameters:@{@"phoneVerificationCode":verificationCode.text} block:^(id object, NSError *error) {
             if ([object isEqualToString:@"Success"])
             {
-                NSLog(@"PHONE NUMBER VERIFIED!!!");
+                NSLog(@"Phone number verified");
+                [Capslr returnCapslrFromPFUser:[PFUser currentUser] withCompletion:^(Capslr *currentCapslr, NSError *error) {
+                    currentCapslr.isVerified = YES;
+
+                    NSData *imageData = UIImageJPEGRepresentation([UIImage imageNamed:@"default"], 0.5f);
+                    PFFile *defaultPhoto = [PFFile fileWithData:imageData];
+                    currentCapslr.profilePhoto = defaultPhoto;
+
+                    //TODO: Fix this later
+                    currentCapslr.name = @" ";
+                    [currentCapslr save];
+
+
+                    // Setting up onboarding capsules
+
+                    [self createOnboardingCapsls:currentCapslr];
+                }];
             }
             else
             {
-                NSLog(@"WRONG CODE!!");
+                NSLog(@"wrong verification");
 
                 [Capslr returnCapslrFromPFUser:[PFUser currentUser] withCompletion:^(Capslr *currentCapslr, NSError *error) {
                     if (!error) {
@@ -277,9 +594,24 @@
                                         [PFUser logOut];
                                         [self manageLogin];
                                     }
+                                    else
+                                    {
+                                        NSLog(@"%@", error.localizedDescription);
+                                        [self error:error];
+                                    }
                                 }];
                             }
+                            else
+                            {
+                                NSLog(@"%@", error.localizedDescription);
+                                [self error:error];
+                            }
                         }];
+                    }
+                    else
+                    {
+                        NSLog(@"%@", error.localizedDescription);
+                        [self error:error];
                     }
                 }];
             }
@@ -287,6 +619,7 @@
 
     }
 }
+
 
 //Sent the delegate when the sign up attempt fails
 - (void)signUpViewController:(PFSignUpViewController *)signUpController didFailToSignUpWithError:(NSError *)error
@@ -329,8 +662,8 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-
     JCAMainViewController *vc = segue.destinationViewController;
+    self.JCAMainVC = segue.destinationViewController;
 
     if ([sender isEqual:self.sendCapsuleButton])
     {
@@ -340,6 +673,69 @@
     {
         vc.showChooseVC = NO;
     }
+
+    vc.capslsArray = self.capslsArray;
+    vc.sentCapslsArray = self.sentCapslsArray;
+    vc.availableCapslsArray = self.availableCapslsArray;
+    vc.shouldShowSent = self.shouldShowSent;
+    vc.currentProfileImage = self.currentProfileImage;
+<<<<<<< HEAD
+}
+
+#pragma mark - helper method
+- (void)createOnboardingCapsls:(Capslr *)currentCapslr
+{
+    // CAPSULE #1 - opens in 5 minutes
+    Capsl *onboardingCapsl = [Capsl object];
+    Capslr *theCapslTeam = [Capslr objectWithoutDataWithClassName:@"Capslr" objectId:@"xpUlEgxIac"];
+    onboardingCapsl.sender = theCapslTeam;
+    onboardingCapsl.recipient = currentCapslr;
+
+    NSDate *deliveryDate = [currentCapslr.createdAt dateByAddingTimeInterval:(kTwoMinutesInSeconds)];
+    onboardingCapsl.deliveryTime = deliveryDate;
+    onboardingCapsl.wallpaperIndex = @1;
+    onboardingCapsl.text = @"Welcome to Capsl";
+    onboardingCapsl.type = @"multimedia";
+
+    // CAPSULE #2 - opens in 24 hours
+    Capsl *onboardingCapsl2 = [Capsl object];
+    onboardingCapsl2.sender = theCapslTeam;
+    onboardingCapsl2.recipient = currentCapslr;
+
+    NSDate *deliveryDate2 = [currentCapslr.createdAt dateByAddingTimeInterval:(kTwoDaysInSeconds)];
+    onboardingCapsl2.deliveryTime = deliveryDate2;
+    onboardingCapsl2.wallpaperIndex = @2;
+    onboardingCapsl2.text = @"Opening in 24 hours";
+    onboardingCapsl2.type = @"multimedia";
+
+    // CAPSULE #3 - opens in a week
+    Capsl *onboardingCapsl3 = [Capsl object];
+    onboardingCapsl3.sender = theCapslTeam;
+    onboardingCapsl3.recipient = currentCapslr;
+
+    NSDate *deliveryDate3 = [currentCapslr.createdAt dateByAddingTimeInterval:(kWeekInSeconds)];
+    onboardingCapsl3.deliveryTime = deliveryDate3;
+    onboardingCapsl3.wallpaperIndex = @3;
+    onboardingCapsl3.text = @"Opening in a week";
+    onboardingCapsl3.type = @"multimedia";
+
+    // need to save one by one to make sure they all save... not sure how to optimize this(?)
+    [onboardingCapsl save];
+    [onboardingCapsl2 save];
+    [onboardingCapsl3 save];
+
+    // go back to rootVC
+    [self showRootViewController];
+}
+
+
+- (void)showRootViewController
+{
+    UINavigationController *rootNav = [self.storyboard instantiateInitialViewController];;
+
+    [self.view.window setRootViewController:rootNav];
+=======
+>>>>>>> Dev3
 }
 
 @end

@@ -7,6 +7,11 @@
 //
 
 #import "Capsl.h"
+#import "Capslr.h"
+
+#define kTwoMinutesInSeconds 120
+#define kTwoDaysInSeconds 172800
+#define kWeekInSeconds 604800
 
 @implementation Capsl
 
@@ -37,6 +42,22 @@
 + (NSString *)parseClassName
 {
     return @"Capsl";
+}
+
+- (instancetype)initWithCurrentCapslr:(Capslr *)currentCapslr withIndex:(NSNumber *)index withWelcomeText:(NSString *)welcomeText withTimeInterval:(NSTimeInterval)timeInterval
+{
+    self = [super init];
+
+    Capslr *theCapslTeam = [Capslr objectWithoutDataWithClassName:@"Capslr" objectId:@"xpUlEgxIac"];
+    self.sender = theCapslTeam;
+    self.recipient = currentCapslr;
+
+    self.deliveryTime = [currentCapslr.createdAt dateByAddingTimeInterval:timeInterval];
+    self.wallpaperIndex = index;
+    self.text = welcomeText;
+    self.type = @"multimedia";
+
+    return self;
 }
 
 //Class Method searching for capsl by its recipient

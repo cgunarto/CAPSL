@@ -103,6 +103,7 @@
                 else
                 {
                     [self usernameExistsAlert];
+                    [SVProgressHUD dismiss];
                 }
             }];
         }

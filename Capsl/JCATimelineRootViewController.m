@@ -343,6 +343,7 @@
 {
     NSInteger index = [IndexConverter indexForSoonestUnopenedCapsuleInArray:dataArray];
     Capsl *soonestUnopenedCapsl = dataArray[index];
+
     return soonestUnopenedCapsl;
 }
 

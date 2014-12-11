@@ -21,7 +21,9 @@
 
 + (NSString *)getStatusStringWithCapsl:(Capsl *)capsl;
 
-+ (NSString *)getDateStringWithDate:(NSDate *)date;
++ (NSString *)getDateStringWithDate:(NSDate *)date withCapsl:(Capsl *)capsl;
+
++ (NSString *)getDateForLater:(NSDate *)date;
 
 //
 //@property NSTimer *timer;

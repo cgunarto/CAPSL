@@ -17,6 +17,11 @@
 #import "SVProgressHUD.h"
 #import "DataFetcher.h"
 
+#define kTwoMinutesInSeconds 120
+#define kTwoDaysInSeconds 172800
+#define kWeekInSeconds 604800
+
+
 @interface RootViewController () <PFLogInViewControllerDelegate, PFSignUpViewControllerDelegate, UIAlertViewDelegate>
 @property (strong, nonatomic) IBOutlet UIButton *sendCapsuleButton;
 @property (strong, nonatomic) IBOutlet UIButton *viewCapsulesButton;
@@ -30,6 +35,7 @@
 @property (nonatomic) NSArray *sentCapslsArray;
 @property (nonatomic) NSMutableArray *availableCapslsArray;
 @property UIImage *currentProfileImage;
+@property NSArray *onboardingCapsl;
 
 @property (nonatomic) BOOL shouldShowSent;
 
@@ -238,6 +244,10 @@
           {
               if (!error)
               {
+                  if (error.code == 101)
+                  {
+                      self.sentCapslsArray = objects;
+                  }
                   self.sentCapslsArray = objects;
                   self.JCAMainVC.sentCapslsArray = self.sentCapslsArray;
 
@@ -441,6 +451,9 @@
 - (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
 {
 
+    self.sendCapsuleButton.enabled = NO;
+    self.viewCapsulesButton.enabled = NO;
+
     if (buttonIndex == 0)
     {
         [Capslr returnCapslrFromPFUser:[PFUser currentUser] withCompletion:^(Capslr *currentCapslr, NSError *error) {
@@ -480,49 +493,15 @@
                     currentCapslr.name = @" ";
                     [currentCapslr save];
 
-                    PFQuery *query = [Capsl query];
-                    [query whereKey:@"objectId" equalTo:@"D1ruCY5eCd"];
-                    [query getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error) {
-                        currentCapslr.objectId = [object valueForKey:@"recipient"];
 
+                    // Setting up onboarding capsules
 
-
-                        currentCapslr.objectId = object[@"recipient"];
-                        NSDate *deliverDate = [currentCapslr.createdAt dateByAddingTimeInterval:(60*5)];
-                        object[@"deliveryTime"] = deliverDate;
-
-
-                    }];
-
-                    // working on onboarding capsl for new users...
-
-//                    [query getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error) {
-//                        if (!error)
-//                        {
-////                            object = nil;
-//                            object[@"recipient"] = currentCapslr.objectId;
-////                            [object setValue:currentCapslr.objectId forKey:@"recipient"];
-//
-//                            NSDate *deliverDate = [currentCapslr.createdAt dateByAddingTimeInterval:(60*5)];
-//                            object[@"deliveryTime"] = deliverDate;
-//
-////                            [object setValue:deliverDate forKey:@"deliverTime"];
-//                        }
-//                        else
-//                        {
-//                            NSLog(@"%@", error.localizedDescription);
-//                        }
-//
-//                    }];
-
+                    [self createOnboardingCapsls:currentCapslr];
                 }];
-            
-
-                
             }
             else
             {
-                NSLog(@"WRONG CODE!!");
+                NSLog(@"wrong verification");
 
                 [Capslr returnCapslrFromPFUser:[PFUser currentUser] withCompletion:^(Capslr *currentCapslr, NSError *error) {
                     if (!error) {
@@ -545,6 +524,7 @@
 
     }
 }
+
 
 //Sent the delegate when the sign up attempt fails
 - (void)signUpViewController:(PFSignUpViewController *)signUpController didFailToSignUpWithError:(NSError *)error
@@ -604,6 +584,30 @@
     vc.availableCapslsArray = self.availableCapslsArray;
     vc.shouldShowSent = self.shouldShowSent;
     vc.currentProfileImage = self.currentProfileImage;
+}
+
+#pragma mark - helper method
+- (void)createOnboardingCapsls:(Capslr *)currentCapslr
+{
+    Capsl *onboardingCapsl1 = [[Capsl alloc] initWithCurrentCapslr:currentCapslr withIndex:@1 withWelcomeText:@"Welcome To Capsl! If you have any questions email us at thecapslteam@gmail.com. We hope you enjoy Capsl!" withTimeInterval:kTwoMinutesInSeconds];
+    [onboardingCapsl1 save];
+
+    Capsl *onboardingCapsl2 = [[Capsl alloc] initWithCurrentCapslr:currentCapslr withIndex:@2 withWelcomeText:@"Opening in 24 hours" withTimeInterval:kTwoDaysInSeconds];
+    [onboardingCapsl2 save];
+
+    Capsl *onboardingCapsl3 = [[Capsl alloc] initWithCurrentCapslr:currentCapslr withIndex:@3 withWelcomeText:@"Opening in a week" withTimeInterval:kWeekInSeconds];
+    [onboardingCapsl3 save];
+
+    // go back to rootVC
+    [self showRootViewController];
+}
+
+
+- (void)showRootViewController
+{
+    UINavigationController *rootNav = [self.storyboard instantiateInitialViewController];;
+
+    [self.view.window setRootViewController:rootNav];
 }
 
 @end

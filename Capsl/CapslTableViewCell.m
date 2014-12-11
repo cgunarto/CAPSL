@@ -34,8 +34,7 @@
 {
 
     self.timerLabel.text = [[JKCountDownTimer getStatusStringWithCapsl:capsl] uppercaseString];
-    self.deliveryDateLabel.text = [JKCountDownTimer getDateStringWithDate:capsl.deliveryTime];
-
+    self.deliveryDateLabel.text = [JKCountDownTimer getDateStringWithDate:capsl.deliveryTime withCapsl:capsl];
 }
 
 - (void)drawCellForCapsl:(Capsl *)capsl ThatWasSent:(BOOL)wasSent

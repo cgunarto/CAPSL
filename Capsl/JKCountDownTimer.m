@@ -19,6 +19,7 @@
 @implementation JKCountDownTimer
 
 
+// For Timer
 + (NSString *)getStatusStringWithCapsl:(Capsl *)capsl
 {
 
@@ -41,14 +42,14 @@
     }
     if (timeInterval > kDayInSeconds)
     {
-        dateString = [self englishStringFromTimeInterval:timeInterval];
+        dateString = [self englishStringFromTimeInterval:timeInterval capsl:capsl];
     }
 
     return dateString;
 
 }
 
-+ (NSString *)englishStringFromTimeInterval:(NSTimeInterval)timeInterval
++ (NSString *)englishStringFromTimeInterval:(NSTimeInterval)timeInterval capsl:(Capsl *)capsl
 {
     NSString *timeString = [NSString string];
 
@@ -79,7 +80,8 @@
     }
     else if (timeInterval > timeFromNowUntilSunday)
     {
-        timeString = @"Later";
+        NSDate *deliveryDate = capsl.deliveryTime;
+        timeString = [self getDateForLater:deliveryDate];
     }
 
     return timeString;
@@ -96,19 +98,59 @@
     return [NSString stringWithFormat:@"%02li:%02li:%02li", (long)hours, (long)minutes, (long)seconds];
 }
 
-+ (NSString *)getDateStringWithDate:(NSDate *)date
+// For Date
++ (NSString *)getDateStringWithDate:(NSDate *)date withCapsl:(Capsl *)capsl
 {
-    
+    //TODO: Refactor later
+    NSDate *deliveryDate = capsl.deliveryTime;
+    NSTimeInterval timeInterval = [deliveryDate timeIntervalSinceNow];
+
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+
+    NSString *timeString = [NSString string];
+
+    NSCalendarUnit dayOfWeek = NSCalendarUnitWeekday;
+    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+    NSInteger todaysDay = [calendar component:dayOfWeek fromDate:[NSDate date]];
+
+    NSInteger daysUntilSunday = 8 - todaysDay;
+    NSTimeInterval timeFromStartOfTodayThroughSaturday = kDayInSeconds * daysUntilSunday;
+
+    NSDate *startOfToday = [calendar startOfDayForDate:[NSDate date]];
+
+    NSTimeInterval timeSinceMidnightToday = [startOfToday timeIntervalSinceNow];
+
+    NSTimeInterval timeFromNowUntilSunday = timeSinceMidnightToday + timeFromStartOfTodayThroughSaturday;
+
+    // Setting the delivery date
+
+    if (timeInterval > timeFromNowUntilSunday)
+    {
+        [dateFormatter setDateFormat:@"h:mm a"];
+
+        timeString = [NSString stringWithFormat:@"%@", [dateFormatter stringFromDate:date]];
+    }
+    else
+    {
+        [dateFormatter setDateFormat:@"MMM d, yyyy | h:mm a"];
+
+        timeString = [NSString stringWithFormat:@"%@", [dateFormatter stringFromDate:date]];
+    }
+
+    return timeString;
+}
+
+
++ (NSString *)getDateForLater:(NSDate *)date
+{
     // Setting the delivery date
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
 
-    //TODO: change date format with no LEADING ZERO
-    [dateFormatter setDateFormat:@"MMM d, yyyy h:mm a"];
+    [dateFormatter setDateFormat:@"MMM d, yyyy"];
 
     NSString *dateString = [NSString stringWithFormat:@"%@", [dateFormatter stringFromDate:date]];
 
     return dateString;
-
 }
 
 
