@@ -50,7 +50,6 @@
           {
               self.capslrArray = capslrObjectsArray;
               self.tableViewDataArray = [self.capslrArray mutableCopy];
-              [self.tableView reloadData];
           }];
          
      }];
@@ -64,6 +63,13 @@
     {
         self.view.backgroundColor = [UIColor colorWithPatternImage:self.backgroundImage];
     }
+
+}
+
+-(void)setTableViewDataArray:(NSMutableArray *)tableViewDataArray
+{
+    _tableViewDataArray = tableViewDataArray;
+    [self.tableView reloadData];
 
 }
 
