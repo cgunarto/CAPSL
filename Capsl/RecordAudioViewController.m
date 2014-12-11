@@ -140,6 +140,9 @@
 
     [alert addAction:yesButton];
     [alert addAction:cancelButton];
+
+    [alert.view setTintColor:kAlertControllerTintColor];
+
     [self presentViewController:alert
                        animated:YES
                      completion:nil];

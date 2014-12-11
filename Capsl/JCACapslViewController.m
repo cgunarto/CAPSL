@@ -88,11 +88,11 @@ static NSString * const reuseIdentifier = @"CapslCell";
 
 - (void)showCapslWithYearMultiplier:(NSInteger)yearMultiplier
                       andMonthIndex:(NSInteger)monthIndex
-                      andCapslIndex:(NSInteger)capsl
+                      andCapslIndex:(NSInteger)capslIndex
                       withAnimation:(BOOL)animated
 {
 
-    NSIndexPath *monthIndexPath = [NSIndexPath indexPathForItem:capsl inSection:(yearMultiplier * 12) + monthIndex];
+    NSIndexPath *monthIndexPath = [NSIndexPath indexPathForItem:capslIndex inSection:(yearMultiplier * 12) + monthIndex];
 
     UICollectionViewLayoutAttributes *attributes = [self.capslView layoutAttributesForItemAtIndexPath:monthIndexPath];
     CGRect capslRect = attributes.frame;
@@ -306,12 +306,6 @@ static NSString * const reuseIdentifier = @"CapslCell";
 - (void)scrollToEarliestUnopenedCapsule
 {
 
-    NSInteger year = [self.soonestUnopenedCapsl getYearForCapsl];
-    NSInteger month = [self.soonestUnopenedCapsl getMonthForCapsl];
-
-    NSInteger multiplierForYear = [self.capslYearNumbers indexOfObject:[NSString stringWithFormat:@"%li", (long)year]];
-    NSInteger monthIndex = month - 1;
-
     NSArray *currentArray = [NSArray array];
 
     if (self.showSent)
@@ -323,11 +317,18 @@ static NSString * const reuseIdentifier = @"CapslCell";
         currentArray = self.capslsArray;
     }
 
+    NSInteger indexOfSoonestUnopenedCapsl = [IndexConverter indexForSoonestUnopenedCapsuleInArray:currentArray];
+    Capsl *currentSoonestUnopenedCapsule = currentArray[indexOfSoonestUnopenedCapsl];
+
+    NSInteger year = [currentSoonestUnopenedCapsule getYearForCapsl];
+    NSInteger month = [currentSoonestUnopenedCapsule getMonthForCapsl];
+
+    NSInteger multiplierForYear = [self.capslYearNumbers indexOfObject:[NSString stringWithFormat:@"%li", (long)year]];
+    NSInteger monthIndex = month - 1;
+
     NSInteger capslIndex = [IndexConverter indexForSoonestUnopenedCapsuleInArrayInItsOwnMonth:currentArray];
 
     [self showCapslWithYearMultiplier:multiplierForYear andMonthIndex:monthIndex andCapslIndex:capslIndex withAnimation:YES];
-
-    
 
 //    NSInteger section = (multiplierForYear * 12 + month) - 1;
 

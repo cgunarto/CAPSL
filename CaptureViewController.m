@@ -294,7 +294,7 @@
 {
 
     //Trigger an action sheet, 1 goes to camera, 2 goes to photo folder
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"SELECT IMAGE SOURCE" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Select image source" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
 
     UIAlertAction *cameraButton = [UIAlertAction actionWithTitle:@"Camera"
                                                            style:UIAlertActionStyleDefault

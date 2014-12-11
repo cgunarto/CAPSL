@@ -551,6 +551,9 @@
                                                      style:UIAlertActionStyleDefault
                                                    handler:nil];
     [alert addAction:action];
+
+    [alert.view setTintColor:kAlertControllerTintColor];
+
     [self presentViewController:alert animated:YES completion:nil];
 }
 
