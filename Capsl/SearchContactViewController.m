@@ -50,7 +50,6 @@
           {
               self.capslrArray = capslrObjectsArray;
               self.tableViewDataArray = [self.capslrArray mutableCopy];
-              [self.tableView reloadData];
           }];
          
      }];
@@ -71,6 +70,15 @@
 {
     //Tableview needs to be reloaded otherwise profile pic will not show up the first time view loads
     [self.tableView reloadData];
+}
+
+#pragma mark Setter for TBV Data
+
+-(void)setTableViewDataArray:(NSMutableArray *)tableViewDataArray
+{
+    _tableViewDataArray = tableViewDataArray;
+    [self.tableView reloadData];
+
 }
 
 #pragma mark Lock Orientation
@@ -115,6 +123,8 @@
 
 -(BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchString:(NSString *)searchString
 {
+    [self.searchDisplayController.searchResultsTableView setBackgroundColor:[UIColor clearColor]];
+
     [self filterContentForSearchText:searchString
                                scope:[[self.searchDisplayController.searchBar scopeButtonTitles]
                                       objectAtIndex:[self.searchDisplayController.searchBar
