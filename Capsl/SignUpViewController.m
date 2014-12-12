@@ -17,7 +17,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self.signUpView setLogo:[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Interstellar.jpg"]]];
+    [self.signUpView setLogo:[[UIImageView alloc] initWithImage:kLoginImage]];
 
 }
 

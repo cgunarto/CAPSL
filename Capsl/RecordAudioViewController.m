@@ -10,7 +10,13 @@
 #import "CaptureViewController.h"
 #import "Capsl.h"
 #import "Capslr.h"
+
 #define kMaxAudioDuration 60
+#define kPlayButtonImage @"play-50"
+#define kPauseButtonImage @"pause-50"
+#define kStopButtonImage @"stop-50"
+#define kRecordButtonImage @"micro-50"
+#define kDeleteRecordingButtonImage @"cancel-50"
 
 @import AVFoundation;
 
@@ -19,6 +25,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *endRecordingButton;
 @property (weak, nonatomic) IBOutlet UIButton *playButton;
 @property (weak, nonatomic) IBOutlet UIButton *deleteRecordingButton;
+@property (strong, nonatomic) IBOutlet UIView *audioControlsView;
 
 @property AVAudioRecorder *recorder;
 @property AVAudioPlayer *player;
@@ -36,6 +43,13 @@
     [self.endRecordingButton setEnabled:NO];
     [self setUpAudioSessionAndRecorder];
     [self setButtonStateToReflectAudioAvailability];
+
+    [self processButton:self.recordPauseButton withImageName:kRecordButtonImage];
+    [self processButton:self.playButton withImageName:kPlayButtonImage];
+    [self processButton:self.endRecordingButton withImageName:kStopButtonImage];
+    [self processButton:self.deleteRecordingButton withImageName:kDeleteRecordingButtonImage];
+    [self processView:self.audioControlsView];
+
 }
 
 #pragma mark Lock Orientation
@@ -74,7 +88,7 @@
         [session setActive:YES error:nil];
 
         [self.recorder recordForDuration:kMaxAudioDuration];
-        [self.recordPauseButton setTitle:@"Pause" forState:UIControlStateNormal];
+        [self processButton:self.recordPauseButton withImageName:kPauseButtonImage];
         //Code to record without max duration - [self.recorder record];
     }
 
@@ -82,7 +96,8 @@
     {
         // Pause recording
         [self.recorder pause];
-        [self.recordPauseButton setTitle:@"Record" forState:UIControlStateNormal];
+        [self processButton:self.recordPauseButton withImageName:kRecordButtonImage];
+
     }
 
     [self.endRecordingButton setEnabled:YES];
@@ -119,33 +134,49 @@
 
 - (IBAction)onDeleteRecordingButtonTapped:(UIButton *)sender
 {
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"DELETE?"
-                                                                   message:@"Are you sure you want to delete current recording?"
-                                                            preferredStyle:UIAlertControllerStyleActionSheet];
 
-    UIAlertAction *yesButton = [UIAlertAction actionWithTitle:@"Yes"
-                                                        style:UIAlertActionStyleDefault
-                                                      handler:^(UIAlertAction *action)
+    if (self.recorder.recording)
     {
-        [self deleteRecordedAudio];
-        [self setButtonStateToReflectAudioAvailability];
-    }];
+        [self onEndRecordingTapped:nil];
+    }
 
-    UIAlertAction *cancelButton = [UIAlertAction actionWithTitle:@"Cancel"
-                                                           style:UIAlertActionStyleCancel
-                                                         handler:^(UIAlertAction *action)
+    if (self.audioData)
     {
-         [alert dismissViewControllerAnimated:YES completion:nil];
-    }];
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Save recording?"
+                                                                       message:nil
+                                                                preferredStyle:UIAlertControllerStyleAlert];
 
-    [alert addAction:yesButton];
-    [alert addAction:cancelButton];
+        UIAlertAction *yesButton = [UIAlertAction actionWithTitle:@"Delete"
+                                                            style:UIAlertActionStyleDefault
+                                                          handler:^(UIAlertAction *action)
+                                    {
+                                        [self deleteRecordedAudio];
+                                        [self setButtonStateToReflectAudioAvailability];
+                                        [self performSegueWithIdentifier:@"unWindToCapture" sender:self];
+                                    }];
 
-    [alert.view setTintColor:kAlertControllerTintColor];
+        UIAlertAction *cancelButton = [UIAlertAction actionWithTitle:@"Save"
+                                                               style:UIAlertActionStyleCancel
+                                                             handler:^(UIAlertAction *action)
+                                       {
+                                           [alert dismissViewControllerAnimated:YES completion:nil];
+                                           [self performSegueWithIdentifier:@"unWindToCapture" sender:self];
+                                       }];
+        
+        [alert addAction:yesButton];
+        [alert addAction:cancelButton];
+        
+        [alert.view setTintColor:kAlertControllerTintColor];
+        
+        [self presentViewController:alert
+                           animated:YES
+                         completion:nil];
 
-    [self presentViewController:alert
-                       animated:YES
-                     completion:nil];
+    }
+    else
+    {
+        [self performSegueWithIdentifier:@"unWindToCapture" sender:self];
+    }
 }
 
 #pragma mark Helper Method
@@ -192,12 +223,12 @@
 {
     if (self.audioData)
     {
-        [self.deleteRecordingButton setEnabled:YES];
+//        [self.deleteRecordingButton setEnabled:YES];
         [self.playButton setEnabled:YES];
     }
     else
     {
-        [self.deleteRecordingButton setEnabled:NO];
+//        [self.deleteRecordingButton setEnabled:NO];
         [self.playButton setEnabled:NO];
     }
 }
@@ -208,7 +239,7 @@
 //Delegate method for handling interruption during recording
 - (void) audioRecorderDidFinishRecording:(AVAudioRecorder *)avrecorder successfully:(BOOL)flag
 {
-    [self.recordPauseButton setTitle:@"Record" forState:UIControlStateNormal];
+    [self processButton:self.recordPauseButton withImageName:kRecordButtonImage];
     [self.endRecordingButton setEnabled:NO];
 
     AVAudioSession *audioSession = [AVAudioSession sharedInstance];
@@ -224,8 +255,8 @@
 #pragma mark AVAudioPlayerDelegate
 //Delegate method for handling interreuption during playback
 - (void) audioPlayerDidFinishPlaying:(AVAudioPlayer *)player successfully:(BOOL)flag{
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle: @"Done"
-                                                    message: @"Finish playing the recording!"
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle: @"Playback completed"
+                                                    message: nil
                                                    delegate: nil
                                           cancelButtonTitle:@"OK"
                                           otherButtonTitles:nil];
@@ -253,7 +284,25 @@
     button.layer.shadowOpacity = 0.3;
     button.layer.shadowRadius = 1;
     button.layer.shadowOffset = CGSizeMake(0, 1.5f);
+
+    if ([button isEqual:self.deleteRecordingButton])
+    {
+        [self processView:self.deleteRecordingButton];
+    }
     
+}
+
+- (void)processView:(UIView *)view
+{
+    view.layer.borderWidth = 1.0;
+    view.layer.borderColor = [[UIColor whiteColor] CGColor];
+    view.layer.cornerRadius = 30;
+    view.tintColor = [UIColor whiteColor];
+    view.layer.shadowColor = [UIColor blackColor].CGColor;
+    view.layer.shadowOpacity = 0.3;
+    view.layer.shadowRadius = 1;
+    view.layer.shadowOffset = CGSizeMake(0, 1.5f);
+
 }
 
 @end

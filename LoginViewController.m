@@ -13,7 +13,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self.logInView setLogo:[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Interstellar.jpg"]]];
+    [self.logInView setLogo:[[UIImageView alloc] initWithImage:kLoginImage]];
 }
 
 @end

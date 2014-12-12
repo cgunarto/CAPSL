@@ -23,7 +23,7 @@
 
 #define kAlertControllerTintColor [UIColor blackColor]
 
-
+#define kLoginImage [UIImage imageNamed:@"logo_login"]
 #define kSplashWallpaper [UIImage imageNamed:@"wallpaperRoad"]
 #define kViewCapsulesWallpaper [UIImage imageNamed:@"wallpaperRoad_blurred"]
 #define kChooseScreenWallpaper [UIImage imageNamed:@"wallpaperRoad_blurred"]
