@@ -90,20 +90,7 @@ static NSString *kSendID = @"sendCell";  // the cell containing the date picker
 
     self.title = @"Delivery Date";
 
-    if (!self.backgroundImage)
-    {
-
-        self.view.backgroundColor = [UIColor colorWithPatternImage:[BackgroundGenerator generateDefaultBackground]];
-
-    }
-    else if (self.createdCapsl.photo)
-    {
-        self.view.backgroundColor = [UIColor colorWithPatternImage:[BackgroundGenerator blurImage:self.backgroundImage]];
-    }
-    else
-    {
-        self.view.backgroundColor = [UIColor colorWithPatternImage:self.backgroundImage];
-    }
+    self.view.backgroundColor = [UIColor colorWithPatternImage:self.backgroundImage];
 
 }
 
@@ -114,6 +101,26 @@ static NSString *kSendID = @"sendCell";  // the cell containing the date picker
                                                   object:nil];
 }
 
+- (void)setCreatedCapsl:(Capsl *)createdCapsl
+{
+    _createdCapsl = createdCapsl;
+
+//    if (!self.backgroundImage)
+//    {
+//
+//        self.view.backgroundColor = [UIColor colorWithPatternImage:[BackgroundGenerator generateDefaultBackground]];
+//
+//    }
+//    else if (self.createdCapsl.photo)
+//    {
+//        self.view.backgroundColor = [UIColor colorWithPatternImage:[BackgroundGenerator blurImage:self.backgroundImage]];
+//    }
+//    else
+//    {
+//        self.view.backgroundColor = [UIColor colorWithPatternImage:self.backgroundImage];
+//    }
+
+}
 
 #pragma mark Lock Orientation
 

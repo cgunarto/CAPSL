@@ -54,15 +54,20 @@
          
      }];
 
-    if (self.createdCapsl.photo)
+    if (!self.backgroundImage)
     {
-        UIImage *processedImage = [BackgroundGenerator blurImage:self.backgroundImage];
-        self.view.backgroundColor = [UIColor colorWithPatternImage:processedImage];
+
+        self.backgroundImage = [BackgroundGenerator generateDefaultBackground];
+
     }
-    else
+    else if (self.createdCapsl.photo)
     {
-        self.view.backgroundColor = [UIColor colorWithPatternImage:self.backgroundImage];
+
+        self.backgroundImage = [BackgroundGenerator blurImage:self.backgroundImage];
+
     }
+
+    self.view.backgroundColor = [UIColor colorWithPatternImage:self.backgroundImage];
 
 }
 

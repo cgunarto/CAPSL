@@ -10,7 +10,7 @@
 @class Capsl;
 
 @interface DateTableViewController : UITableViewController
-@property Capsl *createdCapsl;
+@property (nonatomic, strong) Capsl *createdCapsl;
 @property UIImage *backgroundImage;
 
 

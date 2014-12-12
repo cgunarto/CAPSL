@@ -241,6 +241,19 @@
     captureVC.audioData = self.audioData;
 }
 
+- (void)processButton:(UIButton *)button withImageName:(NSString *)buttonName
+{
 
+    UIImage *image = [[UIImage imageNamed:buttonName] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+    [button setImage:image forState:UIControlStateNormal];
+
+    button.tintColor = [UIColor whiteColor];
+
+    button.layer.shadowColor = [UIColor blackColor].CGColor;
+    button.layer.shadowOpacity = 0.3;
+    button.layer.shadowRadius = 1;
+    button.layer.shadowOffset = CGSizeMake(0, 1.5f);
+    
+}
 
 @end
