@@ -65,7 +65,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    //[PFUser logOut];
+//    [PFUser logOut];
 
     self.observer =  [[NSNotificationCenter defaultCenter]addObserverForName:kRefreshData object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *note)
                       {

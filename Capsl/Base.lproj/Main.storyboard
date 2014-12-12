@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="fsF-ct-we6">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="fsF-ct-we6">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
@@ -615,9 +615,14 @@
                                         <rect key="frame" x="-23" y="-15" width="46" height="30"/>
                                         <color key="backgroundColor" red="0.50196081399917603" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="64" id="6VN-hj-Kfv"/>
-                                            <constraint firstAttribute="height" constant="30" id="IG6-lK-ulc"/>
+                                            <constraint firstAttribute="width" constant="64" id="6VN-hj-Kfv">
+                                                <variation key="heightClass=regular-widthClass=compact" constant="60"/>
+                                            </constraint>
+                                            <constraint firstAttribute="height" constant="30" id="IG6-lK-ulc">
+                                                <variation key="heightClass=regular-widthClass=compact" constant="60"/>
+                                            </constraint>
                                         </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="9"/>
                                         <state key="normal" title="RECORD">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
@@ -641,9 +646,14 @@
                                         <rect key="frame" x="-23" y="-15" width="46" height="30"/>
                                         <color key="backgroundColor" red="0.50196081399917603" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="30" id="4u8-93-k9Q"/>
-                                            <constraint firstAttribute="width" constant="37" id="g5i-97-CgP"/>
+                                            <constraint firstAttribute="height" constant="30" id="4u8-93-k9Q">
+                                                <variation key="heightClass=regular-widthClass=compact" constant="60"/>
+                                            </constraint>
+                                            <constraint firstAttribute="width" constant="37" id="g5i-97-CgP">
+                                                <variation key="heightClass=regular-widthClass=compact" constant="60"/>
+                                            </constraint>
                                         </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="9"/>
                                         <state key="normal" title="PLAY">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
@@ -663,49 +673,20 @@
                                             <action selector="onPlayTapped:" destination="Vgx-hR-DGD" eventType="touchUpInside" id="BNt-f7-NCt"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9ZE-4q-zUy">
-                                        <rect key="frame" x="-23" y="-15" width="46" height="30"/>
-                                        <color key="backgroundColor" red="0.50196081399917603" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="30" id="1uE-Zh-iDl"/>
-                                            <constraint firstAttribute="height" constant="30" id="SiQ-C3-qtN"/>
-                                            <constraint firstAttribute="width" constant="126" id="bp4-WI-cTy"/>
-                                            <constraint firstAttribute="width" constant="38" id="fKw-dN-la9">
-                                                <variation key="widthClass=compact" constant="126"/>
-                                            </constraint>
-                                        </constraints>
-                                        <state key="normal" title="END RECORDING">
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <variation key="default">
-                                            <mask key="constraints">
-                                                <exclude reference="1uE-Zh-iDl"/>
-                                                <exclude reference="SiQ-C3-qtN"/>
-                                                <exclude reference="bp4-WI-cTy"/>
-                                                <exclude reference="fKw-dN-la9"/>
-                                            </mask>
-                                        </variation>
-                                        <variation key="widthClass=compact">
-                                            <mask key="constraints">
-                                                <exclude reference="1uE-Zh-iDl"/>
-                                                <include reference="SiQ-C3-qtN"/>
-                                                <include reference="bp4-WI-cTy"/>
-                                                <exclude reference="fKw-dN-la9"/>
-                                            </mask>
-                                        </variation>
-                                        <connections>
-                                            <action selector="onEndRecordingTapped:" destination="Vgx-hR-DGD" eventType="touchUpInside" id="LQT-ze-6F3"/>
-                                        </connections>
-                                    </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="T4n-2k-zJU">
                                         <rect key="frame" x="-23" y="-15" width="46" height="30"/>
                                         <color key="backgroundColor" red="0.50196081399917603" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="56" id="6Kf-FA-brF"/>
+                                            <constraint firstAttribute="width" constant="56" id="6Kf-FA-brF">
+                                                <variation key="heightClass=regular-widthClass=compact" constant="60"/>
+                                            </constraint>
                                             <constraint firstAttribute="height" constant="30" id="GQ8-tj-pVv"/>
                                             <constraint firstAttribute="width" constant="56" id="T6M-vZ-QaA"/>
-                                            <constraint firstAttribute="height" constant="30" id="obi-U0-npi"/>
+                                            <constraint firstAttribute="height" constant="30" id="obi-U0-npi">
+                                                <variation key="heightClass=regular-widthClass=compact" constant="60"/>
+                                            </constraint>
                                         </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="9"/>
                                         <state key="normal" title="DELETE">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
@@ -729,6 +710,45 @@
                                             <action selector="onDeleteRecordingButtonTapped:" destination="Vgx-hR-DGD" eventType="touchUpInside" id="kCh-5M-arM"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9ZE-4q-zUy">
+                                        <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                        <color key="backgroundColor" red="0.50196081399917603" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="1uE-Zh-iDl"/>
+                                            <constraint firstAttribute="height" constant="30" id="SiQ-C3-qtN">
+                                                <variation key="heightClass=regular-widthClass=compact" constant="60"/>
+                                            </constraint>
+                                            <constraint firstAttribute="width" constant="126" id="bp4-WI-cTy">
+                                                <variation key="heightClass=regular-widthClass=compact" constant="60"/>
+                                            </constraint>
+                                            <constraint firstAttribute="width" constant="38" id="fKw-dN-la9">
+                                                <variation key="widthClass=compact" constant="126"/>
+                                            </constraint>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="9"/>
+                                        <state key="normal" title="END RECORDING">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <variation key="default">
+                                            <mask key="constraints">
+                                                <exclude reference="1uE-Zh-iDl"/>
+                                                <exclude reference="SiQ-C3-qtN"/>
+                                                <exclude reference="bp4-WI-cTy"/>
+                                                <exclude reference="fKw-dN-la9"/>
+                                            </mask>
+                                        </variation>
+                                        <variation key="widthClass=compact">
+                                            <mask key="constraints">
+                                                <exclude reference="1uE-Zh-iDl"/>
+                                                <include reference="SiQ-C3-qtN"/>
+                                                <include reference="bp4-WI-cTy"/>
+                                                <exclude reference="fKw-dN-la9"/>
+                                            </mask>
+                                        </variation>
+                                        <connections>
+                                            <action selector="onEndRecordingTapped:" destination="Vgx-hR-DGD" eventType="touchUpInside" id="LQT-ze-6F3"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -739,23 +759,29 @@
                                     <constraint firstItem="9ZE-4q-zUy" firstAttribute="top" secondItem="6hM-1s-RaB" secondAttribute="top" constant="33" id="4mC-NG-7TJ"/>
                                     <constraint firstItem="SeJ-cV-lRw" firstAttribute="top" secondItem="6hM-1s-RaB" secondAttribute="top" constant="33" id="4w4-4H-fLB"/>
                                     <constraint firstItem="9ZE-4q-zUy" firstAttribute="top" secondItem="6hM-1s-RaB" secondAttribute="top" constant="33" id="AoD-dc-Ig8">
-                                        <variation key="heightClass=regular-widthClass=compact" constant="15"/>
+                                        <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
                                     </constraint>
                                     <constraint firstAttribute="trailing" secondItem="9ZE-4q-zUy" secondAttribute="trailing" constant="73" id="FzL-qX-NxN">
                                         <variation key="widthClass=compact" constant="181"/>
                                     </constraint>
-                                    <constraint firstItem="SeJ-cV-lRw" firstAttribute="leading" secondItem="T4n-2k-zJU" secondAttribute="trailing" constant="32" id="Gmr-Oc-G6A"/>
+                                    <constraint firstItem="SeJ-cV-lRw" firstAttribute="leading" secondItem="T4n-2k-zJU" secondAttribute="trailing" constant="32" id="Gmr-Oc-G6A">
+                                        <variation key="heightClass=regular-widthClass=compact" constant="-301"/>
+                                    </constraint>
                                     <constraint firstItem="fSy-W1-wUz" firstAttribute="top" secondItem="6hM-1s-RaB" secondAttribute="top" constant="33" id="Qu9-n6-Dji">
-                                        <variation key="heightClass=regular-widthClass=compact" constant="15"/>
+                                        <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
                                     </constraint>
                                     <constraint firstItem="fSy-W1-wUz" firstAttribute="top" secondItem="6hM-1s-RaB" secondAttribute="top" constant="33" id="Vdf-xP-E5G"/>
-                                    <constraint firstItem="T4n-2k-zJU" firstAttribute="leading" secondItem="9ZE-4q-zUy" secondAttribute="trailing" constant="25" id="X0C-Fm-OLi"/>
-                                    <constraint firstItem="SeJ-cV-lRw" firstAttribute="top" secondItem="6hM-1s-RaB" secondAttribute="top" constant="33" id="XOq-go-ayt">
-                                        <variation key="heightClass=regular-widthClass=compact" constant="15"/>
+                                    <constraint firstItem="T4n-2k-zJU" firstAttribute="leading" secondItem="9ZE-4q-zUy" secondAttribute="trailing" constant="25" id="X0C-Fm-OLi">
+                                        <variation key="heightClass=regular-widthClass=compact" constant="16"/>
                                     </constraint>
-                                    <constraint firstItem="9ZE-4q-zUy" firstAttribute="leading" secondItem="fSy-W1-wUz" secondAttribute="trailing" constant="16" id="YES-gJ-qCp"/>
+                                    <constraint firstItem="SeJ-cV-lRw" firstAttribute="top" secondItem="6hM-1s-RaB" secondAttribute="top" constant="33" id="XOq-go-ayt">
+                                        <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
+                                    </constraint>
+                                    <constraint firstItem="9ZE-4q-zUy" firstAttribute="leading" secondItem="fSy-W1-wUz" secondAttribute="trailing" constant="16" id="YES-gJ-qCp">
+                                        <variation key="heightClass=regular-widthClass=compact" constant="28"/>
+                                    </constraint>
                                     <constraint firstItem="fSy-W1-wUz" firstAttribute="leading" secondItem="6hM-1s-RaB" secondAttribute="leading" constant="13" id="bTP-gN-L07">
-                                        <variation key="heightClass=regular-widthClass=compact" constant="22"/>
+                                        <variation key="heightClass=regular-widthClass=compact" constant="107"/>
                                     </constraint>
                                     <constraint firstItem="SeJ-cV-lRw" firstAttribute="leading" secondItem="T4n-2k-zJU" secondAttribute="trailing" constant="32" id="ePT-cc-pxq"/>
                                     <constraint firstItem="SeJ-cV-lRw" firstAttribute="leading" secondItem="fSy-W1-wUz" secondAttribute="trailing" constant="58" id="eVP-4z-u0g">
@@ -766,7 +792,7 @@
                                         <variation key="widthClass=compact" constant="255"/>
                                     </constraint>
                                     <constraint firstItem="T4n-2k-zJU" firstAttribute="top" secondItem="6hM-1s-RaB" secondAttribute="top" constant="33" id="oNP-yq-UNh">
-                                        <variation key="heightClass=regular-widthClass=compact" constant="15"/>
+                                        <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
                                     </constraint>
                                     <constraint firstAttribute="bottom" secondItem="fSy-W1-wUz" secondAttribute="bottom" constant="32" id="sjp-AZ-ZRM"/>
                                 </constraints>
@@ -774,8 +800,8 @@
                                     <mask key="subviews">
                                         <exclude reference="fSy-W1-wUz"/>
                                         <exclude reference="SeJ-cV-lRw"/>
-                                        <exclude reference="9ZE-4q-zUy"/>
                                         <exclude reference="T4n-2k-zJU"/>
+                                        <exclude reference="9ZE-4q-zUy"/>
                                     </mask>
                                     <mask key="constraints">
                                         <exclude reference="4mC-NG-7TJ"/>
@@ -803,8 +829,8 @@
                                     <mask key="subviews">
                                         <include reference="fSy-W1-wUz"/>
                                         <include reference="SeJ-cV-lRw"/>
-                                        <include reference="9ZE-4q-zUy"/>
                                         <include reference="T4n-2k-zJU"/>
+                                        <include reference="9ZE-4q-zUy"/>
                                     </mask>
                                     <mask key="constraints">
                                         <exclude reference="4mC-NG-7TJ"/>
@@ -2761,8 +2787,7 @@
                                                             <exclude reference="mGu-sF-Gp6"/>
                                                         </mask>
                                                     </variation>
-                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                        <rect key="frame" x="100" y="20" width="120" height="120"/>
+                                                    <variation key="heightClass=regular-widthClass=compact">
                                                         <mask key="constraints">
                                                             <include reference="jsa-Pt-4g7"/>
                                                             <include reference="mGu-sF-Gp6"/>
@@ -2784,8 +2809,7 @@
                                                             <exclude reference="tG8-Ii-le1"/>
                                                         </mask>
                                                     </variation>
-                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                        <rect key="frame" x="98" y="148" width="124" height="21"/>
+                                                    <variation key="heightClass=regular-widthClass=compact">
                                                         <mask key="constraints">
                                                             <include reference="hdo-j4-oqY"/>
                                                             <include reference="tG8-Ii-le1"/>
@@ -2899,8 +2923,7 @@
                                                             <exclude reference="m03-xX-XHr"/>
                                                         </mask>
                                                     </variation>
-                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                        <rect key="frame" x="109" y="18" width="103" height="25"/>
+                                                    <variation key="heightClass=regular-widthClass=compact">
                                                         <mask key="constraints">
                                                             <include reference="DtZ-t4-0kA"/>
                                                             <include reference="m03-xX-XHr"/>
@@ -4254,9 +4277,9 @@
         <image name="wallpaperRoad_blurred" width="375" height="667"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="k95-R4-CRQ"/>
         <segue reference="dAc-Nd-2MW"/>
         <segue reference="BeW-T3-OQ1"/>
-        <segue reference="k95-R4-CRQ"/>
-        <segue reference="THB-3X-bqr"/>
+        <segue reference="Eln-db-Pjz"/>
     </inferredMetricsTieBreakers>
 </document>
