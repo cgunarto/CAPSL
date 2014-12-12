@@ -9,7 +9,7 @@
 #ifndef Capsl_ConstantsHeader_h
 #define Capsl_ConstantsHeader_h
 
-#define kCapslTeamObjectID @"xpUlEgxIac"
+#define kCapslTeamObjectID @"m6QMrhFxWp"
 
 #define kReceivedCapsuleColor [UIColor colorWithHue:0.575 saturation:0.438 brightness:0.751 alpha:1.000]
 #define kReceivedViewedTextColor [UIColor colorWithHue:0.573 saturation:0.222 brightness:0.866 alpha:1.000]
