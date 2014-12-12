@@ -9,6 +9,9 @@
 #import "CapslTableViewCell.h"
 #import "JKCountDownTimer.h"
 #import "UIImage+ImageEffects.h"
+#import "FBShimmeringView.h"
+#import "FBShimmeringLayer.h"
+#import "FBShimmering.h"
 
 #define kSixHoursInSeconds 21600
 #define kDayInSeconds 86400
@@ -71,10 +74,19 @@
     self.deliveryDateLabel.textColor = [UIColor whiteColor];
     self.capslrLabel.textColor = [UIColor whiteColor];
 
+    FBShimmeringView *shimmeringView = [[FBShimmeringView alloc] initWithFrame:self.contentView.bounds];
+    [self.contentView addSubview:shimmeringView];
+
+    shimmeringView.contentView = self.countdownLabel;
+    shimmeringView.shimmering = NO;
 
     if (timeInterval <= 0)
     {
-        // unlocked - add shimmer
+//         unlocked - add shimmer
+        if ([self.countdownLabel.text isEqualToString:@"UNLOCKED"])
+        {
+            shimmeringView.shimmering = YES;
+        }
     }
     if (timeInterval <= 0 && capsl.viewedAt)
     {

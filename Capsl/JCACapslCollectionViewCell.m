@@ -9,6 +9,9 @@
 #import "JCACapslCollectionViewCell.h"
 #import "Capsl.h"
 #import "JKCountDownTimer.h"
+#import "FBShimmeringView.h"
+#import "FBShimmeringLayer.h"
+#import "FBShimmering.h"
 
 @implementation JCACapslCollectionViewCell
 
@@ -84,6 +87,7 @@
     if (timeInterval <= 0)
     {
         // unlocked - add shimmer
+        
     }
     if (timeInterval <= 0 && capsl.viewedAt)
     {

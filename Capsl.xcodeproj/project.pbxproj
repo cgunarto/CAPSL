@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4F0B3FF11A3ACCFC009A9F94 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F0B3FF01A3ACCFC009A9F94 /* Foundation.framework */; };
+		4F0B3FF91A3ACD87009A9F94 /* FBShimmeringLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F0B3FF61A3ACD87009A9F94 /* FBShimmeringLayer.m */; };
+		4F0B3FFA1A3ACD87009A9F94 /* FBShimmeringView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F0B3FF81A3ACD87009A9F94 /* FBShimmeringView.m */; };
 		4F33B1AD1A33A246004444FB /* JCALocalNotification.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F33B1AC1A33A246004444FB /* JCALocalNotification.m */; };
 		4F69EBC41A252331009625AA /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F69EBC31A252331009625AA /* main.m */; };
 		4F69EBC71A252331009625AA /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F69EBC61A252331009625AA /* AppDelegate.m */; };
@@ -92,6 +95,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4F0B3FF01A3ACCFC009A9F94 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		4F0B3FF31A3ACD87009A9F94 /* FBShimmering-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "FBShimmering-Prefix.pch"; sourceTree = "<group>"; };
+		4F0B3FF41A3ACD87009A9F94 /* FBShimmering.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBShimmering.h; sourceTree = "<group>"; };
+		4F0B3FF51A3ACD87009A9F94 /* FBShimmeringLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBShimmeringLayer.h; sourceTree = "<group>"; };
+		4F0B3FF61A3ACD87009A9F94 /* FBShimmeringLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBShimmeringLayer.m; sourceTree = "<group>"; };
+		4F0B3FF71A3ACD87009A9F94 /* FBShimmeringView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBShimmeringView.h; sourceTree = "<group>"; };
+		4F0B3FF81A3ACD87009A9F94 /* FBShimmeringView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBShimmeringView.m; sourceTree = "<group>"; };
 		4F33B1AB1A33A246004444FB /* JCALocalNotification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JCALocalNotification.h; sourceTree = "<group>"; };
 		4F33B1AC1A33A246004444FB /* JCALocalNotification.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JCALocalNotification.m; sourceTree = "<group>"; };
 		4F69EBBE1A252331009625AA /* Capsl.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Capsl.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -227,6 +237,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4F0B3FF11A3ACCFC009A9F94 /* Foundation.framework in Frameworks */,
+				4F69EC0D1A253A0F009625AA /* CoreGraphics.framework in Frameworks */,
 				4F69EC1B1A253A43009625AA /* QuartzCore.framework in Frameworks */,
 				4F69EC191A253A3C009625AA /* CoreLocation.framework in Frameworks */,
 				4F69EC171A253A35009625AA /* libz.dylib in Frameworks */,
@@ -234,7 +246,6 @@
 				4F69EC131A253A26009625AA /* MobileCoreServices.framework in Frameworks */,
 				4F69EC111A253A1E009625AA /* AdSupport.framework in Frameworks */,
 				4F69EC0F1A253A16009625AA /* Security.framework in Frameworks */,
-				4F69EC0D1A253A0F009625AA /* CoreGraphics.framework in Frameworks */,
 				4F69EC0B1A253A07009625AA /* Social.framework in Frameworks */,
 				4F69EC091A253A00009625AA /* AudioToolbox.framework in Frameworks */,
 				4F69EC071A2539F9009625AA /* SystemConfiguration.framework in Frameworks */,
@@ -257,9 +268,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4F0B3FF21A3ACD87009A9F94 /* FBShimmering */ = {
+			isa = PBXGroup;
+			children = (
+				4F0B3FF31A3ACD87009A9F94 /* FBShimmering-Prefix.pch */,
+				4F0B3FF41A3ACD87009A9F94 /* FBShimmering.h */,
+				4F0B3FF51A3ACD87009A9F94 /* FBShimmeringLayer.h */,
+				4F0B3FF61A3ACD87009A9F94 /* FBShimmeringLayer.m */,
+				4F0B3FF71A3ACD87009A9F94 /* FBShimmeringView.h */,
+				4F0B3FF81A3ACD87009A9F94 /* FBShimmeringView.m */,
+			);
+			name = FBShimmering;
+			path = "../../../Sample Codes/Shimmer-master 2/FBShimmering";
+			sourceTree = "<group>";
+		};
 		4F69EBB51A252331009625AA = {
 			isa = PBXGroup;
 			children = (
+				4F0B3FF21A3ACD87009A9F94 /* FBShimmering */,
 				4F69EBCB1A252331009625AA /* Main.storyboard */,
 				4F69EBC01A252331009625AA /* Capsl */,
 				4F69EBDA1A252331009625AA /* CapslTests */,
@@ -339,6 +365,7 @@
 		4F69EC011A25395F009625AA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				4F0B3FF01A3ACCFC009A9F94 /* Foundation.framework */,
 				4F69EC1A1A253A43009625AA /* QuartzCore.framework */,
 				4F69EC181A253A3C009625AA /* CoreLocation.framework */,
 				4F69EC161A253A35009625AA /* libz.dylib */,
@@ -576,7 +603,7 @@
 				TargetAttributes = {
 					4F69EBBD1A252331009625AA = {
 						CreatedOnToolsVersion = 6.1;
-						DevelopmentTeam = EP9GA36X8K;
+						DevelopmentTeam = 5FCLB5W36M;
 					};
 					4F69EBD61A252331009625AA = {
 						CreatedOnToolsVersion = 6.1;
@@ -636,6 +663,7 @@
 				905E900D1A2F9D9700BF32E3 /* EditProfileViewController.m in Sources */,
 				4F69EBCA1A252331009625AA /* RootViewController.m in Sources */,
 				4F69EBF81A2532C8009625AA /* ProfileViewController.m in Sources */,
+				4F0B3FFA1A3ACD87009A9F94 /* FBShimmeringView.m in Sources */,
 				8D7E3CF41A36B03E0010C39C /* DataFetcher.m in Sources */,
 				4F69EBC71A252331009625AA /* AppDelegate.m in Sources */,
 				8D23D82A1A356B82007C6E2C /* LogoutButtonTableViewCell.m in Sources */,
@@ -653,6 +681,7 @@
 				4FB6B77D1A3988670003DE0B /* UILabel+WhiteUIDatePickerLabels.m in Sources */,
 				4F69EBEF1A253269009625AA /* ChooseTypeViewController.m in Sources */,
 				8DEA789B1A31206900271A8A /* CapsuleListBackground.m in Sources */,
+				4F0B3FF91A3ACD87009A9F94 /* FBShimmeringLayer.m in Sources */,
 				905E90131A2FE55600BF32E3 /* UpdateProfileInfoViewController.m in Sources */,
 				4F69EBEC1A25320C009625AA /* MessageDetailViewController.m in Sources */,
 				905E90101A2FA3FC00BF32E3 /* EditProfilePicTableViewCell.m in Sources */,
