@@ -193,6 +193,7 @@
         }
     }
 
+    [self verticalCenterText];
 
 }
 
