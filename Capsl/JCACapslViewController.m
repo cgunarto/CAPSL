@@ -27,6 +27,7 @@
 @property NSArray *capslsInAYear;
 @property NSArray *monthsOfTheYear;
 @property NSArray *collectionViewData;
+@property (strong, nonatomic) IBOutlet UILabel *promptLabel;
 
 @property (strong, nonatomic) MPMoviePlayerViewController *videoController;
 
@@ -163,7 +164,7 @@ static NSString * const reuseIdentifier = @"CapslCell";
 
 //    cell.profilePicView.image = [UIImage imageNamed:@"profilepic1"];
 
-    if (!capsl.objectId)
+    if (!capsl.objectId || [capsl.recipient.objectId isEqualToString:kCapslTeamObjectID])
     {
         cell.hidden = YES;
     }
@@ -292,10 +293,20 @@ static NSString * const reuseIdentifier = @"CapslCell";
     if (self.showSent)
     {
         self.collectionViewData = self.sentCapslsGrandArray;
+        Capsl *firstCapsl = self.sentCapslsArray.firstObject;
+        if (self.sentCapslsArray.count == 1 && [firstCapsl.recipient.objectId isEqualToString:kCapslTeamObjectID])
+        {
+            self.promptLabel.hidden = NO;
+        }
+        else
+        {
+            self.promptLabel.hidden = YES;
+        }
     }
     else
     {
         self.collectionViewData = self.capslGrandArray;
+        self.promptLabel.hidden = YES;
     }
 
     [self.capslView reloadData];

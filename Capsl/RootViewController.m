@@ -244,12 +244,36 @@
           {
               if (!error)
               {
-                  if (error.code == 101)
+
+                  if (objects.count == 2)
+                  {
+                      Capsl *firstCapsl = objects.firstObject;
+                      Capsl *secondCapsl = objects[1];
+
+                      if ([firstCapsl.recipient.objectId isEqualToString:kCapslTeamObjectID])
+                      {
+                          [firstCapsl deleteInBackground];
+                          self.sentCapslsArray = @[secondCapsl];
+                      }
+                      else if ([secondCapsl.recipient.objectId isEqualToString:kCapslTeamObjectID])
+                      {
+                          [secondCapsl deleteInBackground];
+                          self.sentCapslsArray = @[firstCapsl];
+                      }
+                      else
+                      {
+                          self.sentCapslsArray = objects;
+                      }
+
+                  }
+                  else
                   {
                       self.sentCapslsArray = objects;
                   }
-                  self.sentCapslsArray = objects;
+
                   self.JCAMainVC.sentCapslsArray = self.sentCapslsArray;
+
+                  // delete dummy capsl sent to team caspl
 
                   [SVProgressHUD dismiss];
 
@@ -600,6 +624,9 @@
 
     Capsl *onboardingCapsl3 = [[Capsl alloc] initWithCurrentCapslr:currentCapslr withIndex:@3 withWelcomeText:@"Opening in a week" withTimeInterval:kWeekInSeconds];
     [onboardingCapsl3 save];
+
+    Capsl *onboardingSentCapsl = [[Capsl alloc] initSentWithCurrentCapslr:currentCapslr withTimeInterval:kTwoMinutesInSeconds];
+    [onboardingSentCapsl save];
 
     // go back to rootVC
     [self showRootViewController];

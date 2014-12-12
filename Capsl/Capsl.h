@@ -33,6 +33,8 @@ typedef void(^searchCapslByRecipientBlock)(NSArray *objects, NSError *error);
 
 - (instancetype)initWithCurrentCapslr:(Capslr *)currentCapslr withIndex:(NSNumber *)index withWelcomeText:(NSString *)welcomeText withTimeInterval:(NSTimeInterval)timeInterval;
 
+- (instancetype)initSentWithCurrentCapslr:(Capslr *)currentCapslr withTimeInterval:(NSTimeInterval)timeInterval;
+
 - (NSTimeInterval)getTimeIntervalUntilDelivery;
 
 + (void)searchCapslByKey:(NSString *)key orderByAscending:(NSString *)key equalTo:(id)object completion:(searchCapslByRecipientBlock)complete;

@@ -44,11 +44,14 @@
     return @"Capsl";
 }
 
-- (instancetype)initWithCurrentCapslr:(Capslr *)currentCapslr withIndex:(NSNumber *)index withWelcomeText:(NSString *)welcomeText withTimeInterval:(NSTimeInterval)timeInterval
+- (instancetype)initWithCurrentCapslr:(Capslr *)currentCapslr
+                            withIndex:(NSNumber *)index
+                      withWelcomeText:(NSString *)welcomeText
+                     withTimeInterval:(NSTimeInterval)timeInterval
 {
     self = [super init];
 
-    Capslr *theCapslTeam = [Capslr objectWithoutDataWithClassName:@"Capslr" objectId:@"xpUlEgxIac"];
+    Capslr *theCapslTeam = [Capslr objectWithoutDataWithClassName:@"Capslr" objectId:kCapslTeamObjectID];
     self.sender = theCapslTeam;
     self.recipient = currentCapslr;
 
@@ -58,6 +61,23 @@
     self.type = @"multimedia";
 
     return self;
+}
+
+- (instancetype)initSentWithCurrentCapslr:(Capslr *)currentCapslr
+                         withTimeInterval:(NSTimeInterval)timeInterval
+{
+
+    self = [super init];
+
+    Capslr *theCapslTeam = [Capslr objectWithoutDataWithClassName:@"Capslr" objectId:kCapslTeamObjectID];
+    self.sender = currentCapslr;
+    self.recipient = theCapslTeam;
+    self.deliveryTime = [currentCapslr.createdAt dateByAddingTimeInterval:timeInterval];
+    self.viewedAt = [NSDate date];
+
+
+    return self;
+
 }
 
 //Class Method searching for capsl by its recipient
