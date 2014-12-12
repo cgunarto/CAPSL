@@ -201,7 +201,7 @@
 #pragma mark - invalid email alert
 - (void)invalidEmailAlert
 {
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Invalid Email" message:@"Please try a new email" preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Invalid email" message:@"Please try a new email" preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction *okButton = [UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleDefault handler:nil];
 
     [alert addAction:okButton];

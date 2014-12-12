@@ -482,7 +482,7 @@
 
     else
     {
-        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"NO CAPSL CREATED"
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"No capsule created"
                                                                        message:@"Add a photo, record audio, or write a message"
                                                                 preferredStyle:UIAlertControllerStyleAlert];
 

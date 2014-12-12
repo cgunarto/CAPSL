@@ -150,7 +150,7 @@
 #pragma mark - Alert
 -(void)notAvailableAlert
 {
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"CAPSL is not yet available" message:@"Please check again later" preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Capsl is not yet available" message:@"Please check again later" preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction *okButton = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil];
 
     [alert addAction:okButton];

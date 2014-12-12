@@ -338,7 +338,7 @@
         return YES;
     }
 
-    [[[UIAlertView alloc] initWithTitle:@"Missing Information" message:@"Make sure you fill out all of the information!" delegate:nil cancelButtonTitle:@"ok" otherButtonTitles:nil, nil] show];
+    [[[UIAlertView alloc] initWithTitle:@"Missing Information" message:@"Please complete all fields" delegate:nil cancelButtonTitle:@"ok" otherButtonTitles:nil, nil] show];
     //Interrupt login process
     return NO;
 }
@@ -434,7 +434,7 @@
     //Display an alert if field wasn't completed
     if (!informationComplete) {
 
-        [[[UIAlertView alloc] initWithTitle:@"Incorrect Information" message:@"Make sure you fill out all of the information correctly" delegate:nil cancelButtonTitle:@"ok" otherButtonTitles:nil] show];
+        [[[UIAlertView alloc] initWithTitle:@"Incorrect Information" message:@"Make sure information is entered correctly" delegate:nil cancelButtonTitle:@"ok" otherButtonTitles:nil] show];
     }
 
     return informationComplete;
@@ -616,13 +616,13 @@
 #pragma mark - helper method
 - (void)createOnboardingCapsls:(Capslr *)currentCapslr
 {
-    Capsl *onboardingCapsl1 = [[Capsl alloc] initWithCurrentCapslr:currentCapslr withIndex:@1 withWelcomeText:@"Welcome To Capsl! If you have any questions email us at thecapslteam@gmail.com. We hope you enjoy Capsl!" withTimeInterval:kTwoMinutesInSeconds];
+    Capsl *onboardingCapsl1 = [[Capsl alloc] initWithCurrentCapslr:currentCapslr withIndex:@1 withWelcomeText:@"Welcome To Capsl! Send a capsule to a friend in the future. They'll love it!" withTimeInterval:kTwoMinutesInSeconds];
     [onboardingCapsl1 save];
 
-    Capsl *onboardingCapsl2 = [[Capsl alloc] initWithCurrentCapslr:currentCapslr withIndex:@2 withWelcomeText:@"Opening in 24 hours" withTimeInterval:kTwoDaysInSeconds];
+    Capsl *onboardingCapsl2 = [[Capsl alloc] initWithCurrentCapslr:currentCapslr withIndex:@2 withWelcomeText:@"Have you tried sending a photo or a short audio message? Capture a funny moment or sing someone \"Happy Birthday\"!" withTimeInterval:kTwoDaysInSeconds];
     [onboardingCapsl2 save];
 
-    Capsl *onboardingCapsl3 = [[Capsl alloc] initWithCurrentCapslr:currentCapslr withIndex:@3 withWelcomeText:@"Opening in a week" withTimeInterval:kWeekInSeconds];
+    Capsl *onboardingCapsl3 = [[Capsl alloc] initWithCurrentCapslr:currentCapslr withIndex:@3 withWelcomeText:@"Sometimes waiting can be fun. Invite a friend to send you some capsules!" withTimeInterval:kWeekInSeconds];
     [onboardingCapsl3 save];
 
     Capsl *onboardingSentCapsl = [[Capsl alloc] initSentWithCurrentCapslr:currentCapslr withTimeInterval:kTwoMinutesInSeconds];
