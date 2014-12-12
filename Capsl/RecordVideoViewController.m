@@ -84,7 +84,7 @@
     }
     else
     {
-        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"CAMERA NOT AVAILABLE"
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Camera not available"
                                                                        message:@""
                                                                 preferredStyle:UIAlertControllerStyleAlert];
 
@@ -144,7 +144,7 @@
     }
     else
     {
-        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"NOTHING RECORDED"
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Nothing recorded"
                                                                        message:@"Please record a video"
                                                                 preferredStyle:UIAlertControllerStyleAlert];
 

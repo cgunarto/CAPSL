@@ -99,7 +99,7 @@
 {
     if(![MFMessageComposeViewController canSendText])
     {
-        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"ERROR"
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Error"
                                                                        message:@"Your device doesn't support SMS!"
                                                                 preferredStyle:UIAlertControllerStyleAlert];
 

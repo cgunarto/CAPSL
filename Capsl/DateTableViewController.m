@@ -653,7 +653,7 @@ NSUInteger DeviceSystemMajorVersion()
 
     else
     {
-        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"NO DELIVERY DATE CHOSEN"
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"No delivery date chosen"
                                                                        message:@"Please choose a delivery date"
                                                                 preferredStyle:UIAlertControllerStyleAlert];
 
