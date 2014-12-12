@@ -119,7 +119,7 @@
     UIApplicationState state = [application applicationState];
     if (state == UIApplicationStateActive)
     {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"CAPSULE UNLOCKED"
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Capsule unlocked"
                                                         message:notification.alertBody
                                                        delegate:self cancelButtonTitle:@"OK"
                                               otherButtonTitles:nil];

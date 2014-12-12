@@ -338,7 +338,7 @@
         return YES;
     }
 
-    [[[UIAlertView alloc] initWithTitle:@"Missing Information" message:@"Make sure you fill out all of the information!" delegate:nil cancelButtonTitle:@"ok" otherButtonTitles:nil, nil] show];
+    [[[UIAlertView alloc] initWithTitle:@"Missing Information" message:@"Please complete all fields" delegate:nil cancelButtonTitle:@"ok" otherButtonTitles:nil, nil] show];
     //Interrupt login process
     return NO;
 }
@@ -434,7 +434,7 @@
     //Display an alert if field wasn't completed
     if (!informationComplete) {
 
-        [[[UIAlertView alloc] initWithTitle:@"Incorrect Information" message:@"Make sure you fill out all of the information correctly" delegate:nil cancelButtonTitle:@"ok" otherButtonTitles:nil] show];
+        [[[UIAlertView alloc] initWithTitle:@"Incorrect Information" message:@"Make sure information is entered correctly" delegate:nil cancelButtonTitle:@"ok" otherButtonTitles:nil] show];
     }
 
     return informationComplete;
