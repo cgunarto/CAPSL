@@ -15,5 +15,6 @@
 
 @property NSData *audioData;
 
+- (IBAction)onDeleteRecordingButtonTapped:(UIButton *)sender;
 
 @end

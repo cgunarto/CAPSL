@@ -15,6 +15,7 @@
 #define kImageResolution 0.2f
 #define kTextViewDistanceFromBottom 100.0f
 #define kCharacterLimit 120
+#define kAddAudioButton @"audio_wave-50"
 
 @import AVFoundation;
 
@@ -35,7 +36,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *characterCountLabel;
 @property (strong, nonatomic) IBOutlet UIButton *enterTextButton;
 @property (strong, nonatomic) IBOutlet UIButton *addPhotoButton;
-@property (weak, nonatomic) IBOutlet UIButton *exitAudioButton;
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *bottomTextViewConstraint;
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *addAudioButtonCenterYConstraint;
@@ -63,7 +63,6 @@
     [super viewDidLoad];
 
     //CONDITION FOR NONEDITING AND EDITING
-    self.exitAudioButton.hidden = YES;
     self.audioControlsContainerView.hidden = YES;
     [self makeNavBarTransparent:YES];
 
@@ -89,7 +88,7 @@
 
         [self processButton:self.enterTextButton withImageName:@"lowercase-50"];
         [self processButton:self.addPhotoButton withImageName:@"camera-50"];
-        [self processButton:self.addAudioButton withImageName:@"audio_wave-50"];
+        [self processButton:self.addAudioButton withImageName:kAddAudioButton];
     }
 
     //If VC isEditing is NO, it is trying to unwrap and display a CPSL message
@@ -103,7 +102,7 @@
 
         self.imageView.userInteractionEnabled = NO;
         [self.view addSubview:self.textView];
-        self.textView.userInteractionEnabled = NO;
+        self.textView.editable = NO;
         self.exitButton.hidden = NO;
         [self processExitButton];
 
@@ -114,7 +113,7 @@
              if (!error)
              {
                  self.audioData = data;
-                 [self processButton:self.addAudioButton withImageName:@"audio_wave-50"];
+                 [self processButton:self.addAudioButton withImageName:kAddAudioButton];
 //                 if (self.chosenCapsl.photo)
 //                 {
 //                     [self setAddAudioToBottom];
@@ -410,12 +409,27 @@
 {
     if (self.isEditing)
     {
-        self.addAudioButton.hidden = YES;
-        self.exitAudioButton.hidden = NO;
+
         self.audioControlsContainerView.hidden = NO;
+
+        self.audioControlsContainerView.alpha = 0.0;
+        self.addAudioButton.alpha = 1.0;
+
+        [UIView animateWithDuration:0.2 animations:^{
+            self.audioControlsContainerView.alpha = 1.0;
+            self.addAudioButton.alpha = 0.0;
+        } completion:nil];
+
+        self.addAudioButton.hidden = YES;
+
         self.recordAudioVC.createdCapsl = self.createdCapsl;
         self.recordAudioVC.audioData = self.audioData;
         [self.navigationController setNavigationBarHidden:YES animated:YES];
+
+        self.addPhotoButton.userInteractionEnabled = NO;
+        self.enterTextButton.userInteractionEnabled = NO;
+        self.textView.userInteractionEnabled = NO;
+
     }
 
     //If not editing, pass audio data from chosenCapsl
@@ -427,21 +441,6 @@
         [self.player play];
     }
 }
-
-- (IBAction)onExitAudioButtonPressed:(UIButton *)sender
-{
-    self.audioControlsContainerView.hidden = YES;
-    self.exitAudioButton.hidden = YES;
-    self.addAudioButton.hidden = NO;
-
-    self.createdCapsl = self.recordAudioVC.createdCapsl;
-    self.audioData = self.recordAudioVC.audioData;
-
-    [self.navigationController setNavigationBarHidden:NO animated:YES];
-
-    [self updateAudioButton];
-}
-
 
 #pragma mark Segue and Next Button
 
@@ -595,7 +594,14 @@
 
 - (IBAction)onViewTapped:(UITapGestureRecognizer *)sender
 {
-    [self.textView resignFirstResponder];
+    if (self.isEditing)
+    {
+
+        [self.textView resignFirstResponder];
+        [self.recordAudioVC onDeleteRecordingButtonTapped:nil];
+
+    }
+
 }
 
 #pragma mark Text View Observer for center vert align
@@ -670,7 +676,30 @@
 
 - (IBAction)unWindToCaptureSegue:(UIStoryboardSegue *)segue
 {
-    
+
+    self.addAudioButton.hidden = NO;
+
+    self.addAudioButton.alpha = 0.0;
+    self.audioControlsContainerView.alpha = 1.0;
+
+    [UIView animateWithDuration:0.2 animations:^{
+        self.addAudioButton.alpha = 1.0;
+        self.audioControlsContainerView.alpha = 0.0;
+    } completion:nil];
+
+    self.audioControlsContainerView.hidden = YES;
+
+    self.createdCapsl = self.recordAudioVC.createdCapsl;
+    self.audioData = self.recordAudioVC.audioData;
+
+    [self.navigationController setNavigationBarHidden:NO animated:YES];
+
+    self.addPhotoButton.userInteractionEnabled = YES;
+    self.enterTextButton.userInteractionEnabled = YES;
+    self.textView.userInteractionEnabled = YES;
+
+    [self updateAudioButton];
+
 }
 
 - (IBAction)onExitButtonPressed:(UIButton *)sender
@@ -706,6 +735,10 @@
 - (void)processExitButton
 {
 
+    UIImage *image = [[UIImage imageNamed:@"cancel-50"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+    [self.exitButton setImage:image forState:UIControlStateNormal];
+
+    self.exitButton.tintColor = [UIColor whiteColor];
     self.exitButton.layer.shadowColor = [UIColor blackColor].CGColor;
     self.exitButton.layer.shadowOpacity = 0.3;
     self.exitButton.layer.shadowRadius = 1;
@@ -751,7 +784,11 @@
     if (self.audioData == nil)
     {
         //TODO:Button needs to change back for NO AUDIO
-        NSLog(@"Button needs to change back for NO AUDIO");
+        [self.addAudioButton setTitle:@"" forState:UIControlStateNormal];
+        [self processButton:self.addAudioButton withImageName:kAddAudioButton];
+
+        self.addAudioButtonWidthConstraint.constant = 60;
+
     }
 
 }
