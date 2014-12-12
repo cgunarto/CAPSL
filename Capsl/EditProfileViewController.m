@@ -228,6 +228,8 @@
         [alert addAction:delete];
         [alert addAction:cancel];
 
+        [alert.view setTintColor:kAlertControllerTintColor];
+
         [self presentViewController:alert animated:YES completion:nil];
     }
 

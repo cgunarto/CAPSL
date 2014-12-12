@@ -29,6 +29,7 @@
 
 @property NSInteger availableCapslsCount;
 @property BOOL shouldShowMessage;
+@property (strong, nonatomic) IBOutlet UILabel *promptLabel;
 
 @end
 
@@ -151,6 +152,16 @@
         }];
 
     [cell drawCellForCapsl:capslForCell ThatWasSent:self.shouldShowSent];
+
+    if ([capslForCell.recipient.objectId isEqualToString:kCapslTeamObjectID])
+    {
+        cell.hidden = YES;
+        self.promptLabel.hidden = NO;
+    }
+    else
+    {
+        self.promptLabel.hidden = YES;
+    }
 
     return cell;
 }
