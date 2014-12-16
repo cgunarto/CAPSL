@@ -74,14 +74,23 @@
                                                          contact.number = phoneNumber;
                                                      }
 
-                                                     //Check for the phone number for '+' '-' '(' ')' ' ' and remove them.
-                                                     contact.number = [contact.number stringByReplacingOccurrencesOfString:@" " withString:@""];
-                                                     contact.number = [contact.number stringByReplacingOccurrencesOfString:@"+" withString:@""];
-                                                     contact.number = [contact.number stringByReplacingOccurrencesOfString:@"-" withString:@""];
-                                                     contact.number = [contact.number stringByReplacingOccurrencesOfString:@"(" withString:@""];
-                                                     contact.number = [contact.number stringByReplacingOccurrencesOfString:@")" withString:@""];
-                                                     contact.number = [contact.number stringByReplacingOccurrencesOfString:@"." withString:@""];
+                                                     NSCharacterSet *setToRemove = [NSCharacterSet characterSetWithCharactersInString:@"0123456789"];
+                                                     NSCharacterSet *setToKeep = [setToRemove invertedSet];
+
+                                                     NSString *newString =
+                                                     [[contact.number componentsSeparatedByCharactersInSet:setToKeep]
+                                                      componentsJoinedByString:@""];
                                                      
+                                                     contact.number = newString;
+
+//                                                     //Check for the phone number for '+' '-' '(' ')' ' ' and remove them.
+//                                                     contact.number = [contact.number stringByReplacingOccurrencesOfString:@" " withString:@""];
+//                                                     contact.number = [contact.number stringByReplacingOccurrencesOfString:@"+" withString:@""];
+//                                                     contact.number = [contact.number stringByReplacingOccurrencesOfString:@"-" withString:@""];
+//                                                     contact.number = [contact.number stringByReplacingOccurrencesOfString:@"(" withString:@""];
+//                                                     contact.number = [contact.number stringByReplacingOccurrencesOfString:@")" withString:@""];
+//                                                     contact.number = [contact.number stringByReplacingOccurrencesOfString:@"." withString:@""];
+
                                                      //Assign the first name and last name
                                                      contact.firstName = firstName;
                                                      contact.lastName = lastName;
