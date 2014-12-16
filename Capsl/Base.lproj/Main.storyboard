@@ -450,7 +450,7 @@
                                 </variation>
                             </toolbar>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailingMargin" secondItem="Vr6-T6-uD9" secondAttribute="trailing" constant="-16" id="1zh-79-X10"/>
                             <constraint firstAttribute="bottomMargin" secondItem="rBf-K9-OAZ" secondAttribute="bottom" id="2sE-cn-tnQ"/>

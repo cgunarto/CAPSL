@@ -400,15 +400,6 @@
 
     CAGradientLayer *gradient = [CAGradientLayer layer];
 
-    NSLog(@"%f", self.maskView.frame.size.width);
-    NSLog(@"%f", self.maskView.frame.size.height);
-
-    NSLog(@"%f", self.view.frame.size.width);
-    NSLog(@"%f", self.view.frame.size.height);
-
-    NSLog(@"%f", self.timelineView.frame.size.width);
-    NSLog(@"%f", self.timelineView.frame.size.height);
-
     gradient.frame = self.timelineView.frame;
 
     gradient.startPoint = CGPointMake(0.0, 0.5);
