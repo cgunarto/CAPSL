@@ -40,6 +40,25 @@
     [rightSegment stroke];
 
 
+    // masking
+
+//    CAGradientLayer *gradient = [CAGradientLayer layer];
+//    gradient.allowsGroupOpacity = NO;
+//    gradient.frame = self.bounds;
+//    gradient.colors = [NSArray arrayWithObjects:
+//                       (__bridge id)UIColor.clearColor.CGColor,
+//                       UIColor.whiteColor.CGColor,
+//                       UIColor.whiteColor.CGColor,
+//                       UIColor.clearColor.CGColor,
+//                       nil];
+//    gradient.locations = [NSArray arrayWithObjects:
+//                          [NSNumber numberWithFloat:0],
+//                          [NSNumber numberWithFloat:1.0/16],
+//                          [NSNumber numberWithFloat:15.0/16],
+//                          [NSNumber numberWithFloat:1],
+//                          nil];
+//    self.layer.mask = gradient;
+
 }
 
 @end

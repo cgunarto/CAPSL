@@ -233,6 +233,15 @@ static NSString * const reuseIdentifier = @"CapslCell";
 
 }
 
+- (void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView
+{
+
+//    NSArray *visibleIndexPaths = [self.capslView indexPathsForVisibleItems];
+//
+//    [self.delegate capslsScrolledToIndex:visibleIndexPaths.firstObject];
+
+}
+
 
 #pragma mark Playing Video
 
@@ -251,12 +260,21 @@ static NSString * const reuseIdentifier = @"CapslCell";
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
+
+//    NSArray *arrayOfSelectedIndexPaths = [self.capslView indexPathsForSelectedItems];
     NSArray *visibleIndexPaths = [self.capslView indexPathsForVisibleItems];
 
+    // dragged scrollview
     if (scrollView.dragging)
     {
         [self.delegate capslsScrolledToIndex:visibleIndexPaths.firstObject];
     }
+    // tapped scrollview
+//    else if (arrayOfSelectedIndexPaths.count != 0)
+//    {
+//        [self.delegate capslsScrolledToIndex:visibleIndexPaths.firstObject];
+//    }
+
 
 }
 
@@ -347,6 +365,9 @@ static NSString * const reuseIdentifier = @"CapslCell";
 // NSIndexPath *indexPath = [NSIndexPath indexPathForItem:0 inSection:section];
 //
 //    [self.capslView scrollToItemAtIndexPath:indexPath atScrollPosition:UICollectionViewScrollPositionLeft animated:YES];
+
+    NSIndexPath *indexPathOfCapsl = [NSIndexPath indexPathForItem:monthIndex inSection:(multiplierForYear * 12) + monthIndex];
+    [self.delegate capslsScrolledToIndex:indexPathOfCapsl];
 
 }
 

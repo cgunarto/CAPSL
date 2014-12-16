@@ -8,18 +8,21 @@
 
 #import "JCATimelineViewController.h"
 #import "JCATimelineMonthCollectionViewCell.h"
+#import "JCATimeline.h"
 #import <QuartzCore/QuartzCore.h>
 
 @interface JCATimelineViewController () <UIGestureRecognizerDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout>
 
 @property (strong, nonatomic) IBOutlet UICollectionView *timelineView;
+@property (strong, nonatomic) IBOutlet JCATimeline *maskView;
+@property (strong, nonatomic) IBOutlet UILabel *yearLabel;
 @property NSArray *monthStrings;
 @property NSArray *arrayOfYearNumbers;
 @property NSMutableArray *arrayOfMonths;
 @property NSArray *arrayOfCapslCounts;
 @property NSArray *collectionViewData;
 
-@property CGFloat screenWidth;
+@property CGFloat timelineWidth;
 //@property UIView *timelineHighlight;
 
 @end
@@ -42,15 +45,31 @@
         }
     }
 
-    self.screenWidth = [[UIScreen mainScreen] bounds].size.height;
+//    self.timelineWidth = [[UIScreen mainScreen] bounds].size.height;
+    self.timelineWidth = self.view.bounds.size.height * 0.9;
+
+    // set year label to this year
+    NSDateFormatter *yearFormatter = [[NSDateFormatter alloc] init];
+    [yearFormatter setDateFormat:@"yyyy"];
+    self.yearLabel.text = [yearFormatter stringFromDate:[NSDate date]];
+
+    [self.maskView addSubview:self.timelineView];
 
 //    [self styleHighlight];
+
 
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [self updateData];
+}
+
+- (void)viewWillLayoutSubviews
+{
+
+    [self fadeLeftEdge];
+
 }
 
 - (void)setCapslGrandArray:(NSArray *)capslGrandArray
@@ -110,7 +129,7 @@
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
 
-    return CGSizeMake(self.screenWidth/12, self.view.frame.size.height);
+    return CGSizeMake(self.timelineWidth/9, self.view.frame.size.height);
 
 }
 
@@ -159,12 +178,14 @@
     if (scrollView.dragging)
     {
         [self.delegate indexPathForTimelineCellAtCenter:indexPath fromTap:NO];
+        self.yearLabel.text = self.arrayOfYearNumbers[indexPath.section];
     }
 
     // tapped scrollview
     else if (arrayOfSelectedIndexPaths.count != 0)
     {
         [self.delegate indexPathForTimelineCellAtCenter:indexPath fromTap:YES];
+        self.yearLabel.text = self.arrayOfYearNumbers[indexPath.section];
     }
 
 }
@@ -174,11 +195,11 @@
 - (void)styleHighlight
 {
 
-//    CGRect highlightFrame = CGRectMake(300, self.screenWidth/2, self.screenWidth/12, self.screenWidth/12);
+//    CGRect highlightFrame = CGRectMake(300, self.timelineWidth/2, self.timelineWidth/12, self.timelineWidth/12);
 //
 //    UIView *timelineHighlight = [[UIView alloc] initWithFrame:highlightFrame];
 //
-////    timelineHighlight.center = CGPointMake(self.screenWidth/2, self.view.frame.size.width);
+////    timelineHighlight.center = CGPointMake(self.timelineWidth/2, self.view.frame.size.width);
 //    timelineHighlight.layer.cornerRadius = self.timelineHighlight.frame.size.width/2;
 //    timelineHighlight.layer.borderWidth = 1.0;
 //    timelineHighlight.layer.borderColor = [UIColor lightGrayColor].CGColor;
@@ -218,8 +239,8 @@
 
 - (NSIndexPath *)indexPathAtCenter
 {
-    CGFloat yUnderCenterOfContainer = self.timelineView.contentSize.height/2;
-    CGFloat xUnderCenterOfContainer = self.timelineView.contentOffset.x + self.screenWidth/2;
+    CGFloat yUnderCenterOfContainer = self.timelineView.contentSize.height * 0.4;
+    CGFloat xUnderCenterOfContainer = self.timelineView.contentOffset.x + self.timelineWidth/2;
     NSIndexPath *indexPath = [self.timelineView indexPathForItemAtPoint:CGPointMake(xUnderCenterOfContainer, yUnderCenterOfContainer)];
     return indexPath;
 }
@@ -371,6 +392,29 @@
     NSLayoutConstraint *centerXConstraint = [NSLayoutConstraint constraintWithItem:cell.countLabel attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:cell attribute:NSLayoutAttributeCenterX multiplier:1.0 constant:0];
 
     [cell addConstraints:@[centerXConstraint, centerYConstraint]];
+
+}
+
+- (void)fadeLeftEdge
+{
+
+    CAGradientLayer *gradient = [CAGradientLayer layer];
+
+    gradient.frame = self.timelineView.frame;
+
+    gradient.startPoint = CGPointMake(0.0, 0.5);
+    gradient.endPoint = CGPointMake(1.0, 0.5);
+    gradient.colors = [NSArray arrayWithObjects:
+                       (__bridge id)UIColor.clearColor.CGColor,
+                       UIColor.whiteColor.CGColor,
+                       UIColor.whiteColor.CGColor,
+                       nil];
+    gradient.locations = [NSArray arrayWithObjects:
+                          [NSNumber numberWithFloat:0],
+                          [NSNumber numberWithFloat:1.0/20],
+                          [NSNumber numberWithFloat:1.0],
+                          nil];
+    self.maskView.layer.mask = gradient;
 
 }
 
