@@ -617,6 +617,9 @@ NSUInteger DeviceSystemMajorVersion()
                                                 [self showRootViewController];
                                             }];
                  [alert addAction:okButton];
+
+                 [alert.view setTintColor:kAlertControllerTintColor];
+
                  [self presentViewController:alert
                                     animated:YES
                                   completion:nil];
