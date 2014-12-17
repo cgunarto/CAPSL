@@ -108,12 +108,19 @@
     // Dispose of any resources that can be recreated.
 }
 
-//#pragma mark Lock Orientation
-//
-//- (BOOL) shouldAutorotate
-//{
-//    return YES;
-//}
+#pragma mark Lock Orientation
+
+- (BOOL) shouldAutorotate
+{
+    if (self.chooseTypeContainerView.hidden == NO)
+    {
+        return NO;
+    }
+    else
+    {
+        return YES;
+    }
+}
 //
 //-(NSUInteger)supportedInterfaceOrientations
 //{
