@@ -112,6 +112,7 @@
     [self.recorder stop];
 
     AVAudioSession *audioSession = [AVAudioSession sharedInstance];
+    [audioSession setCategory:AVAudioSessionCategoryPlayback error:nil];
     [audioSession setActive:NO error:nil];
 
     //TODO: Limit Audio Data File
@@ -127,6 +128,7 @@
         //Playing from document's directory self.player = [[AVAudioPlayer alloc] initWithContentsOfURL:self.recorder.url error:nil];
         self.player = [[AVAudioPlayer alloc] initWithData:self.audioData fileTypeHint:@"m4a" error:nil];
         [self.player setDelegate:self];
+        [self.player setVolume: 1.0];
         [self.player play];
     }
 
