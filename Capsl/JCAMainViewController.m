@@ -80,7 +80,6 @@
 //    [self.view layoutIfNeeded];
 
 }
-//
 
 - (BOOL)prefersStatusBarHidden
 {

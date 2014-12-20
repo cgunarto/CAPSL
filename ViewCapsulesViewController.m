@@ -139,7 +139,7 @@
 {
     [super viewWillAppear:animated];
     // put timer here
-    self.timer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(updateUIInSubviews) userInfo:nil repeats:YES];
+    self.timer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(updateClocksInSubviews) userInfo:nil repeats:YES];
 
 }
 
@@ -168,6 +168,8 @@
         [self.timelineContainer setNeedsDisplay];
         [self.view bringSubviewToFront:self.sentReceivedSegmentedControl];
 
+        [self.timelineRootVC updateTimelines];
+
 //        self.view.backgroundColor = [UIColor colorWithPatternImage:kTimelineWallpaper];
 
     }
@@ -177,6 +179,11 @@
         //        [self.timelineViewControllerContainer setHidden:YES];
         //        [self.view sendSubviewToBack:self.timelineViewControllerContainer];
         [self.view addSubview:self.capslListContainer];
+
+        CGRect capslListContainerFrame = self.capslListContainer.frame;
+        capslListContainerFrame.size = CGSizeMake(self.capslListContainer.frame.size.height, self.capslListContainer.frame.size.width);
+        self.capslListContainer.frame = capslListContainerFrame;
+        
         [self.view bringSubviewToFront:self.capslListContainer];
         [self.capslListContainer setHidden:NO];
         [self.timelineContainer removeFromSuperview];
@@ -216,7 +223,7 @@
 
 #pragma mark - helper methods
 
-- (void)updateUIInSubviews
+- (void)updateClocksInSubviews
 {
 
     [self.capslListVC updateClocks];

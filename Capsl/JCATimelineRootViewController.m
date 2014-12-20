@@ -347,6 +347,12 @@
     return soonestUnopenedCapsl;
 }
 
+- (void)updateTimelines
+{
+    [self.timelineVC updateData];
+    [self.capslVC updateUserInterface];
+}
+
 #pragma mark - segue life cycle
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
