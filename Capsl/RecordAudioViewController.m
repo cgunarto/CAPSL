@@ -7,7 +7,7 @@
 //
 
 #import "RecordAudioViewController.h"
-#import "CaptureViewController.h"
+#import "MessageViewController.h"
 #import "Capsl.h"
 #import "Capslr.h"
 
@@ -267,7 +267,7 @@
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    CaptureViewController *captureVC = segue.destinationViewController;
+    MessageViewController *captureVC = segue.destinationViewController;
     captureVC.createdCapsl = self.createdCapsl;
     captureVC.audioData = self.audioData;
 }

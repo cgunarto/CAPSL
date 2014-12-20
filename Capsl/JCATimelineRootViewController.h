@@ -15,6 +15,7 @@
 @property (nonatomic) BOOL shouldShowSent;
 
 - (void)updateClocks;
+- (void)updateTimelines;
 
 @end
 

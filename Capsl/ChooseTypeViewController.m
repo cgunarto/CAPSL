@@ -8,7 +8,7 @@
 
 #import "ChooseTypeViewController.h"
 #import "RecordAudioViewController.h"
-#import "CaptureViewController.h"
+#import "MessageViewController.h"
 #import "SVProgressHUD.h"
 
 @interface ChooseTypeViewController ()
@@ -70,7 +70,7 @@
     if ([segue.identifier isEqualToString:@"segueToCapture"])
     {
         UINavigationController *navVC = segue.destinationViewController;
-        CaptureViewController *captureVC = navVC.childViewControllers[0];
+        MessageViewController *captureVC = navVC.childViewControllers[0];
         captureVC.isEditing = YES;
     }
 }

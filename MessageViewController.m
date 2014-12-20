@@ -6,7 +6,7 @@
 //  Copyright (c) 2014 Christina Gunarto. All rights reserved.
 //
 
-#import "CaptureViewController.h"
+#import "MessageViewController.h"
 #import "SearchContactViewController.h"
 #import "RecordAudioViewController.h"
 #import "Capsl.h"
@@ -19,7 +19,7 @@
 
 @import AVFoundation;
 
-@interface CaptureViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextViewDelegate, AVAudioPlayerDelegate>
+@interface MessageViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextViewDelegate, AVAudioPlayerDelegate>
 
 @property  RecordAudioViewController *recordAudioVC;
 @property (strong, nonatomic) IBOutlet UIView *audioControlsContainerView;
@@ -51,7 +51,7 @@
 
 @end
 
-@implementation CaptureViewController
+@implementation MessageViewController
 
 #pragma mark View Controller Life Cycle
 

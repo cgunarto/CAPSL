@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 @class Capsl;
 
-@interface CaptureViewController : UIViewController
+@interface MessageViewController : UIViewController
 @property Capsl *createdCapsl;
 @property Capsl *chosenCapsl;
 @property NSData *audioData;

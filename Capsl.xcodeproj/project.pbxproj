@@ -17,7 +17,7 @@
 		4F69EBE91A2531D9009625AA /* CapsuleListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F69EBE81A2531D9009625AA /* CapsuleListViewController.m */; };
 		4F69EBEC1A25320C009625AA /* MessageDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F69EBEB1A25320C009625AA /* MessageDetailViewController.m */; };
 		4F69EBEF1A253269009625AA /* ChooseTypeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F69EBEE1A253269009625AA /* ChooseTypeViewController.m */; };
-		4F69EBF21A25327A009625AA /* CaptureViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F69EBF11A25327A009625AA /* CaptureViewController.m */; };
+		4F69EBF21A25327A009625AA /* MessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F69EBF11A25327A009625AA /* MessageViewController.m */; };
 		4F69EBF81A2532C8009625AA /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F69EBF71A2532C8009625AA /* ProfileViewController.m */; };
 		4F69EBFD1A253957009625AA /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F69EBF91A253957009625AA /* Bolts.framework */; };
 		4F69EBFE1A253957009625AA /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F69EBFA1A253957009625AA /* Parse.framework */; };
@@ -112,8 +112,8 @@
 		4F69EBEB1A25320C009625AA /* MessageDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageDetailViewController.m; sourceTree = "<group>"; };
 		4F69EBED1A253269009625AA /* ChooseTypeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChooseTypeViewController.h; sourceTree = "<group>"; };
 		4F69EBEE1A253269009625AA /* ChooseTypeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChooseTypeViewController.m; sourceTree = "<group>"; };
-		4F69EBF01A25327A009625AA /* CaptureViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CaptureViewController.h; path = ../CaptureViewController.h; sourceTree = "<group>"; };
-		4F69EBF11A25327A009625AA /* CaptureViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CaptureViewController.m; path = ../CaptureViewController.m; sourceTree = "<group>"; };
+		4F69EBF01A25327A009625AA /* MessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MessageViewController.h; path = ../MessageViewController.h; sourceTree = "<group>"; };
+		4F69EBF11A25327A009625AA /* MessageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MessageViewController.m; path = ../MessageViewController.m; sourceTree = "<group>"; };
 		4F69EBF61A2532C8009625AA /* ProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileViewController.h; sourceTree = "<group>"; };
 		4F69EBF71A2532C8009625AA /* ProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileViewController.m; sourceTree = "<group>"; };
 		4F69EBF91A253957009625AA /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
@@ -386,8 +386,8 @@
 			children = (
 				4F69EBED1A253269009625AA /* ChooseTypeViewController.h */,
 				4F69EBEE1A253269009625AA /* ChooseTypeViewController.m */,
-				4F69EBF01A25327A009625AA /* CaptureViewController.h */,
-				4F69EBF11A25327A009625AA /* CaptureViewController.m */,
+				4F69EBF01A25327A009625AA /* MessageViewController.h */,
+				4F69EBF11A25327A009625AA /* MessageViewController.m */,
 				4FC4EA161A2B021D00D3D09D /* RecordAudioViewController.h */,
 				4FC4EA171A2B021D00D3D09D /* RecordAudioViewController.m */,
 				4FC4EA1E1A2D1D4000D3D09D /* RecordVideoViewController.h */,
@@ -671,7 +671,7 @@
 				8D6A97721A32321500ECA7D9 /* CrossDissolveSegue.m in Sources */,
 				8D5A3DD81A2A4AFD00A6485A /* JCATimelineRootViewController.m in Sources */,
 				4F69EBC41A252331009625AA /* main.m in Sources */,
-				4F69EBF21A25327A009625AA /* CaptureViewController.m in Sources */,
+				4F69EBF21A25327A009625AA /* MessageViewController.m in Sources */,
 				4F69EC3A1A2A72D9009625AA /* SearchContactViewController.m in Sources */,
 				90C61E671A2C4EA3003EFEF9 /* UIImage+Alpha.m in Sources */,
 				90C61E621A2C4D3A003EFEF9 /* UIImage+RoundedCorner.m in Sources */,

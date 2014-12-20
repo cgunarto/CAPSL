@@ -12,7 +12,7 @@
 #import "JKCountDownTimer.h"
 #import "JCATimelineRootViewController.h"
 #import "JCAMainViewController.h"
-#import "CaptureViewController.h"
+#import "MessageViewController.h"
 #import "RecordVideoViewController.h"
 #import "IndexConverter.h"
 
@@ -48,7 +48,6 @@
     [super viewDidLoad];
 
     self.view.backgroundColor = [UIColor clearColor];
-//    self.tableView.contentInset = UIEdgeInsetsMake(self.navigationController.navigationBar.frame.size.height + 20, 0, 44, 0);
     self.availableCapslsCount = 0;
 
     self.senderPics = [@[] mutableCopy];
@@ -266,7 +265,7 @@
 {
     long elapsedSeconds = [capsl.deliveryTime timeIntervalSinceNow];
 
-    // don't open if the capsule is not ready!
+    // consideration only required if viewing received
     if (!self.shouldShowSent)
     {
         //if it's unviewed and unlocked
@@ -317,7 +316,7 @@
 
     if ([segue.identifier isEqualToString:@"multimediaSegue"])
     {
-        CaptureViewController *vc = segue.destinationViewController;
+        MessageViewController *vc = segue.destinationViewController;
         vc.chosenCapsl = capsl;
         vc.isEditing = NO;
     }

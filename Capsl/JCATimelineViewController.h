@@ -28,6 +28,7 @@
 @property BOOL showSent;
 
 - (void)centerCorrespondingMonthCell:(NSIndexPath *)indexPath;
+- (void)updateData;
 
 @property (nonatomic, weak) id <TimelineDelegate> delegate;
 

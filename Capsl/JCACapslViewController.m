@@ -12,7 +12,7 @@
 #import "Capslr.h"
 #import "JKCountDownTimer.h"
 #import "IndexConverter.h"
-#import "CaptureViewController.h"
+#import "MessageViewController.h"
 #import <QuartzCore/QuartzCore.h>
 
 @import MediaPlayer;
@@ -431,7 +431,7 @@ static NSString * const reuseIdentifier = @"CapslCell";
 {
     if ([segue.identifier isEqualToString:@"multimediaSegue"])
     {
-        CaptureViewController *vc = segue.destinationViewController;
+        MessageViewController *vc = segue.destinationViewController;
         vc.chosenCapsl = capsl;
         vc.isEditing = NO;
     }
