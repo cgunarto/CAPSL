@@ -287,12 +287,19 @@
         for (NSString *month in monthStrings)
         {
 
-            NSString *numberOfCapsls = [dictOfMonths objectForKey:month];
+            NSNumber *numberOfCapsls = [dictOfMonths objectForKey:month];
             NSInteger yearMultiplier = [self.arrayOfYearNumbers indexOfObject:yearString];
             NSInteger index = (yearMultiplier * 12) + ([month integerValue] - 1);
 
-            [arrayOfCounts replaceObjectAtIndex:index withObject:numberOfCapsls];
-
+            // if recipient is Team Capsl do not show a count in the timeline
+            if ([numberOfCapsls isEqual:@0])
+            {
+                break;
+            }
+            else
+            {
+                [arrayOfCounts replaceObjectAtIndex:index withObject:numberOfCapsls];
+            }
         }
 
     }

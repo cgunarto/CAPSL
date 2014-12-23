@@ -224,7 +224,11 @@
                                                        handler:nil];
 
         [alert addAction:chooseFromLibrary];
-        [alert addAction:takePhoto];
+
+        if ([UIImagePickerController isSourceTypeAvailable: UIImagePickerControllerSourceTypeCamera])
+        {
+            [alert addAction:takePhoto];
+        }
         [alert addAction:delete];
         [alert addAction:cancel];
 

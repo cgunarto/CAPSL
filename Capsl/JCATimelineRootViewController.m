@@ -14,6 +14,7 @@
 #import "UIImage+ImageEffects.h"
 #import "BackgroundGenerator.h"
 #import "Capsl.h"
+#import "Capslr.h"
 
 #define kNumOfTimelinePrefixYears 1
 
@@ -159,7 +160,7 @@
 
     UIImage *wallpaper = [[UIImage alloc] init];
 
-    wallpaper = [BackgroundGenerator blurImage:kTimelineWallpaper];
+    wallpaper = [BackgroundGenerator blurImage:kTimelineWallpaper withRadius:10.0];
 
     if (self.shouldShowSent)
     {
@@ -171,7 +172,7 @@
     }
 
     self.wallpaperView = [[UIImageView alloc] initWithImage:wallpaper];
-    self.wallpaperView.frame = self.view.bounds;
+    self.wallpaperView.frame = [[UIScreen mainScreen] bounds];
     self.wallpaperView.contentMode = UIViewContentModeScaleAspectFill;
     [self.view addSubview:self.wallpaperView];
     [self.view sendSubviewToBack:self.wallpaperView];
@@ -310,7 +311,7 @@
 
     NSMutableDictionary *dictionaryOfYearKeys = [NSMutableDictionary dictionary];
 
-    // create a dictionary where key is year and object is another dictionary with month name key, and capsule count for that month as value
+    // create a dictionary where key is year and value is another dictionary with month name key, and capsule count for that month as value
     for (Capsl *capsl in capsls)
     {
         NSInteger capslYear = [capsl getYearForCapsl];
@@ -330,7 +331,17 @@
             [dictOfMonths setObject:@0 forKey:monthString];
         }
 
-        NSNumber *newCount = [NSNumber numberWithInteger:[[dictOfMonths objectForKey:monthString] integerValue] + 1];
+
+        NSNumber *newCount = [NSNumber new];
+
+        if ([capsl.recipient.objectId isEqualToString:kCapslTeamObjectID])
+        {
+            newCount = @0;
+        }
+        else
+        {
+            newCount = [NSNumber numberWithInteger:[[dictOfMonths objectForKey:monthString] integerValue] + 1];
+        }
 
         [dictOfMonths setObject:newCount forKey:monthString];
 
