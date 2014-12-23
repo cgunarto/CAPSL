@@ -63,7 +63,7 @@
     else if (self.createdCapsl.photo)
     {
 
-        self.backgroundImage = [BackgroundGenerator blurImage:self.backgroundImage];
+        self.backgroundImage = [BackgroundGenerator blurImage:self.backgroundImage withRadius:kChosenImageBlurRadius];
 
     }
 
@@ -131,7 +131,7 @@
 
 - (void)searchDisplayController:(UISearchDisplayController *)controller willShowSearchResultsTableView:(UITableView*)tableView
 {
-    UIImage *processedImage = [BackgroundGenerator blurImage:self.backgroundImage];
+    UIImage *processedImage = [BackgroundGenerator blurImage:self.backgroundImage withRadius:kChosenImageBlurRadius];
     [tableView setBackgroundColor:[UIColor colorWithPatternImage:processedImage]];
     tableView.tag = 1;
 

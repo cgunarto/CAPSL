@@ -13,12 +13,13 @@
 @implementation BackgroundGenerator
 
 + (UIImage *)blurImage:(UIImage *)image
+            withRadius:(float)radius
 {
 
     UIImage *newImage = [self imageResize:image];
 
     UIColor *tintColor = [UIColor colorWithWhite:0.3 alpha:0.1];
-    UIImage *blurredImage = [newImage applyBlurWithRadius:20 tintColor:tintColor saturationDeltaFactor:0.8 maskImage:nil];
+    UIImage *blurredImage = [newImage applyBlurWithRadius:radius tintColor:tintColor saturationDeltaFactor:0.8 maskImage:nil];
 
     return blurredImage;
 
@@ -26,7 +27,7 @@
 
 + (UIImage *)imageResize :(UIImage *)img
 {
-    CGFloat scale = [[UIScreen mainScreen]scale];
+//    CGFloat scale = [[UIScreen mainScreen]scale];
 
     CGSize newSize = [[UIScreen mainScreen] bounds].size;
 

@@ -66,106 +66,18 @@
     self.audioControlsContainerView.hidden = YES;
     [self makeNavBarTransparent:YES];
 
-    //If VC isEditing, it is trying to create a Capsl message
-    if (self.isEditing)
-    {
-        self.textView.delegate = self;
-        self.exitButton.hidden = YES;
-        //Setting CPSL sender
-        [Capslr returnCapslrFromPFUser:[PFUser currentUser] withCompletion:^(Capslr *currentCapslr, NSError *error)
-         {
-             self.createdCapsl.sender = currentCapslr;
-         }];
+    self.textView.delegate = self;
 
-        //Initializing Capsl object and its type
-        self.createdCapsl = [Capsl object];
-        self.createdCapsl.type = @"multimedia";
-        self.navigationItem.leftBarButtonItem = self.cancelButton;
-        self.navigationItem.rightBarButtonItem = self.doneButton;
+    //Initializing Capsl object and its type
+    self.createdCapsl = [Capsl object];
+    self.createdCapsl.type = @"multimedia";
 
-        self.imageView.userInteractionEnabled = YES;
-        self.textView.userInteractionEnabled = YES;
-
-        [self processButton:self.enterTextButton withImageName:@"lowercase-50"];
-        [self processButton:self.addPhotoButton withImageName:@"camera-50"];
-        [self processButton:self.addAudioButton withImageName:kAddAudioButton];
-    }
-
-    //If VC isEditing is NO, it is trying to unwrap and display a CPSL message
-    else
-    {
-
-        self.enterTextButton.hidden = YES;
-        self.addPhotoButton.hidden = YES;
-        self.addAudioButton.hidden = NO;
-        self.audioControlsContainerView.hidden = YES;
-
-        self.imageView.userInteractionEnabled = NO;
-        [self.view addSubview:self.textView];
-        self.textView.editable = NO;
-        self.exitButton.hidden = NO;
-        [self processExitButton];
-
-
-        //Get the audio data early -- show addAudio button which should be play button
-        [self.chosenCapsl.audio getDataInBackgroundWithBlock:^(NSData *data, NSError *error)
-         {
-             if (!error)
-             {
-                 self.audioData = data;
-                 [self processButton:self.addAudioButton withImageName:kAddAudioButton];
-//                 if (self.chosenCapsl.photo)
-//                 {
-//                     [self setAddAudioToBottom];
-//                 }
-             }
-             else
-             {
-                 NSLog(@"error for getting audio: %@", error.localizedDescription);
-             }
-         }];
-
-        //Show textview, automatically defaults to center if there is no image
-        if (self.textView.text)
-        {
-
-            //TODO: trouble shoot vertical alignment for viewing capsules
-            self.textView.text = self.chosenCapsl.text;
-
-            CGSize contentSize = self.textView.contentSize;
-            contentSize.height = ceilf([self.textView sizeThatFits:self.textView.frame.size].height);
-            self.textView.contentSize = contentSize;
-
-            [self verticalCenterText];
-
-        }
-
-        //Display the Capsl photo if available
-        if (self.chosenCapsl.photo)
-        {
-            [self.chosenCapsl.photo getDataInBackgroundWithBlock:^(NSData *data, NSError *error)
-            {
-                self.imageView.image = [UIImage imageWithData:data];
-            }];
-
-            //If there is text, move it to bottom
-            if (self.chosenCapsl.text)
-            {
-                [self setTextViewToBottom];
-            }
-
-            //If there is no text, hide the textview
-            else
-            {
-                self.textView.hidden = YES;
-            }
-        }
-
-        //Show or Hide Audio Button depending if there is an audio message
-        //TODO: if there is no text and no photo put audio button in center of screen with text view background
-        self.addAudioButton.hidden = !self.chosenCapsl.audio;
-
-    }
+    //Setting CPSL sender
+    [Capslr returnCapslrFromPFUser:[PFUser currentUser] withCompletion:^(Capslr *currentCapslr, NSError *error)
+     {
+        
+         self.createdCapsl.sender = currentCapslr;
+     }];
 
     self.view.backgroundColor = [UIColor colorWithPatternImage:[self getBackgroundImage]];
 
@@ -193,7 +105,104 @@
         }
     }
 
+    [self.textView setAutoresizingMask:UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight];
+    [self.textView layoutIfNeeded];
     [self verticalCenterText];
+
+    //If VC isEditing, it is trying to create a Capsl message
+    if (self.isEditing)
+    {
+        self.exitButton.hidden = YES;
+        self.navigationItem.leftBarButtonItem = self.cancelButton;
+        self.navigationItem.rightBarButtonItem = self.doneButton;
+
+        self.imageView.userInteractionEnabled = YES;
+        self.textView.userInteractionEnabled = YES;
+
+        [self processButton:self.enterTextButton withImageName:@"lowercase-50"];
+        [self processButton:self.addPhotoButton withImageName:@"camera-50"];
+        if (!self.audioData)
+        {
+            [self processButton:self.addAudioButton withImageName:kAddAudioButton];
+        }
+    }
+
+    //If VC isEditing is NO, it is trying to unwrap and display a CPSL message
+    else
+    {
+
+        self.enterTextButton.hidden = YES;
+        self.addPhotoButton.hidden = YES;
+        self.addAudioButton.hidden = NO;
+        self.audioControlsContainerView.hidden = YES;
+
+        self.imageView.userInteractionEnabled = NO;
+        [self.view addSubview:self.textView];
+        self.textView.editable = NO;
+        self.exitButton.hidden = NO;
+        [self processExitButton];
+
+
+        //Get the audio data early -- show addAudio button which should be play button
+        [self.chosenCapsl.audio getDataInBackgroundWithBlock:^(NSData *data, NSError *error)
+         {
+             if (!error)
+             {
+                 self.audioData = data;
+                 [self processButton:self.addAudioButton withImageName:kAddAudioButton];
+                 //                 if (self.chosenCapsl.photo)
+                 //                 {
+                 //                     [self setAddAudioToBottom];
+                 //                 }
+             }
+             else
+             {
+                 NSLog(@"error for getting audio: %@", error.localizedDescription);
+             }
+         }];
+
+        //Show textview, automatically defaults to center if there is no image
+        if (self.chosenCapsl.text)
+        {
+
+            //TODO: trouble shoot vertical alignment for viewing capsules
+            self.textView.text = self.chosenCapsl.text;
+            [self.textView layoutIfNeeded];
+
+            //            CGSize contentSize = self.textView.contentSize;
+            //            contentSize.height = ceilf([self.textView sizeThatFits:self.textView.frame.size].height);
+            //            self.textView.contentSize = contentSize;
+
+            [self verticalCenterText];
+
+        }
+
+        //Display the Capsl photo if available
+        if (self.chosenCapsl.photo)
+        {
+            [self.chosenCapsl.photo getDataInBackgroundWithBlock:^(NSData *data, NSError *error)
+             {
+                 self.imageView.image = [UIImage imageWithData:data];
+             }];
+
+            //If there is text, move it to bottom
+            if (self.chosenCapsl.text)
+            {
+                [self setTextViewToBottom];
+            }
+
+            //If there is no text, hide the textview
+            else
+            {
+                self.textView.hidden = YES;
+            }
+        }
+
+        //Show or Hide Audio Button depending if there is an audio message
+        //TODO: if there is no text and no photo put audio button in center of screen with text view background
+        self.addAudioButton.hidden = !self.chosenCapsl.audio;
+        
+    }
 
 }
 
@@ -239,8 +248,7 @@
 {
     if (self.isEditing)
     {
-        //If image is not nil, move the keyboard up by Keyboard height
-        //If image is nil, don't do anything
+        //move the keyboard up by Keyboard height
 
         NSDictionary *userInfo = [notification userInfo];
         self.kbSize = [[userInfo objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
@@ -355,8 +363,11 @@
                                        [alert dismissViewControllerAnimated:YES completion:nil];
                                        
                                    }];
-    
-    [alert addAction:cameraButton];
+
+    if ([UIImagePickerController isSourceTypeAvailable: UIImagePickerControllerSourceTypeCamera])
+    {
+        [alert addAction:cameraButton];
+    }
     [alert addAction:libraryButton];
     [alert addAction:cancelButton];
 
@@ -611,6 +622,8 @@
 {
 
     CGFloat topoffset = ([self.textView bounds].size.height - [self.textView contentSize].height * [self.textView zoomScale])/2.0;
+    NSLog(@"height %f", self.textView.bounds.size.height);
+    NSLog(@"width %f", self.textView.bounds.size.width);
     topoffset = ( topoffset < 0.0 ? 0.0 : topoffset );
     self.textView.contentOffset = (CGPoint){.x = 0, .y = -topoffset};
 

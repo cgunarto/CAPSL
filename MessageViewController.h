@@ -10,7 +10,7 @@
 @class Capsl;
 
 @interface MessageViewController : UIViewController
-@property Capsl *createdCapsl;
+@property (nonatomic, strong) Capsl *createdCapsl;
 @property Capsl *chosenCapsl;
 @property NSData *audioData;
 

@@ -11,8 +11,7 @@
 
 @interface BackgroundGenerator : NSObject
 
-+ (UIImage *)blurImage:(UIImage *)image;
-
++ (UIImage *)blurImage:(UIImage *)image withRadius:(float)radius;
 + (UIImage *)generateDefaultBackground;
 
 @end
