@@ -14,6 +14,7 @@
 #import "UIImage+ImageEffects.h"
 #import "BackgroundGenerator.h"
 #import "Capsl.h"
+#import "Capslr.h"
 
 #define kNumOfTimelinePrefixYears 1
 
@@ -330,7 +331,17 @@
             [dictOfMonths setObject:@0 forKey:monthString];
         }
 
-        NSNumber *newCount = [NSNumber numberWithInteger:[[dictOfMonths objectForKey:monthString] integerValue] + 1];
+
+        NSNumber *newCount = [NSNumber new];
+
+        if ([capsl.recipient.objectId isEqualToString:kCapslTeamObjectID])
+        {
+            newCount = @0;
+        }
+        else
+        {
+            newCount = [NSNumber numberWithInteger:[[dictOfMonths objectForKey:monthString] integerValue] + 1];
+        }
 
         [dictOfMonths setObject:newCount forKey:monthString];
 
