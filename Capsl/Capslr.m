@@ -34,9 +34,9 @@
 
 //Comparing the retrieved Capslrs to see if any contacts are Capslrs (based on phone number)
 //Return only Capslrs that have been claimed by a sign up and have the corresponding phone number
-+ (void)returnCapslrWithContactsArray:(NSArray *)Contacts withCompletion:(void(^)(NSArray *capslrObjectsArray, NSError *error))complete
++ (void)returnCapslrWithContactsArray:(NSArray *)contacts withCompletion:(void(^)(NSArray *capslrObjectsArray, NSError *error))complete
 {
-    NSMutableArray *capslrContact = [@[]mutableCopy];
+    NSMutableArray *capslrContacts = [@[]mutableCopy];
     NSMutableArray *capslrArray =[@[]mutableCopy];
 
     PFQuery *query = [Capslr query];
@@ -55,17 +55,17 @@
                  }
              }
 
-             for (Contact *contact in Contacts)
+             for (Contact *contact in contacts)
              {
                  for (Capslr *capslr in capslrArray)
                  {
                      if ([capslr.phone containsString:contact.number])
                      {
-                         [capslrContact addObject:capslr];
+                         [capslrContacts addObject:capslr];
                      }
                  }
              }
-             complete (capslrContact, nil);
+             complete (capslrContacts, nil);
          }
      }];
 }
