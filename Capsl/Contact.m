@@ -9,8 +9,6 @@
 #import "Contact.h"
 
 @implementation Contact
-
-#import "Contact.h"
 @import AddressBook;
 
 - (NSString *)fullName
@@ -38,6 +36,7 @@
 + (void)retrieveAllContactsWithBlock:(void(^)(NSArray *))block
 {
     CFErrorRef *error = NULL;
+
     ABAddressBookRef addressBook = ABAddressBookCreateWithOptions(NULL, error);
     ABAddressBookRequestAccessWithCompletion(addressBook, ^(bool granted, CFErrorRef error)
                                              {
@@ -45,13 +44,15 @@
                                                  CFIndex numberOfPeople = ABAddressBookGetPersonCount(addressBook);
 
                                                  //Create a mutable array to add our custom Contact objects into
-                                                 NSMutableArray *arrayOfContacts = [NSMutableArray array];
+                                                 NSMutableArray *arrayOfContacts = [@[]mutableCopy];
+
 
                                                  //Loop through all the people in 'allPeople' based on the 'numberOfPeople'
                                                  for(int i = 0; i < numberOfPeople; i++)
                                                  {
                                                      //Create contact object (this is our custom class)
                                                      Contact *contact = [[Contact alloc]init];
+                                                     contact.phoneNumbersArray = [@[]mutableCopy];
 
                                                      //Grab person from 'allPeople' based on i
                                                      ABRecordRef person = CFArrayGetValueAtIndex( allPeople, i );
@@ -70,26 +71,22 @@
                                                      {
                                                          NSString *phoneNumber = (__bridge_transfer NSString *) ABMultiValueCopyValueAtIndex(phoneNumbers, i);
 
-                                                         //Assign one of the phone numbers to our contact object
-                                                         contact.number = phoneNumber;
-                                                     }
+                                                         NSCharacterSet *setToRemove = [NSCharacterSet characterSetWithCharactersInString:@"0123456789"];
+                                                         NSCharacterSet *setToKeep = [setToRemove invertedSet];
 
-                                                     NSCharacterSet *setToRemove = [NSCharacterSet characterSetWithCharactersInString:@"0123456789"];
-                                                     NSCharacterSet *setToKeep = [setToRemove invertedSet];
+                                                         //Stripping out non number character from phone number
+                                                         NSString *newString =
+                                                         [[phoneNumber componentsSeparatedByCharactersInSet:setToKeep]componentsJoinedByString:@""];
 
-                                                     NSString *newString =
-                                                     [[contact.number componentsSeparatedByCharactersInSet:setToKeep]
-                                                      componentsJoinedByString:@""];
-                                                     
-                                                     contact.number = newString;
+                                                         [contact.phoneNumbersArray addObject:newString];
 
-//                                                     //Check for the phone number for '+' '-' '(' ')' ' ' and remove them.
-//                                                     contact.number = [contact.number stringByReplacingOccurrencesOfString:@" " withString:@""];
-//                                                     contact.number = [contact.number stringByReplacingOccurrencesOfString:@"+" withString:@""];
-//                                                     contact.number = [contact.number stringByReplacingOccurrencesOfString:@"-" withString:@""];
-//                                                     contact.number = [contact.number stringByReplacingOccurrencesOfString:@"(" withString:@""];
-//                                                     contact.number = [contact.number stringByReplacingOccurrencesOfString:@")" withString:@""];
-//                                                     contact.number = [contact.number stringByReplacingOccurrencesOfString:@"." withString:@""];
+                                                         //Grab the first phone number from address book to represent contact
+                                                         if (i == 0)
+                                                         {
+                                                              contact.number = newString;                                                          }
+                                                         }
+
+
 
                                                      //Assign the first name and last name
                                                      contact.firstName = firstName;
