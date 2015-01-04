@@ -609,8 +609,12 @@
     if (self.isEditing)
     {
 
+        if ([self.addAudioButton isHidden])
+        {
+            [self.recordAudioVC onDeleteRecordingButtonTapped:nil];
+        }
+
         [self.textView resignFirstResponder];
-        [self.recordAudioVC onDeleteRecordingButtonTapped:nil];
 
     }
 
@@ -703,7 +707,7 @@
 
     self.audioControlsContainerView.hidden = YES;
 
-    self.createdCapsl = self.recordAudioVC.createdCapsl;
+//    self.createdCapsl = self.recordAudioVC.createdCapsl;
     self.audioData = self.recordAudioVC.audioData;
 
     [self.navigationController setNavigationBarHidden:NO animated:YES];

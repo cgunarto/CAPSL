@@ -267,9 +267,12 @@
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    MessageViewController *captureVC = segue.destinationViewController;
-    captureVC.createdCapsl = self.createdCapsl;
-    captureVC.audioData = self.audioData;
+//    MessageViewController *captureVC = segue.destinationViewController;
+//    if (self.createdCapsl)
+//    {
+//        captureVC.createdCapsl = self.createdCapsl;
+//    }
+//    captureVC.audioData = self.audioData;
 }
 
 - (void)processButton:(UIButton *)button withImageName:(NSString *)buttonName
