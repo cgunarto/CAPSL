@@ -21,7 +21,7 @@
 #define kTitleKey       @"title"   // key for obtaining the data source item's title
 #define kDateKey        @"date"    // key for obtaining the data source item's date value
 #define kTimeKey        @"time"   // key for obtaining the data source item's date value
-#define kMinutesHeadSendDate 2
+#define kMinutesHeadSendDate 60
 
 
 // keep track of which rows have date cells
@@ -656,22 +656,68 @@ NSUInteger DeviceSystemMajorVersion()
 
     else
     {
-        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"No delivery date chosen"
-                                                                       message:@"Please choose a delivery date"
-                                                                preferredStyle:UIAlertControllerStyleAlert];
+        [self showLoadingIndicator];
+        NSTimeInterval secondsAhead = kMinutesHeadSendDate * 60;
+        self.createdCapsl.deliveryTime = [[NSDate date] dateByAddingTimeInterval:secondsAhead];
 
-        UIAlertAction *okButton = [UIAlertAction actionWithTitle:@"OK"
-                                                           style:UIAlertActionStyleDefault
-                                                         handler:nil];
-        [alert addAction:okButton];
+        [self.createdCapsl saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error)
+        {
+            if (!error)
+            {
+                Capslr *recipient= self.createdCapsl.recipient;
 
-        [alert.view setTintColor:kAlertControllerTintColor];
+                [SVProgressHUD dismiss];
 
-        [self presentViewController:alert
-                           animated:YES
-                         completion:nil];
+                NSString *message = [NSString stringWithFormat:@"Capsl sent to %@", recipient.username];
 
-        [SVProgressHUD dismiss];
+                UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Message Sent!"
+                                                                               message:message
+                                                                        preferredStyle:UIAlertControllerStyleAlert];
+
+                UIAlertAction *okButton = [UIAlertAction actionWithTitle:@"OK"
+                                                                   style:UIAlertActionStyleDefault
+                                                                 handler:^(UIAlertAction *action)
+                                           {
+                                               [alert dismissViewControllerAnimated:YES completion:nil];
+
+                                               [self showRootViewController];
+                                           }];
+                [alert addAction:okButton];
+
+                [alert.view setTintColor:kAlertControllerTintColor];
+
+                [self presentViewController:alert
+                                   animated:YES
+                                 completion:nil];
+
+                //SENDING PUSH MESSAGE to the recipient when they get a message
+                PFQuery *pushQuery = [PFInstallation query];
+
+                [pushQuery whereKey:@"capslr" equalTo:self.createdCapsl.recipient];
+
+                PFPush *push = [[PFPush alloc]init];
+
+                //TODO: Send push to multiple device tokens
+                //TODO: Set it to open a message
+                NSString *pushString = [NSString stringWithFormat:@"You got a Capsl message from %@!", self.createdCapsl.sender.name];
+                [push setQuery:pushQuery];
+                [push setMessage:pushString];
+                [push sendPushInBackgroundWithBlock:^(BOOL succeeded, NSError *error)
+                 {
+                     if (error)
+                     {
+                         NSLog(@"%@ error", error.localizedDescription);
+                     }
+                 }];
+            }
+
+            else
+            {
+                NSLog(@"there is an error %@", error.localizedDescription);
+                [SVProgressHUD dismiss];
+
+            }
+        }];
     }
 
 

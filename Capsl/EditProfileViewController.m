@@ -298,7 +298,14 @@
 
         if ([segue.identifier isEqualToString:@"editNameSegue"])
         {
-            updateProfileInfoVC.nameString = self.currenCapslrInfo[0];
+            if ([self.currenCapslrInfo[0] isEqualToString:@" "])
+            {
+                updateProfileInfoVC.nameString = @"";
+            }
+            else
+            {
+                updateProfileInfoVC.nameString = self.currenCapslrInfo[0];
+            }
         }
         else if ([segue.identifier isEqualToString:@"editUsernameSegue"])
         {
