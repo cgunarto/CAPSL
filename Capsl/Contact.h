@@ -15,6 +15,7 @@
 @property NSString *nickName;
 @property NSString *allNameString;
 @property NSString *number;
+@property NSMutableArray *phoneNumbersArray;
 @property NSData *photo;
 
 - (NSString *) fullName;

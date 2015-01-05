@@ -34,17 +34,28 @@
 
 //Comparing the retrieved Capslrs to see if any contacts are Capslrs (based on phone number)
 //Return only Capslrs that have been claimed by a sign up and have the corresponding phone number
-+ (void)returnCapslrWithContactsArray:(NSArray *)contacts withCompletion:(void(^)(NSArray *capslrObjectsArray, NSError *error))complete
++ (void)returnCapslrWithContactsArray:(NSArray *)Contacts withCompletion:(void(^)(NSArray *capslrObjectsArray, NSError *error))complete
 {
-    NSMutableArray *capslrContacts = [@[]mutableCopy];
-    NSMutableArray *capslrArray =[@[]mutableCopy];
+    NSMutableArray *capslrContact = [@[]mutableCopy];
+    NSMutableArray *capslrArray = [@[]mutableCopy];
+    NSMutableArray *allContactPhones = [@[]mutableCopy];
+
+    //Get all the phone numbers in Contact's phonenumberarray
+    for (Contact *contact in Contacts)
+    {
+        for (NSString *phoneNumber in contact.phoneNumbersArray)
+        {
+            [allContactPhones addObject:phoneNumber];
+        }
+    }
 
     PFQuery *query = [Capslr query];
+    [query whereKey:@"phone" containedIn:allContactPhones];
 
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error)
-     {
-         if (!error)
-         {
+    {
+        if (!error)
+        {
              for (Capslr *capslr in objects)
              {
                  //Only add CAPSLRs that have a user pointer (they have been claimed by a signup), otherwise empty CAPSLR with phone numbers only will show up
@@ -55,19 +66,49 @@
                  }
              }
 
-             for (Contact *contact in contacts)
+             for (Capslr *capslr in capslrArray)
              {
-                 for (Capslr *capslr in capslrArray)
+                 for (Contact *contact in Contacts)
                  {
                      if ([capslr.phone containsString:contact.number])
                      {
-                         [capslrContacts addObject:capslr];
+                         [capslrContact addObject:capslr];
+                         break;
                      }
                  }
              }
-             complete (capslrContacts, nil);
-         }
-     }];
+
+            complete (capslrContact, nil);
+        }
+    }];
+
+//    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error)
+//     {
+//         if (!error)
+//         {
+//             for (Capslr *capslr in objects)
+//             {
+//                 //Only add CAPSLRs that have a user pointer (they have been claimed by a signup), otherwise empty CAPSLR with phone numbers only will show up
+//                 //Empty CAPSLRs are created when a sender sends message to a phone number (not a CAPSLR user)
+//                 if (capslr.user)
+//                 {
+//                     [capslrArray addObject:capslr];
+//                 }
+//             }
+//
+//             for (Contact *contact in Contacts)
+//             {
+//                 for (Capslr *capslr in capslrArray)
+//                 {
+//                     if ([capslr.phone containsString:contact.number])
+//                     {
+//                         [capslrContact addObject:capslr];
+//                     }
+//                 }
+//             }
+//             complete (capslrContact, nil);
+//         }
+//     }];
 }
 
 
