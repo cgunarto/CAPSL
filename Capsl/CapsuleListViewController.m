@@ -163,8 +163,8 @@
     }
 
     return cell;
-}
 
+}
 
 #pragma mark - Helper Method
 - (void)scrollToEarliestUnopenedCapsule

@@ -65,6 +65,14 @@
 		8D7E3CF71A36FDE50010C39C /* SendCapsuleTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D7E3CF61A36FDE50010C39C /* SendCapsuleTableViewCell.m */; };
 		8DABE4AC1A37DDAC00A97498 /* IndexConverter.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DABE4AB1A37DDAC00A97498 /* IndexConverter.m */; };
 		8DAC42441A2A9BD400A8859A /* JCAMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DAC42431A2A9BD400A8859A /* JCAMainViewController.m */; };
+		8DD734B41AC376C2005AD011 /* HomeInterfaceController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DD734B31AC376C2005AD011 /* HomeInterfaceController.m */; };
+		8DD734B71AC376C2005AD011 /* NotificationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DD734B61AC376C2005AD011 /* NotificationController.m */; };
+		8DD734BA1AC376C2005AD011 /* GlanceController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DD734B91AC376C2005AD011 /* GlanceController.m */; };
+		8DD734BC1AC376C2005AD011 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8DD734BB1AC376C2005AD011 /* Images.xcassets */; };
+		8DD734C01AC376C2005AD011 /* Capsl WatchKit App.app in Resources */ = {isa = PBXBuildFile; fileRef = 8DD734BF1AC376C2005AD011 /* Capsl WatchKit App.app */; };
+		8DD734C81AC376C2005AD011 /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8DD734C61AC376C2005AD011 /* Interface.storyboard */; };
+		8DD734CA1AC376C2005AD011 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8DD734C91AC376C2005AD011 /* Images.xcassets */; };
+		8DD734CD1AC376C2005AD011 /* Capsl WatchKit Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 8DD734AD1AC376C2005AD011 /* Capsl WatchKit Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		8DE360601A2D6E5800DAE08C /* ViewCapsulesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DE3605F1A2D6E5800DAE08C /* ViewCapsulesViewController.m */; };
 		8DEA789B1A31206900271A8A /* CapsuleListBackground.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DEA789A1A31206900271A8A /* CapsuleListBackground.m */; };
 		905073921A32182900B40E45 /* SVProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 9050738F1A32182900B40E45 /* SVProgressHUD.m */; };
@@ -89,7 +97,35 @@
 			remoteGlobalIDString = 4F69EBBD1A252331009625AA;
 			remoteInfo = Capsl;
 		};
+		8DD734C11AC376C2005AD011 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4F69EBB61A252331009625AA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8DD734BE1AC376C2005AD011;
+			remoteInfo = "Capsl WatchKit App";
+		};
+		8DD734CB1AC376C2005AD011 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4F69EBB61A252331009625AA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8DD734AC1AC376C2005AD011;
+			remoteInfo = "Capsl WatchKit Extension";
+		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		8DD734D41AC376C3005AD011 /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				8DD734CD1AC376C2005AD011 /* Capsl WatchKit Extension.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		4F33B1AB1A33A246004444FB /* JCALocalNotification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JCALocalNotification.h; sourceTree = "<group>"; };
@@ -190,6 +226,20 @@
 		8DABE4AB1A37DDAC00A97498 /* IndexConverter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IndexConverter.m; sourceTree = "<group>"; };
 		8DAC42421A2A9BD400A8859A /* JCAMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JCAMainViewController.h; sourceTree = "<group>"; };
 		8DAC42431A2A9BD400A8859A /* JCAMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JCAMainViewController.m; sourceTree = "<group>"; };
+		8DD734AD1AC376C2005AD011 /* Capsl WatchKit Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Capsl WatchKit Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8DD734B01AC376C2005AD011 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8DD734B11AC376C2005AD011 /* PushNotificationPayload.apns */ = {isa = PBXFileReference; lastKnownFileType = text; path = PushNotificationPayload.apns; sourceTree = "<group>"; };
+		8DD734B21AC376C2005AD011 /* HomeInterfaceController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeInterfaceController.h; sourceTree = "<group>"; };
+		8DD734B31AC376C2005AD011 /* HomeInterfaceController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeInterfaceController.m; sourceTree = "<group>"; };
+		8DD734B51AC376C2005AD011 /* NotificationController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NotificationController.h; sourceTree = "<group>"; };
+		8DD734B61AC376C2005AD011 /* NotificationController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NotificationController.m; sourceTree = "<group>"; };
+		8DD734B81AC376C2005AD011 /* GlanceController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GlanceController.h; sourceTree = "<group>"; };
+		8DD734B91AC376C2005AD011 /* GlanceController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GlanceController.m; sourceTree = "<group>"; };
+		8DD734BB1AC376C2005AD011 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		8DD734BF1AC376C2005AD011 /* Capsl WatchKit App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Capsl WatchKit App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8DD734C51AC376C2005AD011 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8DD734C71AC376C2005AD011 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Interface.storyboard; sourceTree = "<group>"; };
+		8DD734C91AC376C2005AD011 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		8DE3605E1A2D6E5800DAE08C /* ViewCapsulesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ViewCapsulesViewController.h; path = ../ViewCapsulesViewController.h; sourceTree = "<group>"; };
 		8DE3605F1A2D6E5800DAE08C /* ViewCapsulesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ViewCapsulesViewController.m; path = ../ViewCapsulesViewController.m; sourceTree = "<group>"; };
 		8DEA78991A31206900271A8A /* CapsuleListBackground.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CapsuleListBackground.h; path = ../CapsuleListBackground.h; sourceTree = "<group>"; };
@@ -254,6 +304,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		8DD734AA1AC376C2005AD011 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -263,6 +320,8 @@
 				4F69EBCB1A252331009625AA /* Main.storyboard */,
 				4F69EBC01A252331009625AA /* Capsl */,
 				4F69EBDA1A252331009625AA /* CapslTests */,
+				8DD734AE1AC376C2005AD011 /* Capsl WatchKit Extension */,
+				8DD734C31AC376C2005AD011 /* Capsl WatchKit App */,
 				4F69EBBF1A252331009625AA /* Products */,
 				4F69EC011A25395F009625AA /* Frameworks */,
 			);
@@ -273,6 +332,8 @@
 			children = (
 				4F69EBBE1A252331009625AA /* Capsl.app */,
 				4F69EBD71A252331009625AA /* CapslTests.xctest */,
+				8DD734AD1AC376C2005AD011 /* Capsl WatchKit Extension.appex */,
+				8DD734BF1AC376C2005AD011 /* Capsl WatchKit App.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -492,6 +553,48 @@
 			name = "Capsule View";
 			sourceTree = "<group>";
 		};
+		8DD734AE1AC376C2005AD011 /* Capsl WatchKit Extension */ = {
+			isa = PBXGroup;
+			children = (
+				8DD734B21AC376C2005AD011 /* HomeInterfaceController.h */,
+				8DD734B31AC376C2005AD011 /* HomeInterfaceController.m */,
+				8DD734B51AC376C2005AD011 /* NotificationController.h */,
+				8DD734B61AC376C2005AD011 /* NotificationController.m */,
+				8DD734B81AC376C2005AD011 /* GlanceController.h */,
+				8DD734B91AC376C2005AD011 /* GlanceController.m */,
+				8DD734BB1AC376C2005AD011 /* Images.xcassets */,
+				8DD734AF1AC376C2005AD011 /* Supporting Files */,
+			);
+			path = "Capsl WatchKit Extension";
+			sourceTree = "<group>";
+		};
+		8DD734AF1AC376C2005AD011 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				8DD734B01AC376C2005AD011 /* Info.plist */,
+				8DD734B11AC376C2005AD011 /* PushNotificationPayload.apns */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		8DD734C31AC376C2005AD011 /* Capsl WatchKit App */ = {
+			isa = PBXGroup;
+			children = (
+				8DD734C61AC376C2005AD011 /* Interface.storyboard */,
+				8DD734C91AC376C2005AD011 /* Images.xcassets */,
+				8DD734C41AC376C2005AD011 /* Supporting Files */,
+			);
+			path = "Capsl WatchKit App";
+			sourceTree = "<group>";
+		};
+		8DD734C41AC376C2005AD011 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				8DD734C51AC376C2005AD011 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 		8DE360611A2D6E6500DAE08C /* View Capsules */ = {
 			isa = PBXGroup;
 			children = (
@@ -537,10 +640,12 @@
 				4F69EBBA1A252331009625AA /* Sources */,
 				4F69EBBB1A252331009625AA /* Frameworks */,
 				4F69EBBC1A252331009625AA /* Resources */,
+				8DD734D41AC376C3005AD011 /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				8DD734CC1AC376C2005AD011 /* PBXTargetDependency */,
 			);
 			name = Capsl;
 			productName = Capsl;
@@ -565,6 +670,39 @@
 			productReference = 4F69EBD71A252331009625AA /* CapslTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		8DD734AC1AC376C2005AD011 /* Capsl WatchKit Extension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8DD734D11AC376C3005AD011 /* Build configuration list for PBXNativeTarget "Capsl WatchKit Extension" */;
+			buildPhases = (
+				8DD734A91AC376C2005AD011 /* Sources */,
+				8DD734AA1AC376C2005AD011 /* Frameworks */,
+				8DD734AB1AC376C2005AD011 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				8DD734C21AC376C2005AD011 /* PBXTargetDependency */,
+			);
+			name = "Capsl WatchKit Extension";
+			productName = "Capsl WatchKit Extension";
+			productReference = 8DD734AD1AC376C2005AD011 /* Capsl WatchKit Extension.appex */;
+			productType = "com.apple.product-type.watchkit-extension";
+		};
+		8DD734BE1AC376C2005AD011 /* Capsl WatchKit App */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8DD734CE1AC376C3005AD011 /* Build configuration list for PBXNativeTarget "Capsl WatchKit App" */;
+			buildPhases = (
+				8DD734BD1AC376C2005AD011 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Capsl WatchKit App";
+			productName = "Capsl WatchKit App";
+			productReference = 8DD734BF1AC376C2005AD011 /* Capsl WatchKit App.app */;
+			productType = "com.apple.product-type.application.watchapp";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -581,6 +719,13 @@
 					4F69EBD61A252331009625AA = {
 						CreatedOnToolsVersion = 6.1;
 						TestTargetID = 4F69EBBD1A252331009625AA;
+					};
+					8DD734AC1AC376C2005AD011 = {
+						CreatedOnToolsVersion = 6.2;
+						DevelopmentTeam = 5FCLB5W36M;
+					};
+					8DD734BE1AC376C2005AD011 = {
+						CreatedOnToolsVersion = 6.2;
 					};
 				};
 			};
@@ -599,6 +744,8 @@
 			targets = (
 				4F69EBBD1A252331009625AA /* Capsl */,
 				4F69EBD61A252331009625AA /* CapslTests */,
+				8DD734AC1AC376C2005AD011 /* Capsl WatchKit Extension */,
+				8DD734BE1AC376C2005AD011 /* Capsl WatchKit App */,
 			);
 		};
 /* End PBXProject section */
@@ -619,6 +766,24 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8DD734AB1AC376C2005AD011 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8DD734C01AC376C2005AD011 /* Capsl WatchKit App.app in Resources */,
+				8DD734BC1AC376C2005AD011 /* Images.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8DD734BD1AC376C2005AD011 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8DD734C81AC376C2005AD011 /* Interface.storyboard in Resources */,
+				8DD734CA1AC376C2005AD011 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -690,6 +855,16 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		8DD734A91AC376C2005AD011 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8DD734B71AC376C2005AD011 /* NotificationController.m in Sources */,
+				8DD734B41AC376C2005AD011 /* HomeInterfaceController.m in Sources */,
+				8DD734BA1AC376C2005AD011 /* GlanceController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -697,6 +872,16 @@
 			isa = PBXTargetDependency;
 			target = 4F69EBBD1A252331009625AA /* Capsl */;
 			targetProxy = 4F69EBD81A252331009625AA /* PBXContainerItemProxy */;
+		};
+		8DD734C21AC376C2005AD011 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8DD734BE1AC376C2005AD011 /* Capsl WatchKit App */;
+			targetProxy = 8DD734C11AC376C2005AD011 /* PBXContainerItemProxy */;
+		};
+		8DD734CC1AC376C2005AD011 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8DD734AC1AC376C2005AD011 /* Capsl WatchKit Extension */;
+			targetProxy = 8DD734CB1AC376C2005AD011 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -716,6 +901,14 @@
 				4F69EBD11A252331009625AA /* Base */,
 			);
 			name = LaunchScreen.xib;
+			sourceTree = "<group>";
+		};
+		8DD734C61AC376C2005AD011 /* Interface.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				8DD734C71AC376C2005AD011 /* Base */,
+			);
+			name = Interface.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -873,6 +1066,70 @@
 			};
 			name = Release;
 		};
+		8DD734CF1AC376C3005AD011 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				IBSC_MODULE = Capsl_WatchKit_Extension;
+				INFOPLIST_FILE = "Capsl WatchKit App/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 4;
+				"TARGETED_DEVICE_FAMILY[sdk=iphonesimulator*]" = "1,4";
+			};
+			name = Debug;
+		};
+		8DD734D01AC376C3005AD011 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COPY_PHASE_STRIP = NO;
+				IBSC_MODULE = Capsl_WatchKit_Extension;
+				INFOPLIST_FILE = "Capsl WatchKit App/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 4;
+				"TARGETED_DEVICE_FAMILY[sdk=iphonesimulator*]" = "1,4";
+			};
+			name = Release;
+		};
+		8DD734D21AC376C3005AD011 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "Capsl WatchKit Extension/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_NAME = "${TARGET_NAME}";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		8DD734D31AC376C3005AD011 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				INFOPLIST_FILE = "Capsl WatchKit Extension/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_NAME = "${TARGET_NAME}";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -902,6 +1159,22 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		8DD734CE1AC376C3005AD011 /* Build configuration list for PBXNativeTarget "Capsl WatchKit App" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8DD734CF1AC376C3005AD011 /* Debug */,
+				8DD734D01AC376C3005AD011 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		8DD734D11AC376C3005AD011 /* Build configuration list for PBXNativeTarget "Capsl WatchKit Extension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8DD734D21AC376C3005AD011 /* Debug */,
+				8DD734D31AC376C3005AD011 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 /* End XCConfigurationList section */
 	};

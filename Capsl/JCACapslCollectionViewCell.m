@@ -50,7 +50,10 @@
     //    cell.profilePicView.layer.borderColor = [UIColor blackColor].CGColor;
     //    cell.profilePicView.layer.borderWidth = 1.0;
 
-    self.countdownLabel.layer.cornerRadius = self.countdownLabel.frame.size.height/2;
+    CGFloat labelHeight = CGRectGetHeight(self.countdownLabel.frame);
+    self.countdownLabel.layer.cornerRadius = labelHeight/2;
+
+    //    self.countdownLabel.layer.cornerRadius = self.countdownLabel.frame.size.height/2;
     self.countdownLabel.clipsToBounds = YES;
 
     if (showSent)
